@@ -5,6 +5,8 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
+import { AdminLeaguesComponent } from './admin-leagues/admin-leagues.component';
+import { AdminLeagueComponent } from './admin-leagues/admin-league/admin-league.component';
 
 @NgModule({
   imports: [
@@ -14,7 +16,9 @@ import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
   declarations: [
     AdminComponent,
     AdminDashboardComponent,
-    AdminSidebarComponent
+    AdminSidebarComponent,
+    AdminLeaguesComponent,
+    AdminLeagueComponent
   ]
 })
 export class AdminModule { }
