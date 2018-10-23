@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { League } from '@app/models/league';
@@ -12,6 +12,7 @@ import { LeagueService } from '@app/core/league.service';
 export class AdminLeagueFormComponent implements OnInit {
 
   @Input() league: League;
+  @Output('saveClick') saveClick: EventEmitter<boolean> = new EventEmitter<boolean>;
   new: boolean;
 
   constructor(
@@ -20,7 +21,7 @@ export class AdminLeagueFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.league._id) {
+    if (!this.league._id) {
       this.new = true;
     } else {
       this.new = false;
@@ -31,7 +32,12 @@ export class AdminLeagueFormComponent implements OnInit {
     this.leagueService.save(this.league).subscribe(
       (league: League) => {
         this.league = league;
-        this.router.navigate(['admin', 'leagues', league._id]);
+
+        if (this.new) {
+          this.router.navigate(['admin', 'leagues', league._id]);
+        } else {
+          this.saveClick.emit(true);
+        }
       }
     );
   }

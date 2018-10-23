@@ -1,5 +1,13 @@
 <app-admin-league-form
-  *ngIf="league"
+  *ngIf="league && editingLeague"
   [league]="league"
+  (saveClick)="editingLeague = !editingLeague"
 >
 </app-admin-league-form>
+
+<app-admin-league-details
+  *ngIf="league && !editingLeague"
+  [league]="league"
+  (editClick)="editingLeague = !editingLeague"
+>
+</app-admin-league-details>

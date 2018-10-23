@@ -13,6 +13,7 @@ import { LeagueService } from '@app/core/league.service';
 export class AdminLeagueComponent implements OnInit {
 
   league: League;
+  editingLeague = false;
 
   constructor(
     private route: ActivatedRoute,
