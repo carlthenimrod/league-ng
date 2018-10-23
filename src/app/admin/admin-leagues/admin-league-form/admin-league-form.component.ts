@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { League } from '@app/models/league';
+import { LeagueService } from '@app/core/league.service';
 
 @Component({
   selector: 'app-admin-league-form',
@@ -7,9 +11,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminLeagueFormComponent implements OnInit {
 
-  constructor() { }
+  @Input() league: League;
+  new: boolean;
+
+  constructor(
+    private leagueService: LeagueService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    if (this.league._id) {
+      this.new = true;
+    } else {
+      this.new = false;
+    }
   }
 
+  onSubmit() {
+    this.leagueService.save(this.league).subscribe(
+      (league: League) => {
+        this.league = league;
+        this.router.navigate(['admin', 'leagues', league._id]);
+      }
+    );
+  }
 }

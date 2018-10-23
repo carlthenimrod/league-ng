@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+
+import { League } from '@app/models/league';
+import { LeagueService } from '@app/core/league.service';
 
 @Component({
   selector: 'app-admin-league',
@@ -7,9 +12,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminLeagueComponent implements OnInit {
 
-  constructor() { }
+  league: League;
+
+  constructor(
+    private route: ActivatedRoute,
+    private leagueService: LeagueService
+  ) { }
 
   ngOnInit() {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => this.leagueService.get(params.get('id')))
+    )
+    .subscribe((league: League) => this.league = league);
   }
 
 }

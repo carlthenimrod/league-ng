@@ -16,7 +16,21 @@ export class LeagueService {
 
   all(): Observable<any> {
     const url = this.api + 'leagues';
-
     return this.http.get(url);
+  }
+
+  get(id: String): Observable<any> {
+    const url = this.api + 'leagues/' + id;
+    return this.http.get(url);
+  }
+
+  save(league: League): Observable<any> {
+    if (league._id) { // edit
+      const url = this.api + 'leagues/' + league._id;
+      return this.http.put(url, league);
+    } else { // new
+      const url = this.api + 'leagues';
+      return this.http.post(url, league);
+    }
   }
 }
