@@ -4,7 +4,15 @@
 
 <ul class="nav nav-pills flex-column">
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['leagues']">
+    <a class="nav-link" [routerLink]="['/admin']">
+      <i class="fa fa-home mr-2"></i>
+
+      <span class="mr-2">Home</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/admin', 'leagues']">
       <i class="fa fa-sticky-note mr-2"></i>
 
       <span class="mr-2">Leagues</span>
