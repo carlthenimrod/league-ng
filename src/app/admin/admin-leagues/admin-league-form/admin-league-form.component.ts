@@ -12,7 +12,7 @@ import { LeagueService } from '@app/core/league.service';
 export class AdminLeagueFormComponent implements OnInit {
 
   @Input() league: League;
-  @Output('saveClick') saveClick: EventEmitter<boolean> = new EventEmitter<boolean>;
+  @Output('saveClick') saveClick: EventEmitter<boolean> = new EventEmitter<boolean>();
   new: boolean;
 
   constructor(
