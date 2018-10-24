@@ -19,5 +19,4 @@ export class AdminLeaguesComponent implements OnInit {
       this.leagues = leagues;
     });
   }
-
 }

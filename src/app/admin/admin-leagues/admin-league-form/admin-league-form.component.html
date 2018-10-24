@@ -1,58 +1,62 @@
-<div class="row p-4 my-4 bg-light rounded">
+<div class="row my-4">
   <div class="col">
-    <form #f="ngForm" (ngSubmit)="onSubmit()">
-      <h4 class="mb-4 text-muted">
-        League Details
+    <div class="p-4 bg-light rounded">
+      <form #f="ngForm" (ngSubmit)="onSubmit()">
+        <h4 class="mb-4 text-muted">
+          League Details
 
-        <button
-          *ngIf="new"
-          class="btn btn-primary float-right"
-          [disabled]="!f.form.valid"
-        >
-          <i class="fas fa-plus mr-1"></i>
+          <button
+            *ngIf="new"
+            class="btn btn-primary float-right"
+            [disabled]="!f.form.valid"
+          >
+            <i class="fas fa-plus mr-1"></i>
 
-          Create League
-        </button>
+            Create League
+          </button>
 
-        <button
-          *ngIf="!new"
-          class="btn btn-primary float-right"
-          [disabled]="!f.form.valid"
-        >
-          Save
-        </button>
-      </h4>
+          <button
+            *ngIf="!new"
+            class="btn btn-primary float-right"
+            [disabled]="!f.form.valid"
+          >
+            <i class="fas fa-save mr-1"></i>
 
-      <div class="form-group">
-        <label for="name">Name</label>
+            Save
+          </button>
+        </h4>
 
-        <input
-          type="text"
-          name="name"
-          id="name"
-          class="form-control"
-          required
-          [(ngModel)]="league.name"
-          #name="ngModel"
-          [ngClass]="{'is-invalid': !name.valid && name.touched}"
-        >
+        <div class="form-group">
+          <label for="name">Name</label>
 
-        <div class="invalid-feedback">
-          Name is required.
+          <input
+            type="text"
+            name="name"
+            id="name"
+            class="form-control"
+            required
+            [(ngModel)]="league.name"
+            #name="ngModel"
+            [ngClass]="{'is-invalid': !name.valid && name.touched}"
+          >
+
+          <div class="invalid-feedback">
+            Name is required.
+          </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label for="description">Description</label>
+        <div class="form-group">
+          <label for="description">Description</label>
 
-        <textarea
-          name="description"
-          id="description"
-          class="form-control"
-          rows="5"
-          [(ngModel)]="league.description"
-        ></textarea>
-      </div>
-    </form>
+          <textarea
+            name="description"
+            id="description"
+            class="form-control"
+            rows="5"
+            [(ngModel)]="league.description"
+          ></textarea>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
