@@ -11,6 +11,7 @@ import { AdminLeagueComponent } from './admin-leagues/admin-league/admin-league.
 import { AdminLeagueFormComponent } from './admin-leagues/admin-league-form/admin-league-form.component';
 import { AdminLeagueNewComponent } from './admin-leagues/admin-league-new/admin-league-new.component';
 import { AdminLeagueDetailsComponent } from './admin-leagues/admin-league-details/admin-league-details.component';
+import { AdminLeagueTeamsComponent } from './admin-leagues/admin-league-teams/admin-league-teams.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { AdminLeagueDetailsComponent } from './admin-leagues/admin-league-detail
     AdminLeagueComponent,
     AdminLeagueFormComponent,
     AdminLeagueNewComponent,
-    AdminLeagueDetailsComponent
+    AdminLeagueDetailsComponent,
+    AdminLeagueTeamsComponent
   ]
 })
 export class AdminModule { }

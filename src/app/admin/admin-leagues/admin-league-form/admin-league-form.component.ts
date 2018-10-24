@@ -13,6 +13,8 @@ export class AdminLeagueFormComponent implements OnInit {
 
   @Input() league: League;
   @Output('saveClick') saveClick: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output('cancelClick') cancelClick: EventEmitter<boolean> = new EventEmitter<boolean>();
+  oldLeague: League;
   new: boolean;
 
   constructor(
@@ -26,6 +28,9 @@ export class AdminLeagueFormComponent implements OnInit {
     } else {
       this.new = false;
     }
+
+    // create copy
+    this.oldLeague = {...this.league};
   }
 
   onSubmit() {
@@ -40,5 +45,13 @@ export class AdminLeagueFormComponent implements OnInit {
         }
       }
     );
+  }
+
+  onCancel() {
+    // reset values to old league
+    this.league.name = this.oldLeague.name;
+    this.league.description = this.oldLeague.description;
+
+    this.cancelClick.emit(true);
   }
 }
