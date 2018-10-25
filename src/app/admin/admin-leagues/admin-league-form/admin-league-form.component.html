@@ -10,7 +10,8 @@
       <button
         *ngIf="new"
         type="submit"
-        class="btn btn-success"
+        mat-flat-button
+        color="primary"
         [disabled]="!f.form.valid"
       >
         <i class="fas fa-plus mr-1"></i>
@@ -21,7 +22,9 @@
       <button
         *ngIf="!new"
         type="submit"
-        class="btn btn-success mr-2"
+        mat-flat-button
+        color="primary"
+        class="mr-2"
         [disabled]="!f.form.valid"
       >
         <i class="fas fa-save mr-1"></i>
@@ -32,9 +35,9 @@
       <button
         *ngIf="!new"
         type="button"
+        mat-flat-button
+        color="warn"
         (click)="onCancel()"
-        class="btn btn-danger"
-        [disabled]="!f.form.valid"
       >
         <i class="fas fa-times mr-1"></i>
 

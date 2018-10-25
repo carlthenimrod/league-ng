@@ -1,13 +1,15 @@
-<div class="row">
+<div class="row align-items-center">
   <div class="col-8">
-      <h1 class="h2 mb-4 text-muted">
+      <h1 class="h2 text-muted">
         {{ league.name }}
       </h1>
   </div>
 
   <div class="col-4 text-right">
     <button
-      class="btn btn-primary mr-2"
+      mat-flat-button
+      color="primary"
+      class="mr-2"
       (click)="onEditClick()"
     >
       <i class="fas fa-edit mr-2"></i>
@@ -16,7 +18,8 @@
     </button>
 
     <button
-      class="btn btn-danger"
+      mat-flat-button
+      color="warn"
       (click)="onDeleteClick()"
     >
       <i class="fas fa-trash-alt mr-2"></i>
@@ -26,7 +29,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row mt-4" *ngIf="league.description">
   <div class="col">
     <p class="pt-4">{{ league.description }}</p>
   </div>
