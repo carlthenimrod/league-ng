@@ -15,7 +15,6 @@ import {
   exports: [
     MatButtonModule,
     MatDialogModule,
-    MatIconModule,
     MatInputModule
   ],
   declarations: []

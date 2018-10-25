@@ -5,13 +5,13 @@
 
   <div class="col-4 text-right">
     <button color="primary" mat-mini-fab (click)="onAddClick()">
-      <mat-icon>add</mat-icon>
+      <i class="fas fa-plus"></i>
     </button>
   </div>
 </div>
 
 <div class="row">
-  <div class="col" *ngIf="!teams">
-    <p>No Teams.</p>
+  <div class="col text-center text-muted" *ngIf="!teams || !teams.length">
+    <p class="pt-4 mb-0">No Teams.</p>
   </div>
 </div>

@@ -22,8 +22,8 @@ export class AdminLeagueTeamsComponent implements OnInit {
 
   onAddClick(): void {
     const dialogRef = this.dialog.open(AdminLeagueTeamAddComponent, {
-      height: '480px',
-      width: '640px'
+      autoFocus: false,
+      width: '500px'
     });
   }
 }
