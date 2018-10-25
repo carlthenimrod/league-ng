@@ -1,0 +1,25 @@
+<form>
+  <h1 mat-dialog-title class="display-4 mb-4">Add a Team</h1>
+
+  <mat-form-field>
+    <input matInput placeholder="Team Name">
+  </mat-form-field>
+
+  <mat-dialog-actions>
+    <button
+      mat-flat-button
+      color="primary"
+      class="mr-2"
+    >
+      Save
+    </button>
+
+    <button
+      mat-flat-button
+      color="warn"
+      [mat-dialog-close]="true"
+    >
+      Cancel
+    </button>
+  </mat-dialog-actions>
+</form>

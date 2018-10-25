@@ -22,7 +22,11 @@
 <div class="row justify-content-between">
   <div class="col-5">
     <div class="p-4 bg-light">
-      <app-admin-league-teams></app-admin-league-teams>
+      <app-admin-league-teams
+        *ngIf="league"
+        [teams]="league.teams"
+      >
+      </app-admin-league-teams>
     </div>
   </div>
 
