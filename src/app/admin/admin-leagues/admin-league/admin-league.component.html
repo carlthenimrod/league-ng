@@ -32,7 +32,11 @@
 
   <div class="col-7">
     <div class="p-4 bg-light">
-      <h2 class="h4 text-muted">Divisions</h2>
+        <app-admin-league-divisions
+          *ngIf="league"
+          [divisions]="league.divisions"
+        >
+        </app-admin-league-divisions>
     </div>
   </div>
 </div>

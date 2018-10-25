@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { Team } from '@app/models/team';
-import { AdminLeagueTeamAddComponent } from './admin-league-team-add/admin-league-team-add.component';
+import { AdminLeagueTeamFormComponent } from './admin-league-team-form/admin-league-team-form.component';
 
 @Component({
   selector: 'app-admin-league-teams',
@@ -21,7 +21,7 @@ export class AdminLeagueTeamsComponent implements OnInit {
   }
 
   onAddClick(): void {
-    const dialogRef = this.dialog.open(AdminLeagueTeamAddComponent, {
+    const dialogRef = this.dialog.open(AdminLeagueTeamFormComponent, {
       autoFocus: false,
       width: '500px'
     });

@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <form>
+          <div class="row pb-2 text-center align-items-center">
+            <div class="col">
+              <h1 class="h2 text-muted">Add Division</h1>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col p-4 bg-light">
+              <mat-form-field class="w-100">
+                <input matInput required placeholder="Division Name">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col text-center pt-4 border-top">
+              <button
+                mat-flat-button
+                color="primary"
+                class="mr-2"
+              >
+                <i class="fas fa-plus mr-1"></i>
+
+                Add Division
+              </button>
+
+              <button
+                mat-flat-button
+                color="warn"
+                [mat-dialog-close]="true"
+              >
+                <i class="fas fa-times mr-1"></i>
+
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
