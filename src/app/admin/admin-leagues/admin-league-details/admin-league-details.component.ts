@@ -27,15 +27,11 @@ export class AdminLeagueDetailsComponent implements OnInit {
   }
 
   onDeleteClick() {
-    let name = prompt('Warning: Cannot be undone! Enter league name to confirm:');
+    const name = prompt('Warning: Cannot be undone! Enter league name to confirm:');
 
-    if (name) {
-      name = name.trim();
-    } else {
-      return;
-    }
+    if (!name) { return; }
 
-    if (this.league.name === name) {
+    if (this.league.name === name.trim()) {
       this.leagueService.delete(this.league._id).subscribe(() => {
         this.router.navigate(['/', 'admin', 'leagues']);
       });

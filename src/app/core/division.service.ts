@@ -23,4 +23,8 @@ export class DivisionService {
       return this.http.post(url, division);
     }
   }
+
+  delete(leagueId: string, divisionId: string): Observable<any> {
+    const url = this.api + `leagues/${leagueId}/divisions/${divisionId}`;
+    return this.http.delete(url);
 }

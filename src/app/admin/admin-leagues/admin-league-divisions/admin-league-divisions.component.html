@@ -12,7 +12,7 @@
 
 <div class="row">
   <div class="col text-center text-muted" *ngIf="!league.divisions || !league.divisions.length">
-    <p class="pt-4 mb-0">No Divisions.</p>
+    <p class="pt-2 mb-0">No Divisions.</p>
   </div>
 
   <div class="col">
@@ -28,7 +28,7 @@
               <i class="fas fa-pen"></i>
             </button>
 
-            <button mat-icon-button (click)="onDeleteClick()">
+            <button mat-icon-button (click)="onDeleteClick(division)">
               <i class="fas fa-trash-alt"></i>
             </button>
           </div>

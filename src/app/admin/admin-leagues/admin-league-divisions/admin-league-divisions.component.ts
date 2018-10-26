@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 import { League } from '@app/models/league';
 import { AdminLeagueDivisionFormComponent } from './admin-league-division-form/admin-league-division-form.component';
 import { Division } from '@app/models/division';
+import { DivisionService } from '@app/core/division.service';
 
 @Component({
   selector: 'app-admin-league-divisions',
@@ -15,7 +16,8 @@ export class AdminLeagueDivisionsComponent implements OnInit {
   @Input() league: League;
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private divisionService: DivisionService
   ) { }
 
   ngOnInit() {
@@ -51,7 +53,6 @@ export class AdminLeagueDivisionsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((division?: Division) => {
       if (division) {
-        console.log(division);
         const index = this.league.divisions.findIndex((d: Division) => d._id === division._id);
         this.league.divisions[index] = division;
       }
@@ -59,6 +60,17 @@ export class AdminLeagueDivisionsComponent implements OnInit {
   }
 
   onDeleteClick(division: Division) {
+    const name = prompt('Warning: Cannot be undone! Enter division name to confirm:');
 
+    if (!name) { return; }
+
+    if (division.name === name.trim()) {
+      this.divisionService.delete(this.league._id, division._id).subscribe(() => {
+        const index = this.league.divisions.findIndex((d: Division) => d._id === division._id);
+        this.league.divisions.splice(index, 1);
+      });
+    } else {
+      alert('Error: Division name entered doesn\'t match.');
+    }
   }
 }
