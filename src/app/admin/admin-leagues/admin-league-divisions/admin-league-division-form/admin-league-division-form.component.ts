@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Division } from '@app/models/division';
 import { DivisionService } from '@app/core/division.service';
+import { League } from '@app/models/league';
 
 @Component({
   selector: 'app-admin-league-division-form',
@@ -12,23 +13,28 @@ import { DivisionService } from '@app/core/division.service';
 export class AdminLeagueDivisionFormComponent implements OnInit {
 
   division: Division;
+  league: League;
+  new: boolean = false;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: {leagueId: string, division?: Division},
+    @Inject(MAT_DIALOG_DATA) private data: {league: League, division?: Division},
     private dialogRef: MatDialogRef<AdminLeagueDivisionFormComponent>,
     private divisionService: DivisionService
   ) { }
 
   ngOnInit() {
+    this.league = this.data.league;
+
     if (this.data.division) {
       this.division = this.data.division;
     } else {
+      this.new = true;
       this.division = new Division('');
     }
   }
 
   onSubmit() {
-    this.divisionService.save(this.data.leagueId, this.division)
+    this.divisionService.save(this.league._id, this.division)
     .subscribe((division: Division) => {
       this.dialogRef.close(division);
     });

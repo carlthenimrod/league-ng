@@ -5,6 +5,7 @@ export class Division {
     public name: string,
     public divisons: Division[] = [],
     public teams: Team[] = [],
+    public parent?: string,
     public _id?: string,
     public __v?: string
   ) {}

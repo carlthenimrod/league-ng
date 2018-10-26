@@ -1,3 +1,17 @@
 .mat-mini-fab {
   box-shadow: none !important;
 }
+
+ul {
+  li {
+    height: 50px;
+
+    &:hover button {
+      display: inline-block;
+    }
+
+    button {
+      display: none;
+    }
+  }
+}

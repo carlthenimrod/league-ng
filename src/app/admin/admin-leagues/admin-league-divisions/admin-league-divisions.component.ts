@@ -21,11 +21,11 @@ export class AdminLeagueDivisionsComponent implements OnInit {
   ngOnInit() {
   }
 
-  onAddClick(): void {
+  onAddClick() {
     const dialogRef = this.dialog.open(AdminLeagueDivisionFormComponent, {
       autoFocus: false,
       data: {
-        leagueId: this.league._id
+        league: this.league
       },
       restoreFocus: false,
       width: '500px'
@@ -36,5 +36,29 @@ export class AdminLeagueDivisionsComponent implements OnInit {
         this.league.divisions.push(division);
       }
     });
+  }
+
+  onEditClick(selectedDivision: Division) {
+    const dialogRef = this.dialog.open(AdminLeagueDivisionFormComponent, {
+      autoFocus: false,
+      data: {
+        league: this.league,
+        division: {...selectedDivision}
+      },
+      restoreFocus: false,
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe((division?: Division) => {
+      if (division) {
+        console.log(division);
+        const index = this.league.divisions.findIndex((d: Division) => d._id === division._id);
+        this.league.divisions[index] = division;
+      }
+    });
+  }
+
+  onDeleteClick(division: Division) {
+
   }
 }
