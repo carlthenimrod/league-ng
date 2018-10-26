@@ -14,7 +14,7 @@ export class AdminLeagueDivisionFormComponent implements OnInit {
 
   division: Division;
   league: League;
-  new: boolean = false;
+  new = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: {league: League, division?: Division},

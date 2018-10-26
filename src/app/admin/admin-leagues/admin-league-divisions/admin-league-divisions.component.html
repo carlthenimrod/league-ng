@@ -15,7 +15,7 @@
     <p class="pt-2 mb-0">No Divisions.</p>
   </div>
 
-  <div class="col">
+  <div class="col" *ngIf="league.divisions && league.divisions.length > 0">
     <ul class="list-group list-group-flush border">
       <li class="list-group-item list-group-item-light p-1 pl-4" *ngFor="let division of league.divisions">
         <div class="d-flex h-100 align-items-center justify-content-between">
