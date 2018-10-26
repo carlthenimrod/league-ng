@@ -25,10 +25,10 @@ export class LeagueService {
   }
 
   save(league: League): Observable<any> {
-    if (league._id) { // edit
+    if (league._id) {
       const url = this.api + 'leagues/' + league._id;
       return this.http.put(url, league);
-    } else { // new
+    } else {
       const url = this.api + 'leagues';
       return this.http.post(url, league);
     }

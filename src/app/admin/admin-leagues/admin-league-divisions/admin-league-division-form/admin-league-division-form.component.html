@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-      <form>
+      <form #f="ngForm" (ngSubmit)="onSubmit()">
         <div class="row pb-2 text-center align-items-center">
           <div class="col">
             <h1 class="h2 text-muted">Add Division</h1>
@@ -11,7 +11,15 @@
         <div class="row">
           <div class="col p-4 bg-light">
             <mat-form-field class="w-100">
-              <input matInput required placeholder="Division Name">
+              <input
+                matInput
+                name="name"
+                required
+                placeholder="Division Name"
+                [(ngModel)]="division.name"
+                #name="ngModel"
+              >
+              <mat-error>Name is required.</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -22,6 +30,7 @@
               mat-flat-button
               color="primary"
               class="mr-2"
+              [disabled]="f.invalid"
             >
               <i class="fas fa-plus mr-1"></i>
 
@@ -31,7 +40,7 @@
             <button
               mat-flat-button
               color="warn"
-              [mat-dialog-close]="true"
+              mat-dialog-close
             >
               <i class="fas fa-times mr-1"></i>
 
