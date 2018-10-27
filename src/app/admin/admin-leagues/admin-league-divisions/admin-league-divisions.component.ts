@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { League } from '@app/models/league';
 import { AdminLeagueDivisionFormComponent } from './admin-league-division-form/admin-league-division-form.component';
+import { League } from '@app/models/league';
+import { LeagueService } from '@app/core/league.service';
 import { Division } from '@app/models/division';
 import { DivisionService } from '@app/core/division.service';
 
@@ -17,7 +18,8 @@ export class AdminLeagueDivisionsComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private divisionService: DivisionService
+    private divisionService: DivisionService,
+    private leagueService: LeagueService
   ) { }
 
   ngOnInit() {
@@ -33,29 +35,29 @@ export class AdminLeagueDivisionsComponent implements OnInit {
       width: '500px'
     });
 
-    dialogRef.afterClosed().subscribe((division?: Division) => {
-      if (division) {
-        this.league.divisions.push(division);
-      }
+    dialogRef.afterClosed().subscribe(() => {
+      this.leagueService.get(this.league._id).subscribe((league: League) => {
+        this.league = league;
+      });
     });
   }
 
-  onEditClick(selectedDivision: Division) {
+  onEditClick(selectedDivision: Division, parent?: string) {
     const dialogRef = this.dialog.open(AdminLeagueDivisionFormComponent, {
       autoFocus: false,
       data: {
         league: this.league,
-        division: {...selectedDivision}
+        division: {...selectedDivision},
+        parent: parent
       },
       restoreFocus: false,
       width: '500px'
     });
 
-    dialogRef.afterClosed().subscribe((division?: Division) => {
-      if (division) {
-        const index = this.league.divisions.findIndex((d: Division) => d._id === division._id);
-        this.league.divisions[index] = division;
-      }
+    dialogRef.afterClosed().subscribe(() => {
+      this.leagueService.get(this.league._id).subscribe((league: League) => {
+        this.league = league;
+      });
     });
   }
 
@@ -66,8 +68,9 @@ export class AdminLeagueDivisionsComponent implements OnInit {
 
     if (division.name === name.trim()) {
       this.divisionService.delete(this.league._id, division._id).subscribe(() => {
-        const index = this.league.divisions.findIndex((d: Division) => d._id === division._id);
-        this.league.divisions.splice(index, 1);
+        this.leagueService.get(this.league._id).subscribe((league: League) => {
+          this.league = league;
+        });
       });
     } else {
       alert('Error: Division name entered doesn\'t match.');

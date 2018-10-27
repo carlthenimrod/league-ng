@@ -4,14 +4,14 @@
 
 ul {
   li {
-    height: 50px;
+    div {
+      &:hover button {
+        display: inline-block;
+      }
 
-    &:hover button {
-      display: inline-block;
-    }
-
-    button {
-      display: none;
+      button {
+        display: none;
+      }
     }
   }
 }

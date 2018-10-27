@@ -15,11 +15,17 @@
     <p class="pt-2 mb-0">No Divisions.</p>
   </div>
 
-  <div class="col" *ngIf="league.divisions && league.divisions.length > 0">
+  <div
+    *ngIf="league.divisions && league.divisions.length > 0"
+    class="col"
+  >
     <ul class="list-group list-group-flush border">
-      <li class="list-group-item list-group-item-light p-1 pl-4" *ngFor="let division of league.divisions">
-        <div class="d-flex h-100 align-items-center justify-content-between">
-          <div>
+      <li
+        *ngFor="let division of league.divisions"
+        class="list-group-item list-group-item-light py-0 px-2"
+      >
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="h5 m-0 py-3 pl-4">
             {{ division.name }}
           </div>
 
@@ -33,6 +39,29 @@
             </button>
           </div>
         </div>
+
+        <ul class="list-group list-group-flush border-top" *ngIf="division.divisions && division.divisions.length > 0">
+          <li
+            *ngFor="let subDivision of division.divisions"
+            class="list-group-item list-group-item-light p-2"
+          >
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="py-2 pl-4">
+                {{ subDivision.name }}
+              </div>
+
+              <div>
+                <button mat-icon-button class="mr-1" (click)="onEditClick(subDivision, division._id)">
+                  <i class="fas fa-pen"></i>
+                </button>
+
+                <button mat-icon-button (click)="onDeleteClick(subDivision)">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </div>
+            </div>
+          </li>
+        </ul>
       </li>
     </ul>
   </div>

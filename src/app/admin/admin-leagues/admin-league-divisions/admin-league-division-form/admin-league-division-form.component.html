@@ -27,7 +27,7 @@
               </div>
             </div>
 
-            <div class="row pt-4" *ngIf="league.divisions && league.divisions.length > 0">
+            <div class="row pt-4" *ngIf="parents && parents.length > 0">
               <div class="col">
                 <mat-form-field class="w-100">
                   <mat-select
@@ -37,8 +37,8 @@
                     #parent="ngModel"
                   >
                     <mat-option [value]="null">--- No Parent ---</mat-option>
-                    <mat-option *ngFor="let division of league.divisions" [value]="division._id">
-                      {{ division.name }}
+                    <mat-option *ngFor="let parent of parents" [value]="parent._id">
+                      {{ parent.name }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
