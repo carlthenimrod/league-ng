@@ -15,7 +15,7 @@ export class AdminLeagueTeamFormComponent implements OnInit {
 
   league: League;
   team: Team;
-  teams: Team[];
+  autocompleteOptions: Team[];
   new = false;
   teamForm = this.fb.group({
     team: [this.team]
@@ -39,7 +39,10 @@ export class AdminLeagueTeamFormComponent implements OnInit {
     }
 
     this.teamService.all().subscribe((teams: Team[]) => {
-      this.teams = teams;
+      this.autocompleteOptions = teams.filter((t: Team) => {
+        const result = this.league.teams.find((l: Team) => l._id === t._id);
+        if (!result) { return t; }
+      });
     });
   }
 

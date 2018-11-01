@@ -22,7 +22,7 @@
             </mat-form-field>
 
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-              <mat-option *ngFor="let team of teams" [value]="team">
+              <mat-option *ngFor="let team of autocompleteOptions" [value]="team">
                 {{ team.name }}
               </mat-option>
             </mat-autocomplete>
@@ -35,6 +35,7 @@
               mat-flat-button
               color="primary"
               class="mr-2"
+              [disabled]="teamForm.invalid"
             >
               <i class="fas fa-plus mr-1"></i>
 
