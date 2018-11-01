@@ -1,10 +1,9 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Division } from '@app/models/division';
 import { DivisionService } from '@app/core/division.service';
 import { League } from '@app/models/league';
-import { defineDirective } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-admin-league-division-form',
@@ -20,9 +19,9 @@ export class AdminLeagueDivisionFormComponent implements OnInit {
   new = false;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: {league: League, division?: Division, parent?: string},
-    private dialogRef: MatDialogRef<AdminLeagueDivisionFormComponent>,
-    private divisionService: DivisionService
+    @Inject(MAT_DIALOG_DATA) public data: {league: League, division?: Division, parent?: string},
+    public dialogRef: MatDialogRef<AdminLeagueDivisionFormComponent>,
+    public divisionService: DivisionService
   ) { }
 
   ngOnInit() {

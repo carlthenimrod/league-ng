@@ -11,7 +11,26 @@
 </div>
 
 <div class="row">
-  <div class="col text-center text-muted" *ngIf="!teams || !teams.length">
+  <div *ngIf="!league.teams || !league.teams.length" class="col text-center text-muted">
     <p class="pt-2 mb-0">No Teams.</p>
+  </div>
+
+  <div
+    *ngIf="league.teams && league.teams.length > 0"
+    class="col"
+  >
+    <ul class="list-group list-group-flush border">
+      <li
+        *ngFor="let team of league.teams"
+        class="list-group-item list-group-item-light"
+      >
+        <a
+          [routerLink]="['/admin/team', team._id]"
+          class="d-block h5 m-0"
+        >
+          {{ team.name }}
+        </a>
+      </li>
+    </ul>
   </div>
 </div>

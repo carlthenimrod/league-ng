@@ -12,7 +12,7 @@ export class DivisionService {
 
   api: string = environment.api;
 
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
   save(leagueId: string, division: Division): Observable<any> {
     if (division._id) {

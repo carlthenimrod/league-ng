@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '@app/shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
@@ -21,6 +21,7 @@ import { AdminLeagueDivisionFormComponent } from './admin-leagues/admin-league-d
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     SharedModule,
     AdminRoutingModule
   ],

@@ -12,7 +12,7 @@ export class LeagueService {
 
   api: string = environment.api;
 
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
   all(): Observable<any> {
     const url = this.api + 'leagues';
@@ -20,13 +20,13 @@ export class LeagueService {
   }
 
   get(id: String): Observable<any> {
-    const url = this.api + 'leagues/' + id;
+    const url = this.api + `leagues/${id}`;
     return this.http.get(url);
   }
 
   save(league: League): Observable<any> {
     if (league._id) {
-      const url = this.api + 'leagues/' + league._id;
+      const url = this.api + `leagues/${league._id}`;
       return this.http.put(url, league);
     } else {
       const url = this.api + 'leagues';
@@ -35,7 +35,7 @@ export class LeagueService {
   }
 
   delete(id: String): Observable<any> {
-    const url = this.api + 'leagues/' + id;
+    const url = this.api + `leagues/${id}`;
     return this.http.delete(url);
   }
 }
