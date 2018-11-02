@@ -22,14 +22,22 @@
     <ul class="list-group list-group-flush border">
       <li
         *ngFor="let team of league.teams"
-        class="list-group-item list-group-item-light"
+        class="list-group-item list-group-item-light py-0 px-2"
       >
-        <a
-          [routerLink]="['/admin/team', team._id]"
-          class="d-block h5 m-0"
-        >
-          {{ team.name }}
-        </a>
+        <div class="d-flex justify-content-between align-items-center">
+          <a
+            [routerLink]="['/admin/team', team._id]"
+            class="h5 m-0 py-3 pl-4"
+          >
+            {{ team.name }}
+          </a>
+
+          <div>
+            <button mat-icon-button (click)="onRemoveClick(league._id, team._id)">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
       </li>
     </ul>
   </div>

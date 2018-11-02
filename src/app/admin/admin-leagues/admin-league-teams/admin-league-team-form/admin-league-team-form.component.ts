@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { League } from '@app/models/league';
+import { LeagueService } from '@app/core/league.service';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/core/team.service';
 import { FormBuilder } from '@angular/forms';
@@ -16,7 +17,6 @@ export class AdminLeagueTeamFormComponent implements OnInit {
   league: League;
   team: Team;
   autocompleteOptions: Team[];
-  new = false;
   teamForm = this.fb.group({
     team: [this.team]
   });
@@ -25,18 +25,12 @@ export class AdminLeagueTeamFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: {league: League, team?: Team},
     public dialogRef: MatDialogRef<AdminLeagueTeamFormComponent>,
     public fb: FormBuilder,
+    public leagueService: LeagueService,
     public teamService: TeamService
   ) { }
 
   ngOnInit() {
     this.league = this.data.league;
-
-    if (this.data.team) {
-      this.team = this.data.team;
-    } else {
-      this.new = true;
-      this.team = new Team('');
-    }
 
     this.teamService.all().subscribe((teams: Team[]) => {
       this.autocompleteOptions = teams.filter((t: Team) => {
@@ -59,7 +53,7 @@ export class AdminLeagueTeamFormComponent implements OnInit {
       this.team = new Team(selected);
     }
 
-    this.teamService.save(this.team, this.league._id)
+    this.leagueService.addTeam(this.league._id, this.team)
     .subscribe((team: Team) => {
       this.dialogRef.close(team);
     });
