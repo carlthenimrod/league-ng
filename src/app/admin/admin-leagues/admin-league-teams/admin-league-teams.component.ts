@@ -5,11 +5,13 @@ import { AdminLeagueTeamFormComponent } from './admin-league-team-form/admin-lea
 import { League } from '@app/models/league';
 import { LeagueService } from '@app/core/league.service';
 import { Team } from '@app/models/team';
+import { teamStaggerTrigger, teamToggleTrigger } from './animations';
 
 @Component({
   selector: 'app-admin-league-teams',
   templateUrl: './admin-league-teams.component.html',
-  styleUrls: ['./admin-league-teams.component.scss']
+  styleUrls: ['./admin-league-teams.component.scss'],
+  animations: [teamStaggerTrigger, teamToggleTrigger]
 })
 export class AdminLeagueTeamsComponent implements OnInit {
 
