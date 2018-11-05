@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FormBuilder } from '@angular/forms';
 
-import { Division } from '@app/models/division';
-import { DivisionService } from '@app/core/division.service';
-import { League } from '@app/models/league';
+import { League, Division } from '@app/models/league';
+import { LeagueService } from '@app/core/league.service';
 
 @Component({
   selector: 'app-admin-league-division-form',
@@ -12,16 +12,21 @@ import { League } from '@app/models/league';
 })
 export class AdminLeagueDivisionFormComponent implements OnInit {
 
-  division: Division;
+  division: Division = new Division('');
   parents: Division[] = [];
-  parent: string;
+  parent = '';
   league: League;
   new = false;
+  divisionForm = this.fb.group({
+    name: [this.division.name],
+    parent: [this.parent]
+  });
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {league: League, division?: Division, parent?: string},
     public dialogRef: MatDialogRef<AdminLeagueDivisionFormComponent>,
-    public divisionService: DivisionService
+    public fb: FormBuilder,
+    public leagueService: LeagueService
   ) { }
 
   ngOnInit() {
@@ -29,10 +34,9 @@ export class AdminLeagueDivisionFormComponent implements OnInit {
 
     if (this.data.division) {
       this.division = this.data.division;
-      this.division.parent = this.data.parent;
+      if (this.data.parent) { this.parent = this.data.parent; }
     } else {
       this.new = true;
-      this.division = new Division('');
     }
 
     this.findParents(this.league.divisions);
@@ -45,9 +49,6 @@ export class AdminLeagueDivisionFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.divisionService.save(this.league._id, this.division)
-    .subscribe((division: Division) => {
-      this.dialogRef.close();
-    });
+    this.dialogRef.close({ division: this.division, parent: this.parent });
   }
 }

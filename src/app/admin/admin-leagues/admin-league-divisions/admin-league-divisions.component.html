@@ -19,10 +19,11 @@
     *ngIf="league.divisions && league.divisions.length > 0"
     class="col"
   >
-    <ul class="list-group list-group-flush border">
+    <ul class="list-group list-group-flush" @divStagger>
       <li
         *ngFor="let division of league.divisions"
-        class="list-group-item list-group-item-light py-0 px-2"
+        class="list-group-item list-group-item-light py-0 px-2 border"
+        @divToggle
       >
         <div class="d-flex justify-content-between align-items-center">
           <div class="h5 m-0 py-3 pl-4">
@@ -43,7 +44,8 @@
         <ul class="list-group list-group-flush border-top" *ngIf="division.divisions && division.divisions.length > 0">
           <li
             *ngFor="let subDivision of division.divisions"
-            class="list-group-item list-group-item-light p-2"
+            class="list-group-item list-group-item-light p-0 border-0"
+            @divToggle
           >
             <div class="d-flex justify-content-between align-items-center">
               <div class="py-2 pl-4">

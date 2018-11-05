@@ -2,15 +2,15 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { AdminLeagueDivisionFormComponent } from './admin-league-division-form/admin-league-division-form.component';
-import { League } from '@app/models/league';
+import { League, Division } from '@app/models/league';
 import { LeagueService } from '@app/core/league.service';
-import { Division } from '@app/models/division';
-import { DivisionService } from '@app/core/division.service';
+import { divStaggerTrigger, divToggleTrigger } from './animations';
 
 @Component({
   selector: 'app-admin-league-divisions',
   templateUrl: './admin-league-divisions.component.html',
-  styleUrls: ['./admin-league-divisions.component.scss']
+  styleUrls: ['./admin-league-divisions.component.scss'],
+  animations: [divStaggerTrigger, divToggleTrigger]
 })
 export class AdminLeagueDivisionsComponent implements OnInit {
 
@@ -18,7 +18,6 @@ export class AdminLeagueDivisionsComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private divisionService: DivisionService,
     private leagueService: LeagueService
   ) { }
 
@@ -35,14 +34,17 @@ export class AdminLeagueDivisionsComponent implements OnInit {
       width: '500px'
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      this.leagueService.get(this.league._id).subscribe((league: League) => {
-        this.league = league;
-      });
+    dialogRef.afterClosed().subscribe((r?: {division?: Division, parent?: String}) => {
+      const division = r.division,
+            parent = r.parent;
+
+      if (division) {
+        this.leagueService.addDivision(division, parent);
+      }
     });
   }
 
-  onEditClick(selectedDivision: Division, parent?: string) {
+  onEditClick(selectedDivision: Division, parent?: String) {
     const dialogRef = this.dialog.open(AdminLeagueDivisionFormComponent, {
       autoFocus: false,
       data: {
@@ -54,10 +56,13 @@ export class AdminLeagueDivisionsComponent implements OnInit {
       width: '500px'
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      this.leagueService.get(this.league._id).subscribe((league: League) => {
-        this.league = league;
-      });
+    dialogRef.afterClosed().subscribe((r?: {division?: Division, parent?: String}) => {
+      const division = r.division,
+            newParent = r.parent;
+
+      console.log(division);
+      console.log(parent);
+      console.log(newParent);
     });
   }
 
@@ -67,11 +72,7 @@ export class AdminLeagueDivisionsComponent implements OnInit {
     if (!name) { return; }
 
     if (division.name === name.trim()) {
-      this.divisionService.delete(this.league._id, division._id).subscribe(() => {
-        this.leagueService.get(this.league._id).subscribe((league: League) => {
-          this.league = league;
-        });
-      });
+      this.leagueService.removeDivision(division._id);
     } else {
       alert('Error: Division name entered doesn\'t match.');
     }

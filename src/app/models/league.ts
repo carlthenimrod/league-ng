@@ -1,5 +1,14 @@
-import { Division } from '@app/models/division';
 import { Team } from '@app/models/team';
+
+export class Division {
+  constructor(
+    public name: string,
+    public divisions: Division[] = [],
+    public teams: Team[] = [],
+    public _id?: string,
+    public __v?: string
+  ) {}
+}
 
 export class League {
   constructor(
