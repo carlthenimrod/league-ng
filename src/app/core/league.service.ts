@@ -75,7 +75,7 @@ export class LeagueService {
       }
 
       if (d.divisions.length > 0) { // check children
-        this.addToDivisions(d.divisions, newDivision, parent));
+        this.addToDivisions(d.divisions, newDivision, parent);
       }
     }
   }
