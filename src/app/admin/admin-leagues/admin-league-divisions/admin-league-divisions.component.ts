@@ -35,8 +35,7 @@ export class AdminLeagueDivisionsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((r?: {division?: Division, parent?: String}) => {
-      const division = r.division,
-            parent = r.parent;
+      const {division, parent} = r;
 
       if (division) {
         this.leagueService.addDivision(division, parent);
@@ -44,25 +43,24 @@ export class AdminLeagueDivisionsComponent implements OnInit {
     });
   }
 
-  onEditClick(selectedDivision: Division, parent?: String) {
+  onEditClick(selectedDivision: Division, currentParent?: String) {
     const dialogRef = this.dialog.open(AdminLeagueDivisionFormComponent, {
       autoFocus: false,
       data: {
         league: this.league,
         division: {...selectedDivision},
-        parent: parent
+        parent: currentParent
       },
       restoreFocus: false,
       width: '500px'
     });
 
     dialogRef.afterClosed().subscribe((r?: {division?: Division, parent?: String}) => {
-      const division = r.division,
-            newParent = r.parent;
+      const {division, parent} = r;
 
-      console.log(division);
-      console.log(parent);
-      console.log(newParent);
+      if (division) {
+        this.leagueService.updateDivision(division, parent);
+      }
     });
   }
 
