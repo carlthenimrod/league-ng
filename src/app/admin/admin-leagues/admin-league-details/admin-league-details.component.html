@@ -1,36 +1,40 @@
-<div class="row align-items-center">
-  <div class="col-8">
-      <h1 class="h2 text-muted">
-        {{ league.name }}
-      </h1>
-  </div>
-
-  <div class="col-4 text-right">
-    <button
-      mat-flat-button
-      color="primary"
-      class="mr-2"
-      (click)="onEditClick()"
-    >
-      <i class="fas fa-edit mr-2"></i>
-
-      Edit
-    </button>
-
-    <button
-      mat-flat-button
-      color="warn"
-      (click)="onDeleteClick()"
-    >
-      <i class="fas fa-trash-alt mr-2"></i>
-
-      Delete
-    </button>
-  </div>
-</div>
-
-<div class="row mt-4" *ngIf="league.description">
+<div class="row bg-light my-4 p-4">
   <div class="col">
-    <p class="pt-4">{{ league.description }}</p>
+    <div class="row align-items-center">
+      <div class="col-8">
+          <h1 class="h2 text-muted">
+            {{ league.name }}
+          </h1>
+      </div>
+
+      <div class="col-4 text-right">
+        <button
+          mat-flat-button
+          color="primary"
+          class="mr-2"
+          (click)="onEditClick()"
+        >
+          <i class="fas fa-edit mr-2"></i>
+
+          Edit
+        </button>
+
+        <button
+          mat-flat-button
+          color="warn"
+          (click)="onDeleteClick()"
+        >
+          <i class="fas fa-trash-alt mr-2"></i>
+
+          Delete
+        </button>
+      </div>
+    </div>
+
+    <div class="row mt-4" *ngIf="league.description">
+      <div class="col">
+        <p class="pt-4">{{ league.description }}</p>
+      </div>
+    </div>
   </div>
 </div>

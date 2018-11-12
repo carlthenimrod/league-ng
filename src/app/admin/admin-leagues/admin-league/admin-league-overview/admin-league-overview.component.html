@@ -1,0 +1,87 @@
+<div class="row bg-light p-4">
+  <div class="col">
+    <div class="row mb-4 border-bottom align-items-start justify-content-between">
+      <div class="col-8">
+        <h2 class="h3 text-muted pb-2">League Overview</h2>
+      </div>
+
+      <div class="col-4">
+        <button
+          mat-flat-button
+          color="primary"
+          class="mr-2"
+          (click)="onNewDivisionClick()"
+        >
+          <i class="fas fa-align-left mr-1"></i>
+
+          New Division
+        </button>
+
+        <button
+          mat-flat-button
+          color="primary"
+          class="mr-2"
+          (click)="onAddTeamClick()"
+        >
+          <i class="fas fa-tshirt mr-1"></i>
+
+          Add Team
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-9">
+        <section id="divisions">
+          <table class="table border bg-white mb-0">
+            <thead>
+              <tr>
+                <th>Division / Team</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <ng-container
+                *ngFor="let division of league.divisions"
+              >
+                <tr
+                  (dragstart)="onDivisionDrag($event, division)"
+                  (dragover)="onDivisionDragOver($event, division)"
+                  (drop)="onDivisionDrop($event, division)"
+                  draggable="true"
+                >
+                  <td [ngStyle]="styleDivisionName(division)">
+                    {{ division.name }}
+                  </td>
+                </tr>
+
+                <ng-container *ngIf="division.teams && division.teams.length > 0">
+                  <tr *ngFor="let team of division.teams">
+                    <td class="py-2">{{ team.name }}</td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+      <div class="col-3">
+        <section id="teams">
+          <h3 class="h6 text-center mb-3">Unassigned Teams</h3>
+
+          <ul class="list-group">
+            <li
+              *ngFor="let team of league.teams"
+              class="list-group-item"
+              draggable="true"
+              (dragstart)="onTeamDrag($event, team)"
+            >
+              {{ team.name }}
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

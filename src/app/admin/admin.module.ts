@@ -12,10 +12,9 @@ import { AdminLeagueComponent } from './admin-leagues/admin-league/admin-league.
 import { AdminLeagueFormComponent } from './admin-leagues/admin-league-form/admin-league-form.component';
 import { AdminLeagueNewComponent } from './admin-leagues/admin-league-new/admin-league-new.component';
 import { AdminLeagueDetailsComponent } from './admin-leagues/admin-league-details/admin-league-details.component';
-import { AdminLeagueTeamsComponent } from './admin-leagues/admin-league-teams/admin-league-teams.component';
-import { AdminLeagueTeamFormComponent } from './admin-leagues/admin-league-teams/admin-league-team-form/admin-league-team-form.component';
-import { AdminLeagueDivisionsComponent } from './admin-leagues/admin-league-divisions/admin-league-divisions.component';
-import { AdminLeagueDivisionFormComponent } from './admin-leagues/admin-league-divisions/admin-league-division-form/admin-league-division-form.component';
+import { AdminLeagueTeamModalComponent } from './admin-leagues/admin-league/admin-league-overview/admin-league-team-modal/admin-league-team-modal.component';
+import { AdminLeagueDivisionModalComponent } from './admin-leagues/admin-league/admin-league-overview/admin-league-division-modal/admin-league-division-modal.component';
+import { AdminLeagueOverviewComponent } from './admin-leagues/admin-league/admin-league-overview/admin-league-overview.component';
 
 @NgModule({
   imports: [
@@ -34,14 +33,13 @@ import { AdminLeagueDivisionFormComponent } from './admin-leagues/admin-league-d
     AdminLeagueFormComponent,
     AdminLeagueNewComponent,
     AdminLeagueDetailsComponent,
-    AdminLeagueTeamsComponent,
-    AdminLeagueTeamFormComponent,
-    AdminLeagueDivisionsComponent,
-    AdminLeagueDivisionFormComponent
+    AdminLeagueTeamModalComponent,
+    AdminLeagueDivisionModalComponent,
+    AdminLeagueOverviewComponent
   ],
   entryComponents: [
-    AdminLeagueTeamFormComponent,
-    AdminLeagueDivisionFormComponent
+    AdminLeagueTeamModalComponent,
+    AdminLeagueDivisionModalComponent
   ]
 })
 export class AdminModule { }

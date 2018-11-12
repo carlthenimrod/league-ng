@@ -8,11 +8,11 @@ import { TeamService } from '@app/core/team.service';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-admin-league-team-form',
-  templateUrl: './admin-league-team-form.component.html',
-  styleUrls: ['./admin-league-team-form.component.scss']
+  selector: 'app-admin-league-team-modal',
+  templateUrl: './admin-league-team-modal.component.html',
+  styleUrls: ['./admin-league-team-modal.component.scss']
 })
-export class AdminLeagueTeamFormComponent implements OnInit {
+export class AdminLeagueTeamModalComponent implements OnInit {
 
   league: League;
   team: Team;
@@ -23,7 +23,7 @@ export class AdminLeagueTeamFormComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {league: League, team?: Team},
-    public dialogRef: MatDialogRef<AdminLeagueTeamFormComponent>,
+    public dialogRef: MatDialogRef<AdminLeagueTeamModalComponent>,
     public fb: FormBuilder,
     public leagueService: LeagueService,
     public teamService: TeamService

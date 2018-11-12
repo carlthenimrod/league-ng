@@ -6,25 +6,30 @@ import { League, Division } from '@app/models/league';
 import { LeagueService } from '@app/core/league.service';
 
 @Component({
-  selector: 'app-admin-league-division-form',
-  templateUrl: './admin-league-division-form.component.html',
-  styleUrls: ['./admin-league-division-form.component.scss']
+  selector: 'app-admin-league-division-modal',
+  templateUrl: './admin-league-division-modal.component.html',
+  styleUrls: ['./admin-league-division-modal.component.scss']
 })
-export class AdminLeagueDivisionFormComponent implements OnInit {
+export class AdminLeagueDivisionModalComponent implements OnInit {
 
   division: Division = new Division('');
   parents: Division[] = [];
   parent = '';
   league: League;
   new = false;
+
   divisionForm = this.fb.group({
     name: [this.division.name],
     parent: [this.parent]
   });
 
+  teamAddForm = this.fb.group({
+    team: []
+  });
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {league: League, division?: Division, parent?: string},
-    public dialogRef: MatDialogRef<AdminLeagueDivisionFormComponent>,
+    public dialogRef: MatDialogRef<AdminLeagueDivisionModalComponent>,
     public fb: FormBuilder,
     public leagueService: LeagueService
   ) { }

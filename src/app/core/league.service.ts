@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { League, Division } from '@app/models/league';
 import { Team } from '@app/models/team';
@@ -25,7 +26,12 @@ export class LeagueService {
 
   get(id: String): void {
     const url = this.api + `leagues/${id}`;
-    this.http.get(url).subscribe((league: League) => {
+    this.http.get(url).pipe(
+      map((league: League) => {
+        league.divisions = this.flattenDivisions(league.divisions);
+        return league;
+      })
+    ).subscribe((league: League) => {
       this.league = league;
       this.leagueSubject.next(league);
     });
@@ -50,7 +56,23 @@ export class LeagueService {
     return this.http.delete(url);
   }
 
-  findDivision(divisionId: String, divisions?: Division[], remove?: Boolean): Division {
+  flattenDivisions(divisions: Division[], depth: number = 0, parent: string | boolean = false) {
+    return divisions.reduce((acc: Division[], val: Division) => {
+      const division = {...val, parent, depth};
+      delete division.divisions;
+
+      if (val.divisions.length > 0) {
+        acc.push(division);
+        acc = acc.concat(this.flattenDivisions(val.divisions, depth + 1, val._id));
+        return acc;
+      }
+
+      acc.push(division);
+      return acc;
+    }, []);
+  }
+
+  findDivision(divisionId: string, divisions?: Division[], remove?: boolean): Division {
     divisions = divisions || this.league.divisions;
 
     for (let i = 0; i < divisions.length; i++) {
@@ -62,7 +84,7 @@ export class LeagueService {
         return d;
       }
 
-      if (d.divisions.length > 0) {
+      if (d.divisions && d.divisions.length > 0) {
         const match = this.findDivision(divisionId, d.divisions, remove);
 
         if (match) { return match; }
@@ -70,7 +92,7 @@ export class LeagueService {
     }
   }
 
-  findDivisionParent(divisionId: String, division?: Division): Division {
+  findDivisionParent(divisionId: string, division?: Division | League): Division | League {
     division = division || this.league;
 
     for (let i = 0; i < division.divisions.length; i++) {
@@ -105,7 +127,7 @@ export class LeagueService {
     return children;
   }
 
-  addDivision(division: Division, parent: String) {
+  addDivision(division: Division, parent: string) {
     const url = this.api + `leagues/${this.league._id}/divisions`;
 
     this.http.post(url, {...division, parent}).subscribe((newDivision: Division) => {
@@ -121,7 +143,7 @@ export class LeagueService {
     });
   }
 
-  updateDivision(division: Division, parent: String) {
+  updateDivision(division: Division, parent: string) {
     const url = this.api + `leagues/${this.league._id}/divisions/${division._id}`;
 
     this.http.put(url, {...division, parent}).subscribe((updatedDivision: Division) => {
@@ -159,7 +181,7 @@ export class LeagueService {
     });
   }
 
-  removeDivision(divisionId: String) {
+  removeDivision(divisionId: string) {
     const url = this.api + `leagues/${this.league._id}/divisions/${divisionId}`;
 
     this.http.delete(url).subscribe(() => {
@@ -174,13 +196,24 @@ export class LeagueService {
     });
   }
 
-  addTeam(id: String, team: Team): Observable<any> {
+  addTeam(id: string, team: Team): Observable<any> {
     const url = this.api + `leagues/${id}/teams`;
     return this.http.post(url, team);
   }
 
-  removeTeam(id: String, teamId: String): Observable<any> {
+  removeTeam(id: string, teamId: string): Observable<any> {
     const url = this.api + `leagues/${id}/teams/${teamId}`;
     return this.http.delete(url);
+  }
+
+  addTeamToDivision(id: string, divisionId: string, teamId: string) {
+    const url = this.api + `leagues/${id}/divisions/${divisionId}/teams/${teamId}`;
+
+    this.http.post(url, {}).subscribe((addedTeam: Team) => {
+      const division = this.findDivision(divisionId);
+      division.teams.push(addedTeam);
+
+      this.leagueSubject.next(this.league);
+    });
   }
 }

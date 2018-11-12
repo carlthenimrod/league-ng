@@ -1,42 +1,16 @@
-<div class="row my-4">
-  <div class="col">
-    <div class="p-4 bg-light rounded">
-      <app-admin-league-form
-        *ngIf="league && editingLeague"
-        [league]="league"
-        (saveClick)="editingLeague = !editingLeague"
-        (cancelClick)="editingLeague = !editingLeague"
-      >
-      </app-admin-league-form>
+<app-admin-league-form
+  *ngIf="league && editingLeague"
+  [league]="league"
+  (saveClick)="editingLeague = !editingLeague"
+  (cancelClick)="editingLeague = !editingLeague"
+>
+</app-admin-league-form>
 
-      <app-admin-league-details
-        *ngIf="league && !editingLeague"
-        [league]="league"
-        (editClick)="editingLeague = !editingLeague"
-      >
-      </app-admin-league-details>
-    </div>
-  </div>
-</div>
+<app-admin-league-details
+  *ngIf="league && !editingLeague"
+  [league]="league"
+  (editClick)="editingLeague = !editingLeague"
+>
+</app-admin-league-details>
 
-<div class="row justify-content-between">
-  <div class="col-5">
-    <div class="p-4 bg-light">
-      <app-admin-league-teams
-        *ngIf="league"
-        [league]="league"
-      >
-      </app-admin-league-teams>
-    </div>
-  </div>
-
-  <div class="col-7">
-    <div class="p-4 bg-light">
-        <app-admin-league-divisions
-          *ngIf="league"
-          [league]="league"
-        >
-        </app-admin-league-divisions>
-    </div>
-  </div>
-</div>
+<app-admin-league-overview *ngIf="league" [league]="league"></app-admin-league-overview>

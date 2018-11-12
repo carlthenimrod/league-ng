@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -15,6 +16,7 @@ import {
     CommonModule
   ],
   exports: [
+    DragDropModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatDialogModule,

@@ -1,83 +1,87 @@
-<form #f="ngForm" (ngSubmit)="onSubmit()">
-  <div class="row">
-    <div class="col-8">
-      <h4 class="mb-4 text-muted">
-        League Details
-      </h4>
-    </div>
+<div class="row bg-light my-4 p-4">
+  <div class="col">
+    <form #f="ngForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-8">
+          <h4 class="mb-4 text-muted">
+            League Details
+          </h4>
+        </div>
 
-    <div class="col-4 text-right">
-      <button
-        *ngIf="new"
-        type="submit"
-        mat-flat-button
-        color="primary"
-        [disabled]="!f.form.valid"
-      >
-        <i class="fas fa-plus mr-1"></i>
+        <div class="col-4 text-right">
+          <button
+            *ngIf="new"
+            type="submit"
+            mat-flat-button
+            color="primary"
+            [disabled]="!f.form.valid"
+          >
+            <i class="fas fa-plus mr-1"></i>
 
-        Create League
-      </button>
+            Create League
+          </button>
 
-      <button
-        *ngIf="!new"
-        type="submit"
-        mat-flat-button
-        color="primary"
-        class="mr-2"
-        [disabled]="!f.form.valid"
-      >
-        <i class="fas fa-save mr-1"></i>
+          <button
+            *ngIf="!new"
+            type="submit"
+            mat-flat-button
+            color="primary"
+            class="mr-2"
+            [disabled]="!f.form.valid"
+          >
+            <i class="fas fa-save mr-1"></i>
 
-        Save
-      </button>
+            Save
+          </button>
 
-      <button
-        *ngIf="!new"
-        type="button"
-        mat-flat-button
-        color="warn"
-        (click)="onCancel()"
-      >
-        <i class="fas fa-times mr-1"></i>
+          <button
+            *ngIf="!new"
+            type="button"
+            mat-flat-button
+            color="warn"
+            (click)="onCancel()"
+          >
+            <i class="fas fa-times mr-1"></i>
 
-        Cancel
-      </button>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="name">Name</label>
-
-        <input
-          type="text"
-          name="name"
-          id="name"
-          class="form-control"
-          required
-          [(ngModel)]="league.name"
-          #name="ngModel"
-          [ngClass]="{'is-invalid': !name.valid && name.touched}"
-        >
-
-        <div class="invalid-feedback">
-          Name is required.
+            Cancel
+          </button>
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="description">Description</label>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="name">Name</label>
 
-        <textarea
-          name="description"
-          id="description"
-          class="form-control"
-          rows="5"
-          [(ngModel)]="league.description"
-        ></textarea>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              class="form-control"
+              required
+              [(ngModel)]="league.name"
+              #name="ngModel"
+              [ngClass]="{'is-invalid': !name.valid && name.touched}"
+            >
+
+            <div class="invalid-feedback">
+              Name is required.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+
+            <textarea
+              name="description"
+              id="description"
+              class="form-control"
+              rows="5"
+              [(ngModel)]="league.description"
+            ></textarea>
+          </div>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
-</form>
+</div>
