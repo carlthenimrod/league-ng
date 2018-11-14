@@ -30,6 +30,36 @@
       </div>
     </div>
 
+    <ng-template #divisionRow let-divisions="divisions" let-depth="depth">
+      <ng-container *ngFor="let division of divisions">
+          <tr
+            (dragstart)="onDivisionDrag($event, division)"
+            (dragover)="onDivisionDragOver($event, division)"
+            (drop)="onDivisionDrop($event, division)"
+            draggable="true"
+          >
+            <td [ngStyle]="styleDivisionName(depth)">
+              {{ division.name }}
+            </td>
+          </tr>
+
+          <ng-container *ngIf="division.teams.length > 0">
+              <tr *ngFor="let team of division.teams">
+                <td>
+                  {{ team.name }}
+                </td>
+              </tr>
+          </ng-container>
+
+          <ng-container *ngIf="division.divisions && division.divisions.length > 0">
+            <ng-container
+              *ngTemplateOutlet="divisionRow, context: { divisions: division.divisions, depth: depth + 1 }"
+            >
+            </ng-container>
+          </ng-container>
+      </ng-container>
+    </ng-template>
+
     <div class="row">
       <div class="col-9">
         <section id="divisions">
@@ -41,24 +71,10 @@
             </thead>
 
             <tbody>
-              <ng-container
-                *ngFor="let division of league.divisions"
-              >
-                <tr
-                  (dragstart)="onDivisionDrag($event, division)"
-                  (dragover)="onDivisionDragOver($event, division)"
-                  (drop)="onDivisionDrop($event, division)"
-                  draggable="true"
+              <ng-container *ngIf="league.divisions && league.divisions.length > 0">
+                <ng-container
+                  *ngTemplateOutlet="divisionRow, context: { divisions: league.divisions, depth: 0 }"
                 >
-                  <td [ngStyle]="styleDivisionName(division)">
-                    {{ division.name }}
-                  </td>
-                </tr>
-
-                <ng-container *ngIf="division.teams && division.teams.length > 0">
-                  <tr *ngFor="let team of division.teams">
-                    <td class="py-2">{{ team.name }}</td>
-                  </tr>
                 </ng-container>
               </ng-container>
             </tbody>

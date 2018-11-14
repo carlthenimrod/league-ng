@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material';
 
 import { AdminLeagueDivisionModalComponent } from './admin-league-division-modal/admin-league-division-modal.component';
@@ -12,9 +13,10 @@ import { Team } from '@app/models/team';
   templateUrl: './admin-league-overview.component.html',
   styleUrls: ['./admin-league-overview.component.scss']
 })
-export class AdminLeagueOverviewComponent implements OnInit {
+export class AdminLeagueOverviewComponent implements OnInit, OnDestroy {
 
   @Input() league: League;
+  leagueSubscription: Subscription;
   draggedTeam: Team;
   draggedDivision: Division;
   draggedType: string;
@@ -26,12 +28,20 @@ export class AdminLeagueOverviewComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.league);
+    this.leagueSubscription = this.leagueService.leagueListener().subscribe((league: League) => {
+      this.league = league;
+      console.log(league);
+    });
   }
 
-  styleDivisionName(division: Division) {
+  ngOnDestroy() {
+    this.leagueSubscription.unsubscribe();
+  }
+
+  styleDivisionName(depth: number) {
     return {
-      'font-size.rem': 1.6 - (division.depth * 0.2),
-      'padding-left.rem': 1 + (division.depth * 0.2)
+      'font-size.rem': 1.6 - (depth * 0.2),
+      'padding-left.rem': 1 + (depth * 0.2)
     };
   }
 
@@ -51,7 +61,7 @@ export class AdminLeagueOverviewComponent implements OnInit {
 
       delete this.draggedTeam;
     } else if (this.draggedType === 'division') {
-      console.log('Dropped: ', this.draggedDivision);
+      this.leagueService.updateDivision(this.draggedDivision, division._id);
 
       delete this.draggedDivision;
     }
@@ -61,10 +71,9 @@ export class AdminLeagueOverviewComponent implements OnInit {
 
   onDivisionDragOver($event: DragEvent, division: Division) {
     if (this.draggedType === 'team') {
-      console.log('Dragged Over: ', this.draggedTeam);
       $event.preventDefault();
     } else if (this.draggedType === 'division') {
-      console.log('Dragged Over: ', this.draggedDivision);
+      if (this.draggedDivision._id === division._id) { return; }
       $event.preventDefault();
     }
   }
@@ -108,22 +117,21 @@ export class AdminLeagueOverviewComponent implements OnInit {
       width: '500px'
     });
 
-    dialogRef.afterClosed().subscribe((r?: {division?: Division, parent?: string}) => {
-      const {division, parent} = r;
+    dialogRef.afterClosed().subscribe((r?: {division?: Division}) => {
+      const {division} = r;
 
       if (division) {
-        this.leagueService.addDivision(division, parent);
+        this.leagueService.addDivision(division);
       }
     });
   }
 
-  onDivisionEditClick(selectedDivision: Division, currentParent?: string) {
+  onDivisionEditClick(selectedDivision: Division) {
     const dialogRef = this.dialog.open(AdminLeagueDivisionModalComponent, {
       autoFocus: false,
       data: {
         league: this.league,
-        division: {...selectedDivision},
-        parent: currentParent
+        division: {...selectedDivision}
       },
       restoreFocus: false,
       width: '500px'

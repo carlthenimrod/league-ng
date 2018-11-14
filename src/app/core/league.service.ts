@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import _ from 'lodash';
 
 import { League, Division } from '@app/models/league';
 import { Team } from '@app/models/team';
@@ -26,14 +27,9 @@ export class LeagueService {
 
   get(id: String): void {
     const url = this.api + `leagues/${id}`;
-    this.http.get(url).pipe(
-      map((league: League) => {
-        league.divisions = this.flattenDivisions(league.divisions);
-        return league;
-      })
-    ).subscribe((league: League) => {
+    this.http.get(url).subscribe((league: League) => {
       this.league = league;
-      this.leagueSubject.next(league);
+      this.leagueSubject.next(_.cloneDeep(this.league));
     });
   }
 
@@ -56,128 +52,92 @@ export class LeagueService {
     return this.http.delete(url);
   }
 
-  flattenDivisions(divisions: Division[], depth: number = 0, parent: string | boolean = false) {
-    return divisions.reduce((acc: Division[], val: Division) => {
-      const division = {...val, parent, depth};
-      delete division.divisions;
-
-      if (val.divisions.length > 0) {
-        acc.push(division);
-        acc = acc.concat(this.flattenDivisions(val.divisions, depth + 1, val._id));
-        return acc;
-      }
-
-      acc.push(division);
-      return acc;
-    }, []);
-  }
-
-  findDivision(divisionId: string, divisions?: Division[], remove?: boolean): Division {
+  findDivision(divisionId: string, divisions?: Division[]): Division {
     divisions = divisions || this.league.divisions;
 
     for (let i = 0; i < divisions.length; i++) {
       const d = divisions[i];
 
       if (d._id === divisionId) {
-        if (remove) { divisions.splice(i, 1); }
-
         return d;
       }
 
-      if (d.divisions && d.divisions.length > 0) {
-        const match = this.findDivision(divisionId, d.divisions, remove);
-
-        if (match) { return match; }
-      }
-    }
-  }
-
-  findDivisionParent(divisionId: string, division?: Division | League): Division | League {
-    division = division || this.league;
-
-    for (let i = 0; i < division.divisions.length; i++) {
-      const d = division.divisions[i];
-
-      if (d._id === divisionId) { return division; }
-
       if (d.divisions.length > 0) {
-        const match = this.findDivisionParent(divisionId, d);
-
+        const match = this.findDivision(divisionId, d.divisions);
         if (match) { return match; }
       }
     }
   }
 
-  findAndRemoveDivisions(divisions?: Division[]) {
-    divisions = divisions || this.league.divisions;
-    const children: Division[] = [];
+  findDivisionParent(id: string, get = 'parent', parent?: League|Division): League|Division {
+    parent = parent || this.league;
 
+    for (let i = 0; i < parent.divisions.length; i++) {
+      const p = parent.divisions[i];
+
+      if (p._id === id) {
+        if (get === 'parent') {
+          return parent;
+        } else if (get === 'match') {
+          return p;
+        }
+      }
+
+      if (p.divisions.length > 0) {
+        const match = this.findDivisionParent(id, get, p);
+        if (match) { return match; }
+      }
+    }
+  }
+
+  findDivisionParentInChildren(divisions: Division[], id: string) {
     for (let i = 0; i < divisions.length; i++) {
       const d = divisions[i];
 
-      if (d.divisions.length > 0) {
-        this.findAndRemoveDivisions(d.divisions);
-      }
+      if (d._id === id) { return true; }
 
-      children.push(d);
+      if (d.divisions.length > 0) {
+        const result = this.findDivisionParentInChildren(d.divisions, id);
+        if (result) { return true; }
+      }
     }
 
-    divisions.length = 0;
-
-    return children;
+    return false;
   }
 
-  addDivision(division: Division, parent: string) {
+  addDivision(division: Division) {
     const url = this.api + `leagues/${this.league._id}/divisions`;
 
-    this.http.post(url, {...division, parent}).subscribe((newDivision: Division) => {
-      if (parent) {
-        const match = this.findDivision(parent);
+    this.http.post(url, {...division}).subscribe((newDivision: Division) => {
+      this.league.divisions.push(newDivision);
 
-        if (match) { match.divisions.push(newDivision); }
-      } else {
-        this.league.divisions.push(newDivision);
-      }
-
-      this.leagueSubject.next(this.league);
+      this.leagueSubject.next(_.cloneDeep(this.league));
     });
   }
 
-  updateDivision(division: Division, parent: string) {
+  updateDivision(division: Division, newParentId: string) {
     const url = this.api + `leagues/${this.league._id}/divisions/${division._id}`;
 
-    this.http.put(url, {...division, parent}).subscribe((updatedDivision: Division) => {
-      const currentParent = this.findDivisionParent(updatedDivision._id);
+    this.http.put(url, {...division, parent: newParentId}).subscribe((updatedDivision: Division) => {
+      const oldParent = this.findDivisionParent(division._id);
+      const newParent = this.findDivisionParent(newParentId, 'match');
 
-      if (currentParent) {
-        parent = parent || this.league._id;
+      const index = oldParent.divisions.findIndex(d => d._id === division._id);
+      oldParent.divisions.splice(index, 1);
 
-        let match;
+      if (oldParent._id === newParent._id) {
+        oldParent.divisions.push(updatedDivision);
+      } else {
+        const match = this.findDivisionParentInChildren(division.divisions, division._id);
 
-        if (currentParent._id !== parent) { // new parent, move division
-          match = this.findDivision(updatedDivision._id, null, true);
-
-          if (match.divisions.length > 0) {
-            const divisions = this.findAndRemoveDivisions(match.divisions);
-            this.league.divisions.push(...divisions);
-          }
-
-          if (parent === this.league._id) {
-            this.league.divisions.push(updatedDivision);
-          } else {
-            const newParent = this.findDivision(parent);
-            newParent.divisions.push(updatedDivision);
-          }
-        } else {
-          match = this.findDivision(updatedDivision._id);
+        if (match) {
+          oldParent.divisions.push(...division.divisions);
         }
 
-        for (const prop in updatedDivision) { // update data
-          if (updatedDivision.hasOwnProperty(prop)) {
-            match[prop] = updatedDivision[prop];
-          }
-        }
+        newParent.divisions.push(updatedDivision);
       }
+
+      this.leagueSubject.next(_.cloneDeep(this.league));
     });
   }
 
@@ -185,14 +145,6 @@ export class LeagueService {
     const url = this.api + `leagues/${this.league._id}/divisions/${divisionId}`;
 
     this.http.delete(url).subscribe(() => {
-      const match = this.findDivision(divisionId, null, true);
-
-      if (match && (match.divisions.length > 0)) {
-        const divisions = this.findAndRemoveDivisions(match.divisions);
-        this.league.divisions.push(...divisions);
-      }
-
-      this.leagueSubject.next(this.league);
     });
   }
 
@@ -213,7 +165,7 @@ export class LeagueService {
       const division = this.findDivision(divisionId);
       division.teams.push(addedTeam);
 
-      this.leagueSubject.next(this.league);
+      this.leagueSubject.next(_.cloneDeep(this.league));
     });
   }
 }
