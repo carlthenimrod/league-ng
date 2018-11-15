@@ -120,7 +120,7 @@ export class LeagueService {
 
     this.http.put(url, {...division, parent: newParentId}).subscribe((updatedDivision: Division) => {
       const oldParent = this.findDivisionParent(division._id);
-      const newParent = this.findDivisionParent(newParentId, 'match');
+      let newParent = this.findDivisionParent(newParentId, 'match');
 
       const index = oldParent.divisions.findIndex(d => d._id === division._id);
       oldParent.divisions.splice(index, 1);
@@ -128,12 +128,10 @@ export class LeagueService {
       if (oldParent._id === newParent._id) {
         oldParent.divisions.push(updatedDivision);
       } else {
-        const match = this.findDivisionParentInChildren(division.divisions, division._id);
+        const match = this.findDivisionParentInChildren(division.divisions, newParentId);
+        if (match) { oldParent.divisions.push(...division.divisions); }
 
-        if (match) {
-          oldParent.divisions.push(...division.divisions);
-        }
-
+        newParent = this.findDivision(newParentId);
         newParent.divisions.push(updatedDivision);
       }
 
@@ -148,9 +146,14 @@ export class LeagueService {
     });
   }
 
-  addTeam(id: string, team: Team): Observable<any> {
+  addTeam(id: string, team: Team) {
     const url = this.api + `leagues/${id}/teams`;
-    return this.http.post(url, team);
+
+    this.http.post(url, team).subscribe((newTeam: Team) => {
+      this.league.teams.push(newTeam);
+
+      this.leagueSubject.next(_.cloneDeep(this.league));
+    });
   }
 
   removeTeam(id: string, teamId: string): Observable<any> {
@@ -167,5 +170,39 @@ export class LeagueService {
 
       this.leagueSubject.next(_.cloneDeep(this.league));
     });
+  }
+
+  findUnassignedTeams(): Team[] {
+    const teams = [];
+
+    if (this.league.divisions && this.league.divisions.length > 0) {
+      if (this.league.teams && this.league.teams.length > 0) {
+        this.league.teams.forEach((team: Team) => {
+          const result = this.searchDivisionForTeam(this.league.divisions, team);
+          if (!result) { teams.push(team); }
+        });
+      }
+    }
+
+    return teams;
+  }
+
+  searchDivisionForTeam(divisions: Division[], team: Team): boolean {
+    for (let i = 0; i < divisions.length; i++) {
+      const d = divisions[i];
+
+      const match = d.teams.find(t => t._id === team._id);
+
+      if (match) {
+        return true;
+      }
+
+      if (d.divisions.length > 0) {
+        const result = this.searchDivisionForTeam(d.divisions, team);
+        if (result) { return true; }
+      }
+    }
+
+    return false;
   }
 }

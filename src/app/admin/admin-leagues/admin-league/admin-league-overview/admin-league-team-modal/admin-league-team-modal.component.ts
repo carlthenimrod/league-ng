@@ -25,7 +25,6 @@ export class AdminLeagueTeamModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: {league: League, team?: Team},
     public dialogRef: MatDialogRef<AdminLeagueTeamModalComponent>,
     public fb: FormBuilder,
-    public leagueService: LeagueService,
     public teamService: TeamService
   ) { }
 
@@ -53,9 +52,6 @@ export class AdminLeagueTeamModalComponent implements OnInit {
       this.team = new Team(selected);
     }
 
-    this.leagueService.addTeam(this.league._id, this.team)
-    .subscribe((team: Team) => {
-      this.dialogRef.close(team);
-    });
+    this.dialogRef.close(this.team);
   }
 }

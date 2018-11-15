@@ -38,6 +38,6 @@ export class AdminLeagueDivisionModalComponent implements OnInit {
   }
 
   onSubmit() {
-    this.dialogRef.close({ division: this.division });
+    this.dialogRef.close(this.division);
   }
 }

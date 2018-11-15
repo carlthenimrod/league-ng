@@ -17,6 +17,7 @@ export class AdminLeagueOverviewComponent implements OnInit, OnDestroy {
 
   @Input() league: League;
   leagueSubscription: Subscription;
+  unassignedTeams: Team[] = [];
   draggedTeam: Team;
   draggedDivision: Division;
   draggedType: string;
@@ -27,10 +28,11 @@ export class AdminLeagueOverviewComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    console.log(this.league);
+    this.unassignedTeams = this.leagueService.findUnassignedTeams();
+
     this.leagueSubscription = this.leagueService.leagueListener().subscribe((league: League) => {
       this.league = league;
-      console.log(league);
+      this.unassignedTeams = this.leagueService.findUnassignedTeams();
     });
   }
 
@@ -40,8 +42,8 @@ export class AdminLeagueOverviewComponent implements OnInit, OnDestroy {
 
   styleDivisionName(depth: number) {
     return {
-      'font-size.rem': 1.6 - (depth * 0.2),
-      'padding-left.rem': 1 + (depth * 0.2)
+      'font-size.rem': 2.0 - (depth * 0.2),
+      'padding-left.rem': 1 + (depth * 0.5)
     };
   }
 
@@ -88,9 +90,9 @@ export class AdminLeagueOverviewComponent implements OnInit, OnDestroy {
       width: '500px'
     });
 
-    dialogRef.afterClosed().subscribe((team?: Team) => {
+    dialogRef.afterClosed().subscribe((team: Team) => {
       if (team) {
-        this.league.teams.push(team);
+        this.leagueService.addTeam(this.league._id, team);
       }
     });
   }
@@ -117,9 +119,7 @@ export class AdminLeagueOverviewComponent implements OnInit, OnDestroy {
       width: '500px'
     });
 
-    dialogRef.afterClosed().subscribe((r?: {division?: Division}) => {
-      const {division} = r;
-
+    dialogRef.afterClosed().subscribe((division: Division) => {
       if (division) {
         this.leagueService.addDivision(division);
       }

@@ -60,16 +60,30 @@
       </ng-container>
     </ng-template>
 
+    <div class="row mb-4" *ngIf="unassignedTeams && unassignedTeams.length > 0">
+      <div class="col">
+        <section id="unassigned-teams" class="p-2">
+          <h3 class="h6 text-muted pb-2 mb-2">Unassigned Teams:</h3>
+
+          <button
+            *ngFor="let team of unassignedTeams"
+            mat-raised-button
+            color="white"
+            disableRipple="true"
+            class="border mr-2"
+            (dragstart)="onTeamDrag($event, team)"
+            draggable="true"
+          >
+            {{ team.name }}
+          </button>
+        </section>
+      </div>
+    </div>
+
     <div class="row">
-      <div class="col-9">
+      <div class="col">
         <section id="divisions">
           <table class="table border bg-white mb-0">
-            <thead>
-              <tr>
-                <th>Division / Team</th>
-              </tr>
-            </thead>
-
             <tbody>
               <ng-container *ngIf="league.divisions && league.divisions.length > 0">
                 <ng-container
@@ -79,23 +93,6 @@
               </ng-container>
             </tbody>
           </table>
-        </section>
-      </div>
-
-      <div class="col-3">
-        <section id="teams">
-          <h3 class="h6 text-center mb-3">Unassigned Teams</h3>
-
-          <ul class="list-group">
-            <li
-              *ngFor="let team of league.teams"
-              class="list-group-item"
-              draggable="true"
-              (dragstart)="onTeamDrag($event, team)"
-            >
-              {{ team.name }}
-            </li>
-          </ul>
         </section>
       </div>
     </div>
