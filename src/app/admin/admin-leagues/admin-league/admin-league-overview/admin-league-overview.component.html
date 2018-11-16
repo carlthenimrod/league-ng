@@ -32,30 +32,33 @@
 
     <ng-template #divisionRow let-divisions="divisions" let-depth="depth">
       <ng-container *ngFor="let division of divisions">
-          <tr
+          <div
+            class="division mb-2"
             (dragstart)="onDivisionDrag($event, division)"
             (dragover)="onDivisionDragOver($event, division)"
             (drop)="onDivisionDrop($event, division)"
             draggable="true"
           >
-            <td [ngStyle]="styleDivisionName(depth)">
+            <div [ngStyle]="styleDivisionName(depth)" class="border-bottom">
               {{ division.name }}
-            </td>
-          </tr>
+            </div>
 
-          <ng-container *ngIf="division.teams.length > 0">
-              <tr *ngFor="let team of division.teams">
-                <td>
-                  {{ team.name }}
-                </td>
-              </tr>
-          </ng-container>
+            <ng-container *ngIf="division.teams.length > 0">
+                <div class="teams py-1">
+                    <div
+                      *ngFor="let team of division.teams"
+                      class="team p-2"
+                    >
+                      {{ team.name }}
+                    </div>
+                </div>
+            </ng-container>
+          </div>
 
           <ng-container *ngIf="division.divisions && division.divisions.length > 0">
             <ng-container
               *ngTemplateOutlet="divisionRow, context: { divisions: division.divisions, depth: depth + 1 }"
-            >
-            </ng-container>
+            ></ng-container>
           </ng-container>
       </ng-container>
     </ng-template>
@@ -90,17 +93,13 @@
 
     <div class="row">
       <div class="col">
-        <section id="divisions">
-          <table class="table border bg-white mb-0">
-            <tbody>
-              <ng-container *ngIf="league.divisions && league.divisions.length > 0">
-                <ng-container
-                  *ngTemplateOutlet="divisionRow, context: { divisions: league.divisions, depth: 0 }"
-                >
-                </ng-container>
-              </ng-container>
-            </tbody>
-          </table>
+        <section id="divisions" class="bg-white p-4 rounded" @leagueOverviewEnter>
+          <ng-container *ngIf="league.divisions && league.divisions.length > 0">
+            <ng-container
+              *ngTemplateOutlet="divisionRow, context: { divisions: league.divisions, depth: 0 }"
+            >
+            </ng-container>
+          </ng-container>
         </section>
       </div>
     </div>
