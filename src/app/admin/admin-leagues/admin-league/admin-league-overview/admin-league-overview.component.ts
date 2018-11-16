@@ -7,11 +7,13 @@ import { AdminLeagueTeamModalComponent } from './admin-league-team-modal/admin-l
 import { League, Division } from '@app/models/league';
 import { LeagueService } from '@app/core/league.service';
 import { Team } from '@app/models/team';
+import { unassignedTeamsToggleTrigger, unassignedTeamEnterTrigger } from './animations';
 
 @Component({
   selector: 'app-admin-league-overview',
   templateUrl: './admin-league-overview.component.html',
-  styleUrls: ['./admin-league-overview.component.scss']
+  styleUrls: ['./admin-league-overview.component.scss'],
+  animations: [unassignedTeamsToggleTrigger, unassignedTeamEnterTrigger]
 })
 export class AdminLeagueOverviewComponent implements OnInit, OnDestroy {
 
