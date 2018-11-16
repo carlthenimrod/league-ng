@@ -93,13 +93,23 @@
 
     <div class="row">
       <div class="col">
-        <section id="divisions" class="bg-white p-4 rounded" @leagueOverviewEnter>
-          <ng-container *ngIf="league.divisions && league.divisions.length > 0">
+        <section
+          *ngIf="league.divisions && league.divisions.length > 0"
+          id="divisions"
+          class="bg-white p-4 rounded"
+          @leagueOverviewEnter
+        >
             <ng-container
               *ngTemplateOutlet="divisionRow, context: { divisions: league.divisions, depth: 0 }"
             >
             </ng-container>
-          </ng-container>
+        </section>
+
+        <section
+          *ngIf="!league.divisions || league.divisions.length === 0"
+          id="divisions"
+        >
+          <p class="text-center text-muted">No Divisions.</p>
         </section>
       </div>
     </div>
