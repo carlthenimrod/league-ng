@@ -17,32 +17,6 @@ export const leagueOverviewEnterTrigger = trigger('leagueOverviewEnter', [
   ])
 ]);
 
-export const leagueOverviewTeamToggleTrigger = trigger('leagueOverviewTeamToggle', [
-  transition(':enter', [
-    style({
-      height: 0,
-      opacity: 0,
-      transform: 'scale(1.1)'
-    }),
-    animate('200ms ease-out', style({
-      height: '*'
-    })),
-    animate('200ms ease-out')
-  ]),
-  transition(':leave', [
-    style({
-      height: '*',
-      opacity: 1,
-      transform: 'scale(1)'
-    }),
-    animate('200ms ease-out', style({
-      height: 0,
-      opacity: 0,
-      transform: 'scale(0)'
-    }))
-  ])
-]);
-
 export const unassignedTeamsToggleTrigger = trigger('unassignedTeamsToggle', [
   transition(':enter', [
     query('button', [
