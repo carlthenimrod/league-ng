@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: 'http://localhost:3000/'
+  api: 'https://radiant-peak-62646.herokuapp.com/'
 };
