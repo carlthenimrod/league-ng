@@ -55,7 +55,6 @@ export class AdminLeagueOverviewComponent implements OnInit, OnDestroy {
       'padding-left.rem': 1 + (depth * 0.5)
     };
   }
-
   onTeamDrag($event: DragEvent, team: Team) {
     this.draggedType = 'team';
     this.draggedTeam = team;

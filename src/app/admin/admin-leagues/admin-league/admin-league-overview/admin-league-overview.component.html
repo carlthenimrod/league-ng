@@ -35,6 +35,7 @@
           <div
             class="division mb-2"
             (dragstart)="onDivisionDrag($event, division)"
+            (dragenter)="onDivisionDragOver($event, division)"
             (dragover)="onDivisionDragOver($event, division)"
             (drop)="onDivisionDrop($event, division)"
             draggable="true"
