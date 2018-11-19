@@ -2,17 +2,16 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { League } from '@app/models/league';
-import { LeagueService } from '@app/core/league.service';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/core/team.service';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-admin-league-team-modal',
-  templateUrl: './admin-league-team-modal.component.html',
-  styleUrls: ['./admin-league-team-modal.component.scss']
+  selector: 'app-admin-modal-team',
+  templateUrl: './admin-modal-team.component.html',
+  styleUrls: ['./admin-modal-team.component.scss']
 })
-export class AdminLeagueTeamModalComponent implements OnInit {
+export class AdminModalTeamComponent implements OnInit {
 
   league: League;
   team: Team;
@@ -23,7 +22,7 @@ export class AdminLeagueTeamModalComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {league: League, team?: Team},
-    public dialogRef: MatDialogRef<AdminLeagueTeamModalComponent>,
+    public dialogRef: MatDialogRef<AdminModalTeamComponent>,
     public fb: FormBuilder,
     public teamService: TeamService
   ) { }

@@ -1,11 +1,11 @@
 <div class="row bg-light p-4">
   <div class="col">
     <div class="row mb-4 border-bottom align-items-start justify-content-between">
-      <div class="col-8">
+      <div class="col-sm-8">
         <h2 class="h3 text-muted pb-2">League Overview</h2>
       </div>
 
-      <div class="col-4">
+      <div class="col-sm-4">
         <button
           mat-flat-button
           color="primary"
@@ -32,28 +32,50 @@
 
     <ng-template #divisionRow let-divisions="divisions" let-depth="depth">
       <ng-container *ngFor="let division of divisions">
-          <div
-            class="division mb-2"
-            (dragstart)="onDivisionDrag($event, division)"
-            (dragenter)="onDivisionDragOver($event, division)"
-            (dragover)="onDivisionDragOver($event, division)"
-            (drop)="onDivisionDrop($event, division)"
-            draggable="true"
-          >
-            <div [ngStyle]="styleDivisionName(depth)" class="border-bottom">
-              {{ division.name }}
+          <div class="division mb-2">
+            <div class="label">
+              <div
+                class="drop-before"
+                (dragenter)="onLeagueDragOver($event, division)"
+                (dragover)="onLeagueDragOver($event, division)"
+                (dragleave)="onLeagueDragLeave($event)"
+                (drop)="onLeagueDrop($event, division)"
+              >
+              </div>
+
+              <div
+                class="drop-in border-bottom"
+                [ngStyle]="styleDivisionName(depth)"
+                (dragstart)="onDivisionDrag($event, division)"
+                (dragenter)="onDivisionDragOver($event, division)"
+                (dragover)="onDivisionDragOver($event, division)"
+                (dragleave)="onDivisionDragLeave($event)"
+                (drop)="onDivisionDrop($event, division)"
+                draggable="true"
+              >
+                {{ division.name }}
+              </div>
             </div>
 
             <ng-container *ngIf="division.teams.length > 0">
-                <div class="teams py-1">
+                <div class="teams pt-1 pl-2">
                     <div
                       *ngFor="let team of division.teams"
-                      class="team p-2"
+                      class="team py-2"
                     >
                       {{ team.name }}
                     </div>
                 </div>
             </ng-container>
+
+            <div
+              class="drop-after"
+              (dragenter)="onLeagueDragOver($event, division)"
+              (dragover)="onLeagueDragOver($event, division)"
+              (dragleave)="onLeagueDragLeave($event)"
+              (drop)="onLeagueDrop($event, division)"
+            >
+            </div>
           </div>
 
           <ng-container *ngIf="division.divisions && division.divisions.length > 0">
@@ -61,6 +83,8 @@
               *ngTemplateOutlet="divisionRow, context: { divisions: division.divisions, depth: depth + 1 }"
             ></ng-container>
           </ng-container>
+
+          <div class="league-drop"></div>
       </ng-container>
     </ng-template>
 

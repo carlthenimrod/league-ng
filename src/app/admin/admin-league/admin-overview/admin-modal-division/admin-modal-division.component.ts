@@ -6,11 +6,11 @@ import { League, Division } from '@app/models/league';
 import { LeagueService } from '@app/core/league.service';
 
 @Component({
-  selector: 'app-admin-league-division-modal',
-  templateUrl: './admin-league-division-modal.component.html',
-  styleUrls: ['./admin-league-division-modal.component.scss']
+  selector: 'app-admin-modal-division',
+  templateUrl: './admin-modal-division.component.html',
+  styleUrls: ['./admin-modal-division.component.scss']
 })
-export class AdminLeagueDivisionModalComponent implements OnInit {
+export class AdminModalDivisionComponent implements OnInit {
 
   division: Division = new Division('');
   league: League;
@@ -22,7 +22,7 @@ export class AdminLeagueDivisionModalComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {league: League, division?: Division},
-    public dialogRef: MatDialogRef<AdminLeagueDivisionModalComponent>,
+    public dialogRef: MatDialogRef<AdminModalDivisionComponent>,
     public fb: FormBuilder,
     public leagueService: LeagueService
   ) { }

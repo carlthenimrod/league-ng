@@ -8,13 +8,14 @@ import { AdminComponent } from './admin.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 import { AdminLeaguesComponent } from './admin-leagues/admin-leagues.component';
-import { AdminLeagueComponent } from './admin-leagues/admin-league/admin-league.component';
+import { AdminLeagueComponent } from './admin-league/admin-league.component';
 import { AdminLeagueFormComponent } from './admin-leagues/admin-league-form/admin-league-form.component';
 import { AdminLeagueNewComponent } from './admin-leagues/admin-league-new/admin-league-new.component';
 import { AdminLeagueDetailsComponent } from './admin-leagues/admin-league-details/admin-league-details.component';
-import { AdminLeagueTeamModalComponent } from './admin-leagues/admin-league/admin-league-overview/admin-league-team-modal/admin-league-team-modal.component';
-import { AdminLeagueDivisionModalComponent } from './admin-leagues/admin-league/admin-league-overview/admin-league-division-modal/admin-league-division-modal.component';
-import { AdminLeagueOverviewComponent } from './admin-leagues/admin-league/admin-league-overview/admin-league-overview.component';
+import { AdminOverviewComponent } from './admin-league/admin-overview/admin-overview.component';
+import { AdminModalDivisionComponent } from './admin-league/admin-overview/admin-modal-division/admin-modal-division.component';
+import { AdminModalTeamComponent } from './admin-league/admin-overview/admin-modal-team/admin-modal-team.component';
+import { AdminDivisionsComponent } from './admin-league/admin-overview/admin-divisions/admin-divisions.component';
 
 @NgModule({
   imports: [
@@ -33,13 +34,14 @@ import { AdminLeagueOverviewComponent } from './admin-leagues/admin-league/admin
     AdminLeagueFormComponent,
     AdminLeagueNewComponent,
     AdminLeagueDetailsComponent,
-    AdminLeagueTeamModalComponent,
-    AdminLeagueDivisionModalComponent,
-    AdminLeagueOverviewComponent
+    AdminOverviewComponent,
+    AdminModalDivisionComponent,
+    AdminModalTeamComponent,
+    AdminDivisionsComponent
   ],
   entryComponents: [
-    AdminLeagueTeamModalComponent,
-    AdminLeagueDivisionModalComponent
+    AdminModalDivisionComponent,
+    AdminModalTeamComponent
   ]
 })
 export class AdminModule { }

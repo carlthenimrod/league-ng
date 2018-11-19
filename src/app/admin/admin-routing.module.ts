@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminLeaguesComponent } from './admin-leagues/admin-leagues.component';
-import { AdminLeagueComponent } from './admin-leagues/admin-league/admin-league.component';
+import { AdminLeagueComponent } from './admin-league/admin-league.component';
 import { AdminLeagueNewComponent } from './admin-leagues/admin-league-new/admin-league-new.component';
 
 const routes: Routes = [

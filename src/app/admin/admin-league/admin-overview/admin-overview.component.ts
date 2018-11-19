@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material';
 
-import { AdminLeagueDivisionModalComponent } from './admin-league-division-modal/admin-league-division-modal.component';
-import { AdminLeagueTeamModalComponent } from './admin-league-team-modal/admin-league-team-modal.component';
+import { AdminModalDivisionComponent } from './admin-modal-division/admin-modal-division.component';
+import { AdminModalTeamComponent } from './admin-modal-team/admin-modal-team.component';
 import { League, Division } from '@app/models/league';
 import { LeagueService } from '@app/core/league.service';
 import { Team } from '@app/models/team';
@@ -13,16 +13,16 @@ import {
   leagueOverviewEnterTrigger } from './animations';
 
 @Component({
-  selector: 'app-admin-league-overview',
-  templateUrl: './admin-league-overview.component.html',
-  styleUrls: ['./admin-league-overview.component.scss'],
+  selector: 'app-admin-overview',
+  templateUrl: './admin-overview.component.html',
+  styleUrls: ['./admin-overview.component.scss'],
   animations: [
     unassignedTeamsToggleTrigger,
     unassignedTeamEnterTrigger,
     leagueOverviewEnterTrigger
   ]
 })
-export class AdminLeagueOverviewComponent implements OnInit, OnDestroy {
+export class AdminOverviewComponent implements OnInit, OnDestroy {
 
   @Input() league: League;
   leagueSubscription: Subscription;
@@ -33,7 +33,8 @@ export class AdminLeagueOverviewComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialog: MatDialog,
-    public leagueService: LeagueService
+    public leagueService: LeagueService,
+    public renderer: Renderer2
   ) { }
 
   ngOnInit() {
@@ -52,6 +53,7 @@ export class AdminLeagueOverviewComponent implements OnInit, OnDestroy {
   styleDivisionName(depth: number) {
     return {
       'font-size.rem': 2.0 - (depth * 0.2),
+      'line-height.rem': 2.0 - (depth * 0.2),
       'padding-left.rem': 1 + (depth * 0.5)
     };
   }
@@ -80,6 +82,9 @@ export class AdminLeagueOverviewComponent implements OnInit, OnDestroy {
   }
 
   onDivisionDragOver($event: DragEvent, division: Division) {
+    const parent = this.renderer.parentNode($event.target);
+    this.renderer.addClass(parent, 'selected');
+
     if (this.draggedType === 'team') {
       $event.preventDefault();
     } else if (this.draggedType === 'division') {
@@ -88,8 +93,47 @@ export class AdminLeagueOverviewComponent implements OnInit, OnDestroy {
     }
   }
 
+  onDivisionDragLeave($event: DragEvent) {
+    const parent = this.renderer.parentNode($event.target);
+    this.renderer.removeClass(parent, 'selected');
+  }
+
+  onLeagueDrag($event: DragEvent, division: Division) {
+    this.draggedType = 'division';
+    this.draggedDivision = division;
+  }
+
+  onLeagueDrop($event: DragEvent, division: Division) {
+    if (this.draggedType === 'team') {
+      this.leagueService.addTeamToDivision(this.league._id, division._id, this.draggedTeam._id);
+
+      delete this.draggedTeam;
+    } else if (this.draggedType === 'division') {
+      this.leagueService.updateDivision(this.draggedDivision, division._id);
+
+      delete this.draggedDivision;
+    }
+
+    delete this.draggedType;
+  }
+
+  onLeagueDragOver($event: DragEvent, division: Division) {
+    this.renderer.addClass($event.target, 'selected');
+
+    if (this.draggedType === 'team') {
+      $event.preventDefault();
+    } else if (this.draggedType === 'division') {
+      if (this.draggedDivision._id === division._id) { return; }
+      $event.preventDefault();
+    }
+  }
+
+  onLeagueDragLeave($event: DragEvent) {
+    this.renderer.removeClass($event.target, 'selected');
+  }
+
   onAddTeamClick(): void {
-    const dialogRef = this.dialog.open(AdminLeagueTeamModalComponent, {
+    const dialogRef = this.dialog.open(AdminModalTeamComponent, {
       autoFocus: false,
       data: {
         league: this.league
@@ -118,7 +162,7 @@ export class AdminLeagueOverviewComponent implements OnInit, OnDestroy {
   }
 
   onNewDivisionClick() {
-    const dialogRef = this.dialog.open(AdminLeagueDivisionModalComponent, {
+    const dialogRef = this.dialog.open(AdminModalDivisionComponent, {
       autoFocus: false,
       data: {
         league: this.league
@@ -135,7 +179,7 @@ export class AdminLeagueOverviewComponent implements OnInit, OnDestroy {
   }
 
   onDivisionEditClick(selectedDivision: Division) {
-    const dialogRef = this.dialog.open(AdminLeagueDivisionModalComponent, {
+    const dialogRef = this.dialog.open(AdminModalDivisionComponent, {
       autoFocus: false,
       data: {
         league: this.league,

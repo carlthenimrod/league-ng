@@ -1,0 +1,40 @@
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+section#unassigned-teams {
+  button {
+    cursor: grab;
+  }
+}
+
+section#divisions {
+  .division {
+    .label {
+      .drop-before {
+        height: 0.5rem;
+
+        &.selected {
+          box-shadow: 0 -4px 4px -3px theme-color("primary");
+        }
+      }
+
+      .drop-in {
+        padding: 0 0 0.5rem 0;
+      }
+
+      &.selected {
+        border-radius: 5px;
+        box-shadow: 0 0 4px theme-color("primary");
+      }
+    }
+
+    .drop-after {
+      height: 0.5rem;
+
+      &.selected {
+        box-shadow: 0 4px 4px -3px theme-color("primary");
+      }
+    }
+  }
+}
