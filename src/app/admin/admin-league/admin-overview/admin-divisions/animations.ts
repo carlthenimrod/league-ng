@@ -1,22 +1,5 @@
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
-export const leagueOverviewEnterTrigger = trigger('leagueOverviewEnter', [
-  transition(':enter', [
-    query('.division', [
-      style({
-        height: 0,
-        opacity: 0
-      }),
-      stagger(100, [
-        animate(100, style({
-          height: '*'
-        })),
-        animate(100)
-      ])
-    ], { optional: true })
-  ])
-]);
-
 export const unassignedTeamsToggleTrigger = trigger('unassignedTeamsToggle', [
   transition(':enter', [
     query('button', [
@@ -58,5 +41,22 @@ export const unassignedTeamEnterTrigger = trigger('unassignedTeamEnter', [
     animate(200, style({
       transform: 'scale(1)'
     }))
+  ])
+]);
+
+export const leagueOverviewEnterTrigger = trigger('leagueOverviewEnter', [
+  transition(':enter', [
+    query('.division', [
+      style({
+        height: 0,
+        opacity: 0
+      }),
+      stagger(100, [
+        animate(100, style({
+          height: '*'
+        })),
+        animate(100)
+      ])
+    ], { optional: true })
   ])
 ]);

@@ -1,0 +1,46 @@
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+section#divisions {
+  .division {
+    .label {
+      padding: 10px 0;
+      position: relative;
+      touch-action: none;
+
+      .drop-before {
+        height: 10px;
+        position: absolute;
+        top: 0;
+        width: 100%;
+
+        &.selected {
+          box-shadow: 0 -4px 4px -3px theme-color("secondary");
+        }
+      }
+
+      .drop-after {
+        height: 10px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+
+        &.selected {
+          box-shadow: 0 4px 4px -3px theme-color("secondary");
+        }
+      }
+
+      &.selected {
+        border-radius: 5px;
+        box-shadow: 0 0 4px theme-color("secondary");
+      }
+    }
+  }
+}
+
+section#unassigned-teams {
+  button {
+    touch-action: none;
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material';
 
@@ -7,129 +7,30 @@ import { AdminModalTeamComponent } from './admin-modal-team/admin-modal-team.com
 import { League, Division } from '@app/models/league';
 import { LeagueService } from '@app/core/league.service';
 import { Team } from '@app/models/team';
-import {
-  unassignedTeamsToggleTrigger,
-  unassignedTeamEnterTrigger,
-  leagueOverviewEnterTrigger } from './animations';
 
 @Component({
   selector: 'app-admin-overview',
   templateUrl: './admin-overview.component.html',
-  styleUrls: ['./admin-overview.component.scss'],
-  animations: [
-    unassignedTeamsToggleTrigger,
-    unassignedTeamEnterTrigger,
-    leagueOverviewEnterTrigger
-  ]
+  styleUrls: ['./admin-overview.component.scss']
 })
 export class AdminOverviewComponent implements OnInit, OnDestroy {
 
   @Input() league: League;
   leagueSubscription: Subscription;
-  unassignedTeams: Team[] = [];
-  draggedTeam: Team;
-  draggedDivision: Division;
-  draggedType: string;
 
   constructor(
     public dialog: MatDialog,
-    public leagueService: LeagueService,
-    public renderer: Renderer2
+    public leagueService: LeagueService
   ) { }
 
   ngOnInit() {
-    this.unassignedTeams = this.leagueService.findUnassignedTeams();
-
     this.leagueSubscription = this.leagueService.leagueListener().subscribe((league: League) => {
       this.league = league;
-      this.unassignedTeams = this.leagueService.findUnassignedTeams();
     });
   }
 
   ngOnDestroy() {
     this.leagueSubscription.unsubscribe();
-  }
-
-  styleDivisionName(depth: number) {
-    return {
-      'font-size.rem': 2.0 - (depth * 0.2),
-      'line-height.rem': 2.0 - (depth * 0.2),
-      'padding-left.rem': 1 + (depth * 0.5)
-    };
-  }
-  onTeamDrag($event: DragEvent, team: Team) {
-    this.draggedType = 'team';
-    this.draggedTeam = team;
-  }
-
-  onDivisionDrag($event: DragEvent, division: Division) {
-    this.draggedType = 'division';
-    this.draggedDivision = division;
-  }
-
-  onDivisionDrop($event: DragEvent, division: Division) {
-    if (this.draggedType === 'team') {
-      this.leagueService.addTeamToDivision(this.league._id, division._id, this.draggedTeam._id);
-
-      delete this.draggedTeam;
-    } else if (this.draggedType === 'division') {
-      this.leagueService.updateDivision(this.draggedDivision, division._id);
-
-      delete this.draggedDivision;
-    }
-
-    delete this.draggedType;
-  }
-
-  onDivisionDragOver($event: DragEvent, division: Division) {
-    const parent = this.renderer.parentNode($event.target);
-    this.renderer.addClass(parent, 'selected');
-
-    if (this.draggedType === 'team') {
-      $event.preventDefault();
-    } else if (this.draggedType === 'division') {
-      if (this.draggedDivision._id === division._id) { return; }
-      $event.preventDefault();
-    }
-  }
-
-  onDivisionDragLeave($event: DragEvent) {
-    const parent = this.renderer.parentNode($event.target);
-    this.renderer.removeClass(parent, 'selected');
-  }
-
-  onLeagueDrag($event: DragEvent, division: Division) {
-    this.draggedType = 'division';
-    this.draggedDivision = division;
-  }
-
-  onLeagueDrop($event: DragEvent, division: Division) {
-    if (this.draggedType === 'team') {
-      this.leagueService.addTeamToDivision(this.league._id, division._id, this.draggedTeam._id);
-
-      delete this.draggedTeam;
-    } else if (this.draggedType === 'division') {
-      this.leagueService.updateDivision(this.draggedDivision, division._id);
-
-      delete this.draggedDivision;
-    }
-
-    delete this.draggedType;
-  }
-
-  onLeagueDragOver($event: DragEvent, division: Division) {
-    this.renderer.addClass($event.target, 'selected');
-
-    if (this.draggedType === 'team') {
-      $event.preventDefault();
-    } else if (this.draggedType === 'division') {
-      if (this.draggedDivision._id === division._id) { return; }
-      $event.preventDefault();
-    }
-  }
-
-  onLeagueDragLeave($event: DragEvent) {
-    this.renderer.removeClass($event.target, 'selected');
   }
 
   onAddTeamClick(): void {

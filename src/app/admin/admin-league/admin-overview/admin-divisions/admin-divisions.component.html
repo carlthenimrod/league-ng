@@ -1,3 +1,106 @@
-<p>
-  admin-divisions works!
-</p>
+<div
+  *ngIf="unassignedTeams && unassignedTeams.length > 0"
+  class="row"
+  @unassignedTeamsToggle
+>
+  <div class="col">
+    <section
+      id="unassigned-teams"
+      class="p-2"
+    >
+      <h3 class="h6 text-muted d-inline mr-3 mb-2">Unassigned Teams:</h3>
+
+      <button
+        *ngFor="let team of unassignedTeams"
+        mat-raised-button
+        color="white"
+        disableRipple="true"
+        class="border mr-2 mb-2"
+        (dragstart)="onTeamDrag($event, team)"
+        draggable="true"
+        @unassignedTeamEnter
+      >
+        {{ team.name }}
+      </button>
+    </section>
+  </div>
+</div>
+
+<ng-template #divisionRow let-divisions="divisions" let-depth="depth" let-parent="parent">
+    <ng-container *ngFor="let division of divisions; let i = index">
+        <div class="division">
+          <div class="label border-bottom">
+            <div
+              class="drop-before"
+              (dragenter)="onDragOver($event, division, parent, i)"
+              (dragover)="onDragOver($event, division, parent, i)"
+              (dragleave)="onDragLeave($event, division, parent, i)"
+              (drop)="onDrop($event, division, parent, i)"
+            >
+            </div>
+
+            <div
+              class="drop-in"
+              [ngStyle]="styleDivisionName(depth)"
+              (dragstart)="onDrag($event, division)"
+              (dragenter)="onDragOver($event, division)"
+              (dragover)="onDragOver($event, division)"
+              (dragleave)="onDragLeave($event)"
+              (drop)="onDrop($event, division)"
+              draggable="true"
+            >
+              {{ division.name }}
+            </div>
+
+            <div
+              class="drop-after"
+              (dragenter)="onDragOver($event, division, parent, i + 1)"
+              (dragover)="onDragOver($event, division, parent, i + 1)"
+              (dragleave)="onDragLeave($event, division, parent, i + 1)"
+              (drop)="onDrop($event, division, parent, i + 1)"
+            >
+            </div>
+          </div>
+
+          <ng-container *ngIf="division.teams.length > 0">
+              <div class="teams pt-1 pl-2">
+                  <div
+                    *ngFor="let team of division.teams"
+                    class="team py-2"
+                  >
+                    {{ team.name }}
+                  </div>
+              </div>
+          </ng-container>
+        </div>
+
+        <ng-container *ngIf="division.divisions && division.divisions.length > 0">
+          <ng-container
+            *ngTemplateOutlet="divisionRow, context: { divisions: division.divisions, depth: depth + 1, parent: division }"
+          ></ng-container>
+        </ng-container>
+    </ng-container>
+  </ng-template>
+
+<div class="row">
+  <div class="col">
+    <section
+      *ngIf="league.divisions && league.divisions.length > 0"
+      id="divisions"
+      class="bg-white p-4 rounded"
+      @leagueOverviewEnter
+    >
+        <ng-container
+          *ngTemplateOutlet="divisionRow, context: { divisions: league.divisions, depth: 0, parent: league }"
+        >
+        </ng-container>
+    </section>
+
+    <section
+      *ngIf="!league.divisions || league.divisions.length === 0"
+      id="divisions"
+    >
+      <p class="text-center text-muted">No Divisions.</p>
+    </section>
+  </div>
+</div>

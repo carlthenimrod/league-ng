@@ -115,24 +115,60 @@ export class LeagueService {
     });
   }
 
-  updateDivision(division: Division, newParentId: string) {
+  updateDivision(division: Division, newParentId: string, index?: number) {
     const url = this.api + `leagues/${this.league._id}/divisions/${division._id}`;
 
-    this.http.put(url, {...division, parent: newParentId}).subscribe((updatedDivision: Division) => {
+    this.http.put(url, {...division, parent: newParentId, index}).subscribe((updatedDivision: Division) => {
       const oldParent = this.findDivisionParent(division._id);
-      let newParent = this.findDivisionParent(newParentId, 'match');
+      let newParent;
 
-      const index = oldParent.divisions.findIndex(d => d._id === division._id);
-      oldParent.divisions.splice(index, 1);
-
-      if (oldParent._id === newParent._id) {
-        oldParent.divisions.push(updatedDivision);
+      // find new parent
+      if (newParentId === this.league._id) {
+        newParent = this.league;
       } else {
+        newParent = this.findDivisionParent(newParentId, 'match');
+      }
+
+      // check if parent is same
+      if (oldParent._id === newParent._id) {
+
+        // check if index is provided, position accordingly
+        if ((typeof index === 'number') && (index < oldParent.divisions.length)) {
+          const newDivisions: Division[] = [];
+
+          oldParent.divisions.forEach((d: Division, i: number) => {
+            if (index === i) { newDivisions.push(updatedDivision); }
+            if (d._id !== updatedDivision._id) { newDivisions.push(d); }
+          });
+
+          oldParent.divisions = newDivisions;
+        } else {
+          const i = oldParent.divisions.findIndex(d => d._id === division._id);
+          oldParent.divisions.splice(i, 1);
+          oldParent.divisions.push(updatedDivision);
+        }
+      } else {
+        // remove old division
+        const i = oldParent.divisions.findIndex(d => d._id === division._id);
+        oldParent.divisions.splice(i, 1);
+
+        // check if parent is in child, pull children out if so
         const match = this.findDivisionParentInChildren(division.divisions, newParentId);
         if (match) { oldParent.divisions.push(...division.divisions); }
 
-        newParent = this.findDivision(newParentId);
-        newParent.divisions.push(updatedDivision);
+        // get new parent again after resolving conflict
+        if (newParentId === this.league._id) {
+          newParent = this.league;
+        } else {
+          newParent = this.findDivision(newParentId);
+        }
+
+        // check if index is provided, position accordingly
+        if (typeof index === 'number') {
+          newParent.divisions.splice(index, 0, updatedDivision);
+        } else {
+          newParent.divisions.push(updatedDivision);
+        }
       }
 
       this.leagueSubject.next(_.cloneDeep(this.league));
