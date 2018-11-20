@@ -7,7 +7,6 @@ section#divisions {
     .label {
       padding: 10px 0;
       position: relative;
-      touch-action: none;
 
       .drop-before {
         height: 10px;
@@ -36,11 +35,5 @@ section#divisions {
         box-shadow: 0 0 4px theme-color("secondary");
       }
     }
-  }
-}
-
-section#unassigned-teams {
-  button {
-    touch-action: none;
   }
 }

@@ -7,6 +7,8 @@
     <section
       id="unassigned-teams"
       class="p-2"
+      (touchstart)="onTouchStart($event)"
+      (touchmove)="onTouchMove($event)"
     >
       <h3 class="h6 text-muted d-inline mr-3 mb-2">Unassigned Teams:</h3>
 
@@ -88,6 +90,8 @@
       *ngIf="league.divisions && league.divisions.length > 0"
       id="divisions"
       class="bg-white p-4 rounded"
+      (touchstart)="onTouchStart($event)"
+      (touchmove)="onTouchMove($event)"
       @leagueOverviewEnter
     >
         <ng-container

@@ -46,6 +46,14 @@ export class AdminDivisionsComponent implements OnInit, OnDestroy {
     this.leagueSubscription.unsubscribe();
   }
 
+  onTouchStart($event: TouchEvent) {
+    $event.preventDefault();
+  }
+
+  onTouchMove($event: TouchEvent) {
+    $event.preventDefault();
+  }
+
   styleDivisionName(depth: number) {
     return {
       'font-size.rem': 2.0 - (depth * 0.2),
