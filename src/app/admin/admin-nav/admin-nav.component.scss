@@ -1,0 +1,53 @@
+@import 'reset';
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+nav {
+  height: 60px;
+}
+
+aside#desktop {
+  display: none;
+}
+
+aside#mobile {
+  @include gradient-y(darken(theme-color(primary), 7%), theme-color(primary));
+  background-color: theme-color(primary);
+  height: 100%;
+  padding-top: 60px;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+
+  ul.nav {
+    border-top: darken(theme-color(primary), 80%);
+    padding-top: 1.5rem;
+
+    a.nav-link {
+      color: $white;
+      font-size: $h4-font-size;
+
+      i {
+        text-align: center;
+        width: 75px;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  nav {
+    display: none;
+  }
+
+  aside#mobile {
+    display: none;
+  }
+
+  aside#desktop {
+    display: block;
+  }
+}

@@ -1,0 +1,31 @@
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+.container {
+  .row {
+    div:first-child {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    div:last-child {
+      padding-top: 60px;
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .container {
+    .row {
+      div:first-child {
+        padding-left: ($grid-gutter-width / 2);
+        padding-right: ($grid-gutter-width / 2);
+      }
+
+      div:last-child {
+        padding-top: 1.5rem;
+      }
+    }
+  }
+}
