@@ -1,54 +1,48 @@
-<div class="row p-4">
+<header class="row align-items-center">
+  <div class="col-8">
+    <h1 class="display-4">
+      Leagues
+    </h1>
+  </div>
+
+  <div class="col-4 text-right">
+    <button
+      mat-flat-button
+      color="primary"
+      routerLink="/admin/leagues/new"
+    >
+      <i class="fas fa-plus mr-2"></i>
+      <span>New</span>
+    </button>
+  </div>
+</header>
+
+<div class="row" *ngIf="leagues">
   <div class="col">
-    <div class="row align-items-center">
-      <div class="col-8">
-        <h1 class="mb-4 display-4">
-          Leagues
-        </h1>
-      </div>
+    <table class="table table-hover" *ngIf="leagues.length > 0">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+          </tr>
+        </thead>
 
-      <div class="col-4 text-right">
-
-          <button
-            mat-flat-button
-            color="primary"
-            routerLink="/admin/leagues/new"
+        <tbody>
+          <tr
+            *ngFor="let league of leagues"
+            [routerLink]="[league._id]"
           >
-            <i class="fas fa-plus mr-1"></i>
+            <td>
+              {{ league.name }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-            New
-          </button>
-      </div>
-    </div>
-
-    <div class="row" *ngIf="leagues">
-      <div class="col">
-        <table class="table table-hover" *ngIf="leagues.length > 0">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr
-                *ngFor="let league of leagues"
-                [routerLink]="[league._id]"
-              >
-                <td>
-                  {{ league.name }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <p
-            *ngIf="leagues.length === 0"
-            class="text-center text-muted p-4 border-top border-bottom"
-          >
-            No leagues. Maybe create one? <i class="far fa-smile"></i>
-          </p>
-      </div>
-    </div>
+      <p
+        *ngIf="leagues.length === 0"
+        class="text-center text-muted p-4 border-top border-bottom"
+      >
+        No leagues. Maybe create one? <i class="far fa-smile"></i>
+      </p>
   </div>
 </div>

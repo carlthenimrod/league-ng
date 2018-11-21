@@ -1,0 +1,21 @@
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+header {
+  padding-top: 0.5rem;
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  header {
+    padding-top: 1.5rem;
+
+    h1 {
+      margin-bottom: 1.5rem;
+    }
+  }
+}
