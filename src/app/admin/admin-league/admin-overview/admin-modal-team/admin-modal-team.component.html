@@ -1,15 +1,15 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col">
-      <form [formGroup]="teamForm" autocomplete="off" (ngSubmit)="onSubmit()">
-        <div class="row pb-2 text-center align-items-center">
+<form [formGroup]="teamForm" autocomplete="off" (ngSubmit)="onSubmit()">
+  <div class="container-fluid">
+    <div class="row p-4">
+      <div class="col">
+        <header class="row pb-2 text-center align-items-center">
           <div class="col">
             <h1 class="h2 text-muted">Add Team</h1>
           </div>
-        </div>
+        </header>
 
-        <div class="row">
-          <div class="col p-4 bg-light">
+        <section class="row bg-light" id="input">
+          <div class="col">
             <mat-form-field class="w-100">
               <input
                 matInput
@@ -27,9 +27,9 @@
               </mat-option>
             </mat-autocomplete>
           </div>
-        </div>
+        </section>
 
-        <div class="row mt-4">
+        <section class="row mt-4" id="controls">
           <div class="col text-center pt-4 border-top">
             <button
               mat-flat-button
@@ -52,8 +52,8 @@
               Cancel
             </button>
           </div>
-        </div>
-      </form>
+        </section>
+      </div>
     </div>
   </div>
-</div>
+</form>

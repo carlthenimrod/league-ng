@@ -1,0 +1,37 @@
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+#input {
+  padding: 0.5rem;
+}
+
+#controls {
+  button {
+    display: block;
+    margin-bottom: 0.25rem;
+    width: 100%;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  #input {
+    padding: 1.5rem;
+  }
+
+  #controls {
+    button {
+      display: inline-block;
+      margin-right: 0.25rem;
+      width: auto;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

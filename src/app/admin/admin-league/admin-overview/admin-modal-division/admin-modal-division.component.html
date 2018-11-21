@@ -1,35 +1,31 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col">
-      <form [formGroup]="divisionForm" autocomplete="off" (ngSubmit)="onSubmit()">
-        <div class="row pb-2 text-center align-items-center">
+<form [formGroup]="divisionForm" autocomplete="off" (ngSubmit)="onSubmit()">
+  <div class="container-fluid">
+    <div class="row p-4">
+      <div class="col">
+        <header class="row pb-2 text-center align-items-center">
           <div class="col">
             <h1 class="h2 text-muted" *ngIf="new">Add Division</h1>
             <h1 class="h2 text-muted" *ngIf="!new">Edit Division</h1>
           </div>
-        </div>
+        </header>
 
-        <div class="row p-4 bg-light">
+        <section class="row bg-light" id="input">
           <div class="col">
-            <div class="row">
-              <div class="col">
-                <mat-form-field class="w-100">
-                  <input
-                    matInput
-                    name="name"
-                    required
-                    placeholder="Division Name"
-                    formControlName="name"
-                    [(ngModel)]="division.name"
-                  >
-                  <mat-error>Name is required.</mat-error>
-                </mat-form-field>
-              </div>
-            </div>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                name="name"
+                required
+                placeholder="Division Name"
+                formControlName="name"
+                [(ngModel)]="division.name"
+              >
+              <mat-error>Name is required.</mat-error>
+            </mat-form-field>
           </div>
-        </div>
+        </section>
 
-        <div class="row mt-4">
+        <section class="row mt-4" id="controls">
           <div class="col text-center pt-4 border-top">
             <button
               *ngIf="new"
@@ -38,9 +34,8 @@
               class="mr-2"
               [disabled]="divisionForm.invalid"
             >
-              <i class="fas fa-plus mr-1"></i>
-
-              Add
+              <i class="fas fa-plus mr-2"></i>
+              <span>Add</span>
             </button>
 
             <button
@@ -50,9 +45,8 @@
               class="mr-2"
               [disabled]="divisionForm.invalid"
             >
-              <i class="fas fa-save mr-1"></i>
-
-              Save
+              <i class="fas fa-save mr-2"></i>
+              <span>Save</span>
             </button>
 
             <button
@@ -60,13 +54,12 @@
               color="warn"
               mat-dialog-close
             >
-              <i class="fas fa-times mr-1"></i>
-
-              Cancel
+              <i class="fas fa-times mr-2"></i>
+              <span>Cancel</span>
             </button>
           </div>
-        </div>
-      </form>
+        </section>
+      </div>
     </div>
   </div>
-</div>
+</form>
