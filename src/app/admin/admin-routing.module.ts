@@ -6,12 +6,14 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminLeaguesComponent } from './admin-leagues/admin-leagues.component';
 import { AdminLeagueComponent } from './admin-league/admin-league.component';
 import { AdminLeagueNewComponent } from './admin-leagues/admin-league-new/admin-league-new.component';
+import { AdminTeamsComponent } from './admin-teams/admin-teams.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent, children: [
     { path: 'leagues', component: AdminLeaguesComponent },
     { path: 'leagues/new', component: AdminLeagueNewComponent },
     { path: 'leagues/:id', component: AdminLeagueComponent },
+    { path: 'teams', component: AdminTeamsComponent },
     { path: '**', component: AdminDashboardComponent }
   ] }
 ];

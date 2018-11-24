@@ -2,6 +2,8 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
+@import 'variables';
+
 .container {
   .row {
     div:first-child {

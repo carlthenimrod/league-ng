@@ -2,10 +2,26 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
+@import 'variables';
+
+section#unassigned-teams {
+  padding: 0.5rem;
+  text-align: center;
+
+  h3 {
+    padding-bottom: 0.5rem;
+  }
+}
+
 section#divisions {
+  padding-top: 0.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.5rem;
+
   .division {
     .label {
-      padding: 10px 0;
+      padding: 5px 0;
       position: relative;
 
       .drop-before {
@@ -35,5 +51,23 @@ section#divisions {
         box-shadow: 0 0 4px theme-color("secondary");
       }
     }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  section#unassigned-teams {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: left;
+
+    h3 {
+      display: inline;
+      padding-right: 1rem;
+      padding-bottom: 0;
+    }
+  }
+
+  section#divisions {
+    padding: 1.5rem;
   }
 }

@@ -1,5 +1,44 @@
-section#unassigned-teams {
-  button {
-    cursor: grab;
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+@import 'variables';
+
+#league-overview {
+  padding-left: 0.5rem;
+  padding-top: 1rem;
+  padding-right: 0.5rem;
+  padding-bottom: 1.5rem;
+
+  header {
+    text-align: center;
+  }
+
+  #buttons-mobile {
+    div:first-child {
+      padding-right: 0.125rem;
+    }
+
+    div:last-child {
+      padding-left: 0.125rem;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  #league-overview {
+    padding: 1.5rem;
+
+    header {
+      text-align: left;
+    }
+
+    button {
+      margin-right: 0.5rem;
+    }
   }
 }

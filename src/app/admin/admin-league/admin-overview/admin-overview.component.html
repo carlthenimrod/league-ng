@@ -1,35 +1,39 @@
-<div class="row bg-light p-4">
+<section id="league-overview" class="row bg-light">
   <div class="col">
-    <div class="row mb-4 border-bottom align-items-start justify-content-between">
-      <div class="col-sm-8">
-        <h2 class="h3 text-muted pb-2">League Overview</h2>
-      </div>
+    <div class="row pb-2 border-bottom align-items-start justify-content-between">
+      <header class="col-sm-8">
+        <h2 class="h3 pb-2 text-muted">League Overview</h2>
+      </header>
 
       <div class="col-sm-4">
-        <button
-          mat-flat-button
-          color="primary"
-          class="mr-2"
-          (click)="onNewDivisionClick()"
-        >
-          <i class="fas fa-align-left mr-1"></i>
+        <div id="buttons-mobile" class="row">
+          <div class="col-6">
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="onNewDivisionClick()"
+            >
+              <i class="fas fa-align-left mr-1"></i>
 
-          New Division
-        </button>
+              <span>New Division</span>
+            </button>
+          </div>
 
-        <button
-          mat-flat-button
-          color="primary"
-          class="mr-2"
-          (click)="onAddTeamClick()"
-        >
-          <i class="fas fa-tshirt mr-1"></i>
+          <div class="col-6">
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="onAddTeamClick()"
+            >
+              <i class="fas fa-tshirt mr-1"></i>
 
-          Add Team
-        </button>
+              <span>Add Team</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
     <app-admin-divisions [league]="league"></app-admin-divisions>
   </div>
-</div>
+</section>

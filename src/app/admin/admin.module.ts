@@ -16,6 +16,7 @@ import { AdminOverviewComponent } from './admin-league/admin-overview/admin-over
 import { AdminModalDivisionComponent } from './admin-league/admin-overview/admin-modal-division/admin-modal-division.component';
 import { AdminModalTeamComponent } from './admin-league/admin-overview/admin-modal-team/admin-modal-team.component';
 import { AdminDivisionsComponent } from './admin-league/admin-overview/admin-divisions/admin-divisions.component';
+import { AdminTeamsComponent } from './admin-teams/admin-teams.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { AdminDivisionsComponent } from './admin-league/admin-overview/admin-div
     AdminOverviewComponent,
     AdminModalDivisionComponent,
     AdminModalTeamComponent,
-    AdminDivisionsComponent
+    AdminDivisionsComponent,
+    AdminTeamsComponent
   ],
   entryComponents: [
     AdminModalDivisionComponent,

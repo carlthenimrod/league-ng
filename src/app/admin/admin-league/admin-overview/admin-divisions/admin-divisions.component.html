@@ -1,32 +1,28 @@
-<div
+<section
   *ngIf="unassignedTeams && unassignedTeams.length > 0"
+  id="unassigned-teams"
   class="row"
   @unassignedTeamsToggle
 >
   <div class="col">
-    <section
-      id="unassigned-teams"
-      class="p-2"
+    <h3 class="h6 text-muted">Unassigned Teams:</h3>
+
+    <button
+      *ngFor="let team of unassignedTeams"
+      mat-raised-button
+      color="white"
+      disableRipple="true"
+      class="border mr-2 mb-2"
+      (dragstart)="onTeamDrag($event, team)"
+      draggable="true"
       (touchstart)="onTouchStart($event)"
       (touchmove)="onTouchMove($event)"
+      @unassignedTeamEnter
     >
-      <h3 class="h6 text-muted d-inline mr-3 mb-2">Unassigned Teams:</h3>
-
-      <button
-        *ngFor="let team of unassignedTeams"
-        mat-raised-button
-        color="white"
-        disableRipple="true"
-        class="border mr-2 mb-2"
-        (dragstart)="onTeamDrag($event, team)"
-        draggable="true"
-        @unassignedTeamEnter
-      >
-        {{ team.name }}
-      </button>
-    </section>
+      {{ team.name }}
+    </button>
   </div>
-</div>
+</section>
 
 <ng-template #divisionRow let-divisions="divisions" let-depth="depth" let-parent="parent">
     <ng-container *ngFor="let division of divisions; let i = index">
@@ -49,6 +45,8 @@
               (dragover)="onDragOver($event, division)"
               (dragleave)="onDragLeave($event)"
               (drop)="onDrop($event, division)"
+              (touchstart)="onTouchStart($event)"
+              (touchmove)="onTouchMove($event)"
               draggable="true"
             >
               {{ division.name }}
@@ -89,9 +87,7 @@
     <section
       *ngIf="league.divisions && league.divisions.length > 0"
       id="divisions"
-      class="bg-white p-4 rounded"
-      (touchstart)="onTouchStart($event)"
-      (touchmove)="onTouchMove($event)"
+      class="bg-white rounded"
       @leagueOverviewEnter
     >
         <ng-container
