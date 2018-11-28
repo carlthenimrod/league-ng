@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import _ from 'lodash';
 
 import { Team } from '@app/models/team';
 
@@ -12,6 +13,9 @@ export class TeamService {
 
   api: string = environment.api;
 
+  team: Team;
+  teamSubject: Subject<Team> = new Subject<Team>();
+
   constructor(public http: HttpClient) { }
 
   all(): Observable<any> {
@@ -19,9 +23,16 @@ export class TeamService {
     return this.http.get(url);
   }
 
-  get(id: string): Observable<any> {
+  get(id: String): void {
     const url = this.api + `teams/${id}`;
-    return this.http.get(url);
+    this.http.get(url).subscribe((team: Team) => {
+      this.team = team;
+      this.teamSubject.next(_.cloneDeep(this.team));
+    });
+  }
+
+  teamListener(): Observable<Team> {
+    return this.teamSubject.asObservable();
   }
 
   save(team: Team, leagueId?: string, divisionId?: string): Observable<any> {

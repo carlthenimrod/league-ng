@@ -1,0 +1,33 @@
+@import 'reset';
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+#team-form {
+  padding-left: 0.5rem;
+  padding-top: 1rem;
+  padding-right: 0.5rem;
+  padding-bottom: 1.5rem;
+
+  textarea {
+    line-height: 1.5rem;
+  }
+
+  #buttons-mobile {
+    div:first-child {
+      padding-right: 0.125rem;
+    }
+
+    div:last-child {
+      padding-left: 0.125rem;
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  #team-form {
+    padding: 1.5rem;
+  }
+}

@@ -1,0 +1,14 @@
+<app-admin-team-form
+  *ngIf="team && editingTeam"
+  [team]="team"
+  (saveClick)="editingTeam = !editingTeam"
+  (cancelClick)="editingTeam = !editingTeam"
+>
+</app-admin-team-form>
+
+<app-admin-team-details
+  *ngIf="team && !editingTeam"
+  [team]="team"
+  (editClick)="editingTeam = !editingTeam"
+>
+</app-admin-team-details>

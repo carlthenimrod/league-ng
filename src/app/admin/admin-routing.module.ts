@@ -5,8 +5,10 @@ import { AdminComponent } from './admin.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminLeaguesComponent } from './admin-leagues/admin-leagues.component';
 import { AdminLeagueComponent } from './admin-league/admin-league.component';
-import { AdminLeagueNewComponent } from './admin-leagues/admin-league-new/admin-league-new.component';
+import { AdminLeagueNewComponent } from './admin-league/admin-league-new/admin-league-new.component';
 import { AdminTeamsComponent } from './admin-teams/admin-teams.component';
+import { AdminTeamComponent } from './admin-team/admin-team.component';
+import { AdminTeamNewComponent } from './admin-team/admin-team-new/admin-team-new.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent, children: [
@@ -14,6 +16,8 @@ const routes: Routes = [
     { path: 'leagues/new', component: AdminLeagueNewComponent },
     { path: 'leagues/:id', component: AdminLeagueComponent },
     { path: 'teams', component: AdminTeamsComponent },
+    { path: 'teams/new', component: AdminTeamNewComponent },
+    { path: 'teams/:id', component: AdminTeamComponent },
     { path: '**', component: AdminDashboardComponent }
   ] }
 ];

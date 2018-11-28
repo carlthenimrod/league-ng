@@ -9,9 +9,9 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import { AdminLeaguesComponent } from './admin-leagues/admin-leagues.component';
 import { AdminLeagueComponent } from './admin-league/admin-league.component';
-import { AdminLeagueFormComponent } from './admin-leagues/admin-league-form/admin-league-form.component';
-import { AdminLeagueNewComponent } from './admin-leagues/admin-league-new/admin-league-new.component';
-import { AdminLeagueDetailsComponent } from './admin-leagues/admin-league-details/admin-league-details.component';
+import { AdminLeagueFormComponent } from './admin-league/admin-league-form/admin-league-form.component';
+import { AdminLeagueNewComponent } from './admin-league/admin-league-new/admin-league-new.component';
+import { AdminLeagueDetailsComponent } from './admin-league/admin-league-details/admin-league-details.component';
 import { AdminOverviewComponent } from './admin-league/admin-overview/admin-overview.component';
 import { AdminModalDivisionComponent } from './admin-league/admin-overview/admin-modal-division/admin-modal-division.component';
 import { AdminModalTeamComponent } from './admin-league/admin-overview/admin-modal-team/admin-modal-team.component';
@@ -20,6 +20,10 @@ import { AdminTeamsComponent } from './admin-teams/admin-teams.component';
 import { AdminUtilityComponent } from './admin-utility/admin-utility.component';
 import { AdminPaginationComponent } from './admin-utility/admin-pagination/admin-pagination.component';
 import { AdminSearchComponent } from './admin-utility/admin-search/admin-search.component';
+import { AdminTeamComponent } from './admin-team/admin-team.component';
+import { AdminTeamNewComponent } from './admin-team/admin-team-new/admin-team-new.component';
+import { AdminTeamDetailsComponent } from './admin-team/admin-team-details/admin-team-details.component';
+import { AdminTeamFormComponent } from './admin-team/admin-team-form/admin-team-form.component';
 
 @NgModule({
   imports: [
@@ -45,7 +49,11 @@ import { AdminSearchComponent } from './admin-utility/admin-search/admin-search.
     AdminTeamsComponent,
     AdminUtilityComponent,
     AdminPaginationComponent,
-    AdminSearchComponent
+    AdminSearchComponent,
+    AdminTeamComponent,
+    AdminTeamNewComponent,
+    AdminTeamDetailsComponent,
+    AdminTeamFormComponent
   ],
   entryComponents: [
     AdminModalDivisionComponent,

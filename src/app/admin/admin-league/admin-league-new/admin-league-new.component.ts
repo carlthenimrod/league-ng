@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { League } from '@app/models/league';
 
 @Component({

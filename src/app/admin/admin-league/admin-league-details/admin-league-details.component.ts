@@ -15,8 +15,8 @@ export class AdminLeagueDetailsComponent implements OnInit {
   @Output('editClick') editClick: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
-    private leagueService: LeagueService,
-    private router: Router
+    public leagueService: LeagueService,
+    public router: Router
   ) { }
 
   ngOnInit() {
