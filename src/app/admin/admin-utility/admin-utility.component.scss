@@ -6,5 +6,19 @@
 @import '~bootstrap/scss/_mixins';
 
 section.utility {
-  font-size: 0.8rem;
+  font-size: 1rem;
+
+  mat-form-field.status {
+    width: 100%;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  section.utility {
+    font-size: 0.8rem;
+
+    mat-form-field.status {
+      padding-left: 1rem;
+    }
+  }
 }

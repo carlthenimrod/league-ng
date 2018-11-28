@@ -1,35 +1,32 @@
-<section class="utility row">
-  <div class="col-7">
+<section class="utility row no-gutters">
+  <div class="col-lg-6">
     <form [formGroup]="utilityForm">
-      <app-admin-search
-        [utilityForm]="utilityForm"
-        (search)="onSearch()"
-      >
-      </app-admin-search>
+      <div class="row no-gutters">
+        <div class="col-sm-6">
+          <app-admin-search
+            [utilityForm]="utilityForm"
+            (search)="onSearch()"
+          >
+          </app-admin-search>
+        </div>
 
-      <mat-form-field *ngIf="teams" class="ml-4">
-        <mat-select
-          formControlName="status"
-          placeholder="Select Status"
-        >
-          <mat-option>--- Select Status ---</mat-option>
-          <mat-option value="new">New</mat-option>
-          <mat-option value="pending">Pending</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <button
-        mat-icon-button
-        color="primary"
-        class="ml-4"
-        type="reset"
-        >
-        <i class="fas fa-redo"></i>
-      </button>
+        <div class="col-sm-6">
+          <mat-form-field *ngIf="teams" class="status">
+            <mat-select
+              formControlName="status"
+              placeholder="Select Status"
+            >
+              <mat-option>--- Select Status ---</mat-option>
+              <mat-option value="new">New</mat-option>
+              <mat-option value="pending">Pending</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
     </form>
   </div>
 
-  <div class="col-5 text-right">
+  <div class="col-lg-6 d-none d-lg-block">
     <app-admin-pagination
       *ngIf="matched"
       [totalItems]="matched.length"

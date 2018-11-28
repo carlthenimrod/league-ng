@@ -2,7 +2,7 @@
   <label>{{ label }} Per Page</label>
 
   <mat-form-field>
-    <mat-select [(value)]="perPage" (selectionChange)="onChange($event)">
+    <mat-select [value]="perPage" (selectionChange)="onChange($event)">
       <mat-option [value]="10">10</mat-option>
       <mat-option [value]="25">25</mat-option>
       <mat-option [value]="100">100</mat-option>
