@@ -1,3 +1,59 @@
-<p>
-  admin-teams works!
-</p>
+<header class="row align-items-center">
+  <div class="col-8">
+    <h1 class="display-4">
+      Teams
+    </h1>
+  </div>
+
+  <div class="col-4 text-right">
+    <button
+      mat-flat-button
+      color="primary"
+      routerLink="/admin/teams/new"
+    >
+      <i class="fas fa-plus mr-2"></i>
+      <span>New</span>
+    </button>
+  </div>
+</header>
+
+<app-admin-utility
+  *ngIf="teams"
+  [teams]="teams"
+  (results)="onResults($event)"
+>
+  <div class="row" *ngIf="teams">
+    <div class="col">
+      <table class="table table-hover table-bordered" *ngIf="teams.length > 0">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="let team of teamList"
+            [routerLink]="[team._id]"
+          >
+            <td>
+              {{ team.name }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="row">
+        <div class="col">
+        </div>
+      </div>
+
+      <p
+        *ngIf="teams.length === 0"
+        class="text-center text-muted p-4 border-top border-bottom"
+      >
+        No teams. Maybe create one? <i class="far fa-smile"></i>
+      </p>
+    </div>
+  </div>
+</app-admin-utility>

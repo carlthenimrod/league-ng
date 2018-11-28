@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {
   MatAutocompleteModule,
+  MatBadgeModule,
   MatButtonModule,
   MatDialogModule,
   MatInputModule,
@@ -18,6 +19,7 @@ import {
   exports: [
     DragDropModule,
     MatAutocompleteModule,
+    MatBadgeModule,
     MatButtonModule,
     MatDialogModule,
     MatInputModule,

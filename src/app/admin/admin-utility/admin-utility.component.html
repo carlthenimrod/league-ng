@@ -1,0 +1,61 @@
+<section class="utility row">
+  <div class="col-7">
+    <form [formGroup]="utilityForm">
+      <app-admin-search
+        [utilityForm]="utilityForm"
+        (search)="onSearch()"
+      >
+      </app-admin-search>
+
+      <mat-form-field *ngIf="teams" class="ml-4">
+        <mat-select
+          formControlName="status"
+          placeholder="Select Status"
+        >
+          <mat-option>--- Select Status ---</mat-option>
+          <mat-option value="new">New</mat-option>
+          <mat-option value="pending">Pending</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button
+        mat-icon-button
+        color="primary"
+        class="ml-4"
+        type="reset"
+        >
+        <i class="fas fa-redo"></i>
+      </button>
+    </form>
+  </div>
+
+  <div class="col-5 text-right">
+    <app-admin-pagination
+      *ngIf="matched"
+      [totalItems]="matched.length"
+      [currentPage]="currentPage"
+      [perPage]="perPage"
+      [label]="label"
+      (page)="onPageChange($event)"
+      (perPageChange)="onPerPageChange($event)"
+    >
+    </app-admin-pagination>
+  </div>
+</section>
+
+<ng-content></ng-content>
+
+<section class="utility row">
+  <div class="col text-right">
+      <app-admin-pagination
+        *ngIf="matched"
+        [totalItems]="matched.length"
+        [currentPage]="currentPage"
+        [perPage]="perPage"
+        [label]="label"
+        (page)="onPageChange($event)"
+        (perPageChange)="onPerPageChange($event)"
+      >
+      </app-admin-pagination>
+  </div>
+</section>

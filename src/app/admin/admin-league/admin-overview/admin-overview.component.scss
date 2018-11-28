@@ -1,8 +1,9 @@
+@import 'reset';
+@import 'variables';
+
 @import '~bootstrap/scss/_functions';
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
-
-@import 'variables';
 
 #league-overview {
   padding-left: 0.5rem;

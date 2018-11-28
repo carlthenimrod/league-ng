@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
 import _ from 'lodash';
 
 import { League, Division } from '@app/models/league';

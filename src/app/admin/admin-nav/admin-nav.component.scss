@@ -49,5 +49,13 @@ aside#mobile {
 
   aside#desktop {
     display: block;
+    padding-right: 1rem;
+
+    a.nav-link {
+      i {
+        text-align: center;
+        width: 30px;
+      }
+    }
   }
 }

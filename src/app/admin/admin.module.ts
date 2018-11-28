@@ -17,6 +17,9 @@ import { AdminModalDivisionComponent } from './admin-league/admin-overview/admin
 import { AdminModalTeamComponent } from './admin-league/admin-overview/admin-modal-team/admin-modal-team.component';
 import { AdminDivisionsComponent } from './admin-league/admin-overview/admin-divisions/admin-divisions.component';
 import { AdminTeamsComponent } from './admin-teams/admin-teams.component';
+import { AdminUtilityComponent } from './admin-utility/admin-utility.component';
+import { AdminPaginationComponent } from './admin-utility/admin-pagination/admin-pagination.component';
+import { AdminSearchComponent } from './admin-utility/admin-search/admin-search.component';
 
 @NgModule({
   imports: [
@@ -39,7 +42,10 @@ import { AdminTeamsComponent } from './admin-teams/admin-teams.component';
     AdminModalDivisionComponent,
     AdminModalTeamComponent,
     AdminDivisionsComponent,
-    AdminTeamsComponent
+    AdminTeamsComponent,
+    AdminUtilityComponent,
+    AdminPaginationComponent,
+    AdminSearchComponent
   ],
   entryComponents: [
     AdminModalDivisionComponent,
