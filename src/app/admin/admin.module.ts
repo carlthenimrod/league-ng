@@ -24,6 +24,9 @@ import { AdminTeamComponent } from './admin-team/admin-team.component';
 import { AdminTeamNewComponent } from './admin-team/admin-team-new/admin-team-new.component';
 import { AdminTeamDetailsComponent } from './admin-team/admin-team-details/admin-team-details.component';
 import { AdminTeamFormComponent } from './admin-team/admin-team-form/admin-team-form.component';
+import { AdminTeamListComponent } from './admin-league/admin-overview/admin-team-list/admin-team-list.component';
+import { AdminDroppableComponent } from './admin-droppable/admin-droppable.component';
+import { AdminDraggableDirective } from './admin-droppable/admin-draggable.directive';
 
 @NgModule({
   imports: [
@@ -53,7 +56,10 @@ import { AdminTeamFormComponent } from './admin-team/admin-team-form/admin-team-
     AdminTeamComponent,
     AdminTeamNewComponent,
     AdminTeamDetailsComponent,
-    AdminTeamFormComponent
+    AdminTeamFormComponent,
+    AdminTeamListComponent,
+    AdminDroppableComponent,
+    AdminDraggableDirective
   ],
   entryComponents: [
     AdminModalDivisionComponent,

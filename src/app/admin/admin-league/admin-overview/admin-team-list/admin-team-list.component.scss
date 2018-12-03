@@ -4,20 +4,19 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
-header {
+section#team-list {
   padding-top: 0.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.5rem;
 
-  h1 {
-    margin-bottom: 1rem;
+  .team {
+    font-size: 1.5rem;
   }
 }
 
 @include media-breakpoint-up(sm) {
-  header {
-    padding-top: 1.5rem;
-
-    h1 {
-      margin-bottom: 1.5rem;
-    }
+  section#team-list {
+    padding: 1.5rem;
   }
 }

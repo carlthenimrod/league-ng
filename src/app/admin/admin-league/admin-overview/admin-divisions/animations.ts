@@ -44,7 +44,20 @@ export const unassignedTeamEnterTrigger = trigger('unassignedTeamEnter', [
   ])
 ]);
 
-export const leagueOverviewEnterTrigger = trigger('leagueOverviewEnter', [
+export const divisionEnterTrigger = trigger('divisionEnter', [
+  transition(':enter', [
+    style({
+      height: 0,
+      opacity: 0
+    }),
+    animate(100, style({
+      height: '*'
+    })),
+    animate(100)
+  ])
+]);
+
+export const divisionsEnterTrigger = trigger('divisionsEnter', [
   transition(':enter', [
     query('.division', [
       style({

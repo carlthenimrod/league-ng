@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material';
 
@@ -7,13 +7,15 @@ import { AdminModalTeamComponent } from './admin-modal-team/admin-modal-team.com
 import { League, Division } from '@app/models/league';
 import { LeagueService } from '@app/core/league.service';
 import { Team } from '@app/models/team';
+import { paragraphEnterTrigger } from './animations';
 
 @Component({
   selector: 'app-admin-overview',
   templateUrl: './admin-overview.component.html',
-  styleUrls: ['./admin-overview.component.scss']
+  styleUrls: ['./admin-overview.component.scss'],
+  animations: [paragraphEnterTrigger]
 })
-export class AdminOverviewComponent implements OnInit, OnDestroy {
+export class AdminOverviewComponent implements OnInit {
 
   @Input() league: League;
   leagueSubscription: Subscription;
@@ -24,13 +26,6 @@ export class AdminOverviewComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.leagueSubscription = this.leagueService.leagueListener().subscribe((league: League) => {
-      this.league = league;
-    });
-  }
-
-  ngOnDestroy() {
-    this.leagueSubscription.unsubscribe();
   }
 
   onAddTeamClick(): void {
@@ -44,9 +39,8 @@ export class AdminOverviewComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((team: Team) => {
-      if (team) {
-        this.leagueService.addTeam(this.league._id, team);
-      }
+      if (!team) { return; }
+      this.leagueService.addTeam(this.league._id, team);
     });
   }
 

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
+import _ from 'lodash';
 
 import { League } from '@app/models/league';
 import { LeagueService } from '@app/core/league.service';
@@ -7,14 +8,15 @@ import { LeagueService } from '@app/core/league.service';
 @Component({
   selector: 'app-admin-league-form',
   templateUrl: './admin-league-form.component.html',
-  styleUrls: ['./admin-league-form.component.scss']
+  styleUrls: ['./admin-league-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AdminLeagueFormComponent implements OnInit {
+export class AdminLeagueFormComponent implements OnInit, OnChanges {
 
   @Input() league: League;
   @Output('saveClick') saveClick: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output('cancelClick') cancelClick: EventEmitter<boolean> = new EventEmitter<boolean>();
-  oldLeague: League;
+  leagueCopy: League;
   new: boolean;
 
   constructor(
@@ -30,14 +32,24 @@ export class AdminLeagueFormComponent implements OnInit {
     }
 
     // create copy
-    this.oldLeague = {...this.league};
+    this.leagueCopy = _.cloneDeep(this.league);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.league && !changes.league.firstChange) {
+      const updatedLeague = changes.league.currentValue;
+
+      // keep old name and description if form is open
+      updatedLeague.name = this.leagueCopy.name;
+      updatedLeague.description = this.leagueCopy.description;
+
+      // update our copy
+      this.leagueCopy = updatedLeague;
+    }
   }
 
   onSubmit() {
-    this.leagueService.save(this.league).subscribe(
-      (league: League) => {
-        this.league = league;
-
+    this.leagueService.save(this.leagueCopy).subscribe((league: League) => {
         if (this.new) {
           this.router.navigate(['admin', 'leagues', league._id]);
         } else {
@@ -48,10 +60,6 @@ export class AdminLeagueFormComponent implements OnInit {
   }
 
   onCancel() {
-    // reset values to old league
-    this.league.name = this.oldLeague.name;
-    this.league.description = this.oldLeague.description;
-
     this.cancelClick.emit(true);
   }
 }

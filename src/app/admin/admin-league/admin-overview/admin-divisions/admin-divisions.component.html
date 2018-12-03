@@ -8,7 +8,7 @@
     <h3 class="h6 text-muted">Unassigned Teams:</h3>
 
     <button
-      *ngFor="let team of unassignedTeams"
+      *ngFor="let team of unassignedTeams; trackBy: trackById"
       mat-raised-button
       color="white"
       disableRipple="true"
@@ -25,8 +25,8 @@
 </section>
 
 <ng-template #divisionRow let-divisions="divisions" let-depth="depth" let-parent="parent">
-    <ng-container *ngFor="let division of divisions; let i = index">
-        <div class="division">
+    <ng-container *ngFor="let division of divisions; let i = index; trackBy: trackById">
+        <div class="division" @divisionEnter>
           <div class="label border-bottom">
             <div
               class="drop-before"
@@ -85,22 +85,14 @@
 <div class="row">
   <div class="col">
     <section
-      *ngIf="league.divisions && league.divisions.length > 0"
       id="divisions"
       class="bg-white rounded"
-      @leagueOverviewEnter
+      @divisionsEnter
     >
         <ng-container
           *ngTemplateOutlet="divisionRow, context: { divisions: league.divisions, depth: 0, parent: league }"
         >
         </ng-container>
-    </section>
-
-    <section
-      *ngIf="!league.divisions || league.divisions.length === 0"
-      id="divisions"
-    >
-      <p class="text-center text-muted">No Divisions.</p>
     </section>
   </div>
 </div>

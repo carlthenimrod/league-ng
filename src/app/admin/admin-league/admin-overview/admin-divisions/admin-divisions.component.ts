@@ -1,5 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Renderer2 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, Input, Renderer2, OnChanges, SimpleChanges } from '@angular/core';
 
 import { LeagueService } from '@app/core/league.service';
 import { League, Division } from '@app/models/league';
@@ -7,7 +6,8 @@ import { Team } from '@app/models/team';
 import {
   unassignedTeamsToggleTrigger,
   unassignedTeamEnterTrigger,
-  leagueOverviewEnterTrigger } from './animations';
+  divisionEnterTrigger,
+  divisionsEnterTrigger } from './animations';
 
 @Component({
   selector: 'app-admin-divisions',
@@ -16,13 +16,13 @@ import {
   animations: [
     unassignedTeamsToggleTrigger,
     unassignedTeamEnterTrigger,
-    leagueOverviewEnterTrigger
+    divisionEnterTrigger,
+    divisionsEnterTrigger
   ]
 })
-export class AdminDivisionsComponent implements OnInit, OnDestroy {
+export class AdminDivisionsComponent implements OnInit, OnChanges {
 
   @Input() league: League;
-  leagueSubscription: Subscription;
   unassignedTeams: Team[] = [];
   dragged: Division|Team;
   draggedType: string;
@@ -35,15 +35,12 @@ export class AdminDivisionsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.unassignedTeams = this.leagueService.findUnassignedTeams();
-
-    this.leagueSubscription = this.leagueService.leagueListener().subscribe((league: League) => {
-      this.league = league;
-      this.unassignedTeams = this.leagueService.findUnassignedTeams();
-    });
   }
 
-  ngOnDestroy() {
-    this.leagueSubscription.unsubscribe();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.league && !changes.league.firstChange) {
+      this.unassignedTeams = this.leagueService.findUnassignedTeams();
+    }
   }
 
   onTouchStart($event: TouchEvent) {
@@ -81,8 +78,13 @@ export class AdminDivisionsComponent implements OnInit, OnDestroy {
     } else if (this.draggedType === 'division') {
       if (parent) {
         this.leagueService.updateDivision((<Division>this.dragged), parent._id, index);
+
+        this.renderer.removeClass($event.target, 'selected');
       } else {
         this.leagueService.updateDivision((<Division>this.dragged), division._id);
+
+        const parentNode = this.renderer.parentNode($event.target);
+        this.renderer.removeClass(parentNode, 'selected');
       }
     }
 
@@ -114,5 +116,9 @@ export class AdminDivisionsComponent implements OnInit, OnDestroy {
       const parentNode = this.renderer.parentNode($event.target);
       this.renderer.removeClass(parentNode, 'selected');
     }
+  }
+
+  trackById(index: number, item: League|Division|Team) {
+    return item._id;
   }
 }

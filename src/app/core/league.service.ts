@@ -36,14 +36,22 @@ export class LeagueService {
     return this.leagueSubject.asObservable();
   }
 
-  save(league: League): Observable<any> {
-    if (league._id) {
-      const url = this.api + `leagues/${league._id}`;
-      return this.http.put(url, league);
-    } else {
-      const url = this.api + 'leagues';
-      return this.http.post(url, league);
-    }
+  save(league: League): Observable<League> {
+    return Observable.create(obs => {
+      if (league._id) {
+        const url = this.api + `leagues/${league._id}`;
+        this.http.put(url, league).subscribe((savedLeague: League) => {
+          this.leagueSubject.next(_.cloneDeep(savedLeague));
+          obs.next(savedLeague);
+        });
+      } else {
+        const url = this.api + 'leagues';
+        this.http.post(url, league).subscribe((savedLeague: League) => {
+          this.leagueSubject.next(_.cloneDeep(savedLeague));
+          obs.next(savedLeague);
+        });
+      }
+    });
   }
 
   delete(id: String): Observable<any> {
@@ -186,6 +194,16 @@ export class LeagueService {
 
     this.http.post(url, team).subscribe((newTeam: Team) => {
       this.league.teams.push(newTeam);
+
+      this.leagueSubject.next(_.cloneDeep(this.league));
+    });
+  }
+
+  moveTeam(team: Team, index: number) {
+    const url = this.api + `leagues/${this.league._id}/teams/${team._id}`;
+
+    this.http.put(url, {...team, index}).subscribe((teams: Team[]) => {
+      this.league.teams = teams;
 
       this.leagueSubject.next(_.cloneDeep(this.league));
     });

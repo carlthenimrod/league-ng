@@ -34,6 +34,24 @@
       </div>
     </div>
 
-    <app-admin-divisions [league]="league"></app-admin-divisions>
+    <app-admin-divisions
+      *ngIf="league.divisions && league.divisions.length > 0; else teamList"
+      [league]="league"
+    >
+    </app-admin-divisions>
+
+    <ng-template #teamList>
+      <app-admin-team-list
+        *ngIf="league.teams && league.teams.length > 0; else p"
+        [teams]="league.teams"
+      >
+      </app-admin-team-list>
+    </ng-template>
+
+    <ng-template #p>
+      <p class="text-center text-muted pt-4" @paragraphEnter>
+        No teams or divisions. <i class="far fa-frown ml-2"></i>
+      </p>
+    </ng-template>
   </div>
 </section>

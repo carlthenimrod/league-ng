@@ -1,0 +1,36 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  display: block;
+  position: relative;
+}
+
+.drop-in {
+  padding: 5px 0;
+}
+
+.drop-before {
+  height: 10px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+
+  &.selected {
+    box-shadow: 0 -4px 4px -3px theme-color("secondary");
+  }
+}
+
+.drop-after {
+  height: 10px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  &.selected {
+    box-shadow: 0 4px 4px -3px theme-color("secondary");
+  }
+}

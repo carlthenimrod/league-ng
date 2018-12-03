@@ -1,0 +1,21 @@
+<section
+  *ngIf="teams && teams.length > 0"
+  id="team-list"
+  class="row bg-white rounded"
+  @teamsEnter
+>
+  <div class="col">
+    <app-admin-droppable
+      *ngFor="let team of teams let i = index; trackBy: trackById"
+      class="team"
+      appAdminDraggable
+      (dragging)="onDrag($event, team)"
+      (dropped)="onDrop($event, i)"
+      [dragged]="dragged"
+      [dropTarget]="team"
+      @teamEnter
+    >
+      {{ team.name }}
+    </app-admin-droppable>
+  </div>
+</section>
