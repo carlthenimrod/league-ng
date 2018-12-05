@@ -41,6 +41,8 @@
               <button
                 mat-icon-button
                 color="primary"
+                draggable="true"
+                (dragstart)="stopPropagation($event)"
               >
                 <i class="fas fa-pen"></i>
               </button>
@@ -48,6 +50,8 @@
               <button
                 mat-icon-button
                 color="primary"
+                draggable="true"
+                (dragstart)="stopPropagation($event)"
               >
                 <i class="fas fa-times"></i>
               </button>

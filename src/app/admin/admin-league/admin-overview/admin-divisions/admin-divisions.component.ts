@@ -89,29 +89,9 @@ export class AdminDivisionsComponent implements OnInit, OnChanges {
     return (<Division>type).teams !== undefined;
   }
 
-  // onDrop($event: DragEvent, division: Division, parent?: Division|League, index?: number) {
-  //   if (this.draggedType === 'team') {
-  //     if (parent) {
-
-  //     } else {
-  //       this.leagueService.addTeamToDivision(this.league._id, division._id, this.dragged._id);
-  //     }
-  //   } else if (this.draggedType === 'division') {
-  //     if (parent) {
-  //       this.leagueService.updateDivision((<Division>this.dragged), parent._id, index);
-
-  //       this.renderer.removeClass($event.target, 'selected');
-  //     } else {
-  //       this.leagueService.updateDivision((<Division>this.dragged), division._id);
-
-  //       const parentNode = this.renderer.parentNode($event.target);
-  //       this.renderer.removeClass(parentNode, 'selected');
-  //     }
-  //   }
-
-  //   delete this.dragged;
-  //   delete this.draggedType;
-  // }
+  stopPropagation($event: DragEvent) {
+    return;
+  }
 
   trackById(index: number, item: League|Division|Team) {
     return item._id;

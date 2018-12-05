@@ -24,8 +24,8 @@ export class AdminDroppableComponent {
     private renderer: Renderer2
   ) { }
 
-  @HostListener('dragenter') test() {
-    this.renderer.addClass(this.el.nativeElement, 'dragging');
+  @HostListener('dragenter') onHostEnter() {
+    this.renderer.addClass(this.el.nativeElement, 'dragging-over');
   }
 
   onDragEnter($event: DragEvent, position: string) {
@@ -53,7 +53,7 @@ export class AdminDroppableComponent {
 
     if (this.counter === 0) {
       // left element
-      this.renderer.removeClass(this.el.nativeElement, 'dragging');
+      this.renderer.removeClass(this.el.nativeElement, 'dragging-over');
 
       // remove selected
       this.removeSelected();

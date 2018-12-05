@@ -38,6 +38,10 @@ export class AdminTeamListComponent implements OnInit {
     }
   }
 
+  stopPropagation($event: DragEvent) {
+    return;
+  }
+
   trackById(index: number, team: Team) {
     return team._id;
   }

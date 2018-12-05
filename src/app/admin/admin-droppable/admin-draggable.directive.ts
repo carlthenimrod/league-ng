@@ -26,6 +26,13 @@ export class AdminDraggableDirective implements OnInit {
   }
 
   @HostListener('dragstart', ['$event']) onDragStart($event: DragEvent) {
+    $event.dataTransfer.setData('text/plain', 'dragging');
+
     this.dragging.emit(<Element>$event.target);
+    this.renderer.addClass(this.el.nativeElement, 'dragging');
+  }
+
+  @HostListener('dragend', ['$event']) onDragEnd($event: DragEvent) {
+    this.renderer.removeClass(this.el.nativeElement, 'dragging');
   }
 }

@@ -11,7 +11,7 @@
   padding: 0 !important;
 }
 
-.dragging {
+.dragging-over {
   pointer-events: none;
 
   .drop-before {
@@ -31,7 +31,7 @@
   }
 }
 
-app-admin-droppable:active {
+.dragging {
   .actions {
     display: none !important;
   }
