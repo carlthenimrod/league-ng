@@ -10,3 +10,29 @@
 .mat-dialog-container {
   padding: 0 !important;
 }
+
+.dragging {
+  pointer-events: none;
+
+  .drop-before {
+    pointer-events: auto;
+  }
+
+  .drop-in {
+    pointer-events: auto;
+
+    * {
+      pointer-events: none
+    }
+  }
+
+  .drop-after {
+    pointer-events: auto;
+  }
+}
+
+app-admin-droppable:active {
+  .actions {
+    display: none !important;
+  }
+}

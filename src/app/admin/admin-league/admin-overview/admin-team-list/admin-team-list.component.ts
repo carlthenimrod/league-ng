@@ -27,11 +27,15 @@ export class AdminTeamListComponent implements OnInit {
   }
 
   onDrop(position: string, index: number) {
-    if (position === 'after') {
-      index = index + 1;
-    }
+    if (position === 'after') { index = index + 1; }
 
     this.leagueService.moveTeam(this.dragged.item, index);
+  }
+
+  onDeleteClick(team: Team) {
+    if (confirm(`Are you sure you want to remove ${team.name} from league?`)) {
+      this.leagueService.removeTeam(team._id);
+    }
   }
 
   trackById(index: number, team: Team) {

@@ -45,15 +45,15 @@ export class AdminOverviewComponent implements OnInit {
   }
 
   onTeamRemoveClick(id: string, teamId: string) {
-    this.leagueService.removeTeam(id, teamId).subscribe(
-      () => {
-        for (let i = 0; i < this.league.teams.length; i++) {
-          if (this.league.teams[i]._id === teamId) {
-            this.league.teams.splice(i, 1);
-          }
-        }
-      }
-    );
+    // this.leagueService.removeTeam(id, teamId).subscribe(
+    //   () => {
+    //     for (let i = 0; i < this.league.teams.length; i++) {
+    //       if (this.league.teams[i]._id === teamId) {
+    //         this.league.teams.splice(i, 1);
+    //       }
+    //     }
+    //   }
+    // );
   }
 
   onNewDivisionClick() {

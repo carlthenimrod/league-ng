@@ -1,7 +1,31 @@
-<div class="drop-before"></div>
+<div
+  #dropBefore
+  class="drop-before"
+  (dragenter)="onDragEnter($event, 'before')"
+  (dragover)="onDragOver($event, 'before')"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event, 'before')"
+>
+</div>
 
-<div class="drop-in">
+<div
+  #dropIn
+  class="drop-in"
+  (dragenter)="onDragEnter($event, 'in')"
+  (dragover)="onDragOver($event, 'in')"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event, 'in')"
+>
   <ng-content></ng-content>
 </div>
 
-<div *ngIf="last" class="drop-after"></div>
+<div
+  *ngIf="last"
+  #dropAfter
+  class="drop-after"
+  (dragenter)="onDragEnter($event, 'after')"
+  (dragover)="onDragOver($event, 'after')"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event, 'after')"
+>
+</div>

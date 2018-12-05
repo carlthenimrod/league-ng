@@ -13,10 +13,8 @@
       color="white"
       disableRipple="true"
       class="border mr-2 mb-2"
-      (dragstart)="onTeamDrag($event, team)"
-      draggable="true"
-      (touchstart)="onTouchStart($event)"
-      (touchmove)="onTouchMove($event)"
+      appAdminDraggable
+      (dragging)="onDrag($event, team)"
       @unassignedTeamEnter
     >
       {{ team.name }}
@@ -26,53 +24,47 @@
 
 <ng-template #divisionRow let-divisions="divisions" let-depth="depth" let-parent="parent">
     <ng-container *ngFor="let division of divisions; let i = index; trackBy: trackById">
-        <div class="division" @divisionEnter>
-          <div class="label border-bottom">
-            <div
-              class="drop-before"
-              (dragenter)="onDragOver($event, division, parent, i)"
-              (dragover)="onDragOver($event, division, parent, i)"
-              (dragleave)="onDragLeave($event, division, parent, i)"
-              (drop)="onDrop($event, division, parent, i)"
-            >
-            </div>
+        <app-admin-droppable
+          appAdminDraggable
+          class="border-bottom"
+          (dragging)="onDrag($event, division)"
+          (dropped)="onDivisionDrop($event, division, parent, i)"
+          [dragged]="dragged"
+          [dropTarget]="division"
+          [last]="(i + 1) === divisions.length"
+          @divisionEnter
+        >
+          <div class="division" [ngStyle]="styleDivisionName(depth)">
+            <div class="label">{{ division.name }}</div>
 
-            <div
-              class="drop-in"
-              [ngStyle]="styleDivisionName(depth)"
-              (dragstart)="onDrag($event, division)"
-              (dragenter)="onDragOver($event, division)"
-              (dragover)="onDragOver($event, division)"
-              (dragleave)="onDragLeave($event)"
-              (drop)="onDrop($event, division)"
-              (touchstart)="onTouchStart($event)"
-              (touchmove)="onTouchMove($event)"
-              draggable="true"
-            >
-              {{ division.name }}
-            </div>
+            <div class="actions">
+              <button
+                mat-icon-button
+                color="primary"
+              >
+                <i class="fas fa-pen"></i>
+              </button>
 
-            <div
-              class="drop-after"
-              (dragenter)="onDragOver($event, division, parent, i + 1)"
-              (dragover)="onDragOver($event, division, parent, i + 1)"
-              (dragleave)="onDragLeave($event, division, parent, i + 1)"
-              (drop)="onDrop($event, division, parent, i + 1)"
-            >
+              <button
+                mat-icon-button
+                color="primary"
+              >
+                <i class="fas fa-times"></i>
+              </button>
             </div>
           </div>
+        </app-admin-droppable>
 
-          <ng-container *ngIf="division.teams.length > 0">
-              <div class="teams pt-1 pl-2">
-                  <div
-                    *ngFor="let team of division.teams"
-                    class="team py-2"
-                  >
-                    {{ team.name }}
-                  </div>
-              </div>
-          </ng-container>
-        </div>
+        <ng-container *ngIf="division.teams.length > 0">
+            <div class="teams pt-1 pl-2">
+                <div
+                  *ngFor="let team of division.teams"
+                  class="team py-2"
+                >
+                  {{ team.name }}
+                </div>
+            </div>
+        </ng-container>
 
         <ng-container *ngIf="division.divisions && division.divisions.length > 0">
           <ng-container

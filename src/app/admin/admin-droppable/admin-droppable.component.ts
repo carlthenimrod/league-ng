@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input, Output, EventEmitter, HostListener, ElementRef, Renderer2 } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, HostListener, ElementRef, Renderer2, Host } from '@angular/core';
 
 import { Division } from '@app/models/league';
 import { Team } from '@app/models/team';
@@ -8,75 +8,111 @@ import { Team } from '@app/models/team';
   templateUrl: './admin-droppable.component.html',
   styleUrls: ['./admin-droppable.component.scss']
 })
-export class AdminDroppableComponent implements OnChanges {
+export class AdminDroppableComponent {
 
   @Input() dragged: { el: Element, item: Division|Team };
   @Input() dropTarget: Division|Team;
+  @Input() last = false;
   @Output() dropped: EventEmitter<string> = new EventEmitter();
-  last: boolean;
+  @ViewChild('dropBefore') dropBefore: ElementRef;
+  @ViewChild('dropIn') dropIn: ElementRef;
+  @ViewChild('dropAfter') dropAfter: ElementRef;
+  counter = 0;
 
   constructor(
     private el: ElementRef,
     private renderer: Renderer2
   ) { }
 
-  ngOnChanges() {
-    // check if last
-    this.last = this.renderer.nextSibling(this.el.nativeElement) ? false : true;
+  @HostListener('dragenter') test() {
+    this.renderer.addClass(this.el.nativeElement, 'dragging');
   }
 
-  @HostListener('dragenter', ['$event']) onDragEnter($event: DragEvent) {
-    const el: Element = <Element>$event.target;
+  onDragEnter($event: DragEvent, position: string) {
+    this.counter++;
 
-    if (!this.isAllowed(el)) { return; }
+    // remove selected
+    this.removeSelected();
 
-    this.renderer.addClass(el, 'selected');
+    if (!this.isAllowed(position)) { return; }
+
+    // add selected
+    this.addSelected(position);
 
     $event.preventDefault();
   }
 
-  @HostListener('dragover', ['$event']) onDragOver($event: DragEvent) {
-    const el: Element = <Element>$event.target;
-
-    if (!this.isAllowed(el)) { return; }
+  onDragOver($event: DragEvent, position: string) {
+    if (!this.isAllowed(position)) { return; }
 
     $event.preventDefault();
   }
 
-  @HostListener('dragleave', ['$event']) onDragLeave($event: DragEvent) {
-    this.renderer.removeClass(<Element>$event.target, 'selected');
+  onDragLeave($event: DragEvent) {
+    this.counter--;
+
+    if (this.counter === 0) {
+      // left element
+      this.renderer.removeClass(this.el.nativeElement, 'dragging');
+
+      // remove selected
+      this.removeSelected();
+    }
 
     $event.preventDefault();
   }
 
-  @HostListener('drop', ['$event']) onDrop($event: DragEvent) {
-    const el: Element = <Element>$event.target;
-
-    if (el.classList.contains('drop-before')) {
+  onDrop($event: DragEvent, position: string) {
+    if (position === 'before') {
       this.dropped.emit('before');
-    } else if (el.classList.contains('drop-in')) {
+    } else if (position === 'in') {
       this.dropped.emit('in');
-    } else if (el.classList.contains('drop-after')) {
+    } else if (position === 'after') {
       this.dropped.emit('after');
     }
 
-    this.renderer.removeClass($event.target, 'selected');
+    this.removeSelected();
+    this.counter = 0;
 
     $event.preventDefault();
   }
 
-  isAllowed(el: Element) {
+  addSelected(position) {
+    if (position === 'before') {
+      this.renderer.addClass(this.dropBefore.nativeElement, 'selected');
+    } else if (position === 'in') {
+      this.renderer.addClass(this.dropIn.nativeElement, 'selected');
+    } else if (position === 'after') {
+      this.renderer.addClass(this.dropAfter.nativeElement, 'selected');
+    }
+  }
+
+  removeSelected() {
+    this.renderer.removeClass(this.dropBefore.nativeElement, 'selected');
+    this.renderer.removeClass(this.dropIn.nativeElement, 'selected');
+
+    if (this.last) {
+      this.renderer.removeClass(this.dropAfter.nativeElement, 'selected');
+    }
+  }
+
+  isAllowed(position: string) {
     // can't drop on-self
     if (this.dragged.item._id === this.dropTarget._id) { return false; }
 
-    // if previous sibling, can't drop before
-    if (this.dragged.el === this.el.nativeElement.previousSibling) { return false; }
+    // can't drop division in team
+    if (this.isDivision(this.dragged.item)) {
+      if (!this.isDivision(this.dropTarget)) { return false; }
+    } else {
+      // can only drop team inside division, not before or after
+      if (this.isDivision(this.dropTarget)) {
+        if (position !== 'in') { return false; }
+      }
+    }
 
-    // check type
-    if (this.isDivision(this.dragged.item)) { // division
-
-    } else { // team
-      if (el.classList.contains('drop-in')) { return false; }
+    // if target is a team, can't drop-in
+    if (!this.isDivision(this.dropTarget)) {
+      if (position === 'in') { return false; }
     }
 
     return true;

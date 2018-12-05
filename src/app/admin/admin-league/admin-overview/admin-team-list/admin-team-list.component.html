@@ -7,15 +7,34 @@
   <div class="col">
     <app-admin-droppable
       *ngFor="let team of teams let i = index; trackBy: trackById"
-      class="team"
       appAdminDraggable
       (dragging)="onDrag($event, team)"
       (dropped)="onDrop($event, i)"
       [dragged]="dragged"
       [dropTarget]="team"
-      @teamEnter
+      [last]="(i + 1) === teams.length"
     >
-      {{ team.name }}
+      <div class="team" @teamEnter>
+        <div class="label">{{ team.name }}</div>
+
+        <div class="actions">
+          <button
+            mat-icon-button
+            color="primary"
+            [routerLink]="['/admin/teams/', team._id]"
+          >
+            <i class="fas fa-pen"></i>
+          </button>
+
+          <button
+            mat-icon-button
+            color="primary"
+            (click)="onDeleteClick(team)"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
     </app-admin-droppable>
   </div>
 </section>

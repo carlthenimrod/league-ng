@@ -209,13 +209,18 @@ export class LeagueService {
     });
   }
 
-  removeTeam(id: string, teamId: string): Observable<any> {
-    const url = this.api + `leagues/${id}/teams/${teamId}`;
-    return this.http.delete(url);
+  removeTeam(teamId: string) {
+    const url = this.api + `leagues/${this.league._id}/teams/${teamId}`;
+
+    this.http.delete(url).subscribe((teams: Team[]) => {
+      this.league.teams = teams;
+
+      this.leagueSubject.next(_.cloneDeep(this.league));
+    });
   }
 
-  addTeamToDivision(id: string, divisionId: string, teamId: string) {
-    const url = this.api + `leagues/${id}/divisions/${divisionId}/teams/${teamId}`;
+  addTeamToDivision(divisionId: string, teamId: string) {
+    const url = this.api + `leagues/${this.league._id}/divisions/${divisionId}/teams/${teamId}`;
 
     this.http.post(url, {}).subscribe((addedTeam: Team) => {
       const division = this.findDivision(divisionId);

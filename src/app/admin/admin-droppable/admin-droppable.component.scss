@@ -11,6 +11,11 @@
 
 .drop-in {
   padding: 5px 0;
+
+  &.selected {
+    border-radius: 5px;
+    box-shadow: 0 0 4px theme-color("secondary");
+  }
 }
 
 .drop-before {

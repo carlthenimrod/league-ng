@@ -20,36 +20,14 @@ section#divisions {
   padding-left: 0.5rem;
 
   .division {
-    .label {
-      padding: 5px 0;
-      position: relative;
+    align-items: center;
+    display: flex;
+    min-height: 55px;
+    justify-content: space-between;
+    pointer-events: none;
 
-      .drop-before {
-        height: 10px;
-        position: absolute;
-        top: 0;
-        width: 100%;
-
-        &.selected {
-          box-shadow: 0 -4px 4px -3px theme-color("secondary");
-        }
-      }
-
-      .drop-after {
-        height: 10px;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-
-        &.selected {
-          box-shadow: 0 4px 4px -3px theme-color("secondary");
-        }
-      }
-
-      &.selected {
-        border-radius: 5px;
-        box-shadow: 0 0 4px theme-color("secondary");
-      }
+    div {
+      display: inline-block;
     }
   }
 }
@@ -69,5 +47,15 @@ section#divisions {
 
   section#divisions {
     padding: 1.5rem;
+
+    .division {
+      .actions {
+        display: none;
+      }
+
+      &:hover .actions {
+        display: inline-block;
+      }
+    }
   }
 }

@@ -24,8 +24,7 @@ export class AdminDivisionsComponent implements OnInit, OnChanges {
 
   @Input() league: League;
   unassignedTeams: Team[] = [];
-  dragged: Division|Team;
-  draggedType: string;
+  dragged: { el: Element, item: Division|Team };
 
 
   constructor(
@@ -43,14 +42,6 @@ export class AdminDivisionsComponent implements OnInit, OnChanges {
     }
   }
 
-  onTouchStart($event: TouchEvent) {
-    $event.preventDefault();
-  }
-
-  onTouchMove($event: TouchEvent) {
-    $event.preventDefault();
-  }
-
   styleDivisionName(depth: number) {
     return {
       'font-size.rem': 2.0 - (depth * 0.2),
@@ -58,65 +49,69 @@ export class AdminDivisionsComponent implements OnInit, OnChanges {
     };
   }
 
-  onTeamDrag($event: DragEvent, team: Team) {
-    this.draggedType = 'team';
-    this.dragged = team;
+  onDrag(el: Element, item: Division|Team) {
+    this.dragged = {el, item};
   }
 
-  onDrag($event: DragEvent, division: Division) {
-    this.draggedType = 'division';
-    this.dragged = division;
-  }
+  onDivisionDrop(position: string, target: Division, parent: Division|League, index: number) {
+    if (position === 'after') { index = index + 1; }
 
-  onDrop($event: DragEvent, division: Division, parent?: Division|League, index?: number) {
-    if (this.draggedType === 'team') {
-      if (parent) {
-
+    // check type
+    if (this.isDivision(this.dragged.item)) { // division
+      if (position === 'in') {
+        this.leagueService.updateDivision(this.dragged.item, target._id);
       } else {
-        this.leagueService.addTeamToDivision(this.league._id, division._id, this.dragged._id);
+        this.leagueService.updateDivision(this.dragged.item, parent._id, index);
       }
-    } else if (this.draggedType === 'division') {
-      if (parent) {
-        this.leagueService.updateDivision((<Division>this.dragged), parent._id, index);
-
-        this.renderer.removeClass($event.target, 'selected');
-      } else {
-        this.leagueService.updateDivision((<Division>this.dragged), division._id);
-
-        const parentNode = this.renderer.parentNode($event.target);
-        this.renderer.removeClass(parentNode, 'selected');
-      }
-    }
-
-    delete this.dragged;
-    delete this.draggedType;
-  }
-
-  onDragOver($event: DragEvent, division: Division, parent?: Division|League, index?: number) {
-    if (this.draggedType === 'team') {
-      $event.preventDefault();
-    } else if (this.draggedType === 'division') {
-      if (this.dragged._id === division._id) { return; }
-      if (parent && this.dragged._id === parent._id) { return; }
-      $event.preventDefault();
-    }
-
-    if (parent) {
-      this.renderer.addClass($event.target, 'selected');
-    } else {
-      const parentNode = this.renderer.parentNode($event.target);
-      this.renderer.addClass(parentNode, 'selected');
+    } else { // team
+      this.leagueService.addTeamToDivision(target._id, this.dragged.item._id);
     }
   }
 
-  onDragLeave($event: DragEvent, parentId?: string) {
-    if (parentId) {
-      this.renderer.removeClass($event.target, 'selected');
-    } else {
-      const parentNode = this.renderer.parentNode($event.target);
-      this.renderer.removeClass(parentNode, 'selected');
+  onTeamDrop(position: string, index: number) {
+    if (position === 'after') { index = index + 1; }
+
+    // check type
+    if (this.isDivision(this.dragged.item)) { // division
+
+    } else { // team
+
     }
   }
+
+  onDeleteClick(team: Team) {
+    // if (confirm(`Are you sure you want to remove ${team.name} from league?`)) {
+    //   this.leagueService.removeTeam(team._id);
+    // }
+  }
+
+  isDivision(type: Team|Division): type is Division {
+    return (<Division>type).teams !== undefined;
+  }
+
+  // onDrop($event: DragEvent, division: Division, parent?: Division|League, index?: number) {
+  //   if (this.draggedType === 'team') {
+  //     if (parent) {
+
+  //     } else {
+  //       this.leagueService.addTeamToDivision(this.league._id, division._id, this.dragged._id);
+  //     }
+  //   } else if (this.draggedType === 'division') {
+  //     if (parent) {
+  //       this.leagueService.updateDivision((<Division>this.dragged), parent._id, index);
+
+  //       this.renderer.removeClass($event.target, 'selected');
+  //     } else {
+  //       this.leagueService.updateDivision((<Division>this.dragged), division._id);
+
+  //       const parentNode = this.renderer.parentNode($event.target);
+  //       this.renderer.removeClass(parentNode, 'selected');
+  //     }
+  //   }
+
+  //   delete this.dragged;
+  //   delete this.draggedType;
+  // }
 
   trackById(index: number, item: League|Division|Team) {
     return item._id;
