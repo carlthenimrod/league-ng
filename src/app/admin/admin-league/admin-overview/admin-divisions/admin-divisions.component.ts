@@ -81,10 +81,7 @@ export class AdminDivisionsComponent implements OnInit, OnChanges {
   onTeamDrop(position: string, target: Team|Division, index: number) {
     if (position === 'after') { index = index + 1; }
 
-    // check type
-    if (this.isDivision(this.dragged.item)) { // division
-    } else { // team
-    }
+    this.leagueService.addTeamToDivision(target._id, this.dragged.item._id, index);
   }
 
   onClickDelete(team: Team) {

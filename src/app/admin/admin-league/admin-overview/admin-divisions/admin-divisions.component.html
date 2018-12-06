@@ -62,12 +62,12 @@
         </app-admin-droppable>
 
         <ng-container *ngIf="division.teams.length > 0">
-            <div class="teams pt-1 pl-2">
+            <div class="teams">
               <app-admin-droppable
                 *ngFor="let team of division.teams; let i = index"
                 appAdminDraggable
                 (dragging)="onDrag($event, team)"
-                (dropped)="onTeamDrop($event, team, i)"
+                (dropped)="onTeamDrop($event, division, i)"
                 [dragged]="dragged"
                 [dropTarget]="team"
                 [last]="(i + 1) === division.teams.length"

@@ -37,10 +37,13 @@ section#divisions {
 }
 
 .teams {
+  padding: 1rem 0;
+
   .team {
     align-items: center;
     display: flex;
     justify-content: space-between;
+    padding-left: 1rem;
     position: relative;
 
     div {
