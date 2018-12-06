@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Renderer2, OnChanges, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material';
 
 import { LeagueService } from '@app/core/league.service';
 import { League, Division } from '@app/models/league';
@@ -8,6 +9,7 @@ import {
   unassignedTeamEnterTrigger,
   divisionEnterTrigger,
   divisionsEnterTrigger } from './animations';
+  import { AdminModalDivisionComponent } from '../admin-modal-division/admin-modal-division.component';
 
 @Component({
   selector: 'app-admin-divisions',
@@ -28,6 +30,7 @@ export class AdminDivisionsComponent implements OnInit, OnChanges {
 
 
   constructor(
+    public dialog: MatDialog,
     public leagueService: LeagueService,
     public renderer: Renderer2
   ) { }
@@ -68,8 +71,22 @@ export class AdminDivisionsComponent implements OnInit, OnChanges {
     }
   }
 
-  onClickEditDivision() {
+  onClickEditDivision(selectedDivision: Division) {
+    const dialogRef = this.dialog.open(AdminModalDivisionComponent, {
+      autoFocus: false,
+      data: {
+        league: this.league,
+        division: {...selectedDivision}
+      },
+      restoreFocus: false,
+      width: '500px'
+    });
 
+    dialogRef.afterClosed().subscribe((division: Division) => {
+      if (division) {
+        this.leagueService.updateDivision(division);
+      }
+    });
   }
 
   onClickDeleteDivision(division: Division) {

@@ -44,18 +44,6 @@ export class AdminOverviewComponent implements OnInit {
     });
   }
 
-  onTeamRemoveClick(id: string, teamId: string) {
-    // this.leagueService.removeTeam(id, teamId).subscribe(
-    //   () => {
-    //     for (let i = 0; i < this.league.teams.length; i++) {
-    //       if (this.league.teams[i]._id === teamId) {
-    //         this.league.teams.splice(i, 1);
-    //       }
-    //     }
-    //   }
-    // );
-  }
-
   onNewDivisionClick() {
     const dialogRef = this.dialog.open(AdminModalDivisionComponent, {
       autoFocus: false,
@@ -71,37 +59,5 @@ export class AdminOverviewComponent implements OnInit {
         this.leagueService.addDivision(division);
       }
     });
-  }
-
-  onDivisionEditClick(selectedDivision: Division) {
-    const dialogRef = this.dialog.open(AdminModalDivisionComponent, {
-      autoFocus: false,
-      data: {
-        league: this.league,
-        division: {...selectedDivision}
-      },
-      restoreFocus: false,
-      width: '500px'
-    });
-
-    dialogRef.afterClosed().subscribe((r?: {division?: Division, parent?: string}) => {
-      const {division, parent} = r;
-
-      if (division) {
-        this.leagueService.updateDivision(division, parent);
-      }
-    });
-  }
-
-  onDivisionDeleteClick(division: Division) {
-    const name = prompt('Warning: Cannot be undone! Enter division name to confirm:');
-
-    if (!name) { return; }
-
-    if (division.name === name.trim()) {
-      this.leagueService.removeDivision(division._id);
-    } else {
-      alert('Error: Division name entered doesn\'t match.');
-    }
   }
 }
