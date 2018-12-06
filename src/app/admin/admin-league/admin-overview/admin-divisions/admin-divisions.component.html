@@ -43,6 +43,7 @@
                 color="primary"
                 draggable="true"
                 (dragstart)="stopPropagation($event)"
+                (click)="onClickEditDivision()"
               >
                 <i class="fas fa-pen"></i>
               </button>
@@ -52,6 +53,7 @@
                 color="primary"
                 draggable="true"
                 (dragstart)="stopPropagation($event)"
+                (click)="onClickDeleteDivision(division)"
               >
                 <i class="fas fa-times"></i>
               </button>
@@ -77,6 +79,7 @@
                     <button
                       mat-icon-button
                       color="primary"
+                      [routerLink]="['/admin/teams/', team._id]"
                       draggable="true"
                       (dragstart)="stopPropagation($event)"
                     >
@@ -88,6 +91,7 @@
                       color="primary"
                       draggable="true"
                       (dragstart)="stopPropagation($event)"
+                      (click)="onClickDelete(team)"
                     >
                       <i class="fas fa-times"></i>
                     </button>

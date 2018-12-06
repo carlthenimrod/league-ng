@@ -68,6 +68,16 @@ export class AdminDivisionsComponent implements OnInit, OnChanges {
     }
   }
 
+  onClickEditDivision() {
+
+  }
+
+  onClickDeleteDivision(division: Division) {
+    if (confirm(`Are you sure you want to remove ${division.name} from league?`)) {
+      this.leagueService.removeDivision(division._id);
+    }
+  }
+
   onTeamDrop(position: string, target: Team|Division, index: number) {
     if (position === 'after') { index = index + 1; }
 
@@ -77,10 +87,10 @@ export class AdminDivisionsComponent implements OnInit, OnChanges {
     }
   }
 
-  onDeleteClick(team: Team) {
-    // if (confirm(`Are you sure you want to remove ${team.name} from league?`)) {
-    //   this.leagueService.removeTeam(team._id);
-    // }
+  onClickDelete(team: Team) {
+    if (confirm(`Are you sure you want to remove ${team.name} from league?`)) {
+      this.leagueService.removeTeam(team._id);
+    }
   }
 
   isDivision(type: Team|Division): type is Division {

@@ -32,7 +32,7 @@ export class AdminTeamListComponent implements OnInit {
     this.leagueService.moveTeam(this.dragged.item, index);
   }
 
-  onDeleteClick(team: Team) {
+  onClickDelete(team: Team) {
     if (confirm(`Are you sure you want to remove ${team.name} from league?`)) {
       this.leagueService.removeTeam(team._id);
     }

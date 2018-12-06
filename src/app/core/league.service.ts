@@ -185,7 +185,10 @@ export class LeagueService {
   removeDivision(divisionId: string) {
     const url = this.api + `leagues/${this.league._id}/divisions/${divisionId}`;
 
-    this.http.delete(url).subscribe(() => {
+    this.http.delete(url).subscribe((divisions: Division[]) => {
+      this.league.divisions = divisions;
+
+      this.leagueSubject.next(_.cloneDeep(this.league));
     });
   }
 
@@ -212,8 +215,8 @@ export class LeagueService {
   removeTeam(teamId: string) {
     const url = this.api + `leagues/${this.league._id}/teams/${teamId}`;
 
-    this.http.delete(url).subscribe((teams: Team[]) => {
-      this.league.teams = teams;
+    this.http.delete(url).subscribe((league: League) => {
+      this.league = league;
 
       this.leagueSubject.next(_.cloneDeep(this.league));
     });
