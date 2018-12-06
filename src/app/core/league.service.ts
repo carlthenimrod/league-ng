@@ -222,10 +222,8 @@ export class LeagueService {
   addTeamToDivision(divisionId: string, teamId: string) {
     const url = this.api + `leagues/${this.league._id}/divisions/${divisionId}/teams/${teamId}`;
 
-    this.http.post(url, {}).subscribe((addedTeam: Team) => {
-      const division = this.findDivision(divisionId);
-      division.teams.push(addedTeam);
-
+    this.http.post(url, {}).subscribe((divisions: Division[]) => {
+      this.league.divisions = divisions;
       this.leagueSubject.next(_.cloneDeep(this.league));
     });
   }

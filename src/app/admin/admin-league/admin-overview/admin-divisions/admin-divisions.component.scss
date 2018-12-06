@@ -22,11 +22,34 @@ section#divisions {
   .division {
     align-items: center;
     display: flex;
-    min-height: 55px;
     justify-content: space-between;
+    position: relative;
 
     div {
       display: inline-block;
+    }
+
+    .actions {
+      position: absolute;
+      right: 0;
+    }
+  }
+}
+
+.teams {
+  .team {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    div {
+      display: inline-block;
+    }
+
+    .actions {
+      position: absolute;
+      right: 0;
     }
   }
 }
@@ -48,6 +71,18 @@ section#divisions {
     padding: 1.5rem;
 
     .division {
+      .actions {
+        display: none;
+      }
+
+      &:hover .actions {
+        display: inline-block;
+      }
+    }
+  }
+
+  .teams {
+    .team {
       .actions {
         display: none;
       }

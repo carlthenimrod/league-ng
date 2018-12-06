@@ -61,12 +61,39 @@
 
         <ng-container *ngIf="division.teams.length > 0">
             <div class="teams pt-1 pl-2">
-                <div
-                  *ngFor="let team of division.teams"
-                  class="team py-2"
-                >
-                  {{ team.name }}
+              <app-admin-droppable
+                *ngFor="let team of division.teams; let i = index"
+                appAdminDraggable
+                (dragging)="onDrag($event, team)"
+                (dropped)="onTeamDrop($event, team, i)"
+                [dragged]="dragged"
+                [dropTarget]="team"
+                [last]="(i + 1) === division.teams.length"
+              >
+                <div class="team">
+                  <div class="label">{{ team.name }}</div>
+
+                  <div class="actions">
+                    <button
+                      mat-icon-button
+                      color="primary"
+                      draggable="true"
+                      (dragstart)="stopPropagation($event)"
+                    >
+                      <i class="fas fa-pen"></i>
+                    </button>
+
+                    <button
+                      mat-icon-button
+                      color="primary"
+                      draggable="true"
+                      (dragstart)="stopPropagation($event)"
+                    >
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
                 </div>
+              </app-admin-droppable>
             </div>
         </ng-container>
 

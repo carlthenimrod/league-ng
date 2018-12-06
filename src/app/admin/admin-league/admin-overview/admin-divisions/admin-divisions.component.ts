@@ -68,14 +68,12 @@ export class AdminDivisionsComponent implements OnInit, OnChanges {
     }
   }
 
-  onTeamDrop(position: string, index: number) {
+  onTeamDrop(position: string, target: Team|Division, index: number) {
     if (position === 'after') { index = index + 1; }
 
     // check type
     if (this.isDivision(this.dragged.item)) { // division
-
     } else { // team
-
     }
   }
 
