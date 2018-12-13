@@ -1,0 +1,68 @@
+<section id="roster" class="row bg-light">
+  <div class="col">
+    <header class="border-bottom pb-2">
+      <h2 class="h3 text-muted">Roster</h2>
+
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="onClickAddUser()"
+      >
+        <i class="fas fa-plus mr-2"></i>
+
+        Add User
+      </button>
+    </header>
+
+    <section id="players">
+      <h3 class="h5 mt-4 text-muted">Player List</h3>
+
+      <ng-container *ngIf="team.players.length > 0; else noPlayers">
+        <div
+          *ngFor="let player of team.players"
+          class="player"
+        >
+          {{ player.name }}
+        </div>
+      </ng-container>
+
+      <ng-template #noPlayers>
+        <p class="text-muted py-2 m-0">No players.</p>
+      </ng-template>
+    </section>
+
+    <section id="coaches">
+      <h3 class="h5 mt-4 text-muted">Coach List</h3>
+
+      <ng-container *ngIf="team.coaches.length > 0; else noCoaches">
+        <div
+          *ngFor="let coach of team.coaches"
+          class="coach"
+        >
+          {{ coach.name }}
+        </div>
+      </ng-container>
+
+      <ng-template #noCoaches>
+        <p class="text-muted py-2 m-0">No coaches.</p>
+      </ng-template>
+    </section>
+
+    <section id="managers">
+      <h3 class="h5 mt-4 text-muted">Manager List</h3>
+
+      <ng-container *ngIf="team.managers.length > 0; else noManagers">
+        <div
+          *ngFor="let manager of team.managers"
+          class="manager"
+        >
+          {{ manager.name }}
+        </div>
+      </ng-container>
+
+      <ng-template #noManagers>
+        <p class="text-muted py-2 m-0">No managers.</p>
+      </ng-template>
+    </section>
+  </div>
+</section>

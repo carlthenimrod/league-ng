@@ -1,24 +1,20 @@
 import { Team } from '@app/models/team';
 
-export class Division {
-  constructor(
-    public name: string,
-    public divisions: Division[] = [],
-    public teams: Team[] = [],
-    public _id?: string,
-    public __v?: string
-  ) {}
+export interface Division {
+  name: string;
+  divisions?: Division[];
+  teams?: Team[];
+  _id?: string;
+  __v?: number;
 }
 
-export class League {
-  constructor(
-    public name: string,
-    public divisions: Division[] = [],
-    public teams: Team[] = [],
-    public description?: string,
-    public start?: string,
-    public end?: string,
-    public _id?: string,
-    public __v?: string
-  ) {}
+export interface League {
+  name: string;
+  divisions?: Division[];
+  teams?: Team[];
+  description?: string;
+  start?: string;
+  end?: string;
+  _id?: string;
+  __v?: number;
 }

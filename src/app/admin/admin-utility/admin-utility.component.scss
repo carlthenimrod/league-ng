@@ -7,7 +7,7 @@
 section.utility {
   font-size: 1rem;
 
-  mat-form-field.status {
+  mat-form-field.status, mat-form-field.roles {
     width: 100%;
   }
 }
@@ -16,7 +16,7 @@ section.utility {
   section.utility {
     font-size: 0.8rem;
 
-    mat-form-field.status {
+    mat-form-field.status, mat-form-field.roles {
       padding-left: 1rem;
     }
   }

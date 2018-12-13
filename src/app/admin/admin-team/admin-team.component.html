@@ -12,3 +12,9 @@
   (editClick)="editingTeam = !editingTeam"
 >
 </app-admin-team-details>
+
+<app-admin-roster
+  *ngIf="team"
+  [team]="team"
+>
+</app-admin-roster>

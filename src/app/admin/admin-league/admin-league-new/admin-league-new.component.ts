@@ -14,6 +14,6 @@ export class AdminLeagueNewComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.league = new League('');
+    this.league = { name: '' };
   }
 }

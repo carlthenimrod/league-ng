@@ -4,6 +4,7 @@
       <div class="row no-gutters">
         <div class="col-sm-6">
           <app-admin-search
+            [label]="label"
             [utilityForm]="utilityForm"
             (search)="onSearch()"
           >
@@ -19,6 +20,18 @@
               <mat-option>--- Select Status ---</mat-option>
               <mat-option value="new">New</mat-option>
               <mat-option value="pending">Pending</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="users" class="roles">
+            <mat-select
+              formControlName="roles"
+              placeholder="Select Roles"
+              multiple
+            >
+              <mat-option>--- Select Roles ---</mat-option>
+              <mat-option value="manager">Manager</mat-option>
+              <mat-option value="player">Player</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

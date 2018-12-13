@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { League } from '@app/models/league';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/core/team.service';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-modal-team',
@@ -48,7 +48,7 @@ export class AdminModalTeamComponent implements OnInit {
     if (typeof selected === 'object') { // existing
       this.team = selected;
     } else { // new
-      this.team = new Team(selected);
+      this.team = { name: selected };
     }
 
     this.dialogRef.close(this.team);

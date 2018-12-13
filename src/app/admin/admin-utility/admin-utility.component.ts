@@ -3,6 +3,7 @@ import { FormBuilder, FormControl } from '@angular/forms';
 
 import { League } from '@app/models/league';
 import { Team } from '@app/models/team';
+import { User } from '@app/models/user';
 
 @Component({
   selector: 'app-admin-utility',
@@ -11,14 +12,15 @@ import { Team } from '@app/models/team';
 })
 export class AdminUtilityComponent implements OnInit {
 
-  @Input() teams: Team[];
   @Input() leagues: League[];
-  @Output() results: EventEmitter<League[]|Team[]> = new EventEmitter();
+  @Input() teams: Team[];
+  @Input() users: User[];
+  @Output() results: EventEmitter<League[]|Team[]|User[]> = new EventEmitter();
 
   currentPage = 0;
   perPage = 10;
   label = 'Items';
-  matched: League[]|Team[];
+  matched: League[]|Team[]|User[];
   utilityForm = this.fb.group({ name: [''] });
 
   constructor(
@@ -32,12 +34,18 @@ export class AdminUtilityComponent implements OnInit {
       this.matched = this.teams;
 
       this.paginateAndEmit();
+    } else if (this.users) {
+      this.utilityForm.addControl('roles', new FormControl());
+      this.label = 'Users';
+      this.matched = this.users;
     }
   }
 
   onSearch() {
     if (this.teams) {
       this.searchTeams();
+    } else if (this.users) {
+      this.searchUsers();
     }
   }
 
@@ -69,6 +77,23 @@ export class AdminUtilityComponent implements OnInit {
       }
 
       return team;
+    });
+
+    this.currentPage = 0;
+    this.paginateAndEmit();
+  }
+
+  searchUsers() {
+    const {name, role}: {name: string, role: string} = this.utilityForm.value;
+
+    this.matched = this.users.filter((user: User) => {
+
+      // check if name matches
+      if (name && user.name.substr(0, name.length).toUpperCase() !== name.toUpperCase()) {
+        return false;
+      }
+
+      return user;
     });
 
     this.currentPage = 0;

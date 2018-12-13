@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 
-import { TeamService } from '@app/core/team.service';
 import { Team } from '@app/models/team';
+import { TeamService } from '@app/core/team.service';
 
 @Component({
   selector: 'app-admin-teams',

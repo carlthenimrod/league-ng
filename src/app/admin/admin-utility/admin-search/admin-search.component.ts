@@ -8,6 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class AdminSearchComponent implements OnInit {
 
+  @Input() label = 'Items';
   @Input() utilityForm: FormGroup;
   @Output() search: EventEmitter<null> = new EventEmitter<null>();
 

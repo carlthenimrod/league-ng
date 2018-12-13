@@ -12,7 +12,7 @@ import { LeagueService } from '@app/core/league.service';
 })
 export class AdminModalDivisionComponent implements OnInit {
 
-  division: Division = new Division('');
+  division: Division = { name: '' };
   league: League;
   new = false;
 

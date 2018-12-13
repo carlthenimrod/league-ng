@@ -9,6 +9,8 @@ import { AdminLeagueNewComponent } from './admin-league/admin-league-new/admin-l
 import { AdminTeamsComponent } from './admin-teams/admin-teams.component';
 import { AdminTeamComponent } from './admin-team/admin-team.component';
 import { AdminTeamNewComponent } from './admin-team/admin-team-new/admin-team-new.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminUserComponent } from './admin-user/admin-user.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent, children: [
@@ -18,6 +20,8 @@ const routes: Routes = [
     { path: 'teams', component: AdminTeamsComponent },
     { path: 'teams/new', component: AdminTeamNewComponent },
     { path: 'teams/:id', component: AdminTeamComponent },
+    { path: 'users', component: AdminUsersComponent },
+    { path: 'users/:id', component: AdminUserComponent },
     { path: '**', component: AdminDashboardComponent }
   ] }
 ];

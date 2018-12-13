@@ -1,0 +1,26 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+section#roster {
+  padding: 0.5rem;
+
+  header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+      margin: 0;
+      padding: 0 0 0 0.5rem;
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  section#roster {
+    padding: 1rem;
+  }
+}

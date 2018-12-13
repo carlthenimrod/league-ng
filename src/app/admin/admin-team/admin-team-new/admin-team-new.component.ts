@@ -14,7 +14,7 @@ export class AdminTeamNewComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.team = new Team('');
+    this.team = { name: '' };
   }
 
 }

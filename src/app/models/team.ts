@@ -1,8 +1,25 @@
-export class Team {
-  constructor(
-    public name: string,
-    public status?: string,
-    public _id?: string,
-    public __v?: string
-  ) {}
+import { League } from './league';
+import { User, Player, Coach, Manager } from './user';
+
+export interface Team {
+  name: string;
+  leagues?: League[];
+  status?: string;
+  _id?: string;
+  __v?: number;
+  players?: Player[];
+  coaches?: Coach[];
+  managers?: Manager[];
+}
+
+export interface TeamResponse {
+  name: string;
+  leagues: League[];
+  roster: [{
+    user: User;
+    roles: [string];
+  }];
+  status: string;
+  _id: string;
+  __v: number;
 }
