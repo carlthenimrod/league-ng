@@ -63,7 +63,7 @@ export class TeamService {
     return this.http.delete(url);
   }
 
-  saveUser(user: User, roles: string[]) {
+  addUser(user: User, roles: string[]) {
     const url = this.api + `teams/${this.team._id}/users`;
     const data = {
       userId: user._id,
@@ -80,6 +80,44 @@ export class TeamService {
       this.team = team;
       this.teamSubject.next(_.cloneDeep(this.team));
     });
+  }
+
+  editUser(userId: string, roles: string[]) {
+    const url = this.api + `teams/${this.team._id}/users/${userId}`;
+
+    this.http.put(url, {roles}).pipe(
+      map((teamResponse: TeamResponse) => {
+        return this.formatResponse(teamResponse);
+      })
+    )
+    .subscribe((team: Team) => {
+      this.team = team;
+      this.teamSubject.next(_.cloneDeep(this.team));
+    });
+  }
+
+  removeUser(userId: string) {
+    const url = this.api + `teams/${this.team._id}/users/${userId}`;
+
+    this.http.delete(url).pipe(
+      map((teamResponse: TeamResponse) => {
+        return this.formatResponse(teamResponse);
+      })
+    )
+    .subscribe((team: Team) => {
+      this.team = team;
+      this.teamSubject.next(_.cloneDeep(this.team));
+    });
+  }
+
+  getUserRoles(userId: string): string[] {
+    const roles = [];
+
+    if (this.team.players.some(p => p._id === userId)) { roles.push('player'); }
+    if (this.team.managers.some(m => m._id === userId)) { roles.push('manager');  }
+    if (this.team.coaches.some(c => c._id === userId)) { roles.push('coach'); }
+
+    return roles;
   }
 
   formatResponse(teamResponse: TeamResponse) {

@@ -5,11 +5,13 @@ import { AdminModalUserComponent } from './admin-modal-user/admin-modal-user.com
 import { User } from '@app/models/user';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/core/team.service';
+import { usersEnterTrigger, userEnterTrigger } from './animations';
 
 @Component({
   selector: 'app-admin-roster',
   templateUrl: './admin-roster.component.html',
-  styleUrls: ['./admin-roster.component.scss']
+  styleUrls: ['./admin-roster.component.scss'],
+  animations: [usersEnterTrigger, userEnterTrigger]
 })
 export class AdminRosterComponent implements OnInit {
 
@@ -34,11 +36,35 @@ export class AdminRosterComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((data: {user: User, roles: string[]}) => {
+      if (!data) { return; }
+
       const {user, roles} = data;
 
-      if (!user) { return; }
-
-      this.teamService.saveUser(user, roles);
+      this.teamService.addUser(user, roles);
     });
+  }
+
+  onClickEditRoles(userId: string) {
+    const dialogRef = this.dialog.open(AdminModalUserComponent, {
+      autoFocus: false,
+      data: {
+        team: this.team,
+        userId: userId
+      },
+      restoreFocus: false,
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe((data: {user: User, roles: string[]}) => {
+      if (!data) { return; }
+
+      const {roles} = data;
+
+      this.teamService.editUser(userId, roles);
+    });
+  }
+
+  trackById(index: number, user: User) {
+    return user._id;
   }
 }

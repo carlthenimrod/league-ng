@@ -17,10 +17,43 @@ section#roster {
       padding: 0 0 0 0.5rem;
     }
   }
+
+  section.users {
+    .user {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+      padding-left: 0.5rem;
+      position: relative;
+
+      div {
+        display: inline-block;
+      }
+
+      .actions {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
 }
 
 @include media-breakpoint-up(sm) {
   section#roster {
     padding: 1rem;
+
+    section.users {
+      .user{
+        .actions {
+          display: none;
+        }
+
+        &:hover .actions {
+          display: inline-block;
+        }
+      }
+    }
   }
 }
