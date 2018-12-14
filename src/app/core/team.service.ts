@@ -7,6 +7,7 @@ import _ from 'lodash';
 
 import { Team, TeamResponse } from '@app/models/team';
 import { User } from '@app/models/user';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,10 @@ export class TeamService {
   team: Team;
   teamSubject: Subject<Team> = new Subject<Team>();
 
-  constructor(public http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private notificationService: NotificationService
+  ) { }
 
   all(): Observable<any> {
     const url = this.api + 'teams';
@@ -78,6 +82,9 @@ export class TeamService {
     .subscribe((team: Team) => {
       this.team = team;
       this.teamSubject.next(_.cloneDeep(this.team));
+
+      // update notifications if new user
+      if (!user._id) { this.notificationService.all(); }
     });
   }
 

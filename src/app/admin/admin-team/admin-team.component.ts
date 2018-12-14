@@ -5,6 +5,7 @@ import { switchMap } from 'rxjs/operators';
 
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/core/team.service';
+import { NotificationService } from '@app/core/notification.service';
 
 @Component({
   selector: 'app-admin-team',
@@ -19,6 +20,7 @@ export class AdminTeamComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
+    private notificationService: NotificationService,
     private teamService: TeamService
   ) { }
 
@@ -29,7 +31,17 @@ export class AdminTeamComponent implements OnInit, OnDestroy {
         return this.teamService.teamListener();
       })
     )
-    .subscribe((team: Team) => this.team = team);
+    .subscribe((team: Team) => {
+      this.team = team;
+
+      // if new, update status, refresh notifications
+      if (this.team.status === 'new') {
+        this.team.status = 'active';
+        this.teamService.save(this.team).subscribe(() => {
+          this.notificationService.all();
+        });
+      }
+    });
   }
 
   ngOnDestroy() {

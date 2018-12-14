@@ -14,7 +14,7 @@ export class AdminUserNewComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.user = { name: '' };
+    this.user = { name: '', status: 'active' };
   }
 
 }
