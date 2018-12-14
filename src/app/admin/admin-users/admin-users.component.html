@@ -24,10 +24,11 @@
 >
   <div class="row" *ngIf="users">
     <div class="col">
-      <table class="table table-hover table-bordered" *ngIf="userList.length > 0">
+      <table class="table table-hover border" *ngIf="userList.length > 0">
         <thead>
           <tr>
             <th scope="col">Name</th>
+            <th scope="col" class="status">Status</th>
           </tr>
         </thead>
 
@@ -35,9 +36,16 @@
           <tr
             *ngFor="let user of users"
             [routerLink]="[user._id]"
+            [ngClass]="{'new': user.status === 'new'}"
           >
             <td>
               {{ user.name }}
+            </td>
+
+            <td
+              class="status"
+            >
+              {{ user.status }}
             </td>
           </tr>
         </tbody>
