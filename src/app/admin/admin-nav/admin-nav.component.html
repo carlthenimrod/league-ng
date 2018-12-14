@@ -11,13 +11,16 @@
 </nav>
 
 <aside id="desktop">
-  <h6 class="sidebar-heading p-3 mt-4 mb-1 text-muted text-uppercase">
-    <span>League App</span>
-  </h6>
+  <h2 class="h6">
+    League App
+  </h2>
 
   <ul class="nav nav-pills flex-column">
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="['/admin']">
+      <a
+        class="nav-link"
+        [routerLink]="['/admin']"
+      >
         <i class="fa fa-home mr-2"></i>
 
         <span class="mr-2">Home</span>
@@ -25,27 +28,42 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="['/admin', 'leagues']">
-        <i class="fa fa-sticky-note mr-2"></i>
+      <app-notification [total]="notifications.leagues.length">
+        <a
+          class="nav-link"
+          [routerLink]="['/admin', 'leagues']"
+        >
+          <i class="fa fa-sticky-note mr-2"></i>
 
-        <span class="mr-2">Leagues</span>
-      </a>
+          <span class="mr-2">Leagues</span>
+        </a>
+      </app-notification>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="['/admin', 'teams']">
-        <i class="fas fa-tshirt mr-2"></i>
+      <app-notification [total]="notifications.teams.length">
+        <a
+          class="nav-link"
+          [routerLink]="['/admin', 'teams']"
+        >
+          <i class="fas fa-tshirt mr-2"></i>
 
-        <span class="mr-2">Teams</span>
-      </a>
+          <span class="mr-2">Teams</span>
+        </a>
+      </app-notification>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="['/admin', 'users']">
-        <i class="fa fa-user mr-2"></i>
+      <app-notification [total]="notifications.users.length">
+        <a
+          class="nav-link"
+          [routerLink]="['/admin', 'users']"
+        >
+          <i class="fa fa-user mr-2"></i>
 
-        <span class="mr-2">Users</span>
-      </a>
+          <span class="mr-2">Users</span>
+        </a>
+      </app-notification>
     </li>
   </ul>
 </aside>

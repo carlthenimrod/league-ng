@@ -50,10 +50,39 @@ aside#mobile {
     display: block;
     padding-right: 1rem;
 
-    a.nav-link {
-      i {
-        text-align: center;
-        width: 30px;
+    h2 {
+      color: $text-muted;
+      margin: 2rem 0 1rem 0;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    ul.nav {
+      background-color: theme-color-level(light, 1);
+      @include border-radius();
+      padding: 0.25rem;
+
+      li.nav-item {
+        margin-top: 0.25rem;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        a.nav-link {
+          background-color: theme-color(light);
+          @include border-radius();
+          padding: 0.5rem 0 0.5rem 1.25rem;
+
+          i {
+            text-align: center;
+            width: 30px;
+          }
+
+          &:hover {
+            background-color: theme-color-level(light, 0.25);
+          }
+        }
       }
     }
   }

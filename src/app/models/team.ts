@@ -3,13 +3,13 @@ import { User, Player, Coach, Manager } from './user';
 
 export interface Team {
   name: string;
-  leagues?: League[];
   status?: string;
-  _id?: string;
-  __v?: number;
+  leagues?: League[];
   players?: Player[];
   coaches?: Coach[];
   managers?: Manager[];
+  _id?: string;
+  __v?: number;
 }
 
 export interface TeamResponse {

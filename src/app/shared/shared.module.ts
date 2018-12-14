@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import {
   MatAutocompleteModule,
-  MatBadgeModule,
   MatButtonModule,
   MatDialogModule,
   MatInputModule,
@@ -12,20 +10,21 @@ import {
   MatSelectModule
 } from '@angular/material';
 
+import { NotificationComponent } from './notification/notification.component';
+
 @NgModule({
   imports: [
     CommonModule
   ],
   exports: [
-    DragDropModule,
     MatAutocompleteModule,
-    MatBadgeModule,
     MatButtonModule,
     MatDialogModule,
     MatInputModule,
     MatListModule,
-    MatSelectModule
+    MatSelectModule,
+    NotificationComponent
   ],
-  declarations: []
+  declarations: [NotificationComponent]
 })
 export class SharedModule { }

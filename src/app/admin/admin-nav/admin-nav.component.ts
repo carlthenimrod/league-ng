@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { slideNavTrigger } from './animations';
+import { NotificationService } from '@app/core/notification.service';
+import { NotificationList } from '@app/models/notification';
 
 @Component({
   selector: 'app-admin-nav',
@@ -10,11 +12,17 @@ import { slideNavTrigger } from './animations';
 })
 export class AdminNavComponent implements OnInit {
 
+  notifications: NotificationList;
   menu = 'closed';
 
-  constructor() { }
+  constructor(
+    private notificationService: NotificationService
+  ) { }
 
   ngOnInit() {
+    this.notificationService.notificationListener().subscribe((notifications: NotificationList) => {
+      this.notifications = notifications;
+    });
   }
 
   onMenuClick() {

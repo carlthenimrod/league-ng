@@ -1,0 +1,10 @@
+<ng-content></ng-content>
+
+<span
+  *ngIf="total > 0"
+  class="notification"
+  [@notificationToggle]="total"
+  [ngStyle]="{'width.rem': total > 99 ? 2 : 1.5}"
+>
+  {{ label }}
+</span>
