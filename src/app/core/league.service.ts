@@ -11,7 +11,6 @@ import { Team } from '@app/models/team';
   providedIn: 'root'
 })
 export class LeagueService {
-
   api: string = environment.api;
 
   league: League;

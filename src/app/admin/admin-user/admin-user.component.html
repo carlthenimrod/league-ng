@@ -1,3 +1,14 @@
-<p>
-  admin-user works!
-</p>
+<app-admin-user-form
+  *ngIf="user && editingUser"
+  [user]="user"
+  (saveClick)="editingUser = !editingUser"
+  (cancelClick)="editingUser = !editingUser"
+>
+</app-admin-user-form>
+
+<app-admin-user-details
+  *ngIf="user && !editingUser"
+  [user]="user"
+  (editClick)="editingUser = !editingUser"
+>
+</app-admin-user-details>

@@ -12,6 +12,7 @@ import { NotificationList, NotificationResponse, Notification } from '@app/model
 })
 export class NotificationService {
   api = environment.api;
+
   notifications: NotificationList = {
     leagues: [],
     teams: [],

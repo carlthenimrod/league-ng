@@ -1,0 +1,112 @@
+<form #f="ngForm" (ngSubmit)="onSubmit()">
+  <section id="user-form" class="row bg-light mb-4">
+    <div class="col">
+      <div class="row">
+        <div class="col-sm-8">
+          <h4 class="mb-4 text-muted">
+            User Details
+          </h4>
+        </div>
+
+        <div class="col-sm-4 text-right d-none d-sm-block">
+          <button
+            *ngIf="new"
+            type="submit"
+            mat-flat-button
+            color="primary"
+            [disabled]="!f.form.valid"
+          >
+            <i class="fas fa-plus mr-1"></i>
+
+            Create User
+          </button>
+
+          <button
+            *ngIf="!new"
+            type="submit"
+            mat-flat-button
+            color="primary"
+            class="mr-2"
+            [disabled]="!f.form.valid"
+          >
+            <i class="fas fa-save mr-1"></i>
+
+            Save
+          </button>
+
+          <button
+            *ngIf="!new"
+            type="button"
+            mat-flat-button
+            color="warn"
+            (click)="onCancel()"
+          >
+            <i class="fas fa-times mr-1"></i>
+
+            Cancel
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="w-100">
+            <input
+              matInput
+              name="name"
+              required
+              placeholder="User Name"
+              [(ngModel)]="user.name"
+            >
+            <mat-error>Name is required.</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <section id="buttons-mobile" class="row mt-4 d-xs-flex d-sm-none">
+        <div class="col-6">
+          <button
+            *ngIf="new"
+            type="submit"
+            mat-flat-button
+            color="primary"
+            class="w-100"
+            [disabled]="!f.form.valid"
+          >
+            <i class="fas fa-plus mr-1"></i>
+
+            <span>Create</span>
+          </button>
+
+          <button
+            *ngIf="!new"
+            type="submit"
+            mat-flat-button
+            color="primary"
+            class="w-100"
+            [disabled]="!f.form.valid"
+          >
+            <i class="fas fa-save mr-1"></i>
+
+            <span>Save</span>
+          </button>
+        </div>
+
+        <div class="col-6">
+          <button
+            *ngIf="!new"
+            type="button"
+            mat-flat-button
+            color="warn"
+            class="w-100"
+            (click)="onCancel()"
+          >
+            <i class="fas fa-times mr-1"></i>
+
+            <span>Cancel</span>
+          </button>
+        </div>
+      </section>
+    </div>
+  </section>
+</form>

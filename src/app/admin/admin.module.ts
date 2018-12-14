@@ -31,6 +31,9 @@ import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { AdminRosterComponent } from './admin-team/admin-roster/admin-roster.component';
 import { AdminModalUserComponent } from './admin-team/admin-roster/admin-modal-user/admin-modal-user.component';
+import { AdminUserDetailsComponent } from './admin-user/admin-user-details/admin-user-details.component';
+import { AdminUserFormComponent } from './admin-user/admin-user-form/admin-user-form.component';
+import { AdminUserNewComponent } from './admin-user/admin-user-new/admin-user-new.component';
 
 @NgModule({
   imports: [
@@ -67,7 +70,10 @@ import { AdminModalUserComponent } from './admin-team/admin-roster/admin-modal-u
     AdminUsersComponent,
     AdminUserComponent,
     AdminRosterComponent,
-    AdminModalUserComponent
+    AdminModalUserComponent,
+    AdminUserDetailsComponent,
+    AdminUserFormComponent,
+    AdminUserNewComponent
   ],
   entryComponents: [
     AdminModalDivisionComponent,

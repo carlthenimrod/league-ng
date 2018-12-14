@@ -12,7 +12,6 @@ import { User } from '@app/models/user';
   providedIn: 'root'
 })
 export class TeamService {
-
   api: string = environment.api;
 
   team: Team;
