@@ -5,23 +5,23 @@ export const notificationToggleTrigger = trigger('notificationToggle', [
     style({
       transform: 'scale(0)'
     }),
-    animate(100, style({
+    animate('100ms ease-out', style({
       transform: 'scale(1)'
     }))
   ]),
   transition(':leave', [
-    animate(100, style({
+    animate('100ms ease-in', style({
       transform: 'scale(0)'
     }))
   ]),
   transition('* <=> *', [
-    animate(100, style({
-      transform: 'scale(0.8)'
+    animate('50ms ease-out', style({
+      transform: 'scale(0.9)'
     })),
-    animate(100, style({
-      transform: 'scale(1.2)'
+    animate('100ms ease-in', style({
+      transform: 'scale(1.1)'
     })),
-    animate(100, style({
+    animate('50ms ease-out', style({
       transform: 'scale(1)'
     }))
   ])

@@ -17,7 +17,7 @@ export class LeagueService {
   league: League;
   leagueSubject: Subject<League> = new Subject<League>();
 
-  constructor(public http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   all(): Observable<any> {
     const url = this.api + 'leagues';

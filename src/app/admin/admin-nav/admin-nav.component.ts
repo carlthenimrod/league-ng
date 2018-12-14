@@ -20,7 +20,8 @@ export class AdminNavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.notificationService.notificationListener().subscribe((notifications: NotificationList) => {
+    this.notificationService.all();
+    this.notificationService.notificationsListener().subscribe((notifications: NotificationList) => {
       this.notifications = notifications;
     });
   }
