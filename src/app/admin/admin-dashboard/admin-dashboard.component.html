@@ -1,3 +1,14 @@
-<p>
-  admin-dashboard works!
-</p>
+<header class="row align-items-center">
+  <div class="col">
+    <h1 class="display-4">
+      Dashboard
+    </h1>
+  </div>
+</header>
+
+<div class="row" *ngIf="notifications">
+  <div class="col">
+    <h2 class="h3">Notifications</h2>
+    <p *ngFor="let notification of notifications">{{ notification.message }}</p>
+  </div>
+</div>

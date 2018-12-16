@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-import { slideNavTrigger } from './animations';
+import { slideNavTrigger, toggleNotificationTrigger } from './animations';
 import { NotificationService } from '@app/core/notification.service';
 import { NotificationList } from '@app/models/notification';
 
@@ -8,11 +9,12 @@ import { NotificationList } from '@app/models/notification';
   selector: 'app-admin-nav',
   templateUrl: './admin-nav.component.html',
   styleUrls: ['./admin-nav.component.scss'],
-  animations: [slideNavTrigger]
+  animations: [slideNavTrigger, toggleNotificationTrigger]
 })
-export class AdminNavComponent implements OnInit {
-
+export class AdminNavComponent implements OnInit, OnDestroy {
   notifications: NotificationList;
+  notificationSubscription: Subscription;
+  streamSubscription: Subscription;
   menu = 'closed';
 
   constructor(
@@ -20,8 +22,9 @@ export class AdminNavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.notificationService.all();
-    this.notificationService.notificationsListener().subscribe((notifications: NotificationList) => {
+    this.streamSubscription = this.notificationService.stream().subscribe();
+
+    this.notificationSubscription = this.notificationService.notificationsListener().subscribe((notifications: NotificationList) => {
       this.notifications = notifications;
     });
   }
@@ -36,5 +39,9 @@ export class AdminNavComponent implements OnInit {
 
   onCloseClick() {
     this.menu = 'closed';
+  }
+
+  ngOnDestroy() {
+    this.streamSubscription.unsubscribe();
   }
 }

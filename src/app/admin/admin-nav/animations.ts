@@ -25,3 +25,19 @@ export const slideNavTrigger = trigger('slideNav', [
     }))
   ])
 ]);
+
+export const toggleNotificationTrigger = trigger('toggleNotification', [
+  transition(':enter', [
+    style({
+      transform: 'scale(0)'
+    }),
+    animate('100ms ease-out', style({
+      transform: 'scale(1)'
+    }))
+  ]),
+  transition(':leave', [
+    animate('100ms ease-in', style({
+      transform: 'scale(0)'
+    }))
+  ])
+]);

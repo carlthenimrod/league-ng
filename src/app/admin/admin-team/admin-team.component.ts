@@ -34,11 +34,11 @@ export class AdminTeamComponent implements OnInit, OnDestroy {
     .subscribe((team: Team) => {
       this.team = team;
 
-      // if new, update status, refresh notifications
+      // if new, update status, push notification
       if (this.team.status === 'new') {
         this.team.status = 'active';
         this.teamService.save(this.team).subscribe(() => {
-          this.notificationService.all();
+          this.notificationService.push();
         });
       }
     });

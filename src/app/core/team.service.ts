@@ -83,8 +83,8 @@ export class TeamService {
       this.team = team;
       this.teamSubject.next(_.cloneDeep(this.team));
 
-      // update notifications if new user
-      if (!user._id) { this.notificationService.all(); }
+      // push notifications if new user
+      if (!user._id) { this.notificationService.push(); }
     });
   }
 

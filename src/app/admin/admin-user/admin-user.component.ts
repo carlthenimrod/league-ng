@@ -34,11 +34,11 @@ export class AdminUserComponent implements OnInit, OnDestroy {
     .subscribe((user: User) => {
       this.user = user;
 
-      // if new, update status, refresh notifications
+      // if new, update status, push notifications
       if (this.user.status === 'new') {
         this.user.status = 'active';
         this.userService.save(this.user).subscribe(() => {
-          this.notificationService.all();
+          this.notificationService.push();
         });
       }
     });

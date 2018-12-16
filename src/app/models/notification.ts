@@ -1,29 +1,26 @@
 export interface Notification {
   _id: string;
   message: string;
-  status: string;
+  type: string;
+  item: any;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface NotificationList {
-  leagues: Notification[];
-  teams: Notification[];
-  users: Notification[];
+  notifications: Notification[];
+  leagues: number;
+  teams: number;
+  users: number;
+  total: number;
 }
 
 export interface NotificationResponse {
-  leagues: [{
-    _id: string;
-    name: string;
-    status: string;
-  }];
-  teams: [{
-    _id: string;
-    name: string;
-    status: string;
-  }];
-  users: [{
-    _id: string;
-    name: string;
-    status: string;
-  }];
+  item: any;
+  itemType: string;
+  notice: string;
+  createdAt: string;
+  updatedAt: string;
+  _id: string;
+  __v: number;
 }

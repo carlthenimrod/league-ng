@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, timer, Observable } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import _ from 'lodash';
 
-import { NotificationList, NotificationResponse, Notification } from '@app/models/notification';
+import { NotificationList, NotificationResponse } from '@app/models/notification';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +14,29 @@ export class NotificationService {
   api = environment.api;
 
   notifications: NotificationList = {
-    leagues: [],
-    teams: [],
-    users: []
+    notifications: [],
+    leagues: 0,
+    teams: 0,
+    users: 0,
+    total: 0
   };
   notificationsBehaviorSubject: BehaviorSubject<NotificationList> = new BehaviorSubject<NotificationList>(this.notifications);
 
   constructor(private http: HttpClient) {}
 
-  all() {
+  stream(): Observable<any> {
+    const url = this.api + 'notifications';
+    return timer(0, 5000).pipe(
+      switchMap(() => this.http.get(url)),
+      map(this.formatNotifications),
+      tap((notifications: NotificationList) => {
+        this.notifications = notifications;
+        this.notificationsBehaviorSubject.next(_.cloneDeep(this.notifications));
+      })
+    );
+  }
+
+  push() {
     const url = this.api + 'notifications';
     this.http.get(url).pipe(map(this.formatNotifications))
     .subscribe((notifications: NotificationList) => {
@@ -31,45 +45,48 @@ export class NotificationService {
     });
   }
 
-  formatNotifications(notifications: NotificationResponse): NotificationList {
+  notificationsListener() {
+    return this.notificationsBehaviorSubject.asObservable();
+  }
+
+  formatNotifications(notifications: NotificationResponse[]): NotificationList {
     const notificationList: NotificationList = {
-      leagues: [],
-      teams: [],
-      users: []
+      notifications: [],
+      leagues: 0,
+      teams: 0,
+      users: 0,
+      total: 0
     };
 
-    for (let i = 0; i < notifications.leagues.length; i++) {
-      const l = notifications.leagues[i];
-    }
+    for (let i = 0; i < notifications.length; i++) {
+      const n = notifications[i];
 
-    for (let i = 0; i < notifications.teams.length; i++) {
-      const t = notifications.teams[i];
+      switch (n.itemType) {
+        case 'League':
+          ++notificationList.leagues;
+          break;
 
-      const notification: Notification = {
-        _id: t._id,
-        status: t.status,
-        message: `New Team: ${t.name}.`
-      };
+        case 'Team':
+        ++notificationList.teams;
+          break;
 
-      notificationList.teams.push(notification);
-    }
+        case 'User':
+        ++notificationList.users;
+          break;
+      }
 
-    for (let i = 0; i < notifications.users.length; i++) {
-      const u = notifications.users[i];
+      notificationList.notifications.push({
+        _id: n._id,
+        item: n.item,
+        type: n.itemType,
+        message: n.notice,
+        createdAt: n.createdAt,
+        updatedAt: n.updatedAt
+      });
 
-      const notification: Notification = {
-        _id: u._id,
-        status: u.status,
-        message: `New User: ${u.name}.`
-      };
-
-      notificationList.users.push(notification);
+      ++notificationList.total;
     }
 
     return notificationList;
-  }
-
-  notificationsListener() {
-    return this.notificationsBehaviorSubject.asObservable();
   }
 }

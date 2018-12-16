@@ -36,3 +36,25 @@
     display: none !important;
   }
 }
+
+app-notification#notification {
+  button {
+    background-color: theme-color(light);
+    color: theme-color(primary);
+    height: 35px;
+    line-height: 35px;
+    margin-right: 1rem;
+    width: 35px;
+
+    i {
+      font-size: 1.3rem;
+    }
+  }
+
+  .notification {
+    top: -7px;
+    right: 3px;
+    left: auto;
+    z-index: 2;
+  }
+}

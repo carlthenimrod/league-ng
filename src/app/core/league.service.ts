@@ -96,8 +96,8 @@ export class LeagueService {
       this.league.teams.push(newTeam);
       this.leagueSubject.next(_.cloneDeep(this.league));
 
-      // update notifications if new user
-      if (!team._id) { this.notificationService.all(); }
+      // push notifications if new team
+      if (!team._id) { this.notificationService.push(); }
     });
   }
 
