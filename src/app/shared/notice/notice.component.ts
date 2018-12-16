@@ -1,15 +1,15 @@
 import { Component, OnInit, OnChanges, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { notificationToggleTrigger } from './animations';
+import { noticeToggleTrigger } from './animations';
 
 @Component({
-  selector: 'app-notification',
-  templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.scss'],
-  animations: [notificationToggleTrigger],
+  selector: 'app-notice',
+  templateUrl: './notice.component.html',
+  styleUrls: ['./notice.component.scss'],
+  animations: [noticeToggleTrigger],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NotificationComponent implements OnInit, OnChanges {
+export class NoticeComponent implements OnInit, OnChanges {
 
   @Input() total: number;
   label: number | string;

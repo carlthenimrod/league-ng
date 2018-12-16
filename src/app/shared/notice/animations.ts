@@ -1,6 +1,6 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 
-export const notificationToggleTrigger = trigger('notificationToggle', [
+export const noticeToggleTrigger = trigger('noticeToggle', [
   transition(':enter', [
     style({
       transform: 'scale(0)'

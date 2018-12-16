@@ -10,7 +10,7 @@ import {
   MatSelectModule
 } from '@angular/material';
 
-import { NotificationComponent } from './notification/notification.component';
+import { NoticeComponent } from './notice/notice.component';
 
 @NgModule({
   imports: [
@@ -23,8 +23,8 @@ import { NotificationComponent } from './notification/notification.component';
     MatInputModule,
     MatListModule,
     MatSelectModule,
-    NotificationComponent
+    NoticeComponent
   ],
-  declarations: [NotificationComponent]
+  declarations: [NoticeComponent]
 })
 export class SharedModule { }

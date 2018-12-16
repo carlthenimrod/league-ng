@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { NotificationList } from '@app/models/notification';
-import { NotificationService } from '@app/core/notification.service';
+import { NoticeList, Notice } from '@app/models/notice';
+import { NoticeService } from '@app/core/notice.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -10,20 +10,21 @@ import { NotificationService } from '@app/core/notification.service';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit, OnDestroy {
-  notifications: NotificationList;
-  notificationSubscription: Subscription;
+  noticeList: NoticeList;
+  notices: Notice[];
+  noticeSubscription: Subscription;
 
   constructor(
-    private notificationService: NotificationService
+    private noticeService: NoticeService
   ) { }
 
   ngOnInit() {
-    this.notificationSubscription = this.notificationService.notificationsListener().subscribe((notifications: NotificationList) => {
-      this.notifications = notifications;
+    this.noticeSubscription = this.noticeService.noticesListener().subscribe((notices: NoticeList) => {
+      this.noticeList = notices;
     });
   }
 
   ngOnDestroy() {
-    this.notificationSubscription.unsubscribe();
+    this.noticeSubscription.unsubscribe();
   }
 }

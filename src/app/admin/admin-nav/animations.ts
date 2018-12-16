@@ -26,7 +26,7 @@ export const slideNavTrigger = trigger('slideNav', [
   ])
 ]);
 
-export const toggleNotificationTrigger = trigger('toggleNotification', [
+export const toggleNoticeTrigger = trigger('toggleNotice', [
   transition(':enter', [
     style({
       transform: 'scale(0)'

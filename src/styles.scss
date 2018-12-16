@@ -37,7 +37,7 @@
   }
 }
 
-app-notification#notification {
+app-notice#notice {
   button {
     background-color: theme-color(light);
     color: theme-color(primary);
@@ -51,7 +51,7 @@ app-notification#notification {
     }
   }
 
-  .notification {
+  .notice {
     top: -7px;
     right: 3px;
     left: auto;

@@ -5,7 +5,7 @@ import { switchMap } from 'rxjs/operators';
 
 import { User } from '@app/models/user';
 import { UserService } from '@app/core/user.service';
-import { NotificationService } from '@app/core/notification.service';
+import { NoticeService } from '@app/core/notice.service';
 
 @Component({
   selector: 'app-admin-user',
@@ -19,7 +19,7 @@ export class AdminUserComponent implements OnInit, OnDestroy {
   editingUser = false;
 
   constructor(
-    private notificationService: NotificationService,
+    private noticeService: NoticeService,
     private route: ActivatedRoute,
     private userService: UserService
   ) { }
@@ -34,11 +34,11 @@ export class AdminUserComponent implements OnInit, OnDestroy {
     .subscribe((user: User) => {
       this.user = user;
 
-      // if new, update status, push notifications
+      // if new, update status, push notices
       if (this.user.status === 'new') {
         this.user.status = 'active';
         this.userService.save(this.user).subscribe(() => {
-          this.notificationService.push();
+          this.noticeService.push();
         });
       }
     });

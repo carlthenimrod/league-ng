@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import { League, Division } from '@app/models/league';
 import { Team } from '@app/models/team';
-import { NotificationService } from './notification.service';
+import { NoticeService } from './notice.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class LeagueService {
 
   constructor(
     private http: HttpClient,
-    private notificationService: NotificationService
+    private noticeService: NoticeService
   ) { }
 
   all(): Observable<any> {
@@ -96,8 +96,8 @@ export class LeagueService {
       this.league.teams.push(newTeam);
       this.leagueSubject.next(_.cloneDeep(this.league));
 
-      // push notifications if new team
-      if (!team._id) { this.notificationService.push(); }
+      // push notices if new team
+      if (!team._id) { this.noticeService.push(); }
     });
   }
 

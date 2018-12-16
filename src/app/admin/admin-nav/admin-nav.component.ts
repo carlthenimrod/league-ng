@@ -1,31 +1,31 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { slideNavTrigger, toggleNotificationTrigger } from './animations';
-import { NotificationService } from '@app/core/notification.service';
-import { NotificationList } from '@app/models/notification';
+import { slideNavTrigger, toggleNoticeTrigger } from './animations';
+import { NoticeService } from '@app/core/notice.service';
+import { NoticeList } from '@app/models/notice';
 
 @Component({
   selector: 'app-admin-nav',
   templateUrl: './admin-nav.component.html',
   styleUrls: ['./admin-nav.component.scss'],
-  animations: [slideNavTrigger, toggleNotificationTrigger]
+  animations: [slideNavTrigger, toggleNoticeTrigger]
 })
 export class AdminNavComponent implements OnInit, OnDestroy {
-  notifications: NotificationList;
-  notificationSubscription: Subscription;
+  notices: NoticeList;
+  noticeSubscription: Subscription;
   streamSubscription: Subscription;
   menu = 'closed';
 
   constructor(
-    private notificationService: NotificationService
+    private noticeService: NoticeService
   ) { }
 
   ngOnInit() {
-    this.streamSubscription = this.notificationService.stream().subscribe();
+    this.streamSubscription = this.noticeService.stream().subscribe();
 
-    this.notificationSubscription = this.notificationService.notificationsListener().subscribe((notifications: NotificationList) => {
-      this.notifications = notifications;
+    this.noticeSubscription = this.noticeService.noticesListener().subscribe((notices: NoticeList) => {
+      this.notices = notices;
     });
   }
 

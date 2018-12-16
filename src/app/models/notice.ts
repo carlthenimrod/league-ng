@@ -1,4 +1,4 @@
-export interface Notification {
+export interface Notice {
   _id: string;
   message: string;
   type: string;
@@ -7,15 +7,15 @@ export interface Notification {
   updatedAt: string;
 }
 
-export interface NotificationList {
-  notifications: Notification[];
+export interface NoticeList {
+  notices: Notice[];
   leagues: number;
   teams: number;
   users: number;
   total: number;
 }
 
-export interface NotificationResponse {
+export interface NoticeResponse {
   item: any;
   itemType: string;
   notice: string;
