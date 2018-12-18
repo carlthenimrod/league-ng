@@ -4,7 +4,7 @@
   <div id="actions">
     <app-notice
       id="notice"
-      *ngIf="notices"
+      *ngIf="notices?.total"
       (click)="onCloseClick()"
       [total]="notices?.total"
       @toggleNotice
@@ -13,7 +13,7 @@
         mat-icon-button
         [routerLink]="['/admin']"
       >
-        <i class="fas fa-exclamation"></i>
+        <i class="fas fa-bell"></i>
       </button>
     </app-notice>
 
