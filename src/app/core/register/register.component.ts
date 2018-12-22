@@ -76,6 +76,8 @@ export class RegisterComponent implements OnInit {
     } else if (step === 'next') {
       this.stepNext();
     }
+
+    window.scrollTo(0, 0);
   }
 
   stepBack() {

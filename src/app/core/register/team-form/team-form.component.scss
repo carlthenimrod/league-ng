@@ -11,21 +11,11 @@
 section#team-info {
   background-color: theme-color(light);
   border-radius: 10px;
+  margin-bottom: 1rem;
   padding: 1rem;
 
-  header {
-    text-align: center;
-
-    h2 {
-      color: theme-color(primary);
-      font-size: 1.8rem;
-      font-weight: 500;
-      margin: 0.5rem 0 1.5rem 0;
-    }
-  }
-
   section#form {
-    h3 {
+    h2 {
       border-bottom: 2px solid theme-color(primary);
       color: theme-color(primary);
       font-size: 1.2rem;
