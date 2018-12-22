@@ -1,0 +1,42 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+section#register {
+  max-width: 800px;
+
+  header {
+    h1 {
+      border-bottom: 1px solid $gray-300;
+      color: $gray-800;
+      font-weight: 300;
+      margin: 0 0 1rem 0;
+      padding: 1rem 0.5rem;
+    }
+  }
+
+  section#register-form {
+    position: relative;
+
+    app-type-select,
+    app-user-form,
+    app-misc-form,
+    app-team-form,
+    app-terms-form {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  header {
+    h1 {
+      margin: 1rem 0;
+    }
+  }
+}

@@ -1,0 +1,151 @@
+<section id="user-info">
+  <section id="form">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <h3>User Info</h3>
+
+      <fieldset>
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                formControlName="first"
+                required
+                placeholder="First Name"
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                formControlName="last"
+                required
+                placeholder="Last Name"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="email"
+                formControlName="email"
+                required
+                placeholder="Enter Email"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="tel"
+                formControlName="phone"
+                required
+                placeholder="Phone Number"
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="tel"
+                formControlName="secondary"
+                placeholder="Secondary Number"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+
+      <h3>Address</h3>
+
+      <fieldset formGroupName="address">
+        <div class="row">
+          <div class="col-sm-8">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                formControlName="street"
+                required
+                placeholder="Street Address"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                formControlName="city"
+                required
+                placeholder="City"
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-4">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                formControlName="state"
+                required
+                placeholder="State"
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-4">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                formControlName="postal"
+                required
+                placeholder="Postal Code"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+
+      <section id="actions">
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          (click)="onClickBack()"
+        >
+          <i class="fas fa-arrow-alt-circle-left mr-2"></i>
+          <span>Go Back</span>
+        </button>
+
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          [disabled]="userForm.invalid"
+        >
+          <span>Submit</span>
+          <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+        </button>
+      </section>
+    </form>
+</section>

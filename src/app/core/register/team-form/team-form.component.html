@@ -1,0 +1,78 @@
+<section id="team-info">
+  <section id="form">
+    <form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
+      <h3>Team Info</h3>
+
+      <fieldset>
+        <div class="row">
+          <div class="col">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                formControlName="name"
+                required
+                placeholder="Team Name"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+
+      <h3>Roster</h3>
+
+      <section id="roster" formArrayName="roster">
+        <button
+          mat-flat-button
+          type="button"
+          color="primary"
+          id="add-player"
+          (click)="onClickAddPlayer()"
+        >
+          <span>Add User</span>
+          <i class="fa fa-user ml-2"></i>
+        </button>
+
+        <div
+          *ngFor="let user of teamForm.get('roster')['controls']; let i = index"
+          class="user"
+        >
+          <div class="label">
+            {{ user.controls.name.value }}
+          </div>
+
+          <div class="actions">
+            <button
+              mat-icon-button
+              color="primary"
+              (click)="onClickRemovePlayer(i)"
+            >
+                <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="actions">
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          (click)="onClickBack()"
+        >
+          <i class="fas fa-arrow-alt-circle-left mr-2"></i>
+          <span>Go Back</span>
+        </button>
+
+        <button
+          mat-flat-button
+          type="submit"
+          color="primary"
+          [disabled]="!teamForm.valid"
+        >
+          <span>Submit</span>
+          <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+        </button>
+      </section>
+    </form>
+</section>

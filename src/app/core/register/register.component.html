@@ -1,0 +1,47 @@
+<section id="register" class="container">
+  <div class="row">
+    <div class="col">
+      <header>
+        <h1>Register</h1>
+      </header>
+
+      <section id="register-form">
+        <app-type-select
+          [type]="type"
+          (select)="onTypeSelect($event)"
+          [@typeSelect]="state"
+        >
+        </app-type-select>
+
+        <app-user-form
+          (step)="onStepChange($event)"
+          [form]="regsiterForm"
+          [@userForm]="state"
+        >
+        </app-user-form>
+
+        <app-misc-form
+          (step)="onStepChange($event)"
+          [form]="regsiterForm"
+          [@miscForm]="state"
+        >
+        </app-misc-form>
+
+        <app-team-form
+          *ngIf="type === 'team'"
+          (step)="onStepChange($event)"
+          [form]="regsiterForm"
+          [@teamForm]="state"
+        >
+        </app-team-form>
+
+        <app-terms-form
+          (step)="onStepChange($event)"
+          (accept)="onTermsAccept($event)"
+          [@termsForm]="state"
+        >
+        </app-terms-form>
+      </section>
+    </div>
+  </div>
+</section>

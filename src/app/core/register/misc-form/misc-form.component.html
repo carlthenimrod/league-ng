@@ -1,0 +1,95 @@
+<section id="misc-info">
+  <section id="form">
+    <form [formGroup]="miscForm" (ngSubmit)="onSubmit()">
+      <h3>Emergency Contact</h3>
+
+      <fieldset formGroupName="emergency">
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                formControlName="first"
+                required
+                placeholder="First Name"
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                formControlName="last"
+                required
+                placeholder="Last Name"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="tel"
+                formControlName="phone"
+                required
+                placeholder="Phone Number"
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="tel"
+                formControlName="secondary"
+                placeholder="Secondary Number"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+
+      <h3>Additional Info</h3>
+
+      <fieldset class="textarea">
+        <mat-form-field>
+          <textarea
+            matInput
+            matTextareaAutosize="true"
+            matAutosizeMinRows="3"
+            formControlName="comments"
+            placeholder="Any Additional Comments?"
+          ></textarea>
+        </mat-form-field>
+      </fieldset>
+
+      <section id="actions">
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          (click)="onClickBack()"
+        >
+          <i class="fas fa-arrow-alt-circle-left mr-2"></i>
+          <span>Go Back</span>
+        </button>
+
+        <button
+          mat-flat-button
+          type="submit"
+          color="primary"
+          [disabled]="!miscForm.valid"
+        >
+          <span>Submit</span>
+          <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+        </button>
+      </section>
+    </form>
+</section>
