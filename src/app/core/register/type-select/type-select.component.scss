@@ -9,22 +9,20 @@
 }
 
 section#type {
-  padding: 1rem 0.5rem;
+  padding: 1rem 0;
   text-align: center;
 
   header {
     h2 {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       font-weight: 500;
-      margin: 1rem 0 3rem 0;
+      margin: 0 0 1.5rem 0;
     }
   }
 
   section#select {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    padding: 0 2rem;
 
     button {
       background-color: theme-color(light);
@@ -35,7 +33,7 @@ section#type {
       margin: 0 0 1rem 0;
       padding: 2rem 0 3rem 0;
       transition: all 50ms ease-out;
-      width: 100%;
+      width: 48%;
 
       &:hover, &.active {
         @include gradient-x(theme-color(primary), lighten(theme-color(primary), 20%));
@@ -65,6 +63,7 @@ section#type {
     header {
       h2 {
         font-size: 1.8rem;
+        margin: 1rem 0 3rem 0;
       }
     }
 
