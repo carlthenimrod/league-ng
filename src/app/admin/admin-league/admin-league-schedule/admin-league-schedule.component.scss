@@ -1,0 +1,28 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+section#league-schedule {
+  background-color: theme-color(light);
+  padding: 1rem;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+      color: $text-muted;
+      font-size: $h3-font-size;
+    }
+
+    #actions {
+      text-align: right;
+
+      button {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+aside#auto-generate {
+  background-color: theme-color(light);
+  padding: 0.5rem 1rem 1rem 1rem;
+
+  header {
+    margin: 0 0 1rem 0;
+
+    h3 {
+      border-bottom: 3px solid theme-color(primary);
+      color: $text-muted;
+      margin: 0;
+      padding: 0 0 0.25rem 0.5rem;
+    }
+
+    p {
+      margin: 0;
+      padding: 0.5rem;
+
+      em {
+        font-size: 0.8rem;
+        text-align: center;
+      }
+    }
+  }
+
+  section#form-fields {
+    background-color: theme-color-level(light, 0.25);
+    border: 1px solid theme-color-level(light, 1.5);
+    border-radius: 2px;
+    padding: 0.5rem 0.5rem;
+
+    fieldset {
+      &#week, &#date {
+        margin-top: 1rem;
+
+        .row {
+          align-items: center;
+          display: flex;
+
+          div {
+            padding: 0 1rem;
+
+            mat-form-field {
+              width: 100%;
+            }
+          }
+
+          div:first-child {
+            label {
+              font-size: 0.8rem;
+              margin: 0;
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      p {
+        margin: 0 0 1rem 0;
+        padding: 0 0 0 .5rem;
+      }
+
+      #strategy {
+        display: flex;
+        font-size: 0.8rem;
+        justify-content: space-around;
+
+        .option {
+          align-items: center;
+          display: flex;
+
+          label {
+            cursor: pointer;
+            margin: 0 1rem 0 0;
+          }
+
+          input {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  section#form-actions {
+    margin-top: 1rem;
+    text-align: right;
+  }
+}

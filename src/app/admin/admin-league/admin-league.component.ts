@@ -12,10 +12,10 @@ import { LeagueService } from '@app/core/league.service';
   styleUrls: ['./admin-league.component.scss']
 })
 export class AdminLeagueComponent implements OnInit, OnDestroy {
-
   league: League;
   leagueSubscription: Subscription;
   editingLeague = false;
+  tab = 'schedule';
 
   constructor(
     private route: ActivatedRoute,

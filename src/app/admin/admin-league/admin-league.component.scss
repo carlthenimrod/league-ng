@@ -1,0 +1,32 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+section#tabs {
+  nav {
+    align-items: flex-end;
+    border-bottom: 3px solid theme-color(primary);
+    display: flex;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 1rem;
+
+    button {
+      background-color: theme-color-level(primary, -5);
+      border: none;
+      border-radius: 10px 10px 0 0;
+      color: $white;
+      cursor: pointer;
+      margin-right: 0.5rem;
+      padding: 0.4rem 1.5rem;
+
+      &.active {
+        background-color: theme-color(primary);
+        cursor: default;
+        padding: 0.5rem 1.5rem;
+      }
+    }
+  }
+}

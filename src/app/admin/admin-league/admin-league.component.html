@@ -13,8 +13,37 @@
 >
 </app-admin-league-details>
 
-<app-admin-overview
-  *ngIf="league"
-  [league]="league"
->
-</app-admin-overview>
+<section id="tabs" *ngIf="league">
+  <nav>
+    <button
+      (click)="tab = 'overview'"
+      [ngClass]="{'active': tab === 'overview'}"
+    >
+      <i class="fas fa-layer-group mr-2"></i>
+
+      <span>Overview</span>
+    </button>
+
+    <button
+      (click)="tab = 'schedule'"
+      [ngClass]="{'active': tab === 'schedule'}"
+    >
+      <i class="far fa-calendar mr-2"></i>
+      <span>Schedule</span>
+    </button>
+  </nav>
+
+  <ng-container [ngSwitch]="tab">
+    <app-admin-overview
+      *ngSwitchCase="'overview'"
+      [league]="league"
+    >
+    </app-admin-overview>
+
+    <app-admin-league-schedule
+      *ngSwitchCase="'schedule'"
+      [league]="league"
+    >
+    </app-admin-league-schedule>
+  </ng-container>
+</section>

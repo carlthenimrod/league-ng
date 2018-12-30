@@ -161,4 +161,14 @@ export class LeagueService {
 
     return false;
   }
+
+  generateSchedule(options) {
+    const url = this.api + `leagues/${this.league._id}/schedule`;
+
+    this.http.post(url, options).subscribe((schedule) => {
+      console.log(schedule);
+      // this.league.schedule = schedule;
+      // this.leagueSubject.next(_.cloneDeep(this.league));
+    });
+  }
 }

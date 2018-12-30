@@ -7,14 +7,17 @@ import {
   MatDialogModule,
   MatInputModule,
   MatListModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from '@angular/material';
 
 import { NoticeComponent } from './notice/notice.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    MatNativeDateModule
   ],
   exports: [
     MatAutocompleteModule,
@@ -23,6 +26,7 @@ import { NoticeComponent } from './notice/notice.component';
     MatInputModule,
     MatListModule,
     MatSelectModule,
+    MatDatepickerModule,
     NoticeComponent
   ],
   declarations: [NoticeComponent]
