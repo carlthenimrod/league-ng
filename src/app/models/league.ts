@@ -18,3 +18,12 @@ export interface League {
   _id?: string;
   __v?: number;
 }
+
+export interface ScheduleOptions {
+  strategy: string;
+  per?: number;
+  total?: string;
+  start?: string;
+  end?: string;
+  days?: string[];
+}

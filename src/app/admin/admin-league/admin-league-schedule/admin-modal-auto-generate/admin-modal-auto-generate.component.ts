@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-admin-modal-auto-generate',
@@ -13,6 +14,7 @@ export class AdminModalAutoGenerateComponent implements OnInit {
   get strategy(): AbstractControl { return this.generateForm.get('strategy'); }
 
   constructor(
+    private dialogRef: MatDialogRef<AdminModalAutoGenerateComponent>,
     private fb: FormBuilder
   ) { }
 
@@ -26,6 +28,7 @@ export class AdminModalAutoGenerateComponent implements OnInit {
     this.generateForm.get('strategy').valueChanges.subscribe(val => {
       if (val === 'date') {
         this.generateForm.removeControl('total');
+        this.generateForm.removeControl('per');
         this.generateForm.addControl('start', new FormControl('', Validators.required));
         this.generateForm.addControl('end', new FormControl('', Validators.required));
         this.generateForm.addControl('days', new FormControl(this.days, Validators.required));
@@ -35,6 +38,7 @@ export class AdminModalAutoGenerateComponent implements OnInit {
         this.generateForm.removeControl('end');
         this.generateForm.removeControl('days');
         this.generateForm.addControl('total', new FormControl('', Validators.required));
+        this.generateForm.addControl('per', new FormControl('', Validators.required));
       }
     });
   }
@@ -59,6 +63,8 @@ export class AdminModalAutoGenerateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.generateForm.value);
+    if (this.generateForm.valid) {
+      this.dialogRef.close(this.generateForm.value);
+    }
   }
 }
