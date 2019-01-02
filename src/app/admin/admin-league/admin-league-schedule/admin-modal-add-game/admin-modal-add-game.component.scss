@@ -1,0 +1,58 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+aside#game {
+  background-color: theme-color(light);
+  padding: 0.5rem 1rem 1rem 1rem;
+
+  header {
+    margin: 0 0 1rem 0;
+
+    h3 {
+      border-bottom: 3px solid theme-color(primary);
+      color: $text-muted;
+      margin: 0;
+      padding: 0 0 0.25rem 0.5rem;
+    }
+  }
+
+  section#form-fields {
+    background-color: theme-color-level(light, 0.25);
+    border: 1px solid theme-color-level(light, 1.5);
+    border-radius: 2px;
+    padding: 1rem 2rem;
+
+    fieldset {
+      mat-form-field {
+        width: 100%;
+      }
+
+      &#group {
+        margin-top: 1rem;
+
+        p {
+          margin: 0;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  section#form-actions {
+    margin-top: 1rem;
+    text-align: right;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  aside#game {
+    fieldset#group {
+      mat-form-field {
+        padding: 0 2rem;
+      }
+    }
+  }
+}

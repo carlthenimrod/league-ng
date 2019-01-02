@@ -28,15 +28,8 @@ section#group {
       }
 
       .actions {
-        display: none;
         position: absolute;
         right: 10px;
-      }
-
-      &:hover {
-        .actions {
-          display: block;
-        }
       }
     }
   }
@@ -92,6 +85,26 @@ section#group {
 
           .score {
             padding-right: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  section#group {
+    nav {
+      a {
+        .actions {
+          display: none;
+          position: absolute;
+          right: 10px;
+        }
+
+        &:hover {
+          .actions {
+            display: block;
           }
         }
       }

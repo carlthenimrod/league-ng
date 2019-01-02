@@ -10,6 +10,7 @@ export interface Game {
     score?: string;
   };
   start?: string;
+  time?: boolean;
   _id?: string;
   __v?: number;
 }

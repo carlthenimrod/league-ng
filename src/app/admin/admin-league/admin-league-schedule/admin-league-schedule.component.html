@@ -16,6 +16,7 @@
         <button
           color="primary"
           mat-flat-button
+          (click)="onClickAddGame()"
         >
           <i class="far fa-calendar-plus mr-2"></i>
           <span>Add</span>
@@ -39,6 +40,7 @@
     >
       <app-admin-game-group
         *ngFor="let group of league.schedule; trackBy: trackById"
+        [league]="league"
         [group]="group"
       >
       </app-admin-game-group>

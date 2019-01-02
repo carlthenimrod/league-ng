@@ -36,7 +36,7 @@ import { AdminUserFormComponent } from './admin-user/admin-user-form/admin-user-
 import { AdminUserNewComponent } from './admin-user/admin-user-new/admin-user-new.component';
 import { AdminLeagueScheduleComponent } from './admin-league/admin-league-schedule/admin-league-schedule.component';
 import { AdminModalAutoGenerateComponent } from './admin-league/admin-league-schedule/admin-modal-auto-generate/admin-modal-auto-generate.component';
-import { AdminModalAddDateComponent } from './admin-league/admin-league-schedule/admin-modal-add-date/admin-modal-add-date.component';
+import { AdminModalAddGameComponent } from './admin-league/admin-league-schedule/admin-modal-add-game/admin-modal-add-game.component';
 import { AdminGameGroupComponent } from './admin-league/admin-league-schedule/admin-game-group/admin-game-group.component';
 import { AdminModalEditGroupComponent } from './admin-league/admin-league-schedule/admin-game-group/admin-modal-edit-group/admin-modal-edit-group.component';
 
@@ -81,7 +81,7 @@ import { AdminModalEditGroupComponent } from './admin-league/admin-league-schedu
     AdminUserNewComponent,
     AdminLeagueScheduleComponent,
     AdminModalAutoGenerateComponent,
-    AdminModalAddDateComponent,
+    AdminModalAddGameComponent,
     AdminGameGroupComponent,
     AdminModalEditGroupComponent
   ],
@@ -90,7 +90,7 @@ import { AdminModalEditGroupComponent } from './admin-league/admin-league-schedu
     AdminModalTeamComponent,
     AdminModalUserComponent,
     AdminModalAutoGenerateComponent,
-    AdminModalAddDateComponent,
+    AdminModalAddGameComponent,
     AdminModalEditGroupComponent
   ]
 })

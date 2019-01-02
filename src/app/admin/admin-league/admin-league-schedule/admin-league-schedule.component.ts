@@ -5,6 +5,8 @@ import { League, ScheduleOptions, Group } from '@app/models/league';
 import { LeagueService } from '@app/core/league.service';
 import { AdminModalAutoGenerateComponent } from './admin-modal-auto-generate/admin-modal-auto-generate.component';
 import { groupsEnterTrigger } from './animations';
+import { AdminModalAddGameComponent } from './admin-modal-add-game/admin-modal-add-game.component';
+import { Game } from '@app/models/game';
 
 @Component({
   selector: 'app-admin-league-schedule',
@@ -37,6 +39,28 @@ export class AdminLeagueScheduleComponent implements OnInit {
     dialogRef.afterClosed().subscribe((options: ScheduleOptions) => {
       if (!options) { return; }
       this.leagueService.generateSchedule(options);
+    });
+  }
+
+  onClickAddGame() {
+    const config = new MatDialogConfig();
+
+    config.autoFocus = false;
+    config.data = { league: this.league };
+    config.maxWidth = '95vw';
+    config.restoreFocus = false;
+    config.width = '500px';
+
+    const dialogRef = this.dialog.open(AdminModalAddGameComponent, config);
+
+    dialogRef.afterClosed().subscribe((data: {game: Game, group: Group|string}) => {
+      if (!data) { return; }
+
+      if (typeof data.group === 'object') {
+        this.leagueService.addGame(data.group._id, data.game);
+      } else {
+        this.leagueService.addGroup(data.group, data.game);
+      }
     });
   }
 

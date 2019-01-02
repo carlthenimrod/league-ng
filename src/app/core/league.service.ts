@@ -7,6 +7,7 @@ import _ from 'lodash';
 import { League, Division, ScheduleOptions, Group } from '@app/models/league';
 import { Team } from '@app/models/team';
 import { NoticeService } from './notice.service';
+import { Game } from '@app/models/game';
 
 @Injectable({
   providedIn: 'root'
@@ -180,6 +181,14 @@ export class LeagueService {
     });
   }
 
+  addGroup(label: string, game?: Game) {
+    const url = this.api + `leagues/${this.league._id}/schedule/add`;
+
+    this.http.post(url, {label}).subscribe((group: Group) => {
+      this.addGame(group._id, game);
+    });
+  }
+
   updateGroup(group: Group) {
     const url = this.api + `leagues/${this.league._id}/schedule/${group._id}`;
 
@@ -196,6 +205,24 @@ export class LeagueService {
     this.http.delete(url).subscribe(() => {
       const index = this.league.schedule.findIndex((g => g._id === group._id));
       this.league.schedule.splice(index, 1);
+      this.leagueSubject.next(_.cloneDeep(this.league));
+    });
+  }
+
+  addGame(groupId: string, game: Game) {
+    const url = this.api + `leagues/${this.league._id}/schedule/${groupId}/games`;
+
+    this.http.post(url, game).subscribe((groups: Group[]) => {
+      this.league.schedule = groups;
+      this.leagueSubject.next(_.cloneDeep(this.league));
+    });
+  }
+
+  updateGame(groupId: string, game: Game) {
+    const url = this.api + `leagues/${this.league._id}/schedule/${groupId}/games/${game._id}`;
+
+    this.http.put(url, game).subscribe((groups: Group[]) => {
+      this.league.schedule = groups;
       this.leagueSubject.next(_.cloneDeep(this.league));
     });
   }

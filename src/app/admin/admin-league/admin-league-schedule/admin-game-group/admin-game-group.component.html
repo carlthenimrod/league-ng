@@ -23,8 +23,12 @@
     </a>
   </nav>
 
-  <section id="game-list" *ngIf="show" @gameListToggle>
-    <article *ngFor="let game of group.games" (click)="onClickEditGame()">
+  <section id="game-list" *ngIf="show" @gameListEnter>
+    <article
+      *ngFor="let game of group.games; trackBy: trackById"
+      (click)="onClickEditGame(group._id, game)"
+      @gameToggle
+    >
       <div class="date" *ngIf="game.start">
         Starts: {{ game.start | date: 'MM/dd/yy' }}
       </div>
@@ -49,17 +53,17 @@
         </div>
 
         <div class="team">
-            <span class="name">
-              {{ game.away.name }}
-            </span>
+          <span class="name">
+            {{ game.away.name }}
+          </span>
 
-            <span class="score" *ngIf="game.away.score">
-              {{ game.away.score }}
-            </span>
+          <span class="score" *ngIf="game.away.score">
+            {{ game.away.score }}
+          </span>
 
-            <span class="score" *ngIf="!game.away.score">
-                -
-            </span>
+          <span class="score" *ngIf="!game.away.score">
+              -
+          </span>
         </div>
       </div>
     </article>

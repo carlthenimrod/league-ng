@@ -1,6 +1,6 @@
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
-export const gameListToggleTrigger = trigger('gameListToggle', [
+export const gameListEnterTrigger = trigger('gameListEnter', [
   transition(':enter', [
     style({
       height: 0,
@@ -24,11 +24,14 @@ export const gameListToggleTrigger = trigger('gameListToggle', [
         }))
       ])
     ], { optional: true })
-  ]),
-  transition(':leave', [
-    animate('100ms', style({
-      height: 0,
-      padding: 0
-    }))
+  ])
+]);
+
+export const gameToggleTrigger = trigger('gameToggle', [
+  transition(':enter', [
+    style({
+      transform: 'scale(4) rotate(180deg)'
+    }),
+    animate('400ms ease-out')
   ])
 ]);

@@ -1,0 +1,160 @@
+<form [formGroup]="gameForm" (ngSubmit)="onSubmit()">
+  <aside id="game" class="container-fluid">
+    <div class="row no-gutters">
+      <div class="col">
+        <header>
+          <h3 *ngIf="!game">Add Game</h3>
+          <h3 *ngIf="game">Edit Game</h3>
+        </header>
+
+        <section id="form-fields">
+          <fieldset formGroupName="home">
+            <div class="row">
+              <div class="col-sm-8">
+                <mat-form-field>
+                  <mat-select
+                    formControlName="team"
+                    required="true"
+                    placeholder="Home Team"
+                  >
+                    <mat-option *ngFor="let team of league?.teams" [value]="team._id">
+                      {{ team.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-4">
+                <mat-form-field>
+                  <input
+                    matInput
+                    type="number"
+                    formControlName="score"
+                    placeholder="Score"
+                  >
+                </mat-form-field>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset formGroupName="away">
+            <div class="row">
+              <div class="col-sm-8">
+                <mat-form-field>
+                  <mat-select
+                    formControlName="team"
+                    required="true"
+                    placeholder="Away Team"
+                  >
+                    <mat-option *ngFor="let team of league?.teams" [value]="team._id">
+                      {{ team.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-4">
+                <mat-form-field>
+                  <input
+                    matInput
+                    type="number"
+                    formControlName="score"
+                    placeholder="Score"
+                  >
+                </mat-form-field>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <div class="row">
+              <div class="col-sm-6">
+                <mat-form-field>
+                  <input
+                    matInput
+                    [matDatepicker]="startDate"
+                    type="text"
+                    name="start"
+                    formControlName="start"
+                    placeholder="Start Date"
+                  >
+                  <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                  <mat-datepicker #startDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-6">
+                <mat-form-field>
+                  <input
+                    matInput
+                    type="time"
+                    formControlName="time"
+                    placeholder="Start Time"
+                  >
+                </mat-form-field>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset id="group" *ngIf="!game">
+            <div class="row">
+              <div class="col">
+                <p>Select where to add the game</p>
+
+                <mat-form-field>
+                  <input
+                    matInput
+                    [matAutocomplete]="auto"
+                    formControlName="group"
+                    name="group"
+                    placeholder="Group Name"
+                    required
+                  >
+                </mat-form-field>
+
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let group of league.schedule" [value]="group">
+                    {{ group.label }}
+                  </mat-option>
+                </mat-autocomplete>
+              </div>
+            </div>
+          </fieldset>
+        </section>
+
+        <section id="form-actions">
+          <button
+            *ngIf="game"
+            mat-flat-button
+            color="primary"
+            class="mr-2"
+            [disabled]="gameForm.invalid"
+          >
+            <i class="fas fa-save mr-2"></i>
+            <span>Save</span>
+          </button>
+
+          <button
+            *ngIf="!game"
+            mat-flat-button
+            color="primary"
+            class="mr-2"
+            [disabled]="gameForm.invalid"
+          >
+            <i class="fas fa-plus mr-2"></i>
+            <span>Add</span>
+          </button>
+
+          <button
+            mat-flat-button
+            color="warn"
+            mat-dialog-close
+          >
+            <i class="fas fa-times mr-2"></i>
+            <span>Cancel</span>
+          </button>
+        </section>
+      </div>
+    </div>
+  </aside>
+</form>
