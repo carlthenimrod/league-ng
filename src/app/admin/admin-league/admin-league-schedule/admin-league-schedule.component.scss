@@ -5,23 +5,26 @@
 @import '~bootstrap/scss/_mixins';
 
 section#league-schedule {
-  background-color: theme-color(light);
-  padding: 1rem;
+  padding: 0.5rem 0 1rem 0;
 
   header {
     display: flex;
+    flex-flow: column;
     justify-content: space-between;
 
     h2 {
       color: $text-muted;
       font-size: $h3-font-size;
+      margin-bottom: 1rem;
+      text-align: center;
     }
 
     #actions {
-      text-align: right;
+      text-align: center;
 
       button {
-        margin-left: 0.5rem;
+        margin-right: 0.25rem;
+        margin-left: 0.25rem;
       }
     }
   }
@@ -38,10 +41,43 @@ section#league-schedule {
   }
 
   section#no-groups {
-    padding: 1rem 0;
+    padding: 2rem 0 1rem 0;
 
     p {
+      text-align: center;
       margin: 0;
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  section#league-schedule {
+    background-color: theme-color(light);
+    padding: 1rem;
+
+    header {
+      flex-flow: row;
+
+      h2 {
+        margin-bottom: auto;
+        text-align: left;
+      }
+    }
+
+    #actions {
+      text-align: right;
+
+      button {
+        margin-left: 0.5rem;
+      }
+    }
+
+    section#no-groups {
+      padding: 1rem 0;
+
+      p {
+        text-align: left;
+      }
     }
   }
 }

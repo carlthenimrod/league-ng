@@ -17,7 +17,7 @@ export const gameListToggleTrigger = trigger('gameListToggle', [
       padding: '*'
     })),
     query('article', [
-      stagger('200ms', [
+      stagger('100ms', [
         animate('200ms ease-out', style({
           opacity: '*',
           transform: 'scale(1)'

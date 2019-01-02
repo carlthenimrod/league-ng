@@ -28,6 +28,7 @@ export class AdminLeagueScheduleComponent implements OnInit {
 
     config.autoFocus = false;
     config.data = { league: this.league };
+    config.maxWidth = '95vw';
     config.restoreFocus = false;
     config.width = '500px';
 
