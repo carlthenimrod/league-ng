@@ -179,4 +179,14 @@ export class LeagueService {
       this.leagueSubject.next(_.cloneDeep(this.league));
     });
   }
+
+  updateGroup(group: Group) {
+    const url = this.api + `leagues/${this.league._id}/schedule/${group._id}`;
+
+    this.http.put(url, _.pick(group, ['label'])).subscribe((updatedGroup: Group) => {
+      const index = this.league.schedule.findIndex((g => g._id === updatedGroup._id));
+      this.league.schedule[index].label = updatedGroup.label;
+      this.leagueSubject.next(_.cloneDeep(this.league));
+    });
+  }
 }

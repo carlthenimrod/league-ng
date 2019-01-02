@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 
+import { LeagueService } from '@app/core/league.service';
 import { Group } from '@app/models/league';
+import { AdminModalEditGroupComponent } from './admin-modal-edit-group/admin-modal-edit-group.component';
 import { gameListToggleTrigger } from './animations';
 
 @Component({
@@ -13,7 +16,10 @@ export class AdminGameGroupComponent implements OnInit {
   @Input() group: Group;
   show = false;
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog,
+    private leagueService: LeagueService
+  ) { }
 
   ngOnInit() {
   }
@@ -24,6 +30,21 @@ export class AdminGameGroupComponent implements OnInit {
 
   onClickEditGroup($event: MouseEvent) {
     $event.stopPropagation();
+
+    const config = new MatDialogConfig();
+
+    config.autoFocus = false;
+    config.data = { group: this.group };
+    config.maxWidth = '95vw';
+    config.restoreFocus = false;
+    config.width = '500px';
+
+    const dialogRef = this.dialog.open(AdminModalEditGroupComponent, config);
+
+    dialogRef.afterClosed().subscribe((group: Group) => {
+      if (!group) { return; }
+      this.leagueService.updateGroup(group);
+    });
   }
 
   onClickDeleteGroup($event: MouseEvent, group: Group) {
