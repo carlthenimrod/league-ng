@@ -1,0 +1,67 @@
+<section id="group" *ngIf="group">
+  <nav>
+    <a (click)="show = !show">
+      <h3>{{ group.label }}</h3>
+
+      <div class="actions">
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="onClickEditGroup($event)"
+        >
+          <i class="fas fa-pen"></i>
+        </button>
+
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="onClickDeleteGroup($event, group)"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </a>
+  </nav>
+
+  <section id="game-list" *ngIf="show" @gameListToggle>
+    <article *ngFor="let game of group.games" (click)="onClickEditGame()">
+      <div class="date" *ngIf="game.start">
+        Starts: {{ game.start | date: 'MM/dd/yy' }}
+      </div>
+
+      <div class="date" *ngIf="!game.start">
+        Date TBD
+      </div>
+
+      <div class="teams">
+        <div class="team">
+          <span class="name">
+            {{ game.home.name }}
+          </span>
+
+          <span class="score" *ngIf="game.home.score">
+            {{ game.home.score }}
+          </span>
+
+          <span class="score" *ngIf="!game.home.score">
+              -
+          </span>
+        </div>
+
+        <div class="team">
+            <span class="name">
+              {{ game.away.name }}
+            </span>
+
+            <span class="score" *ngIf="game.away.score">
+              {{ game.away.score }}
+            </span>
+
+            <span class="score" *ngIf="!game.away.score">
+                -
+            </span>
+        </div>
+      </div>
+    </article>
+  </section>
+</section>

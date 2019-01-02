@@ -1,0 +1,100 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  display: block;
+}
+
+section#group {
+  nav {
+    a {
+      @include gradient-y(theme-color-level(primary, -10), theme-color-level(primary, -8));
+      align-items: center;
+      border-bottom: 3px solid theme-color-level(primary, -2);
+      color: theme-color-level(primary, 4);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      position: relative;
+      user-select: none;
+
+      h3 {
+        font-size: $h4-font-size;
+        margin: 0;
+      }
+
+      .actions {
+        display: none;
+        position: absolute;
+        right: 10px;
+      }
+
+      &:hover {
+        .actions {
+          display: block;
+        }
+      }
+    }
+  }
+
+  section#game-list {
+    @include gradient-y($gray-800, $gray-700);
+    border-bottom: 1px solid theme-color-level(primary, -2);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    overflow: hidden;
+    padding: 0 0 1rem 0;
+
+    article {
+      border: 2px solid $gray-800;
+      border-radius: 5px;
+      box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.6);
+      cursor: pointer;
+      margin: 1rem 0.5rem 0 0.5rem;
+      transition: all 100ms ease-out;
+      user-select: none;
+      width: 200px;
+
+      &:hover {
+        border: 2px solid theme-color(primary);
+        box-shadow: 1px 1px 8px 4px theme-color-level(primary, -1);
+        transform: scale(1.05);
+      }
+
+      .date {
+        background-color: theme-color-level(primary, -7);
+        border-radius: 5px 5px 0 0;
+        color: $white;
+        font-size: 0.8rem;
+        font-weight: 500;
+        padding: 0.25rem 0;
+        text-align: center;
+      }
+
+      .teams {
+        background-color: $white;
+        border-radius: 0 0 5px 5px;
+        padding: 0 0 0.25rem 0;
+
+        .team {
+          display: flex;
+          justify-content: space-between;
+          padding: 0.25rem 0;
+
+          .name {
+            padding-left: 1rem;
+          }
+
+          .score {
+            padding-right: 1rem;
+          }
+        }
+      }
+    }
+  }
+}

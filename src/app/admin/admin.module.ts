@@ -37,6 +37,7 @@ import { AdminUserNewComponent } from './admin-user/admin-user-new/admin-user-ne
 import { AdminLeagueScheduleComponent } from './admin-league/admin-league-schedule/admin-league-schedule.component';
 import { AdminModalAutoGenerateComponent } from './admin-league/admin-league-schedule/admin-modal-auto-generate/admin-modal-auto-generate.component';
 import { AdminModalAddDateComponent } from './admin-league/admin-league-schedule/admin-modal-add-date/admin-modal-add-date.component';
+import { AdminGameGroupComponent } from './admin-league/admin-league-schedule/admin-game-group/admin-game-group.component';
 
 @NgModule({
   imports: [
@@ -79,7 +80,8 @@ import { AdminModalAddDateComponent } from './admin-league/admin-league-schedule
     AdminUserNewComponent,
     AdminLeagueScheduleComponent,
     AdminModalAutoGenerateComponent,
-    AdminModalAddDateComponent
+    AdminModalAddDateComponent,
+    AdminGameGroupComponent
   ],
   entryComponents: [
     AdminModalDivisionComponent,

@@ -25,4 +25,23 @@ section#league-schedule {
       }
     }
   }
+
+  section#groups {
+    margin-top: 1rem;
+    position: relative;
+
+    app-admin-game-group {
+      border: 1px solid theme-color-level(primary, -5);
+      position: relative;
+      top: -1px;
+    }
+  }
+
+  section#no-groups {
+    padding: 1rem 0;
+
+    p {
+      margin: 0;
+    }
+  }
 }

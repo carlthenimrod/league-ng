@@ -24,11 +24,28 @@
         <button
           color="warn"
           mat-flat-button
+          (click)="onClickClearGames()"
         >
           <i class="far fa-calendar-times mr-2"></i>
           <span>Clear</span>
         </button>
       </div>
     </header>
+
+    <section
+      id="groups"
+      *ngIf="league.schedule.length > 0"
+      [@groupsEnter]="league.schedule.length"
+    >
+      <app-admin-game-group
+        *ngFor="let group of league.schedule; trackBy: trackById"
+        [group]="group"
+      >
+      </app-admin-game-group>
+    </section>
+
+    <section id="no-groups" *ngIf="!league.schedule || league.schedule.length === 0">
+      <p>No Games. Maybe add some? <i class="far fa-smile"></i></p>
+    </section>
   </div>
 </section>

@@ -4,7 +4,7 @@ import { environment } from '@env/environment';
 import { Observable, Subject } from 'rxjs';
 import _ from 'lodash';
 
-import { League, Division, ScheduleOptions } from '@app/models/league';
+import { League, Division, ScheduleOptions, Group } from '@app/models/league';
 import { Team } from '@app/models/team';
 import { NoticeService } from './notice.service';
 
@@ -165,10 +165,18 @@ export class LeagueService {
   generateSchedule(options: ScheduleOptions) {
     const url = this.api + `leagues/${this.league._id}/schedule`;
 
-    this.http.post(url, {...options}).subscribe((schedule) => {
-      console.log(schedule);
-      // this.league.schedule = schedule;
-      // this.leagueSubject.next(_.cloneDeep(this.league));
+    this.http.post(url, {...options}).subscribe((groups: Group[]) => {
+      this.league.schedule = groups;
+      this.leagueSubject.next(_.cloneDeep(this.league));
+    });
+  }
+
+  clearSchedule() {
+    const url = this.api + `leagues/${this.league._id}/schedule`;
+
+    this.http.delete(url).subscribe(() => {
+      this.league.schedule.length = 0;
+      this.leagueSubject.next(_.cloneDeep(this.league));
     });
   }
 }
