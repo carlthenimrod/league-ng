@@ -189,4 +189,14 @@ export class LeagueService {
       this.leagueSubject.next(_.cloneDeep(this.league));
     });
   }
+
+  removeGroup(group: Group) {
+    const url = this.api + `leagues/${this.league._id}/schedule/${group._id}`;
+
+    this.http.delete(url).subscribe(() => {
+      const index = this.league.schedule.findIndex((g => g._id === group._id));
+      this.league.schedule.splice(index, 1);
+      this.leagueSubject.next(_.cloneDeep(this.league));
+    });
+  }
 }

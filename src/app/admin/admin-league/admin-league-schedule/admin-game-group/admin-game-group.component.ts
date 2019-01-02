@@ -53,7 +53,7 @@ export class AdminGameGroupComponent implements OnInit {
     const msg = `Remove ${group.label}?\nWarning: This will also remove all games associated with ${group.label}`;
 
     if (confirm(msg)) {
-      console.log('okay');
+      this.leagueService.removeGroup(group);
     }
   }
 }
