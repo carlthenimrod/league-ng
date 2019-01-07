@@ -1,0 +1,28 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  display: block;
+  @include make-container();
+  @include make-container-max-widths();
+
+  section#user {
+    @include make-row(0);
+
+    app-user-sidebar {
+      @include make-col-ready(0);
+      @include make-col(3);
+      background-color: theme-color-level(light, 1);
+      border-right: 2px solid $white;
+    }
+
+    section#dashboard {
+      @include make-col-ready(0);
+      @include make-col(9);
+      background-color: theme-color(light);
+    }
+  }
+}

@@ -1,0 +1,77 @@
+<section id="profile" *ngIf="user">
+  <header>
+    <section id="img">
+      <figure>
+        <i class="fas fa-user"></i>
+      </figure>
+    </section>
+
+    <section id="details">
+      <header>
+        <h1>User Profile</h1>
+
+        <span id="status">{{ user.status }}</span>
+      </header>
+
+      <section id="info">
+        <div id="name">
+          <span>Name:</span>
+          {{ user.name }}
+        </div>
+
+        <div id="email">
+          <span>Email:</span>
+          {{ user.name }}
+        </div>
+
+        <button
+          mat-flat-button
+          color="accent"
+        >
+          <i class="fas fa-pen mr-2"></i>
+          Edit Profile
+        </button>
+      </section>
+    </section>
+  </header>
+
+  <section id="tabs">
+    <nav>
+      <button
+        (click)="tab = 'schedule'"
+        [ngClass]="{'active': tab === 'schedule'}"
+      >
+        <span>Schedule</span>
+        <i class="far fa-calendar-alt ml-2"></i>
+      </button>
+
+      <button
+        (click)="tab = 'results'"
+        [ngClass]="{'active': tab === 'results'}"
+      >
+        <span>Results</span>
+        <i class="far fa-calendar-check ml-2"></i>
+      </button>
+
+      <button
+        (click)="tab = 'stats'"
+        [ngClass]="{'active': tab === 'stats'}"
+      >
+        <span>Stats</span>
+        <i class="fas fa-stream ml-2"></i>
+      </button>
+
+      <button
+        (click)="tab = 'activity'"
+        [ngClass]="{'active': tab === 'activity'}"
+      >
+        <span>Activity</span>
+        <i class="fas fa-chart-line ml-2"></i>
+      </button>
+    </nav>
+
+    <ng-container>
+      <app-user-schedule></app-user-schedule>
+    </ng-container>
+  </section>
+</section>

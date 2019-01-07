@@ -1,0 +1,134 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+section#profile {
+  header {
+    @include make-row(0);
+    background-color: theme-color-level(light, 0.5);
+    padding: 0 2rem 1rem 0;
+
+    section#img {
+      @include make-col-ready(0);
+
+      @include media-breakpoint-up(sm) {
+        @include make-col(3);
+      }
+
+      figure {
+        margin: 0;
+        height: 150px;
+        margin: 1rem 0 0 0;
+        text-align: center;
+        width: 100%;
+
+        i {
+          background-color: theme-color-level(light, 2);
+          border-radius: 50%;
+          color: theme-color-level(light, -1);
+          font-size: 4rem;
+          padding: 2.5rem;
+        }
+      }
+    }
+
+    section#details {
+      @include make-col-ready(0);
+      padding: 1rem 0 0 1rem;
+
+      @include media-breakpoint-up(sm) {
+        @include make-col(9);
+      }
+
+      header {
+        align-items: center;
+        border-bottom: 3px solid theme-color(primary);
+        display: flex;
+        margin: 0 0 1rem 0;
+        padding: 0 0 0.5rem 0.5rem;
+
+        h1 {
+          font-size: $h2-font-size;
+          margin: 0 1rem 0 0;
+        }
+
+        button {
+          font-size: 0.8rem;
+          margin-top: 0.25rem;
+          text-transform: uppercase;
+        }
+
+        #status {
+          background-color: theme-color-level(light, 2);
+          border-radius: 20px;
+          color: $white;
+          display: block;
+          font-size: 0.8rem;
+          font-weight: 600;
+          line-height: 1rem;
+          margin: 0.5rem 0 0 auto;
+          padding: 0.4rem 1rem;
+          text-transform: uppercase;
+        }
+      }
+
+      section#info {
+        div {
+          display: inline-block;
+          font-size: 1.25rem;
+          margin: 0 1rem 0.5rem 0;
+
+          span {
+            display: inline-block;
+            font-weight: 500;
+            text-align: right;
+          }
+        }
+
+        button {
+          display: block;
+          margin-top: 0.25rem;
+        }
+      }
+    }
+  }
+
+  section#tabs {
+    padding: 3rem 2rem 1rem 2rem;
+
+    nav {
+      border-top: 3px solid theme-color(primary);
+      display: flex;
+      justify-content: space-evenly;
+      margin-bottom: 2rem;
+      padding: 0 0 1rem 0;
+
+      button {
+        background-color: theme-color-level(primary, -9);
+        border: 3px solid theme-color-level(primary, -7);
+        border-radius: 25px;
+        color: theme-color-level(primary, 2);
+        cursor: pointer;
+        font-weight: 600;
+        line-height: 1.4rem;
+        margin-top: -1.2rem;
+        padding: 0.25rem 1.25rem;
+        transition: all 100ms ease-out;
+        user-select: none;
+
+        &:hover {
+          background-color: theme-color-level(primary, -7);
+        }
+
+        &.active {
+          background: none;
+          background-color: theme-color(primary);
+          border: 3px solid theme-color(primary);
+          color: $white;
+        }
+      }
+    }
+  }
+}
