@@ -62,15 +62,26 @@ section#profile {
 
         #status {
           background-color: theme-color-level(light, 2);
+          border: 3px solid theme-color-level(light, 2);
           border-radius: 20px;
           color: $white;
           display: block;
           font-size: 0.8rem;
-          font-weight: 600;
+          font-weight: 700;
           line-height: 1rem;
           margin: 0.5rem 0 0 auto;
           padding: 0.4rem 1rem;
           text-transform: uppercase;
+
+          i {
+            margin-left: 0.25rem;
+          }
+
+          &.active {
+            @include gradient-y(theme-color-level(success, -11), theme-color-level(success, -9));
+            border-color: theme-color-level(success, 2);
+            color: theme-color-level(success, 2);
+          }
         }
       }
 
@@ -87,9 +98,12 @@ section#profile {
           }
         }
 
-        button {
-          display: block;
+        #actions {
           margin-top: 0.25rem;
+
+          button {
+            margin-right: 0.5rem;
+          }
         }
       }
     }

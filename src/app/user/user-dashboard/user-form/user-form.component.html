@@ -1,0 +1,200 @@
+<section id="user-edit">
+  <header>
+    <h1>Edit Profile</h1>
+
+    <div id="actions">
+      <button
+        type="submit"
+        mat-flat-button
+        color="primary"
+        class="mr-2"
+        [disabled]="userForm.invalid"
+      >
+        <i class="fas fa-save mr-2"></i>
+
+        <span>Save</span>
+      </button>
+
+      <button
+        type="button"
+        mat-flat-button
+        color="warn"
+        (click)="onCancel()"
+      >
+        <i class="fas fa-times mr-2"></i>
+
+        <span>Cancel</span>
+      </button>
+    </div>
+  </header>
+
+  <section id="form">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <fieldset>
+        <h2>User Info</h2>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="First Name"
+                formControlName="first"
+                required
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Last Name"
+                formControlName="last"
+                required
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="tel"
+                placeholder="Phone Number"
+                formControlName="phone"
+                required
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="tel"
+                placeholder="Secondary Number"
+                formControlName="secondary"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset formGroupName="address">
+        <h2>Address</h2>
+
+        <div class="row">
+          <div class="col-sm-8">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Street Address"
+                formControlName="street"
+                required
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="City"
+                formControlName="city"
+                required
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-4">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="State"
+                formControlName="state"
+                required
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-4">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Postal Code"
+                formControlName="postal"
+                required
+              >
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset formGroupName="emergency">
+        <h2>Emergency Contact</h2>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="First Name"
+                formControlName="first"
+                required
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Last Name"
+                formControlName="last"
+                required
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="tel"
+                placeholder="Phone Number"
+                formControlName="phone"
+                required
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="tel"
+                placeholder="Secondary Number"
+                formControlName="secondary"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </section>
+</section>

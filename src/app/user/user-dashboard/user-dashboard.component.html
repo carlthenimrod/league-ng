@@ -10,7 +10,9 @@
       <header>
         <h1>User Profile</h1>
 
-        <span id="status">{{ user.status }}</span>
+        <span id="status" [ngClass]="user.status">
+          {{ user.status }} <i class="fas fa-check"></i>
+        </span>
       </header>
 
       <section id="info">
@@ -24,13 +26,24 @@
           {{ user.name }}
         </div>
 
-        <button
-          mat-flat-button
-          color="accent"
-        >
-          <i class="fas fa-pen mr-2"></i>
-          Edit Profile
-        </button>
+        <div id="actions">
+          <button
+            mat-flat-button
+            color="primary"
+            routerLink="edit"
+          >
+            <i class="fas fa-pen mr-2"></i>
+            Edit Profile
+          </button>
+
+          <button
+            mat-flat-button
+            color="accent"
+          >
+            <i class="fas fa-key mr-2"></i>
+            Change Password
+          </button>
+        </div>
       </section>
     </section>
   </header>
@@ -43,14 +56,6 @@
       >
         <span>Schedule</span>
         <i class="far fa-calendar-alt ml-2"></i>
-      </button>
-
-      <button
-        (click)="tab = 'results'"
-        [ngClass]="{'active': tab === 'results'}"
-      >
-        <span>Results</span>
-        <i class="far fa-calendar-check ml-2"></i>
       </button>
 
       <button
@@ -67,6 +72,14 @@
       >
         <span>Activity</span>
         <i class="fas fa-chart-line ml-2"></i>
+      </button>
+
+      <button
+        (click)="tab = 'settings'"
+        [ngClass]="{'active': tab === 'settings'}"
+      >
+        <span>Settings</span>
+        <i class="fas fa-cog ml-2"></i>
       </button>
     </nav>
 

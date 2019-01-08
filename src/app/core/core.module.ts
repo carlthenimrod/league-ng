@@ -11,6 +11,7 @@ import { TypeSelectComponent } from './register/type-select/type-select.componen
 import { TermsFormComponent } from './register/terms-form/terms-form.component';
 import { MiscFormComponent } from './register/misc-form/misc-form.component';
 import { ModalAddPlayerComponent } from './register/modal-add-player/modal-add-player.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { ModalAddPlayerComponent } from './register/modal-add-player/modal-add-p
     TypeSelectComponent,
     TermsFormComponent,
     MiscFormComponent,
-    ModalAddPlayerComponent
+    ModalAddPlayerComponent,
+    LoginComponent
   ],
   entryComponents: [
     ModalAddPlayerComponent

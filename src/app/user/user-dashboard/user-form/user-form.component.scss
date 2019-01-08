@@ -1,0 +1,33 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+section#user-edit {
+  padding: 1rem 2rem 3rem 2rem;
+
+  header {
+    align-items: center;
+    border-bottom: 3px solid theme-color(primary);
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 1.5rem 0;
+    padding: 0 0 0.5rem 0;
+  }
+
+  section#form {
+    fieldset {
+      padding: 1rem;
+
+      h2 {
+        font-size: $h4-font-size;
+        margin: 0 0 1rem 0;
+      }
+
+      mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+}
