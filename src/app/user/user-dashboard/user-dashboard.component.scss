@@ -62,7 +62,7 @@ section#profile {
 
         #status {
           background-color: theme-color-level(light, 2);
-          border: 3px solid theme-color-level(light, 2);
+          border: 2px solid theme-color-level(light, 2);
           border-radius: 20px;
           color: $white;
           display: block;
@@ -78,7 +78,7 @@ section#profile {
           }
 
           &.active {
-            @include gradient-y(theme-color-level(success, -11), theme-color-level(success, -9));
+            @include gradient-y(theme-color-level(success, -12), theme-color-level(success, -10));
             border-color: theme-color-level(success, 2);
             color: theme-color-level(success, 2);
           }

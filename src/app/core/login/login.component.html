@@ -1,3 +1,46 @@
-<p>
-  login works!
-</p>
+<section id="login" class="container">
+  <div class="row">
+    <div class="col">
+      <header>
+        <h1>Login</h1>
+        <i class="fas fa-user-circle"></i>
+      </header>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <input
+            matInput
+            type="email"
+            placeholder="Email"
+            formControlName="email"
+            required
+          >
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+            required
+          >
+        </mat-form-field>
+
+        <button
+          mat-flat-button
+          color="primary"
+        >
+          <span>Login</span>
+          <i class="fas fa-sign-in-alt ml-2"></i>
+        </button>
+
+        <section id="recover">
+            <a (click)="onClickRecover()">
+              Forgot Password? Click here to recover.
+            </a>
+        </section>
+      </form>
+    </div>
+  </div>
+</section>
