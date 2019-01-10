@@ -1,0 +1,67 @@
+<section *ngIf="confirmEmail" id="confirm" class="container">
+  <div class="row">
+    <div class="col">
+      <header>
+        <h1>Email Confirmation</h1>
+        <i class="fas fa-check"></i>
+      </header>
+
+      <section id="password-form">
+        <p>
+          Thank you for confirming your email.<br />
+          Please create a password below<br />
+        </p>
+
+        <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col">
+              <mat-form-field>
+                <input
+                  matInput
+                  type="password"
+                  placeholder="Enter Password"
+                  formControlName="password"
+                  required
+                >
+                <mat-error *ngIf="!passwordForm.get('password').hasError('required')">
+                  Password must be at least 5 characters
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <mat-form-field>
+                <input
+                  matInput
+                  type="password"
+                  placeholder="Confirm Password"
+                  formControlName="confirm"
+                  [errorStateMatcher]="matcher"
+                  required
+                >
+                <mat-error *ngIf="passwordForm.hasError('notSame')">
+                  Passwords must match
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <button
+                mat-flat-button
+                color="primary"
+                [disabled]="passwordForm.invalid"
+              >
+                <span>Create Password</span>
+                <i class="fas fa-key ml-2"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</section>

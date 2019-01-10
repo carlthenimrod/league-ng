@@ -193,6 +193,11 @@ export const termsFormTrigger = trigger('termsForm', [
       transform: 'translateX(-300%)'
     }))
   ]),
+  transition('terms => complete', [
+    animate('600ms ease-out', style({
+      transform: 'translateX(-300%)'
+    }))
+  ]),
   transition('terms => misc', [
     style({
       opacity: 1
@@ -208,5 +213,23 @@ export const termsFormTrigger = trigger('termsForm', [
     animate('600ms ease-out', style({
       transform: 'translateX(0%)'
     }))
+  ])
+]);
+
+export const completeTrigger = trigger('complete', [
+  state('*', style({
+    opacity: 0,
+    transform: 'translateX(-300%)'
+  })),
+  state('complete', style({
+    opacity: 1,
+    transform: 'translateX(0%)'
+  })),
+  transition('terms => complete', [
+    style({
+      opacity: 1,
+      transform: 'translateX(300%)'
+    }),
+    animate('600ms ease-out')
   ])
 ]);

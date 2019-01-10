@@ -1,0 +1,77 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+section#confirm {
+  max-width: 800px;
+
+  header {
+    align-items: center;
+    border-bottom: 1px solid $gray-300;
+    display: flex;
+    justify-content: center;
+    margin: 0 0 1rem 0;
+    padding: 0 0.5rem 1rem 0.5rem;
+
+    h1 {
+      color: $gray-800;
+      font-weight: 300;
+      margin: 0;
+    }
+
+    i {
+      color: theme-color(primary);
+      font-size: 2rem;
+      margin-left: 1rem;
+    }
+  }
+
+  section#password-form {
+    border-radius: 10px;
+    margin: 1rem auto;
+    max-width: 400px;
+    padding: 1rem;
+
+    p {
+      margin: 0 0 1rem 0;
+      line-height: 2rem;
+      text-align: center;
+
+      em {
+        color: theme-color(primary);
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+    }
+
+    form {
+      .row {
+        align-items: center;
+        padding: 0.5rem 0;
+
+        mat-form-field {
+          width: 100%;
+        }
+
+        button {
+          margin-top: 1rem;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  section#confirm {
+    header {
+      margin: 1rem 0;
+    }
+
+    section#password-form {
+      padding: 0 2.5rem 1.5rem 2.5rem;
+    }
+  }
+}

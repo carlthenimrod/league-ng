@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import _ from 'lodash';
 
 import { User } from '@app/models/user';
+import { Auth } from '@app/models/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -49,5 +51,23 @@ export class UserService {
   delete(id: String): Observable<any> {
     const url = this.api + `users/${id}`;
     return this.http.delete(url);
+  }
+
+  confirmEmail(userId: string, code: string) {
+    const url = this.api + `users/${userId}/confirm`;
+    return this.http.post(url, {code});
+  }
+
+  createPassword(userId: string, code: string, password: string) {
+    const url = this.api + `users/${userId}/password`;
+    return this.http.post(url, {password, code}).pipe(
+      tap((auth: Auth) => {
+        localStorage.setItem('_id', auth._id);
+        localStorage.setItem('email', auth.email);
+        localStorage.setItem('access_token', auth.access_token);
+        localStorage.setItem('refresh_token', auth.refresh_token);
+        localStorage.setItem('client', auth.client);
+      })
+    );
   }
 }

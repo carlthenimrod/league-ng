@@ -12,6 +12,8 @@ import { TermsFormComponent } from './register/terms-form/terms-form.component';
 import { MiscFormComponent } from './register/misc-form/misc-form.component';
 import { ModalAddPlayerComponent } from './register/modal-add-player/modal-add-player.component';
 import { LoginComponent } from './login/login.component';
+import { RegistrationCompleteComponent } from './register/registration-complete/registration-complete.component';
+import { EmailConfirmComponent } from './email-confirm/email-confirm.component';
 
 @NgModule({
   imports: [
@@ -28,7 +30,9 @@ import { LoginComponent } from './login/login.component';
     TermsFormComponent,
     MiscFormComponent,
     ModalAddPlayerComponent,
-    LoginComponent
+    LoginComponent,
+    RegistrationCompleteComponent,
+    EmailConfirmComponent
   ],
   entryComponents: [
     ModalAddPlayerComponent

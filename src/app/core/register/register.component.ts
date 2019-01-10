@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
+import { User } from '@app/models/user';
+import { UserService } from '../user.service';
 import {
   typeSelectTrigger,
   userFormTrigger,
   miscFormTrigger,
   teamFormTrigger,
-  termsFormTrigger} from './animations';
+  termsFormTrigger,
+  completeTrigger } from './animations';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +20,8 @@ import {
     userFormTrigger,
     miscFormTrigger,
     teamFormTrigger,
-    termsFormTrigger
+    termsFormTrigger,
+    completeTrigger
   ]
 })
 export class RegisterComponent implements OnInit {
@@ -50,7 +54,8 @@ export class RegisterComponent implements OnInit {
   });
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -115,8 +120,26 @@ export class RegisterComponent implements OnInit {
   }
 
   onTermsAccept(accepted: boolean) {
-    if (accepted) {
-      console.log('Accepted!');
+    if (accepted && this.regsiterForm.valid) {
+      const form = this.regsiterForm.value;
+
+      const user: User = {
+        name: `${form.userForm.first} ${form.userForm.last}`,
+        email: form.userForm.email,
+        address: form.userForm.address,
+        phone: form.userForm.phone,
+        secondary: form.userForm.secondary,
+        emergency: {
+          name: `${form.miscForm.emergency.first} ${form.miscForm.emergency.last}`,
+          phone: form.miscForm.emergency.phone,
+          secondary: form.miscForm.emergency.secondary
+        },
+        comments: form.miscForm.comments
+      };
+
+      this.userService.save(user).subscribe(() => {
+        this.state = 'complete';
+      });
     }
   }
 }

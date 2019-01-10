@@ -1,0 +1,53 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  display: block;
+}
+
+section#complete {
+  background-color: theme-color(light);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+
+  header {
+    align-items: center;
+    color: theme-color(primary);
+    border-bottom: 1px solid $gray-400;
+    display: flex;
+    margin: 0.5rem 0 2rem 0;
+    padding: 0 0 0.5rem 0;
+
+    h2 {
+      font-size: $h1-font-size;
+      font-weight: 500;
+    }
+
+    i {
+      font-size: 2rem;
+      margin-left: 1rem;
+    }
+  }
+
+  p {
+    line-height: 2rem;
+    margin: 0;
+    padding: 0 0 1rem 0;
+
+    &.note {
+      color: theme-color(primary);
+      font-weight: 500;
+      margin: 1rem 0 0 0;
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  section#complete {
+    padding: 1rem 2.5rem 1.5rem 2.5rem;
+  }
+}
