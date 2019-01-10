@@ -54,9 +54,19 @@ export class AuthService {
 
   login(email: string, password: string) {
     const url = this.api + 'auth/login';
-    this.http.post(url, {email, password}).subscribe(() => {
+    return this.http.post(url, {email, password}).pipe(
+      tap((auth: Auth) => {
+        localStorage.setItem('_id', auth._id);
+        localStorage.setItem('user', auth.email);
+        localStorage.setItem('access_token', auth.access_token);
+        localStorage.setItem('refresh_token', auth.refresh_token);
+        localStorage.setItem('client', auth.client);
+      })
+    );
+  }
 
-    });
+  loggedIn(): boolean {
+    return (localStorage.getItem('access_token')) ? true : false;
   }
 
   logout() {
@@ -66,6 +76,6 @@ export class AuthService {
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('client');
 
-    this.router.navigateByUrl('login', { skipLocationChange: true });
+    this.router.navigateByUrl('login');
   }
 }

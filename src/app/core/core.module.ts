@@ -14,6 +14,7 @@ import { ModalAddPlayerComponent } from './register/modal-add-player/modal-add-p
 import { LoginComponent } from './login/login.component';
 import { RegistrationCompleteComponent } from './register/registration-complete/registration-complete.component';
 import { EmailConfirmComponent } from './email-confirm/email-confirm.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { EmailConfirmComponent } from './email-confirm/email-confirm.component';
     ModalAddPlayerComponent,
     LoginComponent,
     RegistrationCompleteComponent,
-    EmailConfirmComponent
+    EmailConfirmComponent,
+    LogoutComponent
   ],
   entryComponents: [
     ModalAddPlayerComponent

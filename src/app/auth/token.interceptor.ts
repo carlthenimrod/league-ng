@@ -34,18 +34,22 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(this.addToken(req, access_token)).pipe(
       catchError(error => {
-        if ((<HttpErrorResponse>error).status === 401) {
-          if (error.url === (this.api + 'users/refresh' )) {
-            return this.logout();
-          }
 
-          if (access_token) {
-            return this.handle401Error(req, next);
-          } else {
-            return this.logout();
-          }
-        } else {
-          return throwError(error);
+        switch ((<HttpErrorResponse>error).status) {
+          case 401:
+            if (error.url === (this.api + 'users/refresh' )) {
+              return this.logout();
+            }
+
+            if (access_token) {
+              return this.handle401Error(req, next);
+            } else {
+              return throwError(error.error.error);
+            }
+          case 404:
+            return throwError(error.error.error);
+          default:
+            return throwError({ message: 'Unknown error'});
         }
       })
     );

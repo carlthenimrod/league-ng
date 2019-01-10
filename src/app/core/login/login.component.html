@@ -1,9 +1,11 @@
-<section id="login" class="container">
+<section id="login" class="container" *ngIf="!loggedIn">
   <div class="row">
     <div class="col">
       <header>
         <h1>Login</h1>
         <i class="fas fa-user-circle"></i>
+
+        <p class="error" [ngClass]="{'show': error}">{{ errorMsg }}</p>
       </header>
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">

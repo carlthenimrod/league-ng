@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { User } from '@app/models/user';
 import { UserService } from '@app/core/user.service';
+import { AuthService } from '@app/auth/auth.service';
+import { Auth } from '@app/models/auth';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -12,10 +14,15 @@ export class UserDashboardComponent implements OnInit {
   @Input() user: User;
   tab = 'schedule';
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private auth: AuthService,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
-    this.userService.get('5c32abf3f3c6f02470d2054e');
+    const auth: Auth = this.auth.getAuth();
+
+    this.userService.get(auth._id);
     this.userService.userListener().subscribe((user: User) => this.user = user);
   }
 }
