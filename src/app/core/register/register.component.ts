@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import { User } from '@app/models/user';
 import { UserService } from '../user.service';
+import { emailUnique } from '@app/validators/email-unique.validator';
 import {
   typeSelectTrigger,
   userFormTrigger,
@@ -32,7 +33,7 @@ export class RegisterComponent implements OnInit {
     userForm: this.fb.group({
       first: ['', Validators.required],
       last: ['', Validators.required],
-      email: ['', Validators.email],
+      email: ['', Validators.email, emailUnique(this.userService)],
       phone: ['', Validators.required],
       secondary: [''],
       address: this.fb.group({

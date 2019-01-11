@@ -40,6 +40,9 @@
                 required
                 placeholder="Enter Email"
               >
+              <mat-error *ngIf="userForm.get('email').hasError('notUnique')">
+                Email is already in use
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -141,7 +144,7 @@
           mat-flat-button
           color="primary"
           type="submit"
-          [disabled]="userForm.invalid"
+          [disabled]="!userForm.valid"
         >
           <span>Submit</span>
           <i class="fas fa-arrow-alt-circle-right ml-2"></i>

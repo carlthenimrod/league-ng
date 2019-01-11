@@ -53,6 +53,11 @@ export class UserService {
     return this.http.delete(url);
   }
 
+  checkEmail(email: string) {
+    const url = this.api + `users/email`;
+    return this.http.post(url, {email});
+  }
+
   confirmEmail(userId: string, code: string) {
     const url = this.api + `users/${userId}/confirm`;
     return this.http.post(url, {code});
