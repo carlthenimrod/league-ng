@@ -40,6 +40,10 @@
                 required
                 placeholder="Enter Email"
               >
+              <mat-hint *ngIf="userForm.get('email').pending">
+                Checking Email...
+              </mat-hint>
+
               <mat-error *ngIf="userForm.get('email').hasError('notUnique')">
                 Email is already in use
               </mat-error>
