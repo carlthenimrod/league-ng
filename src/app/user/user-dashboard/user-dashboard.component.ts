@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { User } from '@app/models/user';
 import { UserService } from '@app/core/user.service';
@@ -11,8 +11,8 @@ import { Auth } from '@app/models/auth';
   styleUrls: ['./user-dashboard.component.scss']
 })
 export class UserDashboardComponent implements OnInit {
-  @Input() user: User;
-  tab = 'schedule';
+  editing = false;
+  user: User;
 
   constructor(
     private auth: AuthService,
@@ -24,5 +24,13 @@ export class UserDashboardComponent implements OnInit {
 
     this.userService.get(auth._id);
     this.userService.userListener().subscribe((user: User) => this.user = user);
+  }
+
+  onEdit() {
+    this.editing = true;
+  }
+
+  onSave() {
+    this.editing = false;
   }
 }

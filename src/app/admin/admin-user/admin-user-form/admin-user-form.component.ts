@@ -34,7 +34,7 @@ export class AdminUserFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.userService.save(this.user).subscribe(
+    this.userService.create(this.user).subscribe(
       (user: User) => {
         this.user = user;
 

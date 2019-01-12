@@ -1,39 +1,39 @@
-<section id="user-edit">
-  <header>
-    <h1>Edit Profile</h1>
+<section id="user-edit" *ngIf="user">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <header>
+      <h1>Edit Profile</h1>
 
-    <div id="actions">
-      <button
-        type="submit"
-        mat-flat-button
-        color="primary"
-        class="mr-2"
-        [disabled]="userForm.invalid"
-      >
-        <i class="fas fa-save mr-2"></i>
+      <div id="actions">
+        <button
+          type="submit"
+          mat-flat-button
+          color="primary"
+          class="mr-2"
+          [disabled]="userForm.invalid"
+        >
+          <i class="fas fa-save mr-2"></i>
 
-        <span>Save</span>
-      </button>
+          <span>Save</span>
+        </button>
 
-      <button
-        type="button"
-        mat-flat-button
-        color="warn"
-        (click)="onCancel()"
-      >
-        <i class="fas fa-times mr-2"></i>
+        <button
+          type="button"
+          mat-flat-button
+          color="warn"
+          (click)="onCancel()"
+        >
+          <i class="fas fa-times mr-2"></i>
 
-        <span>Cancel</span>
-      </button>
-    </div>
-  </header>
+          <span>Cancel</span>
+        </button>
+      </div>
+    </header>
 
-  <section id="form">
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <section id="form">
       <fieldset>
         <h2>User Info</h2>
 
-        <div class="row">
+        <div class="row" formGroupName="name">
           <div class="col-sm-6">
             <mat-form-field>
               <input
@@ -144,7 +144,7 @@
       <fieldset formGroupName="emergency">
         <h2>Emergency Contact</h2>
 
-        <div class="row">
+        <div class="row" formGroupName="name">
           <div class="col-sm-6">
             <mat-form-field>
               <input
@@ -195,6 +195,6 @@
           </div>
         </div>
       </fieldset>
-    </form>
-  </section>
+    </section>
+  </form>
 </section>

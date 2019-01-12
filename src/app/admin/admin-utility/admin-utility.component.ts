@@ -89,7 +89,7 @@ export class AdminUtilityComponent implements OnInit {
     this.matched = this.users.filter((user: User) => {
 
       // check if name matches
-      if (name && user.name.substr(0, name.length).toUpperCase() !== name.toUpperCase()) {
+      if (name && user.fullName.substr(0, name.length).toUpperCase() !== name.toUpperCase()) {
         return false;
       }
 

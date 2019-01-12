@@ -31,7 +31,7 @@ export class AdminUserDetailsComponent implements OnInit {
 
     if (!name) { return; }
 
-    if (this.user.name === name.trim()) {
+    if (this.user.fullName === name.trim()) {
       this.userService.delete(this.user._id).subscribe(() => {
         this.router.navigate(['/', 'admin', 'users']);
       });

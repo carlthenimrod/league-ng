@@ -9,6 +9,8 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
 import { UserScheduleComponent } from './user-schedule/user-schedule.component';
 import { UserFormComponent } from './user-dashboard/user-form/user-form.component';
+import { UserDetailsComponent } from './user-dashboard/user-details/user-details.component';
+import { UserModalPasswordComponent } from './user-dashboard/user-details/user-modal-password/user-modal-password.component';
 
 @NgModule({
   imports: [
@@ -22,7 +24,12 @@ import { UserFormComponent } from './user-dashboard/user-form/user-form.componen
     UserDashboardComponent,
     UserSidebarComponent,
     UserScheduleComponent,
-    UserFormComponent
+    UserFormComponent,
+    UserDetailsComponent,
+    UserModalPasswordComponent
+  ],
+  entryComponents: [
+    UserModalPasswordComponent
   ]
 })
 export class UserModule { }

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { User } from '@app/models/user';
+import { UserService } from '@app/core/user.service';
 
 @Component({
   selector: 'app-user-form',
@@ -7,37 +9,56 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./user-form.component.scss']
 })
 export class UserFormComponent implements OnInit {
-  userForm = this.fb.group({
-    first: ['', Validators.required],
-    last: ['', Validators.required],
-    phone: ['', Validators.required],
-    secondary: [''],
-    address: this.fb.group({
-      street: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-      postal: ['', Validators.required]
-    }),
-    emergency: this.fb.group({
-      first: ['', Validators.required],
-      last: ['', Validators.required],
-      phone: ['', Validators.required],
-      secondary: ['']
-    })
-  });
+  @Output() save: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() user: User;
+  userForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
+    this.userForm = this.fb.group({
+      name: this.fb.group({
+        first: ['', Validators.required],
+        last: ['', Validators.required]
+      }),
+      phone: ['', Validators.required],
+      secondary: [''],
+      address: this.fb.group({
+        street: ['', Validators.required],
+        city: ['', Validators.required],
+        state: ['', Validators.required],
+        postal: ['', Validators.required]
+      }),
+      emergency: this.fb.group({
+        name: this.fb.group({
+          first: ['', Validators.required],
+          last: ['', Validators.required]
+        }),
+        phone: ['', Validators.required],
+        secondary: ['']
+      })
+    });
+
+    this.userForm.patchValue(this.user);
   }
 
   onCancel() {
-
+    this.save.emit(false);
   }
 
   onSubmit() {
-    console.log(this.userForm.value);
+    if (!this.userForm.valid) { return; }
+
+    const user: User = {
+      _id: this.user._id,
+      ...this.userForm.value
+    };
+
+    this.userService.update(user).subscribe(() => {
+      this.save.emit(true);
+    });
   }
 }

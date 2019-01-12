@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 
-import { confirmPassword } from './password-confirm.validator';
+import { confirmPassword } from '@app/validators/password-confirm.validator';
 import { UserService } from '../user.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {

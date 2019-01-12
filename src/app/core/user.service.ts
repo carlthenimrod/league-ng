@@ -38,14 +38,19 @@ export class UserService {
     return this.userSubject.asObservable();
   }
 
-  save(user: User): Observable<any> {
-    if (user._id) {
-      const url = this.api + `users/${user._id}`;
-      return this.http.put(url, user);
-    } else {
-      const url = this.api + 'users';
-      return this.http.post(url, user);
-    }
+  create(user: User): Observable<any> {
+    const url = this.api + 'users';
+    return this.http.post(url, user);
+  }
+
+  update(user: User): Observable<any> {
+    const url = this.api + `users/${user._id}`;
+    return this.http.put(url, user).pipe(
+      tap((updatedUser: User) => {
+        this.user = updatedUser;
+        this.userSubject.next(_.cloneDeep(this.user));
+      })
+    );
   }
 
   delete(id: String): Observable<any> {

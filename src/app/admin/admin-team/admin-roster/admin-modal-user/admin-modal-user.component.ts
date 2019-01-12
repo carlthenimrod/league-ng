@@ -72,7 +72,7 @@ export class AdminModalUserComponent implements OnInit {
   }
 
   displayFn(user: User): string | undefined {
-    return user ? user.name : undefined;
+    return user ? user.fullName : undefined;
   }
 
   onClickRemoveUser() {

@@ -125,20 +125,26 @@ export class RegisterComponent implements OnInit {
       const form = this.regsiterForm.value;
 
       const user: User = {
-        name: `${form.userForm.first} ${form.userForm.last}`,
+        name: {
+          first: form.userForm.first,
+          last: form.userForm.last
+        },
         email: form.userForm.email,
         address: form.userForm.address,
         phone: form.userForm.phone,
         secondary: form.userForm.secondary,
         emergency: {
-          name: `${form.miscForm.emergency.first} ${form.miscForm.emergency.last}`,
+          name: {
+            first: form.miscForm.emergency.first,
+            last: form.miscForm.emergency.last
+          },
           phone: form.miscForm.emergency.phone,
           secondary: form.miscForm.emergency.secondary
         },
         comments: form.miscForm.comments
       };
 
-      this.userService.save(user).subscribe(() => {
+      this.userService.create(user).subscribe(() => {
         this.state = 'complete';
       });
     }

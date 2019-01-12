@@ -1,14 +1,16 @@
 import { Address } from './address';
 
 export interface User {
-  name: string;
+  name: { first: string; last: string; };
+  fullName?: string;
   email?: string;
   status?: string;
   address?: Address;
   phone?: string;
   secondary?: string;
   emergency?: {
-    name: string;
+    name: { first: string; last: string; };
+    fullName?: string;
     phone: string;
     secondary?: string;
   };
@@ -18,7 +20,8 @@ export interface User {
 }
 
 export interface Player extends User {
-  name: string;
+  name: { first: string; last: string; };
+  fullName?: string;
   email?: string;
   status?: string;
   _id?: string;
@@ -26,7 +29,8 @@ export interface Player extends User {
 }
 
 export interface Coach extends User {
-  name: string;
+  name: { first: string; last: string; };
+  fullName?: string;
   email?: string;
   status?: string;
   _id?: string;
@@ -34,7 +38,8 @@ export interface Coach extends User {
 }
 
 export interface Manager extends User {
-  name: string;
+  name: { first: string; last: string; };
+  fullName?: string;
   email?: string;
   status?: string;
   _id?: string;
