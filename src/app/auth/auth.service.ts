@@ -70,12 +70,17 @@ export class AuthService {
   }
 
   logout() {
+    const client = localStorage.getItem('client');
+    const refresh_token = localStorage.getItem('refresh_token');
+
     localStorage.removeItem('_id');
     localStorage.removeItem('user');
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('client');
 
+    const url = this.api + 'auth/logout';
+    this.http.request('delete', url, { body: {client, refresh_token}}).subscribe();
     this.router.navigateByUrl('login');
   }
 }
