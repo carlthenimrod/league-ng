@@ -15,11 +15,14 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationCompleteComponent } from './register/registration-complete/registration-complete.component';
 import { EmailConfirmComponent } from './email-confirm/email-confirm.component';
 import { LogoutComponent } from './logout/logout.component';
+import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
+    RouterModule,
     ReactiveFormsModule
   ],
   declarations: [
@@ -34,7 +37,8 @@ import { LogoutComponent } from './logout/logout.component';
     LoginComponent,
     RegistrationCompleteComponent,
     EmailConfirmComponent,
-    LogoutComponent
+    LogoutComponent,
+    PasswordRecoveryComponent
   ],
   entryComponents: [
     ModalAddPlayerComponent

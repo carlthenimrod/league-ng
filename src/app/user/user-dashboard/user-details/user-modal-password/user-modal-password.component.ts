@@ -38,6 +38,14 @@ export class UserModalPasswordComponent implements OnInit {
   }
 
   onSubmit() {
-    this.dialogRef.close();
+    if (!this.passwordForm.valid) { return; }
+
+    const {old, password} = this.passwordForm.value;
+
+    this.userService.updatePassword(old, password).subscribe(() => {
+      this.dialogRef.close();
+    }, (e) => {
+      this.dialogRef.close();
+    });
   }
 }

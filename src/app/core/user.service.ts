@@ -80,4 +80,14 @@ export class UserService {
       })
     );
   }
+
+  updatePassword(old, password) {
+    const url = this.api + `users/${this.user._id}/password`;
+    return this.http.put(url, {old, password});
+  }
+
+  recoverPassword(email) {
+    const url = this.api + 'users/recover';
+    return this.http.post(url, {email});
+  }
 }

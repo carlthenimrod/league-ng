@@ -33,10 +33,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onClickRecover() {
-
-  }
-
   onSubmit() {
     if (this.loginForm.invalid) { return; }
 
