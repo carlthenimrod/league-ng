@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { UserService } from '../user.service';
@@ -8,7 +8,7 @@ import { UserService } from '../user.service';
   templateUrl: './password-recovery.component.html',
   styleUrls: ['./password-recovery.component.scss']
 })
-export class PasswordRecoveryComponent implements OnInit {
+export class PasswordRecoveryComponent {
   recoverForm = this.fb.group({
     email: ['', Validators.email]
   });
@@ -18,9 +18,6 @@ export class PasswordRecoveryComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService
   ) { }
-
-  ngOnInit() {
-  }
 
   onSubmit() {
     if (!this.recoverForm.valid) { return; }
