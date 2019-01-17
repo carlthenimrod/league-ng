@@ -8,7 +8,7 @@ section#profile {
   header {
     @include make-row(0);
     background-color: theme-color-level(light, 0.5);
-    padding: 0 2rem 0.5rem 0;
+    padding: 0 0 0.5rem 0;
 
     section#profile-img {
       @include make-col-ready(0);
@@ -209,6 +209,8 @@ section#profile {
 @include media-breakpoint-up(sm) {
   section#profile {
     header {
+      padding: 0 2rem 0.5rem 0;
+
       section#details {
         header {
           margin-bottom: 1rem;
