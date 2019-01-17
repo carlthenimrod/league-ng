@@ -30,7 +30,7 @@ section#profile {
         button {
           position: absolute;
           top: 0;
-          z-index: 9999;
+          z-index: 999;
 
           &#upload, &#save { right: -5px; }
           &#cancel { left: -5px; }
@@ -54,7 +54,7 @@ section#profile {
             height: 102%;
             top: -1%;
             left: -1%;
-            z-index: 9998;
+            z-index: 998;
             width: 102%;
 
             mat-spinner {
@@ -64,7 +64,7 @@ section#profile {
           }
 
           &#img, &#img-preview {
-            z-index: 9997;
+            z-index: 997;
           }
 
           i#placeholder {
@@ -100,7 +100,7 @@ section#profile {
         padding: 0 0 0.5rem 0.5rem;
 
         h1 {
-          font-size: $h3-font-size;
+          font-size: $h4-font-size;
           margin: 0 1rem 0 0;
         }
 
