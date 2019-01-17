@@ -5,7 +5,7 @@
 @import '~bootstrap/scss/_mixins';
 
 section#user-edit {
-  padding: 1rem 2rem 3rem 2rem;
+  padding: 1rem;
 
   header {
     align-items: center;
@@ -14,11 +14,15 @@ section#user-edit {
     justify-content: space-between;
     margin: 0 0 1.5rem 0;
     padding: 0 0 0.5rem 0;
+
+    #actions {
+      display: none;
+    }
   }
 
   section#form {
     fieldset {
-      padding: 1rem;
+      padding: 0 0 1rem 0;
 
       h2 {
         font-size: $h4-font-size;
@@ -27,6 +31,36 @@ section#user-edit {
 
       mat-form-field {
         width: 100%;
+      }
+    }
+
+    #mobile-actions {
+      display: flex;
+
+      button {
+        width: 50%;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  section#user-edit {
+    padding: 1rem 2rem 3rem 2rem;
+
+    header {
+      #actions {
+        display: block;
+      }
+    }
+
+    section#form {
+      fieldset {
+        padding: 1rem;
+      }
+
+      #mobile-actions {
+        display: none;
       }
     }
   }

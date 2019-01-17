@@ -8,7 +8,7 @@ section#profile {
   header {
     @include make-row(0);
     background-color: theme-color-level(light, 0.5);
-    padding: 0 2rem 1rem 0;
+    padding: 0 2rem 0.5rem 0;
 
     section#profile-img {
       @include make-col-ready(0);
@@ -76,7 +76,7 @@ section#profile {
         align-items: center;
         border-bottom: 3px solid theme-color(primary);
         display: flex;
-        margin: 0 0 1rem 0;
+        margin: 0 0 0.5rem 0;
         padding: 0 0 0.5rem 0.5rem;
 
         h1 {
@@ -122,23 +122,26 @@ section#profile {
       }
 
       section#info {
+        padding: 0 1rem;
+
         div {
-          display: inline-block;
+          display: block;
           font-size: 1.25rem;
-          margin: 0 1rem 0.5rem 0;
+          margin: 0 0 1rem 0;
 
           span {
-            display: inline-block;
+            display: block;
             font-weight: 500;
-            text-align: right;
           }
         }
 
         #actions {
           margin-top: 0.25rem;
+          width: 100%;
 
           button {
-            margin-right: 0.5rem;
+            margin-top: 0.25rem;
+            width: 100%;
           }
         }
       }
@@ -146,11 +149,11 @@ section#profile {
   }
 
   section#tabs {
-    padding: 3rem 2rem 1rem 2rem;
+    padding: 1rem;
 
     nav {
       border-top: 3px solid theme-color(primary);
-      display: flex;
+      display: none;
       justify-content: space-evenly;
       margin-bottom: 2rem;
       padding: 0 0 1rem 0;
@@ -177,6 +180,79 @@ section#profile {
           background-color: theme-color(primary);
           border: 3px solid theme-color(primary);
           color: $white;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  section#profile {
+    header {
+      section#details {
+        header {
+          margin-bottom: 1rem;
+        }
+
+        section#info {
+          padding: 0;
+
+          div {
+            display: inline-block;
+            margin: 0 1rem 0.5rem 0;
+
+            span {
+              display: inline-block;
+              text-align: right;
+            }
+          }
+
+          #actions {
+            margin-top: 0.25rem;
+
+            button {
+              margin-top: 0;
+              margin-right: 0.5rem;
+              width: auto;
+            }
+          }
+        }
+      }
+    }
+
+    section#tabs {
+      padding: 3rem 2rem 1rem 2rem;
+
+      nav {
+        border-top: 3px solid theme-color(primary);
+        display: flex;
+        justify-content: space-evenly;
+        margin-bottom: 2rem;
+        padding: 0 0 1rem 0;
+
+        button {
+          background-color: theme-color-level(primary, -9);
+          border: 3px solid theme-color-level(primary, -7);
+          border-radius: 25px;
+          color: theme-color-level(primary, 2);
+          cursor: pointer;
+          font-weight: 600;
+          line-height: 1.4rem;
+          margin-top: -1.2rem;
+          padding: 0.25rem 1.25rem;
+          transition: all 100ms ease-out;
+          user-select: none;
+
+          &:hover {
+            background-color: theme-color-level(primary, -7);
+          }
+
+          &.active {
+            background: none;
+            background-color: theme-color(primary);
+            border: 3px solid theme-color(primary);
+            color: $white;
+          }
         }
       }
     }
