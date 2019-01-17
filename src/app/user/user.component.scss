@@ -5,9 +5,9 @@
 @import '~bootstrap/scss/_mixins';
 
 :host {
-  display: block;
   @include make-container();
   @include make-container-max-widths();
+  display: block;
 
   section#user {
     @include make-row(0);

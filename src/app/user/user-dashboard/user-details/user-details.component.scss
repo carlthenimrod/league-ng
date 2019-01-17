@@ -10,7 +10,7 @@ section#profile {
     background-color: theme-color-level(light, 0.5);
     padding: 0 2rem 1rem 0;
 
-    section#img {
+    section#profile-img {
       @include make-col-ready(0);
 
       @include media-breakpoint-up(sm) {
@@ -18,18 +18,48 @@ section#profile {
       }
 
       figure {
+        background-color: theme-color-level(light, 2);
+        border-radius: 50%;
         margin: 0;
         height: 150px;
-        margin: 1rem 0 0 0;
+        margin: 1rem auto;
+        position: relative;
         text-align: center;
-        width: 100%;
+        width: 150px;
 
-        i {
-          background-color: theme-color-level(light, 2);
+        button {
+          position: absolute;
+          top: 0;
+          z-index: 9999;
+
+          &#upload, &#save { right: -5px; }
+          &#cancel { left: -5px; }
+        }
+
+        input {
+          display: none;
+        }
+
+        #img, #img-preview {
           border-radius: 50%;
-          color: theme-color-level(light, -1);
-          font-size: 4rem;
-          padding: 2.5rem;
+          height: 100%;
+          overflow: hidden;
+          width: 100%;
+          z-index: 9998;
+
+          i#placeholder {
+            color: theme-color-level(light, -1);
+            font-size: 4rem;
+            padding: 2.5rem 0 0 0;
+          }
+        }
+
+        #img-preview {
+          cursor: grab;
+
+          &.grabbed {
+            cursor: grabbing;
+          }
         }
       }
     }
@@ -60,7 +90,7 @@ section#profile {
           text-transform: uppercase;
         }
 
-        #status {
+        span {
           background-color: theme-color-level(light, 2);
           border: 2px solid theme-color-level(light, 2);
           border-radius: 20px;
@@ -77,10 +107,16 @@ section#profile {
             margin-left: 0.25rem;
           }
 
-          &.active {
-            @include gradient-y(theme-color-level(success, -12), theme-color-level(success, -10));
+          &#verified {
+            @include gradient-y(theme-color-level(success, -12), theme-color-level(success, -11));
             border-color: theme-color-level(success, 2);
             color: theme-color-level(success, 2);
+          }
+
+          &#unverified {
+            @include gradient-y(theme-color-level(warning, -12), theme-color-level(warning, -11));
+            border-color: theme-color-level(warning, 2);
+            color: theme-color-level(warning, 2);
           }
         }
       }

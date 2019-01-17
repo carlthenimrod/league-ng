@@ -1,112 +1,251 @@
-<form #f="ngForm" (ngSubmit)="onSubmit()">
-  <section id="user-form" class="row bg-light mb-4">
-    <div class="col">
-      <div class="row">
-        <div class="col-sm-8">
-          <h4 class="mb-4 text-muted">
-            User Details
-          </h4>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <section id="user-form">
+    <header>
+      <h1>User Details</h1>
+
+      <div id="actions">
+        <button
+          *ngIf="!user"
+          type="submit"
+          mat-flat-button
+          color="primary"
+          [disabled]="!userForm.valid"
+        >
+          <i class="fas fa-plus mr-1"></i>
+
+          Create User
+        </button>
+
+        <button
+          *ngIf="user"
+          type="submit"
+          mat-flat-button
+          color="primary"
+          class="mr-2"
+          [disabled]="!userForm.valid"
+        >
+          <i class="fas fa-save mr-1"></i>
+
+          Save
+        </button>
+
+        <button
+          *ngIf="user"
+          type="button"
+          mat-flat-button
+          color="warn"
+          (click)="onCancel()"
+        >
+          <i class="fas fa-times mr-1"></i>
+
+          Cancel
+        </button>
+      </div>
+    </header>
+
+    <section id="form">
+      <fieldset>
+        <h2>User Info</h2>
+
+        <div class="row" formGroupName="name">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="First Name"
+                formControlName="first"
+                required
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Last Name"
+                formControlName="last"
+                required
+              >
+            </mat-form-field>
+          </div>
         </div>
 
-        <div class="col-sm-4 text-right d-none d-sm-block">
-          <button
-            *ngIf="new"
-            type="submit"
-            mat-flat-button
-            color="primary"
-            [disabled]="!f.form.valid"
-          >
-            <i class="fas fa-plus mr-1"></i>
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="tel"
+                placeholder="Phone Number"
+                formControlName="phone"
+              >
+            </mat-form-field>
+          </div>
 
-            Create User
-          </button>
-
-          <button
-            *ngIf="!new"
-            type="submit"
-            mat-flat-button
-            color="primary"
-            class="mr-2"
-            [disabled]="!f.form.valid"
-          >
-            <i class="fas fa-save mr-1"></i>
-
-            Save
-          </button>
-
-          <button
-            *ngIf="!new"
-            type="button"
-            mat-flat-button
-            color="warn"
-            (click)="onCancel()"
-          >
-            <i class="fas fa-times mr-1"></i>
-
-            Cancel
-          </button>
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="tel"
+                placeholder="Secondary Number"
+                formControlName="secondary"
+              >
+            </mat-form-field>
+          </div>
         </div>
+      </fieldset>
+
+      <fieldset formGroupName="address">
+        <h2>Address</h2>
+
+        <div class="row">
+          <div class="col-sm-8">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Street Address"
+                formControlName="street"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="City"
+                formControlName="city"
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-4">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="State"
+                formControlName="state"
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-4">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Postal Code"
+                formControlName="postal"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset formGroupName="emergency">
+        <h2>Emergency Contact</h2>
+
+        <div class="row" formGroupName="name">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="First Name"
+                formControlName="first"
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Last Name"
+                formControlName="last"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="tel"
+                placeholder="Phone Number"
+                formControlName="phone"
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="tel"
+                placeholder="Secondary Number"
+                formControlName="secondary"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+    </section>
+
+    <section id="buttons-mobile" class="row mt-4 d-xs-flex d-sm-none">
+      <div class="col-6">
+        <button
+          *ngIf="!user"
+          type="submit"
+          mat-flat-button
+          color="primary"
+          class="w-100"
+          [disabled]="!userForm.valid"
+        >
+          <i class="fas fa-plus mr-1"></i>
+
+          <span>Create</span>
+        </button>
+
+        <button
+          *ngIf="user"
+          type="submit"
+          mat-flat-button
+          color="primary"
+          class="w-100"
+          [disabled]="!userForm.valid"
+        >
+          <i class="fas fa-save mr-1"></i>
+
+          <span>Save</span>
+        </button>
       </div>
 
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="w-100">
-            <input
-              matInput
-              name="name"
-              required
-              placeholder="User Name"
-              [(ngModel)]="user.name"
-            >
-            <mat-error>Name is required.</mat-error>
-          </mat-form-field>
-        </div>
+      <div class="col-6">
+        <button
+          *ngIf="user"
+          type="button"
+          mat-flat-button
+          color="warn"
+          class="w-100"
+          (click)="onCancel()"
+        >
+          <i class="fas fa-times mr-1"></i>
+
+          <span>Cancel</span>
+        </button>
       </div>
-
-      <section id="buttons-mobile" class="row mt-4 d-xs-flex d-sm-none">
-        <div class="col-6">
-          <button
-            *ngIf="new"
-            type="submit"
-            mat-flat-button
-            color="primary"
-            class="w-100"
-            [disabled]="!f.form.valid"
-          >
-            <i class="fas fa-plus mr-1"></i>
-
-            <span>Create</span>
-          </button>
-
-          <button
-            *ngIf="!new"
-            type="submit"
-            mat-flat-button
-            color="primary"
-            class="w-100"
-            [disabled]="!f.form.valid"
-          >
-            <i class="fas fa-save mr-1"></i>
-
-            <span>Save</span>
-          </button>
-        </div>
-
-        <div class="col-6">
-          <button
-            *ngIf="!new"
-            type="button"
-            mat-flat-button
-            color="warn"
-            class="w-100"
-            (click)="onCancel()"
-          >
-            <i class="fas fa-times mr-1"></i>
-
-            <span>Cancel</span>
-          </button>
-        </div>
-      </section>
-    </div>
+    </section>
   </section>
 </form>

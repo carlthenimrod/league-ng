@@ -33,7 +33,6 @@ import { AdminRosterComponent } from './admin-team/admin-roster/admin-roster.com
 import { AdminModalUserComponent } from './admin-team/admin-roster/admin-modal-user/admin-modal-user.component';
 import { AdminUserDetailsComponent } from './admin-user/admin-user-details/admin-user-details.component';
 import { AdminUserFormComponent } from './admin-user/admin-user-form/admin-user-form.component';
-import { AdminUserNewComponent } from './admin-user/admin-user-new/admin-user-new.component';
 import { AdminLeagueScheduleComponent } from './admin-league/admin-league-schedule/admin-league-schedule.component';
 import { AdminModalAutoGenerateComponent } from './admin-league/admin-league-schedule/admin-modal-auto-generate/admin-modal-auto-generate.component';
 import { AdminModalAddGameComponent } from './admin-league/admin-league-schedule/admin-modal-add-game/admin-modal-add-game.component';
@@ -78,7 +77,6 @@ import { AdminModalEditGroupComponent } from './admin-league/admin-league-schedu
     AdminModalUserComponent,
     AdminUserDetailsComponent,
     AdminUserFormComponent,
-    AdminUserNewComponent,
     AdminLeagueScheduleComponent,
     AdminModalAutoGenerateComponent,
     AdminModalAddGameComponent,

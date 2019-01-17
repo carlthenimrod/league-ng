@@ -4,30 +4,28 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
-.container {
-  .row {
-    div:first-child {
-      padding-left: 0;
-      padding-right: 0;
-    }
-
-    div:last-child {
-      padding-top: 60px;
-    }
-  }
+:host {
+  @include make-container();
+  @include make-container-max-widths();
+  display: block;
 }
 
-@include media-breakpoint-up(sm) {
-  .container {
-    .row {
-      div:first-child {
-        padding-left: ($grid-gutter-width / 2);
-        padding-right: ($grid-gutter-width / 2);
-      }
+section#admin {
+  @include make-row();
 
-      div:last-child {
-        padding-top: 1.5rem;
-      }
+  app-admin-nav {
+    @include make-col-ready();
+    @include media-breakpoint-up(sm) {
+      @include make-col(2);
+    }
+  }
+
+  section#dashboard {
+    @include make-col-ready();
+    margin-top: 60px;
+    @include media-breakpoint-up(sm) {
+      @include make-col(10);
+      margin-top: 2rem;
     }
   }
 }

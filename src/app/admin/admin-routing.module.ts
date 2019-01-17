@@ -10,8 +10,8 @@ import { AdminTeamsComponent } from './admin-teams/admin-teams.component';
 import { AdminTeamNewComponent } from './admin-team/admin-team-new/admin-team-new.component';
 import { AdminTeamComponent } from './admin-team/admin-team.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
-import { AdminUserNewComponent } from './admin-user/admin-user-new/admin-user-new.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
+import { AdminUserFormComponent } from './admin-user/admin-user-form/admin-user-form.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent, children: [
@@ -22,7 +22,7 @@ const routes: Routes = [
     { path: 'teams/new', component: AdminTeamNewComponent },
     { path: 'teams/:id', component: AdminTeamComponent },
     { path: 'users', component: AdminUsersComponent },
-    { path: 'users/new', component: AdminUserNewComponent },
+    { path: 'users/new', component: AdminUserFormComponent },
     { path: 'users/:id', component: AdminUserComponent },
     { path: '**', component: AdminDashboardComponent }
   ] }

@@ -128,7 +128,8 @@ export class NoticeService {
 
       switch (n.notice) {
         case 'new':
-          message = `New ${n.itemType}: ${n.item.name} has recently been created.`;
+          const name = (n.itemType === 'User') ? n.item.fullName : n.item.name;
+          message = `New ${n.itemType}: ${name} has recently been created.`;
           break;
       }
 

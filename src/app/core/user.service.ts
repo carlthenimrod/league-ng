@@ -7,6 +7,7 @@ import _ from 'lodash';
 
 import { User } from '@app/models/user';
 import { Auth } from '@app/models/auth';
+import { ProfileImg } from '@app/models/profile-img';
 
 @Injectable({
   providedIn: 'root'
@@ -89,5 +90,22 @@ export class UserService {
   recoverPassword(email) {
     const url = this.api + 'users/recover';
     return this.http.post(url, {email});
+  }
+
+  updateImg(file: File, img: ProfileImg) {
+    const data = new FormData();
+    data.append('height', img.dimensions.height.toString());
+    data.append('width', img.dimensions.width.toString());
+    data.append('x', (-img.pos.x.current).toString());
+    data.append('y', (-img.pos.y.current).toString());
+    data.append('img', file);
+
+    const url = this.api + `users/${this.user._id}/img`;
+    return this.http.post(url, data).pipe(
+      tap((user: User) => {
+        this.user.img = user.img;
+        this.userSubject.next(_.cloneDeep(this.user));
+      })
+    );
   }
 }

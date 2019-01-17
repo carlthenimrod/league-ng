@@ -13,7 +13,6 @@ import { NoticeService } from '@app/core/notice.service';
   styleUrls: ['./admin-user.component.scss']
 })
 export class AdminUserComponent implements OnInit, OnDestroy {
-
   user: User;
   userSubscription: Subscription;
   editingUser = false;
@@ -37,7 +36,7 @@ export class AdminUserComponent implements OnInit, OnDestroy {
       // if new, update status, push notices
       if (this.user.status === 'new') {
         this.user.status = 'active';
-        this.userService.create(this.user).subscribe(() => {
+        this.userService.update(this.user).subscribe(() => {
           this.noticeService.push();
         });
       }

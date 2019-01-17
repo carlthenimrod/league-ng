@@ -5,6 +5,8 @@ export interface User {
   fullName?: string;
   email?: string;
   status?: string;
+  img?: string;
+  verified?: boolean;
   address?: Address;
   phone?: string;
   secondary?: string;
@@ -23,7 +25,6 @@ export interface Player extends User {
   name: { first: string; last: string; };
   fullName?: string;
   email?: string;
-  status?: string;
   _id?: string;
   __v?: number;
 }
@@ -32,7 +33,6 @@ export interface Coach extends User {
   name: { first: string; last: string; };
   fullName?: string;
   email?: string;
-  status?: string;
   _id?: string;
   __v?: number;
 }
@@ -41,7 +41,6 @@ export interface Manager extends User {
   name: { first: string; last: string; };
   fullName?: string;
   email?: string;
-  status?: string;
   _id?: string;
   __v?: number;
 }

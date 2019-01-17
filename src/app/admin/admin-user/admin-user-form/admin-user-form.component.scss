@@ -5,13 +5,42 @@
 @import '~bootstrap/scss/_mixins';
 
 #user-form {
-  padding-left: 0.5rem;
-  padding-top: 1rem;
-  padding-right: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding-top: 0.5rem;
   padding-bottom: 1.5rem;
 
-  textarea {
-    line-height: 1.5rem;
+  header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    h1 {
+      color: $text-muted;
+      font-size: $h2-font-size;
+      margin: 0;
+    }
+
+    #actions {
+      display: none;
+    }
+  }
+
+  section#form {
+    padding: 1rem 0;
+
+    fieldset {
+      margin: 1rem 0;
+
+      h2 {
+        color: $text-muted;
+        font-size: $h5-font-size;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    mat-form-field {
+      width: 100%;
+    }
   }
 
   #buttons-mobile {
@@ -27,6 +56,17 @@
 
 @include media-breakpoint-up(sm) {
   #user-form {
+    background-color: theme-color(light);
     padding: 1.5rem;
+
+    header {
+      #actions {
+        display: block;
+      }
+    }
+
+    section#form {
+      padding: 1rem;
+    }
   }
 }

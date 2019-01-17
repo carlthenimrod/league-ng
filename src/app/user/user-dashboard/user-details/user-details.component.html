@@ -1,8 +1,58 @@
 <section id="profile" *ngIf="user">
   <header>
-    <section id="img">
+    <section id="profile-img">
       <figure>
-        <i class="fas fa-user"></i>
+        <button
+          *ngIf="!imgPreview"
+          id="upload"
+          mat-mini-fab
+          color="accent"
+          (click)="file.click()"
+        >
+          <i class="fas fa-pen"></i>
+        </button>
+
+        <button
+          *ngIf="imgPreview"
+          id="cancel"
+          mat-mini-fab
+          color="warn"
+          (click)="onClickCancel()"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+
+        <button
+          *ngIf="imgPreview"
+          id="save"
+          mat-mini-fab
+          color="primary"
+          (click)="onClickSave()"
+        >
+          <i class="fas fa-check"></i>
+        </button>
+
+        <input
+          type="file"
+          (change)="onFileSelect($event)"
+          #file
+        >
+
+        <div id="img-preview" *ngIf="imgPreview && imgPreview.el">
+          <img
+            *ngIf="imgPreview.loaded"
+            [src]="imgPreview.el.src"
+            [ngStyle]="position()"
+            (pan)="onPan($event)"
+            (panend)="onPanEnd($event)"
+          >
+        </div>
+
+        <div id="img" *ngIf="!imgPreview">
+          <img *ngIf="user.img" [src]="user.img">
+
+          <i *ngIf="!user.img" id="placeholder" class="fas fa-user"></i>
+        </div>
       </figure>
     </section>
 
@@ -10,8 +60,12 @@
       <header>
         <h1>User Profile</h1>
 
-        <span id="status" [ngClass]="user.status">
-          {{ user.status }} <i class="fas fa-check"></i>
+        <span id="verified" *ngIf="user.verified">
+          Verified <i class="fas fa-check"></i>
+        </span>
+
+        <span id="unverified" *ngIf="!user.verified">
+          Profile Incomplete <i class="fas fa-exclamation-circle"></i>
         </span>
       </header>
 

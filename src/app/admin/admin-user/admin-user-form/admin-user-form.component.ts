@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { User } from '@app/models/user';
@@ -10,47 +11,68 @@ import { UserService } from '@app/core/user.service';
   styleUrls: ['./admin-user-form.component.scss']
 })
 export class AdminUserFormComponent implements OnInit {
-
-  @Input() user: User;
   @Output('saveClick') saveClick: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output('cancelClick') cancelClick: EventEmitter<boolean> = new EventEmitter<boolean>();
-  oldUser: User;
-  new: boolean;
+  @Input() user: User;
+  userForm: FormGroup;
 
   constructor(
-    private userService: UserService,
-    private router: Router
+    private fb: FormBuilder,
+    private router: Router,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
-    if (!this.user._id) {
-      this.new = true;
-    } else {
-      this.new = false;
-    }
+    this.userForm = this.fb.group({
+      name: this.fb.group({
+        first: ['', Validators.required],
+        last: ['', Validators.required]
+      }),
+      phone: [''],
+      secondary: [''],
+      address: this.fb.group({
+        street: [''],
+        city: [''],
+        state: [''],
+        postal: ['']
+      }),
+      emergency: this.fb.group({
+        name: this.fb.group({
+          first: [''],
+          last: ['']
+        }),
+        phone: [''],
+        secondary: ['']
+      })
+    });
 
-    // create copy
-    this.oldUser = {...this.user};
+    if (this.user) {
+      this.userForm.patchValue(this.user);
+    }
   }
 
   onSubmit() {
-    this.userService.create(this.user).subscribe(
-      (user: User) => {
-        this.user = user;
+    if (!this.userForm.valid) { return; }
 
-        if (this.new) {
-          this.router.navigate(['admin', 'users', user._id]);
-        } else {
-          this.saveClick.emit(true);
-        }
-      }
-    );
+    if (this.user) {
+      const user: User = {
+        _id: this.user._id,
+        ...this.userForm.value
+      };
+
+      this.userService.update(user).subscribe(() => {
+        this.saveClick.emit(true);
+      });
+    } else {
+      const user: User = {...this.userForm.value};
+
+      this.userService.create(user).subscribe((createdUser: User) => {
+        this.router.navigate(['admin', 'users', createdUser._id]);
+      });
+    }
   }
 
   onCancel() {
-    // reset values to old user
-    this.user.name = this.oldUser.name;
-
-    this.cancelClick.emit(true);
+    this.cancelClick.emit(false);
   }
 }
