@@ -100,7 +100,7 @@ section#profile {
         padding: 0 0 0.5rem 0.5rem;
 
         h1 {
-          font-size: $h2-font-size;
+          font-size: $h3-font-size;
           margin: 0 1rem 0 0;
         }
 
@@ -212,6 +212,10 @@ section#profile {
       section#details {
         header {
           margin-bottom: 1rem;
+
+          h1 {
+            font-size: $h2-font-size;
+          }
         }
 
         section#info {
