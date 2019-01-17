@@ -40,12 +40,32 @@ section#profile {
           display: none;
         }
 
-        #img, #img-preview {
+        #img, #img-preview, #img-loading {
           border-radius: 50%;
           height: 100%;
           overflow: hidden;
+          position: absolute;
+          top: 0;
+          left: 0;
           width: 100%;
-          z-index: 9998;
+
+          &#img-loading {
+            background: rgba(255, 255, 255, 0.85);
+            height: 102%;
+            top: -1px;
+            left: -1px;
+            z-index: 9998;
+            width: 102%;
+
+            mat-spinner {
+              margin: 25px auto 0 auto;
+              opacity: 0.2;
+            }
+          }
+
+          &#img, &#img-preview {
+            z-index: 9997;
+          }
 
           i#placeholder {
             color: theme-color-level(light, -1);

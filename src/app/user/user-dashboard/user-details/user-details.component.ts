@@ -20,6 +20,7 @@ export class UserDetailsComponent implements OnInit {
   imgForm: FormGroup;
   imgPreview: ProfileImg;
   img: string;
+  loadingImg = false;
   tab = 'schedule';
 
   constructor(
@@ -67,11 +68,14 @@ export class UserDetailsComponent implements OnInit {
   onClickSave() {
     const img = this.imgForm.get('img');
 
-    if (img.valid) {
+    if (img.valid && !this.loadingImg) {
+      this.loadingImg = true;
       this.userService.updateImg(img.value, this.imgPreview).subscribe(() => {
         this.imgPreview = null;
+        this.loadingImg = false;
       }, (e) => {
         this.imgPreview = null;
+        this.loadingImg = false;
       });
     }
   }

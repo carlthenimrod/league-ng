@@ -9,7 +9,8 @@ import {
   MatListModule,
   MatSelectModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 import { NoticeComponent } from './notice/notice.component';
@@ -27,6 +28,7 @@ import { NoticeComponent } from './notice/notice.component';
     MatListModule,
     MatSelectModule,
     MatDatepickerModule,
+    MatProgressSpinnerModule,
     NoticeComponent
   ],
   declarations: [NoticeComponent]
