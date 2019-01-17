@@ -13,7 +13,7 @@
         </button>
 
         <button
-          *ngIf="imgPreview"
+          *ngIf="imgPreview && !loadingImg"
           id="cancel"
           mat-mini-fab
           color="warn"
@@ -23,7 +23,7 @@
         </button>
 
         <button
-          *ngIf="imgPreview"
+          *ngIf="imgPreview && !loadingImg"
           id="save"
           mat-mini-fab
           color="primary"
