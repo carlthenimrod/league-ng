@@ -1,20 +1,16 @@
-<header class="row align-items-center">
-  <div class="col-8">
-    <h1 class="display-4">
-      Leagues
-    </h1>
-  </div>
+<header>
+  <h1>
+    Leagues
+  </h1>
 
-  <div class="col-4 text-right">
-    <button
-      mat-flat-button
-      color="primary"
-      routerLink="/admin/leagues/new"
-    >
-      <i class="fas fa-plus mr-2"></i>
-      <span>New</span>
-    </button>
-  </div>
+  <button
+    mat-flat-button
+    color="primary"
+    routerLink="/admin/leagues/new"
+  >
+    <i class="fas fa-plus mr-2"></i>
+    <span>New</span>
+  </button>
 </header>
 
 <div class="row" *ngIf="leagues">

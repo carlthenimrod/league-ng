@@ -15,7 +15,7 @@ export class AdminLeagueComponent implements OnInit, OnDestroy {
   league: League;
   leagueSubscription: Subscription;
   editingLeague = false;
-  tab = 'schedule';
+  tab = 'overview';
 
   constructor(
     private route: ActivatedRoute,

@@ -4,8 +4,18 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
+:host {
+  display: block;
+
+  @include media-breakpoint-up(sm) {
+    padding: 1rem;
+  }
+}
+
 header {
   h1 {
+    font-size: $display4-size;
+    font-weight: $display4-weight;
     text-align: center;
   }
 }
@@ -26,6 +36,7 @@ section#notice-list {
 
     h2 {
       display: inline-block;
+      font-size: $h3-font-size;
       margin: 0;
     }
   }
