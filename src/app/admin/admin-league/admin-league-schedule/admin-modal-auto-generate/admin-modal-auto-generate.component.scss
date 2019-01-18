@@ -24,13 +24,7 @@ aside#auto-generate {
     }
 
     p {
-      margin: 0;
-      padding: 0.5rem 0;
-
-      em {
-        font-size: 0.8rem;
-        text-align: center;
-      }
+      display: none;
     }
   }
 
@@ -68,9 +62,7 @@ aside#auto-generate {
 
       &#strategy {
         p {
-          margin: 0 0 1rem 0;
-          padding: 0 0 0 .5rem;
-          text-align: center;
+          display: none;
         }
 
         #options {
@@ -110,7 +102,13 @@ aside#auto-generate {
       margin: 0 0 1rem 0;
 
       p {
+        margin: 0;
         padding: 0.5rem;
+
+        em {
+          font-size: 0.8rem;
+          text-align: center;
+        }
       }
     }
 
@@ -121,6 +119,15 @@ aside#auto-generate {
         &#week, &#date {
           div {
             padding: 0 1rem;
+          }
+        }
+
+        &#strategy {
+          p {
+            display: block;
+            margin: 0 0 1rem 0;
+            padding: 0 0 0 .5rem;
+            text-align: center;
           }
         }
       }
