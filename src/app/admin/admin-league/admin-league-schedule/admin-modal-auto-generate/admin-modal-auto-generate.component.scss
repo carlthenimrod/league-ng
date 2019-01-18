@@ -28,59 +28,64 @@ aside#auto-generate {
     }
   }
 
-  section#form-fields {
+  mat-dialog-content {
     background-color: theme-color-level(light, 0.25);
     border: 1px solid theme-color-level(light, 1.5);
     border-radius: 2px;
-    padding: 0.5rem 0.25rem;
 
-    fieldset {
-      &#week, &#date {
-        margin-top: 1rem;
+    section#form-fields {
+      padding: 0.5rem 0.25rem 0 0.25rem;
 
-        .row {
-          align-items: center;
-          display: flex;
+      fieldset {
+        overflow: hidden;
 
-          div {
-            padding: 0.5rem;
+        &#week, &#date {
+          margin-top: 1rem;
 
-            mat-form-field {
-              width: 100%;
-            }
-          }
-
-          div:first-child {
-            label {
-              font-size: 0.8rem;
-              margin: 0;
-              width: 100%;
-            }
-          }
-        }
-      }
-
-      &#strategy {
-        p {
-          display: none;
-        }
-
-        #options {
-          display: flex;
-          font-size: 0.8rem;
-          justify-content: space-around;
-
-          .option {
+          .row {
             align-items: center;
             display: flex;
 
-            label {
-              cursor: pointer;
-              margin: 0 1rem 0 0;
+            div {
+              padding: 0.25rem 0.5rem;
+
+              mat-form-field {
+                width: 100%;
+              }
             }
 
-            input {
-              cursor: pointer;
+            div:first-child {
+              label {
+                font-size: 0.8rem;
+                margin: 0;
+                width: 100%;
+              }
+            }
+          }
+        }
+
+        &#strategy {
+          p {
+            display: none;
+          }
+
+          #options {
+            display: flex;
+            font-size: 0.8rem;
+            justify-content: space-around;
+
+            .option {
+              align-items: center;
+              display: flex;
+
+              label {
+                cursor: pointer;
+                margin: 0 1rem 0 0;
+              }
+
+              input {
+                cursor: pointer;
+              }
             }
           }
         }
@@ -112,22 +117,24 @@ aside#auto-generate {
       }
     }
 
-    section#form-fields {
-      padding: 0.5rem;
+    mat-dialog-content {
+      section#form-fields {
+        padding: 0.5rem;
 
-      fieldset {
-        &#week, &#date {
-          div {
-            padding: 0 1rem;
+        fieldset {
+          &#week, &#date {
+            div {
+              padding: 0 1rem;
+            }
           }
-        }
 
-        &#strategy {
-          p {
-            display: block;
-            margin: 0 0 1rem 0;
-            padding: 0 0 0 .5rem;
-            text-align: center;
+          &#strategy {
+            p {
+              display: block;
+              margin: 0 0 1rem 0;
+              padding: 0 0 0 .5rem;
+              text-align: center;
+            }
           }
         }
       }
