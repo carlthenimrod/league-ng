@@ -13,32 +13,30 @@
   </button>
 </header>
 
-<div class="row" *ngIf="leagues">
-  <div class="col">
-    <table class="table table-hover" *ngIf="leagues.length > 0">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-          </tr>
-        </thead>
+<section *ngIf="leagues" id="leagues">
+  <table class="table table-hover" *ngIf="leagues.length > 0">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+      </tr>
+    </thead>
 
-        <tbody>
-          <tr
-            *ngFor="let league of leagues"
-            [routerLink]="[league._id]"
-          >
-            <td>
-              {{ league.name }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p
-        *ngIf="leagues.length === 0"
-        class="text-center text-muted p-4 border-top border-bottom"
+    <tbody>
+      <tr
+        *ngFor="let league of leagues"
+        [routerLink]="[league._id]"
       >
-        No leagues. Maybe create one? <i class="far fa-smile"></i>
-      </p>
-  </div>
-</div>
+        <td>
+          {{ league.name }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p
+    *ngIf="leagues.length === 0"
+    class="text-center text-muted p-4 border-top border-bottom"
+  >
+    No leagues. Maybe create one? <i class="far fa-smile"></i>
+  </p>
+</section>

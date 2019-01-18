@@ -12,6 +12,7 @@
 
 section#admin {
   @include make-row(0);
+  overflow: hidden;
 
   app-admin-nav {
     @include make-col-ready(0);

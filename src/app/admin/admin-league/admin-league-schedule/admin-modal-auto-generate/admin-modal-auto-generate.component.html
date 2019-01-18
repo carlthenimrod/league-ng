@@ -1,169 +1,167 @@
 <form [formGroup]="generateForm" (ngSubmit)="onSubmit()">
-  <aside id="auto-generate" class="container-fluid">
-    <div class="row no-gutters">
-      <div class="col">
-        <header>
-          <h3>Auto-Generate</h3>
+  <aside id="auto-generate">
+    <header>
+      <h3>Auto-Generate</h3>
 
-          <p>Generate a schedule based on selections below</p>
-        </header>
+      <p>Generate a schedule based on selections below</p>
+    </header>
 
-        <section id="form-fields">
-          <fieldset id="strategy">
-            <p>How do you want to generate a schedule?</p>
+    <mat-dialog-content>
+      <section id="form-fields">
+        <fieldset id="strategy">
+          <p>How do you want to generate a schedule?</p>
 
-            <div id="strategy">
-              <div class="option">
-                <label for="week">Total Weeks</label>
+          <div id="options">
+            <div class="option">
+              <label for="week">Total Weeks</label>
 
+              <input
+                name="strategy"
+                formControlName="strategy"
+                type="radio"
+                id="week"
+                value="week"
+              >
+            </div>
+
+            <div class="option">
+              <label for="date">Start / End Date</label>
+
+              <input
+                name="strategy"
+                formControlName="strategy"
+                type="radio"
+                id="date"
+                value="date"
+              >
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset *ngIf="strategy.value === 'week'" id="week">
+          <div class="row no-gutters">
+            <div class="col-sm-6">
+              <label>How many total weeks do you want to create?</label>
+            </div>
+
+            <div class="col-sm-6">
+              <mat-form-field>
                 <input
-                  name="strategy"
-                  formControlName="strategy"
-                  type="radio"
-                  id="week"
-                  value="week"
+                  matInput
+                  type="number"
+                  name="total"
+                  formControlName="total"
+                  min="1"
+                  max="52"
+                  required="true"
+                  placeholder="Total Weeks"
                 >
-              </div>
+              </mat-form-field>
+            </div>
+          </div>
 
-              <div class="option">
-                <label for="date">Start / End Date</label>
+          <div class="row no-gutters">
+            <div class="col-sm-6">
+              <label>How many games per week for a single team?</label>
+            </div>
 
+            <div class="col-sm-6">
+              <mat-form-field>
                 <input
-                  name="strategy"
-                  formControlName="strategy"
-                  type="radio"
-                  id="date"
-                  value="date"
+                  matInput
+                  type="number"
+                  name="per"
+                  formControlName="per"
+                  min="1"
+                  max="7"
+                  required="true"
+                  placeholder="Per Week"
                 >
-              </div>
+              </mat-form-field>
             </div>
-          </fieldset>
+          </div>
+        </fieldset>
 
-          <fieldset *ngIf="strategy.value === 'week'" id="week">
-            <div class="row no-gutters">
-              <div class="col-sm-6">
-                <label>How many total weeks of games do you want to create?</label>
-              </div>
-
-              <div class="col-sm-6">
-                <mat-form-field>
-                  <input
-                    matInput
-                    type="number"
-                    name="total"
-                    formControlName="total"
-                    min="1"
-                    max="52"
-                    required="true"
-                    placeholder="Total Weeks"
-                  >
-                </mat-form-field>
-              </div>
+        <fieldset *ngIf="strategy.value === 'date'" id="date">
+          <div class="row no-gutters">
+            <div class="col-sm-6">
+              <mat-form-field>
+                <input
+                  matInput
+                  [matDatepicker]="startDate"
+                  type="text"
+                  name="start"
+                  formControlName="start"
+                  required="true"
+                  placeholder="Start Date"
+                >
+                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                <mat-datepicker #startDate></mat-datepicker>
+              </mat-form-field>
             </div>
 
-            <div class="row no-gutters">
-              <div class="col-sm-6">
-                <label>How many average games per week for a single team?</label>
-              </div>
-
-              <div class="col-sm-6">
-                <mat-form-field>
-                  <input
-                    matInput
-                    type="number"
-                    name="per"
-                    formControlName="per"
-                    min="1"
-                    max="7"
-                    required="true"
-                    placeholder="Per Week"
-                  >
-                </mat-form-field>
-              </div>
+            <div class="col-sm-6">
+              <mat-form-field>
+                <input
+                  matInput
+                  [matDatepicker]="endDate"
+                  type="text"
+                  name="end"
+                  formControlName="end"
+                  required="true"
+                  placeholder="End Date"
+                >
+                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                <mat-datepicker #endDate></mat-datepicker>
+              </mat-form-field>
             </div>
-          </fieldset>
+          </div>
 
-          <fieldset *ngIf="strategy.value === 'date'" id="date">
-              <div class="row no-gutters">
-                  <div class="col-sm-6">
-                    <mat-form-field>
-                      <input
-                        matInput
-                        [matDatepicker]="startDate"
-                        type="text"
-                        name="start"
-                        formControlName="start"
-                        required="true"
-                        placeholder="Start Date"
-                      >
-                      <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
-                      <mat-datepicker #startDate></mat-datepicker>
-                    </mat-form-field>
-                  </div>
+          <div class="row no-gutters">
+            <div class="col-sm-6">
+              <label>What days of the week can games be scheduled?</label>
+            </div>
 
-                <div class="col-sm-6">
-                  <mat-form-field>
-                    <input
-                      matInput
-                      [matDatepicker]="endDate"
-                      type="text"
-                      name="end"
-                      formControlName="end"
-                      required="true"
-                      placeholder="End Date"
-                    >
-                    <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
-                    <mat-datepicker #endDate></mat-datepicker>
-                  </mat-form-field>
-                </div>
-              </div>
+            <div class="col-sm-6">
+              <mat-form-field>
+                <mat-select
+                  placeholder="Days of Week"
+                  formControlName="days"
+                  (selectionChange)="updateTriggerText()"
+                  multiple
+                  required
+                >
+                  <mat-select-trigger>
+                    {{ triggerText }}
+                  </mat-select-trigger>
+                  <mat-option *ngFor="let day of days" [value]="day">{{ day }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+      </section>
 
-              <div class="row no-gutters">
-                <div class="col-sm-6">
-                  <label>What days of the week can games possibly take place?</label>
-                </div>
+      <section id="form-actions">
+        <button
+          mat-flat-button
+          color="accent"
+          class="mr-2"
+          [disabled]="generateForm.invalid"
+        >
+          <i class="fas fa-magic mr-2"></i>
+          <span>Generate</span>
+        </button>
 
-                <div class="col-sm-6">
-                  <mat-form-field>
-                    <mat-select
-                      placeholder="Days of Week"
-                      formControlName="days"
-                      (selectionChange)="updateTriggerText()"
-                      multiple
-                      required
-                    >
-                      <mat-select-trigger>
-                        {{ triggerText }}
-                      </mat-select-trigger>
-                      <mat-option *ngFor="let day of days" [value]="day">{{ day }}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-          </fieldset>
-        </section>
-
-        <section id="form-actions">
-          <button
-            mat-flat-button
-            color="accent"
-            class="mr-2"
-            [disabled]="generateForm.invalid"
-          >
-            <i class="fas fa-magic mr-2"></i>
-            <span>Generate</span>
-          </button>
-
-          <button
-            mat-flat-button
-            color="warn"
-            mat-dialog-close
-          >
-            <i class="fas fa-times mr-2"></i>
-            <span>Cancel</span>
-          </button>
-        </section>
-      </div>
-    </div>
+        <button
+          mat-flat-button
+          color="warn"
+          mat-dialog-close
+        >
+          <i class="fas fa-times mr-2"></i>
+          <span>Cancel</span>
+        </button>
+      </section>
+    </mat-dialog-content>
   </aside>
 </form>
