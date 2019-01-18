@@ -13,18 +13,15 @@ section#league-schedule {
     justify-content: space-between;
 
     h2 {
-      color: $text-muted;
-      font-size: $h3-font-size;
-      margin-bottom: 1rem;
-      text-align: center;
+      display: none;
     }
 
     #actions {
-      text-align: center;
+      padding: 0 0 0 1rem;
+      text-align: left;
 
-      button {
-        margin-right: 0.25rem;
-        margin-left: 0.25rem;
+      #desktop {
+        display: none;
       }
     }
   }
@@ -59,16 +56,32 @@ section#league-schedule {
       flex-flow: row;
 
       h2 {
+        color: $text-muted;
+        font-size: $h3-font-size;
+        display: block;
         margin-bottom: auto;
         text-align: left;
       }
-    }
 
-    #actions {
-      text-align: right;
+      #actions {
+        padding: 0 0 0 1rem;
+        text-align: left;
 
-      button {
-        margin-left: 0.5rem;
+        #mobile {
+          display: none;
+        }
+
+        #desktop {
+          display: block;
+
+          button {
+            margin-left: 0.5rem;
+
+            i {
+              margin-right: 0.5rem;
+            }
+          }
+        }
       }
     }
 

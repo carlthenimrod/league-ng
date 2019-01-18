@@ -4,32 +4,60 @@
       <h2>League Schedule</h2>
 
       <div id="actions">
-        <button
-          color="accent"
-          mat-flat-button
-          (click)="onClickAutoGenerate()"
-        >
-          <i class="fas fa-magic mr-2"></i>
-          <span>Auto-Generate</span>
-        </button>
+        <div id="mobile">
+          <button
+            color="primary"
+            mat-icon-button
+            (click)="onClickAutoGenerate()"
+          >
+            <i class="fas fa-magic"></i>
+          </button>
 
-        <button
-          color="primary"
-          mat-flat-button
-          (click)="onClickAddGame()"
-        >
-          <i class="far fa-calendar-plus mr-2"></i>
-          <span>Add Game</span>
-        </button>
+          <button
+            color="primary"
+            mat-icon-button
+            (click)="onClickAddGame()"
+          >
+            <i class="far fa-calendar-plus"></i>
+          </button>
 
-        <button
-          color="warn"
-          mat-flat-button
-          (click)="onClickClearGames()"
-        >
-          <i class="far fa-calendar-times mr-2"></i>
-          <span>Clear Schedule</span>
-        </button>
+          <button
+            color="primary"
+            mat-icon-button
+            (click)="onClickClearGames()"
+          >
+            <i class="far fa-calendar-times"></i>
+          </button>
+        </div>
+
+        <div id="desktop">
+          <button
+            color="accent"
+            mat-flat-button
+            (click)="onClickAutoGenerate()"
+          >
+            <i class="fas fa-magic"></i>
+            <span>Auto-Generate</span>
+          </button>
+
+          <button
+            color="primary"
+            mat-flat-button
+            (click)="onClickAddGame()"
+          >
+            <i class="far fa-calendar-plus"></i>
+            <span>Add Game</span>
+          </button>
+
+          <button
+            color="warn"
+            mat-flat-button
+            (click)="onClickClearGames()"
+          >
+            <i class="far fa-calendar-times"></i>
+            <span>Clear Schedule</span>
+          </button>
+        </div>
       </div>
     </header>
 

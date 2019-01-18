@@ -11,6 +11,7 @@ section#tabs {
     display: flex;
     margin-left: -15px;
     margin-right: -15px;
+    justify-content: center;
     padding-left: 1rem;
 
     button {
@@ -27,6 +28,14 @@ section#tabs {
         cursor: default;
         padding: 0.5rem 1.5rem;
       }
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  section#tabs {
+    nav {
+      justify-content: flex-start;
     }
   }
 }
