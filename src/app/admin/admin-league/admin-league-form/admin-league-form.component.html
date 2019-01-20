@@ -1,124 +1,109 @@
-<form #f="ngForm" (ngSubmit)="onSubmit()">
-  <section id="league-form" class="row bg-light mb-4">
-    <div class="col">
-      <div class="row">
-        <div class="col-sm-8">
-          <h4 class="mb-4 text-muted">
-            League Details
-          </h4>
-        </div>
+<form [formGroup]="leagueForm" (ngSubmit)="onSubmit()">
+  <section id="league-form">
+    <header>
+      <h1>
+        League Details
+      </h1>
 
-        <div class="col-sm-4 text-right d-none d-sm-block">
-          <button
-            *ngIf="new"
-            type="submit"
-            mat-flat-button
-            color="primary"
-            [disabled]="!f.form.valid"
-          >
-            <i class="fas fa-plus mr-1"></i>
+      <div id="actions-desktop">
+        <button
+          *ngIf="!league"
+          type="submit"
+          mat-flat-button
+          color="primary"
+          [disabled]="!leagueForm.valid"
+        >
+          <i class="fas fa-plus"></i>
 
-            Create League
-          </button>
+          <span>Create League</span>
+        </button>
 
-          <button
-            *ngIf="!new"
-            type="submit"
-            mat-flat-button
-            color="primary"
-            class="mr-2"
-            [disabled]="!f.form.valid"
-          >
-            <i class="fas fa-save mr-1"></i>
+        <button
+          *ngIf="league"
+          type="submit"
+          mat-flat-button
+          color="primary"
+          [disabled]="!leagueForm.valid"
+        >
+          <i class="fas fa-save"></i>
 
-            Save
-          </button>
+          <span>Save</span>
+        </button>
 
-          <button
-            *ngIf="!new"
-            type="button"
-            mat-flat-button
-            color="warn"
-            (click)="onCancel()"
-          >
-            <i class="fas fa-times mr-1"></i>
+        <button
+          *ngIf="league"
+          type="button"
+          mat-flat-button
+          color="warn"
+          (click)="onCancel()"
+        >
+          <i class="fas fa-times"></i>
 
-            Cancel
-          </button>
-        </div>
+          <span>Cancel</span>
+        </button>
       </div>
+    </header>
 
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="w-100">
-            <input
-              matInput
-              name="name"
-              required
-              placeholder="League Name"
-              [(ngModel)]="leagueCopy.name"
-            >
-            <mat-error>Name is required.</mat-error>
-          </mat-form-field>
+    <section id="form">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          placeholder="League Name"
+          formControlName="name"
+          required
+        >
+        <mat-error>Name is required.</mat-error>
+      </mat-form-field>
 
-          <mat-form-field class="w-100">
-            <textarea
-              matInput
-              cdkTextareaAutosize
-              cdkAutosizeMinRows="1"
-              cdkAutosizeMaxRows="10"
-              name="description"
-              placeholder="League Description"
-              [(ngModel)]="leagueCopy.description"
-            ></textarea>
-          </mat-form-field>
-        </div>
-      </div>
+      <mat-form-field>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="10"
+          placeholder="League Description"
+          formControlName="description"
+        ></textarea>
+      </mat-form-field>
+    </section>
 
-      <section id="buttons-mobile" class="row mt-4 d-xs-flex d-sm-none">
-        <div class="col-6">
-          <button
-            *ngIf="new"
-            type="submit"
-            mat-flat-button
-            color="primary"
-            class="w-100"
-            [disabled]="!f.form.valid"
-          >
-            <i class="fas fa-plus mr-1"></i>
+    <div id="actions-mobile">
+      <button
+        *ngIf="!league"
+        type="submit"
+        mat-flat-button
+        color="primary"
+        [disabled]="!leagueForm.valid"
+      >
+        <i class="fas fa-plus"></i>
 
-            <span>Create</span>
-          </button>
+        <span>Create</span>
+      </button>
 
-          <button
-            *ngIf="!new"
-            type="submit"
-            mat-flat-button
-            color="primary"
-            class="w-100"
-            [disabled]="!f.form.valid"
-          >
-            <i class="fas fa-save mr-1"></i>
+      <button
+        *ngIf="league"
+        type="submit"
+        mat-flat-button
+        color="primary"
+        [disabled]="!leagueForm.valid"
+      >
+        <i class="fas fa-save"></i>
 
-            <span>Save</span>
-          </button>
-        </div>
+        <span>Save</span>
+      </button>
 
-        <div class="col-6">
-          <button
-            *ngIf="!new"
-            type="button"
-            mat-flat-button
-            color="warn"
-            class="w-100"
-            (click)="onCancel()"
-          >
-            <i class="fas fa-times mr-1"></i>
+      <button
+        *ngIf="league"
+        type="button"
+        mat-flat-button
+        color="warn"
+        (click)="onCancel()"
+      >
+        <i class="fas fa-times"></i>
 
-            <span>Cancel</span>
-          </button>
-        </div>
-      </section>
+        <span>Cancel</span>
+      </button>
     </div>
   </section>
 </form>

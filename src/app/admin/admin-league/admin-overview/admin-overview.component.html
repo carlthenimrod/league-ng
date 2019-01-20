@@ -1,57 +1,49 @@
-<section id="league-overview" class="row bg-light">
-  <div class="col">
-    <div class="row pb-2 border-bottom align-items-start justify-content-between">
-      <header class="col-sm-8">
-        <h2 class="h3 pb-2 text-muted">League Overview</h2>
-      </header>
+<section id="league-overview">
+  <header>
+    <h2>League Overview</h2>
 
-      <div class="col-sm-4">
-        <div id="buttons-mobile" class="row">
-          <div class="col-6">
-            <button
-              mat-flat-button
-              color="primary"
-              (click)="onNewDivisionClick()"
-            >
-              <i class="fas fa-align-left mr-1"></i>
-
-              <span>New Division</span>
-            </button>
-          </div>
-
-          <div class="col-6">
-            <button
-              mat-flat-button
-              color="primary"
-              (click)="onAddTeamClick()"
-            >
-              <i class="fas fa-tshirt mr-1"></i>
-
-              <span>Add Team</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <app-admin-divisions
-      *ngIf="league.divisions && league.divisions.length > 0; else teamList"
-      [league]="league"
-    >
-    </app-admin-divisions>
-
-    <ng-template #teamList>
-      <app-admin-team-list
-        *ngIf="league.teams && league.teams.length > 0; else p"
-        [teams]="league.teams"
+    <div id="actions">
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="onNewDivisionClick()"
       >
-      </app-admin-team-list>
-    </ng-template>
+        <i class="fas fa-align-left"></i>
 
-    <ng-template #p>
-      <p class="text-center text-muted pt-4" @paragraphEnter>
-        No teams or divisions. <i class="far fa-frown ml-2"></i>
+        <span>New Division</span>
+      </button>
+
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="onAddTeamClick()"
+      >
+        <i class="fas fa-tshirt"></i>
+
+        <span>Add Team</span>
+      </button>
+    </div>
+  </header>
+
+  <app-admin-divisions
+    *ngIf="league.divisions && league.divisions.length > 0; else teamList"
+    [league]="league"
+  >
+  </app-admin-divisions>
+
+  <ng-template #teamList>
+    <app-admin-team-list
+      *ngIf="league.teams && league.teams.length > 0; else p"
+      [teams]="league.teams"
+    >
+    </app-admin-team-list>
+  </ng-template>
+
+  <ng-template #p>
+    <section id="no-teams">
+      <p @paragraphEnter>
+        No teams or divisions. <i class="far fa-frown"></i>
       </p>
-    </ng-template>
-  </div>
+    </section>
+  </ng-template>
 </section>

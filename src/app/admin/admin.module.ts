@@ -10,7 +10,6 @@ import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import { AdminLeaguesComponent } from './admin-leagues/admin-leagues.component';
 import { AdminLeagueComponent } from './admin-league/admin-league.component';
 import { AdminLeagueFormComponent } from './admin-league/admin-league-form/admin-league-form.component';
-import { AdminLeagueNewComponent } from './admin-league/admin-league-new/admin-league-new.component';
 import { AdminLeagueDetailsComponent } from './admin-league/admin-league-details/admin-league-details.component';
 import { AdminOverviewComponent } from './admin-league/admin-overview/admin-overview.component';
 import { AdminModalDivisionComponent } from './admin-league/admin-overview/admin-modal-division/admin-modal-division.component';
@@ -54,7 +53,6 @@ import { AdminModalEditGroupComponent } from './admin-league/admin-league-schedu
     AdminLeaguesComponent,
     AdminLeagueComponent,
     AdminLeagueFormComponent,
-    AdminLeagueNewComponent,
     AdminLeagueDetailsComponent,
     AdminOverviewComponent,
     AdminModalDivisionComponent,

@@ -1,68 +1,55 @@
-<section id="league-details" class="row bg-light mb-4">
-  <div class="col">
-    <div class="row align-items-center">
-      <div class="col-sm-8">
-          <h1 class="h2 text-muted">
-            {{ league.name }}
-          </h1>
-      </div>
+<section id="league-details">
+  <header>
+    <h1>{{ league.name }}</h1>
 
-      <div class="col-sm-4 text-right d-none d-sm-block">
-        <button
-          mat-flat-button
-          color="primary"
-          class="mr-1"
-          (click)="onEditClick()"
-        >
-          <i class="fas fa-edit mr-2"></i>
+    <div id="actions-desktop">
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="onEditClick()"
+      >
+        <i class="fas fa-edit"></i>
 
-          Edit
-        </button>
+        <span>Edit</span>
+      </button>
 
-        <button
-          mat-flat-button
-          color="warn"
-          (click)="onDeleteClick()"
-        >
-          <i class="fas fa-trash-alt mr-2"></i>
+      <button
+        mat-flat-button
+        color="warn"
+        (click)="onDeleteClick()"
+      >
+        <i class="fas fa-trash-alt"></i>
 
-          Delete
-        </button>
-      </div>
+        <span>Delete</span>
+      </button>
     </div>
+  </header>
 
-    <div class="row mt-4" *ngIf="league.description">
-      <div class="col">
-        <p>{{ league.description }}</p>
-      </div>
-    </div>
+  <section id="description" *ngIf="league.description">
+    <p>{{ league.description }}</p>
+  </section>
 
-    <section id="buttons-mobile" class="row d-flex d-sm-none mt-4">
-      <div class="col-6">
-        <button
-          mat-flat-button
-          color="primary"
-          class="w-100"
-          (click)="onEditClick()"
-        >
-          <i class="fas fa-edit mr-2"></i>
+  <div id="actions-mobile">
+    <button
+      mat-flat-button
+      color="primary"
+      class="w-100"
+      (click)="onEditClick()"
+    >
+      <i class="fas fa-edit"></i>
 
-          <span>Edit</span>
-        </button>
-      </div>
+      <span>Edit</span>
+    </button>
 
-      <div class="col-6">
-        <button
-          mat-flat-button
-          color="warn"
-          class="w-100"
-          (click)="onDeleteClick()"
-        >
-          <i class="fas fa-trash-alt mr-2"></i>
+    <button
+      mat-flat-button
+      color="warn"
+      class="w-100"
+      (click)="onDeleteClick()"
+    >
+      <i class="fas fa-trash-alt"></i>
 
-          <span>Delete</span>
-        </button>
-      </div>
-    </section>
+      <span>Delete</span>
+    </button>
   </div>
 </section>

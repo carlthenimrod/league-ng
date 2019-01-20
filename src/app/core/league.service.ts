@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import _ from 'lodash';
 
 import { League, Division, ScheduleOptions, Group } from '@app/models/league';
@@ -40,22 +41,19 @@ export class LeagueService {
     return this.leagueSubject.asObservable();
   }
 
-  save(league: League): Observable<League> {
-    return Observable.create(obs => {
-      if (league._id) {
-        const url = this.api + `leagues/${league._id}`;
-        this.http.put(url, league).subscribe((savedLeague: League) => {
-          this.leagueSubject.next(_.cloneDeep(savedLeague));
-          obs.next(savedLeague);
-        });
-      } else {
-        const url = this.api + 'leagues';
-        this.http.post(url, league).subscribe((savedLeague: League) => {
-          this.leagueSubject.next(_.cloneDeep(savedLeague));
-          obs.next(savedLeague);
-        });
-      }
-    });
+  create(league: League): Observable<any> {
+    const url = this.api + 'leagues';
+    return this.http.post(url, league);
+  }
+
+  update(league: League): Observable<any> {
+    const url = this.api + `leagues/${league._id}`;
+    return this.http.put(url, league).pipe(
+      tap((updatedLeague: League) => {
+        this.league = updatedLeague;
+        this.leagueSubject.next(_.cloneDeep(this.league));
+      })
+    );
   }
 
   delete(id: String): Observable<any> {

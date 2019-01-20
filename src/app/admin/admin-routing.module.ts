@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminLeaguesComponent } from './admin-leagues/admin-leagues.component';
-import { AdminLeagueNewComponent } from './admin-league/admin-league-new/admin-league-new.component';
+import { AdminLeagueFormComponent } from './admin-league/admin-league-form/admin-league-form.component';
 import { AdminLeagueComponent } from './admin-league/admin-league.component';
 import { AdminTeamsComponent } from './admin-teams/admin-teams.component';
 import { AdminTeamNewComponent } from './admin-team/admin-team-new/admin-team-new.component';
@@ -16,7 +16,7 @@ import { AdminUserFormComponent } from './admin-user/admin-user-form/admin-user-
 const routes: Routes = [
   { path: '', component: AdminComponent, children: [
     { path: 'leagues', component: AdminLeaguesComponent },
-    { path: 'leagues/new', component: AdminLeagueNewComponent },
+    { path: 'leagues/new', component: AdminLeagueFormComponent },
     { path: 'leagues/:id', component: AdminLeagueComponent },
     { path: 'teams', component: AdminTeamsComponent },
     { path: 'teams/new', component: AdminTeamNewComponent },

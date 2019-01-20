@@ -1,81 +1,79 @@
-<section id="league-schedule" class="row">
-  <div class="col">
-    <header>
-      <h2>League Schedule</h2>
+<section id="league-schedule">
+  <header>
+    <h2>League Schedule</h2>
 
-      <div id="actions">
-        <div id="mobile">
-          <button
-            color="primary"
-            mat-icon-button
-            (click)="onClickAutoGenerate()"
-          >
-            <i class="fas fa-magic"></i>
-          </button>
+    <div id="actions">
+      <div id="mobile">
+        <button
+          color="primary"
+          mat-icon-button
+          (click)="onClickAutoGenerate()"
+        >
+          <i class="fas fa-magic"></i>
+        </button>
 
-          <button
-            color="primary"
-            mat-icon-button
-            (click)="onClickAddGame()"
-          >
-            <i class="far fa-calendar-plus"></i>
-          </button>
+        <button
+          color="primary"
+          mat-icon-button
+          (click)="onClickAddGame()"
+        >
+          <i class="far fa-calendar-plus"></i>
+        </button>
 
-          <button
-            color="primary"
-            mat-icon-button
-            (click)="onClickClearGames()"
-          >
-            <i class="far fa-calendar-times"></i>
-          </button>
-        </div>
-
-        <div id="desktop">
-          <button
-            color="accent"
-            mat-flat-button
-            (click)="onClickAutoGenerate()"
-          >
-            <i class="fas fa-magic"></i>
-            <span>Auto-Generate</span>
-          </button>
-
-          <button
-            color="primary"
-            mat-flat-button
-            (click)="onClickAddGame()"
-          >
-            <i class="far fa-calendar-plus"></i>
-            <span>Add Game</span>
-          </button>
-
-          <button
-            color="warn"
-            mat-flat-button
-            (click)="onClickClearGames()"
-          >
-            <i class="far fa-calendar-times"></i>
-            <span>Clear Schedule</span>
-          </button>
-        </div>
+        <button
+          color="primary"
+          mat-icon-button
+          (click)="onClickClearGames()"
+        >
+          <i class="far fa-calendar-times"></i>
+        </button>
       </div>
-    </header>
 
-    <section
-      id="groups"
-      *ngIf="league.schedule.length > 0"
-      [@groupsEnter]="league.schedule.length"
+      <div id="desktop">
+        <button
+          color="accent"
+          mat-flat-button
+          (click)="onClickAutoGenerate()"
+        >
+          <i class="fas fa-magic"></i>
+          <span>Auto-Generate</span>
+        </button>
+
+        <button
+          color="primary"
+          mat-flat-button
+          (click)="onClickAddGame()"
+        >
+          <i class="far fa-calendar-plus"></i>
+          <span>Add Game</span>
+        </button>
+
+        <button
+          color="warn"
+          mat-flat-button
+          (click)="onClickClearGames()"
+        >
+          <i class="far fa-calendar-times"></i>
+          <span>Clear Schedule</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section
+    id="groups"
+    *ngIf="league.schedule.length > 0"
+    [@groupsEnter]="league.schedule.length"
+  >
+    <app-admin-game-group
+      *ngFor="let group of league.schedule; trackBy: trackById"
+      [league]="league"
+      [group]="group"
     >
-      <app-admin-game-group
-        *ngFor="let group of league.schedule; trackBy: trackById"
-        [league]="league"
-        [group]="group"
-      >
-      </app-admin-game-group>
-    </section>
+    </app-admin-game-group>
+  </section>
 
-    <section id="no-groups" *ngIf="!league.schedule || league.schedule.length === 0">
-      <p>No Games. Maybe add some? <i class="far fa-smile"></i></p>
-    </section>
-  </div>
+  <section id="no-groups" *ngIf="!league.schedule || league.schedule.length === 0">
+    <p>No Games. Maybe add some? <i class="far fa-smile"></i></p>
+  </section>
 </section>
