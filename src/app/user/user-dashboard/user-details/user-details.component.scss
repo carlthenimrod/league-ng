@@ -10,77 +10,11 @@ section#profile {
     background-color: theme-color-level(light, 0.5);
     padding: 0 0 0.5rem 0;
 
-    section#profile-img {
+    app-profile-img {
       @include make-col-ready(0);
 
       @include media-breakpoint-up(sm) {
         @include make-col(3);
-      }
-
-      figure {
-        background-color: theme-color-level(light, 2);
-        border-radius: 50%;
-        margin: 0;
-        height: 150px;
-        margin: 1rem auto;
-        position: relative;
-        text-align: center;
-        width: 150px;
-
-        button {
-          position: absolute;
-          top: 0;
-          z-index: 999;
-
-          &#upload, &#save { right: -5px; }
-          &#cancel { left: -5px; }
-        }
-
-        input {
-          display: none;
-        }
-
-        #img, #img-preview, #img-loading {
-          border-radius: 50%;
-          height: 100%;
-          overflow: hidden;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-
-          &#img-loading {
-            background: rgba(255, 255, 255, 0.85);
-            height: 102%;
-            top: -1%;
-            left: -1%;
-            z-index: 998;
-            width: 102%;
-
-            mat-spinner {
-              margin: 25px auto 0 auto;
-              opacity: 0.2;
-            }
-          }
-
-          &#img, &#img-preview {
-            z-index: 997;
-          }
-
-          i#placeholder {
-            color: theme-color-level(light, -1);
-            font-size: 4rem;
-            padding: 2.5rem 0 0 0;
-          }
-        }
-
-        #img-preview {
-          cursor: grab;
-
-          &.grabbed {
-            cursor: grabbing;
-          }
-        }
       }
     }
 

@@ -10,15 +10,20 @@ import {
   MatSelectModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatSliderModule
 } from '@angular/material';
 
 import { NoticeComponent } from './notice/notice.component';
+import { ProfileImgComponent } from './profile-img/profile-img.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    MatNativeDateModule
+    MatButtonModule,
+    MatNativeDateModule,
+    MatProgressSpinnerModule,
+    MatSliderModule
   ],
   exports: [
     MatAutocompleteModule,
@@ -29,8 +34,13 @@ import { NoticeComponent } from './notice/notice.component';
     MatSelectModule,
     MatDatepickerModule,
     MatProgressSpinnerModule,
-    NoticeComponent
+    MatSliderModule,
+    NoticeComponent,
+    ProfileImgComponent
   ],
-  declarations: [NoticeComponent]
+  declarations: [
+    NoticeComponent,
+    ProfileImgComponent
+  ]
 })
 export class SharedModule { }

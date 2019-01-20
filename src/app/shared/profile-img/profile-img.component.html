@@ -1,0 +1,57 @@
+<figure>
+  <button
+    *ngIf="!imgPreview"
+    id="upload"
+    mat-mini-fab
+    color="accent"
+    (click)="file.click()"
+  >
+    <i class="fas fa-pen"></i>
+  </button>
+
+  <button
+    *ngIf="imgPreview && !loadingImg"
+    id="cancel"
+    mat-mini-fab
+    color="warn"
+    (click)="onClickCancel()"
+  >
+    <i class="fas fa-times"></i>
+  </button>
+
+  <button
+    *ngIf="imgPreview && !loadingImg"
+    id="save"
+    mat-mini-fab
+    color="primary"
+    (click)="onClickSave()"
+  >
+    <i class="fas fa-check"></i>
+  </button>
+
+  <input
+    type="file"
+    (change)="onFileSelect($event)"
+    #file
+  >
+
+  <div id="img-loading" *ngIf="loadingImg">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div id="img-preview" *ngIf="imgPreview && imgPreview.el">
+    <img
+      *ngIf="imgPreview.loaded"
+      [src]="imgPreview.el.src"
+      [ngStyle]="position()"
+      (pan)="onPan($event)"
+      (panend)="onPanEnd($event)"
+    >
+  </div>
+
+  <div id="img" *ngIf="!imgPreview">
+    <img *ngIf="img" [src]="img" (error)="img = ''">
+
+    <i *ngIf="!img" id="placeholder" class="fas fa-user"></i>
+  </div>
+</figure>
