@@ -4,6 +4,33 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
+:host {
+  display: block;
+  padding: 0 0.5rem;
+
+  @include media-breakpoint-up(sm) {
+    padding: 1rem 2rem;
+  }
+}
+
+header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+
+  h1 {
+    font-size: $display4-size;
+    font-weight: $display4-weight;
+    margin-bottom: 1rem;
+  }
+
+  button {
+    i {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
 table {
   tr {
     cursor: pointer;

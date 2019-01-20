@@ -203,49 +203,45 @@
       </fieldset>
     </section>
 
-    <section id="buttons-mobile" class="row mt-4 d-xs-flex d-sm-none">
-      <div class="col-6">
-        <button
-          *ngIf="!user"
-          type="submit"
-          mat-flat-button
-          color="primary"
-          class="w-100"
-          [disabled]="!userForm.valid"
-        >
-          <i class="fas fa-plus mr-1"></i>
+    <section id="actions-mobile">
+      <button
+        *ngIf="!user"
+        type="submit"
+        mat-flat-button
+        color="primary"
+        class="w-100"
+        [disabled]="!userForm.valid"
+      >
+        <i class="fas fa-plus"></i>
 
-          <span>Create</span>
-        </button>
+        <span>Create</span>
+      </button>
 
-        <button
-          *ngIf="user"
-          type="submit"
-          mat-flat-button
-          color="primary"
-          class="w-100"
-          [disabled]="!userForm.valid"
-        >
-          <i class="fas fa-save mr-1"></i>
+      <button
+        *ngIf="user"
+        type="submit"
+        mat-flat-button
+        color="primary"
+        class="w-100"
+        [disabled]="!userForm.valid"
+      >
+        <i class="fas fa-save"></i>
 
-          <span>Save</span>
-        </button>
-      </div>
+        <span>Save</span>
+      </button>
 
-      <div class="col-6">
-        <button
-          *ngIf="user"
-          type="button"
-          mat-flat-button
-          color="warn"
-          class="w-100"
-          (click)="onCancel()"
-        >
-          <i class="fas fa-times mr-1"></i>
+      <button
+        *ngIf="user"
+        type="button"
+        mat-flat-button
+        color="warn"
+        class="w-100"
+        (click)="onCancel()"
+      >
+        <i class="fas fa-times"></i>
 
-          <span>Cancel</span>
-        </button>
-      </div>
+        <span>Cancel</span>
+      </button>
     </section>
   </section>
 </form>

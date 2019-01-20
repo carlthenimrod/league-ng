@@ -1,20 +1,14 @@
-<header class="row align-items-center">
-  <div class="col-8">
-    <h1 class="display-4">
-      Users
-    </h1>
-  </div>
+<header>
+  <h1>Users</h1>
 
-  <div class="col-4 text-right">
-    <button
-      mat-flat-button
-      color="primary"
-      routerLink="/admin/users/new"
-    >
-      <i class="fas fa-plus mr-2"></i>
-      <span>New</span>
-    </button>
-  </div>
+  <button
+    mat-flat-button
+    color="primary"
+    routerLink="/admin/users/new"
+  >
+    <i class="fas fa-plus"></i>
+    <span>New</span>
+  </button>
 </header>
 
 <app-admin-utility
@@ -22,48 +16,44 @@
   [users]="users"
   (results)="onResults($event)"
 >
-  <div class="row" *ngIf="users">
-    <div class="col">
-      <table class="table table-hover border" *ngIf="userList.length > 0">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col" class="status">Status</th>
-          </tr>
-        </thead>
+  <table *ngIf="users && userList.length > 0" class="table table-hover border">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col" class="status">Status</th>
+      </tr>
+    </thead>
 
-        <tbody>
-          <tr
-            *ngFor="let user of users"
-            [routerLink]="[user._id]"
-            [ngClass]="{'new': user.status === 'new'}"
-          >
-            <td>
-              {{ user.fullName }}
-            </td>
-
-            <td
-              class="status"
-            >
-              {{ user.status }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p
-        *ngIf="userList.length === 0 && users.length > 0"
-        class="text-center text-muted p-4 border-top border-bottom"
+    <tbody>
+      <tr
+        *ngFor="let user of users"
+        [routerLink]="[user._id]"
+        [ngClass]="{'new': user.status === 'new'}"
       >
-        No users found. <i class="far fa-frown ml-1"></i>
-      </p>
+        <td>
+          {{ user.fullName }}
+        </td>
 
-      <p
-        *ngIf="users.length === 0"
-        class="text-center text-muted p-4 border-top border-bottom"
-      >
-        No users. Maybe add some? <i class="far fa-smile ml-1"></i>
-      </p>
-    </div>
-  </div>
+        <td
+          class="status"
+        >
+          {{ user.status }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p
+    *ngIf="userList.length === 0 && users.length > 0"
+    class="text-center text-muted p-4 border-top border-bottom"
+  >
+    No users found. <i class="far fa-frown ml-1"></i>
+  </p>
+
+  <p
+    *ngIf="users.length === 0"
+    class="text-center text-muted p-4 border-top border-bottom"
+  >
+    No users. Maybe add some? <i class="far fa-smile ml-1"></i>
+  </p>
 </app-admin-utility>
