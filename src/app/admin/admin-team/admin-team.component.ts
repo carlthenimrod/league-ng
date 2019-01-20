@@ -37,7 +37,7 @@ export class AdminTeamComponent implements OnInit, OnDestroy {
       // if new, update status, push notice
       if (this.team.status === 'new') {
         this.team.status = 'active';
-        this.teamService.save(this.team).subscribe(() => {
+        this.teamService.update(this.team).subscribe(() => {
           this.noticeService.push();
         });
       }

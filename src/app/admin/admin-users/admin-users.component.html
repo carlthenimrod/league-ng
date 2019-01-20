@@ -43,17 +43,11 @@
     </tbody>
   </table>
 
-  <p
-    *ngIf="userList.length === 0 && users.length > 0"
-    class="text-center text-muted p-4 border-top border-bottom"
-  >
+  <p *ngIf="userList.length === 0 && users.length > 0" class="no-users">
     No users found. <i class="far fa-frown ml-1"></i>
   </p>
 
-  <p
-    *ngIf="users.length === 0"
-    class="text-center text-muted p-4 border-top border-bottom"
-  >
+  <p *ngIf="users.length === 0" class="no-users">
     No users. Maybe add some? <i class="far fa-smile ml-1"></i>
   </p>
 </app-admin-utility>

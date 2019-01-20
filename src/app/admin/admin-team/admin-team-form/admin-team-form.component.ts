@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Team } from '@app/models/team';
@@ -10,47 +11,49 @@ import { TeamService } from '@app/core/team.service';
   styleUrls: ['./admin-team-form.component.scss']
 })
 export class AdminTeamFormComponent implements OnInit {
-
   @Input() team: Team;
   @Output('saveClick') saveClick: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output('cancelClick') cancelClick: EventEmitter<boolean> = new EventEmitter<boolean>();
-  oldTeam: Team;
-  new: boolean;
+  teamForm: FormGroup;
 
   constructor(
-    private teamService: TeamService,
-    private router: Router
+    private fb: FormBuilder,
+    private router: Router,
+    private teamService: TeamService
   ) { }
 
   ngOnInit() {
-    if (!this.team._id) {
-      this.new = true;
-    } else {
-      this.new = false;
-    }
+    this.teamForm = this.fb.group({
+      name: ['', Validators.required]
+    });
 
-    // create copy
-    this.oldTeam = {...this.team};
+    if (this.team) {
+      this.teamForm.patchValue(this.team);
+    }
   }
 
   onSubmit() {
-    this.teamService.save(this.team).subscribe(
-      (team: Team) => {
-        this.team = team;
+    if (!this.teamForm.valid) { return; }
 
-        if (this.new) {
-          this.router.navigate(['admin', 'teams', team._id]);
-        } else {
-          this.saveClick.emit(true);
-        }
-      }
-    );
+    if (this.team) {
+      const team: Team = {
+        _id: this.team._id,
+        ...this.teamForm.value
+      };
+
+      this.teamService.update(team).subscribe(() => {
+        this.saveClick.emit(true);
+      });
+    } else {
+      const team: Team = {...this.teamForm.value};
+
+      this.teamService.create(team).subscribe((createdTeam: Team) => {
+        this.router.navigate(['admin', 'teams', createdTeam._id]);
+      });
+    }
   }
 
   onCancel() {
-    // reset values to old team
-    this.team.name = this.oldTeam.name;
-
-    this.cancelClick.emit(true);
+    this.cancelClick.emit(false);
   }
 }

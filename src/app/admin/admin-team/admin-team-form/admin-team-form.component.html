@@ -1,112 +1,89 @@
-<form #f="ngForm" (ngSubmit)="onSubmit()">
-  <section id="team-form" class="row bg-light mb-4">
-    <div class="col">
-      <div class="row">
-        <div class="col-sm-8">
-          <h4 class="mb-4 text-muted">
-            Team Details
-          </h4>
-        </div>
+<form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
+  <section id="team-form">
+    <header>
+      <h1>Team Details</h1>
 
-        <div class="col-sm-4 text-right d-none d-sm-block">
-          <button
-            *ngIf="new"
-            type="submit"
-            mat-flat-button
-            color="primary"
-            [disabled]="!f.form.valid"
-          >
-            <i class="fas fa-plus mr-1"></i>
+      <div id="actions-desktop">
+        <button
+          *ngIf="!team"
+          type="submit"
+          mat-flat-button
+          color="primary"
+          [disabled]="!teamForm.valid"
+        >
+          <i class="fas fa-plus"></i>
+          <span>Create Team</span>
+        </button>
 
-            Create Team
-          </button>
+        <button
+          *ngIf="team"
+          type="submit"
+          mat-flat-button
+          color="primary"
+          [disabled]="!teamForm.valid"
+        >
+          <i class="fas fa-save"></i>
+          <span>Save</span>
+        </button>
 
-          <button
-            *ngIf="!new"
-            type="submit"
-            mat-flat-button
-            color="primary"
-            class="mr-2"
-            [disabled]="!f.form.valid"
-          >
-            <i class="fas fa-save mr-1"></i>
-
-            Save
-          </button>
-
-          <button
-            *ngIf="!new"
-            type="button"
-            mat-flat-button
-            color="warn"
-            (click)="onCancel()"
-          >
-            <i class="fas fa-times mr-1"></i>
-
-            Cancel
-          </button>
-        </div>
+        <button
+          *ngIf="team"
+          type="button"
+          mat-flat-button
+          color="warn"
+          (click)="onCancel()"
+        >
+          <i class="fas fa-times"></i>
+          <span>Cancel</span>
+        </button>
       </div>
+    </header>
 
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="w-100">
-            <input
-              matInput
-              name="name"
-              required
-              placeholder="Team Name"
-              [(ngModel)]="team.name"
-            >
-            <mat-error>Name is required.</mat-error>
-          </mat-form-field>
-        </div>
-      </div>
+    <section id="form">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Team Name"
+          formControlName="name"
+          required
+        >
+        <mat-error>Name is required.</mat-error>
+      </mat-form-field>
+    </section>
 
-      <section id="buttons-mobile" class="row mt-4 d-xs-flex d-sm-none">
-        <div class="col-6">
-          <button
-            *ngIf="new"
-            type="submit"
-            mat-flat-button
-            color="primary"
-            class="w-100"
-            [disabled]="!f.form.valid"
-          >
-            <i class="fas fa-plus mr-1"></i>
+    <div id="actions-mobile">
+      <button
+        *ngIf="!team"
+        type="submit"
+        mat-flat-button
+        color="primary"
+        [disabled]="!teamForm.valid"
+      >
+        <i class="fas fa-plus"></i>
+        <span>Create</span>
+      </button>
 
-            <span>Create</span>
-          </button>
+      <button
+        *ngIf="team"
+        type="submit"
+        mat-flat-button
+        color="primary"
+        [disabled]="!teamForm.valid"
+      >
+        <i class="fas fa-save"></i>
+        <span>Save</span>
+      </button>
 
-          <button
-            *ngIf="!new"
-            type="submit"
-            mat-flat-button
-            color="primary"
-            class="w-100"
-            [disabled]="!f.form.valid"
-          >
-            <i class="fas fa-save mr-1"></i>
-
-            <span>Save</span>
-          </button>
-        </div>
-
-        <div class="col-6">
-          <button
-            *ngIf="!new"
-            type="button"
-            mat-flat-button
-            color="warn"
-            class="w-100"
-            (click)="onCancel()"
-          >
-            <i class="fas fa-times mr-1"></i>
-
-            <span>Cancel</span>
-          </button>
-        </div>
-      </section>
+      <button
+        *ngIf="team"
+        type="button"
+        mat-flat-button
+        color="warn"
+        (click)="onCancel()"
+      >
+        <i class="fas fa-times"></i>
+        <span>Cancel</span>
+      </button>
     </div>
   </section>
 </form>

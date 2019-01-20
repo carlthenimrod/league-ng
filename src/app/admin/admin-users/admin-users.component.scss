@@ -4,15 +4,6 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
-:host {
-  display: block;
-  padding: 0 0.5rem;
-
-  @include media-breakpoint-up(sm) {
-    padding: 1rem 2rem;
-  }
-}
-
 header {
   align-items: center;
   display: flex;
@@ -60,4 +51,12 @@ table {
       background-color: theme-color-level(success, -11);
     }
   }
+}
+
+p.no-users  {
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  margin:  0;
+  padding: 1rem 0;
+  text-align: center;
 }

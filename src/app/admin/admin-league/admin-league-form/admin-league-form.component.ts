@@ -55,6 +55,6 @@ export class AdminLeagueFormComponent implements OnInit {
   }
 
   onCancel() {
-    this.cancelClick.emit(true);
+    this.cancelClick.emit(false);
   }
 }

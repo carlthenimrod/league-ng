@@ -1,101 +1,95 @@
 <form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmit()">
-  <div class="container-fluid">
-    <div class="row p-4">
-      <div class="col">
-        <header class="row pb-2 text-center align-items-center">
-          <div class="col">
-            <h1 *ngIf="new" class="h2 text-muted">Add User</h1>
-            <h1 *ngIf="!new" class="h2 text-muted">Update User</h1>
-          </div>
-        </header>
+  <aside id="user">
+    <header>
+      <h3 *ngIf="new">Add User</h3>
+      <h3 *ngIf="!new">Update User</h3>
+    </header>
 
-        <section class="row bg-light" id="input">
-          <div class="col">
-            <ng-container *ngIf="new">
-                <mat-form-field class="w-100">
+    <mat-dialog-content>
+      <section id="form-fields">
+        <fieldset>
+          <ng-container *ngIf="new">
+            <div class="row no-gutters">
+              <div class="col">
+                <mat-form-field>
                   <input
                     matInput
-                    required
                     [matAutocomplete]="auto"
-                    formControlName="name"
-                    name="name"
                     placeholder="Name"
+                    formControlName="name"
+                    required
                   >
                 </mat-form-field>
 
                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                   <mat-option *ngFor="let user of autocompleteOptions" [value]="user">
-                    {{ user.name }}
+                    {{ user.fullName }}
                   </mat-option>
                 </mat-autocomplete>
-            </ng-container>
+              </div>
+            </div>
+          </ng-container>
 
-            <mat-form-field class="w-100">
-              <mat-select
-                formControlName="roles"
-                required
-                name="roles"
-                placeholder="Roles"
-                multiple
-              >
-                <mat-option value="player">Player</mat-option>
-                <mat-option value="coach">Coach</mat-option>
-                <mat-option value="manager">Manager</mat-option>
-              </mat-select>
-            </mat-form-field>
+          <div class="row no-gutters">
+            <div class="col">
+              <mat-form-field>
+                <mat-select
+                  placeholder="Roles"
+                  multiple
+                  formControlName="roles"
+                  required
+                >
+                  <mat-option value="player">Player</mat-option>
+                  <mat-option value="coach">Coach</mat-option>
+                  <mat-option value="manager">Manager</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
           </div>
-        </section>
+        </fieldset>
+      </section>
+    </mat-dialog-content>
 
-        <section class="row mt-4" id="controls">
-          <div class="col text-center pt-4 border-top">
-            <button
-              *ngIf="new"
-              mat-flat-button
-              color="primary"
-              class="mr-2"
-              [disabled]="userForm.invalid"
-            >
-              <i class="fas fa-plus mr-1"></i>
+    <section id="form-actions">
+      <button
+        *ngIf="new"
+        mat-flat-button
+        color="primary"
+        [disabled]="userForm.invalid"
+      >
+        <i class="fas fa-plus"></i>
+        <span>Add User</span>
+      </button>
 
-              Add User
-            </button>
+      <button
+        *ngIf="!new"
+        mat-flat-button
+        color="primary"
+        [disabled]="userForm.invalid"
+      >
+        <i class="fas fa-plus"></i>
+        <span>Update User</span>
+      </button>
 
-            <button
-              *ngIf="!new"
-              mat-flat-button
-              color="primary"
-              class="mr-2"
-              [disabled]="userForm.invalid"
-            >
-              <i class="fas fa-plus mr-1"></i>
+      <button
+        *ngIf="!new"
+        mat-flat-button
+        color="accent"
+        (click)="onClickRemoveUser()"
+      >
+        <i class="fas fa-times"></i>
 
-              Update User
-            </button>
+        <span>Remove User</span>
+      </button>
 
-            <button
-              *ngIf="!new"
-              mat-flat-button
-              color="accent"
-              class="mr-2"
-              (click)="onClickRemoveUser()"
-            >
-              <i class="fas fa-times mr-1"></i>
-
-              Remove User
-            </button>
-
-            <button
-              mat-flat-button
-              color="warn"
-              mat-dialog-close
-            >
-              <i class="fas fa-times mr-1"></i>
-
-              Cancel
-            </button>
-          </div>
-        </section>
-      </div>
-    </div>
-  </div>
+      <button
+        mat-flat-button
+        color="warn"
+        mat-dialog-close
+      >
+        <i class="fas fa-times"></i>
+        <span>Cancel</span>
+      </button>
+    </section>
+  </aside>
 </form>

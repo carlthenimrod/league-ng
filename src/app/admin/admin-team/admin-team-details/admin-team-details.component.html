@@ -1,62 +1,45 @@
-<section id="team-details" class="row bg-light mb-4">
-  <div class="col">
-    <div class="row align-items-center">
-      <div class="col-sm-8">
-          <h1 class="h2 text-muted">
-            {{ team.name }}
-          </h1>
-      </div>
+<section id="team-details">
+  <header>
+    <h1>{{ team.name }}</h1>
 
-      <div class="col-sm-4 text-right d-none d-sm-block">
-        <button
-          mat-flat-button
-          color="primary"
-          class="mr-1"
-          (click)="onEditClick()"
-        >
-          <i class="fas fa-edit mr-2"></i>
+    <div id="actions-desktop">
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="onEditClick()"
+      >
+        <i class="fas fa-edit"></i>
+        <span>Edit</span>
+      </button>
 
-          Edit
-        </button>
-
-        <button
-          mat-flat-button
-          color="warn"
-          (click)="onDeleteClick()"
-        >
-          <i class="fas fa-trash-alt mr-2"></i>
-
-          Delete
-        </button>
-      </div>
+      <button
+        mat-flat-button
+        color="warn"
+        (click)="onDeleteClick()"
+      >
+        <i class="fas fa-trash-alt"></i>
+        <span>Delete</span>
+      </button>
     </div>
+  </header>
 
-    <section id="buttons-mobile" class="row d-flex d-sm-none mt-4">
-      <div class="col-6">
-        <button
-          mat-flat-button
-          color="primary"
-          class="w-100"
-          (click)="onEditClick()"
-        >
-          <i class="fas fa-edit mr-2"></i>
+  <div id="actions-mobile">
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="onEditClick()"
+    >
+      <i class="fas fa-edit"></i>
+      <span>Edit</span>
+    </button>
 
-          <span>Edit</span>
-        </button>
-      </div>
-
-      <div class="col-6">
-        <button
-          mat-flat-button
-          color="warn"
-          class="w-100"
-          (click)="onDeleteClick()"
-        >
-          <i class="fas fa-trash-alt mr-2"></i>
-
-          <span>Delete</span>
-        </button>
-      </div>
-    </section>
+    <button
+      mat-flat-button
+      color="warn"
+      (click)="onDeleteClick()"
+    >
+      <i class="fas fa-trash-alt"></i>
+      <span>Delete</span>
+    </button>
   </div>
 </section>

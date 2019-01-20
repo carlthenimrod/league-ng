@@ -20,7 +20,6 @@ import { AdminUtilityComponent } from './admin-utility/admin-utility.component';
 import { AdminPaginationComponent } from './admin-utility/admin-pagination/admin-pagination.component';
 import { AdminSearchComponent } from './admin-utility/admin-search/admin-search.component';
 import { AdminTeamComponent } from './admin-team/admin-team.component';
-import { AdminTeamNewComponent } from './admin-team/admin-team-new/admin-team-new.component';
 import { AdminTeamDetailsComponent } from './admin-team/admin-team-details/admin-team-details.component';
 import { AdminTeamFormComponent } from './admin-team/admin-team-form/admin-team-form.component';
 import { AdminTeamListComponent } from './admin-league/admin-overview/admin-team-list/admin-team-list.component';
@@ -63,7 +62,6 @@ import { AdminModalEditGroupComponent } from './admin-league/admin-league-schedu
     AdminPaginationComponent,
     AdminSearchComponent,
     AdminTeamComponent,
-    AdminTeamNewComponent,
     AdminTeamDetailsComponent,
     AdminTeamFormComponent,
     AdminTeamListComponent,

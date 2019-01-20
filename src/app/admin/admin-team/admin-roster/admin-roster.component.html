@@ -1,114 +1,111 @@
-<section id="roster" class="row bg-light">
-  <div class="col">
-    <header class="border-bottom pb-2">
-      <h2 class="h3 text-muted">Roster</h2>
+<section id="roster">
+  <header>
+    <h2>Roster</h2>
 
-      <button
-        mat-flat-button
-        color="primary"
-        (click)="onClickAddUser()"
-      >
-        <i class="fas fa-plus mr-2"></i>
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="onClickAddUser()"
+    >
+      <i class="fas fa-plus"></i>
+      <span>Add User</span>
+    </button>
+  </header>
 
-        Add User
-      </button>
-    </header>
-
-    <p
+  <p
     *ngIf="
-      team.managers.length === 0 &&
-      team.coaches.length === 0 &&
-      team.players.length === 0"
-    class="text-center py-4 mb-0"
+    team.managers.length === 0 &&
+    team.coaches.length === 0 &&
+    team.players.length === 0"
+    class="no-users"
+  >
+    No users. Maybe add some? <i class="far fa-smile"></i>
+  </p>
+
+  <section
+    *ngIf="team.players.length > 0"
+    id="players"
+    class="users"
+    @usersEnter
+  >
+    <h3>Player List</h3>
+
+    <div
+      *ngFor="let player of team.players; trackBy: trackById"
+      class="player user"
+      @userEnter
     >
-      No users. Maybe add some? <i class="far fa-smile"></i>
-    </p>
-
-    <section
-      *ngIf="team.players.length > 0"
-      id="players"
-      class="users"
-      @usersEnter
-    >
-      <h3 class="h5 mt-4 text-muted">Player List</h3>
-
-      <div
-        *ngFor="let player of team.players; trackBy: trackById"
-        class="player user"
-        @userEnter
-      >
-        <div class="label">
-          <a [routerLink]="['/admin/users/', player._id]">{{ player.fullName }}</a>
-        </div>
-
-        <div class="actions">
-          <button
-            mat-icon-button
-            color="primary"
-            (click)="onClickEditRoles(player._id)"
-          >
-            <i class="fas fa-user-cog"></i>
-          </button>
-        </div>
+      <div class="label">
+        <a [routerLink]="['/admin/users/', player._id]">{{ player.fullName }}</a>
       </div>
-    </section>
 
-    <section
-      *ngIf="team.coaches.length > 0"
-      id="coaches"
-      class="users"
-      @usersEnter
-    >
-      <h3 class="h5 mt-4 text-muted">Coach List</h3>
-
-      <div
-        *ngFor="let coach of team.coaches; trackBy: trackById"
-        class="coach user"
-        @userEnter
-      >
-        <div class="label">
-          <a [routerLink]="['/admin/users/', coach._id]">{{ coach.name }}</a>
-        </div>
-
-        <div class="actions">
-          <button
-            mat-icon-button
-            color="primary"
-            (click)="onClickEditRoles(coach._id)"
-          >
-            <i class="fas fa-user-cog"></i>
-          </button>
-        </div>
+      <div class="actions">
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="onClickEditRoles(player._id)"
+        >
+          <i class="fas fa-user-cog"></i>
+        </button>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section
-      *ngIf="team.managers.length > 0"
-      id="managers"
-      class="users"
-      @usersEnter
+  <section
+    *ngIf="team.coaches.length > 0"
+    id="coaches"
+    class="users"
+    @usersEnter
+  >
+    <h3>Coach List</h3>
+
+    <div
+      *ngFor="let coach of team.coaches; trackBy: trackById"
+      class="coach user"
+      @userEnter
     >
-      <h3 class="h5 mt-4 text-muted">Manager List</h3>
-
-      <div
-        *ngFor="let manager of team.managers; trackBy: trackById"
-        class="manager user"
-        @userEnter
-      >
-        <div class="label">
-          <a [routerLink]="['/admin/users/', manager._id]">{{ manager.name }}</a>
-        </div>
-
-        <div class="actions">
-          <button
-            mat-icon-button
-            color="primary"
-            (click)="onClickEditRoles(manager._id)"
-          >
-            <i class="fas fa-user-cog"></i>
-          </button>
-        </div>
+      <div class="label">
+        <a [routerLink]="['/admin/users/', coach._id]">{{ coach.fullName }}</a>
       </div>
-    </section>
-  </div>
+
+      <div class="actions">
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="onClickEditRoles(coach._id)"
+        >
+          <i class="fas fa-user-cog"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section
+    *ngIf="team.managers.length > 0"
+    id="managers"
+    class="users"
+    @usersEnter
+  >
+    <h3>Manager List</h3>
+
+    <div
+      *ngFor="let manager of team.managers; trackBy: trackById"
+      class="manager user"
+      @userEnter
+    >
+      <div class="label">
+        <a [routerLink]="['/admin/users/', manager._id]">{{ manager.fullName }}</a>
+      </div>
+
+      <div class="actions">
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="onClickEditRoles(manager._id)"
+        >
+          <i class="fas fa-user-cog"></i>
+        </button>
+      </div>
+    </div>
+  </section>
 </section>

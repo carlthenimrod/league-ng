@@ -4,14 +4,6 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
-:host {
-  display: block;
-
-  @include media-breakpoint-up(sm) {
-    padding: 0 1rem;
-  }
-}
-
 section#tabs {
   nav {
     align-items: flex-end;

@@ -1,20 +1,14 @@
-<header class="row align-items-center">
-  <div class="col-8">
-    <h1 class="display-4">
-      Teams
-    </h1>
-  </div>
+<header>
+  <h1>Teams</h1>
 
-  <div class="col-4 text-right">
-    <button
-      mat-flat-button
-      color="primary"
-      routerLink="/admin/teams/new"
-    >
-      <i class="fas fa-plus mr-2"></i>
-      <span>New</span>
-    </button>
-  </div>
+  <button
+    mat-flat-button
+    color="primary"
+    routerLink="/admin/teams/new"
+  >
+    <i class="fas fa-plus"></i>
+    <span>New</span>
+  </button>
 </header>
 
 <app-admin-utility
@@ -22,48 +16,38 @@
   [teams]="teams"
   (results)="onResults($event)"
 >
-  <div class="row" *ngIf="teams">
-    <div class="col">
-      <table class="table table-hover border" *ngIf="teamList.length > 0">
-        <thead>
-          <tr>
-            <th scope="col">Team Name</th>
-            <th scope="col" class="status">Status</th>
-          </tr>
-        </thead>
+  <table *ngIf="teams && teamList.length > 0" class="table table-hover border">
+    <thead>
+      <tr>
+        <th scope="col">Team Name</th>
+        <th scope="col" class="status">Status</th>
+      </tr>
+    </thead>
 
-        <tbody>
-          <tr
-            *ngFor="let team of teamList"
-            [routerLink]="[team._id]"
-            [ngClass]="{'new': team.status === 'new'}"
-          >
-            <td>
-              {{ team.name }}
-            </td>
-
-            <td
-              class="status"
-            >
-              {{ team.status }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p
-        *ngIf="teamList.length === 0 && teams.length > 0"
-        class="text-center text-muted p-4 border-top border-bottom"
+    <tbody>
+      <tr
+        *ngFor="let team of teamList"
+        [routerLink]="[team._id]"
+        [ngClass]="{'new': team.status === 'new'}"
       >
-        No teams found. <i class="far fa-frown ml-1"></i>
-      </p>
+        <td>
+          {{ team.name }}
+        </td>
 
-      <p
-        *ngIf="teams.length === 0"
-        class="text-center text-muted p-4 border-top border-bottom"
-      >
-        No teams. Maybe add some? <i class="far fa-smile ml-1"></i>
-      </p>
-    </div>
-  </div>
+        <td
+          class="status"
+        >
+          {{ team.status }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="teamList.length === 0 && teams.length > 0" class="no-teams">
+    No teams found. <i class="far fa-frown"></i>
+  </p>
+
+  <p *ngIf="teams.length === 0" class="no-teams">
+    No teams. Maybe add some? <i class="far fa-smile"></i>
+  </p>
 </app-admin-utility>

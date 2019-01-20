@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import _ from 'lodash';
 
 import { Team, TeamResponse } from '@app/models/team';
@@ -45,20 +45,22 @@ export class TeamService {
     return this.teamSubject.asObservable();
   }
 
-  save(team: Team, leagueId?: string, divisionId?: string): Observable<any> {
-    const data = {
-      ...team,
-      leagueId,
-      divisionId
-    };
+  create(team: Team): Observable<any> {
+    const url = this.api + 'teams';
+    return this.http.post(url, team);
+  }
 
-    if (team._id) {
-      const url = this.api + `teams/${team._id}`;
-      return this.http.put(url, data);
-    } else {
-      const url = this.api + 'teams';
-      return this.http.post(url, data);
-    }
+  update(team: Team): Observable<any> {
+    const url = this.api + `teams/${team._id}`;
+    return this.http.put(url, team).pipe(
+      map((teamResponse: TeamResponse) => {
+        return this.formatResponse(teamResponse);
+      }),
+      tap((updatedTeam: Team) => {
+        this.team = updatedTeam;
+        this.teamSubject.next(_.cloneDeep(this.team));
+      })
+    );
   }
 
   delete(id: String): Observable<any> {
