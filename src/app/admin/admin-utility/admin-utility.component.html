@@ -55,17 +55,17 @@
 
 <ng-content></ng-content>
 
-<section class="utility row">
+<section class="utility row no-gutters">
   <div class="col text-right">
-      <app-admin-pagination
-        *ngIf="matched"
-        [totalItems]="matched.length"
-        [currentPage]="currentPage"
-        [perPage]="perPage"
-        [label]="label"
-        (page)="onPageChange($event)"
-        (perPageChange)="onPerPageChange($event)"
-      >
-      </app-admin-pagination>
+    <app-admin-pagination
+      *ngIf="matched"
+      [totalItems]="matched.length"
+      [currentPage]="currentPage"
+      [perPage]="perPage"
+      [label]="label"
+      (page)="onPageChange($event)"
+      (perPageChange)="onPerPageChange($event)"
+    >
+    </app-admin-pagination>
   </div>
 </section>

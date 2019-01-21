@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent },
   { path: 'confirm/:id', component: EmailConfirmComponent },
   { path: 'recover', component: PasswordRecoveryComponent },
+  { path: 'team', loadChildren: './team/team.module#TeamModule' },
   { path: 'user', loadChildren: './user/user.module#UserModule' },
   { path: 'admin', loadChildren: './admin/admin.module#AdminModule' }
 ];

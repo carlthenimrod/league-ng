@@ -1,0 +1,29 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  @include make-container(0);
+  @include make-container-max-widths();
+  display: block;
+}
+
+section#team {
+  @include make-row(0);
+
+  app-team-sidebar {
+    @include make-col-ready(0);
+    @include media-breakpoint-up(sm) {
+      @include make-col(3);
+    }
+  }
+
+  section#dashboard {
+    @include make-col-ready(0);
+    @include media-breakpoint-up(sm) {
+      @include make-col(9);
+    }
+  }
+}
