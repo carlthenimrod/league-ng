@@ -28,7 +28,6 @@
       @include make-col-ready(0);
 
       @include media-breakpoint-up(sm) {
-        @include make-col-ready(0);
         @include make-col(9);
       }
     }

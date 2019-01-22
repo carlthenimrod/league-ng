@@ -9,23 +9,37 @@
       <section id="form-fields">
         <fieldset>
           <ng-container *ngIf="new">
-            <div class="row no-gutters">
-              <div class="col">
+            <div formGroupName="name"  class="row no-gutters">
+              <div class="col-sm-6">
                 <mat-form-field>
                   <input
                     matInput
                     [matAutocomplete]="auto"
-                    placeholder="Name"
-                    formControlName="name"
+                    placeholder="First Name"
+                    formControlName="first"
                     required
                   >
                 </mat-form-field>
 
-                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-autocomplete
+                  #auto="matAutocomplete"
+                  (optionSelected)="onSelect($event)"
+                >
                   <mat-option *ngFor="let user of autocompleteOptions" [value]="user">
                     {{ user.fullName }}
                   </mat-option>
                 </mat-autocomplete>
+              </div>
+
+              <div class="col-sm-6">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Last Name"
+                    formControlName="last"
+                    required
+                  >
+                </mat-form-field>
               </div>
             </div>
           </ng-container>

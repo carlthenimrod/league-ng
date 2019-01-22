@@ -1,12 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA, MatAutocompleteSelectedEvent } from '@angular/material';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { User } from '@app/models/user';
 import { UserService } from '@app/core/user.service';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/core/team.service';
-
 
 @Component({
   selector: 'app-admin-modal-user',
@@ -46,7 +45,11 @@ export class AdminModalUserComponent implements OnInit {
       this.new = true;
 
       // add name
-      this.userForm.addControl('name', new FormControl(''));
+      // this.userForm.addControl('name', new FormControl(''));
+      this.userForm.addControl('name', this.fb.group({
+        first: ['', Validators.required],
+        last: ['', Validators.required]
+      }));
 
       // get all users for auto-complete
       this.userService.all().subscribe((users: User[]) => {
@@ -71,22 +74,23 @@ export class AdminModalUserComponent implements OnInit {
     return filteredUsers;
   }
 
-  displayFn(user: User): string | undefined {
-    return user ? user.fullName : undefined;
-  }
-
   onClickRemoveUser() {
     this.teamService.removeUser(this.data.userId);
+  }
+
+  onSelect(e: MatAutocompleteSelectedEvent) {
+    const user: User = e.option.value;
+
+    this.user = user;
+
+    this.userForm.get('name').patchValue(user.name);
   }
 
   onSubmit() {
     const {name, roles} = this.userForm.value;
 
-    if (typeof name === 'object') { // existing
-      this.user = name;
-    } else { // new
-      this.user = { name };
-    }
+    // new user
+    if (!this.user) { this.user = { name }; }
 
     this.dialogRef.close({user: this.user, roles});
   }
