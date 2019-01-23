@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Team } from '@app/models/team';
+import { TeamService } from '@app/core/team.service';
 
 @Component({
   selector: 'app-team-dashboard',
@@ -6,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./team-dashboard.component.scss']
 })
 export class TeamDashboardComponent implements OnInit {
+  team: Team;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private teamService: TeamService
+  ) { }
 
   ngOnInit() {
+    this.teamService.teamListener().subscribe((team: Team) => this.team = team);
+
+    this.route.data.subscribe((data: {team: Team}) => this.team = data.team);
   }
 
 }
