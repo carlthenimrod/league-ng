@@ -28,17 +28,17 @@ export class TeamService {
     return this.http.get(url);
   }
 
-  get(id: String): void {
+  get(id: String): Observable<Team> {
     const url = this.api + `teams/${id}`;
-    this.http.get(url).pipe(
-        map((teamResponse: TeamResponse) => {
-          return this.formatResponse(teamResponse);
-        })
-      )
-      .subscribe((team: Team) => {
+    return this.http.get(url).pipe(
+      map((teamResponse: TeamResponse) => {
+        return this.formatResponse(teamResponse);
+      }),
+      tap((team: Team) => {
         this.team = team;
         this.teamSubject.next(_.cloneDeep(this.team));
-      });
+      })
+    );
   }
 
   teamListener(): Observable<Team> {

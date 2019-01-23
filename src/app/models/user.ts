@@ -7,6 +7,10 @@ export interface User {
   status?: string;
   img?: string;
   verified?: boolean;
+  teams?: [{
+    _id: string;
+    name: string;
+  }];
   address?: Address;
   phone?: string;
   secondary?: string;

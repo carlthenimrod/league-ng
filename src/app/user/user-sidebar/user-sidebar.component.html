@@ -1,9 +1,17 @@
-<aside>
-  <section id="leagues">
+<aside *ngIf="user">
+  <nav id="leagues">
     <h1>Leagues</h1>
-  </section>
+  </nav>
 
-  <section id="teams">
+  <nav id="teams">
     <h1>Teams</h1>
-  </section>
+
+    <ul *ngIf="user.teams && user.teams.length > 0">
+      <li *ngFor="let team of user.teams">
+        <a [routerLink]="['/team', team._id]">{{ team.name }}</a>
+      </li>
+    </ul>
+
+    <p *ngIf="!user.teams || user.teams.length === 0">No Teams</p>
+  </nav>
 </aside>

@@ -1,8 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { TeamService } from '@app/core/team.service';
 
 @Component({
   selector: 'app-team-component',
   templateUrl: './team.component.html',
   styleUrls: ['./team.component.scss']
 })
-export class TeamComponent {}
+export class TeamComponent implements OnInit {
+  constructor(
+    private teamService: TeamService
+  ) {}
+
+  ngOnInit() {
+  }
+}

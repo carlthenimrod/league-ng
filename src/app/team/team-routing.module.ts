@@ -3,9 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TeamComponent } from './team.component';
 import { TeamDashboardComponent } from './team-dashboard/team-dashboard.component';
+import { TeamGuard } from './team.guard';
 
 const routes: Routes = [
-  { path: '', component: TeamComponent, children: [
+  { path: ':id', component: TeamComponent, canActivate: [TeamGuard], children: [
     { path: '', component: TeamDashboardComponent }
   ] }
 ];
