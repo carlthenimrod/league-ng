@@ -36,6 +36,10 @@ import { AdminModalAutoGenerateComponent } from './admin-league/admin-league-sch
 import { AdminModalAddGameComponent } from './admin-league/admin-league-schedule/admin-modal-add-game/admin-modal-add-game.component';
 import { AdminGameGroupComponent } from './admin-league/admin-league-schedule/admin-game-group/admin-game-group.component';
 import { AdminModalEditGroupComponent } from './admin-league/admin-league-schedule/admin-game-group/admin-modal-edit-group/admin-modal-edit-group.component';
+import { AdminPlacesComponent } from './admin-places/admin-places.component';
+import { AdminPlaceComponent } from './admin-place/admin-place.component';
+import { AdminPlaceFormComponent } from './admin-place/admin-place-form/admin-place-form.component';
+import { AdminPlaceDetailsComponent } from './admin-place/admin-place-details/admin-place-details.component';
 
 @NgModule({
   imports: [
@@ -77,7 +81,11 @@ import { AdminModalEditGroupComponent } from './admin-league/admin-league-schedu
     AdminModalAutoGenerateComponent,
     AdminModalAddGameComponent,
     AdminGameGroupComponent,
-    AdminModalEditGroupComponent
+    AdminModalEditGroupComponent,
+    AdminPlacesComponent,
+    AdminPlaceComponent,
+    AdminPlaceFormComponent,
+    AdminPlaceDetailsComponent
   ],
   entryComponents: [
     AdminModalDivisionComponent,

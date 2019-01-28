@@ -9,7 +9,6 @@ import { League } from '@app/models/league';
   styleUrls: ['./admin-leagues.component.scss']
 })
 export class AdminLeaguesComponent implements OnInit {
-
   leagues: League[];
 
   constructor(private leagueService: LeagueService) { }

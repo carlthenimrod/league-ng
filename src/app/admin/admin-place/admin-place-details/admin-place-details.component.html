@@ -1,0 +1,49 @@
+<section id="place-details">
+  <header>
+    <h1>{{ place.name }}</h1>
+
+    <div id="actions-desktop">
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="onEditClick()"
+      >
+        <i class="fas fa-edit"></i>
+
+        <span>Edit</span>
+      </button>
+
+      <button
+        mat-flat-button
+        color="warn"
+        (click)="onDeleteClick()"
+      >
+        <i class="fas fa-trash-alt"></i>
+
+        <span>Delete</span>
+      </button>
+    </div>
+  </header>
+
+  <div id="actions-mobile">
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="onEditClick()"
+    >
+      <i class="fas fa-edit"></i>
+
+      <span>Edit</span>
+    </button>
+
+    <button
+      mat-flat-button
+      color="warn"
+      (click)="onDeleteClick()"
+    >
+      <i class="fas fa-trash-alt"></i>
+
+      <span>Delete</span>
+    </button>
+  </div>
+</section>

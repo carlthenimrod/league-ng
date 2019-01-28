@@ -1,0 +1,150 @@
+<form [formGroup]="placeForm" (ngSubmit)="onSubmit()">
+  <section id="place-form">
+    <header>
+      <h1>
+        Location Details
+      </h1>
+
+      <div id="actions-desktop">
+        <button
+          *ngIf="!place"
+          type="submit"
+          mat-flat-button
+          color="primary"
+          [disabled]="!placeForm.valid"
+        >
+          <i class="fas fa-plus"></i>
+
+          <span>Create Place</span>
+        </button>
+
+        <button
+          *ngIf="place"
+          type="submit"
+          mat-flat-button
+          color="primary"
+          [disabled]="!placeForm.valid"
+        >
+          <i class="fas fa-save"></i>
+
+          <span>Save</span>
+        </button>
+
+        <button
+          *ngIf="place"
+          type="button"
+          mat-flat-button
+          color="warn"
+          (click)="onCancel()"
+        >
+          <i class="fas fa-times"></i>
+
+          <span>Cancel</span>
+        </button>
+      </div>
+    </header>
+
+    <section id="form">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          placeholder="Location Label"
+          formControlName="name"
+          required
+        >
+        <mat-error>Name is required.</mat-error>
+      </mat-form-field>
+
+      <fieldset formGroupName="address">
+        <h2>Address</h2>
+
+        <div class="row">
+          <div class="col-sm-8">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Street Address"
+                formControlName="street"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="City"
+                formControlName="city"
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-4">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="State"
+                formControlName="state"
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-4">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Postal Code"
+                formControlName="postal"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+    </section>
+
+    <div id="actions-mobile">
+      <button
+        *ngIf="!place"
+        type="submit"
+        mat-flat-button
+        color="primary"
+        [disabled]="!placeForm.valid"
+      >
+        <i class="fas fa-plus"></i>
+
+        <span>Create</span>
+      </button>
+
+      <button
+        *ngIf="place"
+        type="submit"
+        mat-flat-button
+        color="primary"
+        [disabled]="!placeForm.valid"
+      >
+        <i class="fas fa-save"></i>
+
+        <span>Save</span>
+      </button>
+
+      <button
+        *ngIf="place"
+        type="button"
+        mat-flat-button
+        color="warn"
+        (click)="onCancel()"
+      >
+        <i class="fas fa-times"></i>
+
+        <span>Cancel</span>
+      </button>
+    </div>
+  </section>
+</form>

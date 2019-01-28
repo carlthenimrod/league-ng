@@ -1,0 +1,83 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+#place-details {
+  background-color: theme-color(light);
+  margin: 0 0 2rem 0;
+  padding-left: 0.5rem;
+  padding-top: 1rem;
+  padding-right: 0.5rem;
+
+  header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    h1 {
+      color: $text-muted;
+      font-size: $h2-font-size;
+      margin: 0;
+    }
+
+    #actions-desktop {
+      display: none;
+    }
+  }
+
+  section#description {
+    padding: 1rem 0 0 0;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  #actions-mobile {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+
+    button {
+      width: 50%;
+
+      i {
+        margin-right: 0.5rem;
+      }
+
+      &:first-child {
+        margin: 0 0.125rem 0 0;
+      }
+
+      &:last-child {
+        margin: 0 0 0 0.125rem;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  #place-details {
+    padding: 1.5rem;
+
+    header {
+      #actions-desktop {
+        display: block;
+
+        button {
+          margin: 0 0 0 0.25rem;
+
+          i {
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+
+    #actions-mobile {
+      display: none;
+    }
+  }
+}

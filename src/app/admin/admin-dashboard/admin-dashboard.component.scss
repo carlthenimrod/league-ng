@@ -4,15 +4,6 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
-:host {
-  display: block;
-  padding: 0 0.5rem;
-
-  @include media-breakpoint-up(sm) {
-    padding: 1rem 2rem;
-  }
-}
-
 header {
   h1 {
     font-size: $display4-size;
