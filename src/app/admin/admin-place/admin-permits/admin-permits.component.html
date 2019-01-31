@@ -1,0 +1,17 @@
+<section id="permits">
+  <header>
+    <h1>Permits</h1>
+
+    <button
+      mat-flat-button
+      color="primary"
+    >
+      <span>Add</span>
+      <i class="fas fa-plus"></i>
+    </button>
+  </header>
+
+  <p id="no-permits" *ngIf="permits.length === 0">
+    No Permits.
+  </p>
+</section>

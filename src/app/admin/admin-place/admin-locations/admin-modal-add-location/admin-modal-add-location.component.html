@@ -1,0 +1,56 @@
+<form [formGroup]="locationForm" (ngSubmit)="onSubmit()">
+  <aside id="add-location">
+    <header>
+      <h3>Add Location</h3>
+    </header>
+
+    <mat-dialog-content>
+      <section id="form-fields">
+        <fieldset>
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              placeholder="Location Name"
+              formControlName="name"
+              required
+            >
+          </mat-form-field>
+        </fieldset>
+      </section>
+    </mat-dialog-content>
+
+      <section id="form-actions">
+        <button
+          *ngIf="new"
+          mat-flat-button
+          color="primary"
+          class="mr-2"
+          [disabled]="!locationForm.valid"
+        >
+          <i class="fas fa-plus"></i>
+          <span>Add</span>
+        </button>
+
+        <button
+          *ngIf="!new"
+          mat-flat-button
+          color="primary"
+          class="mr-2"
+          [disabled]="!locationForm.valid"
+        >
+          <i class="fas fa-save"></i>
+          <span>Save</span>
+        </button>
+
+        <button
+          mat-flat-button
+          color="warn"
+          mat-dialog-close
+        >
+          <i class="fas fa-times"></i>
+          <span>Cancel</span>
+        </button>
+      </section>
+  </aside>
+</form>

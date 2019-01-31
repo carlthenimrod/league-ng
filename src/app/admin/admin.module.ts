@@ -40,6 +40,9 @@ import { AdminPlacesComponent } from './admin-places/admin-places.component';
 import { AdminPlaceComponent } from './admin-place/admin-place.component';
 import { AdminPlaceFormComponent } from './admin-place/admin-place-form/admin-place-form.component';
 import { AdminPlaceDetailsComponent } from './admin-place/admin-place-details/admin-place-details.component';
+import { AdminLocationsComponent } from './admin-place/admin-locations/admin-locations.component';
+import { AdminPermitsComponent } from './admin-place/admin-permits/admin-permits.component';
+import { AdminModalAddLocationComponent } from './admin-place/admin-locations/admin-modal-add-location/admin-modal-add-location.component';
 
 @NgModule({
   imports: [
@@ -85,7 +88,10 @@ import { AdminPlaceDetailsComponent } from './admin-place/admin-place-details/ad
     AdminPlacesComponent,
     AdminPlaceComponent,
     AdminPlaceFormComponent,
-    AdminPlaceDetailsComponent
+    AdminPlaceDetailsComponent,
+    AdminLocationsComponent,
+    AdminPermitsComponent,
+    AdminModalAddLocationComponent
   ],
   entryComponents: [
     AdminModalDivisionComponent,
@@ -93,7 +99,8 @@ import { AdminPlaceDetailsComponent } from './admin-place/admin-place-details/ad
     AdminModalUserComponent,
     AdminModalAutoGenerateComponent,
     AdminModalAddGameComponent,
-    AdminModalEditGroupComponent
+    AdminModalEditGroupComponent,
+    AdminModalAddLocationComponent
   ]
 })
 export class AdminModule { }

@@ -1,14 +1,22 @@
-<app-admin-place-form
-  *ngIf="place && editingPlace"
-  [place]="place"
-  (saveClick)="editingPlace = !editingPlace"
-  (cancelClick)="editingPlace = !editingPlace"
->
-</app-admin-place-form>
+<section *ngIf="place" id="place">
+  <app-admin-place-form
+    *ngIf="editingPlace"
+    [place]="place"
+    (saveClick)="editingPlace = !editingPlace"
+    (cancelClick)="editingPlace = !editingPlace"
+  >
+  </app-admin-place-form>
 
-<app-admin-place-details
-  *ngIf="place && !editingPlace"
-  [place]="place"
-  (editClick)="editingPlace = !editingPlace"
->
-</app-admin-place-details>
+  <app-admin-place-details
+    *ngIf="!editingPlace"
+    [place]="place"
+    (editClick)="editingPlace = !editingPlace"
+  >
+  </app-admin-place-details>
+
+  <section id="place-options">
+    <app-admin-locations [locations]="place.locations"></app-admin-locations>
+
+    <app-admin-permits [permits]="place.permits"></app-admin-permits>
+  </section>
+</section>

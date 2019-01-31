@@ -5,7 +5,7 @@ import { Subject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import _ from 'lodash';
 
-import { Place } from '@app/models/place';
+import { Place, PlaceLocation } from '@app/models/place';
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +55,36 @@ export class PlaceService {
   delete(id: string) {
     const url = this.api + `places/${id}`;
     return this.http.delete(url);
+  }
+
+  addLocation(location: PlaceLocation) {
+    const url = this.api + `places/${this.place._id}/locations`;
+    return this.http.post(url, location).pipe(
+      tap((updatedPlace: Place) => {
+        this.place = updatedPlace;
+        this.placeSubject.next(_.cloneDeep(updatedPlace));
+      })
+    );
+  }
+
+  updateLocation(location: PlaceLocation) {
+    const url = this.api + `places/${this.place._id}/locations/${location._id}`;
+    return this.http.put(url, location).pipe(
+      tap((updatedPlace: Place) => {
+        this.place = updatedPlace;
+        this.placeSubject.next(_.cloneDeep(updatedPlace));
+      })
+    );
+  }
+
+  deleteLocation(locationId: string) {
+    const url = this.api + `places/${this.place._id}/locations/${locationId}`;
+    return this.http.delete(url).pipe(
+      tap(() => {
+        const index = this.place.locations.findIndex((l: PlaceLocation) => l._id === locationId);
+        this.place.locations.splice(index, 1);
+        this.placeSubject.next(_.cloneDeep(this.place));
+      })
+    );
   }
 }
