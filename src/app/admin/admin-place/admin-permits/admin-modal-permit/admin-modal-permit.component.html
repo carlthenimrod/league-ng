@@ -1,7 +1,8 @@
-<form [formGroup]="locationForm" (ngSubmit)="onSubmit()">
-  <aside id="add-location">
+<form [formGroup]="permitForm" (ngSubmit)="onSubmit()">
+  <aside id="permit">
     <header>
-      <h3>Add Location</h3>
+      <h3 *ngIf="new">Add Permit</h3>
+      <h3 *ngIf="!new">Edit Permit</h3>
     </header>
 
     <mat-dialog-content>
@@ -11,8 +12,8 @@
             <input
               matInput
               type="text"
-              placeholder="Location Name"
-              formControlName="name"
+              placeholder="Permit Label"
+              formControlName="label"
               required
             >
           </mat-form-field>
@@ -25,8 +26,7 @@
           *ngIf="new"
           mat-flat-button
           color="primary"
-          class="mr-2"
-          [disabled]="!locationForm.valid"
+          [disabled]="!permitForm.valid"
         >
           <i class="fas fa-plus"></i>
           <span>Add</span>
@@ -36,8 +36,7 @@
           *ngIf="!new"
           mat-flat-button
           color="primary"
-          class="mr-2"
-          [disabled]="!locationForm.valid"
+          [disabled]="!permitForm.valid"
         >
           <i class="fas fa-save"></i>
           <span>Save</span>

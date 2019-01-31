@@ -9,7 +9,7 @@
   display: block;
 }
 
-aside#add-location {
+aside#permit {
   background-color: theme-color(light);
   padding: 0.5rem 0.5rem 1rem 0.5rem;
 
@@ -47,6 +47,8 @@ aside#add-location {
     text-align: right;
 
     button {
+      margin-left: 0.5rem;
+
       i {
         margin-right: 0.5rem;
       }

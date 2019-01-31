@@ -27,6 +27,28 @@ section#permits {
     }
   }
 
+  section#permit-list {
+    margin-bottom: 1rem;
+
+    .permit {
+      border-bottom: 1px solid $border-color;
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem;
+      position: relative;
+
+      .actions {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      &:first-child {
+        border-top: 1px solid $border-color;
+      }
+    }
+  }
+
   p#no-permits {
     border-top: 1px solid $border-color;
     border-bottom: 1px solid $border-color;

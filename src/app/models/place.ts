@@ -7,7 +7,7 @@ export interface PlaceLocation {
 }
 
 export interface Permit {
-  name: string;
+  label: string;
   _id?: string;
   __v?: string;
 }

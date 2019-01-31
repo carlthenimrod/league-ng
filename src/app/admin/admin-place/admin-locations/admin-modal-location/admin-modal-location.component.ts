@@ -4,11 +4,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { PlaceLocation } from '@app/models/place';
 
 @Component({
-  selector: 'app-admin-modal-add-location',
-  templateUrl: './admin-modal-add-location.component.html',
-  styleUrls: ['./admin-modal-add-location.component.scss']
+  selector: 'app-admin-modal-location',
+  templateUrl: './admin-modal-location.component.html',
+  styleUrls: ['./admin-modal-location.component.scss']
 })
-export class AdminModalAddLocationComponent implements OnInit {
+export class AdminModalLocationComponent implements OnInit {
   locationForm = this.fb.group({
     name: ['', Validators.required]
   });
@@ -16,7 +16,7 @@ export class AdminModalAddLocationComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: { location: PlaceLocation },
-    private dialogRef: MatDialogRef<AdminModalAddLocationComponent>,
+    private dialogRef: MatDialogRef<AdminModalLocationComponent>,
     private fb: FormBuilder
   ) { }
 

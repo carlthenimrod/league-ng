@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import { PlaceLocation } from '@app/models/place';
-import { AdminModalAddLocationComponent } from './admin-modal-add-location/admin-modal-add-location.component';
 import { PlaceService } from '@app/core/place.service';
+import { AdminModalLocationComponent } from './admin-modal-location/admin-modal-location.component';
 
 @Component({
   selector: 'app-admin-locations',
@@ -29,7 +29,7 @@ export class AdminLocationsComponent implements OnInit {
       width: '500px'
     };
 
-    const dialog = this.dialog.open(AdminModalAddLocationComponent, config);
+    const dialog = this.dialog.open(AdminModalLocationComponent, config);
 
     dialog.afterClosed().subscribe((location: PlaceLocation) => {
       if (!location) { return; }
@@ -46,7 +46,7 @@ export class AdminLocationsComponent implements OnInit {
       width: '500px'
     };
 
-    const dialog = this.dialog.open(AdminModalAddLocationComponent, config);
+    const dialog = this.dialog.open(AdminModalLocationComponent, config);
 
     dialog.afterClosed().subscribe((updatedLocation: PlaceLocation) => {
       if (!updatedLocation) { return; }
