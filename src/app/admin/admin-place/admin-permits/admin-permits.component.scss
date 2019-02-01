@@ -57,3 +57,19 @@ section#permits {
     text-align: center;
   }
 }
+
+@include media-breakpoint-up(sm) {
+  section#permits {
+    section#permit-list {
+      .permit {
+        .actions {
+          display: none;
+        }
+
+        &:hover .actions {
+          display: block;
+        }
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@
 
     <mat-dialog-content>
       <section id="form-fields">
-        <fieldset>
+        <fieldset *ngIf="!addingTime">
           <mat-form-field>
             <input
               matInput
@@ -18,38 +18,82 @@
             >
           </mat-form-field>
         </fieldset>
+
+        <fieldset id="time">
+          <header *ngIf="!addingTime">
+            <h4>Availablility</h4>
+
+            <div id="actions">
+              <button
+                mat-stroked-button
+                color="primary"
+                type="button"
+                (click)="onClickAddTime()"
+              >
+                <i class="fas fa-plus"></i>
+                <span>Add Slot</span>
+              </button>
+            </div>
+          </header>
+
+          <section *ngIf="!addingTime" id="time-list">
+            <div *ngFor="let slot of slots; let i = index" class="slot">
+              <span>{{ slot.start | date:'short' }} - {{ slot.end | date:'h:mm a' }}</span>
+
+              <div class="actions">
+                <button
+                  mat-icon-button
+                  color="primary"
+                  type="button"
+                  (click)="onClickRemoveSlot(i)"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+
+            <p *ngIf="slots.length === 0" id="no-times">No Time Slots</p>
+          </section>
+
+          <app-admin-time-adder
+            *ngIf="addingTime"
+            (datesAdded)="onDatesAdded($event)"
+            (cancel)="onCancelAddingTimes()"
+          >
+          </app-admin-time-adder>
+        </fieldset>
       </section>
     </mat-dialog-content>
 
-      <section id="form-actions">
-        <button
-          *ngIf="new"
-          mat-flat-button
-          color="primary"
-          [disabled]="!permitForm.valid"
-        >
-          <i class="fas fa-plus"></i>
-          <span>Add</span>
-        </button>
+    <section id="form-actions">
+      <button
+        *ngIf="new"
+        mat-flat-button
+        color="primary"
+        [disabled]="!permitForm.valid"
+      >
+        <i class="fas fa-plus"></i>
+        <span>Add Permit</span>
+      </button>
 
-        <button
-          *ngIf="!new"
-          mat-flat-button
-          color="primary"
-          [disabled]="!permitForm.valid"
-        >
-          <i class="fas fa-save"></i>
-          <span>Save</span>
-        </button>
+      <button
+        *ngIf="!new"
+        mat-flat-button
+        color="primary"
+        [disabled]="!permitForm.valid || addingTime"
+      >
+        <i class="fas fa-save"></i>
+        <span>Save Permit</span>
+      </button>
 
-        <button
-          mat-flat-button
-          color="warn"
-          mat-dialog-close
-        >
-          <i class="fas fa-times"></i>
-          <span>Cancel</span>
-        </button>
-      </section>
+      <button
+        mat-flat-button
+        color="warn"
+        mat-dialog-close
+      >
+        <i class="fas fa-times"></i>
+        <span>Cancel</span>
+      </button>
+    </section>
   </aside>
 </form>

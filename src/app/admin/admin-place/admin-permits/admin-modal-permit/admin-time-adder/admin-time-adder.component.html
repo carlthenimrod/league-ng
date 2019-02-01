@@ -1,0 +1,161 @@
+<form [formGroup]="timeForm" (ngSubmit)="onSubmit()">
+  <section id="time-adder">
+    <fieldset id="occurences">
+      <p>How many slots would you like to enter?</p>
+
+      <div id="options">
+        <div class="option">
+          <label for="single">Single Date</label>
+
+          <input
+            name="occurences"
+            formControlName="occurences"
+            type="radio"
+            id="single"
+            value="single"
+          >
+        </div>
+
+        <div class="option">
+          <label for="multiple">Multiple Dates</label>
+
+          <input
+            name="occurences"
+            formControlName="occurences"
+            type="radio"
+            id="multiple"
+            value="multiple"
+          >
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset *ngIf="occurences.value ==='single'">
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field>
+            <input
+              matInput
+              [matDatepicker]="date"
+              type="text"
+              name="date"
+              placeholder="Date"
+              formControlName="date"
+              required="true"
+            >
+            <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+            <mat-datepicker #date></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset *ngIf="occurences.value ==='multiple'" formGroupName="dates">
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field>
+            <input
+              matInput
+              [matDatepicker]="startDate"
+              type="text"
+              name="start"
+              placeholder="Start Date"
+              formControlName="start"
+              required="true"
+            >
+            <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+            <mat-datepicker #startDate></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-6">
+          <mat-form-field>
+            <input
+              matInput
+              [matDatepicker]="endDate"
+              type="text"
+              name="end"
+              placeholder="End Date"
+              formControlName="end"
+              required="true"
+            >
+            <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+            <mat-datepicker #endDate></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset formGroupName="time">
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field>
+            <input
+              matInput
+              type="time"
+              placeholder="Start Time"
+              formControlName="start"
+              required="true"
+            >
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-6">
+          <mat-form-field>
+            <input
+              matInput
+              type="time"
+              placeholder="End Time"
+              formControlName="end"
+              required="true"
+            >
+          </mat-form-field>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset *ngIf="occurences.value ==='multiple'" id="days">
+      <div class="row">
+        <div class="col-sm-6">
+          <label>What days of the week will the permit include?</label>
+        </div>
+
+        <div class="col-sm-6">
+          <mat-form-field>
+            <mat-select
+              placeholder="Days of Week"
+              formControlName="days"
+              (selectionChange)="updateTriggerText()"
+              multiple
+              required
+            >
+              <mat-select-trigger>
+                {{ triggerText }}
+              </mat-select-trigger>
+              <mat-option *ngFor="let day of days" [value]="day">{{ day }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </fieldset>
+
+    <section id="form-actions">
+      <button
+        mat-stroked-button
+        color="accent"
+      >
+        <i class="fas fa-plus"></i>
+        <span>Add Time</span>
+      </button>
+
+      <button
+        mat-stroked-button
+        color="warn"
+        (click)="onClickCancel()"
+      >
+        <i class="fas fa-times"></i>
+        <span>Cancel</span>
+      </button>
+    </section>
+  </section>
+</form>

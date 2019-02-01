@@ -44,6 +44,7 @@ import { AdminLocationsComponent } from './admin-place/admin-locations/admin-loc
 import { AdminPermitsComponent } from './admin-place/admin-permits/admin-permits.component';
 import { AdminModalLocationComponent } from './admin-place/admin-locations/admin-modal-location/admin-modal-location.component';
 import { AdminModalPermitComponent } from './admin-place/admin-permits/admin-modal-permit/admin-modal-permit.component';
+import { AdminTimeAdderComponent } from './admin-place/admin-permits/admin-modal-permit/admin-time-adder/admin-time-adder.component';
 
 @NgModule({
   imports: [
@@ -93,7 +94,8 @@ import { AdminModalPermitComponent } from './admin-place/admin-permits/admin-mod
     AdminLocationsComponent,
     AdminPermitsComponent,
     AdminModalLocationComponent,
-    AdminModalPermitComponent
+    AdminModalPermitComponent,
+    AdminTimeAdderComponent
   ],
   entryComponents: [
     AdminModalDivisionComponent,

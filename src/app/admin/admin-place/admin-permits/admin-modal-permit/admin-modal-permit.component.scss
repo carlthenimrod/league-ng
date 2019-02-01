@@ -30,13 +30,70 @@ aside#permit {
     border-radius: 2px;
 
     section#form-fields {
-      padding: 1rem 2rem;
+      padding: 0.5rem 1rem;
 
       fieldset {
         overflow: hidden;
 
         mat-form-field {
           width: 100%;
+        }
+
+        &#time {
+          header{
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+
+            h4 {
+              color: $text-muted;
+              font-size: $h6-font-size;
+              font-weight: 500;
+              margin: 0;
+              text-transform: uppercase;
+            }
+
+            #actions {
+              button {
+                i {
+                  margin-right: 0.5rem;
+                }
+              }
+            }
+          }
+
+          section#time-list {
+            margin-bottom: 1rem;
+            max-height: 250px;
+            overflow-y: auto;
+
+            .slot {
+              align-items: center;
+              border-bottom: 1px solid $border-color;
+              display: flex;
+              justify-content: space-between;
+              padding: 0.5rem;
+              position: relative;
+
+              &:first-child {
+                border-top: 1px solid $border-color;
+              }
+
+              .actions {
+                position: absolute;
+                top: 0;
+                right: 0;
+              }
+            }
+
+            p#no-times {
+              border-top: 1px solid $border-color;
+              border-bottom: 1px solid $border-color;
+              margin: 0;
+              padding: 0.5rem;
+              text-align: center;
+            }
+          }
         }
       }
     }
@@ -57,11 +114,33 @@ aside#permit {
 }
 
 @include media-breakpoint-up(sm) {
-  aside#add-location {
+  aside#permit {
     padding: 0.5rem 1rem 1rem 1rem;
 
     header {
       margin: 0 0 1rem 0;
+    }
+
+    mat-dialog-content {
+      section#form-fields {
+        fieldset#time {
+          &#time {
+            section#time-list {
+              .slot {
+                .actions {
+                  display: none;
+                }
+
+                &:hover {
+                  .actions {
+                    display: block;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
