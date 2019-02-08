@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Place } from '@app/models/place';
@@ -16,6 +16,10 @@ export class AdminPlaceFormComponent implements OnInit {
   @Output('cancelClick') cancelClick: EventEmitter<boolean> = new EventEmitter<boolean>();
   placeForm: FormGroup;
 
+  get locations () {
+    return this.placeForm.get('locations') as FormArray;
+  }
+
   constructor(
     private fb: FormBuilder,
     private placeService: PlaceService,
@@ -23,36 +27,66 @@ export class AdminPlaceFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.placeForm = this.fb.group({
-      name: ['', Validators.required],
-      address: this.fb.group({
-        street: [''],
-        city: [''],
-        state: [''],
-        postal: ['']
-      })
-    });
-
     if (this.place) {
-      this.placeForm.patchValue(this.place);
+      this.placeForm = this.fb.group({
+        name: [this.place.name, Validators.required],
+        address: this.fb.group({
+          street: [this.place.address.street],
+          city: [this.place.address.city],
+          state: [this.place.address.state],
+          postal: [this.place.address.postal]
+        }),
+        locations: this.fb.array([])
+      });
+
+      if (this.place.locations.length > 0) {
+        for (let i = 0; i < this.place.locations.length; i++) {
+          const location = this.place.locations[i];
+          this.locations.push(this.fb.group({ name: [location.name], _id: [location._id] }));
+        }
+      } else {
+        this.locations.push(this.fb.group({ name: [''] }));
+      }
+    } else {
+      this.placeForm = this.fb.group({
+        name: ['', Validators.required],
+        address: this.fb.group({
+          street: [''],
+          city: [''],
+          state: [''],
+          postal: ['']
+        }),
+        locations: this.fb.array([
+          this.fb.group({ name: [''] })
+        ])
+      });
     }
+  }
+
+  addLocation() {
+    this.locations.push(this.fb.group({ name: [''] }));
+  }
+
+  removeLocation(i: number) {
+    this.locations.removeAt(i);
   }
 
   onSubmit() {
     if (!this.placeForm.valid) { return; }
 
+    const place: Place = {...this.placeForm.value};
+
+    place.locations = place.locations.filter(l => {
+      if (l.name.trim() !== '') { return l; }
+    });
+
     if (this.place) {
-      const place: Place = {
-        _id: this.place._id,
-        ...this.placeForm.value
-      };
+      place._id = this.place._id;
 
       this.placeService.update(place).subscribe(() => {
         this.saveClick.emit(true);
       });
     } else {
-      const place: Place = {...this.placeForm.value};
-
       this.placeService.create(place).subscribe((createdPlace: Place) => {
         this.router.navigate(['admin', 'places', createdPlace._id]);
       });

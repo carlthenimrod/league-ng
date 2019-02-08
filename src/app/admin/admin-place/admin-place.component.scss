@@ -3,23 +3,3 @@
 @import '~bootstrap/scss/_functions';
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
-
-section#place-options {
-  @include make-row(0);
-
-  app-admin-locations {
-    @include make-col-ready(0);
-    @include media-breakpoint-up(sm) {
-      @include make-col(6);
-      padding-right: $grid-gutter-width / 2;
-    }
-  }
-
-  app-admin-permits {
-    @include make-col-ready(0);
-    @include media-breakpoint-up(sm) {
-      @include make-col(6);
-      padding-left: $grid-gutter-width / 2;
-    }
-  }
-}

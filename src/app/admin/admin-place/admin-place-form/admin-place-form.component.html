@@ -2,7 +2,7 @@
   <section id="place-form">
     <header>
       <h1>
-        Location Details
+        Place Details
       </h1>
 
       <div id="actions-desktop">
@@ -45,19 +45,23 @@
     </header>
 
     <section id="form">
-      <mat-form-field>
-        <input
-          matInput
-          type="text"
-          placeholder="Location Label"
-          formControlName="name"
-          required
-        >
-        <mat-error>Name is required.</mat-error>
-      </mat-form-field>
+      <fieldset>
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            placeholder="Place Label"
+            formControlName="name"
+            required
+          >
+          <mat-error>Name is required.</mat-error>
+        </mat-form-field>
+      </fieldset>
 
       <fieldset formGroupName="address">
-        <h2>Address</h2>
+        <header>
+          <h2>Address</h2>
+        </header>
 
         <div class="row">
           <div class="col-sm-8">
@@ -106,6 +110,44 @@
             </mat-form-field>
           </div>
         </div>
+      </fieldset>
+
+      <fieldset formArrayName="locations">
+        <header>
+          <h2>Locations</h2>
+
+          <button
+            type="button"
+            mat-icon-button
+            color="primary"
+            (click)="addLocation()"
+          >
+            <i class="fas fa-plus"></i>
+          </button>
+        </header>
+
+        <section *ngFor="let location of locations.controls; let i = index" id="locations">
+          <div [formGroupName]="i">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Location #{{ i + 1 }}"
+                formControlName="name"
+              >
+
+              <button
+                matSuffix
+                color="primary"
+                type="button"
+                mat-icon-button
+                (click)="removeLocation(i)"
+              >
+                <i class="fas fa-times"></i>
+              </button>
+            </mat-form-field>
+          </div>
+        </section>
       </fieldset>
     </section>
 
