@@ -12,22 +12,14 @@
     </button>
   </header>
 
-  <section id="permit-list" *ngIf="permits.length > 0">
-    <div *ngFor="let permit of permits" class="permit">
-      <span>
-        {{ permit.label }}
-      </span>
-
-      <div class="actions">
-        <button mat-icon-button color="primary" (click)="onClickEditPermit(permit)">
-          <i class="fas fa-pen"></i>
-        </button>
-
-        <button mat-icon-button color="primary" (click)="onClickDeletePermit(permit)">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-    </div>
+  <section id="permit-list"
+    *ngIf="permits.length > 0"
+    [@permitsEnter]="permits.length"
+  >
+    <app-admin-permit
+      *ngFor="let permit of permits; trackBy: trackById"
+      [permit]="permit">
+    </app-admin-permit>
   </section>
 
   <p id="no-permits" *ngIf="permits.length === 0">

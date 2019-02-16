@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Permit, Slot } from '@app/models/place';
+import { Permit } from '@app/models/place';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
@@ -13,9 +13,7 @@ export class AdminModalPermitComponent implements OnInit {
   permitForm = this.fb.group({
     label: ['', Validators.required]
   });
-  slots: Slot[] = [];
   new: boolean;
-  addingTime = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: { permit: Permit },
@@ -28,26 +26,8 @@ export class AdminModalPermitComponent implements OnInit {
 
     if (!this.new) {
       this.permit = this.data.permit;
-      this.slots = this.permit.slots;
       this.permitForm.patchValue(this.permit);
     }
-  }
-
-  onClickAddTime() {
-    this.addingTime = true;
-  }
-
-  onDatesAdded(dates: Slot[]) {
-    this.slots.push(...dates);
-    this.addingTime = false;
-  }
-
-  onCancelAddingTimes() {
-    this.addingTime = false;
-  }
-
-  onClickRemoveSlot(i) {
-    this.slots.splice(i, 1);
   }
 
   onSubmit() {
@@ -57,12 +37,11 @@ export class AdminModalPermitComponent implements OnInit {
 
     if (this.new) {
       permit = this.permitForm.value;
-      permit.slots = this.slots;
     } else {
       permit = {
         _id: this.data.permit._id,
         ...this.permitForm.value,
-        slots: this.slots
+        slots: this.data.permit.slots
       };
     }
     this.dialogRef.close(permit);

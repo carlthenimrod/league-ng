@@ -1,25 +1,24 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import { Permit } from '@app/models/place';
 import { PlaceService } from '@app/core/place.service';
 import { AdminModalPermitComponent } from './admin-modal-permit/admin-modal-permit.component';
+import { permitsEnterTrigger } from './animations';
 
 @Component({
   selector: 'app-admin-permits',
   templateUrl: './admin-permits.component.html',
-  styleUrls: ['./admin-permits.component.scss']
+  styleUrls: ['./admin-permits.component.scss'],
+  animations: [permitsEnterTrigger]
 })
-export class AdminPermitsComponent implements OnInit {
+export class AdminPermitsComponent {
   @Input() permits: Permit[];
 
   constructor(
     private dialog: MatDialog,
     private placeService: PlaceService
   ) { }
-
-  ngOnInit() {
-  }
 
   onClickAddPermit() {
     const config: MatDialogConfig = {
@@ -37,32 +36,7 @@ export class AdminPermitsComponent implements OnInit {
     });
   }
 
-  onClickEditPermit(permit: Permit): void {
-    const config: MatDialogConfig = {
-      autoFocus: false,
-      data: {permit},
-      maxWidth: '95vw',
-      restoreFocus: false,
-      width: '500px'
-    };
-
-    const dialog = this.dialog.open(AdminModalPermitComponent, config);
-
-    dialog.afterClosed().subscribe((updatedPermit: Permit) => {
-      if (!updatedPermit) { return; }
-      this.placeService.updatePermit(updatedPermit).subscribe();
-    });
-  }
-
-  onClickDeletePermit(permit: Permit): void {
-    const label = prompt('Warning: Cannot be undone! Enter permit label to confirm:');
-
-    if (!label) { return; }
-
-    if (permit.label === label.trim()) {
-      this.placeService.deletePermit(permit._id).subscribe();
-    } else {
-      alert('Error: Permit label entered doesn\'t match.');
-    }
+  trackById(index: number, permit: Permit) {
+    return permit._id;
   }
 }

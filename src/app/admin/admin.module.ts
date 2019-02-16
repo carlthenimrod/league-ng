@@ -43,6 +43,8 @@ import { AdminPlaceDetailsComponent } from './admin-place/admin-place-details/ad
 import { AdminPermitsComponent } from './admin-place/admin-permits/admin-permits.component';
 import { AdminModalPermitComponent } from './admin-place/admin-permits/admin-modal-permit/admin-modal-permit.component';
 import { AdminTimeAdderComponent } from './admin-place/admin-permits/admin-modal-permit/admin-time-adder/admin-time-adder.component';
+import { AdminPermitComponent } from './admin-place/admin-permits/admin-permit/admin-permit.component';
+import { AdminModalTimeComponent } from './admin-place/admin-permits/admin-permit/admin-modal-time/admin-modal-time.component';
 
 @NgModule({
   imports: [
@@ -91,7 +93,9 @@ import { AdminTimeAdderComponent } from './admin-place/admin-permits/admin-modal
     AdminPlaceDetailsComponent,
     AdminPermitsComponent,
     AdminModalPermitComponent,
-    AdminTimeAdderComponent
+    AdminTimeAdderComponent,
+    AdminPermitComponent,
+    AdminModalTimeComponent
   ],
   entryComponents: [
     AdminModalDivisionComponent,
@@ -100,7 +104,8 @@ import { AdminTimeAdderComponent } from './admin-place/admin-permits/admin-modal
     AdminModalAutoGenerateComponent,
     AdminModalAddGameComponent,
     AdminModalEditGroupComponent,
-    AdminModalPermitComponent
+    AdminModalPermitComponent,
+    AdminModalTimeComponent
   ]
 })
 export class AdminModule { }

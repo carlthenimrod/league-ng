@@ -5,9 +5,6 @@
 @import '~bootstrap/scss/_mixins';
 
 section#permits {
-  background-color: theme-color(light);
-  padding: 1rem 1.5rem;
-
   header{
     align-items: center;
     display: flex;
@@ -30,46 +27,19 @@ section#permits {
   section#permit-list {
     margin-bottom: 1rem;
 
-    .permit {
-      border-bottom: 1px solid $border-color;
-      display: flex;
-      justify-content: space-between;
-      padding: 0.5rem;
-      position: relative;
-
-      .actions {
-        position: absolute;
-        right: 0;
-        top: 0;
-      }
+    app-admin-permit {
+      margin-top: -1px;
 
       &:first-child {
-        border-top: 1px solid $border-color;
+        margin-top: 0;
       }
     }
-  }
-
-  p#no-permits {
-    border-top: 1px solid $border-color;
-    border-bottom: 1px solid $border-color;
-    margin-bottom: 1rem;
-    padding: 0.5rem 0;
-    text-align: center;
   }
 }
 
 @include media-breakpoint-up(sm) {
   section#permits {
-    section#permit-list {
-      .permit {
-        .actions {
-          display: none;
-        }
-
-        &:hover .actions {
-          display: block;
-        }
-      }
-    }
+    background-color: theme-color(light);
+    padding: 1rem 1.5rem;
   }
 }

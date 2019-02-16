@@ -3,6 +3,8 @@ import { Address } from './address';
 export interface Slot {
   start: string;
   end: string;
+  _id?: string;
+  __v?: string;
 }
 
 export interface PlaceLocation {

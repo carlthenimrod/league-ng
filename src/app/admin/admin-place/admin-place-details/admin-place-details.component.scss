@@ -5,7 +5,6 @@
 @import '~bootstrap/scss/_mixins';
 
 #place-details {
-  background-color: theme-color(light);
   margin: 0 0 2rem 0;
   padding-left: 0.5rem;
   padding-top: 1rem;
@@ -60,6 +59,7 @@
 
 @include media-breakpoint-up(sm) {
   #place-details {
+    background-color: theme-color(light);
     padding: 1.5rem;
 
     header {

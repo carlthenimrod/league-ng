@@ -5,7 +5,7 @@ import { Subject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import _ from 'lodash';
 
-import { Place, PlaceLocation, Permit } from '@app/models/place';
+import { Place, Permit } from '@app/models/place';
 
 @Injectable({
   providedIn: 'root'
@@ -84,6 +84,21 @@ export class PlaceService {
         const index = this.place.permits.findIndex((p: Permit) => p._id === permitId);
         this.place.permits.splice(index, 1);
         this.placeSubject.next(_.cloneDeep(this.place));
+      })
+    );
+  }
+
+  clearPermitSlots(permitId: string) {
+    const url = this.api + `places/${this.place._id}/permits/${permitId}`;
+    const i = this.place.permits.findIndex((p: Permit) => p._id === permitId);
+    const permit = this.place.permits[i];
+    permit.slots.length = 0;
+
+    return this.http.put(url, permit).pipe(
+      tap((updatedPlace: Place) => {
+        console.log(updatedPlace);
+        this.place = updatedPlace;
+        this.placeSubject.next(_.cloneDeep(updatedPlace));
       })
     );
   }
