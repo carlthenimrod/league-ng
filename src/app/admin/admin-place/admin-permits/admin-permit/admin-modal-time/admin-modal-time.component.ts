@@ -22,8 +22,6 @@ export class AdminModalTimeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    console.log(this.data.permit);
     this.timeForm = this.fb.group({
       occurences: ['single'],
       date: [''],

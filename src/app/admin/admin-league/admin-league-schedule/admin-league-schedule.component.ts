@@ -4,9 +4,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { League, ScheduleOptions, Group } from '@app/models/league';
 import { LeagueService } from '@app/core/league.service';
 import { AdminModalAutoGenerateComponent } from './admin-modal-auto-generate/admin-modal-auto-generate.component';
-import { groupsEnterTrigger } from './animations';
-import { AdminModalAddGameComponent } from './admin-modal-add-game/admin-modal-add-game.component';
 import { Game } from '@app/models/game';
+import { AdminModalAddGameComponent } from './admin-modal-add-game/admin-modal-add-game.component';
+import { groupsEnterTrigger } from './animations';
 
 @Component({
   selector: 'app-admin-league-schedule',

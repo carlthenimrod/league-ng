@@ -13,4 +13,3 @@ export const groupsEnterTrigger = trigger('groupsEnter', [
     ], { optional: true })
   ])
 ]);
-

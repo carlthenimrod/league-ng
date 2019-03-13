@@ -95,6 +95,30 @@
           </div>
         </fieldset>
 
+        <fieldset *ngIf="showPlaces">
+          <div class="row no-gutters">
+            <div class="col-sm-6">
+              <mat-form-field>
+                <mat-select placeholder="Select Place" formControlName="place">
+                  <mat-option *ngFor="let place of places" [value]="place._id">
+                    {{ place.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6" *ngIf="showLocations">
+              <mat-form-field>
+                <mat-select placeholder="Pick Locations" formControlName="locations" multiple required>
+                  <mat-option *ngFor="let location of locations" [value]="location._id">
+                    {{ location.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+
         <fieldset id="group" *ngIf="!game">
           <div class="row no-gutters">
             <div class="col">

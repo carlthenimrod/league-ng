@@ -1,3 +1,5 @@
+import { Place } from './place';
+
 export interface Game {
   home: {
     _id: string;
@@ -11,6 +13,7 @@ export interface Game {
   };
   start?: string;
   time?: boolean;
+  place?: Place;
   _id?: string;
   __v?: number;
 }

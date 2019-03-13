@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { League, Group } from '@app/models/league';
 import { Game } from '@app/models/game';
+import { Place, PlaceLocation } from '@app/models/place';
+import { PlaceService } from '@app/core/place.service';
 
 @Component({
   selector: 'app-admin-modal-add-game',
@@ -23,13 +25,19 @@ export class AdminModalAddGameComponent implements OnInit {
       score: ['']
     }),
     start: [''],
-    time: ['']
+    time: [''],
+    place: ['']
   });
+  places: Place[];
+  showPlaces = false;
+  locations: PlaceLocation[];
+  showLocations = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {league: League, game?: Game },
     private dialogRef: MatDialogRef<AdminModalAddGameComponent>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private placeService: PlaceService
   ) { }
 
   ngOnInit() {
@@ -70,11 +78,57 @@ export class AdminModalAddGameComponent implements OnInit {
 
           const time = hours + ':' + mins;
           this.gameForm.patchValue({ time });
+
+          // show places form field
+          this.showPlaces = true;
         }
       }
+
+      // get all places
+      this.placeService.all().subscribe((places: Place[]) => {
+        this.places = places;
+
+        // add place if exists
+        if (this.game.place) {
+          this.gameForm.patchValue({ place: this.game.place._id });
+          this.showPlaces = true;
+
+          // add locations if needed
+          const index = places.findIndex((p: Place) => p._id === this.game.place._id);
+          const place = places[index];
+
+          if (place.locations.length > 0) {
+            this.gameForm.addControl('locations', new FormControl('', Validators.required));
+            this.gameForm.patchValue({ locations: this.game.place.locations.map(l => l._id) });
+            this.locations = place.locations;
+            this.showLocations = true;
+          }
+        }
+      });
     } else {
       this.gameForm.addControl('group', new FormControl('', Validators.required));
     }
+
+    // on time change, show places form field
+    this.gameForm.get('time').valueChanges.subscribe(val => {
+      this.showPlaces = (val) ? true : false;
+    });
+
+    // on place change, show locations (if exists)
+    this.gameForm.get('place').valueChanges.subscribe(val => {
+      const index = this.places.findIndex((p: Place) => p._id === val);
+      const place = this.places[index];
+
+      if (place.locations.length > 0) {
+        this.gameForm.addControl('locations', new FormControl('', Validators.required));
+        this.showLocations = true;
+        this.locations = place.locations;
+      } else {
+        this.gameForm.removeControl('locations');
+        this.showLocations = false;
+        this.locations = [];
+      }
+    });
   }
 
   displayFn(group: Group): string | undefined {
@@ -135,6 +189,27 @@ export class AdminModalAddGameComponent implements OnInit {
         }
 
         this.game.start = start.toJSON();
+      }
+
+      // update place
+      if (this.gameForm.value.place) {
+        const index = this.places.findIndex((p: Place) => p._id === this.gameForm.value.place);
+        const place = this.places[index];
+
+        this.game.place = {
+          _id: place._id,
+          name: place.name,
+          address: place.address
+        };
+
+        // update locations
+        if (this.gameForm.value.locations) {
+          const locations = this.gameForm.value.locations;
+          this.game.place.locations = place.locations.reduce((acc: PlaceLocation[], l: PlaceLocation) => {
+            if (locations.includes(l._id)) { acc.push(l); }
+            return acc;
+          }, []);
+        }
       }
 
       this.dialogRef.close({
