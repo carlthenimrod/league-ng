@@ -43,96 +43,127 @@ export class AdminModalAddGameComponent implements OnInit {
   ngOnInit() {
     this.league = this.data.league;
 
-    // check if existing game was also provided
-    if (this.data.game) {
-      this.game = this.data.game;
+    // get all places
+    this.placeService.all().subscribe((places: Place[]) => {
+      this.places = places;
 
-      // update form
-      this.gameForm.patchValue({
-        home: { team: this.game.home._id },
-        away: { team: this.game.away._id }
-      });
+      // check if existing game was also provided
+      if (this.data.game) {
+        this.game = this.data.game;
 
-      // add scores if exists
-      if (this.game.home.score) {
+        // update form
         this.gameForm.patchValue({
-          home: { score: this.game.home.score }
+          home: { team: this.game.home._id },
+          away: { team: this.game.away._id }
         });
-      }
 
-      if (this.game.away.score) {
-        this.gameForm.patchValue({
-          away: { score: this.game.away.score }
-        });
-      }
-
-      // add start time if exists
-      if (this.game.start) {
-        this.gameForm.patchValue({ start: this.game.start });
-
-        // add time if it is set
-        if (this.game.time) {
-          const date = new Date(this.game.start);
-          const hours = (date.getHours() < 10) ? '0' + date.getHours() : date.getHours();
-          const mins = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes();
-
-          const time = hours + ':' + mins;
-          this.gameForm.patchValue({ time });
-
-          // show places form field
-          this.showPlaces = true;
+        // add scores if exists
+        if (this.game.home.score) {
+          this.gameForm.patchValue({
+            home: { score: this.game.home.score }
+          });
         }
-      }
 
-      // get all places
-      this.placeService.all().subscribe((places: Place[]) => {
-        this.places = places;
+        if (this.game.away.score) {
+          this.gameForm.patchValue({
+            away: { score: this.game.away.score }
+          });
+        }
+
+        // add start time if exists
+        if (this.game.start) {
+          this.gameForm.patchValue({ start: this.game.start });
+
+          // add time if it is set
+          if (this.game.time) {
+            const date = new Date(this.game.start);
+            const hours = (date.getHours() < 10) ? '0' + date.getHours() : date.getHours();
+            const mins = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes();
+
+            const time = hours + ':' + mins;
+            this.gameForm.patchValue({ time });
+
+            // show places form field
+            this.showPlaces = true;
+          }
+        }
 
         // add place if exists
-        if (this.game.place) {
+        if (this.game.place._id) {
           this.gameForm.patchValue({ place: this.game.place._id });
+          this.places = this.placeService.filterPlaces(this.places, this.game.start, this.game);
           this.showPlaces = true;
 
           // add locations if needed
-          const index = places.findIndex((p: Place) => p._id === this.game.place._id);
-          const place = places[index];
+          const index = this.places.findIndex((p: Place) => p._id === this.game.place._id);
+          const place = this.places[index];
 
-          if (place.locations.length > 0) {
+          if (place.locations && place.locations.length > 0) {
             this.gameForm.addControl('locations', new FormControl('', Validators.required));
             this.gameForm.patchValue({ locations: this.game.place.locations.map(l => l._id) });
             this.locations = place.locations;
             this.showLocations = true;
           }
         }
-      });
-    } else {
-      this.gameForm.addControl('group', new FormControl('', Validators.required));
-    }
-
-    // on time change, show places form field
-    this.gameForm.get('time').valueChanges.subscribe(val => {
-      this.showPlaces = (val) ? true : false;
-    });
-
-    // on place change, show locations (if exists)
-    this.gameForm.get('place').valueChanges.subscribe(val => {
-      const index = this.places.findIndex((p: Place) => p._id === val);
-      const place = this.places[index];
-
-      if (place.locations.length > 0) {
-        this.gameForm.addControl('locations', new FormControl('', Validators.required));
-        this.showLocations = true;
-        this.locations = place.locations;
       } else {
-        this.gameForm.removeControl('locations');
-        this.showLocations = false;
-        this.locations = [];
+        this.gameForm.addControl('group', new FormControl('', Validators.required));
       }
+
+      // on time change, show places form field
+      this.gameForm.get('time').valueChanges.subscribe(() => {
+        this.updatePlaces();
+      });
+
+      this.gameForm.get('start').valueChanges.subscribe(() => {
+        this.updatePlaces();
+      });
+
+      // on place change, show locations (if exists)
+      this.gameForm.get('place').valueChanges.subscribe(val => {
+        if (!val) { return; }
+
+        const index = this.places.findIndex((p: Place) => p._id === val);
+        const place = this.places[index];
+
+        if (place.locations && place.locations.length > 0) {
+          this.gameForm.addControl('locations', new FormControl('', Validators.required));
+          this.showLocations = true;
+          this.locations = place.locations;
+        } else {
+          this.gameForm.removeControl('locations');
+          this.showLocations = false;
+          this.locations = [];
+        }
+      });
     });
   }
 
   displayFn(group: Group): string | undefined {
     return group ? group.label : undefined;
+  }
+
+  updatePlaces() {
+    let start = this.gameForm.get('start').value;
+    const time = this.gameForm.get('time').value;
+
+    // reset values, and hide locations
+    this.gameForm.patchValue({ place: '', locations: [] });
+    this.showLocations = false;
+
+    // check to show/filter places
+    if (start && time) {
+      start = new Date(this.gameForm.value.start);
+      const hour = time.substr(0, time.indexOf(':'));
+      const mins = time.substr(time.indexOf(':') + 1);
+
+      start.setHours(hour, mins);
+      start = start.toJSON();
+
+      this.places = this.placeService.filterPlaces(this.places, start, this.game);
+      this.showPlaces = true;
+    } else {
+      this.showPlaces = false;
+    }
   }
 
   onSubmit() {

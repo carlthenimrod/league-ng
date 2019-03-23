@@ -1,4 +1,4 @@
-<form [formGroup]="gameForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="gameForm" (ngSubmit)="onSubmit()" *ngIf="places">
   <aside id="game">
     <header>
       <h3 *ngIf="!game">Add Game</h3>
@@ -100,8 +100,9 @@
             <div class="col-sm-6">
               <mat-form-field>
                 <mat-select placeholder="Select Place" formControlName="place">
-                  <mat-option *ngFor="let place of places" [value]="place._id">
-                    {{ place.name }}
+                  <mat-option *ngFor="let place of places" [value]="place._id" [disabled]="place.disabled">
+                    <ng-container *ngIf="!place.disabled">{{ place.name }}</ng-container>
+                    <ng-container *ngIf="place.disabled">{{ place.name }} (Not Available)</ng-container>
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -110,8 +111,9 @@
             <div class="col-sm-6" *ngIf="showLocations">
               <mat-form-field>
                 <mat-select placeholder="Pick Locations" formControlName="locations" multiple required>
-                  <mat-option *ngFor="let location of locations" [value]="location._id">
-                    {{ location.name }}
+                  <mat-option *ngFor="let location of locations" [value]="location._id" [disabled]="location.disabled">
+                    <ng-container *ngIf="!location.disabled">{{ location.name }}</ng-container>
+                    <ng-container *ngIf="location.disabled">{{ location.name }} (Not Available)</ng-container>
                   </mat-option>
                 </mat-select>
               </mat-form-field>

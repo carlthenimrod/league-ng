@@ -4,8 +4,10 @@ import { environment } from '@env/environment';
 import { Subject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import _ from 'lodash';
+import * as moment from 'moment';
 
-import { Place, Permit } from '@app/models/place';
+import { Place, Permit, Slot, PlaceLocation } from '@app/models/place';
+import { Game } from '@app/models/game';
 
 @Injectable({
   providedIn: 'root'
@@ -96,10 +98,79 @@ export class PlaceService {
 
     return this.http.put(url, permit).pipe(
       tap((updatedPlace: Place) => {
-        console.log(updatedPlace);
         this.place = updatedPlace;
         this.placeSubject.next(_.cloneDeep(updatedPlace));
       })
     );
+  }
+
+  filterPlaces(places: Place[], start: string, game: Game): Place[] {
+    const gameStart = moment(start);
+    const gameEnd = gameStart.clone().add(2, 'hours');
+
+    for (let i = 0; i < places.length; i++) {
+      const place = places[i];
+      place.disabled = true;
+
+      for (let x = 0; x < place.permits.length; x++) {
+        const permit = place.permits[x];
+
+        const slot = this.searchSlots(permit.slots, gameStart, gameEnd);
+
+        if (!slot) { continue; }
+
+        if (slot.games && slot.games.length > 0) {
+          const conflict = this.checkConflicts(place, slot, game, gameStart, gameEnd);
+
+          // try next
+          if (conflict) { continue; }
+        }
+
+        place.disabled = false;
+      }
+    }
+
+    return places;
+  }
+
+  searchSlots(slots: Slot[], gameStart, gameEnd) {
+    for (let i = 0; i < slots.length; i++) {
+      const slot = slots[i];
+      const slotStart = moment(slot.start);
+      const slotEnd = moment(slot.end);
+
+      // check if game start time fits into slot
+      if (gameStart.isSameOrAfter(slotStart) && gameEnd.isSameOrBefore(slotEnd)) {
+        return slot;
+      }
+    }
+  }
+
+  checkConflicts(place: Place, slot: Slot, game: Game, gameStart: any, gameEnd: any) {
+    for (let i = 0; i < slot.games.length; i++) {
+      const start = moment(slot.games[i].start);
+      const end = start.clone().add(2, 'hours');
+
+      // same id, skip
+      if (game && (game._id === slot.games[i]._id)) { continue; }
+
+      // check if game is same time or between existing game
+      if (gameStart.isSame(start) ||
+          gameEnd.isSame(end) ||
+          gameStart.isBetween(start, end) ||
+          gameEnd.isBetween(start, end)
+      ) {
+        if (place.locations && place.locations.length > 0) {
+          for (let x = 0; x < place.locations.length; x++) {
+            const location = place.locations[x];
+            if (slot.games[i].locations.indexOf(location._id) > -1) { location.disabled = true; }
+          }
+        } else {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 }
