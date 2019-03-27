@@ -89,7 +89,7 @@ export class AdminModalAddGameComponent implements OnInit {
         }
 
         // add place if exists
-        if (this.game.place._id) {
+        if (this.game.place && this.game.place._id) {
           this.gameForm.patchValue({ place: this.game.place._id });
           this.places = this.placeService.filterPlaces(this.places, this.game.start, this.game);
           this.showPlaces = true;
@@ -120,19 +120,21 @@ export class AdminModalAddGameComponent implements OnInit {
 
       // on place change, show locations (if exists)
       this.gameForm.get('place').valueChanges.subscribe(val => {
-        if (!val) { return; }
+        if (!val) {
+          this.gameForm.removeControl('locations');
+          this.showLocations = false;
+          this.locations = [];
+          return;
+        }
 
         const index = this.places.findIndex((p: Place) => p._id === val);
         const place = this.places[index];
 
         if (place.locations && place.locations.length > 0) {
           this.gameForm.addControl('locations', new FormControl('', Validators.required));
+          this.places = this.placeService.filterPlaces(this.places, this.game.start, this.game);
           this.showLocations = true;
           this.locations = place.locations;
-        } else {
-          this.gameForm.removeControl('locations');
-          this.showLocations = false;
-          this.locations = [];
         }
       });
     });
@@ -241,6 +243,8 @@ export class AdminModalAddGameComponent implements OnInit {
             return acc;
           }, []);
         }
+      } else {
+        delete this.game.place;
       }
 
       this.dialogRef.close({

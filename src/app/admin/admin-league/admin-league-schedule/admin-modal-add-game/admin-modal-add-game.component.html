@@ -100,6 +100,7 @@
             <div class="col-sm-6">
               <mat-form-field>
                 <mat-select placeholder="Select Place" formControlName="place">
+                  <mat-option>--- Select Place ---</mat-option>
                   <mat-option *ngFor="let place of places" [value]="place._id" [disabled]="place.disabled">
                     <ng-container *ngIf="!place.disabled">{{ place.name }}</ng-container>
                     <ng-container *ngIf="place.disabled">{{ place.name }} (Not Available)</ng-container>
