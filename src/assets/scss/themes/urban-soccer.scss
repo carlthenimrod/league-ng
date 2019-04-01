@@ -1,0 +1,9 @@
+$urban-soccer-primary: mat-palette($mat-green, 800);
+$urban-soccer-accent:  mat-palette($mat-amber, A100);
+$urban-soccer-warn:    mat-palette($mat-red);
+
+$urban-soccer-theme: mat-light-theme(
+  $urban-soccer-primary,
+  $urban-soccer-accent,
+  $urban-soccer-warn
+);
