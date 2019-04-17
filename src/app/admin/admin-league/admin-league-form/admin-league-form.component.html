@@ -45,27 +45,46 @@
     </header>
 
     <section id="form">
-      <mat-form-field>
-        <input
-          matInput
-          type="text"
-          placeholder="League Name"
-          formControlName="name"
-          required
-        >
-        <mat-error>Name is required.</mat-error>
-      </mat-form-field>
+      <div class="row">
+        <div class="col">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="League Name"
+                formControlName="name"
+                required
+              >
+              <mat-error>Name is required.</mat-error>
+            </mat-form-field>
+        </div>
+      </div>
 
-      <mat-form-field>
-        <textarea
-          matInput
-          cdkTextareaAutosize
-          cdkAutosizeMinRows="1"
-          cdkAutosizeMaxRows="10"
-          placeholder="League Description"
-          formControlName="description"
-        ></textarea>
-      </mat-form-field>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <textarea
+              matInput
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="10"
+              placeholder="League Description"
+              formControlName="description"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row mt-2" *ngIf="config && config.multi">
+        <div class="col-sm-6">
+          <mat-form-field>
+            <mat-label>Web Sites Belongs To</mat-label>
+            <mat-select formControlName="sites" multiple>
+              <mat-option *ngFor="let site of sites" [value]="site._id">{{ site.label }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
     </section>
 
     <div id="actions-mobile">

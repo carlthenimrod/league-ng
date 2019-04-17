@@ -1,44 +1,42 @@
 <section
   *ngIf="teams && teams.length > 0"
   id="team-list"
-  class="row bg-white rounded"
+  class="bg-white rounded"
   @teamsEnter
 >
-  <div class="col">
-    <app-admin-droppable
-      *ngFor="let team of teams let i = index; trackBy: trackById"
-      appAdminDraggable
-      (dragging)="onDrag($event, team)"
-      (dropped)="onDrop($event, i)"
-      [dragged]="dragged"
-      [dropTarget]="team"
-      [last]="(i + 1) === teams.length"
-    >
-      <div class="team" @teamEnter>
-        <div class="label">{{ team.name }}</div>
+  <app-admin-droppable
+    *ngFor="let team of teams let i = index; trackBy: trackById"
+    appAdminDraggable
+    (dragging)="onDrag($event, team)"
+    (dropped)="onDrop($event, i)"
+    [dragged]="dragged"
+    [dropTarget]="team"
+    [last]="(i + 1) === teams.length"
+  >
+    <div class="team" @teamEnter>
+      <div class="label">{{ team.name }}</div>
 
-        <div class="actions">
-          <button
-            mat-icon-button
-            color="primary"
-            [routerLink]="['/admin/teams/', team._id]"
-            draggable="true"
-            (dragstart)="stopPropagation($event)"
-          >
-            <i class="fas fa-pen"></i>
-          </button>
+      <div class="actions">
+        <button
+          mat-icon-button
+          color="primary"
+          [routerLink]="['/admin/teams/', team._id]"
+          draggable="true"
+          (dragstart)="stopPropagation($event)"
+        >
+          <i class="fas fa-pen"></i>
+        </button>
 
-          <button
-            mat-icon-button
-            color="primary"
-            (click)="onClickDelete(team)"
-            draggable="true"
-            (dragstart)="stopPropagation($event)"
-          >
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="onClickDelete(team)"
+          draggable="true"
+          (dragstart)="stopPropagation($event)"
+        >
+          <i class="fas fa-times"></i>
+        </button>
       </div>
-    </app-admin-droppable>
-  </div>
+    </div>
+  </app-admin-droppable>
 </section>

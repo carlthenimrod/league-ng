@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 
 import { League } from '@app/models/league';
 import { LeagueService } from '@app/core/league.service';
+import { ConfigService } from '@app/core/config.service';
+import { Config } from '@app/models/config';
+import { SiteService } from '@app/core/site.service';
+import { Site } from '@app/models/site';
 
 @Component({
   selector: 'app-admin-league-form',
@@ -15,22 +19,44 @@ export class AdminLeagueFormComponent implements OnInit {
   @Output('saveClick') saveClick: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output('cancelClick') cancelClick: EventEmitter<boolean> = new EventEmitter<boolean>();
   leagueForm: FormGroup;
+  config: Config;
+  sites: Site[];
 
   constructor(
+    private configService: ConfigService,
     private fb: FormBuilder,
     private leagueService: LeagueService,
-    private router: Router
+    private router: Router,
+    private siteService: SiteService
   ) { }
 
   ngOnInit() {
-    this.leagueForm = this.fb.group({
-      name: ['', Validators.required],
-      description: ['']
-    });
-
     if (this.league) {
-      this.leagueForm.patchValue(this.league);
+      this.leagueForm = this.fb.group({
+        name: [this.league.name, Validators.required],
+        description: [this.league.description]
+      });
+    } else {
+      this.leagueForm = this.fb.group({
+        name: ['', Validators.required],
+        description: ['']
+      });
     }
+
+    this.configService.configListener().subscribe((config: Config) => {
+      this.config = config;
+
+      if (this.config.multi) {
+        this.siteService.all().subscribe((sites: Site[]) => this.sites = sites);
+
+        if (this.league) {
+          const siteIds = this.league.sites.map(site => site._id);
+          this.leagueForm.addControl('sites', this.fb.control(siteIds));
+        } else {
+          this.leagueForm.addControl('sites', this.fb.control(''));
+        }
+      }
+    });
   }
 
   onSubmit() {
