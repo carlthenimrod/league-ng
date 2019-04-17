@@ -56,7 +56,7 @@ export class LeagueService {
     );
   }
 
-  delete(id: String): Observable<any> {
+  delete(id: string): Observable<any> {
     const url = this.api + `leagues/${id}`;
     return this.http.delete(url);
   }

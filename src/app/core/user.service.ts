@@ -54,7 +54,7 @@ export class UserService {
     );
   }
 
-  delete(id: String): Observable<any> {
+  delete(id: string): Observable<any> {
     const url = this.api + `users/${id}`;
     return this.http.delete(url);
   }

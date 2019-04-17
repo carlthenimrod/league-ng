@@ -63,7 +63,7 @@ export class TeamService {
     );
   }
 
-  delete(id: String): Observable<any> {
+  delete(id: string): Observable<any> {
     const url = this.api + `teams/${id}`;
     return this.http.delete(url);
   }
