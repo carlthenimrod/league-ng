@@ -45,6 +45,17 @@
     </li>
 
     <li class="nav-item">
+      <a
+        class="nav-link"
+        [routerLink]="['/admin/sites']"
+      >
+        <i class="fas fa-network-wired mr-2"></i>
+
+        <span>Sites</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
       <app-notice [total]="notices?.leagues">
         <a
           class="nav-link"
@@ -90,6 +101,14 @@
         <span>Places</span>
       </a>
     </li>
+
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/admin', 'settings']">
+        <i class="fas fa-cog mr-2"></i>
+
+        <span>Settings</span>
+      </a>
+    </li>
   </ul>
 </aside>
 
@@ -100,6 +119,17 @@
         <i class="fa fa-home mr-2"></i>
 
         <span>Home</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [routerLink]="['/admin/sites']"
+      >
+        <i class="fas fa-network-wired mr-2"></i>
+
+        <span>Sites</span>
       </a>
     </li>
 
@@ -132,6 +162,14 @@
         <i class="fas fa-map-marker-alt mr-2"></i>
 
         <span>Places</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/admin', 'settings']">
+        <i class="fas fa-cog mr-2"></i>
+
+        <span>Settings</span>
       </a>
     </li>
   </ul>

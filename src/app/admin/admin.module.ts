@@ -45,6 +45,7 @@ import { AdminModalPermitComponent } from './admin-place/admin-permits/admin-mod
 import { AdminTimeAdderComponent } from './admin-place/admin-permits/admin-modal-permit/admin-time-adder/admin-time-adder.component';
 import { AdminPermitComponent } from './admin-place/admin-permits/admin-permit/admin-permit.component';
 import { AdminModalTimeComponent } from './admin-place/admin-permits/admin-permit/admin-modal-time/admin-modal-time.component';
+import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 
 @NgModule({
   imports: [
@@ -95,7 +96,8 @@ import { AdminModalTimeComponent } from './admin-place/admin-permits/admin-permi
     AdminModalPermitComponent,
     AdminTimeAdderComponent,
     AdminPermitComponent,
-    AdminModalTimeComponent
+    AdminModalTimeComponent,
+    AdminSettingsComponent
   ],
   entryComponents: [
     AdminModalDivisionComponent,

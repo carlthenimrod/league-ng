@@ -15,6 +15,7 @@ import { AdminUserFormComponent } from './admin-user/admin-user-form/admin-user-
 import { AdminPlacesComponent } from './admin-places/admin-places.component';
 import { AdminPlaceFormComponent } from './admin-place/admin-place-form/admin-place-form.component';
 import { AdminPlaceComponent } from './admin-place/admin-place.component';
+import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent, children: [
@@ -30,6 +31,7 @@ const routes: Routes = [
     { path: 'places', component: AdminPlacesComponent },
     { path: 'places/new', component: AdminPlaceFormComponent },
     { path: 'places/:id', component: AdminPlaceComponent },
+    { path: 'settings', component: AdminSettingsComponent },
     { path: '**', component: AdminDashboardComponent }
   ] }
 ];

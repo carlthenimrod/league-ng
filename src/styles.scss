@@ -20,6 +20,14 @@ body {
   }
 }
 
+mat-checkbox {
+  user-select: none;
+
+  label.mat-checkbox-layout {
+    margin-bottom: 0 !important;
+  }
+}
+
 .dragging-over {
   pointer-events: none;
 
