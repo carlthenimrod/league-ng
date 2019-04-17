@@ -1,0 +1,120 @@
+<form [formGroup]="siteForm" (ngSubmit)="onSubmit()">
+  <section id="site-form">
+    <header>
+      <h1>Site Details</h1>
+
+      <div id="actions">
+        <button
+          *ngIf="!site"
+          type="submit"
+          mat-flat-button
+          color="primary"
+          [disabled]="!siteForm.valid"
+        >
+          <i class="fas fa-plus mr-1"></i>
+
+          Create Site
+        </button>
+
+        <button
+          *ngIf="site"
+          type="submit"
+          mat-flat-button
+          color="primary"
+          class="mr-2"
+          [disabled]="!siteForm.valid"
+        >
+          <i class="fas fa-save mr-1"></i>
+
+          Save
+        </button>
+
+        <button
+          *ngIf="site"
+          type="button"
+          mat-flat-button
+          color="warn"
+          (click)="onCancel()"
+        >
+          <i class="fas fa-times mr-1"></i>
+
+          Cancel
+        </button>
+      </div>
+    </header>
+
+    <section id="form">
+      <fieldset>
+        <h2>Site Info</h2>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Label"
+                formControlName="label"
+                required
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="URL"
+                formControlName="url"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+    </section>
+
+    <section id="actions-mobile">
+      <button
+        *ngIf="!site"
+        type="submit"
+        mat-flat-button
+        color="primary"
+        class="w-100"
+        [disabled]="!siteForm.valid"
+      >
+        <i class="fas fa-plus"></i>
+
+        <span>Create</span>
+      </button>
+
+      <button
+        *ngIf="site"
+        type="submit"
+        mat-flat-button
+        color="primary"
+        class="w-100"
+        [disabled]="!siteForm.valid"
+      >
+        <i class="fas fa-save"></i>
+
+        <span>Save</span>
+      </button>
+
+      <button
+        *ngIf="site"
+        type="button"
+        mat-flat-button
+        color="warn"
+        class="w-100"
+        (click)="onCancel()"
+      >
+        <i class="fas fa-times"></i>
+
+        <span>Cancel</span>
+      </button>
+    </section>
+  </section>
+</form>

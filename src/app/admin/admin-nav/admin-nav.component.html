@@ -1,4 +1,4 @@
-<nav>
+<nav *ngIf="config">
   <span>League App</span>
 
   <div id="actions">
@@ -27,7 +27,7 @@
   </div>
 </nav>
 
-<aside id="desktop">
+<aside *ngIf="config" id="desktop">
   <h2>
     League App
   </h2>
@@ -44,7 +44,7 @@
       </a>
     </li>
 
-    <li class="nav-item">
+    <li *ngIf="config.multi" class="nav-item">
       <a
         class="nav-link"
         [routerLink]="['/admin/sites']"
@@ -122,7 +122,7 @@
       </a>
     </li>
 
-    <li class="nav-item">
+    <li *ngIf="config.multi" class="nav-item">
       <a
         class="nav-link"
         [routerLink]="['/admin/sites']"

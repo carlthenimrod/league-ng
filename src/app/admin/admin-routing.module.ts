@@ -3,6 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminComponent } from './admin.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminSitesComponent } from './admin-sites/admin-sites.component';
+import { AdminSiteComponent } from './admin-site/admin-site.component';
+import { AdminSiteFormComponent } from './admin-site/admin-site-form/admin-site-form.component';
 import { AdminLeaguesComponent } from './admin-leagues/admin-leagues.component';
 import { AdminLeagueFormComponent } from './admin-league/admin-league-form/admin-league-form.component';
 import { AdminLeagueComponent } from './admin-league/admin-league.component';
@@ -19,6 +22,9 @@ import { AdminSettingsComponent } from './admin-settings/admin-settings.componen
 
 const routes: Routes = [
   { path: '', component: AdminComponent, children: [
+    { path: 'sites', component: AdminSitesComponent },
+    { path: 'sites/new', component: AdminSiteFormComponent },
+    { path: 'sites/:id', component: AdminSiteComponent },
     { path: 'leagues', component: AdminLeaguesComponent },
     { path: 'leagues/new', component: AdminLeagueFormComponent },
     { path: 'leagues/:id', component: AdminLeagueComponent },

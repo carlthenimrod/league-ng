@@ -10,7 +10,6 @@ import { UserService } from '@app/core/user.service';
   styleUrls: ['./admin-user-details.component.scss']
 })
 export class AdminUserDetailsComponent implements OnInit {
-
   @Input() user: User;
   @Output('editClick') editClick: EventEmitter<boolean> = new EventEmitter<boolean>();
 
