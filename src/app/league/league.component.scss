@@ -1,0 +1,67 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  @include make-container(0);
+  @include make-container-max-widths();
+  display: block;
+}
+
+header {
+  padding: 0 0 2rem 0;
+
+  h1 {
+    padding: 1rem 0;
+  }
+
+  p {
+    margin: 0;
+    padding: 1rem 0;
+  }
+}
+
+section#schedule {
+  article {
+    padding: 1rem 0;
+
+    h2 {
+      font-size: 1.4rem;
+      padding: 0 0 1rem 0;
+    }
+
+    .game {
+      line-height: 1rem;
+      padding: 0.25rem 0;
+
+      .teams {
+        display: inline-block;
+      }
+
+      .date {
+        display: inline-block;
+        font-size: 0.8rem;
+        line-height: 1.4rem;
+        padding: 0 0 0 1rem;
+      }
+
+      .place {
+        font-size: 0.8rem;
+        padding: 0.5rem 0;
+
+        .street {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+p#no-schedule {
+  border-top: 1px solid theme-color(dark);
+  border-bottom: 1px solid theme-color(dark);
+  padding: 1rem 0;
+  text-align: center;
+}
