@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { League } from '@app/models/league';
-import { LeagueService } from '@app/core/league.service';
+import { LeagueService } from '@app/services/league.service';
 
 @Component({
   selector: 'app-admin-league-details',

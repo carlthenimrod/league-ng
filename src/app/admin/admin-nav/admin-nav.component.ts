@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { slideNavTrigger, toggleNoticeTrigger } from './animations';
-import { NoticeService } from '@app/core/notice.service';
+import { NoticeService } from '@app/services/notice.service';
 import { NoticeList } from '@app/models/notice';
-import { ConfigService } from '@app/core/config.service';
+import { ConfigService } from '@app/services/config.service';
 import { Config } from '@app/models/config';
 
 @Component({

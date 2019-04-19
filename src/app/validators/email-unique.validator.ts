@@ -2,7 +2,7 @@ import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/fo
 import { Observable, timer, of } from 'rxjs';
 import { switchMap, mapTo, catchError } from 'rxjs/operators';
 
-import { UserService } from '@app/core/user.service';
+import { UserService } from '@app/services/user.service';
 
 export const emailUnique = (userService: UserService): AsyncValidatorFn => {
   return (control: AbstractControl): Observable<ValidationErrors | null> => {

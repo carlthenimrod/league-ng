@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { Place } from '@app/models/place';
-import { PlaceService } from '@app/core/place.service';
+import { PlaceService } from '@app/services/place.service';
 
 @Component({
   selector: 'app-admin-place',

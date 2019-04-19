@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { League } from '@app/models/league';
 import { Team } from '@app/models/team';
-import { TeamService } from '@app/core/team.service';
+import { TeamService } from '@app/services/team.service';
 
 @Component({
   selector: 'app-admin-modal-team',

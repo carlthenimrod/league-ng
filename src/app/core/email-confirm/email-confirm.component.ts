@@ -4,7 +4,7 @@ import { FormBuilder, Validators, FormControl, FormGroupDirective, NgForm } from
 import { ErrorStateMatcher } from '@angular/material';
 
 import { confirmPassword } from '@app/validators/password-confirm.validator';
-import { UserService } from '../user.service';
+import { UserService } from '@app/services/user.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {

@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material';
 import { AdminModalUserComponent } from './admin-modal-user/admin-modal-user.component';
 import { User } from '@app/models/user';
 import { Team } from '@app/models/team';
-import { TeamService } from '@app/core/team.service';
+import { TeamService } from '@app/services/team.service';
 import { usersEnterTrigger, userEnterTrigger } from './animations';
 
 @Component({

@@ -3,7 +3,7 @@ import { AnimationEvent } from '@angular/animations';
 import { Subscription } from 'rxjs';
 
 import { NoticeList, Notice } from '@app/models/notice';
-import { NoticeService } from '@app/core/notice.service';
+import { NoticeService } from '@app/services/notice.service';
 import { noticeListEnterTrigger, noticeToggleTrigger, noNoticesToggleTrigger } from './animations';
 
 @Component({

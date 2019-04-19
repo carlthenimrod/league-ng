@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Team } from '@app/models/team';
-import { TeamService } from '@app/core/team.service';
+import { TeamService } from '@app/services/team.service';
 
 @Component({
   selector: 'app-admin-team-details',

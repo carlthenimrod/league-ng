@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder } from '@angular/forms';
 
 import { League, Division } from '@app/models/league';
-import { LeagueService } from '@app/core/league.service';
+import { LeagueService } from '@app/services/league.service';
 
 @Component({
   selector: 'app-admin-modal-division',

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Renderer2, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { LeagueService } from '@app/core/league.service';
+import { LeagueService } from '@app/services/league.service';
 import { League, Division } from '@app/models/league';
 import { Team } from '@app/models/team';
 import {

@@ -5,7 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { League, Group } from '@app/models/league';
 import { Game } from '@app/models/game';
 import { Place, PlaceLocation } from '@app/models/place';
-import { PlaceService } from '@app/core/place.service';
+import { PlaceService } from '@app/services/place.service';
 
 @Component({
   selector: 'app-admin-modal-add-game',

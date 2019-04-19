@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { League } from '@app/models/league';
-import { LeagueService } from '@app/core/league.service';
+import { LeagueService } from '@app/services/league.service';
 
 @Component({
   selector: 'app-admin-league',

@@ -3,7 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import { User } from '@app/models/user';
 import { UserModalPasswordComponent } from './user-modal-password/user-modal-password.component';
-import { UserService } from '@app/core/user.service';
+import { UserService } from '@app/services/user.service';
 import { ProfileImg } from '@app/models/profile-img';
 
 @Component({

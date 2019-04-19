@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material';
 import { AdminModalDivisionComponent } from './admin-modal-division/admin-modal-division.component';
 import { AdminModalTeamComponent } from './admin-modal-team/admin-modal-team.component';
 import { League, Division } from '@app/models/league';
-import { LeagueService } from '@app/core/league.service';
+import { LeagueService } from '@app/services/league.service';
 import { Team } from '@app/models/team';
 import { paragraphEnterTrigger } from './animations';
 

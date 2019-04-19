@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { MatDialogRef, ErrorStateMatcher } from '@angular/material';
 
-import { UserService } from '@app/core/user.service';
+import { UserService } from '@app/services/user.service';
 import { confirmPassword } from '@app/validators/password-confirm.validator';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {

@@ -1,11 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatAutocompleteSelectedEvent } from '@angular/material';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { User } from '@app/models/user';
-import { UserService } from '@app/core/user.service';
+import { UserService } from '@app/services/user.service';
 import { Team } from '@app/models/team';
-import { TeamService } from '@app/core/team.service';
+import { TeamService } from '@app/services/team.service';
 
 @Component({
   selector: 'app-admin-modal-user',

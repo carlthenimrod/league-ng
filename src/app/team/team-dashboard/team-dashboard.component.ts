@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Team } from '@app/models/team';
-import { TeamService } from '@app/core/team.service';
+import { TeamService } from '@app/services/team.service';
 import { TeamWebsocketService } from '../team-websocket.service';
 import { Subscription } from 'rxjs';
 

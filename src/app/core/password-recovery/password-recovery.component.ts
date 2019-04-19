@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { UserService } from '../user.service';
+import { UserService } from '@app/services/user.service';
 
 @Component({
   selector: 'app-password-recovery',

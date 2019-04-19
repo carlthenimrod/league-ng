@@ -4,8 +4,8 @@ import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { Site } from '@app/models/site';
-import { SiteService } from '@app/core/site.service';
-import { ConfigService } from '@app/core/config.service';
+import { SiteService } from '@app/services/site.service';
+import { ConfigService } from '@app/services/config.service';
 import { Config } from '@app/models/config';
 
 @Component({

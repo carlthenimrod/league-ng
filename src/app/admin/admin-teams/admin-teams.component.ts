@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Team } from '@app/models/team';
-import { TeamService } from '@app/core/team.service';
+import { TeamService } from '@app/services/team.service';
 
 @Component({
   selector: 'app-admin-teams',

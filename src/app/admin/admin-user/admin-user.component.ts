@@ -4,8 +4,8 @@ import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { User } from '@app/models/user';
-import { UserService } from '@app/core/user.service';
-import { NoticeService } from '@app/core/notice.service';
+import { UserService } from '@app/services/user.service';
+import { NoticeService } from '@app/services/notice.service';
 
 @Component({
   selector: 'app-admin-user',

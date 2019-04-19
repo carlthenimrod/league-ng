@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Site } from '@app/models/site';
-import { SiteService } from '@app/core/site.service';
+import { SiteService } from '@app/services/site.service';
 
 @Component({
   selector: 'app-admin-site-form',

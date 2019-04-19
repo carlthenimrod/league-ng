@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Place } from '@app/models/place';
-import { PlaceService } from '@app/core/place.service';
+import { PlaceService } from '@app/services/place.service';
 
 @Component({
   selector: 'app-admin-place-details',

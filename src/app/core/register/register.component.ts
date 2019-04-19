@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { User } from '@app/models/user';
-import { UserService } from '../user.service';
+import { UserService } from '@app/services/user.service';
 import { emailUnique } from '@app/validators/email-unique.validator';
 import {
   typeSelectTrigger,

@@ -4,7 +4,7 @@ import { Observable, of, EMPTY } from 'rxjs';
 import { take, mergeMap } from 'rxjs/operators';
 
 import { Team } from '@app/models/team';
-import { TeamService } from '@app/core/team.service';
+import { TeamService } from '@app/services/team.service';
 import { AuthService } from '@app/auth/auth.service';
 
 @Injectable({

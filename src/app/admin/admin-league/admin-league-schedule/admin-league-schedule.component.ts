@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import { League, ScheduleOptions, Group } from '@app/models/league';
-import { LeagueService } from '@app/core/league.service';
+import { LeagueService } from '@app/services/league.service';
 import { AdminModalAutoGenerateComponent } from './admin-modal-auto-generate/admin-modal-auto-generate.component';
 import { Game } from '@app/models/game';
 import { AdminModalAddGameComponent } from './admin-modal-add-game/admin-modal-add-game.component';

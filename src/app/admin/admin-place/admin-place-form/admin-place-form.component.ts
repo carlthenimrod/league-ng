@@ -3,7 +3,7 @@ import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Place } from '@app/models/place';
-import { PlaceService } from '@app/core/place.service';
+import { PlaceService } from '@app/services/place.service';
 
 @Component({
   selector: 'app-admin-place-form',

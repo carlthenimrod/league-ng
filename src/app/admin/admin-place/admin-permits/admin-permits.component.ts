@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import { Permit } from '@app/models/place';
-import { PlaceService } from '@app/core/place.service';
+import { PlaceService } from '@app/services/place.service';
 import { AdminModalPermitComponent } from './admin-modal-permit/admin-modal-permit.component';
 import { permitsEnterTrigger } from './animations';
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { LeagueService } from '@app/core/league.service';
+import { LeagueService } from '@app/services/league.service';
 import { Team } from '@app/models/team';
 import { teamsEnterTrigger, teamEnterTrigger } from './animations';
 

@@ -3,10 +3,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { League } from '@app/models/league';
-import { LeagueService } from '@app/core/league.service';
-import { ConfigService } from '@app/core/config.service';
+import { LeagueService } from '@app/services/league.service';
+import { ConfigService } from '@app/services/config.service';
 import { Config } from '@app/models/config';
-import { SiteService } from '@app/core/site.service';
+import { SiteService } from '@app/services/site.service';
 import { Site } from '@app/models/site';
 
 @Component({

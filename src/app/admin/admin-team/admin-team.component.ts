@@ -4,8 +4,8 @@ import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { Team } from '@app/models/team';
-import { TeamService } from '@app/core/team.service';
-import { NoticeService } from '@app/core/notice.service';
+import { TeamService } from '@app/services/team.service';
+import { NoticeService } from '@app/services/notice.service';
 
 @Component({
   selector: 'app-admin-team',

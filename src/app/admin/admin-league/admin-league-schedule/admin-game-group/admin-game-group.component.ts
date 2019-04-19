@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 
-import { LeagueService } from '@app/core/league.service';
+import { LeagueService } from '@app/services/league.service';
 import { League, Group } from '@app/models/league';
 import { Game } from '@app/models/game';
 import { AdminModalEditGroupComponent } from './admin-modal-edit-group/admin-modal-edit-group.component';

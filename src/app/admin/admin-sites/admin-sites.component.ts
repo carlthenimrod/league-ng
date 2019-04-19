@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { SiteService } from '@app/core/site.service';
+import { SiteService } from '@app/services/site.service';
 import { Site } from '@app/models/site';
-import { ConfigService } from '@app/core/config.service';
+import { ConfigService } from '@app/services/config.service';
 import { Config } from '@app/models/config';
 
 @Component({
