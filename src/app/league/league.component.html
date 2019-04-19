@@ -1,0 +1,71 @@
+<section id="league" *ngIf="league">
+  <header>
+    <h1>{{ league.name }}</h1>
+
+    <p *ngIf="league.description">{{ league.description }}</p>
+  </header>
+
+  <section id="schedule" *ngIf="league.schedule && league.schedule.length > 0">
+    <article *ngFor="let group of league.schedule">
+      <h2>{{ group.label }}</h2>
+
+      <div class="game" *ngFor="let game of group.games">
+        <div class="teams">
+          <span>{{ game.away.name }}</span> @ <span>{{ game.home.name }}</span>
+        </div>
+
+        <div class="date" *ngIf="game.start && game.time">
+          <span>Start: {{ game.start | date: 'medium' }}</span>
+        </div>
+
+        <div class="date" *ngIf="!game.start || !game.time">
+          <span>Start: TBD</span>
+        </div>
+
+        <div class="place" *ngIf="game.place && game.place.name">
+          <div class="name">{{ game.place.name }}</div>
+
+          <div
+            class="address"
+            *ngIf="game.place.address.street ||
+              game.place.address.city ||
+              game.place.address.state ||
+              game.place.address.postal"
+          >
+            <span
+              class="street"
+              *ngIf="game.place.address.street"
+            >
+              {{ game.place.address.street }}
+            </span>
+
+            <span
+              class="city"
+              *ngIf="game.place.address.city"
+            >
+                {{ game.place.address.city }}
+            </span>
+
+            <span
+              class="state"
+              *ngIf="game.place.address.state"
+            >
+                {{ game.place.address.state }}
+            </span>
+
+            <span
+              class="postal"
+              *ngIf="game.place.address.postal"
+            >
+              {{ game.place.address.postal }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <p id="no-schedule" *ngIf="!league.schedule || league.schedule.length === 0">
+    League currently has no games scheduled.
+  </p>
+</section>
