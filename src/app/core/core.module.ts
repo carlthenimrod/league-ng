@@ -17,6 +17,7 @@ import { EmailConfirmComponent } from './email-confirm/email-confirm.component';
 import { LogoutComponent } from './logout/logout.component';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import { RouterModule } from '@angular/router';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { RouterModule } from '@angular/router';
     RegistrationCompleteComponent,
     EmailConfirmComponent,
     LogoutComponent,
-    PasswordRecoveryComponent
+    PasswordRecoveryComponent,
+    AboutComponent
   ],
   entryComponents: [
     ModalAddPlayerComponent

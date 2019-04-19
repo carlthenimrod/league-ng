@@ -1,1 +1,64 @@
+<header>
+  <div class="wrapper">
+    <a
+      class="menu"
+      (click)="showMobile = !showMobile"
+    >
+      Menu<span>+</span>
+    </a><!-- .menu -->
+
+    <a href="#" class="logo">
+      <img src="assets/img/flareNYCsports.png" alt="flareNYCsports">
+    </a><!-- .logo -->
+
+    <nav>
+      <ul>
+        <li><a [routerLink]="['/']">Home</a></li>
+
+        <li><a [routerLink]="['/about']" title="About Us">About Us</a></li>
+
+        <li *ngIf="leagues">
+          <a title="Sports" class="mobile-sub">Soccer <span>+</span></a>
+
+          <ul>
+            <li *ngFor="let league of leagues">
+              <a [routerLink]="['league', league._id]" title="league.name">
+                {{ league.name }}
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<nav class="mobile" [ngStyle]="{'display': showMobile ? 'block' : 'none'}">
+  <ul>
+    <li><a [routerLink]="['/']" title="Home">Home</a></li>
+    <li><a [routerLink]="['/about']" title="About Us">About Us</a></li>
+    <li>
+      <a
+        title="Sports"
+        class="mobile-sub"
+      >
+        Soccer<span>+</span>
+      </a>
+    <ul>
+      <li><a href="#" title="Coed">Coed</a></li>
+      <li><a href="#" title="Men">Men</a></li>
+      <li><a href="#" title="Youth">Youth</a></li>
+    </ul>
+    </li>
+  </ul>
+</nav><!-- .mobile -->
+
 <router-outlet></router-outlet>
+
+<footer>
+  <div class="wrapper">
+      <nav></nav>
+
+      <img src="assets/img/footer-logo-crown.png" class="logo" alt="flareNYCsports"><!-- .logo -->
+  </div>
+</footer>

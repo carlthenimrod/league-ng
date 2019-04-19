@@ -8,6 +8,8 @@
   @include make-container(0);
   @include make-container-max-widths();
   display: block;
+  background-color: #fff;
+  padding: 20px 0;
 }
 
 section#admin {

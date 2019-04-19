@@ -1,0 +1,676 @@
+/***********************************
+****** Desktop CSS *****************
+***********************************/
+:host {
+  background: #000 url('assets/img/browser-bg.jpg') repeat-x top left;
+  display: block;
+	font-family: "Adobe Gothic Std B", sans-serif;
+	font-size: 16px;
+	margin: 0;
+}
+
+/*** Wrapper ***/
+.wrapper{
+  margin: 0 auto;
+  position: relative;
+	width: 960px;
+}
+
+a.disabled {
+  color: gray;
+  cursor: not-allowed;
+  text-decoration: underline;
+}
+
+/*** Header ***/
+header{
+	height: 100px;
+	position: relative;
+}
+
+header a.logo{
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 9999;
+}
+
+header a.menu{
+	color: #fff;
+	display: none;
+	float: right;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 30px;
+	padding: 40px 10px 0 0;
+	position: relative;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+header a.menu span{
+	position: relative;
+	top: -2px;
+	left: 2px;
+}
+
+/*** Nav ***/
+header nav ul{
+	margin: 0;
+	text-align: right;
+}
+
+header nav ul{
+	padding: 0;
+	margin: 0;
+}
+
+header nav li{
+	display: inline-block;
+	position: relative;
+}
+
+header nav li a{
+	color: #fff;
+	display: block;
+	font-size: 14px;
+	padding: 65px 10px 10px 10px;
+	line-height: 25px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+header nav li a:hover{
+	background-color: #272727;
+}
+
+header nav li a.register{
+	background-color: #f00;
+	margin: 60px 0 5px 0;
+	padding: 5px 10px 5px 10px;
+}
+
+header nav li a.register:hover{
+	background-color: #f00;
+}
+
+header nav li ul{
+	display: none;
+	padding: 0;
+	position: absolute;
+	top: 98px;
+	margin: 0;
+	width: 200px;
+	z-index: 9998;
+}
+
+header nav li:hover ul{
+	display: block;
+}
+
+header nav li ul li a{
+	background-color: #262626;
+	border-top: 1px solid #959394;
+	color: #fff;
+	display: block;
+	padding: 2px 0 2px 20px;
+	text-align: left;
+	width: 200px;
+}
+
+/*** Mobile ***/
+.mobile{
+  display: none;
+  margin-top: 50px;
+}
+
+/*** Footer ***/
+footer{
+	background: url('assets/img/content-area-bg.jpg') top left;
+	overflow: hidden;
+	padding: 150px 0 40px 0;
+	position: relative;
+}
+
+footer nav{
+	/**border-bottom: 2px solid #6f6f6f; **/
+	padding: 40px 0 0 10px;
+	width: 85%;
+}
+
+footer a{
+	color: #4c4b4b;
+	font-size: 11px;
+	padding: 0 7px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+footer img.partners{
+	width: 100%;
+}
+
+footer img.logo{
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+}
+
+/*** About ***/
+.dest-banner{
+	background: url('assets/img/dest-banner-bg.jpg') left top;
+}
+
+.dest-banner img{
+	display: block;
+	margin: 10px 0 0 0;
+	width: 100%;
+}
+
+.dest-content{
+	border-collapse: collapse;
+	display: table;
+	overflow: hidden;
+	margin: 5px 0 0 0;
+}
+
+.dest-content aside{
+	background: url('assets/img/content-area-bg.jpg') repeat-y top left;
+	display: table-cell;
+	padding: 10px 0 0 0;
+	position: relative;
+	vertical-align: top;
+	width: 24%;
+}
+
+.dest-content .spacing{
+	display: table-cell;
+	width: 1%;
+}
+
+.dest-content .about, .dest-content .contact{
+	background: url('assets/img/content-area-bg.jpg') repeat-y top left;
+	display: table-cell;
+	padding: 10px 20px;
+	vertical-align: top;
+	width: 75%;
+}
+
+.dest-content .about h1, .dest-content .contact h1{
+	color: #595959;
+	font-size: 24px;
+	text-transform: uppercase;
+}
+
+.dest-content .about h1 span{
+	color: #f00;
+}
+
+.dest-content .about h2{
+	color: #494949;
+	font-family: Arial, sans-serif, Helvetica;
+	font-size: 18px;
+}
+
+.dest-content .about p{
+	color: #000;
+	font-family: Arial, sans-serif, Helvetica;
+	font-size: 12px;
+	line-height: 18px;
+}
+
+.dest-content .about ol{
+	color: #000;
+	font-family: Arial, sans-serif, Helvetica;
+	font-size: 12px;
+	line-height: 18px;
+}
+
+.dest-content .about ol ol{
+	list-style-type: lower-alpha;
+}
+
+.dest-content .about .store-logo{
+	display: block;
+	margin: 100px auto 0 auto;
+}
+
+
+/*Flag football*/
+.dest-content .flag-football, .dest-content .contact{
+	background: url('assets/img/content-area-bg.jpg') repeat-y top left;
+	display: table-cell;
+	padding: 10px 20px;
+	vertical-align: top;
+	width: 75%;
+}
+
+.dest-content .flag-football h1, .dest-content .contact h1{
+	color: #595959;
+	font-size: 24px;
+	text-transform: uppercase;
+}
+
+.dest-content .flag-football h1 span{
+	color: #f00;
+}
+
+.dest-content .flag-football h2{
+	color: #494949;
+	font-family: Arial, sans-serif, Helvetica;
+	font-size: 18px;
+}
+
+.dest-content .flag-football p{
+	color: #000;
+	font-family: Arial, sans-serif, Helvetica;
+	font-size: 12px;
+	line-height: 18px;
+}
+
+.dest-content .flag-football ol{
+	color: #000;
+	font-family: Arial, sans-serif, Helvetica;
+	font-size: 12px;
+	line-height: 18px;
+}
+
+.dest-content .flag-football ol ol{
+	list-style-type: lower-alpha;
+}
+
+.dest-content .flag-football .store-logo{
+	display: block;
+	margin: 100px auto 0 auto;
+}
+
+/*FAQ*/
+.dest-content .faq, .dest-content .contact{
+	background: url('assets/img/content-area-bg.jpg') repeat-y top left;
+	display: table-cell;
+	padding: 10px 20px;
+	vertical-align: top;
+	width: 75%;
+}
+
+.dest-content .faq h1, .dest-content .contact h1{
+	color: #595959;
+	font-size: 24px;
+	text-transform: uppercase;
+}
+
+.dest-content .faq h1 span{
+	color: #f00;
+}
+
+.dest-content .faq h2{
+	color: #494949;
+	font-family: Arial, sans-serif, Helvetica;
+	font-size: 18px;
+}
+
+.dest-content .faq p{
+	color: #000;
+	font-family: Arial, sans-serif, Helvetica;
+	font-size: 12px;
+}
+
+.dest-content .faq ol{
+	color: #000;
+	font-family: Arial, sans-serif, Helvetica;
+	font-size: 12px;
+	line-height: 12px;
+}
+
+.dest-content .faq ol ol{
+	list-style-type: lower-alpha;
+}
+
+.dest-content .faq .store-logo{
+	display: block;
+	margin: 100px auto 0 auto;
+}
+
+.faq .question{
+	font-size:14px;
+	font-weight:bold;
+	margin-bottom:0px;
+	padding-bottom:0px;
+}
+
+.dest-content ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.dest-content ul li a{
+	background-color: #272727;
+	color: #fff;
+	display: block;
+	font-size: 14px;
+	line-height: 35px;
+	padding: 0 0 0 25px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.dest-content ul li.sub-menu > a{
+	background: #272727 url('assets/img/down-arrow.png') 95% center no-repeat;
+}
+
+.dest-content ul li a:hover{
+	background-color: #434242;
+}
+
+.dest-content ul li{
+	margin: 0 0 6px 0;
+}
+
+.dest-content ul li img{
+	background-color: #272727;
+	display: block;
+	padding: 5px 20px;
+	width: 100%;
+}
+
+.dest-content ul ul{
+	border-top: 1px solid #bcbcbc;
+	display: none;
+}
+
+.dest-content ul ul a{
+	background-color: #8c8c8c;
+	padding: 0 0 0 30px;
+}
+
+.dest-content ul ul li{
+	margin: 0;
+}
+
+.dest-content aside > img {
+	display: block;
+	border: 2px solid #343434;
+	margin: 20px 5% 0 5%;
+	width: 90%;
+}
+
+.dest-content aside a.learn-more{
+	background-color: #8f8f8f;
+	border-radius: 20px;
+	box-shadow: 3px 3px 5px #000000;
+	color: #272727;
+	display: block;
+	margin: 0 auto;
+	padding: 7px 15px 5px 15px;
+	position: relative;
+	top: -43px;
+	left: 0;
+	width: 70%;
+	text-decoration:none;
+}
+
+/*** glideForm CSS ***/
+.gf-form, .gf-form *{
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.gf-form{
+	border-radius:  0 3px 3px 0;
+	font-size: 12px;
+	padding: 0px 50px;
+	top: 0px;
+	width: 100%;
+}
+
+.gf-tab{
+	background-color: #ccc;
+	border-top: 1px solid #aaa;
+	border-right: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	border-radius:  0 5px 5px 0;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 30px 15px 30px 15px;
+	position: absolute;
+	top: 30px;
+	right: -40px;
+	text-align: center;
+	width: 40px;
+	word-wrap: break-word;
+	z-index: 999;
+}
+
+.gf-tab:hover{
+	cursor: pointer;
+}
+
+.gf-row{
+	display: table;
+	width: 100%;
+}
+
+.gf-row-divider{
+	display: table;
+	width: 100%;
+	background-color:#666;
+	text-align:center;
+	margin-top: 10px;
+	font-weight: bold;
+	padding-top:20px;
+}
+
+.gf-row-waiver{
+  height:150px;
+  overflow:scroll;
+  overflow-x:hidden;
+}
+
+.gf-form label{
+	display: table-cell;
+	font-family: Verdana;
+	font-size: 11px;
+	padding: 0 20px 0 0;
+	text-align: right;
+	vertical-align: middle;
+	width: 20%;
+}
+
+.gf-input{
+	display: table-cell;
+	width: 80%;
+}
+
+.gf-form input{
+	border: 1px solid #aaa;
+	margin: 5px 0;
+	padding: 2px 5px;
+	width: 100%;
+}
+
+.gf-form textarea{
+	border: 1px solid #aaa;
+	height: 120px;
+	margin: 0px 0;
+	padding: 2px 5px;
+	width: 100%;
+}
+
+.gf-btns{
+	display: table-cell;
+	text-align: right;
+}
+
+.gf-btns button{
+	background-color: #eee;
+	border: 1px solid #fff;
+	font-size: 11px;
+	font-weight: bold;
+	margin-left: 7px;
+	padding: 10px 0;
+	text-align: center;
+	width: 70px;
+}
+
+.gf-btns button:hover{
+	border: 1px solid #aaa;
+}
+
+.gf-pagination{
+	margin: 20px 0 0 0;
+	text-align: right;
+}
+
+.gf-pagination div{
+	cursor: pointer;
+	display: inline;
+	font-weight: bold;
+	padding: 0 5px;
+}
+
+.gf-pagination div:hover{
+	text-decoration: underline;
+}
+
+.gf-pagination div.gf-selected{
+	text-decoration: underline;
+}
+
+/***********************************
+****** Tablet CSS ******************
+***********************************/
+@media only screen AND (min-width: 768px) AND (max-width: 1024px){
+	/*** Wrapper ***/
+	.wrapper{
+		margin: 0 auto;
+		padding: 0 10px;
+		width: 100%;
+	}
+
+	/*** Nav ***/
+	header nav li a{
+		font-size: 12px;
+		padding: 65px 7px 7px 10px;
+	}
+}
+
+/***********************************
+****** Mobile CSS ******************
+***********************************/
+@media only screen AND (max-width: 480px){
+	/*** Wrapper ***/
+	.wrapper{
+		margin: 0 auto;
+		padding: 0;
+		width: 100%;
+	}
+
+	/*** Header ***/
+	header{
+		height: 65px;
+	}
+
+	/*** Nav ***/
+	header nav{
+		display: none;
+  }
+
+	header a.logo{
+		position: relative;
+		height: 105px;
+		margin: 0 auto;
+		top: 5px;
+		width: 105px;
+  }
+
+	header a.logo img{
+		height: 100%;
+		width: 100%;
+  }
+
+	header a.menu{
+		display: block;
+	}
+
+	/*** Mobile ***/
+	.mobile{
+		border-top: 2px solid #7f7f7f;
+		border-bottom: 1px solid #000;
+  }
+
+	.mobile ul{
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+  }
+
+	.mobile a{
+		background-color: #272727;
+		border-bottom: 2px solid #4a4a4a;
+		color: #fff;
+		display: block;
+		font-size: 14px;
+		padding: 10px 10px 10px 105px;
+		text-decoration: none;
+		text-transform: uppercase;
+		width: 100%;
+  }
+
+	.mobile a:hover{
+		background-color: #434242;
+  }
+
+	.mobile ul ul a{
+		background-color: #434242;
+		padding: 10px 10px 10px 125px;
+  }
+
+	.mobile a.register{
+		background-color: #f00;
+  }
+
+	.mobile ul ul{
+		display: none;
+  }
+
+	a.mobile-sub{
+		position: relative;
+  }
+
+	a.mobile-sub span{
+		position: relative;
+		top: -1px;
+		left: 1px;
+	}
+
+	/*** Footer ***/
+	footer{
+		margin: 20px 0 0 0;
+  }
+
+	footer nav{
+		padding: 40px 0 0 0;
+		text-align: center;
+		width: 100%;
+  }
+
+	footer a{
+		padding: 0 5px;
+  }
+
+	footer img.partners{
+		display: none;
+  }
+
+	footer img.logo{
+		display: block;
+		margin: 0 auto;
+		padding: 20px 0;
+		position: relative;
+		bottom: 0;
+		right: 0;
+	}
+}
