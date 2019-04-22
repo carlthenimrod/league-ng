@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  api: 'https://radiant-peak-62646.herokuapp.com/',
-  ws: 'ws://radiant-peak-62646.herokuapp.com/'
+  api: 'https://node-league.herokuapp.com/',
+  ws: 'ws://node-league.herokuapp.com/'
 };
