@@ -8,6 +8,14 @@ export interface Team {
   players?: Player[];
   coaches?: Coach[];
   managers?: Manager[];
+  position?: number;
+  wins?: number;
+  losses?: number;
+  draws?: number;
+  points?: number;
+  goalsFor?: number;
+  goalsAgainst?: number;
+  goalDifference?: number;
   _id?: string;
   __v?: number;
 }

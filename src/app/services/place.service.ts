@@ -106,7 +106,7 @@ export class PlaceService {
 
   filterPlaces(places: Place[], start: string, game: Game): Place[] {
     const gameStart = moment(start);
-    const gameEnd = gameStart.clone().add(2, 'hours');
+    const gameEnd = gameStart.clone().add(45, 'minutes');
 
     for (let i = 0; i < places.length; i++) {
       const place = places[i];
@@ -149,7 +149,7 @@ export class PlaceService {
   checkConflicts(place: Place, slot: Slot, game: Game, gameStart: any, gameEnd: any) {
     for (let i = 0; i < slot.games.length; i++) {
       const start = moment(slot.games[i].start);
-      const end = start.clone().add(2, 'hours');
+      const end = start.clone().add(45, 'minutes');
 
       // same id, skip
       if (game && (game._id === slot.games[i]._id)) { continue; }
