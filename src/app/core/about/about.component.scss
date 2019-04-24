@@ -12,4 +12,20 @@ h1 {
 
 p {
   color: #fff;
+
+  a {
+    color: #fff;
+    text-decoration: underline;
+
+    &:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}
+
+img {
+  display: block;
+  margin: 10px auto;
+  max-width: 600px;
 }
