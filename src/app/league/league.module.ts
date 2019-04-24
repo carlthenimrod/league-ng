@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { LeagueRoutingModule } from './league-routing.module';
 import { LeagueComponent } from './league.component';
+import { LeagueStandingsComponent } from './league-standings/league-standings.component';
+import { LeagueScheduleComponent } from './league-schedule/league-schedule.component';
 
 @NgModule({
   imports: [
@@ -10,7 +12,9 @@ import { LeagueComponent } from './league.component';
     LeagueRoutingModule
   ],
   declarations: [
-    LeagueComponent
+    LeagueComponent,
+    LeagueStandingsComponent,
+    LeagueScheduleComponent
   ]
 })
 export class LeagueModule { }

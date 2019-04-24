@@ -12,6 +12,7 @@ import { League } from '@app/models/league';
   styleUrls: ['./league.component.scss']
 })
 export class LeagueComponent implements OnInit, OnDestroy {
+  tab = 'schedule';
   league: League;
   leagueSubscription: Subscription;
 
