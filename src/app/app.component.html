@@ -37,18 +37,16 @@
   <ul>
     <li><a [routerLink]="['/']" title="Home">Home</a></li>
     <li><a [routerLink]="['/about']" title="About Us">About Us</a></li>
-    <li>
-      <a
-        title="Sports"
-        class="mobile-sub"
-      >
-        Soccer<span>+</span>
-      </a>
-    <ul>
-      <li><a href="#" title="Coed">Coed</a></li>
-      <li><a href="#" title="Men">Men</a></li>
-      <li><a href="#" title="Youth">Youth</a></li>
-    </ul>
+    <li *ngIf="leagues">
+      <a title="Sports" class="mobile-sub">Soccer <span>+</span></a>
+
+      <ul>
+        <li *ngFor="let league of leagues">
+          <a [routerLink]="['league', league._id]" title="league.name">
+            {{ league.name }}
+          </a>
+        </li>
+      </ul>
     </li>
   </ul>
 </nav><!-- .mobile -->
