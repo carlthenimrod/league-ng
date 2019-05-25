@@ -1,23 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Team } from '@app/models/team';
-import { TeamWebsocketService } from './team-websocket.service';
+import { TeamSocketService } from '@app/services/team-socket.service';
 
 @Component({
   selector: 'app-team-component',
   templateUrl: './team.component.html',
   styleUrls: ['./team.component.scss']
 })
-export class TeamComponent implements OnInit {
+export class TeamComponent implements OnInit, OnDestroy {
+  team: Team;
+
   constructor(
     private route: ActivatedRoute,
-    private ws: TeamWebsocketService
+    private teamSocket: TeamSocketService
   ) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: {team: Team}) => {
-      const team = data.team;
+      this.team = data.team;
+
+      this.teamSocket.join(this.team._id);
     });
+  }
+
+  ngOnDestroy() {
+    this.teamSocket.leave(this.team._id);
   }
 }

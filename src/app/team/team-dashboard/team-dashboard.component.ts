@@ -3,8 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
-import { TeamWebsocketService } from '../team-websocket.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-team-dashboard',
@@ -13,13 +11,10 @@ import { Subscription } from 'rxjs';
 })
 export class TeamDashboardComponent implements OnInit {
   team: Team;
-  connected: boolean;
-  sub: Subscription;
 
   constructor(
     private route: ActivatedRoute,
-    private teamService: TeamService,
-    private ws: TeamWebsocketService
+    private teamService: TeamService
   ) { }
 
   ngOnInit() {

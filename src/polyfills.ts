@@ -14,6 +14,8 @@
  * Learn more in https://angular.io/docs/ts/latest/guide/browser-support.html
  */
 
+(window as any).global = window;
+
 /***************************************************************************************************
  * BROWSER POLYFILLS
  */
@@ -38,7 +40,7 @@
 // import 'classlist.js';  // Run `npm install --save classlist.js`.
 
 /** IE10 and IE11 requires the following for the Reflect API. */
-// import 'core-js/es6/reflect';
+import 'core-js/es7/reflect';
 
 
 /** Evergreen browsers require these. **/

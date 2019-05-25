@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 import { ActivatedRoute } from '@angular/router';
-import { TeamWebsocketService } from '../team-websocket.service';
 
 @Component({
   selector: 'app-team-sidebar',
@@ -15,8 +14,7 @@ export class TeamSidebarComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private teamService: TeamService,
-    private ws: TeamWebsocketService
+    private teamService: TeamService
   ) { }
 
   ngOnInit() {
