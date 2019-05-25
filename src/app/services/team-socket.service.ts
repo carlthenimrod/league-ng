@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subscription, fromEvent, Observable } from 'rxjs';
 
 import { SocketService } from './socket.service';
 
@@ -7,6 +8,7 @@ import { SocketService } from './socket.service';
 })
 export class TeamSocketService {
   socket: SocketIOClient.Socket;
+  socketSubscription: Subscription;
 
   constructor(
     private socketService: SocketService
@@ -17,9 +19,7 @@ export class TeamSocketService {
   join(teamId: string) {
     this.socket.emit('join', teamId);
 
-    this.socket.on('joined', msg => {
-      console.log(msg);
-    });
+    const obs: Observable<any> = fromEvent(this.socket, 'team');
 
     this.socket.on('team', payload => {
       if (payload.action === 'roster') {

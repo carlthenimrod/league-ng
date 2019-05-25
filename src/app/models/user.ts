@@ -5,6 +5,7 @@ export interface User {
   fullName?: string;
   email?: string;
   status?: string;
+  onlineStatus?: string;
   img?: string;
   verified?: boolean;
   teams?: [{

@@ -29,11 +29,11 @@ export class SocketService {
     });
 
     this.socket.on('disconnect', () => {
-      console.log('disconnected');
+      this.connected.next(false);
     });
 
     this.socket.on('error', error => {
-      console.log(error);
+      this.connected.next(false);
     });
   }
 }
