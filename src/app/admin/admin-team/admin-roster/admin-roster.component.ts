@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { AdminModalUserComponent } from './admin-modal-user/admin-modal-user.component';
@@ -13,17 +13,13 @@ import { usersEnterTrigger, userEnterTrigger } from './animations';
   styleUrls: ['./admin-roster.component.scss'],
   animations: [usersEnterTrigger, userEnterTrigger]
 })
-export class AdminRosterComponent implements OnInit {
-
+export class AdminRosterComponent {
   @Input() team: Team;
 
   constructor(
     private dialog: MatDialog,
     private teamService: TeamService
   ) { }
-
-  ngOnInit() {
-  }
 
   onClickAddUser() {
     const dialogRef = this.dialog.open(AdminModalUserComponent, {

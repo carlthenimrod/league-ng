@@ -1,48 +1,27 @@
-<aside id="roster">
+<aside id="roster" *ngIf="team">
   <h1>Roster</h1>
 
-  <section>
-    <h2>Manager</h2>
+  <ng-container *ngFor="let group of team.roster">
+    <section *ngIf="group.users.length > 0">
+      <h2>{{ group.role | titlecase }}</h2>
 
-    <ul>
-      <li *ngFor="let manager of team.managers">
-        <figure>
-          <img *ngIf="manager.img" [src]="manager.img" [alt]="manager.fullName">
-          <i *ngIf="!manager.img" class="placeholder" class="fas fa-user"></i>
-        </figure>
+      <ul>
+        <li
+          *ngFor="let user of group.users"
+          [ngClass]="{'online': user.status === 'online'}"
+        >
+          <div class="img">
+            <div class="status"></div>
 
-        <span>{{ manager.fullName }}</span>
-      </li>
-    </ul>
-  </section>
+            <figure>
+              <img *ngIf="user.img" [src]="user.img" [alt]="user.fullName">
+              <i *ngIf="!user.img" class="placeholder fas fa-user"></i>
+            </figure>
+          </div>
 
-  <section>
-    <h2>Coach</h2>
-
-    <ul>
-      <li *ngFor="let coach of team.coaches">
-        <figure>
-          <img *ngIf="coach.img" [src]="coach.img" [alt]="coach.fullName">
-          <i *ngIf="!coach.img" class="placeholder" class="fas fa-user"></i>
-        </figure>
-
-        <span>{{ coach.fullName }}</span>
-      </li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Player</h2>
-
-    <ul>
-      <li *ngFor="let player of team.players">
-        <figure>
-          <img *ngIf="player.img" [src]="player.img" [alt]="player.fullName">
-          <i *ngIf="!player.img" class="placeholder fas fa-user"></i>
-        </figure>
-
-        <span>{{ player.fullName }}</span>
-      </li>
-    </ul>
-  </section>
+          <span>{{ user.fullName }}</span>
+        </li>
+      </ul>
+    </section>
+  </ng-container>
 </aside>

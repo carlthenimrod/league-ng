@@ -1,13 +1,20 @@
 import { League } from './league';
-import { User, Player, Coach, Manager } from './user';
+import { User } from './user';
+
+export interface RosterGroup {
+  role: string;
+  users: User[];
+}
 
 export interface Team {
   name: string;
   status?: string;
+  users?: {
+    user: User;
+    roles: [string];
+  }[];
+  roster?: RosterGroup[];
   leagues?: League[];
-  players?: Player[];
-  coaches?: Coach[];
-  managers?: Manager[];
   position?: number;
   wins?: number;
   losses?: number;

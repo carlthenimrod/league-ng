@@ -6,9 +6,10 @@ import { map, tap } from 'rxjs/operators';
 import _ from 'lodash';
 
 import { League, Group } from '@app/models/league';
-import { Team, TeamResponse } from '@app/models/team';
+import { Team, TeamResponse, RosterGroup } from '@app/models/team';
 import { User } from '@app/models/user';
 import { NoticeService } from './notice.service';
+import { RosterUpdate } from '@app/models/socket';
 
 @Injectable({
   providedIn: 'root'
@@ -120,13 +121,9 @@ export class TeamService {
   }
 
   getUserRoles(userId: string): string[] {
-    const roles = [];
+    const user = this.team.users.find(u => u.user._id === userId);
 
-    if (this.team.players.some(p => p._id === userId)) { roles.push('player'); }
-    if (this.team.managers.some(m => m._id === userId)) { roles.push('manager');  }
-    if (this.team.coaches.some(c => c._id === userId)) { roles.push('coach'); }
-
-    return roles;
+    return user.roles;
   }
 
   formatResponse(teamResponse: TeamResponse) {
@@ -134,36 +131,90 @@ export class TeamService {
       name: teamResponse.name,
       status: teamResponse.status,
       leagues: teamResponse.leagues,
-      players: [],
-      coaches: [],
-      managers: [],
+      users: [],
+      roster: [],
       _id: teamResponse._id,
       __v: teamResponse.__v
     };
 
+    this.formatRoster(teamResponse, team);
+
+    return team;
+  }
+
+  formatRoster(teamResponse: TeamResponse, team: Team) {
+    const managers: User[] = [];
+    const coaches: User[] = [];
+    const players: User[] = [];
+
     for (let i = 0; i < teamResponse.roster.length; i++) {
       const u = teamResponse.roster[i];
 
-      for (let x = 0; x < u.roles.length; x++) {
-        const role = u.roles[x];
+      team.users.push(u);
 
-        switch (role) {
-          case 'player':
-            team.players.push(u.user);
-            break;
+      if (u.roles.includes('manager')) {
+        managers.push(u.user);
+        continue;
+      }
 
-          case 'coach':
-            team.coaches.push(u.user);
-            break;
+      if (u.roles.includes('coach')) {
+        coaches.push(u.user);
+        continue;
+      }
 
-          case 'manager':
-            team.managers.push(u.user);
-            break;
-        }
+      if (u.roles.includes('player')) {
+        players.push(u.user);
+        continue;
       }
     }
 
-    return team;
+    team.roster.push({ role: 'manager', users: [...managers] });
+    team.roster.push({ role: 'coach', users: [...coaches] });
+    team.roster.push({ role: 'player', users: [...players] });
+
+    this.orderRoster(team.roster);
+  }
+
+  updateRoster(team: Team, updates: RosterUpdate[]) {
+    updates.forEach(update => {
+      for (let i = 0; i < team.users.length; i++) {
+        const u = team.users[i];
+
+        if (u.user._id === update.user._id) {
+          u.user.status = update.status;
+        }
+      }
+    });
+
+    this.orderRoster(team.roster);
+  }
+
+  orderRoster(roster: RosterGroup[]) {
+    roster.forEach(group => {
+      group.users.sort(this.sortByFullName);
+      group.users.sort(this.sortByOnlineStatus);
+    });
+  }
+
+  sortByFullName(a: User, b: User): number {
+    const aName = a.fullName.toUpperCase();
+    const bName = b.fullName.toUpperCase();
+
+    if (aName >= bName) {
+      return 1;
+    } else {
+      return -1;
+    }
+  }
+
+  sortByOnlineStatus(a: User, b: User): number {
+    if ((a.status === 'online') && (b.status !== 'online')) {
+      return -1;
+    } else if ((a.status !== 'online') && (b.status === 'online')) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   calculateStandings(league: League): Team[] {
