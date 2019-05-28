@@ -1,11 +1,11 @@
 import { User } from './user';
 
-export interface SocketResponse {
+export interface SocketData {
   action: string;
-  data: {};
+  users?: [User];
 }
 
-export interface RosterUpdate {
-  user: User;
-  status: string;
+export interface SocketResponse {
+  event: string;
+  data: SocketData;
 }

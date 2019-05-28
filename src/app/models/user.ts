@@ -1,12 +1,17 @@
 import { Address } from './address';
 
+export interface UserStatus {
+  new?: boolean;
+  verified?: boolean;
+  online?: boolean;
+}
+
 export interface User {
   name: { first: string; last: string; };
   fullName?: string;
   email?: string;
-  status?: string;
+  status?: UserStatus;
   img?: string;
-  verified?: boolean;
   teams?: [{
     _id: string;
     name: string;
@@ -21,6 +26,7 @@ export interface User {
     secondary?: string;
   };
   comments?: string;
+  roles?: [string];
   _id?: string;
   __v?: number;
 }

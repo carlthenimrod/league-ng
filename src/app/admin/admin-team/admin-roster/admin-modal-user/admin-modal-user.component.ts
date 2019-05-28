@@ -64,7 +64,7 @@ export class AdminModalUserComponent implements OnInit {
     for (let i = 0; i < users.length; i++) {
       const user = users[i];
 
-      if (this.team.users.some(u => u.user._id === user._id)) { continue; }
+      if (this.team.users.some(u => u._id === user._id)) { continue; }
 
       filteredUsers.push(user);
     }

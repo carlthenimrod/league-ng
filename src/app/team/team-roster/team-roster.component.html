@@ -8,7 +8,7 @@
       <ul>
         <li
           *ngFor="let user of group.users"
-          [ngClass]="{'online': user.status === 'online'}"
+          [ngClass]="{'online': user.status.online}"
         >
           <div class="img">
             <div class="status"></div>

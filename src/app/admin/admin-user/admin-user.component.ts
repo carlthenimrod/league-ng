@@ -34,8 +34,8 @@ export class AdminUserComponent implements OnInit, OnDestroy {
       this.user = user;
 
       // if new, update status, push notices
-      if (this.user.status === 'new') {
-        this.user.status = 'active';
+      if (this.user.status.new) {
+        this.user.status.new = false;
         this.userService.update(this.user).subscribe(() => {
           this.noticeService.push();
         });

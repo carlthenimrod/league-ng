@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Subscription, fromEvent, Observable, Subject } from 'rxjs';
 
 import { SocketService } from './socket.service';
-import { SocketResponse, RosterUpdate } from '@app/models/socket';
+import { SocketResponse, SocketData } from '@app/models/socket';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +12,15 @@ export class TeamSocketService implements OnDestroy {
   connectedSub: Subscription;
   team$: Observable<SocketResponse>;
   teamSub: Subscription;
-  rosterSubject: Subject<RosterUpdate[]> = new Subject();
+  rosterSubject: Subject<SocketData> = new Subject();
 
   constructor(private socketService: SocketService) {
     this.team$ = fromEvent(this.socketService.socket, 'team');
 
-    this.teamSub = this.team$.subscribe(payload => {
-      switch (payload.action) {
+    this.teamSub = this.team$.subscribe(response => {
+      switch (response.event) {
         case 'roster':
-          this.rosterSubject.next(<RosterUpdate[]>payload.data);
+          this.rosterSubject.next(response.data);
           break;
       }
     });

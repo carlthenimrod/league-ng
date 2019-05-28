@@ -10,11 +10,11 @@
       <header>
         <h1>User Profile</h1>
 
-        <span id="verified" *ngIf="user.verified">
+        <span id="verified" *ngIf="user.status.verified">
           Verified <i class="fas fa-check"></i>
         </span>
 
-        <span id="unverified" *ngIf="!user.verified">
+        <span id="unverified" *ngIf="!user.status.verified">
           Profile Incomplete <i class="fas fa-exclamation-circle"></i>
         </span>
       </header>

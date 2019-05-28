@@ -1,19 +1,22 @@
 import { League } from './league';
 import { User } from './user';
 
-export interface RosterGroup {
+export interface RoleGroup {
   role: string;
   users: User[];
 }
 
+export interface Status {
+  new?: boolean;
+  verified?: boolean;
+  online?: boolean;
+}
+
 export interface Team {
   name: string;
-  status?: string;
-  users?: {
-    user: User;
-    roles: [string];
-  }[];
-  roster?: RosterGroup[];
+  status?: Status;
+  roster?: RoleGroup[];
+  users?: User[];
   leagues?: League[];
   position?: number;
   wins?: number;
@@ -30,11 +33,8 @@ export interface Team {
 export interface TeamResponse {
   name: string;
   leagues: League[];
-  roster: [{
-    user: User;
-    roles: [string];
-  }];
-  status: string;
+  roster?: User[];
+  status?: Status;
   _id: string;
   __v: number;
 }

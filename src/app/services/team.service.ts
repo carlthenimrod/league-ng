@@ -6,10 +6,9 @@ import { map, tap } from 'rxjs/operators';
 import _ from 'lodash';
 
 import { League, Group } from '@app/models/league';
-import { Team, TeamResponse, RosterGroup } from '@app/models/team';
+import { Team, TeamResponse, RoleGroup } from '@app/models/team';
 import { User } from '@app/models/user';
 import { NoticeService } from './notice.service';
-import { RosterUpdate } from '@app/models/socket';
 
 @Injectable({
   providedIn: 'root'
@@ -121,7 +120,7 @@ export class TeamService {
   }
 
   getUserRoles(userId: string): string[] {
-    const user = this.team.users.find(u => u.user._id === userId);
+    const user = this.team.users.find(u => u._id === userId);
 
     return user.roles;
   }
@@ -148,22 +147,22 @@ export class TeamService {
     const players: User[] = [];
 
     for (let i = 0; i < teamResponse.roster.length; i++) {
-      const u = teamResponse.roster[i];
+      const user = teamResponse.roster[i];
 
-      team.users.push(u);
+      team.users.push(user);
 
-      if (u.roles.includes('manager')) {
-        managers.push(u.user);
+      if (user.roles.includes('manager')) {
+        managers.push(user);
         continue;
       }
 
-      if (u.roles.includes('coach')) {
-        coaches.push(u.user);
+      if (user.roles.includes('coach')) {
+        coaches.push(user);
         continue;
       }
 
-      if (u.roles.includes('player')) {
-        players.push(u.user);
+      if (user.roles.includes('player')) {
+        players.push(user);
         continue;
       }
     }
@@ -175,21 +174,20 @@ export class TeamService {
     this.orderRoster(team.roster);
   }
 
-  updateRoster(team: Team, updates: RosterUpdate[]) {
-    updates.forEach(update => {
-      for (let i = 0; i < team.users.length; i++) {
-        const u = team.users[i];
+  updateUser(users: User[]) {
+    users.forEach(user => {
+      for (let i = 0; i < this.team.users.length; i++) {
+        const u = this.team.users[i];
 
-        if (u.user._id === update.user._id) {
-          u.user.status = update.status;
-        }
+        if (u._id === user._id) { u.status = user.status; }
       }
     });
 
-    this.orderRoster(team.roster);
+    this.orderRoster(this.team.roster);
+    this.teamSubject.next(_.cloneDeep(this.team));
   }
 
-  orderRoster(roster: RosterGroup[]) {
+  orderRoster(roster: RoleGroup[]) {
     roster.forEach(group => {
       group.users.sort(this.sortByFullName);
       group.users.sort(this.sortByOnlineStatus);
