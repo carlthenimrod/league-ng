@@ -129,6 +129,7 @@ export class TeamService {
     const team: Team = {
       name: teamResponse.name,
       status: teamResponse.status,
+      feed: teamResponse.feed,
       leagues: teamResponse.leagues,
       users: [],
       roster: [],

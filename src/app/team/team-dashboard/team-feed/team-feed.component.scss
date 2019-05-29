@@ -1,0 +1,129 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+
+:host {
+  background-color: theme-color-level(light, 2);
+  display: block;
+  height: 100%;
+
+  section#feed {
+    height: 100%;
+    padding-bottom: 8rem;
+    position: relative;
+
+    section#feed-list {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      margin-bottom: 8rem;
+      min-height: 0px;
+      overflow: auto;
+      padding: 2rem 2rem 0 2rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      article {
+        border-top: 1px solid theme-color-level(light, 3);
+        display: flex;
+        padding: 1rem 0;
+
+        &:first-child {
+          margin-top: auto;
+        }
+
+        .img {
+          align-self: center;
+          margin-right: 1rem;
+
+          figure {
+            background-color: theme-color-level(light, 6);
+            border-radius: 100%;
+            height: 2.5rem;
+            margin: 0;
+            min-width: 2.5rem;
+            overflow: hidden;
+            width: 2.5rem;
+
+            img {
+              filter: grayscale(100%);
+              height: 100%;
+              width: 100%;
+            }
+
+            i.placeholder {
+              color: $white;
+              font-size: 1.2rem;
+              padding: 0.6rem 0 0 0;
+              text-align: center;
+              width: 100%;
+            }
+          }
+        }
+
+        .body {
+          .info {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding-bottom: 0.25rem;
+
+            .name {
+              margin-right: 0.25rem;
+            }
+
+            .date {
+              color: theme-color-level(light, 5);
+              font-weight: 400;
+            }
+          }
+        }
+      }
+    }
+
+    section#send {
+      border-top: 1px solid theme-color-level(light, 3);
+      height: 8rem;
+      padding: 2rem 2rem 0 2rem;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+
+      form {
+        display: flex;
+        width: 100%;
+
+        input {
+          background-color: theme-color-level(light, 6);
+          border: none;
+          border-radius: 3px 0 0 3px;
+          color: theme-color-level(light, 2);
+          flex-grow: 1;
+          line-height: normal;
+          padding: 0.25rem 0.5rem;
+
+          &::placeholder {
+            color: theme-color-level(light, 3);
+            line-height: normal;
+          }
+        }
+
+        button {
+          background-color: theme-color-level(light, 8);
+          border: none;
+          border-radius: 0 3px 3px 0;
+          color: theme-color-level(light, 1);
+          font-size: 0.8rem;
+          line-height: 0.8rem;
+          padding: 0 1.5rem;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}

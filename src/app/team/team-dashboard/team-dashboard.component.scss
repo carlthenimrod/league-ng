@@ -1,0 +1,101 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  position: relative;
+
+  header {
+    background-color: theme-color-level(light, 0.5);
+
+    h1 {
+
+    }
+
+    section#tabs {
+      nav {
+        border-top: 3px solid theme-color(primary);
+        display: none;
+        justify-content: space-evenly;
+
+        button {
+          background-color: theme-color-level(primary, -9);
+          border: 3px solid theme-color-level(primary, -7);
+          border-radius: 25px;
+          color: theme-color-level(primary, 2);
+          cursor: pointer;
+          font-weight: 600;
+          line-height: 1.4rem;
+          margin-top: -1.2rem;
+          padding: 0.25rem 1.25rem;
+          transition: all 100ms ease-out;
+          user-select: none;
+
+          &:hover {
+            background-color: theme-color-level(primary, -7);
+          }
+
+          &.active {
+            background: none;
+            background-color: theme-color(primary);
+            border: 3px solid theme-color(primary);
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  :host {
+    header {
+      min-height: 15rem;
+      padding: 1rem 0;
+      position: relative;
+
+      section#tabs {
+        padding: 0 1rem;
+        position: absolute;
+        bottom: -19px;
+        width: 100%;
+
+        nav {
+          border-top: 3px solid theme-color(primary);
+          display: flex;
+          justify-content: space-evenly;
+
+          button {
+            background-color: theme-color-level(primary, -9);
+            border: 3px solid theme-color-level(primary, -7);
+            border-radius: 25px;
+            color: theme-color-level(primary, 2);
+            cursor: pointer;
+            font-weight: 600;
+            line-height: 1.4rem;
+            margin-top: -1.2rem;
+            padding: 0.25rem 1.25rem;
+            transition: all 100ms ease-out;
+            user-select: none;
+
+            &:hover {
+              background-color: theme-color-level(primary, -7);
+            }
+
+            &.active {
+              background: none;
+              background-color: theme-color(primary);
+              border: 3px solid theme-color(primary);
+              color: $white;
+            }
+          }
+        }
+      }
+    }
+  }
+}

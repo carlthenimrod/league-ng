@@ -37,7 +37,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
         switch ((<HttpErrorResponse>error).status) {
           case 401:
-            if (error.url === (this.api + 'users/refresh' )) {
+            if (error.url === (this.api + 'auth/refresh' )) {
               return this.logout();
             }
 

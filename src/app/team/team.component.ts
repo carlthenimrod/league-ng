@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Team } from '@app/models/team';
+import { TeamService } from '@app/services/team.service';
 import { TeamSocketService } from '@app/services/team-socket.service';
 
 @Component({
@@ -14,10 +15,13 @@ export class TeamComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
+    private teamService: TeamService,
     private teamSocket: TeamSocketService
   ) { }
 
   ngOnInit() {
+    this.teamService.teamListener().subscribe((team: Team) => this.team = team);
+
     this.route.data.subscribe((data: {team: Team}) => {
       this.team = data.team;
 

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
+import { ProfileImg } from '@app/models/profile-img';
 
 @Component({
   selector: 'app-team-dashboard',
@@ -11,6 +12,7 @@ import { TeamService } from '@app/services/team.service';
 })
 export class TeamDashboardComponent implements OnInit {
   team: Team;
+  tab = 'feed';
 
   constructor(
     private route: ActivatedRoute,
@@ -22,6 +24,13 @@ export class TeamDashboardComponent implements OnInit {
 
     this.route.data.subscribe((data: {team: Team}) => {
       this.team = data.team;
+      console.log(this.team);
     });
+  }
+
+  onSaveImg(data: { file: File, img: ProfileImg }) {
+    const {file, img} = data;
+
+    // this.teamService.updateImg(file, img).subscribe();
   }
 }

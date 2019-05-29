@@ -12,10 +12,21 @@ export interface Status {
   online?: boolean;
 }
 
+export interface Message {
+  type: string;
+  body: string;
+  from?: User;
+  createdAt?: string;
+  updatedAt?: string;
+  _id?: string;
+  __v?: string;
+}
+
 export interface Team {
   name: string;
-  status?: Status;
   roster?: RoleGroup[];
+  status?: Status;
+  feed?: Message[];
   users?: User[];
   leagues?: League[];
   position?: number;
@@ -35,6 +46,7 @@ export interface TeamResponse {
   leagues: League[];
   roster?: User[];
   status?: Status;
+  feed?: Message[];
   _id: string;
   __v: number;
 }

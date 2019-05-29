@@ -22,7 +22,6 @@ export class TeamRosterComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    console.log(this.team);
     this.rosterSub = this.teamSocket.roster$().subscribe((data: SocketData) => {
       switch (data.action) {
         case 'update':

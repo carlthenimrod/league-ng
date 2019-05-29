@@ -1,3 +1,49 @@
-<p>
-  <a [routerLink]="['/admin']">Test</a>
-</p>
+<header>
+  <!-- <app-profile-img
+    [img]="team.img"
+    (save)="onSaveImg($event)"
+  >
+  </app-profile-img> -->
+
+  <h1>{{ team.name }}</h1>
+
+  <section id="tabs">
+    <nav>
+      <button
+        (click)="tab = 'feed'"
+        [ngClass]="{'active': tab === 'feed'}"
+      >
+        <span>Feed</span>
+        <i class="fas fa-rss ml-2"></i>
+      </button>
+
+      <button
+        (click)="tab = 'schedule'"
+        [ngClass]="{'active': tab === 'schedule'}"
+      >
+        <span>Schedule</span>
+        <i class="far fa-calendar-alt ml-2"></i>
+      </button>
+
+      <button
+        (click)="tab = 'roster'"
+        [ngClass]="{'active': tab === 'roster'}"
+      >
+        <span>Roster</span>
+        <i class="fas fa-users ml-2"></i>
+      </button>
+
+      <button
+        (click)="tab = 'settings'"
+        [ngClass]="{'active': tab === 'settings'}"
+      >
+        <span>Settings</span>
+        <i class="fas fa-cog ml-2"></i>
+      </button>
+    </nav>
+  </section>
+</header>
+
+<ng-container>
+  <app-team-feed [feed]="team.feed"></app-team-feed>
+</ng-container>
