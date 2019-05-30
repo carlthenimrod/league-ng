@@ -19,9 +19,10 @@
 
     section#tabs {
       nav {
-        border-top: 3px solid theme-color(primary);
         display: none;
         justify-content: space-evenly;
+        position: relative;
+        z-index: 1;
 
         button {
           background-color: theme-color-level(primary, -9);
@@ -66,7 +67,6 @@
         width: 100%;
 
         nav {
-          border-top: 3px solid theme-color(primary);
           display: flex;
           justify-content: space-evenly;
 

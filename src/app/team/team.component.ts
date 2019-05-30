@@ -25,7 +25,9 @@ export class TeamComponent implements OnInit, OnDestroy {
     this.route.data.subscribe((data: {team: Team}) => {
       this.team = data.team;
 
-      this.teamSocket.join(this.team._id);
+      this.teamSocket.connected$().subscribe(connected => {
+        if (connected) { this.teamSocket.join(this.team._id); }
+      });
     });
   }
 

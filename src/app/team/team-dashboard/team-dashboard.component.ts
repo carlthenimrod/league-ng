@@ -24,7 +24,6 @@ export class TeamDashboardComponent implements OnInit {
 
     this.route.data.subscribe((data: {team: Team}) => {
       this.team = data.team;
-      console.log(this.team);
     });
   }
 

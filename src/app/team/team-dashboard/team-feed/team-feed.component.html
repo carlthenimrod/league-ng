@@ -34,9 +34,19 @@
 
   <section id="send">
     <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
-      <input type="text" formControlName="body" placeholder="Type Message...">
+      <input #input type="text" formControlName="body" placeholder="Type Message...">
 
       <button type="submit">Send</button>
     </form>
+
+    <section id="typing">
+      <img
+        src="assets/img/typing.svg"
+        [ngStyle]="{'visibility': usersTyping ? 'visible' : 'hidden'}"
+      >
+
+      <span>{{ usersTyping }}</span>
+    </section>
   </section>
 </section>
+

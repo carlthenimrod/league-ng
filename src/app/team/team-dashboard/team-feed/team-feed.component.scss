@@ -16,6 +16,7 @@
     position: relative;
 
     section#feed-list {
+      border-top: 3px solid theme-color(primary);
       display: flex;
       flex-direction: column;
       flex-grow: 1;
@@ -122,6 +123,27 @@
           line-height: 0.8rem;
           padding: 0 1.5rem;
           text-transform: uppercase;
+        }
+      }
+
+      section#typing {
+        align-items: center;
+        color: theme-color-level(light, 6);
+        display: flex;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.5rem 0 0 0.5rem;
+        position: relative;
+
+        img {
+          height: 0.4rem;
+          margin-right: 0.5rem;
+          position: relative;
+          top: 2px;
+        }
+
+        span {
+
         }
       }
     }

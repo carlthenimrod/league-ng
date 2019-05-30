@@ -37,6 +37,10 @@ export class TeamFeedService implements OnDestroy {
       );
   }
 
+  isTyping(typing: boolean) {
+    this.teamSocket.typing(this.team._id, typing);
+  }
+
   ngOnDestroy() {
     this.teamSub.unsubscribe();
   }
