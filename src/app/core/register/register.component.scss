@@ -18,6 +18,7 @@ section#register {
   }
 
   section#register-form {
+    min-height: 600px;
     position: relative;
 
     app-type-select,
