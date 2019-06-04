@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from './auth/auth.service';
 import { SocketService } from './services/socket.service';
 
 @Component({
@@ -9,10 +10,14 @@ import { SocketService } from './services/socket.service';
 })
 export class AppComponent implements OnInit {
   constructor(
+    private authService: AuthService,
     private socketService: SocketService
   ) {}
 
   ngOnInit() {
-    this.socketService.connect();
+    if (this.authService.loggedIn()) {
+      const auth = this.authService.getAuth();
+      this.socketService.connect(auth);
+    }
   }
 }

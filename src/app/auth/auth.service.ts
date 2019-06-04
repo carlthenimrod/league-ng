@@ -6,6 +6,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { Auth } from '@app/models/auth';
+import { SocketService } from '@app/services/socket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private socket: SocketService
   ) {}
 
   getAccessToken(): string {
@@ -61,6 +63,7 @@ export class AuthService {
         localStorage.setItem('access_token', auth.access_token);
         localStorage.setItem('refresh_token', auth.refresh_token);
         localStorage.setItem('client', auth.client);
+        this.socket.connect(auth);
       })
     );
   }
@@ -78,6 +81,7 @@ export class AuthService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('client');
+    this.socket.disconnect();
 
     const url = this.api + 'auth/logout';
     this.http.request('delete', url, { body: {client, refresh_token}}).subscribe();

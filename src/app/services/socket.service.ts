@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { environment } from '@env/environment';
 
-import { AuthService } from '@app/auth/auth.service';
 import { Auth } from '@app/models/auth';
 import { BehaviorSubject } from 'rxjs';
 
@@ -15,13 +14,9 @@ export class SocketService {
   socket: SocketIOClient.Socket;
   connected: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor(private auth: AuthService) {}
+  constructor() {}
 
-  connect() {
-    if (!this.auth.loggedIn()) { return; }
-
-    const auth: Auth = this.auth.getAuth();
-
+  connect(auth: Auth) {
     this.socket = io(this.api, { query: auth });
 
     this.socket.on('connect', () => {
@@ -35,5 +30,12 @@ export class SocketService {
     this.socket.on('error', error => {
       this.connected.next(false);
     });
+  }
+
+  disconnect() {
+    if (!this.socket) { return; }
+
+    this.socket.close();
+    delete this.socket;
   }
 }
