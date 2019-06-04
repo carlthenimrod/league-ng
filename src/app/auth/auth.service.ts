@@ -58,7 +58,6 @@ export class AuthService {
     const url = this.api + 'auth/login';
     return this.http.post(url, {email, password}).pipe(
       tap((auth: Auth) => {
-        console.log(auth);
         localStorage.setItem('_id', auth._id);
         localStorage.setItem('email', auth.email);
         localStorage.setItem('access_token', auth.access_token);
