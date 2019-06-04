@@ -58,8 +58,9 @@ export class AuthService {
     const url = this.api + 'auth/login';
     return this.http.post(url, {email, password}).pipe(
       tap((auth: Auth) => {
+        console.log(auth);
         localStorage.setItem('_id', auth._id);
-        localStorage.setItem('user', auth.email);
+        localStorage.setItem('email', auth.email);
         localStorage.setItem('access_token', auth.access_token);
         localStorage.setItem('refresh_token', auth.refresh_token);
         localStorage.setItem('client', auth.client);
@@ -77,7 +78,7 @@ export class AuthService {
     const refresh_token = localStorage.getItem('refresh_token');
 
     localStorage.removeItem('_id');
-    localStorage.removeItem('user');
+    localStorage.removeItem('email');
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('client');
