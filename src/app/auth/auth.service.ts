@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -16,7 +15,6 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router,
     private socket: SocketService
   ) {}
 
@@ -85,6 +83,5 @@ export class AuthService {
 
     const url = this.api + 'auth/logout';
     this.http.request('delete', url, { body: {client, refresh_token}}).subscribe();
-    this.router.navigateByUrl('login');
   }
 }

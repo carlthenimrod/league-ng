@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 import { AuthService } from './auth/auth.service';
 import { SocketService } from './services/socket.service';
@@ -11,11 +12,14 @@ import { SocketService } from './services/socket.service';
 export class AppComponent implements OnInit {
   constructor(
     private authService: AuthService,
+    private location: Location,
     private socketService: SocketService
   ) {}
 
   ngOnInit() {
-    if (this.authService.loggedIn()) {
+    const path = this.location.path();
+
+    if ( (path !== '/logout') && this.authService.loggedIn() ) {
       const auth = this.authService.getAuth();
       this.socketService.connect(auth);
     }

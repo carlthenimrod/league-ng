@@ -34,8 +34,6 @@ export class SocketService {
 
   disconnect() {
     if (!this.socket) { return; }
-
     this.socket.close();
-    delete this.socket;
   }
 }
