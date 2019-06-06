@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { MatSelectChange } from '@angular/material';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-admin-pagination',

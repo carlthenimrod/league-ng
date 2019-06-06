@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { Permit } from '@app/models/place';
 import { PlaceService } from '@app/services/place.service';

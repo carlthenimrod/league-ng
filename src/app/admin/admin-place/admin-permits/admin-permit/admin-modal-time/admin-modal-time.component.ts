@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, AbstractControl, FormControl } from '@angular/forms';
 import { Permit, Slot } from '@app/models/place';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import * as moment from 'moment';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 import { AdminModalUserComponent } from './admin-modal-user/admin-modal-user.component';
 import { User } from '@app/models/user';

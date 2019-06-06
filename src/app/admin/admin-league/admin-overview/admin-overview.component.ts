@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 import { AdminModalDivisionComponent } from './admin-modal-division/admin-modal-division.component';
 import { AdminModalTeamComponent } from './admin-modal-team/admin-modal-team.component';

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { League, ScheduleOptions, Group } from '@app/models/league';
 import { LeagueService } from '@app/services/league.service';
