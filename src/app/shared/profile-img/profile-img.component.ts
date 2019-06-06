@@ -12,7 +12,7 @@ import { mimeType } from '@app/validators/mime-type.validator';
 export class ProfileImgComponent implements OnInit, OnChanges {
   @Input() img: string;
   @Output() save: EventEmitter<{file: File, img: ProfileImg}> = new EventEmitter();
-  @ViewChild('file') file: ElementRef;
+  @ViewChild('file', { static: false }) file: ElementRef;
   imgForm: FormGroup;
   imgPreview: ProfileImg;
   loadingImg = false;

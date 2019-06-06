@@ -16,8 +16,8 @@ import { User } from '@app/models/user';
   styleUrls: ['./team-feed.component.scss']
 })
 export class TeamFeedComponent implements OnInit, OnDestroy, AfterViewChecked, AfterViewInit {
-  @ViewChild('feedList') feedList: ElementRef;
-  @ViewChild('input') input: ElementRef;
+  @ViewChild('feedList', { static: false }) feedList: ElementRef;
+  @ViewChild('input', { static: false }) input: ElementRef;
   @Input() feed: Message[];
   userId: string;
   typing = false;
