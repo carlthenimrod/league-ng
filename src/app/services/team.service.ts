@@ -180,7 +180,12 @@ export class TeamService {
       for (let i = 0; i < this.team.users.length; i++) {
         const u = this.team.users[i];
 
-        if (u._id === user._id) { u.status = user.status; }
+        if (u._id === user._id) {
+          u.name = user.name;
+          u.fullName = user.fullName;
+          u.email = user.email;
+          u.status = user.status;
+        }
       }
     });
 

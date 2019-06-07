@@ -30,6 +30,7 @@ export class TeamSocketService implements OnDestroy {
           this.typingSubject.next(response.data);
           break;
         case 'roster':
+          console.log(response.data);
           this.rosterSubject.next(response.data);
           break;
       }

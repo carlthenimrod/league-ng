@@ -5,23 +5,23 @@
     <section *ngIf="group.users.length > 0">
       <h2>{{ group.role | titlecase }}</h2>
 
-      <ul>
-        <li
-          *ngFor="let user of group.users"
-          [ngClass]="{'online': user.status.online}"
-        >
-          <div class="img">
-            <div class="status"></div>
+      <article
+        *ngFor="let user of group.users; let i = index"
+        [ngClass]="{'online': user.status.online}"
+        (click)="onClick($event, user, i)"
+      >
+        <div class="img">
+          <div class="status"></div>
 
-            <figure>
-              <img *ngIf="user.img" [src]="user.img" [alt]="user.fullName">
-              <i *ngIf="!user.img" class="placeholder fas fa-user"></i>
-            </figure>
-          </div>
+          <figure>
+            <img *ngIf="user.img" [src]="user.img" [alt]="user.fullName">
+            <i *ngIf="!user.img" class="placeholder fas fa-user"></i>
+          </figure>
+        </div>
 
-          <span>{{ user.fullName }}</span>
-        </li>
-      </ul>
+        <span>{{ user.fullName }}</span>
+        <ng-template #card></ng-template>
+      </article>
     </section>
   </ng-container>
 </aside>
