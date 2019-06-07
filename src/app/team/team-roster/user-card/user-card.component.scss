@@ -4,12 +4,143 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
-:host {
-  background-color: theme-color-level(light, 2);
+article#user-card {
   border-radius: 3px;
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
-  padding: 1rem;
+  min-width: 15rem;
   position: absolute;
-  right: 100%;
+  right: 90%;
   top: 0;
+  z-index: 9999;
+
+  &.online {
+    header {
+      #img {
+        #status {
+          background-color: $green;
+          z-index: 1;
+        }
+      }
+    }
+  }
+
+  header {
+    background-color: theme-color-level(light, 1);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 1rem;
+
+    #img {
+      background-color: theme-color-level(light, 4);
+      border-radius: 100%;
+      display: flex;
+      height: 5rem;
+      justify-content: center;
+      margin: 0 auto;
+      min-width: 5rem;
+      position: relative;
+      width: 5rem;
+
+      #status {
+        background-color: theme-color-level(light, 3);
+        border: 2px solid theme-color(light);
+        border-radius: 100%;
+        height: 1.2rem;
+        position: absolute;
+        bottom: -0.15rem;
+        right: 0.25rem;
+        width: 1.2rem;
+      }
+
+      img {
+        border-radius: 100%;
+        height: 100%;
+        width: 100%;
+      }
+
+      i.placeholder {
+        color: theme-color(light);
+        font-size: 2.4rem;
+        padding: 1.25rem 0 0 0;
+        text-align: center;
+        width: 100%;
+      }
+    }
+
+    h1 {
+      color: $black;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 0.5rem 0 0 0;
+      text-align: center;
+    }
+  }
+
+  section#user-details {
+    background-color: theme-color-level(light, 3);
+    padding: 1rem;
+
+    #roles {
+      padding: 0 0 0.25rem 0;
+
+      h2 {
+        font-size: 0.7rem;
+        font-weight: 700;
+        margin: 0;
+        padding: 0 0 0.25rem 0;
+        text-transform: uppercase;
+      }
+
+      span {
+        background-color: theme-color-level(light, 6);
+        border-radius: 25px;
+        color: theme-color-level(light, 2);
+        display: inline-block;
+        font-size: 0.6rem;
+        font-weight: 700;
+        margin: 0 0.25rem 0 0;
+        padding: 0.15rem 0.5rem;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  footer {
+    background-color: theme-color-level(light, 3);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: 1px solid theme-color-level(light, 4);
+    padding: 0 1rem;
+
+    form {
+      display: flex;
+      padding: 1rem 0 0 0;
+      width: 100%;
+
+      input {
+        background-color: theme-color-level(light, 6);
+        border: 1px solid theme-color-level(light, 7);
+        border-radius: 3px;
+        color: theme-color-level(light, 2);
+        flex-grow: 1;
+        line-height: normal;
+        padding: 0.25rem 0.5rem;
+
+        &::placeholder {
+          color: theme-color-level(light, 3);
+          line-height: normal;
+          text-align: center;
+        }
+      }
+    }
+
+    p {
+      color: theme-color-level(light, 6);
+      font-size: 0.6rem;
+      font-weight: 700;
+      margin: 0;
+      padding: 0.5rem 0;
+      text-align: center;
+    }
+  }
 }

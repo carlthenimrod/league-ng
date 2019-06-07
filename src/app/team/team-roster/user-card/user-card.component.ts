@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, HostListener, Output, EventEmitter } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
+import { AuthService } from '@app/auth/auth.service';
 import { User } from '@app/models/user';
 
 @Component({
@@ -8,7 +10,11 @@ import { User } from '@app/models/user';
   styleUrls: ['./user-card.component.scss']
 })
 export class UserCardComponent implements OnInit {
+  self = false;
   initialized = false;
+  messageForm = this.fb.group({
+    message: ['']
+  });
   @Input() user: User;
   @Output() close: EventEmitter<boolean> = new EventEmitter();
 
@@ -27,9 +33,13 @@ export class UserCardComponent implements OnInit {
     event.stopPropagation();
   }
 
-  constructor() {}
+  constructor(
+    private auth: AuthService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
-    console.log(this.user);
+    const auth = this.auth.getAuth();
+    if (auth._id === this.user._id) { this.self = true; }
   }
 }
