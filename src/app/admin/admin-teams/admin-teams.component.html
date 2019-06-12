@@ -20,7 +20,6 @@
     <thead>
       <tr>
         <th scope="col">Team Name</th>
-        <th scope="col" class="status">Status</th>
       </tr>
     </thead>
 
@@ -28,16 +27,9 @@
       <tr
         *ngFor="let team of teamList"
         [routerLink]="[team._id]"
-        [ngClass]="{'new': team.status === 'new'}"
       >
         <td>
           {{ team.name }}
-        </td>
-
-        <td
-          class="status"
-        >
-          {{ team.status }}
         </td>
       </tr>
     </tbody>

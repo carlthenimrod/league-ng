@@ -4,8 +4,6 @@ import { Subscription } from 'rxjs';
 import { slideNavTrigger, toggleNoticeTrigger } from './animations';
 import { NoticeService } from '@app/services/notice.service';
 import { NoticeList } from '@app/models/notice';
-import { ConfigService } from '@app/services/config.service';
-import { Config } from '@app/models/config';
 
 @Component({
   selector: 'app-admin-nav',
@@ -14,14 +12,12 @@ import { Config } from '@app/models/config';
   animations: [slideNavTrigger, toggleNoticeTrigger]
 })
 export class AdminNavComponent implements OnInit, OnDestroy {
-  config: Config;
   notices: NoticeList;
   noticeSubscription: Subscription;
   streamSubscription: Subscription;
   menu = 'closed';
 
   constructor(
-    private configService: ConfigService,
     private noticeService: NoticeService
   ) { }
 
@@ -31,8 +27,6 @@ export class AdminNavComponent implements OnInit, OnDestroy {
     this.noticeSubscription = this.noticeService.noticesListener().subscribe((notices: NoticeList) => {
       this.notices = notices;
     });
-
-    this.configService.configListener().subscribe((config: Config) => this.config = config);
   }
 
   onMenuClick() {

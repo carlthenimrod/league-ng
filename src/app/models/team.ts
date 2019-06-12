@@ -1,13 +1,34 @@
 import { League } from './league';
-import { User, Player, Coach, Manager } from './user';
+import { User } from './user';
+
+export interface RoleGroup {
+  role: string;
+  users: User[];
+}
+
+export interface Status {
+  new?: boolean;
+  verified?: boolean;
+  online?: boolean;
+}
+
+export interface Message {
+  type: string;
+  body: string;
+  from?: User;
+  createdAt?: string;
+  updatedAt?: string;
+  _id?: string;
+  __v?: string;
+}
 
 export interface Team {
   name: string;
-  status?: string;
+  roster?: RoleGroup[];
+  status?: Status;
+  feed?: Message[];
+  users?: User[];
   leagues?: League[];
-  players?: Player[];
-  coaches?: Coach[];
-  managers?: Manager[];
   position?: number;
   wins?: number;
   losses?: number;
@@ -23,11 +44,9 @@ export interface Team {
 export interface TeamResponse {
   name: string;
   leagues: League[];
-  roster: [{
-    user: User;
-    roles: [string];
-  }];
-  status: string;
+  roster?: User[];
+  status?: Status;
+  feed?: Message[];
   _id: string;
   __v: number;
 }

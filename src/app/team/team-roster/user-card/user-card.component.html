@@ -1,0 +1,34 @@
+<article
+  *ngIf="user"
+  [ngClass]="{'online': user.status.online}"
+  id="user-card"
+>
+  <header>
+    <div id="img">
+      <img *ngIf="user.img" [src]="user.img" [alt]="user.fullName">
+      <i *ngIf="!user.img" class="placeholder fas fa-user"></i>
+
+      <div id="status"></div>
+    </div>
+
+    <h1>{{ user.fullName }}</h1>
+  </header>
+
+  <section id="user-details">
+    <div id="roles">
+      <h2>Role</h2>
+
+      <span *ngFor="let role of user.roles">
+        {{ role | titlecase }}
+      </span>
+    </div>
+  </section>
+
+  <footer>
+    <form [formGroup]="messageForm">
+      <input type="text" placeholder="Message @{{ user.fullName }}">
+    </form>
+
+    <p>Right Click User for more Actions</p>
+  </footer>
+</article>

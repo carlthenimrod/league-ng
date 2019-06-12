@@ -1,0 +1,52 @@
+<section id="feed" *ngIf="feed">
+  <section id="feed-list" #feedList>
+    <article *ngFor="let message of feed">
+      <div class="img">
+        <figure>
+          <img *ngIf="message.from.img" [src]="message.from.img" [alt]="message.from.fullName">
+          <i *ngIf="!message.from.img" class="placeholder fas fa-user"></i>
+        </figure>
+      </div>
+
+      <div class="body">
+        <div class="info">
+          <span class="name">{{ message.from.fullName }}</span>
+
+          <span
+            class="date"
+            *ngIf="message.createdAt === message.updatedAt"
+          >
+            {{ message.createdAt | date: 'short' }}
+          </span>
+
+          <span
+            class="date"
+            *ngIf="message.createdAt != message.updatedAt"
+          >
+            {{ message.updatedAt | date: 'short' }} (Edited)
+          </span>
+        </div>
+
+        <div class="message">{{ message.body }}</div>
+      </div>
+    </article>
+  </section>
+
+  <section id="send">
+    <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+      <input #input type="text" formControlName="body" placeholder="Type Message...">
+
+      <button type="submit">Send</button>
+    </form>
+
+    <section id="typing">
+      <img
+        src="assets/img/typing.svg"
+        [ngStyle]="{'visibility': usersTyping ? 'visible' : 'hidden'}"
+      >
+
+      <span>{{ usersTyping }}</span>
+    </section>
+  </section>
+</section>
+

@@ -3,8 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
-import { TeamWebsocketService } from '../team-websocket.service';
-import { Subscription } from 'rxjs';
+import { ProfileImg } from '@app/models/profile-img';
 
 @Component({
   selector: 'app-team-dashboard',
@@ -13,13 +12,11 @@ import { Subscription } from 'rxjs';
 })
 export class TeamDashboardComponent implements OnInit {
   team: Team;
-  connected: boolean;
-  sub: Subscription;
+  tab = 'feed';
 
   constructor(
     private route: ActivatedRoute,
-    private teamService: TeamService,
-    private ws: TeamWebsocketService
+    private teamService: TeamService
   ) { }
 
   ngOnInit() {
@@ -28,5 +25,11 @@ export class TeamDashboardComponent implements OnInit {
     this.route.data.subscribe((data: {team: Team}) => {
       this.team = data.team;
     });
+  }
+
+  onSaveImg(data: { file: File, img: ProfileImg }) {
+    const {file, img} = data;
+
+    // this.teamService.updateImg(file, img).subscribe();
   }
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
-import { ConfigService } from './services/config.service';
-import { LeagueService } from './services/league.service';
-import { League } from './models/league';
+import { AuthService } from './auth/auth.service';
+import { SocketService } from './services/socket.service';
 
 @Component({
   selector: 'app-root',
@@ -10,23 +10,18 @@ import { League } from './models/league';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  leagues: League[];
-  showMobile = false;
-
   constructor(
-    private configService: ConfigService,
-    private leagueService: LeagueService
+    private authService: AuthService,
+    private location: Location,
+    private socketService: SocketService
   ) {}
 
   ngOnInit() {
-    this.configService.get();
+    const path = this.location.path();
 
-    this.leagueService.all().subscribe((leagues: League[]) => {
-      this.leagues = leagues;
-    });
-  }
-
-  @HostListener('window:resize', ['$event']) onResize(event) {
-    this.showMobile = false;
+    if ( (path !== '/logout') && this.authService.loggedIn() ) {
+      const auth = this.authService.getAuth();
+      this.socketService.connect(auth);
+    }
   }
 }

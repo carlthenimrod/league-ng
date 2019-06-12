@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { Auth } from '@app/models/auth';
+import { SocketService } from '@app/services/socket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private socket: SocketService
   ) {}
 
   getAccessToken(): string {
@@ -57,10 +57,11 @@ export class AuthService {
     return this.http.post(url, {email, password}).pipe(
       tap((auth: Auth) => {
         localStorage.setItem('_id', auth._id);
-        localStorage.setItem('user', auth.email);
+        localStorage.setItem('email', auth.email);
         localStorage.setItem('access_token', auth.access_token);
         localStorage.setItem('refresh_token', auth.refresh_token);
         localStorage.setItem('client', auth.client);
+        this.socket.connect(auth);
       })
     );
   }
@@ -74,13 +75,13 @@ export class AuthService {
     const refresh_token = localStorage.getItem('refresh_token');
 
     localStorage.removeItem('_id');
-    localStorage.removeItem('user');
+    localStorage.removeItem('email');
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('client');
+    this.socket.disconnect();
 
     const url = this.api + 'auth/logout';
     this.http.request('delete', url, { body: {client, refresh_token}}).subscribe();
-    this.router.navigateByUrl('login');
   }
 }

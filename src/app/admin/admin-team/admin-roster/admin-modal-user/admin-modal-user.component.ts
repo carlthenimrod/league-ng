@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatAutocompleteSelectedEvent } from '@angular/material';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { User } from '@app/models/user';
@@ -62,13 +63,11 @@ export class AdminModalUserComponent implements OnInit {
     const filteredUsers: User[] = [];
 
     for (let i = 0; i < users.length; i++) {
-      const u = users[i];
+      const user = users[i];
 
-      if (this.team.players.some(p => p._id === u._id)) { continue; }
-      if (this.team.managers.some(m => m._id === u._id)) { continue; }
-      if (this.team.coaches.some(c => c._id === u._id)) { continue; }
+      if (this.team.users.some(u => u._id === user._id)) { continue; }
 
-      filteredUsers.push(u);
+      filteredUsers.push(user);
     }
 
     return filteredUsers;

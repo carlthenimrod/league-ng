@@ -14,9 +14,9 @@ export class AdminDroppableComponent {
   @Input() dropTarget: Division|Team;
   @Input() last = false;
   @Output() dropped: EventEmitter<string> = new EventEmitter();
-  @ViewChild('dropBefore') dropBefore: ElementRef;
-  @ViewChild('dropIn') dropIn: ElementRef;
-  @ViewChild('dropAfter') dropAfter: ElementRef;
+  @ViewChild('dropBefore', { static: false }) dropBefore: ElementRef;
+  @ViewChild('dropIn', { static: false }) dropIn: ElementRef;
+  @ViewChild('dropAfter', { static: false }) dropAfter: ElementRef;
   counter = 0;
 
   constructor(

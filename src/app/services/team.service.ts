@@ -6,7 +6,7 @@ import { map, tap } from 'rxjs/operators';
 import _ from 'lodash';
 
 import { League, Group } from '@app/models/league';
-import { Team, TeamResponse } from '@app/models/team';
+import { Team, TeamResponse, RoleGroup } from '@app/models/team';
 import { User } from '@app/models/user';
 import { NoticeService } from './notice.service';
 
@@ -120,50 +120,105 @@ export class TeamService {
   }
 
   getUserRoles(userId: string): string[] {
-    const roles = [];
+    const user = this.team.users.find(u => u._id === userId);
 
-    if (this.team.players.some(p => p._id === userId)) { roles.push('player'); }
-    if (this.team.managers.some(m => m._id === userId)) { roles.push('manager');  }
-    if (this.team.coaches.some(c => c._id === userId)) { roles.push('coach'); }
-
-    return roles;
+    return user.roles;
   }
 
   formatResponse(teamResponse: TeamResponse) {
     const team: Team = {
       name: teamResponse.name,
       status: teamResponse.status,
+      feed: teamResponse.feed,
       leagues: teamResponse.leagues,
-      players: [],
-      coaches: [],
-      managers: [],
+      users: [],
+      roster: [],
       _id: teamResponse._id,
       __v: teamResponse.__v
     };
 
+    this.formatRoster(teamResponse, team);
+
+    return team;
+  }
+
+  formatRoster(teamResponse: TeamResponse, team: Team) {
+    const managers: User[] = [];
+    const coaches: User[] = [];
+    const players: User[] = [];
+
     for (let i = 0; i < teamResponse.roster.length; i++) {
-      const u = teamResponse.roster[i];
+      const user = teamResponse.roster[i];
 
-      for (let x = 0; x < u.roles.length; x++) {
-        const role = u.roles[x];
+      team.users.push(user);
 
-        switch (role) {
-          case 'player':
-            team.players.push(u.user);
-            break;
+      if (user.roles.includes('manager')) {
+        managers.push(user);
+        continue;
+      }
 
-          case 'coach':
-            team.coaches.push(u.user);
-            break;
+      if (user.roles.includes('coach')) {
+        coaches.push(user);
+        continue;
+      }
 
-          case 'manager':
-            team.managers.push(u.user);
-            break;
-        }
+      if (user.roles.includes('player')) {
+        players.push(user);
+        continue;
       }
     }
 
-    return team;
+    team.roster.push({ role: 'manager', users: [...managers] });
+    team.roster.push({ role: 'coach', users: [...coaches] });
+    team.roster.push({ role: 'player', users: [...players] });
+
+    this.orderRoster(team.roster);
+  }
+
+  updateUser(users: User[]) {
+    users.forEach(user => {
+      for (let i = 0; i < this.team.users.length; i++) {
+        const u = this.team.users[i];
+
+        if (u._id === user._id) {
+          u.name = user.name;
+          u.fullName = user.fullName;
+          u.email = user.email;
+          u.status = user.status;
+        }
+      }
+    });
+
+    this.orderRoster(this.team.roster);
+    this.teamSubject.next(_.cloneDeep(this.team));
+  }
+
+  orderRoster(roster: RoleGroup[]) {
+    roster.forEach(group => {
+      group.users.sort(this.sortByFullName);
+      group.users.sort(this.sortByOnlineStatus);
+    });
+  }
+
+  sortByFullName(a: User, b: User): number {
+    const aName = a.fullName.toUpperCase();
+    const bName = b.fullName.toUpperCase();
+
+    if (aName >= bName) {
+      return 1;
+    } else {
+      return -1;
+    }
+  }
+
+  sortByOnlineStatus(a: User, b: User): number {
+    if ((a.status === 'online') && (b.status !== 'online')) {
+      return -1;
+    } else if ((a.status !== 'online') && (b.status === 'online')) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   calculateStandings(league: League): Team[] {

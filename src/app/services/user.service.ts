@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import _ from 'lodash';
 
+import { SocketService } from './socket.service';
 import { User } from '@app/models/user';
 import { Auth } from '@app/models/auth';
 import { ProfileImg } from '@app/models/profile-img';
@@ -19,7 +20,8 @@ export class UserService {
   userSubject: Subject<User> = new Subject<User>();
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private socket: SocketService
   ) {}
 
   all(): Observable<any> {
@@ -78,6 +80,7 @@ export class UserService {
         localStorage.setItem('access_token', auth.access_token);
         localStorage.setItem('refresh_token', auth.refresh_token);
         localStorage.setItem('client', auth.client);
+        this.socket.connect(auth);
       })
     );
   }

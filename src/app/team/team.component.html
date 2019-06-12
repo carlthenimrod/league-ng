@@ -1,7 +1,7 @@
 <section id="team">
-  <app-team-sidebar></app-team-sidebar>
-
   <section id="dashboard">
     <router-outlet></router-outlet>
   </section>
+
+  <app-team-roster [team]="team"></app-team-roster>
 </section>
