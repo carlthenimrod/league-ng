@@ -3,6 +3,8 @@ import { Location } from '@angular/common';
 
 import { AuthService } from './auth/auth.service';
 import { SocketService } from './services/socket.service';
+import { LeagueService } from './services/league.service';
+import { League } from './models/league';
 
 @Component({
   selector: 'app-root',
