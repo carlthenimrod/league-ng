@@ -44,6 +44,14 @@
   </section>
 </header>
 
-<ng-container>
-  <app-team-feed [feed]="team.feed"></app-team-feed>
+<ng-container [ngSwitch]="tab">
+  <app-team-feed
+    *ngSwitchCase="'feed'"
+    [feed]="team.feed"
+  ></app-team-feed>
+
+  <app-team-schedule
+    *ngSwitchCase="'schedule'"
+  >
+  </app-team-schedule>
 </ng-container>

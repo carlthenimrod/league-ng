@@ -9,6 +9,7 @@ import { TeamDashboardComponent } from './team-dashboard/team-dashboard.componen
 import { TeamRosterComponent } from './team-roster/team-roster.component';
 import { TeamFeedComponent } from './team-dashboard/team-feed/team-feed.component';
 import { UserCardComponent } from './team-roster/user-card/user-card.component';
+import { TeamScheduleComponent } from './team-dashboard/team-schedule/team-schedule.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { UserCardComponent } from './team-roster/user-card/user-card.component';
     TeamDashboardComponent,
     TeamRosterComponent,
     TeamFeedComponent,
-    UserCardComponent
+    UserCardComponent,
+    TeamScheduleComponent
   ],
   entryComponents: [UserCardComponent]
 })
