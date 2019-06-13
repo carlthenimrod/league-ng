@@ -1,5 +1,6 @@
 import { League } from './league';
 import { User } from './user';
+import { Game } from './game';
 
 export interface RoleGroup {
   role: string;
@@ -29,6 +30,7 @@ export interface Team {
   feed?: Message[];
   users?: User[];
   leagues?: League[];
+  schedule?: Game[];
   position?: number;
   wins?: number;
   losses?: number;

@@ -8,6 +8,7 @@ import _ from 'lodash';
 import { League, Group } from '@app/models/league';
 import { Team, TeamResponse, RoleGroup } from '@app/models/team';
 import { User } from '@app/models/user';
+import { Game } from '@app/models/game';
 import { NoticeService } from './notice.service';
 
 @Injectable({
@@ -133,11 +134,13 @@ export class TeamService {
       leagues: teamResponse.leagues,
       users: [],
       roster: [],
+      schedule: [],
       _id: teamResponse._id,
       __v: teamResponse.__v
     };
 
     this.formatRoster(teamResponse, team);
+    this.formatSchedule(teamResponse, team);
 
     return team;
   }
@@ -175,6 +178,16 @@ export class TeamService {
     this.orderRoster(team.roster);
   }
 
+  formatSchedule(teamResponse: TeamResponse, team: Team) {
+    teamResponse.leagues.forEach(league => {
+      for (let i = 0; i < league.schedule.length; i++) {
+        const group = league.schedule[i];
+        team.schedule.push(...group.games);
+      }
+    });
+    this.orderSchedule(team.schedule);
+  }
+
   updateUser(users: User[]) {
     users.forEach(user => {
       for (let i = 0; i < this.team.users.length; i++) {
@@ -198,6 +211,22 @@ export class TeamService {
       group.users.sort(this.sortByFullName);
       group.users.sort(this.sortByOnlineStatus);
     });
+  }
+
+  orderSchedule(games: Game[]) {
+    games.sort((a, b) => {
+      if (!a.start && !b.start) { return 0; }
+      else if (a.start && !b.start) { return -1; }
+      else if (!a.start && b.start) { return 1; }
+      else {
+        if (!a.time && !b.time) { return 0; }
+        else if(a.time && !b.time) { return -1; }
+        else if(!a.time && b.time) { return 1; }
+        else {
+          return new Date(a.start).getTime() - new Date(b.start).getTime();
+        }
+      }
+    }); 
   }
 
   sortByFullName(a: User, b: User): number {

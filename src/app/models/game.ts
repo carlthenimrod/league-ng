@@ -1,4 +1,5 @@
 import { Place } from './place';
+import { League } from './league';
 
 export interface Game {
   home: {
