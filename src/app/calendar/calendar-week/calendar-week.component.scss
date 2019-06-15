@@ -1,0 +1,18 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  display: flex;
+  width: 100%;
+
+  &:first-of-type {
+    justify-content: flex-end;
+  }
+
+  &:last-of-type {
+    justify-content: flex-start;
+  }
+}

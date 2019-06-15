@@ -1,0 +1,43 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  border: 1px solid theme-color(primary);
+  display: block;
+  max-width: 20rem;
+
+  header {
+    background-color: theme-color-level(primary, -8);
+    border-bottom: 1px solid theme-color(primary);
+    text-align: center;
+    text-transform: uppercase;
+
+    h1 {
+      font-size: 1.25rem;
+      padding: 0.5rem 0;
+      margin: 0;
+    }
+
+    section.days-of-week {
+      display: flex;
+      padding: 0.5rem 0 0.25rem 0;
+      justify-content: center;
+
+      div {
+        display: inline-block;
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-align: center;
+        text-transform: uppercase;
+        width: 14.28%;
+      }
+    }
+  }
+
+  section.weeks {
+    padding: 2px;
+  }
+}
