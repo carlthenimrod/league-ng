@@ -11,8 +11,8 @@ import { CalendarWeekComponent } from './calendar-week/calendar-week.component';
 export class CalendarService {
   vc: ViewContainerRef;
   games: Game[];
-  nextGame: Game;
-  selectedGame: BehaviorSubject<Game>;
+  selectedGame: Game;
+  selectedGameSubject: BehaviorSubject<Game>;
   monthFactory: ComponentFactory<CalendarMonthComponent>;
   months: ComponentRef<CalendarMonthComponent>[];
   weekFactory: ComponentFactory<CalendarWeekComponent>;
@@ -29,22 +29,33 @@ export class CalendarService {
   init(games: Game[]) {
     this.games = games;
 
-    this.findNextGame();
+    this.selectGame();
   }
 
   create(vc: ViewContainerRef) {
     this.vc = vc;
-    this.createMonth(moment(this.nextGame.start));
+    this.createMonth(moment(this.selectedGame.start));
+
+    const previousMonth = this.findPreviousMonth(this.selectedGame);
+    if (previousMonth) {
+      this.createMonth(previousMonth, 0);
+    }
+
+    const nextMonth = this.findNextMonth(this.selectedGame);
+    if (nextMonth) {
+      this.createMonth(nextMonth);
+    }
   }
 
-  createMonth(date: moment.Moment) {
-    const month = this.vc.createComponent(this.monthFactory);
+  createMonth(date: moment.Moment, index?: number) {
+    const componentRef = this.vc.createComponent(this.monthFactory, index);
 
-    month.instance.date = date;
-    month.changeDetectorRef.detectChanges();
+    componentRef.instance.date = date;
+    componentRef.instance.$selectedGame = this.selectedGameSubject.asObservable();
+    componentRef.changeDetectorRef.detectChanges();
 
-    this.createDays(date, month.instance.vc);
-    month.changeDetectorRef.detectChanges();
+    this.createDays(date, componentRef.instance.vc);
+    componentRef.changeDetectorRef.detectChanges();
   }
 
   createDays(date: moment.Moment, vc: ViewContainerRef) {
@@ -63,15 +74,16 @@ export class CalendarService {
       const componentRef = currentWeek.instance.vc.createComponent(this.dayFactory);
       componentRef.instance.date = currentDate;
       componentRef.instance.games = this.findGames(currentDate);
-      componentRef.instance.gamesSelected.subscribe((games: Game[]) => {
-        this.selectedGame.next(games[0]);
+      componentRef.instance.$selectedGame = this.selectedGameSubject.asObservable();
+      componentRef.instance.dayClicked.subscribe((games: Game[]) => {
+        this.selectedGameSubject.next(games[0]);
       });
 
       ++day;
     }
   }
 
-  findNextGame() {
+  selectGame() {
     const now = moment();
 
     for (let i = 0; i < this.games.length; i++) {
@@ -85,8 +97,9 @@ export class CalendarService {
       const start = moment(this.games[i].start);
 
       if (start.isSameOrAfter(now)) {
-        this.nextGame = game;
-        this.selectedGame = new BehaviorSubject(game);
+        this.selectedGame = game;
+        this.selectedGameSubject = new BehaviorSubject(game);
+        return;
       }
     }
   }
@@ -105,7 +118,35 @@ export class CalendarService {
     return matches;
   }
 
+  findPreviousMonth(game: Game): moment.Moment {
+    let index = this.games.findIndex(g => g._id === game._id);
+    const currentMonth = moment(game.start);
+
+    while (index >= 0) {
+      const gameStart = moment(this.games[index].start);
+      if (!gameStart.isSame(currentMonth, 'month')) {
+        return gameStart;
+      }
+
+      --index;
+    }
+  }
+
+  findNextMonth(game: Game): moment.Moment {
+    let index = this.games.findIndex(g => g._id === game._id);
+    const currentMonth = moment(game.start);
+
+    while (index < this.games.length) {
+      const gameStart = moment(this.games[index].start);
+      if (!gameStart.isSame(currentMonth, 'month')) {
+        return gameStart;
+      }
+
+      ++index;
+    }
+  }
+
   $selectedGame(): Observable<Game> {
-    return this.selectedGame.asObservable();
+    return this.selectedGameSubject.asObservable();
   }
 }

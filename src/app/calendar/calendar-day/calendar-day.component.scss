@@ -24,4 +24,12 @@
       cursor: pointer;
     }
   }
+
+  &.active {
+    .day {
+      background: none;
+      background-color: theme-color(primary);
+      box-shadow: inset 0 0 0 3px theme-color-level(primary, 4);
+    }
+  }
 }

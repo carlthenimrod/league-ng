@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, HostBinding, ViewContainerRef, HostListener, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, ViewContainerRef, HostListener, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import * as moment from 'moment';
 
 import { Game } from '@app/models/game';
@@ -8,21 +9,43 @@ import { Game } from '@app/models/game';
   templateUrl: './calendar-day.component.html',
   styleUrls: ['./calendar-day.component.scss']
 })
-export class CalendarDayComponent implements OnInit {
+export class CalendarDayComponent implements OnInit, OnDestroy {
   @Input() date: moment.Moment;
   @Input() games: Game[];
-  @Output() gamesSelected: EventEmitter<Game[]> = new EventEmitter();
+  @Input() $selectedGame: Observable<Game>;
+  @Output() dayClicked: EventEmitter<Game[]> = new EventEmitter();
+  gameSub: Subscription;
+  isSelected: boolean;
   dayOfWeek: string;
 
   constructor(public vc: ViewContainerRef) { }
 
   ngOnInit() {
     this.dayOfWeek = this.date.format('ddd').toLowerCase();
+
+    this.gameSub = this.$selectedGame.subscribe(game => {
+      if (!game.start) { 
+        this.isSelected = false;
+        return; 
+      }
+
+      const gameStart = moment(game.start);
+      
+      if (gameStart.isSame(this.date, 'day')) {
+        this.isSelected = true;
+      } else {
+        this.isSelected = false;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.gameSub.unsubscribe();
   }
 
   @HostListener('click') onclick() {
     if (this.games.length === 0) { return; }
-    this.gamesSelected.emit(this.games);
+    this.dayClicked.emit(this.games);
   }
   
   @HostBinding('class') get weekClass() {
@@ -30,6 +53,7 @@ export class CalendarDayComponent implements OnInit {
 
     classes.push(this.dayOfWeek);
     if (this.games.length > 0) { classes.push('games'); }
+    if (this.isSelected) { classes.push('active'); }
 
     return classes.join(' ');
   }
