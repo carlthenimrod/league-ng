@@ -11,6 +11,7 @@ import { TeamRosterComponent } from './team-roster/team-roster.component';
 import { TeamFeedComponent } from './team-dashboard/team-feed/team-feed.component';
 import { UserCardComponent } from './team-roster/user-card/user-card.component';
 import { TeamScheduleComponent } from './team-dashboard/team-schedule/team-schedule.component';
+import { TeamGameListComponent } from './team-dashboard/team-schedule/team-game-list/team-game-list.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { TeamScheduleComponent } from './team-dashboard/team-schedule/team-sched
     TeamRosterComponent,
     TeamFeedComponent,
     UserCardComponent,
-    TeamScheduleComponent
+    TeamScheduleComponent,
+    TeamGameListComponent
   ],
   entryComponents: [UserCardComponent]
 })

@@ -14,7 +14,6 @@ export class CalendarService {
   selectedGame: Game;
   selectedGameSubject: BehaviorSubject<Game>;
   monthFactory: ComponentFactory<CalendarMonthComponent>;
-  months: ComponentRef<CalendarMonthComponent>[];
   weekFactory: ComponentFactory<CalendarWeekComponent>;
   dayFactory: ComponentFactory<CalendarDayComponent>;
 
@@ -52,6 +51,7 @@ export class CalendarService {
 
     componentRef.instance.date = date;
     componentRef.instance.$selectedGame = this.selectedGameSubject.asObservable();
+    componentRef.instance.changeMonth.subscribe(this.changeMonth.bind(this));
     componentRef.changeDetectorRef.detectChanges();
 
     this.createDays(date, componentRef.instance.vc);
@@ -118,13 +118,17 @@ export class CalendarService {
     return matches;
   }
 
-  findPreviousMonth(game: Game): moment.Moment {
+  findPreviousMonth(game: Game, selectGame?: boolean): moment.Moment {
     let index = this.games.findIndex(g => g._id === game._id);
     const currentMonth = moment(game.start);
 
     while (index >= 0) {
       const gameStart = moment(this.games[index].start);
-      if (!gameStart.isSame(currentMonth, 'month')) {
+      if (gameStart.isBefore(currentMonth, 'month')) {
+        if (selectGame) {
+          this.selectedGame = this.games[index];
+          this.selectedGameSubject.next(this.selectedGame);
+        }
         return gameStart;
       }
 
@@ -132,18 +136,54 @@ export class CalendarService {
     }
   }
 
-  findNextMonth(game: Game): moment.Moment {
+  findNextMonth(game: Game, selectGame?: boolean): moment.Moment {
     let index = this.games.findIndex(g => g._id === game._id);
     const currentMonth = moment(game.start);
 
     while (index < this.games.length) {
       const gameStart = moment(this.games[index].start);
-      if (!gameStart.isSame(currentMonth, 'month')) {
+      if (gameStart.isAfter(currentMonth, 'month')) {
+        if (selectGame) {
+          this.selectedGame = this.games[index];
+          this.selectedGameSubject.next(this.selectedGame);
+        }
         return gameStart;
       }
 
       ++index;
     }
+  }
+
+  changeMonth(value: string) {
+    if (value === 'previous') {
+      if(this.findPreviousMonth(this.selectedGame, true)) {
+        this.removeLastMonth();
+      }
+
+      const previousMonth = this.findPreviousMonth(this.selectedGame);
+      if (previousMonth) {
+        this.createMonth(previousMonth, 0);
+      }
+    } else if (value === 'next') {
+      if (this.findNextMonth(this.selectedGame, true)) {
+        this.removeFirstMonth();
+      }
+
+      const nextMonth = this.findNextMonth(this.selectedGame);
+      if (nextMonth) {
+        this.createMonth(nextMonth, 2);
+      }
+    }
+  }
+
+  removeFirstMonth() {
+    if (this.vc.length < 3) { return; }
+    this.vc.remove(0);
+  }
+
+  removeLastMonth() {
+    if (this.vc.length < 3) { return; }
+    this.vc.remove(2);
   }
 
   $selectedGame(): Observable<Game> {

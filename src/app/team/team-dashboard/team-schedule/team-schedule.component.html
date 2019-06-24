@@ -1,12 +1,3 @@
-<header>
-  <h1>Schedule</h1>
-</header>
-
-<section id="game-list">
-  <article *ngIf="selectedGame">
-    {{ selectedGame.away.name }} @ {{ selectedGame.home.name }}
-    <div>{{ selectedGame.start | date: 'short' }}</div>
-  </article>
-</section>
+<app-team-game-list [team]="team"></app-team-game-list>
 
 <app-calendar></app-calendar>

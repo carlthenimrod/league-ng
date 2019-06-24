@@ -7,37 +7,93 @@
 :host {
   border: 1px solid theme-color(primary);
   display: block;
-  max-width: 20rem;
+  position: absolute;
+  transform-style: preserve-3d;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20rem;
 
-  header {
-    background-color: theme-color-level(primary, -8);
-    border-bottom: 1px solid theme-color(primary);
-    text-align: center;
-    text-transform: uppercase;
+  &.previous {
+    transform: translateX(-100%) scale(0.75) rotateY(-350deg);
+  }
 
-    h1 {
-      font-size: 1.25rem;
-      padding: 0.5rem 0;
-      margin: 0;
-    }
+  &.next {
+    transform: translateX(0%) scale(0.75) rotateY(350deg);
+  }
 
-    section.days-of-week {
-      display: flex;
-      padding: 0.5rem 0 0.25rem 0;
-      justify-content: center;
+  &.active {
+    z-index: 3;
+  }
 
-      div {
-        display: inline-block;
-        font-size: 0.8rem;
-        font-weight: 800;
-        text-align: center;
-        text-transform: uppercase;
-        width: 14.28%;
+  .front {
+    backface-visibility: hidden;
+    background-color: $white;
+    min-height: 16.875rem;
+    position: relative;
+    z-index: 2;
+
+    header {
+      background-color: theme-color-level(primary, -8);
+      border-bottom: 1px solid theme-color(primary);
+      position: relative;
+      text-align: center;
+      text-transform: uppercase;
+  
+      h1 {
+        font-size: 1.25rem;
+        padding: 0.5rem 0;
+        margin: 0;
       }
+  
+      section.days-of-week {
+        display: flex;
+        padding: 0.5rem 0 0.25rem 0;
+        justify-content: center;
+  
+        div {
+          display: inline-block;
+          font-size: 0.8rem;
+          font-weight: 800;
+          text-align: center;
+          text-transform: uppercase;
+          width: 14.28%;
+        }
+      }
+
+      .controls {
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        top: 0;
+        width: 100%;
+
+        button {
+          background: none;
+          border: none;
+          color: theme-color(primary);
+          cursor: pointer;
+          padding: 0.5rem 2rem;
+
+          &:hover {
+            color: theme-color-level(primary, 2);
+          }
+        }
+      }
+    }
+  
+    section.weeks {
+      padding: 2px;
     }
   }
 
-  section.weeks {
-    padding: 2px;
+  .back {
+    background-color: theme-color-level(primary, -6);
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
   }
 }

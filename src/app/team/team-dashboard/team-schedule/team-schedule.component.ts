@@ -1,30 +1,19 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { CalendarService } from '@app/calendar/calendar.service';
-import { Game } from '@app/models/game';
-import { Subscription } from 'rxjs';
+import { Team } from '@app/models/team';
 
 @Component({
   selector: 'app-team-schedule',
   templateUrl: './team-schedule.component.html',
   styleUrls: ['./team-schedule.component.scss']
 })
-export class TeamScheduleComponent implements OnInit, OnDestroy {
-  @Input() schedule: Game[];
-  gameSub: Subscription;
-  selectedGame: Game;
+export class TeamScheduleComponent implements OnInit {
+  @Input() team: Team;
 
   constructor(private calendar: CalendarService) { }
 
   ngOnInit() {
-    this.calendar.init(this.schedule);
-    this.gameSub = this.calendar.$selectedGame()
-      .subscribe((game: Game) => {
-        this.selectedGame = game;
-      });
-  }
-
-  ngOnDestroy() {
-    this.gameSub.unsubscribe();
+    this.calendar.init(this.team.schedule);
   }
 }
