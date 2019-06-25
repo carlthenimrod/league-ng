@@ -13,6 +13,7 @@ import { UserCardComponent } from './team-roster/user-card/user-card.component';
 import { TeamScheduleComponent } from './team-dashboard/team-schedule/team-schedule.component';
 import { TeamGameListComponent } from './team-dashboard/team-schedule/team-game-list/team-game-list.component';
 import { TeamNavComponent } from './team-nav/team-nav.component';
+import { TeamLeagueInfoComponent } from './team-dashboard/team-schedule/team-league-info/team-league-info.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { TeamNavComponent } from './team-nav/team-nav.component';
     UserCardComponent,
     TeamScheduleComponent,
     TeamGameListComponent,
-    TeamNavComponent
+    TeamNavComponent,
+    TeamLeagueInfoComponent
   ],
   entryComponents: [UserCardComponent]
 })

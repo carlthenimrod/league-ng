@@ -1,0 +1,28 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+section#team-game-list {
+  @include make-row(0);
+
+  app-team-game-list {
+    @include make-col-ready(0);
+    @include make-col(12);
+  }
+}
+
+section#team-calendar {
+  @include make-row(0);
+
+  app-calendar {
+    @include make-col-ready(0);
+    @include make-col(6);
+  }
+
+  app-team-league-info {
+    @include make-col-ready(0);
+    @include make-col(6);
+  }
+}

@@ -11,9 +11,12 @@
   height: 100%;
 
   section#feed {
-    height: 100%;
     padding-bottom: 8rem;
-    position: relative;
+    position: absolute;
+    top: 10rem;
+    right: 0;
+    left: 0;
+    bottom: 0;
 
     section#feed-list {
       display: flex;
