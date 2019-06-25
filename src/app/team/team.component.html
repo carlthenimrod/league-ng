@@ -1,7 +1,16 @@
-<section id="team">
+<section id="team-nav">
+  <app-team-nav></app-team-nav>
+</section>
+
+<section id="team-main" [ngClass]="{ 'roster-open': rosterOpen }">
   <section id="dashboard">
     <router-outlet></router-outlet>
   </section>
 
-  <app-team-roster [team]="team"></app-team-roster>
+  <app-team-roster 
+    [team]="team"
+    [rosterOpen]="rosterOpen"
+    (rosterToggle)="onRosterToggle($event)"
+  >
+  </app-team-roster>
 </section>

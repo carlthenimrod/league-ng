@@ -182,7 +182,22 @@ export class TeamService {
     teamResponse.leagues.forEach(league => {
       for (let i = 0; i < league.schedule.length; i++) {
         const group = league.schedule[i];
-        team.schedule.push(...group.games);
+        
+        if(group.games.length > 0) {
+          group.games.forEach(game => {
+            team.schedule.push({
+              ...game,
+              league: {
+                _id: league._id,
+                name: league.name
+              },
+              group: {
+                _id: group._id,
+                label: group.label
+              }
+            });
+          });
+        }
       }
     });
     this.orderSchedule(team.schedule);

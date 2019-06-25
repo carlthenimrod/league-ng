@@ -12,6 +12,7 @@ import { TeamSocketService } from '@app/services/team-socket.service';
 })
 export class TeamComponent implements OnInit, OnDestroy {
   team: Team;
+  rosterOpen: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,9 +30,19 @@ export class TeamComponent implements OnInit, OnDestroy {
         if (connected) { this.teamSocket.join(this.team._id); }
       });
     });
+
+    if (window.innerWidth >= 1200) {
+      this.rosterOpen = true;
+    } else {
+      this.rosterOpen = false;
+    }
   }
 
   ngOnDestroy() {
     this.teamSocket.leave(this.team._id);
+  }
+
+  onRosterToggle(open: boolean) {
+    this.rosterOpen = open;
   }
 }

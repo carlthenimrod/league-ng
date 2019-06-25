@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, ViewChildren, ViewContainerRef, QueryList } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ViewChildren, ViewContainerRef, QueryList, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { SocketData } from '@app/models/socket';
@@ -16,6 +16,8 @@ import { UserCardService } from './user-card.service';
 })
 export class TeamRosterComponent implements OnInit, OnDestroy {
   @Input() team: Team;
+  @Input() rosterOpen: boolean;
+  @Output() rosterToggle: EventEmitter<boolean> = new EventEmitter();
   @ViewChildren('card', { read: ViewContainerRef }) cards: QueryList<ViewContainerRef>;
   rosterSub: Subscription;
 
@@ -37,6 +39,14 @@ export class TeamRosterComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.rosterSub.unsubscribe();
+  }
+
+  onClickRosterToggle() {
+    if (this.rosterOpen) {
+      this.rosterToggle.emit(false);
+    } else {
+      this.rosterToggle.emit(true);
+    }
   }
 
   onClick(e, user, i) {

@@ -10,20 +10,46 @@
   display: block;
 }
 
-section#team {
+section#team-nav {
+  @include make-row(0);
+
+  app-team-nav {
+    @include make-col-ready(0);
+    @include make-col(12);
+  }
+
+  @include media-breakpoint-up(sm) {
+    display: none;
+  }
+}
+
+section#team-main {
   @include make-row(0);
   min-height: 100vh;
+  position: relative;
+  border-right: 5px solid theme-color(light);
 
   app-team-roster {
-    @include make-col-ready(0);
-    @include media-breakpoint-up(sm) {
-      @include make-col(3);
-    }
+    position: absolute;
+    right: 0;
+    width: auto;
   }
 
   section#dashboard {
     @include make-col-ready(0);
-    @include media-breakpoint-up(sm) {
+    @include make-col(12);
+  }
+
+  &.roster-open {
+    border-right: none;
+
+    app-team-roster {
+      @include make-col-ready(0);
+      @include make-col(3);
+      right: auto;
+    }
+  
+    section#dashboard {
       @include make-col(9);
     }
   }
