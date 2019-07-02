@@ -13,6 +13,7 @@ import { CalendarService } from '@app/calendar/calendar.service';
 export class TeamGameListComponent implements OnInit, OnDestroy {
   @Input() team: Team;
   selectedGame: Game;
+  isHome: boolean;
   gameSub: Subscription;
 
   constructor(private calendar: CalendarService) { }
@@ -21,6 +22,7 @@ export class TeamGameListComponent implements OnInit, OnDestroy {
     this.gameSub = this.calendar.$selectedGame()
       .subscribe((game: Game) => {
         this.selectedGame = game;
+        this.isHome = game.home._id === this.team._id ? true : false;
       });
   }
 
