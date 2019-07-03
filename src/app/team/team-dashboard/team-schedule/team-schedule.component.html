@@ -1,9 +1,14 @@
-<section id="team-game-list">
-  <app-team-game-list [team]="team"></app-team-game-list>
+<section id="team-games">
+  <app-team-selected-game 
+    *ngIf="selectedGame"
+    [game]="selectedGame"
+    [isHome]="selectedGame.home._id === team._id"
+  >
+  </app-team-selected-game>
+
+  <app-team-game-slider></app-team-game-slider>
 </section>
 
-<section id="team-calendar">
-  <app-calendar></app-calendar>
-
+<section id="team-standings">
   <app-team-league-info></app-team-league-info>
 </section>

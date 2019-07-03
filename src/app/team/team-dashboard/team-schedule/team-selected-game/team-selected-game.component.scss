@@ -4,20 +4,19 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
-:host {
-  background-color: theme-color-level(light, 1);
-  @include make-row(0);
-}
-
 section#selected-game {
-  @include make-col-ready(0);
-  @include make-col(6);
   padding: 3rem 1rem 1rem 1rem;
 
   header {
-    font-size: 0.8rem;
-    padding: 0.25rem 0;
+    padding: 0.5rem 0;
     text-align: center;
+
+    h1 {
+      color: theme-color(primary);
+      font-size: 1.2rem;
+      margin: 0;
+      padding: 0.5rem 0;
+    }
   }
 
   article#game {
@@ -97,7 +96,8 @@ section#selected-game {
   }
 
   footer {
-    font-size: 0.8rem;
-    padding: 0.25rem 0;
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
   }
 }

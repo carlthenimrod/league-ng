@@ -136,13 +136,12 @@ export class TeamService {
       leagues: teamResponse.leagues,
       users: [],
       roster: [],
+      schedule: this.teamSchedule.generateSchedule(teamResponse.leagues),
       _id: teamResponse._id,
       __v: teamResponse.__v
     };
 
     this.formatRoster(teamResponse, team);
-
-    team.schedule = this.teamSchedule.generate(teamResponse.leagues);
 
     return team;
   }

@@ -11,9 +11,10 @@ import { TeamRosterComponent } from './team-roster/team-roster.component';
 import { TeamFeedComponent } from './team-dashboard/team-feed/team-feed.component';
 import { UserCardComponent } from './team-roster/user-card/user-card.component';
 import { TeamScheduleComponent } from './team-dashboard/team-schedule/team-schedule.component';
-import { TeamGameListComponent } from './team-dashboard/team-schedule/team-game-list/team-game-list.component';
 import { TeamNavComponent } from './team-nav/team-nav.component';
 import { TeamLeagueInfoComponent } from './team-dashboard/team-schedule/team-league-info/team-league-info.component';
+import { TeamSelectedGameComponent } from './team-dashboard/team-schedule/team-selected-game/team-selected-game.component';
+import { TeamGameSliderComponent } from './team-dashboard/team-schedule/team-game-slider/team-game-slider.component';
 
 @NgModule({
   imports: [
@@ -30,9 +31,10 @@ import { TeamLeagueInfoComponent } from './team-dashboard/team-schedule/team-lea
     TeamFeedComponent,
     UserCardComponent,
     TeamScheduleComponent,
-    TeamGameListComponent,
     TeamNavComponent,
-    TeamLeagueInfoComponent
+    TeamLeagueInfoComponent,
+    TeamSelectedGameComponent,
+    TeamGameSliderComponent
   ],
   entryComponents: [UserCardComponent]
 })

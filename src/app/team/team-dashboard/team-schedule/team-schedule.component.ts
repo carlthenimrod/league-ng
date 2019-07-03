@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { CalendarService } from '@app/calendar/calendar.service';
 import { Team } from '@app/models/team';
+import { TeamScheduleService } from '@app/services/team-schedule.service';
+import { Game } from '@app/models/game';
 
 @Component({
   selector: 'app-team-schedule',
@@ -10,10 +11,13 @@ import { Team } from '@app/models/team';
 })
 export class TeamScheduleComponent implements OnInit {
   @Input() team: Team;
+  selectedGame: Game;
 
-  constructor(private calendar: CalendarService) { }
+  constructor(
+    private teamSchedule: TeamScheduleService
+  ) { }
 
   ngOnInit() {
-    this.calendar.init(this.team.schedule);
+    this.selectedGame = this.teamSchedule.findNextGame(this.team.schedule);
   }
 }

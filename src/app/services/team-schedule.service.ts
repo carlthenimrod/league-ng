@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
 
 import { League } from '@app/models/league';
 import { Game } from '@app/models/game';
@@ -9,7 +10,7 @@ import { Game } from '@app/models/game';
 export class TeamScheduleService {
   constructor() { }
 
-  generate(leagues: League[]): Game[] {
+  generateSchedule(leagues: League[]): Game[] {
     const schedule: Game[] = [];
 
     leagues.forEach(league => {
@@ -34,12 +35,12 @@ export class TeamScheduleService {
       }
     });
 
-    this.order(schedule);
+    this.orderSchedule(schedule);
 
     return schedule;
   }
 
-  order(schedule: Game[]) {
+  orderSchedule(schedule: Game[]) {
     schedule.sort((a, b) => {
       if (!a.start && !b.start) { return 0; }
       else if (a.start && !b.start) { return -1; }
@@ -53,5 +54,24 @@ export class TeamScheduleService {
         }
       }
     }); 
+  }
+
+  findNextGame(games: Game[]): Game {
+    const now = moment();
+
+    for (let i = 0; i < games.length; i++) {
+      const game = games[i];
+
+      // if no date, or score, go to next game
+      if (!game.start || (game.home.score && game.away.score)) {
+        continue;
+      }
+
+      const start = moment(game.start);
+
+      if (start.isSameOrAfter(now)) {
+        return game;
+      }
+    }
   }
 }

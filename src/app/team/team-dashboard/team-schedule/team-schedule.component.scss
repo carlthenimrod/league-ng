@@ -4,12 +4,18 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
-section#team-game-list {
+section#team-games {
   @include make-row(0);
+  background-color: theme-color-level(light, 1);
 
-  app-team-game-list {
+  app-team-selected-game {
     @include make-col-ready(0);
-    @include make-col(12);
+    @include make-col(6);
+  }
+
+  app-team-game-slider {
+    @include make-col-ready(0);
+    @include make-col(6);
   }
 }
 
