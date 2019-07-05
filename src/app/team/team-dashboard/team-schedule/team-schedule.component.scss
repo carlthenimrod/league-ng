@@ -4,9 +4,30 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
+:host {
+  background-color: theme-color-level(light, 1);
+  display: block;
+}
+
+nav {
+  @include make-row(0);
+  align-items: center;
+  padding-top: 2rem;
+
+  app-team-league-selector {
+    @include make-col-ready(0);
+    @include make-col(6);
+  }
+
+  app-team-schedule-view-mode {
+    @include make-col-ready(0);
+    @include make-col(6);
+
+  }
+}
+
 section#team-games {
   @include make-row(0);
-  background-color: theme-color-level(light, 1);
 
   app-team-selected-game {
     @include make-col-ready(0);

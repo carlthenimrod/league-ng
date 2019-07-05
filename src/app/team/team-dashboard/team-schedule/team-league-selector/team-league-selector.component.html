@@ -1,0 +1,12 @@
+<section id="league-selector">
+  <input placeholder="League Search" [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayLeagueName">
+    <mat-option *ngFor="let league of leagues" [value]="league._id">
+      {{ league.name }}
+    </mat-option>
+  </mat-autocomplete>
+
+  <button>
+    <i class="fas fa-search"></i>
+  </button>
+</section>

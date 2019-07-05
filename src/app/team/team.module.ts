@@ -12,9 +12,11 @@ import { TeamFeedComponent } from './team-dashboard/team-feed/team-feed.componen
 import { UserCardComponent } from './team-roster/user-card/user-card.component';
 import { TeamScheduleComponent } from './team-dashboard/team-schedule/team-schedule.component';
 import { TeamNavComponent } from './team-nav/team-nav.component';
-import { TeamLeagueInfoComponent } from './team-dashboard/team-schedule/team-league-info/team-league-info.component';
 import { TeamSelectedGameComponent } from './team-dashboard/team-schedule/team-selected-game/team-selected-game.component';
 import { TeamGameSliderComponent } from './team-dashboard/team-schedule/team-game-slider/team-game-slider.component';
+import { TeamLeagueStandingsComponent } from './team-dashboard/team-schedule/team-league-standings/team-league-standings.component';
+import { TeamLeagueSelectorComponent } from './team-dashboard/team-schedule/team-league-selector/team-league-selector.component';
+import { TeamScheduleViewModeComponent } from './team-dashboard/team-schedule/team-schedule-view-mode/team-schedule-view-mode.component';
 
 @NgModule({
   imports: [
@@ -32,9 +34,11 @@ import { TeamGameSliderComponent } from './team-dashboard/team-schedule/team-gam
     UserCardComponent,
     TeamScheduleComponent,
     TeamNavComponent,
-    TeamLeagueInfoComponent,
     TeamSelectedGameComponent,
-    TeamGameSliderComponent
+    TeamGameSliderComponent,
+    TeamLeagueStandingsComponent,
+    TeamLeagueSelectorComponent,
+    TeamScheduleViewModeComponent
   ],
   entryComponents: [UserCardComponent]
 })

@@ -11,6 +11,7 @@ import { User } from '@app/models/user';
 import { Game } from '@app/models/game';
 import { NoticeService } from './notice.service';
 import { TeamScheduleService } from './team-schedule.service';
+import { LeagueStandingsService } from './league-standings.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class TeamService {
 
   constructor(
     private http: HttpClient,
+    private leagueStandings: LeagueStandingsService,
     private noticeService: NoticeService,
     private teamSchedule: TeamScheduleService
   ) { }
@@ -140,6 +142,8 @@ export class TeamService {
       _id: teamResponse._id,
       __v: teamResponse.__v
     };
+
+    team.leagues.forEach(league => this.leagueStandings.generateStandings(league));
 
     this.formatRoster(teamResponse, team);
 

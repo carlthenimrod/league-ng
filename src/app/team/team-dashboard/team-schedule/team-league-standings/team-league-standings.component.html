@@ -1,0 +1,66 @@
+<ng-template #teamTable let-teams="teams" let-group="group">
+  <thead>
+    <tr>
+      <th>{{ group }}</th>
+      <th>W</th>
+      <th>L</th>
+      <th>D</th>
+      <th>PTS</th>
+      <th>GF</th>
+      <th>GA</th>
+      <th>GD</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let team of teams">
+      <ng-container *ngTemplateOutlet="teamRow; context: { 
+        $implicit: team }"
+      ></ng-container>
+    </tr>
+  </tbody>
+</ng-template>
+
+<ng-template #teamRow let-team>
+  <td>{{ team.name }}</td>
+  <td>{{ team.wins }}</td>
+  <td>{{ team.losses }}</td>
+  <td>{{ team.draws }}</td>
+  <td>{{ team.points }}</td>
+  <td>{{ team.goalsFor }}</td>
+  <td>{{ team.goalsAgainst }}</td>
+  <td>{{ team.goalDifference }}</td>
+</ng-template>
+
+<section id="league-standings" *ngIf="$league | async as league">
+  <header>
+    <h1>{{ league.name }} Standings</h1>
+  </header>
+  
+  <table *ngIf="league.divisions.length === 0; else divisions">
+    <ng-container *ngTemplateOutlet="teamTable; context: { 
+      teams: league.teams }"
+    ></ng-container>
+  </table>
+
+  <ng-template #divisions>
+    <ng-container *ngFor="let division of league.divisions">
+      <h2>{{ division.name }}</h2>
+
+      <table *ngIf="division.divisions === 0">
+        <ng-container *ngTemplateOutlet="teamTable; context: { 
+          teams: division.teams }"
+        ></ng-container>
+      </table>
+      
+      <ng-container *ngIf="division.divisions.length > 0">
+        <table *ngFor="let subDivision of division.divisions">
+          <ng-container *ngTemplateOutlet="teamTable; context: { 
+            teams: subDivision.teams,
+            group: subDivision.name }"
+          ></ng-container>
+        </table>
+      </ng-container>
+    </ng-container>
+  </ng-template>
+</section>

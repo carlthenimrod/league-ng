@@ -35,15 +35,19 @@
     </h1>
 
     <ng-container *ngIf="game.start; else noStart">
-      <span id="label" *ngIf="!game.home.score && !game.away.score">
-        Starts On: 
-      </span>
+      <div id="game-start">
+        <span id="label" *ngIf="!game.home.score && !game.away.score">
+          Starts On: 
+        </span>
 
-      <span id="date" *ngIf="!game.time">{{ game.start | date: 'EEEE, MMMM d' }}</span>
-      <span id="date" *ngIf="game.time">{{ game.start | date: 'EEEE, MMMM d, h:mm a' }}</span>
+        <span id="date" *ngIf="!game.time">{{ game.start | date: 'EEEE, MMMM d' }}</span>
+        <span id="date" *ngIf="game.time">{{ game.start | date: 'EEEE, MMMM d, h:mm a' }}</span>
+      </div>
     </ng-container>
 
-    <ng-template #noStart>Date TBD</ng-template>
+    <ng-template #noStart>
+      <p id="no-start">Date TBD</p>
+    </ng-template>
   </header>
 
   <article 

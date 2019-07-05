@@ -5,11 +5,10 @@
 @import '~bootstrap/scss/_mixins';
 
 section#selected-game {
-  padding: 3rem 1rem 1rem 1rem;
+  padding: 1rem;
 
   header {
-    padding: 0.5rem 0;
-    text-align: center;
+    padding: 0.5rem;
 
     h1 {
       color: theme-color(primary);
@@ -96,8 +95,6 @@ section#selected-game {
   }
 
   footer {
-    display: flex;
-    justify-content: center;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
   }
 }

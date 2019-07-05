@@ -1,0 +1,17 @@
+<section id="view-select">
+  <button 
+    (click)="onClickEmitView('list')" 
+    [ngClass]="{ 'selected': selectedView === 'list' }"
+    title="List View"
+  >
+    <i class="fas fa-list"></i>
+  </button>
+  
+  <button 
+    (click)="onClickEmitView('calendar')"
+    [ngClass]="{ 'selected': selectedView === 'calendar' }"
+    title="Calendar View"
+  >
+    <i class="far fa-calendar-alt"></i>
+  </button>
+</section>

@@ -3,12 +3,23 @@ import * as moment from 'moment';
 
 import { League } from '@app/models/league';
 import { Game } from '@app/models/game';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamScheduleService {
+  selectedLeague: BehaviorSubject<League> = new BehaviorSubject(null);
+
   constructor() { }
+
+  $selectedLeague() {
+    return this.selectedLeague.asObservable();
+  }
+
+  selectLeague(league: League) {
+    this.selectedLeague.next(league);
+  }
 
   generateSchedule(leagues: League[]): Game[] {
     const schedule: Game[] = [];

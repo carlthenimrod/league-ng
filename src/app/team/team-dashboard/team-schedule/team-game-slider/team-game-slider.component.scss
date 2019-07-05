@@ -1,0 +1,15 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  @include gradient-x(
+    theme-color-level(light, 10), 
+    theme-color-level(light, 4),
+    0%,
+    1%
+  );
+  display: block;
+}

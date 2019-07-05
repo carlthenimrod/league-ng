@@ -1,0 +1,37 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+section#league-selector {
+  padding: 1rem;
+
+  input {
+    background-color: theme-color-level(light, 6);
+    border: none;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    color: theme-color-level(light, 2);
+    line-height: 2rem;
+    padding: 0 1rem;
+
+    &::placeholder {
+      color: theme-color-level(light, 3);
+      line-height: normal;
+    }
+  }
+
+  button {
+    background-color: theme-color-level(light, 6);
+    border: none;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding: 0 1rem;
+    height: 2rem;
+
+    i {
+      color: theme-color-level(light, 3);
+    }
+  }
+}
