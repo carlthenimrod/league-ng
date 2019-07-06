@@ -11,7 +11,6 @@ import { TeamRosterComponent } from './team-roster/team-roster.component';
 import { TeamFeedComponent } from './team-dashboard/team-feed/team-feed.component';
 import { UserCardComponent } from './team-roster/user-card/user-card.component';
 import { TeamScheduleComponent } from './team-dashboard/team-schedule/team-schedule.component';
-import { TeamNavComponent } from './team-nav/team-nav.component';
 import { TeamSelectedGameComponent } from './team-dashboard/team-schedule/team-selected-game/team-selected-game.component';
 import { TeamLeagueStandingsComponent } from './team-dashboard/team-schedule/team-league-standings/team-league-standings.component';
 import { TeamLeagueSelectorComponent } from './team-dashboard/team-schedule/team-league-selector/team-league-selector.component';
@@ -33,7 +32,6 @@ import { TeamGameListComponent } from './team-dashboard/team-schedule/team-game-
     TeamFeedComponent,
     UserCardComponent,
     TeamScheduleComponent,
-    TeamNavComponent,
     TeamSelectedGameComponent,
     TeamLeagueStandingsComponent,
     TeamLeagueSelectorComponent,

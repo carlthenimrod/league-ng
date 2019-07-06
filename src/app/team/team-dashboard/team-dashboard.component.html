@@ -7,6 +7,13 @@
 
   <h1>{{ team.name }}</h1>
 
+  <button 
+    id="toggle"
+    (click)="onClickSidebarToggle()"
+  >
+    <i class="fas fa-comments"></i>
+  </button>
+
   <section id="tabs">
     <nav>
       <button

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
+import { TeamSidebarService } from '@app/services/team-sidebar.service';
 import { ProfileImg } from '@app/models/profile-img';
 
 @Component({
@@ -16,7 +17,8 @@ export class TeamDashboardComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private teamService: TeamService
+    private teamService: TeamService,
+    private teamSidebar: TeamSidebarService
   ) { }
 
   ngOnInit() {
@@ -31,5 +33,9 @@ export class TeamDashboardComponent implements OnInit {
     const {file, img} = data;
 
     // this.teamService.updateImg(file, img).subscribe();
+  }
+
+  onClickSidebarToggle() {
+    this.teamSidebar.toggleSidebar();
   }
 }

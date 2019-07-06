@@ -9,36 +9,55 @@
   background-color: theme-color-level(light, 2);
   display: block;
   height: 100%;
+  position: relative;
 
   section#feed {
-    padding-bottom: 8rem;
+    padding-bottom: 2.5rem;
     position: absolute;
-    top: 10rem;
+    top: 0;
     right: 0;
     left: 0;
     bottom: 0;
+
+    @include media-breakpoint-up(sm) {
+      padding-bottom: 8rem;
+    }
 
     section#feed-list {
       display: flex;
       flex-direction: column;
       flex-grow: 1;
-      margin-bottom: 8rem;
+      margin-bottom: 2.5rem;
       min-height: 0px;
       overflow: auto;
-      padding: 2rem 2rem 0 2rem;
       position: absolute;
+      padding: 0 0.5rem 0 0.5rem;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
 
+      @include media-breakpoint-up(sm) {
+        margin-bottom: 8rem;
+        padding: 2rem 2rem 0 2rem;
+      }
+
       article {
         border-top: 1px solid theme-color-level(light, 3);
         display: flex;
-        padding: 1rem 0;
+        padding: 1rem 0.25rem;
+
+        @include media-breakpoint-up(sm) {
+          padding: 1rem 0;
+        }
 
         &:first-child {
+          border-top: none;
           margin-top: auto;
+
+          @include media-breakpoint-up(sm) {
+            border-top: 1px solid theme-color-level(light, 3);
+          }
         }
 
         .img {
@@ -90,12 +109,16 @@
     }
 
     section#send {
-      border-top: 1px solid theme-color-level(light, 3);
-      height: 8rem;
-      padding: 2rem 2rem 0 2rem;
+      height: 2.5rem;
       position: absolute;
       bottom: 0;
       width: 100%;
+
+      @include media-breakpoint-up(sm) {
+        border-top: 1px solid theme-color-level(light, 3);
+        height: 8rem;
+        padding: 2rem 2rem 0 2rem;
+      }
 
       form {
         display: flex;
@@ -104,11 +127,14 @@
         input {
           background-color: theme-color-level(light, 6);
           border: none;
-          border-radius: 3px 0 0 3px;
           color: theme-color-level(light, 2);
           flex-grow: 1;
           line-height: normal;
           padding: 0.25rem 0.5rem;
+
+          @include media-breakpoint-up(sm) {
+            border-radius: 3px 0 0 3px;
+          }
 
           &::placeholder {
             color: theme-color-level(light, 3);
@@ -119,12 +145,16 @@
         button {
           background-color: theme-color-level(light, 8);
           border: none;
-          border-radius: 0 3px 3px 0;
           color: theme-color-level(light, 1);
           font-size: 0.8rem;
-          line-height: 0.8rem;
+          line-height: 2.5rem;
           padding: 0 1.5rem;
           text-transform: uppercase;
+
+          @include media-breakpoint-up(sm) {
+            border-radius: 0 3px 3px 0;
+            line-height: 0.8rem;
+          }
         }
       }
 

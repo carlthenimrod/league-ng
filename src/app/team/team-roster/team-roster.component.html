@@ -1,6 +1,6 @@
 <aside 
   id="roster"
-  [ngClass]="{ 'roster-open': rosterOpen }"
+  [ngClass]="{ 'roster-open': sidebarOpen }"
 >
   <h1>Roster</h1>
 
@@ -31,8 +31,8 @@
 
 <button 
   id="toggle"
-  [ngClass]="{ 'roster-open': rosterOpen }"
-  (click)="onClickRosterToggle()"
+  [ngClass]="{ 'roster-open': sidebarOpen }"
+  (click)="onClickSidebarToggle()"
 >
   <i class="fas fa-comments"></i>
 </button>

@@ -1,9 +1,10 @@
-import { Component, Input, OnInit, OnDestroy, ViewChildren, ViewContainerRef, QueryList, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ViewChildren, ViewContainerRef, QueryList } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { SocketData } from '@app/models/socket';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
+import { TeamSidebarService } from '@app/services/team-sidebar.service';
 import { TeamSocketService } from '@app/services/team-socket.service';
 import { UserCardService } from './user-card.service';
 
@@ -16,13 +17,14 @@ import { UserCardService } from './user-card.service';
 })
 export class TeamRosterComponent implements OnInit, OnDestroy {
   @Input() team: Team;
-  @Input() rosterOpen: boolean;
-  @Output() rosterToggle: EventEmitter<boolean> = new EventEmitter();
   @ViewChildren('card', { read: ViewContainerRef }) cards: QueryList<ViewContainerRef>;
   rosterSub: Subscription;
+  sidebarOpen: boolean;
+  sidebarSub: Subscription;
 
   constructor(
     private teamService: TeamService,
+    private teamSidebar: TeamSidebarService,
     private teamSocket: TeamSocketService,
     private userCard: UserCardService
   ) {}
@@ -35,18 +37,18 @@ export class TeamRosterComponent implements OnInit, OnDestroy {
           break;
       }
     });
+
+    this.sidebarSub = this.teamSidebar.$sidebarOpen().subscribe(status => {
+      this.sidebarOpen = status;
+    });
   }
 
   ngOnDestroy() {
-    this.rosterSub.unsubscribe();
+    this.sidebarSub.unsubscribe();
   }
 
-  onClickRosterToggle() {
-    if (this.rosterOpen) {
-      this.rosterToggle.emit(false);
-    } else {
-      this.rosterToggle.emit(true);
-    }
+  onClickSidebarToggle() {
+    this.teamSidebar.toggleSidebar();
   }
 
   onClick(e, user, i) {

@@ -11,16 +11,44 @@
   position: relative;
 
   header {
-    background-color: theme-color-level(light, 0.5);
-    border-bottom: 3px solid theme-color(primary);
+    background-color: theme-color(primary);
+    color: $white;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 0 0.5rem;
+
+    @include media-breakpoint-up(sm) {
+      background-color: theme-color-level(light, 0.5);
+      border-bottom: 3px solid theme-color(primary);
+    }
 
     h1 {
 
     }
 
-    section#tabs {
-      nav {
+    button#toggle {
+      cursor: pointer;
+      width: 3.5rem;
+      text-align: center;
+
+      @include media-breakpoint-up(sm) {
         display: none;
+      }
+
+      i {
+        color: $white;
+        font-size: 1.2rem;
+      }
+    }
+
+    section#tabs {
+      display: none;
+
+      @include media-breakpoint-up(sm) {
+        display: block;
+      }
+
+      nav {
         justify-content: space-evenly;
         position: relative;
         z-index: 1;
@@ -51,6 +79,10 @@
         }
       }
     }
+  }
+
+  app-team-feed {
+    flex: 1;
   }
 }
 
