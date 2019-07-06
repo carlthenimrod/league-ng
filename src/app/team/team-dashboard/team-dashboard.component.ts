@@ -26,7 +26,7 @@ export class TeamDashboardComponent implements OnInit {
     this.mobileNav = false;
   }
   
-  @HostListener('window:resize') onResize(event) {
+  @HostListener('window:resize') onResize() {
     this.mobileNav = false;
   }
 
