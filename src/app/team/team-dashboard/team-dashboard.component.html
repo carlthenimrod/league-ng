@@ -7,6 +7,54 @@
 
   <h1>{{ team.name }}</h1>
 
+  <button id="team-mobile-toggle" (click)="onClickMobileToggle($event)">
+    <ng-container [ngSwitch]="tab">
+      <i *ngSwitchCase="'feed'" class="fas fa-rss"></i>
+      <i *ngSwitchCase="'schedule'" class="far fa-calendar-alt"></i>
+      <i *ngSwitchCase="'roster'" class="fas fa-users"></i>
+      <i *ngSwitchCase="'settings'" class="fas fa-cog"></i>
+    </ng-container>
+
+    <span>{{ tab }}</span>
+
+    <i *ngIf="!mobileNav" class="fas fa-caret-down"></i>
+    <i *ngIf="mobileNav" class="fas fa-caret-up"></i>
+  </button>
+
+  <nav id="team-mobile" [ngStyle]="{ 'display': mobileNav ? 'block' : 'none' }">
+    <a 
+      *ngIf="tab !== 'feed'" 
+      (click)="tab = 'feed'"
+    >
+      <i class="fas fa-rss"></i>
+      <span>Feed</span>
+    </a>
+
+    <a 
+      *ngIf="tab !== 'schedule'" 
+      (click)="tab = 'schedule'"
+    >
+      <i class="far fa-calendar-alt"></i>
+      <span>Schedule</span>
+    </a>
+
+    <a 
+      *ngIf="tab !== 'roster'" 
+      (click)="tab = 'roster'"
+    >
+      <i class="fas fa-users"></i>
+      <span>Roster</span>
+    </a>
+
+    <a 
+      *ngIf="tab !== 'settings'" 
+      (click)="tab = 'settings'"
+    >
+      <i class="fas fa-cog"></i>
+      <span>Settings</span>
+    </a>
+  </nav>
+
   <button 
     id="toggle"
     (click)="onClickSidebarToggle()"

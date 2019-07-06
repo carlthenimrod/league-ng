@@ -161,11 +161,15 @@
       section#typing {
         align-items: center;
         color: theme-color-level(light, 6);
-        display: flex;
+        display: none;
         font-size: 0.8rem;
         font-weight: 600;
         padding: 0.5rem 0 0 0.5rem;
         position: relative;
+
+        @include media-breakpoint-up(sm) {
+          display: flex;
+        }
 
         img {
           height: 0.4rem;

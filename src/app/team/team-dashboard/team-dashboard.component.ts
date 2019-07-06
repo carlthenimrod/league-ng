@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Team } from '@app/models/team';
@@ -12,6 +12,7 @@ import { ProfileImg } from '@app/models/profile-img';
   styleUrls: ['./team-dashboard.component.scss']
 })
 export class TeamDashboardComponent implements OnInit {
+  mobileNav: boolean = false;
   team: Team;
   tab = 'feed';
 
@@ -20,6 +21,11 @@ export class TeamDashboardComponent implements OnInit {
     private teamService: TeamService,
     private teamSidebar: TeamSidebarService
   ) { }
+
+  @HostListener('document:click') hideMobile() {
+    console.log('clicked');
+    this.mobileNav = false;
+  }
 
   ngOnInit() {
     this.teamService.teamListener().subscribe((team: Team) => this.team = team);
@@ -37,5 +43,11 @@ export class TeamDashboardComponent implements OnInit {
 
   onClickSidebarToggle() {
     this.teamSidebar.toggleSidebar();
+  }
+
+  onClickMobileToggle($event: MouseEvent) {
+    this.mobileNav = !this.mobileNav;
+
+    $event.stopPropagation();
   }
 }
