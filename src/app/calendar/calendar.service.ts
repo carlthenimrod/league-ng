@@ -62,7 +62,7 @@ export class CalendarService {
     const totalDays = date.daysInMonth();
     let day = 1;
     let currentWeek: ComponentRef<CalendarWeekComponent>;
-    
+
     while (day <= totalDays) {
       const currentDate = moment(date).date(day);
 
