@@ -1,4 +1,7 @@
-<aside id="roster" *ngIf="team">
+<aside 
+  id="roster"
+  [ngClass]="{ 'roster-open': sidebarOpen }"
+>
   <h1>Roster</h1>
 
   <ng-container *ngFor="let group of team.roster">
@@ -25,3 +28,11 @@
     </section>
   </ng-container>
 </aside>
+
+<button 
+  id="toggle"
+  [ngClass]="{ 'roster-open': sidebarOpen }"
+  (click)="onClickSidebarToggle()"
+>
+  <i class="fas fa-comments"></i>
+</button>

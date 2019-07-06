@@ -1,3 +1,25 @@
-<app-team-game-list [team]="team"></app-team-game-list>
+<nav>
+  <app-team-league-selector 
+    [leagues]="team.leagues"
+  >
+  </app-team-league-selector>
 
-<app-calendar></app-calendar>
+  <app-team-schedule-view-mode
+    (viewSelect)="onViewSelect($event)"
+  >
+  </app-team-schedule-view-mode>
+</nav>
+
+<section id="team-games">
+  <app-team-selected-game 
+    *ngIf="selectedGame"
+    [game]="selectedGame"
+    [isHome]="selectedGame.home._id === team._id"
+  ></app-team-selected-game>
+
+  <app-team-game-list [team]="team"></app-team-game-list>
+</section>
+
+<section id="team-standings">
+  <app-team-league-standings></app-team-league-standings>
+</section>

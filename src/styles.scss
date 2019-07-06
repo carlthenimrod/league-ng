@@ -8,6 +8,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 body {
+  background-color: theme-color-level(light, 0.5);
   overflow-x: hidden;
 }
 

@@ -11,16 +11,98 @@
   position: relative;
 
   header {
-    background-color: theme-color-level(light, 0.5);
-    border-bottom: 3px solid theme-color(primary);
+    background-color: theme-color(primary);
+    color: $white;
+    display: flex;
+    height: 3.5rem;
+    position: relative;
+
+    @include media-breakpoint-up(sm) {
+      background-color: theme-color-level(light, 0.5);
+      border-bottom: 3px solid theme-color(primary);
+    }
 
     h1 {
+      display: none;
+    }
 
+    button#team-mobile-toggle {
+      align-items: center;
+      background: none;
+      border: none;
+      color: $white;
+      cursor: pointer;
+      display: flex;
+      font-size: 1.2rem;
+      font-weight: 700;
+      height: 100%;
+      margin: 0 auto;
+      position: absolute;
+      left: 50%;
+      text-transform: capitalize;
+      transform: translateX(-50%);
+
+      span {
+        margin: 0 1.25rem 0 0.75rem;
+      }
+    }
+
+    nav#team-mobile {
+      background-color: theme-color-level(primary, 2);
+      display: none;
+      position: absolute;
+      top: 100%;
+      width: 100%;
+      z-index: 2;
+
+      a {
+        align-items: center;
+        display: flex;
+        cursor: pointer;
+        font-size: 1.2rem;
+        font-weight: 700;
+        justify-content: center;
+        line-height: 3.5rem;
+        position: relative;
+
+        span {
+          min-width: 7rem;
+        }
+
+        i {
+          margin: 0 0.75rem 0 1.5rem;
+          min-width: 1.7rem;
+          text-align: center;
+        }
+      }
+    }
+
+    button#toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-left: auto;
+      width: 3.5rem;
+      text-align: center;
+
+      @include media-breakpoint-up(sm) {
+        display: none;
+      }
+
+      i {
+        color: $white;
+        font-size: 1.2rem;
+      }
     }
 
     section#tabs {
+      display: none;
+
+      @include media-breakpoint-up(sm) {
+        display: block;
+      }
+
       nav {
-        display: none;
         justify-content: space-evenly;
         position: relative;
         z-index: 1;
@@ -52,12 +134,16 @@
       }
     }
   }
+
+  app-team-feed {
+    flex: 1;
+  }
 }
 
 @include media-breakpoint-up(sm) {
   :host {
     header {
-      min-height: 15rem;
+      min-height: 10rem;
       padding: 1rem 0;
       position: relative;
 

@@ -34,24 +34,15 @@ export class CalendarService {
   create(vc: ViewContainerRef) {
     this.vc = vc;
     this.createMonth(moment(this.selectedGame.start));
-
-    const previousMonth = this.findPreviousMonth(this.selectedGame);
-    if (previousMonth) {
-      this.createMonth(previousMonth, 0);
-    }
-
-    const nextMonth = this.findNextMonth(this.selectedGame);
-    if (nextMonth) {
-      this.createMonth(nextMonth);
-    }
   }
 
   createMonth(date: moment.Moment, index?: number) {
     const componentRef = this.vc.createComponent(this.monthFactory, index);
 
     componentRef.instance.date = date;
-    componentRef.instance.$selectedGame = this.selectedGameSubject.asObservable();
     componentRef.instance.changeMonth.subscribe(this.changeMonth.bind(this));
+    componentRef.instance.prev = (this.findPreviousMonth(this.selectedGame)) ? true : false;
+    componentRef.instance.next = (this.findNextMonth(this.selectedGame)) ? true : false;
     componentRef.changeDetectorRef.detectChanges();
 
     this.createDays(date, componentRef.instance.vc);
@@ -157,33 +148,15 @@ export class CalendarService {
   changeMonth(value: string) {
     if (value === 'previous') {
       if(this.findPreviousMonth(this.selectedGame, true)) {
-        this.removeLastMonth();
-      }
-
-      const previousMonth = this.findPreviousMonth(this.selectedGame);
-      if (previousMonth) {
-        this.createMonth(previousMonth, 0);
+        this.vc.clear();
+        this.createMonth(moment(this.selectedGame.start));
       }
     } else if (value === 'next') {
       if (this.findNextMonth(this.selectedGame, true)) {
-        this.removeFirstMonth();
-      }
-
-      const nextMonth = this.findNextMonth(this.selectedGame);
-      if (nextMonth) {
-        this.createMonth(nextMonth, 2);
+        this.vc.clear();
+        this.createMonth(moment(this.selectedGame.start));
       }
     }
-  }
-
-  removeFirstMonth() {
-    if (this.vc.length < 3) { return; }
-    this.vc.remove(0);
-  }
-
-  removeLastMonth() {
-    if (this.vc.length < 3) { return; }
-    this.vc.remove(2);
   }
 
   $selectedGame(): Observable<Game> {

@@ -1,4 +1,4 @@
-<div class="front">
+<section class="month">
   <header>
     <h1>{{ date.format('MMM, YYYY') }}</h1>
   
@@ -11,13 +11,21 @@
       <div>F</div>
       <div>S</div>
     </section>
-
-    <div class="controls" *ngIf="state === 'active'">
-      <button (click)="onClickChangeMonth('previous')">
+  
+    <div class="controls" *ngIf="prev || next">
+      <button 
+        *ngIf="prev" 
+        class="prev"
+        (click)="onClickChangeMonth('previous')"
+      >
         <i class="fas fa-angle-left"></i>
       </button>
-
-      <button (click)="onClickChangeMonth('next')">
+  
+      <button 
+        *ngIf="next"
+        class="next"
+        (click)="onClickChangeMonth('next')"
+      >
         <i class="fas fa-angle-right"></i>
       </button>
     </div>
@@ -26,6 +34,4 @@
   <section class="weeks">
     <ng-container #vc></ng-container>
   </section>
-</div>
-
-<div class="back"></div>
+</section>

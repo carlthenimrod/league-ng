@@ -1,5 +1,5 @@
+import { League, Group } from './league';
 import { Place } from './place';
-import { League } from './league';
 
 export interface Game {
   home: {
@@ -15,6 +15,8 @@ export interface Game {
   start?: string;
   time?: boolean;
   place?: Place;
+  league?: League;
+  group?: Group;
   _id?: string;
   __v?: number;
 }

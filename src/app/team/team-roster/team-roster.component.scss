@@ -4,11 +4,25 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
+:host {
+  display: block;
+  position: relative;
+}
+
+button#toggle {
+  display: none;
+}
 
 aside#roster {
   background-color: theme-color(light);
+  display: none;
   height: 100%;
   padding: 1rem 0.25rem;
+  position: relative;
+
+  &.roster-open {
+    display: block;
+  }
 
   h1 {
     border-bottom: 1px solid theme-color-level(light, 2);
@@ -22,7 +36,11 @@ aside#roster {
 
   section {
     margin: 0 0 2rem 0;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
+
+    @include media-breakpoint-up(sm) {
+      padding: 0.5rem 1rem;
+    }
 
     h2 {
       font-size: 0.8rem;
@@ -35,8 +53,12 @@ aside#roster {
       align-items: center;
       cursor: pointer;
       display: flex;
-      padding: 0.25rem 1rem;
+      padding: 0.25rem;
       position: relative;
+
+      @include media-breakpoint-up(sm) {
+        padding: 0.25rem 1rem;
+      }
 
       &:hover {
         background-color: theme-color-level(light, 0.5);
@@ -118,6 +140,28 @@ aside#roster {
         font-weight: 400;
         padding: 0 0 0 1rem;
       }
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  button#toggle {
+    background: theme-color(light);
+    border: none;
+    color: theme-color-level(light, 5);
+    display: block;
+    font-size: 1.2rem;
+    padding: 0.5rem 0;
+    text-align: center;
+    width: 3rem;
+
+    &.roster-open {
+      background: none;
+      padding: 0;
+      position: absolute;
+      top: 0.75rem;
+      left: 1.25rem;
+      width: auto;
     }
   }
 }

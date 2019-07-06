@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
+import { TeamSidebarService } from '@app/services/team-sidebar.service';
 import { TeamSocketService } from '@app/services/team-socket.service';
 
 @Component({
@@ -11,11 +13,14 @@ import { TeamSocketService } from '@app/services/team-socket.service';
   styleUrls: ['./team.component.scss']
 })
 export class TeamComponent implements OnInit, OnDestroy {
+  sidebarOpen: boolean;
+  sidebarSub: Subscription;
   team: Team;
 
   constructor(
     private route: ActivatedRoute,
     private teamService: TeamService,
+    private teamSidebar: TeamSidebarService,
     private teamSocket: TeamSocketService
   ) { }
 
@@ -29,9 +34,15 @@ export class TeamComponent implements OnInit, OnDestroy {
         if (connected) { this.teamSocket.join(this.team._id); }
       });
     });
+
+    this.sidebarSub = this.teamSidebar.$sidebarOpen().subscribe(status => {
+      this.sidebarOpen = status;
+    });
   }
 
   ngOnDestroy() {
     this.teamSocket.leave(this.team._id);
+    
+    this.sidebarSub.unsubscribe();
   }
 }

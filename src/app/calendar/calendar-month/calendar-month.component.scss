@@ -7,35 +7,24 @@
 :host {
   border: 1px solid theme-color(primary);
   display: block;
-  position: absolute;
-  transform-style: preserve-3d;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20rem;
+  height: 0;
+  margin: 0 auto;
+  padding-top: 89.5%;
+  position: relative;
+  width: 100%;
 
-  &.previous {
-    transform: translateX(-100%) scale(0.75) rotateY(-350deg);
-  }
-
-  &.next {
-    transform: translateX(0%) scale(0.75) rotateY(350deg);
-  }
-
-  &.active {
-    z-index: 3;
-  }
-
-  .front {
-    backface-visibility: hidden;
+  .month {
     background-color: $white;
-    min-height: 16.875rem;
-    position: relative;
-    z-index: 2;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 
     header {
       background-color: theme-color-level(primary, -8);
       border-bottom: 1px solid theme-color(primary);
+      height: 25%;
       position: relative;
       text-align: center;
       text-transform: uppercase;
@@ -49,7 +38,10 @@
       section.days-of-week {
         display: flex;
         padding: 0.5rem 0 0.25rem 0;
+        position: absolute;
+        bottom: 0;
         justify-content: center;
+        width: 100%;
   
         div {
           display: inline-block;
@@ -60,23 +52,31 @@
           width: 14.28%;
         }
       }
-
+  
       .controls {
         display: flex;
         justify-content: space-between;
         position: absolute;
         top: 0;
         width: 100%;
-
+  
         button {
           background: none;
           border: none;
           color: theme-color(primary);
           cursor: pointer;
           padding: 0.5rem 2rem;
-
+  
           &:hover {
             color: theme-color-level(primary, 2);
+          }
+
+          &.prev {
+            margin-right: auto;
+          }
+
+          &.next {
+            margin-left: auto;
           }
         }
       }
@@ -85,15 +85,5 @@
     section.weeks {
       padding: 2px;
     }
-  }
-
-  .back {
-    background-color: theme-color-level(primary, -6);
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 1;
   }
 }

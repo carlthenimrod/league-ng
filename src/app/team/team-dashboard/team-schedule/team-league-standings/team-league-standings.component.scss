@@ -1,0 +1,103 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+section#league-standings {
+  background-color: theme-color-level(light, -4);
+  padding: 3rem 1rem 2rem 1rem;
+
+  header {
+    margin: 0 auto 0.25rem auto;
+    max-width: 50rem;
+    padding: 0 0 0.25rem 0;
+
+    h1 {
+      color: theme-color-level(primary, 8);
+      font-size: 1.4rem;
+      text-transform: uppercase;
+    }
+  }
+
+  h2 {
+    color: theme-color-level(primary, 8);
+    font-size: 1.2rem;
+    margin: 0 auto;
+    max-width: 50rem;
+    padding: 1rem 0 0.5rem 0;
+  }
+
+  table {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 50rem;
+    width: 100%;
+
+    thead {
+      background-color: theme-color(primary);
+      color: $white;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0.125rem;
+      width: 100%;
+
+      tr {
+        th {
+          margin-right: 0.25rem;
+          
+          &:first-child {
+            flex-grow: 1;
+          }
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    tbody {
+      color: theme-color-level(primary, 8);
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      tr {
+        margin: 0.125rem 0;
+
+        td {
+          background-color: theme-color-level(primary, -10);
+          margin-right: 0.25rem;
+
+          &:first-child {
+            flex-grow: 1;
+          }
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    tr {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+
+      th, td {
+        min-width: 3rem;
+        padding: 0.5rem;
+        text-align: center;
+
+        &:first-child {
+          margin-right: auto;
+          min-width: 10rem;
+          text-align: left;
+        }
+      }
+    }
+  }
+}

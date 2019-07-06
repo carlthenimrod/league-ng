@@ -17,6 +17,7 @@ import {
 
 import { NoticeComponent } from './notice/notice.component';
 import { ProfileImgComponent } from './profile-img/profile-img.component';
+import { FormatLocationsPipe } from './format-locations.pipe';
 
 @NgModule({
   imports: [
@@ -38,11 +39,13 @@ import { ProfileImgComponent } from './profile-img/profile-img.component';
     MatProgressSpinnerModule,
     MatSliderModule,
     NoticeComponent,
-    ProfileImgComponent
+    ProfileImgComponent,
+    FormatLocationsPipe
   ],
   declarations: [
     NoticeComponent,
-    ProfileImgComponent
+    ProfileImgComponent,
+    FormatLocationsPipe
   ]
 })
 export class SharedModule { }

@@ -13,7 +13,7 @@ export interface Group {
   _id: string;
   label: string;
   start?: string;
-  games: Game[];
+  games?: Game[];
 }
 
 export interface League {
