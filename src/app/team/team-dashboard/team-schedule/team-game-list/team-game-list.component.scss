@@ -1,0 +1,96 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  display: block;
+  padding-bottom: 2rem;
+}
+
+table {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+  margin: 0 auto;
+  max-width: 25rem;
+  width: 100%;
+
+  thead {
+    background-color: theme-color(primary);
+    border: 1px solid theme-color(primary);
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    tr {
+      th {
+        margin-right: 0.25rem;
+        
+        &:first-child {
+          flex-grow: 1;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  tbody {
+    color: theme-color-level(primary, 8);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    tr {
+      background-color: theme-color-level(primary, -11);
+      border: 1px solid theme-color-level(primary, -11);
+
+      &:nth-child(even) {
+        background-color: theme-color-level(primary, -11.5);
+        border: 1px solid theme-color-level(primary, -11.5);
+      }
+
+      td {
+        margin-right: 0.25rem;
+
+        &:first-child {
+          flex-grow: 1;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        .versus {
+          display: inline-block;
+          font-weight: 700;
+          text-align: left;
+          width: 2rem;
+        }
+      }
+    }
+  }
+
+  tr {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+
+    th, td {
+      min-width: 10rem;
+      padding: 0.25rem 0.5rem;
+      text-align: center;
+
+      &:first-child {
+        margin-right: auto;
+        min-width: 10rem;
+        text-align: left;
+      }
+    }
+  }
+}

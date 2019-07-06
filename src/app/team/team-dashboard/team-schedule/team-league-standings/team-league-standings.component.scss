@@ -36,7 +36,7 @@ section#league-standings {
     width: 100%;
 
     thead {
-      background-color: theme-color-level(primary, 4);
+      background-color: theme-color(primary);
       color: $white;
       display: flex;
       flex-direction: column;

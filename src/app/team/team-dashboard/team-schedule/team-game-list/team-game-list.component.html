@@ -1,0 +1,29 @@
+<table>
+  <thead>
+    <tr>
+      <th>Opponent</th>
+      <th>Starts On</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let game of team.schedule">
+      <ng-container *ngIf="team._id === game.home._id; else isAway">
+        <td>
+          <span class="versus">vs.</span> 
+          <span class="team">{{ game.away.name }}</span>
+        </td>
+      </ng-container>
+
+      <ng-template #isAway>
+        <td>
+          <span class="versus">@</span> 
+          <span class="team">{{ game.home.name }}</span>
+        </td>
+      </ng-template>
+
+      <td *ngIf="game.start">{{ game.start | date: 'MM/dd' }}</td>
+      <td *ngIf="!game.start">TBD</td>
+    </tr>
+  </tbody>
+</table>

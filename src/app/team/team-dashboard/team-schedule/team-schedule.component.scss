@@ -34,7 +34,7 @@ section#team-games {
     @include make-col(6);
   }
 
-  app-team-game-slider {
+  app-team-game-list {
     @include make-col-ready(0);
     @include make-col(6);
   }
