@@ -22,8 +22,11 @@ export class TeamDashboardComponent implements OnInit {
     private teamSidebar: TeamSidebarService
   ) { }
 
-  @HostListener('document:click') hideMobile() {
-    console.log('clicked');
+  @HostListener('document:click') onClickHideMobile() {
+    this.mobileNav = false;
+  }
+  
+  @HostListener('window:resize') onResize(event) {
     this.mobileNav = false;
   }
 
