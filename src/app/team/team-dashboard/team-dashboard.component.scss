@@ -42,6 +42,10 @@
       text-transform: capitalize;
       transform: translateX(-50%);
 
+      @include media-breakpoint-up(sm) {
+        display: none;
+      }
+
       span {
         margin: 0 1.25rem 0 0.75rem;
       }
