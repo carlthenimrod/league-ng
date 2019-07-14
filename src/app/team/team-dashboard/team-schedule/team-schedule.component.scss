@@ -12,17 +12,19 @@
 nav {
   @include make-row(0);
   align-items: center;
-  padding-top: 2rem;
+
+  @include media-breakpoint-up(sm) {
+    padding-top: 2rem;
+  }
 
   app-team-league-selector {
     @include make-col-ready(0);
-    @include make-col(6);
+    @include make-col(9);
   }
 
   app-team-schedule-view-mode {
     @include make-col-ready(0);
-    @include make-col(6);
-
+    @include make-col(3);
   }
 }
 
@@ -31,12 +33,20 @@ section#team-games {
 
   app-team-selected-game {
     @include make-col-ready(0);
-    @include make-col(6);
+    @include make-col(12);
+
+    @include media-breakpoint-up(sm) {
+      @include make-col(6);
+    }
   }
 
   app-team-game-list {
     @include make-col-ready(0);
-    @include make-col(6);
+    @include make-col(12);
+
+    @include media-breakpoint-up(sm) {
+      @include make-col(6);
+    }
   }
 }
 

@@ -5,7 +5,11 @@
 @import '~bootstrap/scss/_mixins';
 
 section#league-selector {
-  padding: 1rem;
+  padding: 0 0 0 0.5rem;
+
+  @include media-breakpoint-up(sm) {
+    padding: 1rem;
+  }
 
   input {
     background-color: theme-color-level(light, 6);

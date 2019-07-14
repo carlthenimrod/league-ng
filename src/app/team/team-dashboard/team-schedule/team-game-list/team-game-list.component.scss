@@ -6,7 +6,10 @@
 
 :host {
   display: block;
-  padding-bottom: 2rem;
+
+  @include media-breakpoint-up(sm) {
+    padding-bottom: 2rem;
+  }
 }
 
 table {
