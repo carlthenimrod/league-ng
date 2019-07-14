@@ -19,26 +19,7 @@ section#team-main {
     border-right: 5px solid theme-color(light);
   }
 
-  app-team-roster {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    transform: translateX(calc(100% + 3.5rem));
-    width: calc(100% - 3.5rem);
-
-    @include media-breakpoint-up(sm) {
-      top: auto;
-      right: 0;
-      bottom: auto;
-      left: auto;
-      transform: none;
-      width: auto;
-    }
-  }
-
-  section#dashboard {
+  app-team-dashboard {
     @include make-col-ready(0);
     @include make-col(12);
   }
@@ -47,23 +28,19 @@ section#team-main {
     border-right: none;
 
     app-team-roster {
-      transform: translateX(3.5rem);
-
       @include media-breakpoint-up(sm) {
         @include make-col-ready(0);
         @include make-col(3);
-        right: auto;
-        transform: none;
       }
     }
   
-    section#dashboard {
-      left: calc((100% - 3.5rem) * -1);
+    app-team-dashboard {
+      transform: translateX(calc((100% - 3.5rem) * -1));
       @include make-col(12);
 
       @include media-breakpoint-up(sm) {
         @include make-col(9);
-        left: auto;
+        transform: none;
       }
     }
   }
