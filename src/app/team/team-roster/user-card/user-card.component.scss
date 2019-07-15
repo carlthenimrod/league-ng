@@ -134,6 +134,7 @@ article#user-card {
         display: none;
 
         @include media-breakpoint-up(sm) {
+          display: block;
           font-size: 0.7rem;
           font-weight: 700;
           margin: 0;

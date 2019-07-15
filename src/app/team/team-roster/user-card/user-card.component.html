@@ -3,6 +3,7 @@
   [ngClass]="{'online': user.status.online}"
   id="user-card"
   [@usercard]="viewportState"
+  (click)="onUserCardClick($event)"
 >
   <header>
     <div id="img">

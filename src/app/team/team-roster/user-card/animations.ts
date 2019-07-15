@@ -23,6 +23,6 @@ export const usercardTrigger = trigger('usercard', [
     style({
       bottom: '-65%'
     }),
-    animate('200ms ease-out')
+    animate('200ms ease-in')
   ])
 ]);

@@ -41,8 +41,9 @@ export class UserCardComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('click', ['$event'])
-  public insideClick(event: MouseEvent): void {
-    event.stopPropagation();
+  public lightboxClick($event: MouseEvent): void {
+    this.close.emit(true);
+    $event.stopPropagation();
   }
 
   ngOnInit() {
@@ -52,6 +53,10 @@ export class UserCardComponent implements OnInit, OnDestroy {
     this.viewportSub = this.viewport.$viewportType().subscribe(type => {
       this.viewportState = type;
     });
+  }
+
+  onUserCardClick($event: MouseEvent) {
+    $event.stopPropagation();
   }
 
   ngOnDestroy() {
