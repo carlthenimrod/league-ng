@@ -4,14 +4,42 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
-article#user-card {
-  border-radius: 3px;
-  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
-  min-width: 15rem;
-  position: absolute;
-  right: 90%;
-  top: 0;
+:host {
+  background-color: rgba(0, 0, 0, 0.85);
+  display: block;
+  position: fixed;
   z-index: 9999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  @include media-breakpoint-up(sm) {
+    background: none;
+    position: absolute;
+    top: 0;
+    right: 90%;
+    bottom: auto;
+    left: auto;
+  }
+}
+
+article#user-card {
+  display: flex;
+  flex-direction: column;
+  height: 65%;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  @include media-breakpoint-up(sm) {
+    border-radius: 3px;
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+    height: auto;
+    min-width: 15rem;
+    position: static;
+    width: auto;
+  }
 
   &.online {
     header {
@@ -26,20 +54,33 @@ article#user-card {
 
   header {
     background-color: theme-color-level(light, 1);
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
     padding: 1rem;
+    position: relative;
+    height: 6rem;
+
+    @include media-breakpoint-up(sm) {
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      height: auto;
+    }
 
     #img {
       background-color: theme-color-level(light, 4);
+      border: 5px solid theme-color-level(light, 1);
       border-radius: 100%;
+      box-sizing: content-box;
       display: flex;
       height: 5rem;
       justify-content: center;
-      margin: 0 auto;
+      margin: -3.5rem auto 0 auto;
       min-width: 5rem;
       position: relative;
       width: 5rem;
+
+      @include media-breakpoint-up(sm) {
+        border: none;
+        margin: 0 auto;
+      }
 
       #status {
         background-color: theme-color-level(light, 3);
@@ -78,17 +119,27 @@ article#user-card {
 
   section#user-details {
     background-color: theme-color-level(light, 3);
+    flex: 1;
     padding: 1rem;
 
     #roles {
       padding: 0 0 0.25rem 0;
+      text-align: center;
+
+      @include media-breakpoint-up(sm) {
+        text-align: left;
+      }
 
       h2 {
-        font-size: 0.7rem;
-        font-weight: 700;
-        margin: 0;
-        padding: 0 0 0.25rem 0;
-        text-transform: uppercase;
+        display: none;
+
+        @include media-breakpoint-up(sm) {
+          font-size: 0.7rem;
+          font-weight: 700;
+          margin: 0;
+          padding: 0 0 0.25rem 0;
+          text-transform: uppercase;
+        }
       }
 
       span {
@@ -107,40 +158,71 @@ article#user-card {
 
   footer {
     background-color: theme-color-level(light, 3);
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
     border-top: 1px solid theme-color-level(light, 4);
     padding: 0 1rem;
 
+    @include media-breakpoint-up(sm) {
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
     form {
-      display: flex;
-      padding: 1rem 0 0 0;
-      width: 100%;
+      display: none;
 
-      input {
-        background-color: theme-color-level(light, 6);
-        border: 1px solid theme-color-level(light, 7);
-        border-radius: 3px;
-        color: theme-color-level(light, 2);
-        flex-grow: 1;
-        line-height: normal;
-        padding: 0.25rem 0.5rem;
-
-        &::placeholder {
-          color: theme-color-level(light, 3);
+      @include media-breakpoint-up(sm) {
+        display: flex;
+        padding: 1rem 0 0 0;
+        width: 100%;
+        
+        input {
+          background-color: theme-color-level(light, 6);
+          border: 1px solid theme-color-level(light, 7);
+          border-radius: 3px;
+          color: theme-color-level(light, 2);
+          flex-grow: 1;
           line-height: normal;
-          text-align: center;
+          padding: 0.25rem 0.5rem;
+  
+          &::placeholder {
+            color: theme-color-level(light, 3);
+            line-height: normal;
+            text-align: center;
+          }
         }
       }
     }
 
     p {
-      color: theme-color-level(light, 6);
-      font-size: 0.6rem;
-      font-weight: 700;
-      margin: 0;
-      padding: 0.5rem 0;
-      text-align: center;
+      display: none;
+      
+      @include media-breakpoint-up(sm) {
+        color: theme-color-level(light, 6);
+        display: block;
+        font-size: 0.6rem;
+        font-weight: 700;
+        margin: 0;
+        padding: 0.5rem 0;
+        text-align: center;
+      }
+    }
+
+    button {
+      display: block;
+      font-size: 1rem;
+      margin: 1rem auto;
+      max-width: 20rem;
+      padding: 0.5rem;
+      text-transform: uppercase;
+      width: 100%;
+      
+      @include media-breakpoint-up(sm) {
+        display: none;
+      }
+
+      i {
+        margin-top: -2px;
+        margin-left: 0.5rem;
+      }
     }
   }
 }

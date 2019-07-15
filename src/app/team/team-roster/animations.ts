@@ -2,16 +2,16 @@ import { trigger, state, style, transition, animate, query } from '@angular/anim
 
 export const sidebarSlideTrigger = trigger('sidebarSlide', [
   state('desktopClose', style({
-    transform: 'none'
+    left: 'auto'
   })),
   state('desktopOpen', style({
-    transform: 'none'
+    left: 'auto'
   })),
   state('mobileClose', style({
-    transform: 'translateX(calc(100% + 3.5rem))'
+    left: 'calc(100% + 3.5rem)'
   })),
   state('mobileOpen', style({
-    transform: 'translateX(3.5rem)'
+    left: '3.5rem'
   })),
   transition('mobileOpen => mobileClose', [
     query('aside#roster', style({
