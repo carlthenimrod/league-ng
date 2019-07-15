@@ -1,22 +1,34 @@
-import { Component, OnInit, Input, HostListener, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, HostListener, Output, EventEmitter, HostBinding, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 import { AuthService } from '@app/auth/auth.service';
 import { User } from '@app/models/user';
+import { ViewportService } from '@app/services/viewport.service';
+import { lightboxTrigger, usercardTrigger } from './animations';
 
 @Component({
   selector: 'app-user-card',
   templateUrl: './user-card.component.html',
-  styleUrls: ['./user-card.component.scss']
+  styleUrls: ['./user-card.component.scss'],
+  animations: [lightboxTrigger, usercardTrigger]
 })
-export class UserCardComponent implements OnInit {
+export class UserCardComponent implements OnInit, OnDestroy {
   self = false;
   initialized = false;
   messageForm = this.fb.group({
     message: ['']
   });
+  viewportSub: Subscription;
   @Input() user: User;
   @Output() close: EventEmitter<boolean> = new EventEmitter();
+  @HostBinding('@lightbox') viewportState: string
+
+  constructor(
+    private auth: AuthService,
+    private fb: FormBuilder,
+    private viewport: ViewportService
+  ) {}
 
   @HostListener('document:click')
   public outsideClick(): void {
@@ -29,17 +41,25 @@ export class UserCardComponent implements OnInit {
   }
 
   @HostListener('click', ['$event'])
-  public insideClick(event: MouseEvent): void {
-    event.stopPropagation();
+  public lightboxClick($event: MouseEvent): void {
+    this.close.emit(true);
+    $event.stopPropagation();
   }
-
-  constructor(
-    private auth: AuthService,
-    private fb: FormBuilder
-  ) {}
 
   ngOnInit() {
     const auth = this.auth.getAuth();
     if (auth._id === this.user._id) { this.self = true; }
+
+    this.viewportSub = this.viewport.$viewportType().subscribe(type => {
+      this.viewportState = type;
+    });
+  }
+
+  onUserCardClick($event: MouseEvent) {
+    $event.stopPropagation();
+  }
+
+  ngOnDestroy() {
+    this.viewportSub.unsubscribe();
   }
 }

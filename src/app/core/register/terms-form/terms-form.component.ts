@@ -8,10 +8,19 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class TermsFormComponent implements OnInit {
   @Output() step: EventEmitter<string> = new EventEmitter();
   @Output() accept: EventEmitter<boolean> = new EventEmitter<boolean>();
+  termsRead: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onScroll($event: UIEvent) {
+    const el = (<HTMLElement>$event.target);
+    const height = el.scrollHeight - el.offsetHeight;
+    const top = el.scrollTop;
+    
+    this.termsRead = (height === top) ? true : false;
   }
 
   onClickAccept() {

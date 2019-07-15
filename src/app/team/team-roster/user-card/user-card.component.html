@@ -2,6 +2,8 @@
   *ngIf="user"
   [ngClass]="{'online': user.status.online}"
   id="user-card"
+  [@usercard]="viewportState"
+  (click)="onUserCardClick($event)"
 >
   <header>
     <div id="img">
@@ -30,5 +32,10 @@
     </form>
 
     <p>Right Click User for more Actions</p>
+
+    <button mat-flat-button color="primary">
+      <span>Send Message</span>
+      <i class="fas fa-share-square"></i>
+    </button>
   </footer>
 </article>
