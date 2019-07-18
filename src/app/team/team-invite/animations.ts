@@ -8,7 +8,11 @@ export const lightboxTrigger = trigger('lightbox', [
         backgroundColor: 'rgba(0, 0, 0, 0.5)'
       })),
       query('@inviteForm', animateChild())
-    ])
+    ]),
+    query('@userInvite', 
+      animateChild(), 
+      { optional: true }
+    )
   ])
 ]);
 
@@ -16,6 +20,15 @@ export const inviteFormTrigger = trigger('inviteForm', [
   transition(':enter', [
     style({ top: '-8.5rem' }),
     animate('150ms ease-out', style({
+      top: 0
+    }))
+  ])
+]);
+
+export const userInviteTrigger = trigger('userInvite', [
+  transition(':enter', [
+    style({ top: 'calc(100% - 8.5rem)' }),
+    animate('150ms ease-in', style({
       top: 0
     }))
   ])

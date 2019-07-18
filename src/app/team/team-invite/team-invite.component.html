@@ -1,4 +1,8 @@
-<header @inviteForm (click)="onClickInside($event)">
+<section 
+  id="invite-form" 
+  @inviteForm 
+  (click)="onClickInside($event)"
+>
   <h1>
     <span>Invite Player</span>
 
@@ -24,4 +28,25 @@
       Please Enter a Valid Email
     </p>
   </ng-container>
-</header>
+</section>
+
+<article 
+  *ngIf="user"
+  id="user-invite"
+  @userInvite
+>
+  <div id="img">
+    <img *ngIf="user.img" [src]="user.img" [alt]="user.fullName">
+    <i *ngIf="!user.img" class="placeholder fas fa-user"></i>
+
+    <div id="status"></div>
+  </div>
+
+  <h1>{{ user.fullName }}</h1>
+
+  <button mat-flat-button color="accent">
+    <span>Send Invite</span>
+
+    <i class="fas fa-paper-plane"></i>
+  </button>
+</article>

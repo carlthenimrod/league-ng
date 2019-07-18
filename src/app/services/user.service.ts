@@ -111,4 +111,9 @@ export class UserService {
       })
     );
   }
+
+  search(email: string) {
+    const url = this.api + `users/search`;
+    return this.http.post(url, { email });
+  }
 }

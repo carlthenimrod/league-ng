@@ -1,26 +1,34 @@
 import { Component, OnInit, HostBinding, HostListener, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { lightboxTrigger, inviteFormTrigger } from './animations';
+import { UserService } from '@app/services/user.service';
+import { User } from '@app/models/user';
+import { lightboxTrigger, inviteFormTrigger, userInviteTrigger } from './animations';
 
 @Component({
   selector: 'app-team-invite',
   templateUrl: './team-invite.component.html',
   styleUrls: ['./team-invite.component.scss'],
-  animations: [lightboxTrigger, inviteFormTrigger]
+  animations: [
+    lightboxTrigger, 
+    inviteFormTrigger, 
+    userInviteTrigger
+  ]
 })
 export class TeamInviteComponent implements OnInit, AfterViewInit {
   inviteForm: FormGroup;
+  user: User;
   @Output() close: EventEmitter<boolean> = new EventEmitter();
   @ViewChild('email', { static: false }) email: ElementRef;
-  @HostBinding('@lightbox') lightbox = 'open';
+  @HostBinding('@lightbox') lightbox;
 
   get emailCtrl() {
     return this.inviteForm.get('email');
   }
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: UserService
   ) { }
 
   @HostListener('click') onClickLightbox() {
@@ -47,6 +55,8 @@ export class TeamInviteComponent implements OnInit, AfterViewInit {
 
     const email = this.inviteForm.value.email;
 
-    console.log(email);
+    this.userService.search(email).subscribe((user: User) => {
+      this.user = user;
+    });
   }
 }
