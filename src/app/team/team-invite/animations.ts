@@ -5,7 +5,7 @@ export const lightboxTrigger = trigger('lightbox', [
     style({ backgroundColor: 'transparent' }),
     group([
       animate('50ms ease-in', style({
-        backgroundColor: 'rgba(0, 0, 0, 0.3)'
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
       })),
       query('@inviteForm', animateChild())
     ])
