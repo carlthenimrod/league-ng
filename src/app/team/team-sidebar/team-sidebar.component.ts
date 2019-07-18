@@ -12,13 +12,13 @@ import { sidebarSlideTrigger } from './animations';
 
 
 @Component({
-  selector: 'app-team-roster',
-  styleUrls: ['./team-roster.component.scss'],
-  templateUrl: './team-roster.component.html',
+  selector: 'app-team-sidebar',
+  styleUrls: ['./team-sidebar.component.scss'],
+  templateUrl: './team-sidebar.component.html',
   providers: [UserCardService],
   animations: [sidebarSlideTrigger]
 })
-export class TeamRosterComponent implements OnInit, OnDestroy {
+export class TeamSidebarComponent implements OnInit, OnDestroy {
   @Input() team: Team;
   @ViewChildren('card', { read: ViewContainerRef }) cards: QueryList<ViewContainerRef>;
   @HostBinding('class.sidebar-open') sidebarOpen: boolean;

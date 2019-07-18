@@ -1,0 +1,27 @@
+<header @inviteForm (click)="onClickInside($event)">
+  <h1>
+    <span>Invite Player</span>
+
+    <i class="fas fa-user-plus"></i>
+  </h1>
+
+  <form [formGroup]="inviteForm" (ngSubmit)="onSubmit()">
+    <input 
+      type="email" 
+      formControlName="email"
+      placeholder="Enter Email"
+      #email
+    >
+
+    <button type="submit">Search</button>
+  </form>
+
+  <ng-container *ngIf="emailCtrl.invalid && emailCtrl.touched">
+    <p 
+      *ngIf="emailCtrl.errors.email"
+      id="error"
+    >
+      Please Enter a Valid Email
+    </p>
+  </ng-container>
+</header>

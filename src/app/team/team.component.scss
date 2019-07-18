@@ -8,6 +8,7 @@
   @include make-container(0);
   @include make-container-max-widths();
   display: block;
+  overflow: hidden;
 }
 
 section#team-main {
@@ -27,7 +28,7 @@ section#team-main {
   &.sidebar-open {
     border-right: none;
 
-    app-team-roster {
+    app-team-sidebar {
       @include media-breakpoint-up(sm) {
         @include make-col-ready(0);
         @include make-col(3);
