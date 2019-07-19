@@ -14,6 +14,7 @@
       type="email" 
       formControlName="email"
       placeholder="Enter Email"
+      (keyup.enter)="onEnter()"
       #email
     >
 
@@ -45,16 +46,25 @@
 
   <h1>{{ user.fullName }}</h1>
 
-  <button 
-    mat-flat-button 
-    color="accent"
-    (click)="onClickInvite()"
-    [disabled]="invited"
-  >
-    <span *ngIf="!invited">Send Invite</span>
-    <span *ngIf="invited">Invited</span>
+  <ng-container *ngIf="teamMember; else: notTeamMember">
+    <p>
+      <span>Already Member</span>
+      <i class="fas fa-user-check"></i>
+    </p>
+  </ng-container>
 
-    <i *ngIf="!invited" class="fas fa-paper-plane"></i>
-    <i *ngIf="invited" class="fas check"></i>
-  </button>
+  <ng-template #notTeamMember>
+    <button 
+      mat-flat-button 
+      color="accent"
+      (click)="onClickInvite()"
+      [disabled]="invited"
+    >
+      <span *ngIf="!invited">Send Invite</span>
+      <span *ngIf="invited">Invited</span>
+
+      <i *ngIf="!invited" class="fas fa-paper-plane"></i>
+      <i *ngIf="invited" class="fas fa-check"></i>
+    </button>
+  </ng-template>
 </article>
