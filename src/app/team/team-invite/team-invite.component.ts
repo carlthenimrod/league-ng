@@ -20,6 +20,7 @@ import { TeamService } from '@app/services/team.service';
 export class TeamInviteComponent implements OnInit, AfterViewInit {
   inviteForm: FormGroup;
   invited: boolean;
+  teamMember: boolean;
   user: User;
   @Input() team: Team;
   @Output() close: EventEmitter<boolean> = new EventEmitter();
@@ -47,8 +48,7 @@ export class TeamInviteComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const el = this.email.nativeElement as HTMLElement;
-    el.focus();
+    <HTMLElement>(this.email.nativeElement).focus();
   }
 
   onClickInside($event: Event) {
@@ -63,16 +63,33 @@ export class TeamInviteComponent implements OnInit, AfterViewInit {
     this.userService.search(email).subscribe((user: User) => {
       this.user = user;
 
-      console.log(this.team);
-
-      if (!this.team.pending) { this.team.pending = []; }
-      const index = this.team.pending.findIndex(u => u._id === user._id);
-      this.invited = (index !== -1) ? true : false;
+      if (user) {
+        this.teamMember = this.isTeamMember(user);
+        this.invited = this.isInvited(user);
+      }
     });
+  }
+
+  isTeamMember(user: User): boolean {
+    if (!this.team.users) { return false; }
+
+    const index = this.team.users.findIndex(u => u._id === user._id);
+    return (index !== -1) ? true : false;
+  }
+
+  isInvited(user: User): boolean {
+    if (!this.team.pending) { return false; }
+
+    const index = this.team.pending.findIndex(u => u._id === user._id);
+    return (index !== -1) ? true : false;
   }
 
   onClickInvite() {
     this.teamService.invite(this.user);
     this.close.emit(true);
+  }
+
+  onEnter() {
+    <HTMLElement>(this.email.nativeElement).blur();
   }
 }
