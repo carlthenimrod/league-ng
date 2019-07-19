@@ -1,9 +1,11 @@
-import { Component, OnInit, HostBinding, HostListener, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, HostBinding, HostListener, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Team } from '@app/models/team';
 import { UserService } from '@app/services/user.service';
 import { User } from '@app/models/user';
 import { lightboxTrigger, inviteFormTrigger, userInviteTrigger } from './animations';
+import { TeamService } from '@app/services/team.service';
 
 @Component({
   selector: 'app-team-invite',
@@ -17,7 +19,9 @@ import { lightboxTrigger, inviteFormTrigger, userInviteTrigger } from './animati
 })
 export class TeamInviteComponent implements OnInit, AfterViewInit {
   inviteForm: FormGroup;
+  invited: boolean;
   user: User;
+  @Input() team: Team;
   @Output() close: EventEmitter<boolean> = new EventEmitter();
   @ViewChild('email', { static: false }) email: ElementRef;
   @HostBinding('@lightbox') lightbox;
@@ -28,6 +32,7 @@ export class TeamInviteComponent implements OnInit, AfterViewInit {
 
   constructor(
     private fb: FormBuilder,
+    private teamService: TeamService,
     private userService: UserService
   ) { }
 
@@ -57,6 +62,17 @@ export class TeamInviteComponent implements OnInit, AfterViewInit {
 
     this.userService.search(email).subscribe((user: User) => {
       this.user = user;
+
+      console.log(this.team);
+
+      if (!this.team.pending) { this.team.pending = []; }
+      const index = this.team.pending.findIndex(u => u._id === user._id);
+      this.invited = (index !== -1) ? true : false;
     });
+  }
+
+  onClickInvite() {
+    this.teamService.invite(this.user);
+    this.close.emit(true);
   }
 }

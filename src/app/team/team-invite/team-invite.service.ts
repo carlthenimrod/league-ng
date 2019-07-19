@@ -1,6 +1,7 @@
 import { Injectable, ComponentFactoryResolver, ComponentRef, OnDestroy, Inject, Injector, ApplicationRef, EmbeddedViewRef } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
+import { Team } from '@app/models/team';
 import { TeamInviteComponent } from './team-invite.component';
 
 @Injectable()
@@ -14,15 +15,15 @@ export class TeamInviteService implements OnDestroy {
     private resolver: ComponentFactoryResolver
   ) { }
 
-  open() {
+  open(team: Team) {
     if (this.componentRef) { this.close(); }
 
     const factory = this.resolver.resolveComponentFactory(TeamInviteComponent);
 
     this.componentRef = factory.create(this.injector);
+    this.componentRef.instance.team = team;
     this.componentRef.instance.close.subscribe(close => {
       if (close) { this.close(); }
-      console.log(close);
     });
 
     this.appRef.attachView(this.componentRef.hostView);

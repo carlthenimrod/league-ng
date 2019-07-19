@@ -8,7 +8,6 @@ import _ from 'lodash';
 import { League, Group } from '@app/models/league';
 import { Team, TeamResponse, RoleGroup } from '@app/models/team';
 import { User } from '@app/models/user';
-import { Game } from '@app/models/game';
 import { NoticeService } from './notice.service';
 import { TeamScheduleService } from './team-schedule.service';
 import { LeagueStandingsService } from './league-standings.service';
@@ -124,6 +123,17 @@ export class TeamService {
     });
   }
 
+  invite(user: User) {
+    const url = this.api + `teams/${this.team._id}/invite`;
+
+    this.http.post(url, user).subscribe((user: User) => {
+      if (!user) { return; }
+      if (!this.team.pending) { this.team.pending = []; }
+      this.team.pending.push(user);
+      this.teamSubject.next(_.cloneDeep(this.team));
+    });
+  }
+
   getUserRoles(userId: string): string[] {
     const user = this.team.users.find(u => u._id === userId);
 
@@ -134,6 +144,7 @@ export class TeamService {
     const team: Team = {
       name: teamResponse.name,
       status: teamResponse.status,
+      pending: teamResponse.pending,
       feed: teamResponse.feed,
       leagues: teamResponse.leagues,
       users: [],

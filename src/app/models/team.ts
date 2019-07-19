@@ -27,6 +27,7 @@ export interface Team {
   name: string;
   roster?: RoleGroup[];
   status?: Status;
+  pending?: User[];
   feed?: Message[];
   users?: User[];
   leagues?: League[];
@@ -48,6 +49,7 @@ export interface TeamResponse {
   leagues: League[];
   roster?: User[];
   status?: Status;
+  pending?: User[];
   feed?: Message[];
   _id: string;
   __v: number;

@@ -19,6 +19,6 @@ export class TeamRosterComponent implements OnInit {
   }
 
   onClickTeamInvite() {
-    this.teamInvite.open();
+    this.teamInvite.open(this.team);
   }
 }
