@@ -33,6 +33,7 @@
 <article 
   *ngIf="user"
   id="user-invite"
+  (click)="onClickInside($event)"
   @userInvite
 >
   <div id="img">
@@ -44,9 +45,16 @@
 
   <h1>{{ user.fullName }}</h1>
 
-  <button mat-flat-button color="accent">
-    <span>Send Invite</span>
+  <button 
+    mat-flat-button 
+    color="accent"
+    (click)="onClickInvite()"
+    [disabled]="invited"
+  >
+    <span *ngIf="!invited">Send Invite</span>
+    <span *ngIf="invited">Invited</span>
 
-    <i class="fas fa-paper-plane"></i>
+    <i *ngIf="!invited" class="fas fa-paper-plane"></i>
+    <i *ngIf="invited" class="fas check"></i>
   </button>
 </article>
