@@ -55,6 +55,10 @@ export class TeamInviteComponent implements OnInit, AfterViewInit {
     $event.stopPropagation();
   }
 
+  onFocus() {
+    if (this.user) { delete this.user; }
+  }
+
   onSubmit() {
     if (!this.inviteForm.valid) { return; }
 
@@ -86,6 +90,10 @@ export class TeamInviteComponent implements OnInit, AfterViewInit {
 
   onClickInvite() {
     this.teamService.invite(this.user);
+    this.close.emit(true);
+  }
+
+  onSwipeup() {
     this.close.emit(true);
   }
 

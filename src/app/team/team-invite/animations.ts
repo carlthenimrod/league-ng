@@ -13,6 +13,11 @@ export const lightboxTrigger = trigger('lightbox', [
       animateChild(), 
       { optional: true }
     )
+  ]),
+  transition(':leave', [
+    animate('50ms ease-in', style({
+      opacity: 0
+    }))
   ])
 ]);
 
@@ -30,6 +35,11 @@ export const userInviteTrigger = trigger('userInvite', [
     style({ top: 'calc(100% - 8.5rem)' }),
     animate('150ms ease-in', style({
       top: 0
+    }))
+  ]),
+  transition(':leave', [
+    animate('50ms ease-in', style({
+      opacity: 0
     }))
   ])
 ]);
