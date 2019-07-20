@@ -15,6 +15,7 @@ export const lightboxTrigger = trigger('lightbox', [
     )
   ]),
   transition(':leave', [
+    query('@inviteForm', animateChild()),
     animate('50ms ease-in', style({
       opacity: 0
     }))
@@ -26,6 +27,11 @@ export const inviteFormTrigger = trigger('inviteForm', [
     style({ top: '-8.5rem' }),
     animate('150ms ease-out', style({
       top: 0
+    }))
+  ]),
+  transition(':leave', [
+    animate('150ms ease-out', style({
+      top: '-8.5rem'
     }))
   ])
 ]);
