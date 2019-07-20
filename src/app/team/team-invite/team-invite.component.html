@@ -2,6 +2,7 @@
   id="invite-form" 
   @inviteForm 
   (click)="onClickInside($event)"
+  (swipeup)="onSwipeup()"
 >
   <h1>
     <span>Invite Player</span>
@@ -15,10 +16,13 @@
       formControlName="email"
       placeholder="Enter Email"
       (keyup.enter)="onEnter()"
+      (focus)="onFocus()"
       #email
     >
 
-    <button type="submit">Search</button>
+    <button type="submit">
+      <i class="fas fa-search"></i>
+    </button>
   </form>
 
   <ng-container *ngIf="emailCtrl.invalid && emailCtrl.touched">
@@ -37,6 +41,7 @@
   (click)="onClickInside($event)"
   @userInvite
 >
+
   <div id="img">
     <img *ngIf="user.img" [src]="user.img" [alt]="user.fullName">
     <i *ngIf="!user.img" class="placeholder fas fa-user"></i>
@@ -55,6 +60,7 @@
 
   <ng-template #notTeamMember>
     <button 
+      id="invite"
       mat-flat-button 
       color="accent"
       (click)="onClickInvite()"
