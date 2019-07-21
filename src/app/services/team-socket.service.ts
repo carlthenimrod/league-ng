@@ -9,7 +9,7 @@ import { Message } from '@app/models/team';
   providedIn: 'root'
 })
 export class TeamSocketService implements OnDestroy {
-  connected: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  connected: BehaviorSubject<boolean>;
   team$: Observable<SocketResponse>;
   teamSub: Subscription;
   rosterSubject: Subject<SocketData> = new Subject();
