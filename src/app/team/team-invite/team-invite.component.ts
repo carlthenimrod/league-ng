@@ -18,17 +18,19 @@ import { TeamService } from '@app/services/team.service';
   ]
 })
 export class TeamInviteComponent implements OnInit, AfterViewInit {
-  inviteForm: FormGroup;
+  searchUserForm: FormGroup;
+  sendInviteForm: FormGroup;
   invited: boolean;
   teamMember: boolean;
   user: User;
+  searchComplete: boolean = false;
   @Input() team: Team;
   @Output() close: EventEmitter<boolean> = new EventEmitter();
   @ViewChild('email', { static: false }) email: ElementRef;
   @HostBinding('@lightbox') lightbox;
 
   get emailCtrl() {
-    return this.inviteForm.get('email');
+    return this.searchUserForm.get('email');
   }
 
   constructor(
@@ -42,8 +44,13 @@ export class TeamInviteComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.inviteForm = this.fb.group({
+    this.searchUserForm = this.fb.group({
       email: ['', [ Validators.required, Validators.email ]]
+    });
+
+    this.sendInviteForm = this.fb.group({
+      first: ['', Validators.required],
+      last: ['', Validators.required]
     });
   }
 
@@ -56,22 +63,39 @@ export class TeamInviteComponent implements OnInit, AfterViewInit {
   }
 
   onFocus() {
-    if (this.user) { delete this.user; }
+    if (this.user) { this.user = null; }
+    this.searchComplete = false;
   }
 
-  onSubmit() {
-    if (!this.inviteForm.valid) { return; }
+  onSubmitSearchUser() {
+    if (!this.searchUserForm.valid) { return; }
 
-    const email = this.inviteForm.value.email;
+    const email = this.searchUserForm.value.email;
 
     this.userService.search(email).subscribe((user: User) => {
       this.user = user;
+      this.searchComplete = true;
 
       if (user) {
         this.teamMember = this.isTeamMember(user);
         this.invited = this.isInvited(user);
       }
     });
+  }
+
+  onSubmitSendInvite() {
+    if (!this.sendInviteForm.valid) { return; }
+
+    const {first, last} = this.sendInviteForm.value;
+    const email = this.searchUserForm.value.email;
+
+    const user: User = {
+      email,
+      name: { first, last }
+    };
+
+    this.teamService.invite(user);
+    this.close.emit(true);
   }
 
   isTeamMember(user: User): boolean {
