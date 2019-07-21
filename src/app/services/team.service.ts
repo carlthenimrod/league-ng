@@ -126,10 +126,10 @@ export class TeamService {
   invite(user: User) {
     const url = this.api + `teams/${this.team._id}/invite`;
 
-    this.http.post(url, user).subscribe((user: User) => {
-      if (!user) { return; }
+    this.http.post(url, user).subscribe((invitedUser: User) => {
+      if (!invitedUser) { return; }
       if (!this.team.pending) { this.team.pending = []; }
-      this.team.pending.push(user);
+      this.team.pending.push(invitedUser);
       this.teamSubject.next(_.cloneDeep(this.team));
     });
   }

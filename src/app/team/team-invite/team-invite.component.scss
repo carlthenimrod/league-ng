@@ -123,6 +123,12 @@ article#user-invite {
     }
   }
 
+  #no-user {
+    color: theme-color(primary);
+    font-size: 2rem;
+    text-align: center;
+  }
+
   h1 {
     color: $black;
     font-size: 1.2rem;
@@ -148,11 +154,19 @@ article#user-invite {
       margin-top: -2px;
       margin-left: 0.5rem;
     }
+
+    &#enter-name {
+      margin: 0;
+    }
   }
 
-  button#invite {
+  form#new-user {
+    mat-form-field { width: 100%; }
+  }
+
+  button#invite, 
+  button#email {
     font-size: 1rem;
-    margin-top: 2rem;
     padding: 0.5rem;
     text-transform: uppercase;
     width: 100%;
@@ -160,6 +174,10 @@ article#user-invite {
     i {
       margin-left: 1rem;
     }
+  }
+
+  button#invite {
+    margin-top: 2rem;
 
     &:disabled {
       background-color: transparent;

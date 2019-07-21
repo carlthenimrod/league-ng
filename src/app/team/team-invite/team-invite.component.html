@@ -10,7 +10,7 @@
     <i class="fas fa-user-plus"></i>
   </h1>
 
-  <form [formGroup]="inviteForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="searchUserForm" (ngSubmit)="onSubmitSearchUser()">
     <input 
       type="email" 
       formControlName="email"
@@ -36,7 +36,7 @@
 </section>
 
 <article 
-  *ngIf="user"
+  *ngIf="searchComplete && user"
   id="user-invite"
   (click)="onClickInside($event)"
   @userInvite
@@ -52,7 +52,7 @@
   <h1>{{ user.fullName }}</h1>
 
   <ng-container *ngIf="teamMember; else: notTeamMember">
-    <p>
+    <p id="already-member">
       <span>Already Member</span>
       <i class="fas fa-user-check"></i>
     </p>
@@ -73,4 +73,58 @@
       <i *ngIf="invited" class="fas fa-check"></i>
     </button>
   </ng-template>
+</article>
+
+
+
+<article 
+  *ngIf="searchComplete && !user"
+  id="user-invite"
+  (click)="onClickInside($event)"
+  @userInvite
+>
+  <div id="no-user">
+    <i class="placeholder fas fa-user-times"></i>
+  </div>
+
+  <h1>User not found!</h1>
+
+  <p id="enter-name">Enter Name</p>
+
+  <form 
+    id="new-user" 
+    [formGroup]="sendInviteForm"
+    (ngSubmit)="onSubmitSendInvite()"
+  >
+    <mat-form-field>
+      <input 
+        type="text"
+        formControlName="first"
+        placeholder="First"
+        matInput
+        required
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <input 
+        type="text"
+        formControlName="last"
+        placeholder="Last"
+        matInput
+        required
+      >
+    </mat-form-field>
+
+    <button 
+      id="email"
+      mat-flat-button 
+      color="accent"
+      [disabled]="!sendInviteForm.valid"
+    >
+      <span>Send Email</span>
+
+      <i class="fas fa-envelope"></i>
+    </button>
+  </form>
 </article>
