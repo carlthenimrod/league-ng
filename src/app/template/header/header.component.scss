@@ -20,6 +20,8 @@ header {
 
   button#mobile-menu,
   button#notifications {
+    background: none;
+    border: none;
     color: $white;
     display: block;
     font-size: 1.6rem;
