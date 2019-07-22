@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { TemplateModule } from './template/template.module';
 import { TokenInterceptor } from './auth/token.interceptor';
 
 @NgModule({
@@ -19,6 +20,7 @@ import { TokenInterceptor } from './auth/token.interceptor';
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
+    TemplateModule,
     SharedModule
   ],
   providers: [

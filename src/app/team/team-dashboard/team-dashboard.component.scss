@@ -11,7 +11,7 @@
   position: relative;
 
   header {
-    background-color: theme-color(primary);
+    background-color: theme-color-level(primary, 2);
     color: $white;
     display: flex;
     height: 3.5rem;
