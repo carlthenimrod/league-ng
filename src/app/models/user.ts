@@ -1,4 +1,5 @@
 import { Address } from './address';
+import { Team } from './team';
 
 export interface UserStatus {
   new?: boolean;
@@ -55,3 +56,33 @@ export interface Manager extends User {
   __v?: number;
 }
 
+export interface UserNotificationStatus {
+  read: boolean;
+  pending?: boolean;
+  accepted?: boolean;
+}
+
+export interface UserNotificationResponse {
+  type: string;
+  action: string;
+  status: UserNotificationStatus;
+  team?: Team;
+  user?: User;
+  _id?: string;
+  __v?: number;
+}
+
+export interface UserNotification {
+  type: string;
+  action: string;
+  message: string;
+  status: UserNotificationStatus;
+  _id: string;
+  team?: Team;
+  user?: User;
+}
+
+export interface UserNotificationReply {
+  notification: UserNotification;
+  reply: string;
+}

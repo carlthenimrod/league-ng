@@ -1,0 +1,28 @@
+<section id="notifications">
+  <p *ngIf="notifications.length === 0" id="no-notifications">No Notifications</p>
+
+  <ng-container *ngIf="notifications.length > 0">
+    <article *ngFor="let notification of notifications" class="notification">
+      <figure>
+        <img *ngIf="notification.team.img" src="{{ notification.team.img }}">
+        <i *ngIf="!notification.team.img" class="fas fa-tshirt"></i>
+      </figure>
+
+      <div class="message">
+        <p>{{ notification.message }}</p>
+
+        <div class="controls">
+          <button class="decline" (click)="onClickReply(notification, 'decline')">
+            <span>Decline</span>
+            <i class="fas fa-times"></i>
+          </button>
+
+          <button class="accept" (click)="onClickReply(notification, 'accept')">
+            <span>Accept</span>
+            <i class="fas fa-check"></i>
+          </button>
+        </div>
+      </div>
+    </article>
+  </ng-container>
+</section>

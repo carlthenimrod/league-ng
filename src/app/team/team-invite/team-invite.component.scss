@@ -17,7 +17,7 @@
 }
 
 section#invite-form {
-  @include gradient-y(theme-color-level(primary, 2.5), theme-color-level(primary, -2.5));
+  @include gradient-y(theme-color-level(primary, 2.5), theme-color(primary));
   box-shadow: 0 -5px 10px 5px rgba(0, 0, 0, 0.3);
   height: 8.5rem;
   padding: 1rem;

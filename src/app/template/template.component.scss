@@ -3,3 +3,12 @@
 @import '~bootstrap/scss/_functions';
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
+
+:host {
+  display: block;
+  padding-top: 3rem;
+
+  @include media-breakpoint-up(sm) {
+    padding-top: 0;
+  }
+}

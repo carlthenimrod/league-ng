@@ -1,5 +1,6 @@
-import { Component, OnInit, HostBinding, HostListener, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, HostBinding, HostListener, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, Input, Inject, OnDestroy, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DOCUMENT } from '@angular/common';
 
 import { Team } from '@app/models/team';
 import { UserService } from '@app/services/user.service';
@@ -17,7 +18,7 @@ import { TeamService } from '@app/services/team.service';
     userInviteTrigger
   ]
 })
-export class TeamInviteComponent implements OnInit, AfterViewInit {
+export class TeamInviteComponent implements OnInit, AfterViewInit, OnDestroy {
   searchUserForm: FormGroup;
   sendInviteForm: FormGroup;
   invited: boolean;
@@ -34,7 +35,9 @@ export class TeamInviteComponent implements OnInit, AfterViewInit {
   }
 
   constructor(
+    @Inject(DOCUMENT) private document: Document,
     private fb: FormBuilder,
+    private renderer: Renderer2,
     private teamService: TeamService,
     private userService: UserService
   ) { }
@@ -52,10 +55,16 @@ export class TeamInviteComponent implements OnInit, AfterViewInit {
       first: ['', Validators.required],
       last: ['', Validators.required]
     });
+
+    this.renderer.setStyle(this.document.body, 'overflow', 'hidden');
   }
 
   ngAfterViewInit() {
     <HTMLElement>(this.email.nativeElement).focus();
+  }
+
+  ngOnDestroy() {
+    this.renderer.removeStyle(this.document.body, 'overflow');
   }
 
   onClickInside($event: Event) {

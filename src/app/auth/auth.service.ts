@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { Auth } from '@app/models/auth';
@@ -12,11 +12,18 @@ import { SocketService } from '@app/services/socket.service';
 })
 export class AuthService {
   api: string = environment.api;
+  loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject(null);
 
   constructor(
     private http: HttpClient,
     private socket: SocketService
-  ) {}
+  ) {
+    if (localStorage.getItem('access_token')) {
+      this.loggedInSubject.next(true);
+    } else {
+      this.loggedInSubject.next(false);
+    }
+  }
 
   getAccessToken(): string {
     return localStorage.getItem('access_token');
@@ -40,7 +47,7 @@ export class AuthService {
       return throwError('');
     }
 
-    return this.http.post(this.api + 'users/refresh', {
+    return this.http.post(this.api + 'auth/refresh', {
       'refresh_token': refresh_token,
       'client': client
     })
@@ -62,6 +69,7 @@ export class AuthService {
         localStorage.setItem('refresh_token', auth.refresh_token);
         localStorage.setItem('client', auth.client);
         this.socket.connect(auth);
+        this.loggedInSubject.next(true);
       })
     );
   }
@@ -80,8 +88,13 @@ export class AuthService {
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('client');
     this.socket.disconnect();
+    this.loggedInSubject.next(false);
 
     const url = this.api + 'auth/logout';
     this.http.request('delete', url, { body: {client, refresh_token}}).subscribe();
+  }
+
+  $loggedIn() {
+    return this.loggedInSubject.asObservable();
   }
 }

@@ -5,7 +5,15 @@
 
   <h1>ngLeague App</h1>
 
-  <button id="notifications">
+  <button 
+    *ngIf="loggedIn"
+    id="notifications" 
+    (click)="onClickToggleNotifications()"
+  >
     <i class="fas fa-bell"></i>
+
+    <span *ngIf="$unread | async" @unreadNotifications></span>
+
+    <ng-container #vc></ng-container>
   </button>
 </header>

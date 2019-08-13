@@ -6,6 +6,17 @@
 
 :host {
   @include make-row(0);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+
+  @include media-breakpoint-up(sm) {
+    position: static;
+    top: auto;
+    width: auto;
+    z-index: inherit;
+  }
 }
 
 header {
@@ -20,19 +31,40 @@ header {
 
   button#mobile-menu,
   button#notifications {
+    background: none;
+    border: none;
     color: $white;
     display: block;
-    font-size: 1.6rem;
+    height: 100%;
     padding: 0 0.5rem;
     margin: 0;
 
-    @include media-breakpoint-up(sm) {
-      display: none;
+    i {
+      font-size: 1.8rem;
     }
   }
 
   button#notifications {
     margin-left: auto;
+    position: relative;
+
+    span {
+      background-color: $red;
+      border: 3px solid theme-color(primary);
+      border-radius: 100%;
+      box-sizing: content-box;
+      height: 0.65rem;
+      position: absolute;
+      top: 6px;
+      right: 1px;
+      width: 0.65rem;
+    }
+  }
+
+  button#mobile-menu {
+    @include media-breakpoint-up(sm) {
+      display: none;
+    }
   }
 
   h1 {
