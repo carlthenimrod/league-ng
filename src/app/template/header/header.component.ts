@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewContainerRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewChild, AfterViewInit } from '@angular/core';
 
 import { AuthService } from '@app/auth/auth.service';
 import { Auth } from '@app/models/auth';
 import { UserNotificationsService } from '@app/services/user-notifications.service';
 import { unreadNotificationsTrigger } from './animations';
 import { Subscription, Observable } from 'rxjs';
+import { NavService } from './nav/nav.service';
 
 @Component({
   selector: 'app-header',
@@ -12,8 +13,9 @@ import { Subscription, Observable } from 'rxjs';
   styleUrls: ['./header.component.scss'],
   animations: [unreadNotificationsTrigger]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
   @ViewChild('vc', { read: ViewContainerRef, static: false }) vc: ViewContainerRef;
+  @ViewChild('desktopNav', { read: ViewContainerRef, static: false }) desktopNav: ViewContainerRef;
   $unread: Observable<boolean>;
   $loggedIn: Observable<boolean>;
   loggedInSub: Subscription;
@@ -21,6 +23,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private navService: NavService,
     private userNotifications: UserNotificationsService
   ) { }
 
@@ -38,6 +41,14 @@ export class HeaderComponent implements OnInit {
     });
 
     this.$unread = this.userNotifications.$unread();
+  }
+
+  ngAfterViewInit() {
+    this.navService.init(this.desktopNav);
+  }
+
+  onClickToggleNav() {
+    this.navService.toggleNav();
   }
 
   onClickToggleNotifications() {

@@ -1,0 +1,53 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  @include gradient-y(theme-color-level(primary, -1.5), theme-color-level(primary, -1));
+  border-right: 1px solid theme-color-level(primary, 8);
+  display: block;
+  padding-top: 3rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: calc(100% - 3rem);
+
+  @include media-breakpoint-up(sm) {
+    background: none;
+    border-right: none;
+    display: block;
+    margin-left: auto;
+    padding-top: 0;
+    position: static;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: auto;
+    z-index: inherit;
+  }
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+
+  @include media-breakpoint-up(sm) {
+    flex-direction: row;
+  }
+
+  a {
+    color: $white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 1rem 2rem;
+
+    @include media-breakpoint-up(sm) {
+      font-size: 1rem;
+      padding: 0 1rem;
+    }
+  }
+}

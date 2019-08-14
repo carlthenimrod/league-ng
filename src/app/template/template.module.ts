@@ -5,13 +5,16 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { TemplateComponent } from './template.component';
+import { NavComponent } from './header/nav/nav.component';
 import { UserNotificationsComponent } from './header/user-notifications/user-notifications.component';
 
 @NgModule({
   declarations: [
     HeaderComponent, 
     FooterComponent, 
-    TemplateComponent, UserNotificationsComponent
+    TemplateComponent, 
+    NavComponent,
+    UserNotificationsComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +24,7 @@ import { UserNotificationsComponent } from './header/user-notifications/user-not
     TemplateComponent
   ],
   entryComponents: [
+    NavComponent,
     UserNotificationsComponent
   ]
 })

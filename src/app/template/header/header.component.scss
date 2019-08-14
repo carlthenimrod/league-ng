@@ -27,7 +27,6 @@ header {
   color: $white;
   display: flex;
   height: 3rem;
-  padding: 0 0.25rem;
 
   button#mobile-menu,
   button#notifications {
@@ -36,8 +35,9 @@ header {
     color: $white;
     display: block;
     height: 100%;
-    padding: 0 0.5rem;
     margin: 0;
+    text-align: center;
+    width: 3rem;
 
     i {
       font-size: 1.8rem;
@@ -47,6 +47,10 @@ header {
   button#notifications {
     margin-left: auto;
     position: relative;
+
+    @include media-breakpoint-up(sm) {
+      display: none;
+    }
 
     span {
       background-color: $red;

@@ -1,11 +1,13 @@
 <header>
-  <button id="mobile-menu">
+  <button id="mobile-menu" (click)="onClickToggleNav()">
     <i class="fas fa-bars"></i>
   </button>
 
   <a routerLink="/">
     <h1>ngLeague App</h1>
   </a>
+
+  <ng-container #desktopNav></ng-container>
 
   <button 
     *ngIf="loggedIn"
