@@ -4,12 +4,12 @@ export const navToggleTrigger = trigger('navToggle', [
   state('mobileOpen', style({ left: 'calc(100% - 3rem)' })),
   transition('mobileClose => mobileOpen', [
     animate('200ms ease-in', style({
-      left: 'calc(100% - 3rem)'
+      left: 'calc(100% - 3rem + 2px)'
     }))
   ]),
   transition('mobileOpen => mobileClose', [
     animate('200ms ease-in', style({
-      left: '-1px'
+      left: '-2px'
     }))
   ]),
 ]);

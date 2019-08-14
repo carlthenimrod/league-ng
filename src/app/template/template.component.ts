@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, HostBinding, OnDestroy, ChangeDetectorRef, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { NavService } from './header/nav/nav.service';
@@ -13,6 +13,10 @@ import { navToggleTrigger } from './animations';
 export class TemplateComponent implements OnInit, OnDestroy {
   navSub: Subscription;
   @HostBinding('@navToggle') navToggle: string;
+  @HostListener('touchmove', ['$event']) stopScroll($event) {
+    if (this.navToggle === 'desktop') { return; }
+    $event.preventDefault();
+  }
 
   constructor(
     private navService: NavService,
