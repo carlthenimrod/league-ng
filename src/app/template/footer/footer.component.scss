@@ -1,0 +1,10 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+p {
+  margin: 0;
+  padding: 2rem 0;
+}

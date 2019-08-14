@@ -8,4 +8,11 @@
   @include make-container(0);
   @include make-container-max-widths();
   display: block;
+  overflow: hidden;
+  width: 100%;
+
+  @include media-breakpoint-up(sm) {
+    overflow: visible;
+    width: auto;
+  }
 }
