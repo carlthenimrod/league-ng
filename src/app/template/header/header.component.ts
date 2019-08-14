@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
     this.loggedInSub = this.authService.$loggedIn().subscribe(loggedIn => {
       if (loggedIn) {
         const auth: Auth = this.authService.getAuth();

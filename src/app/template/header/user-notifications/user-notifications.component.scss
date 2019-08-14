@@ -28,6 +28,7 @@
 
 section#notifications {
   padding: 1rem 0.5rem;
+  position: relative;
 
   @include media-breakpoint-up(sm) {
     border-right: 1px solid theme-color(primary);
@@ -48,7 +49,10 @@ section#notifications {
     border-radius: 5px;
     box-shadow: 0px 0px 2px 2px theme-color-level(primary, 10);
     display: flex;
+    margin-bottom: 1rem;
     padding: 0.5rem;
+    position: relative;
+    transform-origin: top left;
 
     @include media-breakpoint-up(sm) {
       border-radius: 0;

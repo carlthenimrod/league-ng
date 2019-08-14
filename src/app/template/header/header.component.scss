@@ -67,11 +67,15 @@ header {
     }
   }
 
-  h1 {
-    font-size: 1rem;
-    font-weight: 700;
-    margin: 0 0 0 1rem;
-    padding: 0;
-    text-transform: uppercase;
+  a {
+    color: $white;
+
+    h1 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 0 0 0 1rem;
+      padding: 0;
+      text-transform: uppercase;
+    }
   }
 }
