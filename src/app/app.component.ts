@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { AuthService } from './auth/auth.service';
 import { SocketService } from './services/socket.service';
+import { TestBed } from '@angular/core/testing';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,10 @@ export class AppComponent implements OnInit {
     private location: Location,
     private socketService: SocketService
   ) {}
+
+  @HostListener('touchmove', ['$event']) test($event) {
+    $event.preventDefault();
+  }
 
   ngOnInit() {
     const path = this.location.path();
