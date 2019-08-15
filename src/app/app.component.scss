@@ -8,4 +8,7 @@
   @include make-container(0);
   @include make-container-max-widths();
   display: block;
+  height: 100vh;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
