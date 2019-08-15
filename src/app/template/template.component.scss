@@ -14,9 +14,6 @@
   left: -2px;
   width: 100%;
   z-index: 1;
-  height: 100%;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
 
   @include media-breakpoint-up(sm) {
     border-left: none;

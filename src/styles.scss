@@ -8,9 +8,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 html {
-  height: 100%;
-  position: fixed;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 body {
