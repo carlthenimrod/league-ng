@@ -7,13 +7,8 @@
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-html {
-  position: fixed;
-  height: 100%;
-  overflow: hidden;
-}
-
 body {
+  background-color: theme-color-level(light, 0.5);
 }
 
 .mat-dialog-container {
