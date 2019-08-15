@@ -24,14 +24,5 @@
 }
 
 main {
-  width: 100vw;
-  height: calc(100vh - 3rem);
-  overflow-y: scroll;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-
-  &.no-scroll {
-    overflow: hidden;
-    pointer-events: none;
-  }
+  
 }
