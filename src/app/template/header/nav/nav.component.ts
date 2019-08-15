@@ -1,20 +1,11 @@
-import { Component, OnInit, Input, HostBinding } from '@angular/core';
-
-import { navMenuTrigger } from './animations';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss'],
-  animations: [navMenuTrigger]
+  styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-  @Input() navStatus: string;
-
-  @HostBinding('@navMenu') get hideNav() {
-    return this.navStatus;
-  }
-
   constructor() { }
 
   ngOnInit() {
