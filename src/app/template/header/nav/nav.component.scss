@@ -6,7 +6,7 @@
 
 :host {
   @include gradient-y(theme-color-level(primary, -1.5), theme-color-level(primary, -1));
-  display: none;
+  display: block;
   padding-top: 3rem;
   position: fixed;
   top: 0;
@@ -16,6 +16,8 @@
 
   @include media-breakpoint-up(sm) {
     background: none;
+    border-right: none;
+    display: block;
     margin-left: auto;
     padding-top: 0;
     position: static;
