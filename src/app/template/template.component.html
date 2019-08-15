@@ -1,7 +1,7 @@
 <app-header></app-header>
 
-<main>
+<main [ngClass]="{ 'no-scroll': navToggle === 'mobileOpen' }">
   <ng-content></ng-content>
-  
+
   <app-footer></app-footer>
 </main>

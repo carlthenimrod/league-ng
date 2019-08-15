@@ -26,4 +26,10 @@
 main {
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+
+  &.no-scroll {
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
 }

@@ -12,8 +12,12 @@ import { navToggleTrigger } from './animations';
 })
 export class TemplateComponent implements OnInit, OnDestroy {
   navSub: Subscription;
-  @HostBinding('@navToggle') navToggle: string;
+  navToggle: string;
+  @HostBinding('@navToggle') get navToggleTrigger () {
+    return this.navToggle;
+  }
   @HostListener('touchmove', ['$event']) stopScroll($event) {
+    console.log(this.navToggle);
     // if (this.navToggle !== 'mobileOpen') { return; }
     // $event.preventDefault();
   }
