@@ -2,20 +2,20 @@ import { Component, OnInit, HostBinding, OnDestroy, ChangeDetectorRef, HostListe
 import { Subscription } from 'rxjs';
 
 import { NavService } from './header/nav/nav.service';
-import { navToggleTrigger, headerToggleTrigger } from './animations';
+import { navToggleTrigger } from './animations';
 
 @Component({
   selector: 'app-template',
   templateUrl: './template.component.html',
   styleUrls: ['./template.component.scss'],
-  animations: [navToggleTrigger, headerToggleTrigger]
+  animations: [navToggleTrigger]
 })
 export class TemplateComponent implements OnInit, OnDestroy {
   navSub: Subscription;
   @HostBinding('@navToggle') navToggle: string;
   @HostListener('touchmove', ['$event']) stopScroll($event) {
-    if (this.navToggle === 'desktop') { return; }
-    $event.preventDefault();
+    // if (this.navToggle !== 'mobileOpen') { return; }
+    // $event.preventDefault();
   }
 
   constructor(
