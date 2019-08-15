@@ -34,6 +34,11 @@ export class TemplateComponent implements OnInit, OnDestroy {
     });
   }
 
+
+  onScroll() {
+    console.log('test');
+  }
+
   ngOnDestroy() {
     this.navSub.unsubscribe();
   }
