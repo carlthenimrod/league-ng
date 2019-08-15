@@ -7,9 +7,11 @@
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+html,
 body {
   background-color: theme-color-level(light, 0.5);
-  overflow-x: hidden;
+  position: fixed;
+  overflow: hidden;
 }
 
 .mat-dialog-container {
