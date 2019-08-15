@@ -47,9 +47,13 @@ export class NavService implements OnDestroy {
     if (this.navStatus !== 'mobileOpen') {
       this.navStatus = 'mobileOpen';
       this.navStatusSubject.next(this.navStatus);
+
+      this.document.body.classList.add('no-scroll');
     } else {
       this.navStatus = 'mobileClose';
       this.navStatusSubject.next(this.navStatus);
+
+      this.document.body.classList.remove('no-scroll');
     }
   }
 

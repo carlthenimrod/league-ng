@@ -9,6 +9,11 @@
 
 body {
   background-color: theme-color-level(light, 0.5);
+
+  &.no-scroll {
+    height: 100%;
+    overflow: hidden;
+  }
 }
 
 .mat-dialog-container {
