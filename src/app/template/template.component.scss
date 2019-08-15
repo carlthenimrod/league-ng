@@ -14,11 +14,16 @@
   position: relative;
   left: -2px;
   width: 100%;
-  z-index: 9997;
+  z-index: 1;
 
   @include media-breakpoint-up(sm) {
     border-left: none;
     padding-top: 0;
     left: auto;
   }
+}
+
+main {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }

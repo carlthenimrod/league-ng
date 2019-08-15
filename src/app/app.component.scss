@@ -8,10 +8,6 @@
   @include make-container(0);
   @include make-container-max-widths();
   display: block;
-  width: 100vw;
-  height: 100vh;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
 
   @include media-breakpoint-up(sm) {
     overflow: visible;
