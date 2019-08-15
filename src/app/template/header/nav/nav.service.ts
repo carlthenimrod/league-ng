@@ -46,9 +46,11 @@ export class NavService implements OnDestroy {
 
     if (this.navStatus !== 'mobileOpen') {
       this.navStatus = 'mobileOpen';
+      this.componentRef.instance.navStatus = 'mobileOpen';
       this.navStatusSubject.next(this.navStatus);
     } else {
       this.navStatus = 'mobileClose';
+      this.componentRef.instance.navStatus = 'mobileClose';
       this.navStatusSubject.next(this.navStatus);
     }
   }
@@ -86,6 +88,7 @@ export class NavService implements OnDestroy {
     this.document.body.appendChild(domEl);
 
     this.navStatus = 'mobileClose';
+    this.componentRef.instance.navStatus = 'mobileClose';
     this.navStatusSubject.next('mobileClose');
   }
 
@@ -98,6 +101,7 @@ export class NavService implements OnDestroy {
     this.desktopCtn.insert(this.componentRef.hostView);
 
     this.navStatus = 'desktop';
+    this.componentRef.instance.navStatus = 'desktop';
     this.navStatusSubject.next('desktop');
   }
 
