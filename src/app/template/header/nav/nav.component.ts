@@ -9,6 +9,12 @@ export class NavComponent implements OnInit {
   @HostListener('touchmove', ['$event']) stopScroll($event) {
     $event.preventDefault();
   }
+  @HostListener('touchstart', ['$event']) stopssScroll($event) {
+    $event.preventDefault();
+  }
+  @HostListener('touchend', ['$event']) stopsScroll($event) {
+    $event.preventDefault();
+  }
 
   constructor() { }
 

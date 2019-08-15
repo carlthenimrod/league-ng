@@ -1,3 +1,7 @@
-<app-header></app-header>
+<app-header [@headerToggle]="navToggle"></app-header>
+
+<main>
   <ng-content></ng-content>
+</main>
+
 <app-footer></app-footer>

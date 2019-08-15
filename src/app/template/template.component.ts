@@ -2,13 +2,13 @@ import { Component, OnInit, HostBinding, OnDestroy, ChangeDetectorRef, HostListe
 import { Subscription } from 'rxjs';
 
 import { NavService } from './header/nav/nav.service';
-import { navToggleTrigger } from './animations';
+import { navToggleTrigger, headerToggleTrigger } from './animations';
 
 @Component({
   selector: 'app-template',
   templateUrl: './template.component.html',
   styleUrls: ['./template.component.scss'],
-  animations: [navToggleTrigger]
+  animations: [navToggleTrigger, headerToggleTrigger]
 })
 export class TemplateComponent implements OnInit, OnDestroy {
   navSub: Subscription;
