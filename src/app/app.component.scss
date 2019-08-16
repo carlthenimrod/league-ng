@@ -7,4 +7,5 @@
 :host {
   @include make-container(0);
   @include make-container-max-widths();
+  display: block;
 }
