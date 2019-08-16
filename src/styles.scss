@@ -8,18 +8,16 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 html {
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
   position: fixed;
 }
 
 body {
   background-color: theme-color-level(light, 0.5);
-
-  &.no-scroll {
-    height: 100vh;
-    overflow: hidden;
-  }
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mat-dialog-container {
