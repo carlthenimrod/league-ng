@@ -6,7 +6,7 @@
 
 :host {
   @include gradient-y(theme-color-level(primary, -1.5), theme-color-level(primary, -1));
-  display: block;
+  display: none;
   overflow: hidden;
   padding-top: 3rem;
   position: fixed;
