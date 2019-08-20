@@ -9,6 +9,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class SearchComponent implements OnInit {
   searchForm: FormGroup;
+  typing: boolean;
 
   constructor(private fb: FormBuilder) { }
 

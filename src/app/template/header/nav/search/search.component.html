@@ -1,8 +1,14 @@
-<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+<form 
+  [formGroup]="searchForm" 
+  (ngSubmit)="onSubmit()" 
+  [ngClass]="{ 'typing': typing }"
+>
   <input 
     type="text"
     formControlName="search"
     placeholder="Search..."
+    (focus)="typing = true"
+    (blur)="typing = false"
   >
 
   <button>
