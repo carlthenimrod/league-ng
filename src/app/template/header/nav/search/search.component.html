@@ -1,0 +1,11 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <input 
+    type="text"
+    formControlName="search"
+    placeholder="Search..."
+  >
+
+  <button>
+    <i class="fas fa-search"></i>
+  </button>
+</form>
