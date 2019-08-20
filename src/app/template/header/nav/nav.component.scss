@@ -5,7 +5,8 @@
 @import '~bootstrap/scss/_mixins';
 
 :host {
-  @include gradient-y(theme-color-level(primary, -1.5), theme-color-level(primary, -1));
+  // @include gradient-y(theme-color-level(primary, -1.5), theme-color-level(primary, -1));
+  @include gradient-x(theme-color-level(primary, -1.5), $black, 98%, 100%);
   display: block;
   overflow: hidden;
   position: fixed;
