@@ -1,9 +1,33 @@
 <app-search></app-search>
 
-<nav>
-  <a title="Link #1">Link #1</a>
-
-  <a title="Link #2">Link #2</a>
-
-  <a title="Link #3">Link #3</a>
-</nav>
+<aside>
+  <nav id="toggle">
+      <button [ngClass]="{ 'active': selected === 'home' }" (click)="selected = 'home'">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </button>
+    
+      <button [ngClass]="{ 'active': selected === 'leagues' }" (click)="selected = 'leagues'">
+        <i class="fa fa-sticky-note"></i>
+        <span>Leagues</span>
+      </button>
+    
+      <button [ngClass]="{ 'active': selected === 'teams' }" (click)="selected = 'teams'">
+        <i class="fas fa-tshirt"></i>
+        <span>Teams</span>
+      </button>
+    
+      <button [ngClass]="{ 'active': selected === 'admin' }" (click)="selected = 'admin'">
+        <i class="fas fa-key"></i>
+        <span>Admin</span>
+      </button>
+    </nav>
+    
+    <nav id="main">
+      <a title="Link #1">Link #1</a>
+    
+      <a title="Link #2">Link #2</a>
+    
+      <a title="Link #3">Link #3</a>
+    </nav>
+</aside>
