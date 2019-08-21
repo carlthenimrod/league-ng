@@ -5,10 +5,10 @@ export const navToggleTrigger = trigger('navToggle', [
   transition('mobileClose => mobileOpen', [
     query('app-header', style({ left: '0' })),
     group([
-      animate('200ms ease-in', style({
+      animate('100ms ease-in', style({
         left: 'calc(100% - 3rem - 2px)'
       })),
-      query('app-header', animate('200ms ease-in', style({
+      query('app-header', animate('100ms ease-in', style({
         left: 'calc(100% - 3rem)'
       })))
     ])
@@ -16,10 +16,10 @@ export const navToggleTrigger = trigger('navToggle', [
   transition('mobileOpen => mobileClose', [
     query('app-header', style({ left: 'calc(100% - 3rem)' })),
     group([
-      animate('200ms ease-in', style({
+      animate('100ms ease-in', style({
         left: '-2px'
       })),
-      query('app-header', animate('200ms ease-in', style({
+      query('app-header', animate('100ms ease-in', style({
         left: '0'
       })))
     ])

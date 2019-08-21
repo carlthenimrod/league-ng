@@ -6,7 +6,6 @@ import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 import { TeamSidebarService } from '@app/services/team-sidebar.service';
 import { TeamSocketService } from '@app/services/team-socket.service';
-import { ViewportService } from '@app/services/viewport.service';
 
 @Component({
   selector: 'app-team-component',

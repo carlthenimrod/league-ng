@@ -1,9 +1,11 @@
 import { Injectable, OnDestroy, ViewContainerRef, ComponentFactoryResolver, ComponentRef, Injector, ApplicationRef, Inject, EmbeddedViewRef } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, Location } from '@angular/common';
 import { Subscription, BehaviorSubject } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import { NavComponent } from './nav.component';
 import { ViewportService } from '@app/services/viewport.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +15,28 @@ export class NavService implements OnDestroy {
   desktopCtn: ViewContainerRef;
   navStatusSubject: BehaviorSubject<string> = new BehaviorSubject(null);
   navStatus: string;
+  pathSubject: BehaviorSubject<string[]> = new BehaviorSubject([]);
+  subscription: Subscription = new Subscription();
   viewportType: string;
-  viewportSub: Subscription;
 
   constructor(
     private appRef: ApplicationRef,
     @Inject(DOCUMENT) private document: Document,
     private injector: Injector,
+    private location: Location,
     private resolver: ComponentFactoryResolver,
+    private router: Router,
     private viewport: ViewportService
   ) { 
-    this.viewportSub = this.viewport.$viewportType().subscribe(type => {
+    this.subscription.add(this.viewport.$viewportType().subscribe(type => {
       this.viewportType = type;
 
       this.updateNav();
-    });
+    }));
+
+    this.subscription.add(this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => this.getPath()));
   }
 
   init(desktopCtn: ViewContainerRef) {
@@ -41,16 +50,29 @@ export class NavService implements OnDestroy {
     }
   }
 
+  getPath() {
+    const path = this.location.path().split('/');
+    path.shift();
+
+    this.pathSubject.next(path);
+  }
+
+  $path() {
+    return this.pathSubject.asObservable();
+  }
+
   toggleNav() {
     if (this.viewportType !== 'mobile') { return; }
 
     if (this.navStatus !== 'mobileOpen') {
       this.navStatus = 'mobileOpen';
+      this.componentRef.instance.navMenu = this.navStatus;
       this.navStatusSubject.next(this.navStatus);
 
       this.document.body.classList.add('no-scroll');
     } else {
       this.navStatus = 'mobileClose';
+      this.componentRef.instance.navMenu = this.navStatus;
       this.navStatusSubject.next(this.navStatus);
 
       this.document.body.classList.remove('no-scroll');
@@ -65,6 +87,7 @@ export class NavService implements OnDestroy {
     const factory = this.resolver.resolveComponentFactory(NavComponent);
     
     this.componentRef = factory.create(this.injector);
+    this.componentRef.instance.$path = this.$path();
   }
 
   updateNav() {
@@ -90,6 +113,7 @@ export class NavService implements OnDestroy {
     this.document.body.appendChild(domEl);
 
     this.navStatus = 'mobileClose';
+    this.componentRef.instance.navMenu = this.navStatus;
     this.navStatusSubject.next('mobileClose');
   }
 
@@ -102,6 +126,7 @@ export class NavService implements OnDestroy {
     this.desktopCtn.insert(this.componentRef.hostView);
 
     this.navStatus = 'desktop';
+    this.componentRef.instance.navMenu = this.navStatus;
     this.navStatusSubject.next('desktop');
   }
 
@@ -111,6 +136,6 @@ export class NavService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.viewportSub.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }

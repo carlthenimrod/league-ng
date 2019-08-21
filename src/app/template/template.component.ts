@@ -17,7 +17,6 @@ export class TemplateComponent implements OnInit, OnDestroy {
     return this.navToggle;
   }
   @HostListener('touchmove', ['$event']) stopScroll($event) {
-    console.log(this.navToggle);
     if (this.navToggle !== 'mobileOpen') { return; }
     $event.preventDefault();
   }
