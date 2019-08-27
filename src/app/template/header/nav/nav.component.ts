@@ -10,7 +10,7 @@ import { navMenuTrigger } from './animations';
   animations: [navMenuTrigger]
 })
 export class NavComponent implements OnInit {
-  selected: string = 'home';
+  selected = 'home';
   $path: Observable<string[]>;
   @HostBinding('@navMenu') navMenu;
 
@@ -18,7 +18,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     this.$path.subscribe(path => {
-      if (path.length === 0) { 
+      if (path.length === 0) {
         this.selected = 'home';
         return;
       }
@@ -32,9 +32,10 @@ export class NavComponent implements OnInit {
           break;
         case 'admin':
           this.selected = 'admin';
+          break;
         default:
           this.selected = 'home';
       }
-    })
+    });
   }
 }
