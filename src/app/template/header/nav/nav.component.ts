@@ -23,7 +23,7 @@ export class NavComponent implements OnInit {
         return;
       }
 
-      switch(path[0]) {
+      switch (path[0]) {
         case 'team':
           this.selected = 'teams';
           break;
