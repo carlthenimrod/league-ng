@@ -38,7 +38,7 @@ aside {
     background-color: theme-color-level(primary, 4.5);
     border-right: 1px solid theme-color-level(primary, 8);
     width: 5rem;
-  
+
     button {
       align-items: center;
       background: none;
@@ -73,29 +73,6 @@ aside {
 
       i {
         font-size: 1.6rem;
-      }
-    }
-  }
-  
-  nav#main {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-  
-    @include media-breakpoint-up(sm) {
-      flex-direction: row;
-    }
-  
-    a {
-      border-bottom: 1px solid theme-color-level(primary, 8);
-      color: $white;
-      font-size: 1.2rem;
-      font-weight: 700;
-      padding: 1rem;
-  
-      @include media-breakpoint-up(sm) {
-        font-size: 1rem;
-        padding: 0 1rem;
       }
     }
   }

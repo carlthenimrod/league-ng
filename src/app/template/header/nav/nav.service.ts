@@ -1,11 +1,11 @@
 import { Injectable, OnDestroy, ViewContainerRef, ComponentFactoryResolver, ComponentRef, Injector, ApplicationRef, Inject, EmbeddedViewRef } from '@angular/core';
 import { DOCUMENT, Location } from '@angular/common';
-import { Subscription, BehaviorSubject } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 
 import { NavComponent } from './nav.component';
 import { ViewportService } from '@app/services/viewport.service';
-import { Router, NavigationEnd } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class NavService implements OnDestroy {
   navStatusSubject: BehaviorSubject<string> = new BehaviorSubject(null);
   navStatus: string;
   pathSubject: BehaviorSubject<string[]> = new BehaviorSubject([]);
-  subscription: Subscription = new Subscription();
+  unsubscribe$ = new Subject<void>();
   viewportType: string;
 
   constructor(
@@ -27,16 +27,21 @@ export class NavService implements OnDestroy {
     private resolver: ComponentFactoryResolver,
     private router: Router,
     private viewport: ViewportService
-  ) { 
-    this.subscription.add(this.viewport.$viewportType().subscribe(type => {
-      this.viewportType = type;
+  ) {
+    this.viewport.$viewportType()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(type => {
+        this.viewportType = type;
 
-      this.updateNav();
-    }));
+        this.updateNav();
+      });
 
-    this.subscription.add(this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => this.getPath()));
+    this.router.events
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        filter(event => event instanceof NavigationEnd)
+      )
+      .subscribe(() => this.getPath());
   }
 
   init(desktopCtn: ViewContainerRef) {
@@ -57,7 +62,7 @@ export class NavService implements OnDestroy {
     this.pathSubject.next(path);
   }
 
-  $path() {
+  path$() {
     return this.pathSubject.asObservable();
   }
 
@@ -65,18 +70,23 @@ export class NavService implements OnDestroy {
     if (this.viewportType !== 'mobile') { return; }
 
     if (this.navStatus !== 'mobileOpen') {
-      this.navStatus = 'mobileOpen';
-      this.componentRef.instance.navMenu = this.navStatus;
-      this.navStatusSubject.next(this.navStatus);
-
-      this.document.body.classList.add('no-scroll');
+      this.openNav();
     } else {
-      this.navStatus = 'mobileClose';
-      this.componentRef.instance.navMenu = this.navStatus;
-      this.navStatusSubject.next(this.navStatus);
-
-      this.document.body.classList.remove('no-scroll');
+      this.closeNav();
     }
+  }
+
+  openNav() {
+    this.navStatus = 'mobileOpen';
+    this.componentRef.instance.navMenu = this.navStatus;
+    this.navStatusSubject.next(this.navStatus);
+  }
+
+  closeNav() {
+    this.navStatus = 'mobileClose';
+    this.componentRef.instance.navMenu = this.navStatus;
+    this.navStatusSubject.next(this.navStatus);
+
   }
 
   $navStatus() {
@@ -85,9 +95,14 @@ export class NavService implements OnDestroy {
 
   createNav() {
     const factory = this.resolver.resolveComponentFactory(NavComponent);
-    
+
     this.componentRef = factory.create(this.injector);
-    this.componentRef.instance.$path = this.$path();
+    this.componentRef.instance.path$ = this.path$();
+    this.componentRef.instance.linkClicked
+      .subscribe(() => {
+        if (this.viewportType !== 'mobile') { return; }
+        this.closeNav();
+      });
   }
 
   updateNav() {
@@ -136,6 +151,7 @@ export class NavService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

@@ -2,6 +2,7 @@ import { Address } from './address';
 import { Team } from './team';
 
 export interface UserStatus {
+  admin?: boolean;
   new?: boolean;
   verified?: boolean;
   online?: boolean;
@@ -13,10 +14,7 @@ export interface User {
   email?: string;
   status?: UserStatus;
   img?: string;
-  teams?: [{
-    _id: string;
-    name: string;
-  }];
+  teams?: Team[];
   address?: Address;
   phone?: string;
   secondary?: string;

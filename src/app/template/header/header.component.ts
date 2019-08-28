@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 
 import { AuthService } from '@app/auth/auth.service';
 import { Auth } from '@app/models/auth';
@@ -13,7 +13,7 @@ import { NavService } from './nav/nav.service';
   styleUrls: ['./header.component.scss'],
   animations: [unreadNotificationsTrigger]
 })
-export class HeaderComponent implements OnInit, AfterViewInit {
+export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('vc', { read: ViewContainerRef, static: false }) vc: ViewContainerRef;
   @ViewChild('desktopNav', { read: ViewContainerRef, static: false }) desktopNav: ViewContainerRef;
   $unread: Observable<boolean>;
@@ -28,12 +28,12 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this.loggedInSub = this.authService.$loggedIn().subscribe(loggedIn => {
+    this.loggedInSub = this.authService.loggedIn$().subscribe(loggedIn => {
       if (loggedIn) {
         const auth: Auth = this.authService.getAuth();
-  
+
         this.userNotifications.get(auth._id);
-  
+
         this.$unread = this.userNotifications.$unread();
       }
 

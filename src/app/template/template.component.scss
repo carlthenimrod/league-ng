@@ -9,6 +9,7 @@
   border-left: 2px solid theme-color-level(primary, 8.5);
   box-sizing: content-box;
   display: block;
+  height: 100vh;
   padding-top: 3rem;
   position: relative;
   left: -2px;
@@ -17,6 +18,7 @@
 
   @include media-breakpoint-up(sm) {
     border-left: none;
+    height: auto;
     padding-top: 0;
     left: auto;
   }

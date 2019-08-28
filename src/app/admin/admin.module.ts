@@ -6,7 +6,6 @@ import { SharedModule } from '@app/shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import { AdminLeaguesComponent } from './admin-leagues/admin-leagues.component';
 import { AdminLeagueComponent } from './admin-league/admin-league.component';
 import { AdminLeagueFormComponent } from './admin-league/admin-league-form/admin-league-form.component';
@@ -57,7 +56,6 @@ import { AdminModalTimeComponent } from './admin-place/admin-permits/admin-permi
   declarations: [
     AdminComponent,
     AdminDashboardComponent,
-    AdminNavComponent,
     AdminLeaguesComponent,
     AdminLeagueComponent,
     AdminLeagueFormComponent,

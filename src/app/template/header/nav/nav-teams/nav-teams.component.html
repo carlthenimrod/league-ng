@@ -1,0 +1,16 @@
+<nav id="teams">
+  <ng-container *ngIf="teams.length > 0; else noTeams">
+    <a
+      *ngFor="let team of teams"
+      [routerLink]="['team', team._id]"
+      title="{{ team.name }}"
+      (click)="onClick()"
+    >
+      <span>{{ team.name }}</span>
+    </a>
+  </ng-container>
+
+  <ng-template #noTeams>
+    <p>No Teams</p>
+  </ng-template>
+</nav>
