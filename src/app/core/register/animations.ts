@@ -2,15 +2,18 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
 
 export const typeSelectTrigger = trigger('typeSelect', [
   state('*', style({
+    display: 'none',
     opacity: 0,
     transform: 'translateX(-300%)'
   })),
   state('type', style({
+    display: 'block',
     opacity: 1,
     transform: 'translateX(0%)'
   })),
   transition('void => type', [
     style({
+      display: 'block',
       transform: 'translateX(0%)'
     }),
     animate('150ms ease-out')
@@ -22,6 +25,7 @@ export const typeSelectTrigger = trigger('typeSelect', [
   ]),
   transition('user => type', [
     style({
+      display: 'none',
       opacity: 0,
       transform: 'translateX(0%)'
     }),
@@ -31,15 +35,18 @@ export const typeSelectTrigger = trigger('typeSelect', [
 
 export const userFormTrigger = trigger('userForm', [
   state('*', style({
+    display: 'none',
     opacity: 0,
     transform: 'translateX(-300%)'
   })),
   state('user', style({
+    display: 'block',
     opacity: 1,
     transform: 'translateX(0%)'
   })),
   transition('type => user', [
     style({
+      display: 'block',
       opacity: 0,
       transform: 'translateX(0%)'
     }),
@@ -57,7 +64,9 @@ export const userFormTrigger = trigger('userForm', [
   ]),
   transition('misc => user', [
     style({
-      opacity: 1
+      display: 'block',
+      opacity: 1,
+      transform: 'translateX(-300%)'
     }),
     animate('600ms ease-out', style({
       transform: 'translateX(0%)'
@@ -67,23 +76,28 @@ export const userFormTrigger = trigger('userForm', [
 
 export const miscFormTrigger = trigger('miscForm', [
   state('*', style({
-    opacity: 0,
+    display: 'none',
     transform: 'translateX(-300%)'
   })),
   state('misc', style({
-    opacity: 1,
+    display: 'block',
     transform: 'translateX(0%)'
   })),
   transition('user => misc', [
     style({
-      opacity: 1,
-      transform: 'translateX(300%)'
+      display: 'block',
+      transform: 'translateX(200%)'
     }),
-    animate('600ms ease-out')
+    animate('600ms ease-out', style({
+      transform: 'translateX(-100%)'
+    }))
   ]),
   transition('misc => user', [
+    style({
+      transform: 'translateX(-100%)'
+    }),
     animate('600ms ease-out', style({
-      transform: 'translateX(300%)'
+      transform: 'translateX(200%)'
     }))
   ]),
   transition('misc => team', [
@@ -98,7 +112,7 @@ export const miscFormTrigger = trigger('miscForm', [
   ]),
   transition('team => misc', [
     style({
-      opacity: 1
+      display: 'block'
     }),
     animate('600ms ease-out', style({
       transform: 'translateX(0%)'
@@ -106,7 +120,7 @@ export const miscFormTrigger = trigger('miscForm', [
   ]),
   transition('terms => misc', [
     style({
-      opacity: 1
+      display: 'block'
     }),
     animate('600ms ease-out', style({
       transform: 'translateX(0%)'
@@ -116,23 +130,28 @@ export const miscFormTrigger = trigger('miscForm', [
 
 export const teamFormTrigger = trigger('teamForm', [
   state('*', style({
-    opacity: 0,
+    display: 'none',
     transform: 'translateX(-300%)'
   })),
   state('team', style({
-    opacity: 1,
+    display: 'block',
     transform: 'translateX(0%)'
   })),
   transition('misc => team', [
     style({
-      opacity: 1,
-      transform: 'translateX(300%)'
+      display: 'block',
+      transform: 'translateX(200%)'
     }),
-    animate('600ms ease-out')
+    animate('600ms ease-out', style({
+      transform: 'translateX(-100%)'
+    }))
   ]),
   transition('team => misc', [
+    style({
+      transform: 'translateX(-100%)'
+    }),
     animate('600ms ease-out', style({
-      transform: 'translateX(300%)'
+      transform: 'translateX(200%)'
     }))
   ]),
   transition('team => terms', [
@@ -142,7 +161,7 @@ export const teamFormTrigger = trigger('teamForm', [
   ]),
   transition('terms => team', [
     style({
-      opacity: 1
+      display: 'block'
     }),
     animate('600ms ease-out', style({
       transform: 'translateX(0%)'
@@ -152,35 +171,45 @@ export const teamFormTrigger = trigger('teamForm', [
 
 export const termsFormTrigger = trigger('termsForm', [
   state('*', style({
-    opacity: 0,
+    display: 'none',
     transform: 'translateX(-300%)'
   })),
   state('terms', style({
-    opacity: 1,
+    display: 'block',
     transform: 'translateX(0%)'
   })),
   transition('misc => terms', [
     style({
-      opacity: 1,
-      transform: 'translateX(300%)'
+      display: 'block',
+      transform: 'translateX(200%)'
     }),
-    animate('600ms ease-out')
+    animate('600ms ease-out', style({
+      transform: 'translateX(-100%)'
+    }))
   ]),
   transition('team => terms', [
     style({
-      opacity: 1,
-      transform: 'translateX(300%)'
+      display: 'block',
+      transform: 'translateX(200%)'
     }),
-    animate('600ms ease-out')
+    animate('600ms ease-out', style({
+      transform: 'translateX(-100%)'
+    }))
   ]),
   transition('terms => misc', [
+    style({
+      transform: 'translateX(-100%)'
+    }),
     animate('600ms ease-out', style({
-      transform: 'translateX(300%)'
+      transform: 'translateX(200%)'
     }))
   ]),
   transition('terms => team', [
+    style({
+      transform: 'translateX(-100%)'
+    }),
     animate('600ms ease-out', style({
-      transform: 'translateX(300%)'
+      transform: 'translateX(200%)'
     }))
   ]),
   transition('misc => terms', [
@@ -200,7 +229,7 @@ export const termsFormTrigger = trigger('termsForm', [
   ]),
   transition('terms => misc', [
     style({
-      opacity: 1
+      display: 'block'
     }),
     animate('600ms ease-out', style({
       transform: 'translateX(0%)'
@@ -208,7 +237,7 @@ export const termsFormTrigger = trigger('termsForm', [
   ]),
   transition('terms => team', [
     style({
-      opacity: 1
+      display: 'block'
     }),
     animate('600ms ease-out', style({
       transform: 'translateX(0%)'
@@ -218,18 +247,20 @@ export const termsFormTrigger = trigger('termsForm', [
 
 export const completeTrigger = trigger('complete', [
   state('*', style({
-    opacity: 0,
+    display: 'none',
     transform: 'translateX(-300%)'
   })),
   state('complete', style({
-    opacity: 1,
+    display: 'block',
     transform: 'translateX(0%)'
   })),
   transition('terms => complete', [
     style({
-      opacity: 1,
-      transform: 'translateX(300%)'
+      display: 'block',
+      transform: 'translateX(200%)'
     }),
-    animate('600ms ease-out')
+    animate('600ms ease-out', style({
+      transform: 'translateX(-100%)'
+    }))
   ])
 ]);

@@ -5,9 +5,12 @@
 @import '~bootstrap/scss/_mixins';
 
 section#register {
+  margin: 0 auto;
   max-width: 800px;
 
   header {
+    padding: 0 0.5rem;
+
     h1 {
       border-bottom: 1px solid $gray-300;
       color: $gray-800;
@@ -18,16 +21,15 @@ section#register {
   }
 
   section#register-form {
-    position: relative;
+    display: flex;
 
     app-type-select,
     app-user-form,
     app-misc-form,
     app-team-form,
-    app-terms-form {
-      position: absolute;
-      top: 0;
-      left: 0;
+    app-terms-form,
+    app-registration-complete {
+      flex: 0 0 100%;
       width: 100%;
     }
   }

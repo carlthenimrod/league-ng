@@ -66,9 +66,7 @@ export class AuthService {
       })
       .pipe(
         map(response => this.formatResponse(response)),
-        tap((auth) => {
-          this.setLocalStorage(auth);
-        })
+        tap(auth => this.setLocalStorage(auth))
       );
   }
 
