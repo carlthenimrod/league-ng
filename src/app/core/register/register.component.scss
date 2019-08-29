@@ -4,41 +4,38 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
-section#register {
+:host {
+  display: block;
   margin: 0 auto;
   max-width: 800px;
+}
 
-  header {
-    padding: 0 0.5rem;
+header {
+  padding: 0 0.5rem;
 
-    h1 {
-      border-bottom: 1px solid $gray-300;
-      color: $gray-800;
-      font-weight: 300;
-      margin: 0 0 1rem 0;
-      padding: 1rem 0.5rem;
-    }
-  }
+  h1 {
+    border-bottom: 1px solid $gray-300;
+    color: $gray-800;
+    font-weight: 300;
+    margin: 0 0 1rem 0;
+    padding: 1rem 0.5rem;
 
-  section#register-form {
-    display: flex;
-
-    app-type-select,
-    app-user-form,
-    app-misc-form,
-    app-team-form,
-    app-terms-form,
-    app-registration-complete {
-      flex: 0 0 100%;
-      width: 100%;
+    @include media-breakpoint-up(sm) {
+      margin: 1rem 0;
     }
   }
 }
 
-@include media-breakpoint-up(sm) {
-  header {
-    h1 {
-      margin: 1rem 0;
-    }
+section#register-form {
+  display: flex;
+
+  app-type-select,
+  app-user-form,
+  app-misc-form,
+  app-team-form,
+  app-terms-form,
+  app-registration-complete {
+    flex: 0 0 100%;
+    width: 100%;
   }
 }

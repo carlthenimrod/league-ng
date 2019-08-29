@@ -9,7 +9,7 @@ export class ViewportService implements OnDestroy {
   viewport: string;
   viewportSubject: BehaviorSubject<string> = new BehaviorSubject(null);
 
-  constructor() { 
+  constructor() {
     this.findViewportType();
 
     this.windowSub = fromEvent(window, 'resize').subscribe(() => {
@@ -34,7 +34,7 @@ export class ViewportService implements OnDestroy {
   $viewportType() {
     return this.viewportSubject.asObservable();
   }
-  
+
   ngOnDestroy() {
     this.windowSub.unsubscribe();
   }

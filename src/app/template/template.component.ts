@@ -1,8 +1,9 @@
-import { Component, OnInit, HostBinding, OnDestroy, ChangeDetectorRef, HostListener } from '@angular/core';
+import { Component, OnInit, HostBinding, OnDestroy, ChangeDetectorRef, HostListener, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { NavService } from './header/nav/nav.service';
 import { navToggleTrigger } from './animations';
+import { TemplateService } from '@app/services/template.service';
 
 @Component({
   selector: 'app-template',
@@ -10,9 +11,10 @@ import { navToggleTrigger } from './animations';
   styleUrls: ['./template.component.scss'],
   animations: [navToggleTrigger]
 })
-export class TemplateComponent implements OnInit, OnDestroy {
+export class TemplateComponent implements OnInit, AfterViewInit, OnDestroy {
   navSub: Subscription;
   navToggle: string;
+  @ViewChild('main', { static: false, read: ElementRef }) main: ElementRef;
   @HostBinding('@navToggle') get navToggleTrigger () {
     return this.navToggle;
   }
@@ -23,7 +25,8 @@ export class TemplateComponent implements OnInit, OnDestroy {
 
   constructor(
     private navService: NavService,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    private templateService: TemplateService
   ) { }
 
   ngOnInit() {
@@ -31,6 +34,10 @@ export class TemplateComponent implements OnInit, OnDestroy {
       this.navToggle = status;
       this.ref.detectChanges();
     });
+  }
+
+  ngAfterViewInit() {
+    this.templateService.setContainer(this.main);
   }
 
   ngOnDestroy() {

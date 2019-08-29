@@ -11,6 +11,7 @@ import {
   teamFormTrigger,
   termsFormTrigger,
   completeTrigger } from './animations';
+import { TemplateService } from '@app/services/template.service';
 
 @Component({
   selector: 'app-register',
@@ -56,6 +57,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private templateService: TemplateService,
     private userService: UserService
   ) { }
 
@@ -77,6 +79,8 @@ export class RegisterComponent implements OnInit {
   }
 
   onStepChange(step: string) {
+    this.templateService.scrollCtnUp();
+
     if (step === 'back') {
       this.stepBack();
     } else if (step === 'next') {

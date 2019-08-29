@@ -18,14 +18,9 @@ export const typeSelectTrigger = trigger('typeSelect', [
     }),
     animate('150ms ease-out')
   ]),
-  transition('type => user', [
-    animate('150ms ease-out', style({
-      opacity: 0
-    }))
-  ]),
   transition('user => type', [
     style({
-      display: 'none',
+      display: 'block',
       opacity: 0,
       transform: 'translateX(0%)'
     }),
@@ -53,6 +48,9 @@ export const userFormTrigger = trigger('userForm', [
     animate('150ms 150ms ease-out')
   ]),
   transition('user => type', [
+    style({
+      transform: 'translateX(0%)'
+    }),
     animate('150ms ease-out', style({
       opacity: 0
     }))
