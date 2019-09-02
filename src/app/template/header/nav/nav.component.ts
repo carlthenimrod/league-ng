@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, OnDestroy, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, HostBinding, OnDestroy, EventEmitter, Output, HostListener } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 import { Auth } from '@app/models/auth';
@@ -18,6 +18,11 @@ export class NavComponent implements OnInit, OnDestroy {
   path: string[] = [];
   path$: Observable<string[]>;
   unsubscribe$ = new Subject<void>();
+
+  @HostListener('touchmove', ['$event']) touchMove(e: TouchEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
 
   constructor(
     private authService: AuthService
