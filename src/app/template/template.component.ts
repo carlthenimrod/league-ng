@@ -2,22 +2,17 @@ import { Component, OnInit, HostBinding, OnDestroy, ChangeDetectorRef, HostListe
 import { Subscription } from 'rxjs';
 
 import { NavService } from './header/nav/nav.service';
-import { navToggleTrigger } from './animations';
 import { TemplateService } from '@app/services/template.service';
 
 @Component({
   selector: 'app-template',
   templateUrl: './template.component.html',
-  styleUrls: ['./template.component.scss'],
-  animations: [navToggleTrigger]
+  styleUrls: ['./template.component.scss']
 })
 export class TemplateComponent implements OnInit, AfterViewInit, OnDestroy {
   navSub: Subscription;
   navToggle: string;
   @ViewChild('main', { static: false, read: ElementRef }) main: ElementRef;
-  @HostBinding('@navToggle') get navToggleTrigger () {
-    return this.navToggle;
-  }
   @HostListener('touchmove', ['$event']) stopScroll($event) {
     if (this.navToggle !== 'mobileOpen') { return; }
     $event.preventDefault();
@@ -31,7 +26,6 @@ export class TemplateComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.navSub = this.navService.$navStatus().subscribe(status => {
-      this.navToggle = status;
       this.ref.detectChanges();
     });
   }

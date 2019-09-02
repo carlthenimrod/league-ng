@@ -5,9 +5,9 @@
 @import '~bootstrap/scss/_mixins';
 
 p {
-  background-color: black;
-  border-bottom: 60px solid red;
-  color: white;
+  color: $gray-700;
+  font-size: 0.8rem;
   margin: 0;
-  padding: 2rem 0;
+  padding: 1rem 0;
+  text-align: center;
 }

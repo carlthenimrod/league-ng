@@ -1,6 +1,5 @@
 import { Component, OnInit, HostBinding, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { navMenuTrigger } from './animations';
 
 import { Auth } from '@app/models/auth';
 import { AuthService } from '@app/auth/auth.service';
@@ -9,12 +8,11 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss'],
-  animations: [navMenuTrigger]
+  styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit, OnDestroy {
   @Output() linkClicked = new EventEmitter<boolean>();
-  @HostBinding('@navMenu') navMenu;
+  @HostBinding('class.open') navOpen: boolean;
   auth: Auth;
   selected = 'home';
   path: string[] = [];

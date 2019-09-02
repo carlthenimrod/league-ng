@@ -1,6 +1,4 @@
-<app-search></app-search>
-
-<aside>
+<aside [ngClass]="{ 'open': navOpen }">
   <nav id="toggle" *ngIf="auth">
     <button [ngClass]="{ 'active': selected === 'home' }" (click)="selected = 'home'">
       <i class="fas fa-home"></i>

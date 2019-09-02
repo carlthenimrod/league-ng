@@ -78,15 +78,14 @@ export class NavService implements OnDestroy {
 
   openNav() {
     this.navStatus = 'mobileOpen';
-    this.componentRef.instance.navMenu = this.navStatus;
+    this.componentRef.instance.navOpen = true;
     this.navStatusSubject.next(this.navStatus);
   }
 
   closeNav() {
     this.navStatus = 'mobileClose';
-    this.componentRef.instance.navMenu = this.navStatus;
+    this.componentRef.instance.navOpen = false;
     this.navStatusSubject.next(this.navStatus);
-
   }
 
   $navStatus() {
@@ -128,7 +127,7 @@ export class NavService implements OnDestroy {
     this.document.body.appendChild(domEl);
 
     this.navStatus = 'mobileClose';
-    this.componentRef.instance.navMenu = this.navStatus;
+    this.componentRef.instance.navOpen = false;
     this.navStatusSubject.next('mobileClose');
   }
 
@@ -141,7 +140,6 @@ export class NavService implements OnDestroy {
     this.desktopCtn.insert(this.componentRef.hostView);
 
     this.navStatus = 'desktop';
-    this.componentRef.instance.navMenu = this.navStatus;
     this.navStatusSubject.next('desktop');
   }
 
