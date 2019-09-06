@@ -16,7 +16,7 @@ export class UserNotificationsService implements OnDestroy {
   api = environment.api;
   notifications: UserNotification[];
   notificationsSubject: BehaviorSubject<UserNotification[]> = new BehaviorSubject(null);
-  unread: boolean = false;
+  unread = false;
   unreadSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
   componentRef: ComponentRef<UserNotificationsComponent>;
   headerRef: ViewRef;
@@ -34,7 +34,7 @@ export class UserNotificationsService implements OnDestroy {
     private resolver: ComponentFactoryResolver,
     private viewport: ViewportService
   ) {
-    this.viewportSub = this.viewport.$viewportType().subscribe(type => {
+    this.viewportSub = this.viewport.type$().subscribe(type => {
       this.viewportType = type;
 
       if (this.componentRef) { this.removeNotifications(); }
@@ -47,7 +47,7 @@ export class UserNotificationsService implements OnDestroy {
 
     this.http.get(url).pipe(
       map((response: UserNotificationResponse[]) => {
-        return this.formatResponse(response); 
+        return this.formatResponse(response);
       })
     ).subscribe(notifications => {
       this.notifications = notifications;
@@ -60,8 +60,8 @@ export class UserNotificationsService implements OnDestroy {
 
     for (let i = 0; i < notifications.length; i++) {
       const {_id, type, action, team, user, status} = notifications[i];
-      
-      switch(type) {
+
+      switch (type) {
         case 'invite':
           if (action === 'request') {
             userNotifications.push({
@@ -76,9 +76,9 @@ export class UserNotificationsService implements OnDestroy {
           break;
       }
 
-      if (!status.read) { 
+      if (!status.read) {
         this.unread = true;
-        this.unreadSubject.next(true); 
+        this.unreadSubject.next(true);
       }
     }
 
@@ -96,7 +96,7 @@ export class UserNotificationsService implements OnDestroy {
   toggleNotifications(vc: ViewContainerRef) {
     if (!this.vc) { this.vc = vc; }
 
-    if (!this.factory) { 
+    if (!this.factory) {
       this.factory = this.resolver.resolveComponentFactory(UserNotificationsComponent);
     }
 
@@ -117,10 +117,10 @@ export class UserNotificationsService implements OnDestroy {
 
     if (this.viewportType === 'mobile') {
       this.appRef.attachView(this.componentRef.hostView);
-  
+
       const componentView = this.componentRef.hostView as EmbeddedViewRef<UserNotificationsComponent>;
       const domEl = componentView.rootNodes[0];
-  
+
       this.document.body.appendChild(domEl);
     } else {
       this.vc.insert(this.componentRef.hostView);
@@ -139,7 +139,7 @@ export class UserNotificationsService implements OnDestroy {
 
     this.http.post(url, {}).pipe(
       map((response: UserNotificationResponse[]) => {
-        return this.formatResponse(response); 
+        return this.formatResponse(response);
       })
     ).subscribe(notifications => {
       this.unread = false;

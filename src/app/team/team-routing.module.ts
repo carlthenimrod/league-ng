@@ -5,7 +5,7 @@ import { TeamComponent } from './team.component';
 import { TeamResolverService } from './team-resolver.service';
 
 const routes: Routes = [
-  { 
+  {
     path: ':id', component: TeamComponent, resolve: { team: TeamResolverService }
   }
 ];

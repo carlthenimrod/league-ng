@@ -1,16 +1,30 @@
-<nav id="teams">
-  <ng-container *ngIf="teams.length > 0; else noTeams">
-    <a
-      *ngFor="let team of teams"
-      [routerLink]="['team', team._id]"
-      title="{{ team.name }}"
-      (click)="onClick()"
-    >
-      <span>{{ team.name }}</span>
-    </a>
-  </ng-container>
+<nav *ngIf="isMobile" id="teams">
+  <h1>My Teams</h1>
 
-  <ng-template #noTeams>
-    <p>No Teams</p>
-  </ng-template>
+  <ng-container *ngTemplateOutlet="teamList"></ng-container>
 </nav>
+
+<a *ngIf="!isMobile" id="teams">
+  <span>My Teams</span>
+  <i class="fas fa-tshirt"></i>
+
+  <ng-container *ngTemplateOutlet="teamList"></ng-container>
+</a>
+
+<ng-template #teamList>
+  <ul *ngIf="teams.length > 0; else noTeams">
+    <li *ngFor="let team of teams">
+      <a
+        [routerLink]="['team', team._id]"
+        title="{{ team.name }}"
+        (click)="onClick()"
+      >
+        <span>{{ team.name }}</span>
+      </a>
+    </li>
+  </ul>
+</ng-template>
+
+<ng-template #noTeams>
+  <p>No Teams</p>
+</ng-template>

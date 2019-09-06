@@ -1,4 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   HttpInterceptor,
   HttpRequest,
@@ -21,7 +22,10 @@ export class TokenInterceptor implements HttpInterceptor {
   isRefreshingToken = false;
   tokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
-  constructor(private injector: Injector) {}
+  constructor(
+    private injector: Injector,
+    private router: Router
+  ) {}
 
   addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
     return req.clone({ setHeaders: { Authorization: 'Bearer ' + token }});
@@ -34,7 +38,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(this.addToken(req, access_token)).pipe(
       catchError(error => {
-
         switch ((<HttpErrorResponse>error).status) {
           case 401:
             if (error.url === (this.api + 'auth/refresh' )) {
@@ -44,7 +47,7 @@ export class TokenInterceptor implements HttpInterceptor {
             if (access_token) {
               return this.handle401Error(req, next);
             } else {
-              return throwError(error.error.error);
+              return this.logout();
             }
           case 404:
             return throwError(error.error.error);
@@ -86,8 +89,7 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   logout() {
-    const auth = this.injector.get(AuthService);
-    auth.logout();
+    this.router.navigateByUrl('/logout');
     return throwError('');
   }
 }

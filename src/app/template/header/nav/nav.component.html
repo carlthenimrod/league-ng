@@ -1,4 +1,4 @@
-<aside [ngClass]="{ 'open': navOpen }">
+<aside *ngIf="isMobile" [ngClass]="{ 'open': navOpen }">
   <nav id="toggle" *ngIf="auth">
     <button [ngClass]="{ 'active': selected === 'home' }" (click)="selected = 'home'">
       <i class="fas fa-home"></i>
@@ -25,7 +25,7 @@
     </button>
   </nav>
 
-  <ng-container *ngIf="auth; else notLoggedIn" [ngSwitch]="selected">
+  <ng-container *ngIf="auth" [ngSwitch]="selected">
     <app-nav-home
       *ngSwitchCase="'home'"
       (linkClick)="onLinkClick()"
@@ -49,7 +49,25 @@
     ></app-nav-admin>
   </ng-container>
 
-  <ng-template #notLoggedIn>
-    <app-nav-home (linkClick)="onLinkClick()"></app-nav-home>
-  </ng-template>
+  <ng-container *ngIf="!auth">
+    <app-nav-home  (linkClick)="onLinkClick()"></app-nav-home>
+  </ng-container>
 </aside>
+
+<ng-container *ngIf="!isMobile">
+  <app-nav-home></app-nav-home>
+
+  <ng-container *ngIf="auth">
+    <app-nav-leagues
+      [leagues]="auth.leagues"
+    ></app-nav-leagues>
+
+    <app-nav-teams
+      [teams]="auth.teams"
+    ></app-nav-teams>
+
+    <app-nav-admin
+      *ngIf="auth.status && auth.status.admin"
+    ></app-nav-admin>
+  </ng-container>
+</ng-container>

@@ -22,7 +22,7 @@ export class UserCardComponent implements OnInit, OnDestroy {
   viewportSub: Subscription;
   @Input() user: User;
   @Output() close: EventEmitter<boolean> = new EventEmitter();
-  @HostBinding('@lightbox') viewportState: string
+  @HostBinding('@lightbox') viewportState: string;
 
   constructor(
     private auth: AuthService,
@@ -50,7 +50,7 @@ export class UserCardComponent implements OnInit, OnDestroy {
     const auth = this.auth.getAuth();
     if (auth._id === this.user._id) { this.self = true; }
 
-    this.viewportSub = this.viewport.$viewportType().subscribe(type => {
+    this.viewportSub = this.viewport.type$().subscribe(type => {
       this.viewportState = type;
     });
   }

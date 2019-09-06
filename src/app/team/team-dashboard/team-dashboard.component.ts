@@ -18,7 +18,7 @@ import { dashboardSlideTrigger } from './animations';
 export class TeamDashboardComponent implements OnInit, OnDestroy {
   @HostBinding('class.sidebar-open') sidebarOpen: boolean;
   @HostBinding('@dashboardSlide') sidebarState: string;
-  mobileNav: boolean = false;
+  mobileNav = false;
   sidebarSub: Subscription;
   team: Team;
   tab = 'feed';
@@ -31,7 +31,7 @@ export class TeamDashboardComponent implements OnInit, OnDestroy {
     private teamSidebar: TeamSidebarService,
     private viewport: ViewportService
   ) { }
-  
+
   @HostListener('window:resize') onResize() {
     if (this.mobileNav) { this.mobileNav = false; }
   }
@@ -48,7 +48,7 @@ export class TeamDashboardComponent implements OnInit, OnDestroy {
       this.team = data.team;
     });
 
-    this.viewportSub = this.viewport.$viewportType().subscribe(type => {
+    this.viewportSub = this.viewport.type$().subscribe(type => {
       this.viewportType = type;
 
       this.updateSidebarState();

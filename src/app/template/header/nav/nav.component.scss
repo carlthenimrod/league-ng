@@ -6,7 +6,6 @@
 
 :host {
   display: none;
-  overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
@@ -18,18 +17,25 @@
   }
 
   @include media-breakpoint-up(sm) {
+    align-items: center;
     background: none;
     border-right: none;
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     margin-left: auto;
-    padding-top: 0;
+    padding: 0 0.5rem 0 0;
     position: static;
     top: auto;
     right: auto;
     bottom: auto;
     left: auto;
-    width: auto;
+    width: 100%;
     z-index: inherit;
+  }
+
+  @include media-breakpoint-up(xl) {
+    padding: 0;
   }
 }
 
@@ -41,10 +47,21 @@ aside {
   margin-top: 3rem;
   width: 100%;
 
+  @include media-breakpoint-up(sm) {
+    border-top: none;
+    margin-top: 0;
+    height: auto;
+    width: auto;
+  }
+
   nav#toggle {
     background-color: theme-color-level(primary, 4.5);
     border-right: 1px solid theme-color-level(primary, 8);
     width: 4.5rem;
+
+    @include media-breakpoint-up(sm) {
+      display: none;
+    }
 
     button {
       align-items: center;

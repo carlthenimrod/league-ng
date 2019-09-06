@@ -1,9 +1,10 @@
 import { Component, OnInit, HostBinding, OnDestroy, EventEmitter, Output, HostListener } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { Auth } from '@app/models/auth';
 import { AuthService } from '@app/auth/auth.service';
-import { takeUntil } from 'rxjs/operators';
+import { ViewportService } from '@app/services/viewport.service';
 
 @Component({
   selector: 'app-nav',
@@ -14,6 +15,7 @@ export class NavComponent implements OnInit, OnDestroy {
   @Output() linkClicked = new EventEmitter<boolean>();
   @HostBinding('class.open') navOpen: boolean;
   auth: Auth;
+  isMobile: boolean;
   selected = 'home';
   path: string[] = [];
   path$: Observable<string[]>;
@@ -25,7 +27,8 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private viewport: ViewportService
   ) { }
 
   ngOnInit() {
@@ -40,6 +43,13 @@ export class NavComponent implements OnInit, OnDestroy {
       .subscribe(path => {
         this.path = path;
         this.updateNav();
+      });
+
+    this.viewport.type$()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(type => {
+        this.isMobile = (type === 'mobile') ? true : false;
+        if (this.isMobile) { this.updateNav(); }
       });
   }
 

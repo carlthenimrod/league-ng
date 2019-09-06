@@ -25,7 +25,6 @@ section#admin {
   section#dashboard {
     @include make-col-ready(0);
     padding: 0 0.5rem;
-    margin-top: 60px;
 
     @include media-breakpoint-up(sm) {
       @include make-col(10);

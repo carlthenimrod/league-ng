@@ -8,4 +8,8 @@
   background-color: theme-color-level(light, 0.5);
   display: block;
   padding-top: 3rem;
+
+  @include media-breakpoint-up(sm) {
+    padding-top: 0;
+  }
 }

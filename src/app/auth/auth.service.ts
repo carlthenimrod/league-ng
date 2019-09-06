@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '@env/environment';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { environment } from '@env/environment';
 
 import { AuthResponse, Auth } from '@app/models/auth';
 import { League } from '@app/models/league';

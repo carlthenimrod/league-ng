@@ -45,7 +45,7 @@ export class TeamSidebarComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.viewportSub = this.viewport.$viewportType().subscribe(type => {
+    this.viewportSub = this.viewport.type$().subscribe(type => {
       this.viewportType = type;
 
       this.updateSidebarState();

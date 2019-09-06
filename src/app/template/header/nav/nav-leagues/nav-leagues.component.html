@@ -1,16 +1,30 @@
-<nav id="leagues">
-  <ng-container *ngIf="leagues.length > 0; else noLeagues">
-    <a
-      *ngFor="let league of leagues"
-      [routerLink]="['leagues', league._id]"
-      title="{{ league.name }}"
-      (click)="onClick()"
-    >
-      <span>{{ league.name }}</span>
-    </a>
-  </ng-container>
+<nav *ngIf="isMobile" id="leagues">
+  <h1>My Leagues</h1>
 
-  <ng-template #noLeagues>
-    <p>No Leagues</p>
-  </ng-template>
+  <ng-container *ngTemplateOutlet="leagueList"></ng-container>
 </nav>
+
+<a *ngIf="!isMobile" id="leagues">
+  <span>My Leagues</span>
+  <i class="fa fa-sticky-note"></i>
+
+  <ng-container *ngTemplateOutlet="leagueList"></ng-container>
+</a>
+
+<ng-template #leagueList>
+  <ul *ngIf="leagues.length > 0; else noLeagues">
+    <li *ngFor="let league of leagues">
+      <a
+        [routerLink]="['leagues', league._id]"
+        title="{{ league.name }}"
+        (click)="onClick()"
+      >
+        <span>{{ league.name }}</span>
+      </a>
+    </li>
+  </ul>
+</ng-template>
+
+<ng-template #noLeagues>
+  <p>No Leagues</p>
+</ng-template>

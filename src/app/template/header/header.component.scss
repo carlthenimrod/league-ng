@@ -28,6 +28,12 @@ header {
   display: flex;
   height: 3rem;
 
+  @include media-breakpoint-up(sm) {
+    background-color: transparent;
+    color: theme-color(primary);
+    height: auto;
+  }
+
   button#mobile-menu,
   button#notifications {
     background: none;
@@ -73,6 +79,11 @@ header {
 
   a {
     color: $white;
+    flex: 1 0 auto;
+
+    @include media-breakpoint-up(sm) {
+      color: theme-color(primary);
+    }
 
     h1 {
       font-size: 1rem;

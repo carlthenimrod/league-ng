@@ -31,7 +31,7 @@ export class ViewportService implements OnDestroy {
     this.viewportSubject.next(this.viewport);
   }
 
-  $viewportType() {
+  type$() {
     return this.viewportSubject.asObservable();
   }
 

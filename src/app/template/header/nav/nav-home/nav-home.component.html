@@ -6,4 +6,66 @@
   >
     <span>Home</span>
   </a>
+
+  <a
+    routerLink="/"
+    title="Link #1"
+    (click)="onClick()"
+  >
+    <span>Link #1</span>
+  </a>
+
+  <a
+    routerLink="/"
+    title="Link #2"
+    (click)="onClick()"
+  >
+    <span>Link #2</span>
+  </a>
+
+  <a
+    routerLink="/"
+    title="Link #3"
+    (click)="onClick()"
+  >
+    <span>Link #3</span>
+  </a>
+
+  <a
+    *ngIf="!loggedIn"
+    routerLink="/login"
+    title="Login"
+    (click)="onClick()"
+  >
+    <span>Login</span>
+  </a>
+
+  <a
+    *ngIf="!loggedIn && isMobile"
+    routerLink="/register"
+    title="Register"
+    (click)="onClick()"
+  >
+    <span>Sign Up!</span>
+  </a>
+
+  <button
+    *ngIf="!loggedIn && !isMobile"
+    mat-flat-button
+    color="primary"
+    routerLink="/register"
+    title="Register"
+  >
+    <span>Sign Up!</span>
+    <i class="far fa-hand-pointer"></i>
+  </button>
+
+  <a
+    *ngIf="loggedIn"
+    routerLink="/logout"
+    title="Logout"
+    (click)="onClick()"
+  >
+    <span>Logout</span>
+  </a>
 </nav>

@@ -28,7 +28,7 @@ export class NavService implements OnDestroy {
     private router: Router,
     private viewport: ViewportService
   ) {
-    this.viewport.$viewportType()
+    this.viewport.type$()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(type => {
         this.viewportType = type;
