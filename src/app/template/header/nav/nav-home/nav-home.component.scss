@@ -32,7 +32,14 @@ nav#home {
     @include media-breakpoint-up(sm) {
       color: theme-color(primary);
       font-size: 1rem;
-      text-transform: uppercase;
+    }
+
+    &:hover {
+      background-color: theme-color-level(light, -4);
+
+      @include media-breakpoint-down(sm) {
+        font-weight: normal;
+      }
     }
   }
 
