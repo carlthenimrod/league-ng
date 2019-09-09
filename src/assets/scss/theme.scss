@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$ng-league-primary: mat-palette($mat-indigo);
+$ng-league-accent: mat-palette($mat-pink, A200, A100, A400);
+$ng-league-warn: mat-palette($mat-red);
+
+$ng-league-theme: mat-light-theme($ng-league-primary, $ng-league-accent, $ng-league-warn);
+
+@include angular-material-theme($ng-league-theme);

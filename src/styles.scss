@@ -1,11 +1,8 @@
 @import 'reset';
+@import 'theme';
 @import 'variables';
 
 @import '~bootstrap/scss/bootstrap';
-
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 body {
   background-color: theme-color-level(light, 0.5);
