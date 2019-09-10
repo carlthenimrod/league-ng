@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewContainerRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Subscription, Observable, Subject } from 'rxjs';
 
 import { AuthService } from '@app/auth/auth.service';
 import { Auth } from '@app/models/auth';
 import { UserNotificationsService } from '@app/services/user-notifications.service';
-import { unreadNotificationsTrigger } from './animations';
-import { Subscription, Observable } from 'rxjs';
 import { NavService } from './nav/nav.service';
+import { ViewportService } from '@app/services/viewport.service';
+import { unreadNotificationsTrigger } from './animations';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -16,29 +18,39 @@ import { NavService } from './nav/nav.service';
 export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('vc', { read: ViewContainerRef, static: false }) vc: ViewContainerRef;
   @ViewChild('desktopNav', { read: ViewContainerRef, static: false }) desktopNav: ViewContainerRef;
+  isMobile: boolean;
   $unread: Observable<boolean>;
   $loggedIn: Observable<boolean>;
-  loggedInSub: Subscription;
   loggedIn: boolean;
+  unsubscribe$ = new Subject<void>();
 
   constructor(
     private authService: AuthService,
     private navService: NavService,
-    private userNotifications: UserNotificationsService
+    private userNotifications: UserNotificationsService,
+    private viewport: ViewportService
   ) { }
 
   ngOnInit() {
-    this.loggedInSub = this.authService.loggedIn$().subscribe(loggedIn => {
-      if (loggedIn) {
-        const auth: Auth = this.authService.getAuth();
+    this.authService.loggedIn$()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(loggedIn => {
+        if (loggedIn) {
+          const auth: Auth = this.authService.getAuth();
 
-        this.userNotifications.get(auth._id);
+          this.userNotifications.get(auth._id);
 
-        this.$unread = this.userNotifications.$unread();
-      }
+          this.$unread = this.userNotifications.$unread();
+        }
 
-      this.loggedIn = loggedIn;
-    });
+        this.loggedIn = loggedIn;
+      });
+
+    this.viewport.type$()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(type => {
+        this.isMobile = (type === 'mobile') ? true : false;
+      });
 
     this.$unread = this.userNotifications.$unread();
   }
@@ -56,6 +68,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.loggedInSub.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

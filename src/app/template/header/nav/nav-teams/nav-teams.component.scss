@@ -32,6 +32,7 @@ nav#teams {
 }
 
 a#teams {
+  color: theme-color-level(primary, -10);
   cursor: pointer;
   display: block;
   font-size: 0.8rem;
@@ -42,7 +43,8 @@ a#teams {
   text-transform: uppercase;
 
   &:hover {
-    background-color: theme-color-level(light, -4);
+    background-color: theme-color-level(primary, 6);
+    color: $white;
   }
 
   i {
@@ -50,8 +52,7 @@ a#teams {
   }
 
   ul {
-    background-color: theme-color-level(light, -4);
-    border-top: 3px solid theme-color(primary);
+    background-color: theme-color-level(primary, 6);
     display: none;
     margin: 0;
     min-width: 10rem;
@@ -66,12 +67,12 @@ a#teams {
   }
 
   li a {
-    color: theme-color(primary);
+    color: theme-color-level(primary, -10);
     font-size: 1rem;
     padding: 1rem;
 
     &:hover {
-      background-color: theme-color-level(primary, -10);
+      color: $white;
     }
   }
 }

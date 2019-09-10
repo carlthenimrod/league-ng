@@ -55,19 +55,29 @@
 </aside>
 
 <ng-container *ngIf="!isMobile">
-  <app-nav-home></app-nav-home>
+  <div id="bar-top">
+    <nav id="main">
+      <a routerLink="/">
+        <h1>ngLeague App</h1>
+      </a>
 
-  <ng-container *ngIf="auth">
-    <app-nav-leagues
-      [leagues]="auth.leagues"
-    ></app-nav-leagues>
+      <app-nav-home></app-nav-home>
+    </nav>
+  </div>
 
-    <app-nav-teams
-      [teams]="auth.teams"
-    ></app-nav-teams>
+  <div id="bar-bot" *ngIf="auth">
+    <nav id="user">
+      <app-nav-leagues
+        [leagues]="auth.leagues"
+      ></app-nav-leagues>
 
-    <app-nav-admin
-      *ngIf="auth.status && auth.status.admin"
-    ></app-nav-admin>
-  </ng-container>
+      <app-nav-teams
+        [teams]="auth.teams"
+      ></app-nav-teams>
+
+      <app-nav-admin
+        *ngIf="auth.status && auth.status.admin"
+      ></app-nav-admin>
+    </nav>
+  </div>
 </ng-container>

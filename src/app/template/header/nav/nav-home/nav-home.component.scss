@@ -4,14 +4,6 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
-:host {
-  width: 100%;
-
-  @include media-breakpoint-down(sm) {
-    width: auto;
-  }
-}
-
 nav#home {
   display: flex;
   justify-content: flex-end;
@@ -30,15 +22,15 @@ nav#home {
     padding: 0 1rem;
 
     @include media-breakpoint-up(sm) {
-      color: theme-color(primary);
       font-size: 1rem;
+      font-weight: 700;
     }
 
     &:hover {
-      background-color: theme-color-level(light, -4);
+      background-color: theme-color-level(primary, 2);
 
       @include media-breakpoint-down(sm) {
-        font-weight: normal;
+        background-color: transparent;
       }
     }
   }

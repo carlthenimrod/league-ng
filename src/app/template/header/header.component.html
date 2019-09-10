@@ -1,17 +1,19 @@
 <header>
-  <button id="mobile-menu" (click)="onClickToggleNav()">
-    <i class="fas fa-bars"></i>
-  </button>
+  <ng-container *ngIf="isMobile">
+    <button id="mobile-menu" (click)="onClickToggleNav()">
+      <i class="fas fa-bars"></i>
+    </button>
 
-  <a routerLink="/">
-    <h1>ngLeague App</h1>
-  </a>
+    <a routerLink="/">
+      <h1>ngLeague App</h1>
+    </a>
+  </ng-container>
 
   <ng-container #desktopNav></ng-container>
 
-  <button 
+  <button
     *ngIf="loggedIn"
-    id="notifications" 
+    id="notifications"
     (click)="onClickToggleNotifications()"
   >
     <i class="fas fa-bell"></i>

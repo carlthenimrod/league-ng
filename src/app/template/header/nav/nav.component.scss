@@ -101,3 +101,41 @@ aside {
     }
   }
 }
+
+#bar-top {
+  background-color: theme-color(primary);
+  width: 100%;
+
+  nav#main {
+    @include make-container(0);
+    @include make-container-max-widths();
+    align-items: center;
+    display: flex;
+
+    a {
+      color: $white;
+      flex: 1 0 auto;
+
+      h1 {
+        font-size: 1rem;
+        font-weight: 700;
+        margin: 0 0 0 1rem;
+        padding: 0;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+#bar-bot {
+  background-color: theme-color-level(primary, 4);
+  width: 100%;
+
+  nav#user {
+    @include make-container(0);
+    @include make-container-max-widths();
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
