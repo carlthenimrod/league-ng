@@ -60,6 +60,9 @@ export class NavComponent implements OnInit, OnDestroy {
     }
 
     switch (this.path[0]) {
+      case 'user':
+        this.selected = 'user';
+        break;
       case 'team':
         this.selected = 'teams';
         break;

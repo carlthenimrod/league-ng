@@ -1,24 +1,22 @@
-import { Component, Input, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Team } from '@app/models/team';
+import { Auth } from '@app/models/auth';
 import { ViewportService } from '@app/services/viewport.service';
 
 @Component({
-  selector: 'app-nav-teams',
-  templateUrl: './nav-teams.component.html',
-  styleUrls: ['./nav-teams.component.scss']
+  selector: 'app-nav-user',
+  templateUrl: './nav-user.component.html',
+  styleUrls: ['./nav-user.component.scss']
 })
-export class NavTeamsComponent implements OnInit, OnDestroy {
-  @Input() teams: Team[];
+export class NavUserComponent implements OnInit, OnDestroy {
+  @Input() auth: Auth;
   @Output() linkClick = new EventEmitter<boolean>();
   isMobile: boolean;
   unsubscribe$ = new Subject<void>();
 
-  constructor(
-    private viewport: ViewportService
-  ) { }
+  constructor(private viewport: ViewportService) { }
 
   ngOnInit() {
     this.viewport.type$()

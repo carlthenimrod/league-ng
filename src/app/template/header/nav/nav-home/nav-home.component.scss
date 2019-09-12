@@ -4,6 +4,15 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
+:host {
+  display: block;
+  width: 100%;
+
+  @include media-breakpoint-up(sm) {
+    width: auto;
+  }
+}
+
 nav#home {
   display: flex;
   justify-content: flex-end;
@@ -20,6 +29,7 @@ nav#home {
     font-size: 1.2rem;
     line-height: 3rem;
     padding: 0 1rem;
+    transition: color 50ms ease-in;
 
     @include media-breakpoint-up(sm) {
       font-size: 1rem;

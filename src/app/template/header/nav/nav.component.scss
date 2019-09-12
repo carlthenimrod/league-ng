@@ -57,6 +57,7 @@ aside {
   nav#toggle {
     background-color: theme-color-level(primary, 4.5);
     border-right: 1px solid theme-color-level(primary, 8);
+    flex: 0 0 auto;
     width: 4.5rem;
 
     @include media-breakpoint-up(sm) {

@@ -13,21 +13,35 @@
   }
 }
 
-nav#admin {
+nav#user {
   display: flex;
   flex-direction: column;
 
-  @include media-breakpoint-up(sm) {
-    flex-direction: row;
-  }
+  header {
+    @include gradient-y(theme-color-level(primary, -2), theme-color-level(primary, -2.5));
+    align-items: center;
+    border-bottom: 1px solid theme-color-level(primary, 8);
+    display: flex;
+    padding: 1rem;
 
-  h1 {
-    color: theme-color-level(primary, -10);
+    figure {
+      background-color: theme-color-level(primary, 6);
+      height: 3rem;
+      width: 3rem;
+
+      i {
+        font-size: 1.4rem;
+      }
+    }
+
+    h1 {
+    color: $white;
     font-size: 1.2rem;
     font-weight: 700;
     margin: 0;
     padding: 1rem;
     text-transform: uppercase;
+    }
   }
 
   ul {
@@ -36,14 +50,17 @@ nav#admin {
     li a {
       font-size: 1.2rem;
       padding: 0.5rem 1rem;
+
+      i { margin-left: 0.5rem; }
     }
   }
 }
 
-a#admin {
+a#user {
+  align-items: center;
   color: theme-color-level(primary, -10);
   cursor: pointer;
-  display: block;
+  display: flex;
   font-size: 0.8rem;
   font-weight: 700;
   line-height: 3rem;
@@ -57,8 +74,18 @@ a#admin {
     color: $white;
   }
 
-  i {
-    margin-left: 0.5rem;
+  figure {
+    background-color: theme-color-level(primary, -1);
+    height: 2rem;
+    width: 2rem;
+
+    i {
+      font-size: 1rem;
+    }
+  }
+
+  span {
+    margin: 0 0.5rem;
   }
 
   ul {
@@ -68,7 +95,7 @@ a#admin {
     min-width: 10rem;
     position: absolute;
     top: 3rem;
-    right: 0;
+    left: 0;
     z-index: 1;
   }
 
@@ -85,6 +112,21 @@ a#admin {
     &:hover {
       color: $white;
     }
+  }
+}
+
+figure {
+  align-items: center;
+  border-radius: 100%;
+  color: theme-color-level(primary, -8);
+  display: flex;
+  justify-content: center;
+  line-height: initial;
+  margin: 0;
+
+  img {
+    height: 100%;
+    width: 100%;
   }
 }
 

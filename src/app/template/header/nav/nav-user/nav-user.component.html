@@ -1,0 +1,41 @@
+<nav *ngIf="isMobile" id="user">
+  <header>
+    <ng-container *ngTemplateOutlet="profileImg"></ng-container>
+
+    <h1>Hi, {{ auth.fullName }}!</h1>
+  </header>
+
+  <ng-container *ngTemplateOutlet="userLinks"></ng-container>
+</nav>
+
+<a *ngIf="!isMobile" id="user">
+  <ng-container *ngTemplateOutlet="profileImg"></ng-container>
+
+  <span>Hi, {{ auth.fullName }}!</span>
+
+  <ng-container *ngTemplateOutlet="userLinks"></ng-container>
+</a>
+
+<ng-template #profileImg>
+  <figure>
+    <i *ngIf="!auth.img" class="fas fa-user"></i>
+    <img *ngIf="auth.img" [src]="auth.img">
+  </figure>
+</ng-template>
+
+<ng-template #userLinks>
+  <ul>
+    <li>
+      <a routerLink="/user" title="My Profile" (click)="onClick()">
+        <span>My Profile</span>
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/logout" title="Logout" (click)="onClick()">
+        <span>Logout</span>
+        <i class="fas fa-sign-out-alt"></i>
+      </a>
+    </li>
+  </ul>
+</ng-template>

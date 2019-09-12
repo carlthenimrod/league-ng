@@ -5,6 +5,11 @@
       <span>Home</span>
     </button>
 
+    <button [ngClass]="{ 'active': selected === 'user' }" (click)="selected = 'user'">
+      <i class="fas fa-user"></i>
+      <span>User</span>
+    </button>
+
     <button [ngClass]="{ 'active': selected === 'leagues' }" (click)="selected = 'leagues'">
       <i class="fa fa-sticky-note"></i>
       <span>Leagues</span>
@@ -30,6 +35,12 @@
       *ngSwitchCase="'home'"
       (linkClick)="onLinkClick()"
     ></app-nav-home>
+
+    <app-nav-user
+      *ngSwitchCase="'user'"
+      [auth]="auth"
+      (linkClick)="onLinkClick()"
+    ></app-nav-user>
 
     <app-nav-leagues
       *ngSwitchCase="'leagues'"
@@ -67,6 +78,10 @@
 
   <div id="bar-bot" *ngIf="auth">
     <nav id="user">
+      <app-nav-user
+        [auth]="auth"
+      ></app-nav-user>
+
       <app-nav-leagues
         [leagues]="auth.leagues"
       ></app-nav-leagues>

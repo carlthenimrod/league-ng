@@ -4,6 +4,15 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
+:host {
+  display: block;
+  width: 100%;
+
+  @include media-breakpoint-up(sm) {
+    width: auto;
+  }
+}
+
 nav#teams {
   display: flex;
   flex-direction: column;
@@ -41,6 +50,7 @@ a#teams {
   padding: 0 1rem;
   position: relative;
   text-transform: uppercase;
+  transition: color 50ms ease-in;
 
   &:hover {
     background-color: theme-color-level(primary, 6);
@@ -70,6 +80,7 @@ a#teams {
     color: theme-color-level(primary, -10);
     font-size: 1rem;
     padding: 1rem;
+    transition: color 50ms ease-in;
 
     &:hover {
       color: $white;
