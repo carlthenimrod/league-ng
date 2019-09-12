@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { take } from 'rxjs/operators';
 
 import { AuthService } from './auth/auth.service';
+import { Auth, AuthResponse } from './models/auth';
 import { SocketService } from './services/socket.service';
 
 @Component({
@@ -19,9 +21,16 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     const path = this.location.path();
 
-    if ( (path !== '/logout') && this.authService.loggedIn() ) {
-      const auth = this.authService.getAuth();
-      this.socketService.connect(auth);
-    }
+    this.authService.loggedIn$()
+      .pipe(take(1))
+      .subscribe(loggedIn => {
+        if (!loggedIn || (path === '/logout')) { return; }
+
+        const auth = this.authService.getAuth();
+        this.socketService.connect(auth).then((authResponse: AuthResponse) => {
+          const updatedAuth: Auth = this.authService.formatResponse(authResponse);
+          this.authService.setLocalStorage(updatedAuth);
+        });
+      });
   }
 }

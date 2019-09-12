@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+import { take } from 'rxjs/operators';
 
 import { AuthService } from '@app/auth/auth.service';
 
@@ -20,17 +21,21 @@ export class LoginComponent implements OnInit {
   messageTimeout;
 
   constructor(
-    private auth: AuthService,
+    private authService: AuthService,
     private fb: FormBuilder,
     private router: Router
   ) { }
 
   ngOnInit() {
-    if (this.auth.loggedIn()) {
-      this.router.navigateByUrl('user');
-    } else {
-      this.loggedIn = false;
-    }
+    this.authService.loggedIn$()
+      .pipe(take(1))
+      .subscribe(loggedIn => {
+        if (loggedIn) {
+          this.router.navigateByUrl('user');
+        } else {
+          this.loggedIn = false;
+        }
+      });
   }
 
   onSubmit() {
@@ -38,7 +43,7 @@ export class LoginComponent implements OnInit {
 
     const {email, password} = this.loginForm.value;
 
-    this.auth.login(email, password).subscribe(() => {
+    this.authService.login(email, password).subscribe(() => {
       this.router.navigateByUrl('user');
     }, (e: Error) => {
       this.error = true;

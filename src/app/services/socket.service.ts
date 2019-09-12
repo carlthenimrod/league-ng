@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { environment } from '@env/environment';
 
-import { Auth } from '@app/models/auth';
+import { Auth, AuthResponse } from '@app/models/auth';
 import { BehaviorSubject } from 'rxjs';
 
 
@@ -17,18 +17,24 @@ export class SocketService {
   constructor() {}
 
   connect(auth: Auth) {
-    this.socket = io(this.api, { query: auth });
+    return new Promise<AuthResponse>((resolve, reject) => {
+      const { client, refresh_token } = auth;
 
-    this.socket.on('connect', () => {
-      this.connected.next(true);
-    });
+      this.socket = io(this.api);
 
-    this.socket.on('disconnect', () => {
-      this.connected.next(false);
-    });
+      this.socket.on('connect', () => {
+        this.socket.emit('authorize', { client, refresh_token });
 
-    this.socket.on('error', error => {
-      this.connected.next(false);
+        this.socket.on('authorized', (authResponse: AuthResponse) => {
+          this.connected.next(true);
+          resolve(authResponse);
+        });
+      });
+
+      this.socket.on('disconnect', () => {
+        this.connected.next(false);
+        reject(null);
+      });
     });
   }
 

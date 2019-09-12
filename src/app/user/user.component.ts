@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 import { Auth } from '@app/models/auth';
 import { AuthService } from '@app/auth/auth.service';
@@ -15,19 +16,20 @@ export class UserComponent implements OnInit {
   user: User;
 
   constructor(
-    private auth: AuthService,
+    private authService: AuthService,
     private router: Router,
     private userService: UserService
   ) {}
 
   ngOnInit() {
-    if (this.auth.loggedIn()) {
-      const auth: Auth = this.auth.getAuth();
+    this.authService.loggedIn$()
+      .pipe(take(1))
+      .subscribe(loggedIn => {
+        if (!loggedIn) { this.router.navigateByUrl('login'); }
+        const auth: Auth = this.authService.getAuth();
 
-      this.userService.get(auth._id);
-      this.userService.userListener().subscribe((user: User) => this.user = user);
-    } else {
-      this.router.navigateByUrl('login');
-    }
+        this.userService.get(auth._id);
+        this.userService.userListener().subscribe((user: User) => this.user = user);
+      });
   }
 }

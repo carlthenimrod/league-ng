@@ -12,17 +12,21 @@ import { AuthService } from '@app/auth/auth.service';
 })
 export class TeamResolverService implements Resolve<Team> {
   constructor(
-    private auth: AuthService,
+    private authService: AuthService,
     private router: Router,
     private teamService: TeamService
   ) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
   : Observable<Team> | Observable<never> {
-    if (!this.auth.loggedIn) { this.router.navigateByUrl('/login'); }
+    this.authService.loggedIn$()
+      .pipe(take(1))
+      .subscribe(loggedIn => {
+        if (!loggedIn) { this.router.navigateByUrl('/login'); }
+      });
 
     const teamId = route.paramMap.get('id');
-    const userId = this.auth.getAuth()._id;
+    const userId = this.authService.getAuth()._id;
 
     return this.teamService.get(teamId).pipe(
       take(1),

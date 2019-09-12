@@ -78,15 +78,10 @@ export class AuthService {
         map(response => this.formatResponse(response)),
         tap(auth => {
           this.setLocalStorage(auth);
-
-          this.socket.connect(auth);
           this.loggedInSubject.next(true);
+          this.socket.connect(auth);
         })
       );
-  }
-
-  loggedIn(): boolean {
-    return (localStorage.getItem('access_token')) ? true : false;
   }
 
   logout() {
@@ -146,7 +141,8 @@ export class AuthService {
     return leagues;
   }
 
-  setLocalStorage(auth: Auth) {localStorage.setItem('_id', auth._id);
+  setLocalStorage(auth: Auth) {
+    localStorage.setItem('_id', auth._id);
     localStorage.setItem('email', auth.email);
     localStorage.setItem('name', JSON.stringify(auth.name));
     localStorage.setItem('fullName', auth.fullName);
