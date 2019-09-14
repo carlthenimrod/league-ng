@@ -36,8 +36,8 @@ section#type {
       width: 48%;
 
       &:hover, &.active {
-        @include gradient-x(theme-color(primary), lighten(theme-color(primary), 20%));
-        border: 1px solid darken(theme-color(primary), 20%);
+        @include gradient-x(theme-color(primary), lighten(theme-color(primary), 5%));
+        border: 1px solid theme-color-level(primary, 3);
         color: $white;
       }
 
