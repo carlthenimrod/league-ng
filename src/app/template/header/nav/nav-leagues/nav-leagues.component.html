@@ -15,7 +15,7 @@
   <ul *ngIf="leagues.length > 0; else noLeagues">
     <li *ngFor="let league of leagues">
       <a
-        [routerLink]="['leagues', league._id]"
+        [routerLink]="['league', league._id]"
         title="{{ league.name }}"
         (click)="onClick()"
       >

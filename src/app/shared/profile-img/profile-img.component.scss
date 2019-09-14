@@ -17,7 +17,6 @@ figure {
   button {
     position: absolute;
     top: 0;
-    z-index: 999;
 
     &#upload, &#save { right: -5px; }
     &#cancel { left: -5px; }
@@ -41,17 +40,12 @@ figure {
       height: 102%;
       top: -1%;
       left: -1%;
-      z-index: 997;
       width: 102%;
 
       mat-spinner {
         margin: 25px auto 0 auto;
         opacity: 0.2;
       }
-    }
-
-    &#img, &#img-preview {
-      z-index: 996;
     }
 
     i#placeholder {

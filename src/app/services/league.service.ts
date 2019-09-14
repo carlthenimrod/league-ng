@@ -29,15 +29,18 @@ export class LeagueService {
     return this.http.get(url);
   }
 
-  get(id: String): void {
+  get(id: String): Observable<League> {
     const url = this.api + `leagues/${id}`;
-    this.http.get(url).subscribe((league: League) => {
-      this.league = league;
-      this.leagueSubject.next(_.cloneDeep(this.league));
-    });
+    return this.http.get(url).pipe(
+      tap((league: League) => {
+        console.log(league);
+        this.league = league;
+        this.leagueSubject.next(_.cloneDeep(this.league));
+      })
+    );
   }
 
-  leagueListener(): Observable<League> {
+  league$(): Observable<League> {
     return this.leagueSubject.asObservable();
   }
 

@@ -43,7 +43,7 @@ export class TeamComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.teamSocket.leave(this.team._id);
-    
+
     this.sidebarSub.unsubscribe();
   }
 }

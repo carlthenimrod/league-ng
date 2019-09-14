@@ -18,7 +18,7 @@ export class TeamResolverService implements Resolve<Team> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
-  : Observable<Team> | Observable<never> {
+  : Observable<Team> {
     this.authService.loggedIn$()
       .pipe(take(1))
       .subscribe(loggedIn => {

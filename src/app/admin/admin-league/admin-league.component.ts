@@ -26,7 +26,7 @@ export class AdminLeagueComponent implements OnInit, OnDestroy {
     this.leagueSubscription = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         this.leagueService.get(params.get('id'));
-        return this.leagueService.leagueListener();
+        return this.leagueService.league$();
       })
     )
     .subscribe((league: League) => this.league = league);
