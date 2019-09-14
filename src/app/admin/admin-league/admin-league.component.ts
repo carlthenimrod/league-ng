@@ -25,12 +25,10 @@ export class AdminLeagueComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.paramMap
       .pipe(
-        switchMap((params: ParamMap) => {
-          return this.leagueService.get(params.get('id'));
-        }),
+        switchMap((params: ParamMap) => this.leagueService.get(params.get('id'))),
         takeUntil(this.unsubscribe$)
       )
-      .subscribe((league: League) => this.league = league);
+      .subscribe(league => this.league = league);
   }
 
   ngOnDestroy() {
