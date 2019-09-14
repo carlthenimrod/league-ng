@@ -47,14 +47,6 @@ export const userFormTrigger = trigger('userForm', [
     }),
     animate('150ms 150ms ease-out')
   ]),
-  transition('user => type', [
-    style({
-      transform: 'translateX(0%)'
-    }),
-    animate('150ms ease-out', style({
-      opacity: 0
-    }))
-  ]),
   transition('user => misc', [
     animate('600ms ease-out', style({
       transform: 'translateX(-300%)'
