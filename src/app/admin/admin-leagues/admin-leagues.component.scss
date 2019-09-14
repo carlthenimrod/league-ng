@@ -8,11 +8,11 @@ header {
   align-items: center;
   display: flex;
   justify-content: space-between;
+  padding: 2rem 0;
 
   h1 {
-    font-size: $display4-size;
-    font-weight: $display4-weight;
-    margin-bottom: 1rem;
+    text-transform: uppercase;
+    margin: 0;
   }
 
   button {
