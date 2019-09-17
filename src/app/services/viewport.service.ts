@@ -1,20 +1,23 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, fromEvent, Subscription } from 'rxjs';
+import { BehaviorSubject, fromEvent, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ViewportService implements OnDestroy {
-  windowSub: Subscription;
   viewport: string;
   viewportSubject: BehaviorSubject<string> = new BehaviorSubject(null);
+  unsubscribe$ = new Subject<void>();
 
   constructor() {
     this.findViewportType();
 
-    this.windowSub = fromEvent(window, 'resize').subscribe(() => {
-      this.findViewportType();
-    });
+    fromEvent(window, 'resize')
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+        this.findViewportType();
+      });
   }
 
   findViewportType() {
@@ -36,6 +39,7 @@ export class ViewportService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.windowSub.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

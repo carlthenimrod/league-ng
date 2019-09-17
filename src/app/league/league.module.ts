@@ -5,6 +5,7 @@ import { LeagueRoutingModule } from './league-routing.module';
 import { LeagueComponent } from './league.component';
 import { LeagueStandingsComponent } from './league-standings/league-standings.component';
 import { LeagueScheduleComponent } from './league-schedule/league-schedule.component';
+import { LeagueHeaderComponent } from './league-header/league-header.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { LeagueScheduleComponent } from './league-schedule/league-schedule.compo
   declarations: [
     LeagueComponent,
     LeagueStandingsComponent,
-    LeagueScheduleComponent
+    LeagueScheduleComponent,
+    LeagueHeaderComponent
   ]
 })
 export class LeagueModule { }

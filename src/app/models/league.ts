@@ -18,10 +18,7 @@ export interface Group {
 
 export interface League {
   name: string;
-  sites?: [{
-    _id: string,
-    label: string
-  }];
+  img?: string;
   divisions?: Division[];
   teams?: Team[];
   schedule?: Group[];

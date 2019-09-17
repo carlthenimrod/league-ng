@@ -33,7 +33,6 @@ export class LeagueService {
     const url = this.api + `leagues/${id}`;
     return this.http.get(url).pipe(
       tap((league: League) => {
-        console.log(league);
         this.league = league;
         this.leagueSubject.next(_.cloneDeep(this.league));
       })

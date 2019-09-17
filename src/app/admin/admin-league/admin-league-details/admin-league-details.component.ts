@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { League } from '@app/models/league';
@@ -9,18 +9,14 @@ import { LeagueService } from '@app/services/league.service';
   templateUrl: './admin-league-details.component.html',
   styleUrls: ['./admin-league-details.component.scss']
 })
-export class AdminLeagueDetailsComponent implements OnInit {
-
+export class AdminLeagueDetailsComponent {
   @Input() league: League;
-  @Output('editClick') editClick: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() editClick = new EventEmitter<boolean>();
 
   constructor(
     public leagueService: LeagueService,
     public router: Router
   ) { }
-
-  ngOnInit() {
-  }
 
   onEditClick() {
     this.editClick.emit(true);

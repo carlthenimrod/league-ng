@@ -1,7 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ParamMap, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { League } from '@app/models/league';
 
@@ -11,7 +9,7 @@ import { League } from '@app/models/league';
   styleUrls: ['./league.component.scss']
 })
 export class LeagueComponent implements OnInit {
-  tab = 'schedule';
+  selected = 'home';
   league: League;
 
   constructor(
@@ -20,8 +18,11 @@ export class LeagueComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe((data: { league: League }) => {
-      console.log(data);
       this.league = data.league;
     });
+  }
+
+  onNavClick(clicked: string) {
+    this.selected = clicked;
   }
 }

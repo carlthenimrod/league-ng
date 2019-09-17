@@ -1,0 +1,39 @@
+<header>
+  <h2>{{ league.name }}</h2>
+
+  <p *ngIf="league.description">{{ league.description }}</p>
+
+  <nav>
+    <a
+      [ngClass]="{ 'active': selected === 'home' }"
+      (click)="onClick('home')"
+      title="Home"
+    >
+      Home
+    </a>
+
+    <a
+      [ngClass]="{ 'active': selected === 'schedule' }"
+      (click)="onClick('schedule')"
+      title="Schedule"
+    >
+      Schedule
+    </a>
+
+    <a
+      [ngClass]="{ 'active': selected === 'scores' }"
+      (click)="onClick('scores')"
+      title="Scores"
+    >
+      Scores
+    </a>
+
+    <a
+      [ngClass]="{ 'active': selected === 'standings' }"
+      (click)="onClick('standings')"
+      title="Standings"
+    >
+      Standings
+    </a>
+  </nav>
+</header>

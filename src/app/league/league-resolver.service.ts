@@ -1,4 +1,4 @@
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
 import { take, mergeMap } from 'rxjs/operators';
 

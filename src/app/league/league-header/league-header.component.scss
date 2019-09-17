@@ -1,0 +1,85 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/mixins';
+
+header {
+  align-items: center;
+  background-color: theme-color-level(primary, 2);
+  color: $white;
+  display: flex;
+  justify-content: space-between;
+  overflow-x: scroll;
+
+  @include media-breakpoint-up(sm) {
+    align-items: stretch;
+    background-color: theme-color-level(light, -2);
+    flex-direction: column;
+    min-height: 10rem;
+    padding: 0 1rem;
+  }
+
+  > p {
+    color: $black;
+
+    @include media-breakpoint-down(sm) {
+      display: none;
+    }
+  }
+
+  h2 {
+    border-right: 1px solid theme-color(primary);
+    flex: 0 0 auto;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 1rem;
+    padding-right: 1.5rem;
+    text-transform: uppercase;
+
+    @include media-breakpoint-up(sm) {
+      border-right: none;
+      color: theme-color(primary);
+      font-size: $h2-font-size;
+      margin: 1rem 0;
+      padding: 0;
+    }
+  }
+
+  nav {
+    display: flex;
+    height: 3rem;
+    margin-right: 0.5rem;
+
+    @include media-breakpoint-up(sm) {
+      background-color: $white;
+      margin: 0;
+      padding: 0 1rem;
+      width: 100%;
+    }
+
+    a {
+      cursor: pointer;
+      display: block;
+      height: 100%;
+      line-height: 3rem;
+      padding: 0 0.5rem;
+      text-align: center;
+      transition: color 50ms ease-in;
+
+      @include media-breakpoint-up(sm) {
+        color: theme-color(primary);
+      }
+
+      &.active {
+        border-bottom: 4px solid $white;
+        color: theme-color-level(primary, -10);
+
+        @include media-breakpoint-up(sm) {
+          border-bottom: 4px solid theme-color(primary);
+          color: theme-color(primary);
+        }
+      }
+    }
+  }
+}

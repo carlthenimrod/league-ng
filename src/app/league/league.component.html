@@ -1,42 +1,21 @@
-<section id="league" *ngIf="league">
-  <header>
-    <h1>{{ league.name }}</h1>
+<app-league-header
+  [league]="league"
+  [selected]="selected"
+  (navClick)="onNavClick($event)"
+></app-league-header>
 
-    <p *ngIf="league.description">{{ league.description }}</p>
-  </header>
+<section id="league">
+  <ng-container [ngSwitch]="selected">
+    <app-league-schedule
+      *ngSwitchCase="'schedule'"
+      [league]="league"
+    >
+    </app-league-schedule>
 
-  <section id="tabs">
-    <nav>
-      <button
-        (click)="tab = 'schedule'"
-        [ngClass]="{'active': tab === 'schedule'}"
-      >
-        <i class="far fa-calendar mr-2"></i>
-
-        <span>Schedule</span>
-      </button>
-
-      <button
-        (click)="tab = 'standings'"
-        [ngClass]="{'active': tab === 'standings'}"
-      >
-        <i class="fas fa-list-ol mr-2"></i>
-        <span>Standings</span>
-      </button>
-    </nav>
-
-    <ng-container [ngSwitch]="tab">
-      <app-league-schedule
-        *ngSwitchCase="'schedule'"
-        [league]="league"
-      >
-      </app-league-schedule>
-
-      <app-league-standings
-        *ngSwitchCase="'standings'"
-        [league]="league"
-      >
-      </app-league-standings>
-    </ng-container>
-  </section>
+    <app-league-standings
+      *ngSwitchCase="'standings'"
+      [league]="league"
+    >
+    </app-league-standings>
+  </ng-container>
 </section>
