@@ -18,6 +18,7 @@ import {
 import { NoticeComponent } from './notice/notice.component';
 import { ProfileImgComponent } from './profile-img/profile-img.component';
 import { FormatLocationsPipe } from './format-locations.pipe';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   imports: [
@@ -40,12 +41,14 @@ import { FormatLocationsPipe } from './format-locations.pipe';
     MatSliderModule,
     NoticeComponent,
     ProfileImgComponent,
-    FormatLocationsPipe
+    FormatLocationsPipe,
+    GameComponent
   ],
   declarations: [
     NoticeComponent,
     ProfileImgComponent,
-    FormatLocationsPipe
+    FormatLocationsPipe,
+    GameComponent
   ]
 })
 export class SharedModule { }

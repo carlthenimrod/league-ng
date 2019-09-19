@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
-import { Observable, Subject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import _ from 'lodash';
 
@@ -17,7 +17,7 @@ export class LeagueService {
   api: string = environment.api;
 
   league: League;
-  leagueSubject: Subject<League> = new Subject<League>();
+  leagueSubject: BehaviorSubject<League> = new BehaviorSubject<League>(null);
 
   constructor(
     private http: HttpClient,

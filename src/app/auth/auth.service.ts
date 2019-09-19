@@ -14,17 +14,15 @@ import { SocketService } from '@app/services/socket.service';
 })
 export class AuthService {
   api: string = environment.api;
+  loggedIn: boolean;
   loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject(null);
 
   constructor(
     private http: HttpClient,
     private socket: SocketService
   ) {
-    if (localStorage.getItem('access_token')) {
-      this.loggedInSubject.next(true);
-    } else {
-      this.loggedInSubject.next(false);
-    }
+    this.loggedIn = (localStorage.getItem('access_token')) ? true : false;
+    this.loggedInSubject.next(this.loggedIn);
   }
 
   getAccessToken(): string {
@@ -32,6 +30,8 @@ export class AuthService {
   }
 
   getAuth(): Auth {
+    if (!this.loggedIn) { return; }
+
     const auth: Auth = {
       _id: localStorage.getItem('_id'),
       email: localStorage.getItem('email'),
@@ -78,7 +78,8 @@ export class AuthService {
         map(response => this.formatResponse(response)),
         tap(auth => {
           this.setLocalStorage(auth);
-          this.loggedInSubject.next(true);
+          this.loggedIn = true;
+          this.loggedInSubject.next(this.loggedIn);
           this.socket.connect(auth);
         })
       );
@@ -90,7 +91,8 @@ export class AuthService {
 
     localStorage.clear();
     this.socket.disconnect();
-    this.loggedInSubject.next(false);
+    this.loggedIn = false;
+    this.loggedInSubject.next(this.loggedIn);
 
     const url = this.api + 'auth/logout';
     this.http.request('delete', url, { body: {client, refresh_token}}).subscribe();

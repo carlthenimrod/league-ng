@@ -1,0 +1,75 @@
+<header *ngIf="size !== 'sm'">
+  <ng-container *ngIf="game.start; else noStart">
+    <div id="game-start">
+      <span id="label" *ngIf="!game.home.score && !game.away.score">
+        Starts On:
+      </span>
+
+      <span id="date" *ngIf="!game.time">{{ game.start | date: 'EEEE, MMMM d' }}</span>
+      <span id="date" *ngIf="game.time">{{ game.start | date: 'EEEE, MMMM d, h:mm a' }}</span>
+    </div>
+  </ng-container>
+
+  <ng-template #noStart>
+    <p id="no-start">Date TBD</p>
+  </ng-template>
+</header>
+
+<article>
+  <ng-container
+    *ngTemplateOutlet="team; context: { $implicit: game.home, isHome: true }"
+  ></ng-container>
+
+  <ng-container
+    *ngTemplateOutlet="team; context: { $implicit: game.away, isHome: false }"
+  ></ng-container>
+</article>
+
+<footer *ngIf="size !== 'sm'">
+  <section
+  id="place"
+  *ngIf="game.place && game.place._id; else noPlace"
+  >
+    <div *ngIf="game.place.name">
+      <span>{{ game.place.name }}</span>
+      <ng-container
+        *ngIf="game.place.locations && game.place.locations.length > 0"
+      >
+        <span>{{ game.place.locations | formatLocations }}</span>
+      </ng-container>
+    </div>
+
+    <ng-template #address let-address>
+      <div *ngIf="address.street">{{ address.street }}</div>
+      <div *ngIf="address.city && address.state && address.postal">
+        {{ address.city }} {{ address.state }}, {{ address.postal }}
+      </div>
+    </ng-template>
+
+    <div id="address" *ngIf="game.place.address">
+      <ng-container
+        *ngTemplateOutlet="address; context: {
+          $implicit: game.place.address
+        }"
+      ></ng-container>
+    </div>
+  </section>
+
+  <ng-template #noPlace>
+    <p>Location TBD</p>
+  </ng-template>
+</footer>
+
+<ng-template #team let-team let-isHome="isHome">
+  <div class="team" [id]="isHome ? 'home' : 'away'">
+    <figure>
+      <img *ngIf="team.img" [src]="team.img">
+      <i *ngIf="!team.img" class="fas fa-tshirt"></i>
+    </figure>
+
+    <span class="name">{{ team.name }}</span>
+
+    <span *ngIf="team.score" class="score">{{ team.score }}</span>
+    <span *ngIf="!team.score" class="score">-</span>
+  </div>
+</ng-template>

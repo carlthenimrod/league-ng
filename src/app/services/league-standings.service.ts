@@ -99,7 +99,7 @@ export class LeagueStandingsService {
           away.goalsAgainst = away.goalsAgainst + game.home.score;
         }
       }
-    }    
+    }
 
     this.calculateGoalDifference(league.teams);
   }

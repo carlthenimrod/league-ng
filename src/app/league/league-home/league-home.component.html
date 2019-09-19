@@ -1,0 +1,20 @@
+<section id="upcoming" *ngIf="league$ | async as league">
+  <p *ngIf="league.schedule.length === 0">No Games Scheduled.</p>
+
+  <ng-container *ngIf="league.schedule.length > 0">
+    <h3>{{ selectedGroup.label }}</h3>
+
+    <section id="game-list">
+      <app-game
+        *ngFor="let game of selectedGroup.games"
+        (click)="selectedGame = game"
+        [game]="game"
+        size="sm"
+      ></app-game>
+    </section>
+
+    <article id="game-selected" *ngIf="selectedGame">
+      <app-game [game]="selectedGame"></app-game>
+    </article>
+  </ng-container>
+</section>

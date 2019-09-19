@@ -22,6 +22,7 @@ header {
 
   > p {
     color: $black;
+    margin: 1rem;
 
     @include media-breakpoint-down(sm) {
       display: none;
@@ -41,7 +42,7 @@ header {
       border-right: none;
       color: theme-color(primary);
       font-size: $h2-font-size;
-      margin: 1rem 0;
+      margin: 1rem;
       padding: 0;
     }
   }
@@ -69,6 +70,7 @@ header {
 
       @include media-breakpoint-up(sm) {
         color: theme-color(primary);
+        margin-right: 2rem;
       }
 
       &.active {
