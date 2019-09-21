@@ -8,10 +8,6 @@
   color: $black;
   display: block;
 
-  @include media-breakpoint-up(sm) {
-    padding: 1rem;
-  }
-
   header {
     max-width: 30rem;
     padding: 0.5rem;
@@ -33,12 +29,31 @@
     justify-content: space-between;
     max-width: 30rem;
     padding: 0.25rem 1rem;
+    transition: all 100ms ease-in;
+
+    &.away-top {
+      .team#away {
+        order: 1;
+      }
+
+      #info {
+        order: 2;
+      }
+
+      .team#home {
+        order: 3;
+      }
+    }
 
     .team {
       align-items: center;
       display: flex;
       padding: 0.5rem 0;
       width: 100%;
+
+      &.is-user {
+        color: theme-color(primary);
+      }
 
       figure {
         background-color: theme-color-level(light, 2);
@@ -81,25 +96,9 @@
     }
 
     #info {
-      align-items: center;
-      display: flex;
-      justify-content: space-between;
+      align-self: flex-start;
       font-weight: 700;
-      padding: 0 0 0 1rem;
-    }
-
-    &.is-home {
-      .team#home {
-        order: 1;
-      }
-
-      #info {
-        order: 2;
-      }
-
-      .team#away {
-        order: 3;
-      }
+      padding: 0 1rem;
     }
   }
 
@@ -126,9 +125,20 @@
         i { font-size: 0.6rem; }
       }
 
+      .info {
+        .name { font-size: 0.8rem; }
+      }
+
       .score {
         font-size: 0.8rem;
       }
+    }
+  }
+
+  &.active {
+    article {
+      background-color: $white;
+      box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.4);
     }
   }
 }

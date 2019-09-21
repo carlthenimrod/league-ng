@@ -4,6 +4,17 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/mixins';
 
+:host {
+  display: block;
+  position: fixed;
+  top: 3rem;
+
+  @include media-breakpoint-up(sm) {
+    position: static;
+    top: auto;
+  }
+}
+
 header {
   align-items: center;
   background-color: theme-color-level(primary, 2);

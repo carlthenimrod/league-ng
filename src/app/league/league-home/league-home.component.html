@@ -7,6 +7,7 @@
     <section id="game-list">
       <app-game
         *ngFor="let game of selectedGroup.games"
+        [ngClass]="{ 'active' : game._id === selectedGame._id }"
         (click)="selectedGame = game"
         [game]="game"
         size="sm"

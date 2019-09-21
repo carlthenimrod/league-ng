@@ -15,13 +15,21 @@
   </ng-template>
 </header>
 
-<article>
+<article [ngClass]="{ 'away-top': loggedIn && isAway }">
   <ng-container
-    *ngTemplateOutlet="team; context: { $implicit: game.home, isHome: true }"
+    *ngTemplateOutlet="team; context: { $implicit: game.home, homeOrAway: 'home' }"
   ></ng-container>
 
+  <div id="info" *ngIf="size !== 'sm'">
+    <span id="versus">{{ (loggedIn && isAway) ? '@' : 'vs' }}</span>
+
+    <span id="final" *ngIf="game.home.score && game.away.score">
+      Final
+    </span>
+  </div>
+
   <ng-container
-    *ngTemplateOutlet="team; context: { $implicit: game.away, isHome: false }"
+    *ngTemplateOutlet="team; context: { $implicit: game.away, homeOrAway: 'away' }"
   ></ng-container>
 </article>
 
@@ -60,14 +68,22 @@
   </ng-template>
 </footer>
 
-<ng-template #team let-team let-isHome="isHome">
-  <div class="team" [id]="isHome ? 'home' : 'away'">
+<ng-template #team let-team let-homeOrAway="homeOrAway">
+  <div
+    class="team"
+    [id]="homeOrAway"
+    [ngClass]="{ 'is-user': isUser(homeOrAway) }"
+  >
     <figure>
       <img *ngIf="team.img" [src]="team.img">
       <i *ngIf="!team.img" class="fas fa-tshirt"></i>
     </figure>
 
-    <span class="name">{{ team.name }}</span>
+    <div class="info">
+      <div class="name">{{ team.name }}</div>
+
+      <div class="record" *ngIf="size !== 'sm'">{{ team.record ? team.record : '0 - 0 - 0' }}</div>
+    </div>
 
     <span *ngIf="team.score" class="score">{{ team.score }}</span>
     <span *ngIf="!team.score" class="score">-</span>

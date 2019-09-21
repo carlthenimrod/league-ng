@@ -1,13 +1,13 @@
-<ng-template #team let-team="team" let-type="type">    
+<ng-template #team let-team="team" let-type="type">
   <div id="{{ type }}" class="team">
     <div class="img">
-      <img 
+      <img
         *ngIf="team.img"
-        src="team.img" 
+        src="team.img"
         alt="{{ team.img }}"
       >
-      
-      <i 
+
+      <i
         *ngIf="!team.img"
         class="fas fa-tshirt"
       ></i>
@@ -37,7 +37,7 @@
     <ng-container *ngIf="game.start; else noStart">
       <div id="game-start">
         <span id="label" *ngIf="!game.home.score && !game.away.score">
-          Starts On: 
+          Starts On:
         </span>
 
         <span id="date" *ngIf="!game.time">{{ game.start | date: 'EEEE, MMMM d' }}</span>
@@ -50,13 +50,13 @@
     </ng-template>
   </header>
 
-  <article 
-    id="game" 
+  <article
+    id="game"
     [ngClass]="{ 'is-home': isHome }"
   >
-    <ng-container 
-      *ngTemplateOutlet="team; context: { 
-        team: game.away, 
+    <ng-container
+      *ngTemplateOutlet="team; context: {
+        team: game.away,
         type: 'away'
       }"
     >
@@ -70,9 +70,9 @@
       </span>
     </div>
 
-    <ng-container 
-      *ngTemplateOutlet="team; context: { 
-        team: game.home, 
+    <ng-container
+      *ngTemplateOutlet="team; context: {
+        team: game.home,
         type: 'home'
       }"
     >
@@ -80,13 +80,13 @@
   </article>
 
   <footer>
-    <section 
-      id="place" 
+    <section
+      id="place"
       *ngIf="game.place && game.place._id; else noPlace"
     >
       <div *ngIf="game.place.name">
         <span>{{ game.place.name }}</span>
-        <ng-container 
+        <ng-container
           *ngIf="game.place.locations && game.place.locations.length > 0"
         >
           <span> {{ game.place.locations | formatLocations }}</span>
@@ -101,9 +101,9 @@
       </ng-template>
 
       <div id="address" *ngIf="game.place.address">
-        <ng-container 
-          *ngTemplateOutlet="address; context: { 
-            $implicit: game.place.address 
+        <ng-container
+          *ngTemplateOutlet="address; context: {
+            $implicit: game.place.address
           }"
         ></ng-container>
       </div>

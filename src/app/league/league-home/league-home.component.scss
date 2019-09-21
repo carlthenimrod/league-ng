@@ -22,6 +22,10 @@ section#upcoming {
     padding: 0 1rem;
   }
 
+  > p {
+    padding: 0 0.5rem;
+  }
+
   section#game-list {
     display: flex;
     overflow-y: scroll;

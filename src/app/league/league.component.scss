@@ -4,55 +4,11 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
-:host {
-  @include make-container(0);
-  @include make-container-max-widths();
-  display: block;
-}
+section#league {
+  padding-top: 3rem;
 
-header {
-  padding: 0 0 2rem 0;
-
-  h1 {
-    padding: 1rem 0;
-  }
-
-  p {
-    margin: 0;
-    padding: 1rem 0;
+  @include media-breakpoint-up(sm) {
+    padding-top: 0;
   }
 }
 
-section#tabs {
-  nav {
-    align-items: flex-end;
-    border-bottom: 3px solid theme-color(primary);
-    display: flex;
-    justify-content: center;
-    padding-left: 1rem;
-
-    button {
-      background-color: theme-color-level(primary, -5);
-      border: none;
-      border-radius: 10px 10px 0 0;
-      color: $white;
-      cursor: pointer;
-      margin-right: 0.5rem;
-      padding: 0.4rem 1.5rem;
-
-      &.active {
-        background-color: theme-color(primary);
-        cursor: default;
-        padding: 0.5rem 1.5rem;
-      }
-    }
-  }
-}
-
-@include media-breakpoint-up(sm) {
-  section#tabs {
-    nav {
-      justify-content: flex-start;
-    }
-  }
-}
