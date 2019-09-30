@@ -34,13 +34,13 @@ header {
   }
 
   &::after {
-    @include gradient-x(transparent, rgba(0, 0, 0, 0.35), 97%, 100%);
+    @include gradient-x(transparent, rgba(0, 0, 0, 0.35));
     content: '';
     height: 100%;
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: 0;
+    width: 0.75rem;
 
     @include media-breakpoint-up(sm) {
       display: none;
