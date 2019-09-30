@@ -11,7 +11,7 @@ import { Game } from '@app/models/game';
 export class LeagueScheduleService {
   constructor() {}
 
-  pickGroup(league: League): Group {
+  pickGroup(league: League): number {
     if (league.schedule.length === 0) { return; }
 
     for (let i = 0; i < league.schedule.length; i++) {
@@ -21,10 +21,10 @@ export class LeagueScheduleService {
       if (!latestGame) { continue; }
 
       const cutoff = moment().add(1, 'd').startOf('day').add(3, 'h');
-      if (cutoff.isAfter(latestGame.start)) { return group; }
+      if (cutoff.isAfter(latestGame.start)) { return i; }
     }
 
-    return league.schedule[0];
+    return 0;
   }
 
   findLatestGame(games: Game[]): Game {

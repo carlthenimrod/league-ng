@@ -19,7 +19,5 @@ export class LeagueStandingsComponent implements OnInit {
 
   ngOnInit() {
     this.teams = this.teamService.calculateStandings(this.league);
-
-    console.log(this.teams);
   }
 }

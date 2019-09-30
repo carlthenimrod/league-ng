@@ -1,5 +1,7 @@
 <section id="standings" *ngIf="teams">
-  <table class="table">
+  <h3>Standings</h3>
+
+  <table>
     <thead>
       <tr>
         <th scope="col">Pos</th>
@@ -16,7 +18,7 @@
 
     <tbody>
       <tr *ngFor="let team of teams">
-        <th scope="row">{{ team.position }}</th>
+        <td>{{ team.position }}</td>
         <td>{{ team.name }}</td>
         <td>{{ team.wins }}</td>
         <td>{{ team.losses }}</td>

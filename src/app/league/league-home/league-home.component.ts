@@ -29,7 +29,7 @@ export class LeagueHomeComponent implements OnInit {
     this.league$ = this.leagueService.league$()
       .pipe(
         tap(league => {
-          this.selectedGroup = this.schedule.pickGroup(league);
+          this.selectedGroup = league.schedule[this.schedule.pickGroup(league)];
 
           if (this.selectedGroup) {
             const auth = this.authService.getAuth();

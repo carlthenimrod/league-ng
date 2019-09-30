@@ -1,17 +1,24 @@
-<header *ngIf="size !== 'sm'">
+<header *ngIf="type !== 'thumb'">
   <ng-container *ngIf="game.start; else noStart">
-    <div id="game-start">
-      <span id="label" *ngIf="!game.home.score && !game.away.score">
+    <div class="game-start">
+      <span class="label" *ngIf="!haveScore(game) && type !== 'list'">
         Starts On:
       </span>
 
-      <span id="date" *ngIf="!game.time">{{ game.start | date: 'EEEE, MMMM d' }}</span>
-      <span id="date" *ngIf="game.time">{{ game.start | date: 'EEEE, MMMM d, h:mm a' }}</span>
+      <ng-container *ngIf="type !== 'list'">
+        <span class="date" *ngIf="!game.time">{{ game.start | date: 'EEEE, MMMM d' }}</span>
+        <span class="date" *ngIf="game.time">{{ game.start | date: 'EEEE, MMMM d, h:mm a' }}</span>
+      </ng-container>
+
+      <ng-container *ngIf="type === 'list'">
+        <span class="date">{{ game.start | date: 'M/dd' }}</span>
+      </ng-container>
     </div>
   </ng-container>
 
   <ng-template #noStart>
-    <p id="no-start">Date TBD</p>
+    <p class="no-start" *ngIf="type !== 'list'">Date TBD</p>
+    <p class="no-start" *ngIf="type === 'list'">TBD</p>
   </ng-template>
 </header>
 
@@ -20,10 +27,10 @@
     *ngTemplateOutlet="team; context: { $implicit: game.home, homeOrAway: 'home' }"
   ></ng-container>
 
-  <div id="info" *ngIf="size !== 'sm'">
-    <span id="versus">{{ (loggedIn && isAway) ? '@' : 'vs' }}</span>
+  <div class="status" *ngIf="type !== 'thumb'">
+    <span class="versus">{{ (loggedIn && isAway) ? '@' : 'vs' }}</span>
 
-    <span id="final" *ngIf="game.home.score && game.away.score">
+    <span class="final" *ngIf="haveScore(game)">
       Final
     </span>
   </div>
@@ -33,39 +40,54 @@
   ></ng-container>
 </article>
 
-<footer *ngIf="size !== 'sm'">
-  <section
-  id="place"
-  *ngIf="game.place && game.place._id; else noPlace"
-  >
-    <div *ngIf="game.place.name">
-      <span>{{ game.place.name }}</span>
-      <ng-container
-        *ngIf="game.place.locations && game.place.locations.length > 0"
-      >
-        <span>{{ game.place.locations | formatLocations }}</span>
-      </ng-container>
-    </div>
+<footer *ngIf="type !== 'thumb'">
+  <ng-container *ngIf="game.place && game.place._id; else noPlace">
+    <section *ngIf="type !== 'list'" class="place">
+      <div *ngIf="game.place.name">
+        <span>{{ game.place.name }}</span>
+        <ng-container
+          *ngIf="game.place.locations && game.place.locations.length > 0"
+        >
+          <span> {{ game.place.locations | formatLocations }}</span>
+        </ng-container>
 
-    <ng-template #address let-address>
-      <div *ngIf="address.street">{{ address.street }}</div>
-      <div *ngIf="address.city && address.state && address.postal">
-        {{ address.city }} {{ address.state }}, {{ address.postal }}
+        <a href="{{ game.place | gmapLink }}" title="Location" target="_blank">
+          <i class="fas fa-map-marker-alt"></i>
+        </a>
       </div>
-    </ng-template>
 
-    <div id="address" *ngIf="game.place.address">
-      <ng-container
-        *ngTemplateOutlet="address; context: {
-          $implicit: game.place.address
-        }"
-      ></ng-container>
-    </div>
-  </section>
+      <ng-template #address let-address>
+        <div *ngIf="address.street">{{ address.street }}</div>
+        <div *ngIf="address.city && address.state && address.postal">
+          {{ address.city }} {{ address.state }}, {{ address.postal }}
+        </div>
+      </ng-template>
+
+      <div class="address" *ngIf="game.place.address">
+        <ng-container
+          *ngTemplateOutlet="address; context: {
+            $implicit: game.place.address
+          }"
+        ></ng-container>
+      </div>
+    </section>
+
+    <a *ngIf="!haveScore(game) && type === 'list'" href="{{ game.place | gmapLink }}" title="Location" target="_blank">
+      <i class="fas fa-map-marker-alt"></i>
+    </a>
+  </ng-container>
 
   <ng-template #noPlace>
-    <p>Location TBD</p>
+    <p class="no-place" *ngIf="type !== 'list'">Location TBD</p>
   </ng-template>
+
+  <ng-container *ngIf="type === 'list'">
+    <section class="score" *ngIf="haveScore(game)">
+      <span class="home">{{ game.home.score }}</span>
+      <span>-</span>
+      <span class="away">{{ game.away.score }}</span>
+    </section>
+  </ng-container>
 </footer>
 
 <ng-template #team let-team let-homeOrAway="homeOrAway">
@@ -82,10 +104,12 @@
     <div class="info">
       <div class="name">{{ team.name }}</div>
 
-      <div class="record" *ngIf="size !== 'sm'">{{ team.record ? team.record : '0 - 0 - 0' }}</div>
+      <div class="record" *ngIf="!type">{{ team.record ? team.record : '0 - 0 - 0' }}</div>
     </div>
 
-    <span *ngIf="team.score" class="score">{{ team.score }}</span>
-    <span *ngIf="!team.score" class="score">-</span>
+    <ng-container *ngIf="type !== 'list'">
+      <span *ngIf="team.score" class="score">{{ team.score }}</span>
+      <span *ngIf="!team.score" class="score">-</span>
+    </ng-container>
   </div>
 </ng-template>

@@ -1,63 +1,35 @@
-<section id="schedule" *ngIf="league.schedule && league.schedule.length > 0">
-  <article *ngFor="let group of league.schedule">
-    <h2>{{ group.label }}</h2>
+<section id="schedule" *ngIf="league$ | async as league">
+  <p *ngIf="league.schedule.length === 0">No Games Scheduled.</p>
 
-    <div class="game" *ngFor="let game of group.games">
-      <div class="teams">
-        <span>{{ game.away.name }}</span> @ <span>{{ game.home.name }}</span>
-      </div>
+  <ng-container *ngIf="league.schedule.length > 0">
+    <h3>League Schedule</h3>
 
-      <div class="date" *ngIf="game.start && game.time">
-        <span>Start: {{ game.start | date: 'medium' }}</span>
-      </div>
-
-      <div class="date" *ngIf="!game.start || !game.time">
-        <span>Start: TBD</span>
-      </div>
-
-      <div class="place" *ngIf="game.place && game.place.name">
-        <div class="name">{{ game.place.name }}</div>
-
-        <div
-          class="address"
-          *ngIf="game.place.address.street ||
-            game.place.address.city ||
-            game.place.address.state ||
-            game.place.address.postal"
+    <article>
+      <nav>
+        <button
+          (click)="selectedGroupIndex = selectedGroupIndex - 1; selectedGroup = league.schedule[selectedGroupIndex]"
+          [disabled]="selectedGroupIndex === 0"
         >
-          <span
-            class="street"
-            *ngIf="game.place.address.street"
-          >
-            {{ game.place.address.street }}
-          </span>
+          <i class="fas fa-angle-left"></i>
+        </button>
 
-          <span
-            class="city"
-            *ngIf="game.place.address.city"
-          >
-              {{ game.place.address.city }}
-          </span>
+        <h4>{{ selectedGroup.label }}</h4>
 
-          <span
-            class="state"
-            *ngIf="game.place.address.state"
-          >
-              {{ game.place.address.state }}
-          </span>
+        <button
+          (click)="selectedGroupIndex = selectedGroupIndex + 1; selectedGroup = league.schedule[selectedGroupIndex]"
+          [disabled]="selectedGroupIndex === league.schedule.length - 1"
+        >
+          <i class="fas fa-angle-right"></i>
+        </button>
+      </nav>
 
-          <span
-            class="postal"
-            *ngIf="game.place.address.postal"
-          >
-            {{ game.place.address.postal }}
-          </span>
-        </div>
-      </div>
-    </div>
-  </article>
+      <section id="game-list">
+        <app-game
+          *ngFor="let game of selectedGroup.games"
+          [game]="game"
+          type="list"
+        ></app-game>
+      </section>
+    </article>
+  </ng-container>
 </section>
-
-<p id="no-schedule" *ngIf="!league.schedule || league.schedule.length === 0">
-  League currently has no games scheduled.
-</p>

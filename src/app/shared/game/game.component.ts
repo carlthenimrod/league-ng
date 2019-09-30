@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostBinding, OnDestroy, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, OnChanges, ElementRef, Renderer2 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -13,11 +13,7 @@ import { Auth } from '@app/models/auth';
 })
 export class GameComponent implements OnInit, OnChanges, OnDestroy {
   @Input() game: Game;
-  @Input() size: string;
-  @Input() class = '';
-  @HostBinding('class.sm') get addClass(): boolean {
-    return (this.size === 'sm') ? true : false;
-  }
+  @Input() type: string;
   auth: Auth;
   loggedIn: boolean;
   isHome: boolean;
@@ -25,7 +21,9 @@ export class GameComponent implements OnInit, OnChanges, OnDestroy {
   unsubscribe$ = new Subject<void>();
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private el: ElementRef,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit() {
@@ -36,6 +34,8 @@ export class GameComponent implements OnInit, OnChanges, OnDestroy {
         this.auth = this.authService.getAuth();
         this.checkAwayOrHome();
       });
+
+    if (this.type) { this.renderer.addClass(this.el.nativeElement, this.type); }
   }
 
   ngOnChanges() {
@@ -57,6 +57,13 @@ export class GameComponent implements OnInit, OnChanges, OnDestroy {
       this.isHome = false;
       this.isAway = false;
     }
+  }
+
+  haveScore(game: Game): boolean {
+    if (typeof game.home.score !== 'number') { return false; }
+    if (typeof game.away.score !== 'number') { return false; }
+
+    return true;
   }
 
   ngOnDestroy() {

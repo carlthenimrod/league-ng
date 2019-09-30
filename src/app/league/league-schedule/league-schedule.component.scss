@@ -4,16 +4,78 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
-section#schedule {
-  article {
-    padding: 1rem 0;
+:host {
+  background-color: $white;
+  display: block;
+  padding: 0 0 1rem 0;
 
-    h2 {
-      font-size: 1.4rem;
-      padding: 0 0 1rem 0;
+  @include media-breakpoint-up(sm) {
+    padding: 2rem;
+  }
+}
+
+section#schedule {
+  color: theme-color(primary);
+
+  h3 {
+    display: none;
+
+    @include media-breakpoint-up(sm) {
+      display: block;
+      margin-bottom: 0.5rem;
+      padding: 0 0.5rem;
+      text-align: left;
+    }
+  }
+
+  > p {
+    padding: 0 0.5rem;
+  }
+
+  article {
+    padding: 0.5rem 0.25rem 1rem 0.25rem;
+
+    @include media-breakpoint-up(sm) {
+      padding: 1rem 0;
+    }
+
+    nav {
+      border-bottom: 1px solid theme-color-level(primary, -8);
+      display: flex;
+      justify-content: center;
+      margin: 0 0.25rem 1rem 0.25rem;
+      padding: 0.5rem;
+
+      @include media-breakpoint-up(sm) {
+        border-top: 1px solid theme-color-level(primary, -8);
+        justify-content: flex-start;
+        margin: 0 0 1rem 0;
+        padding: 1rem 0.5rem;
+      }
+
+      button {
+        background: none;
+        border: none;
+        color: theme-color(primary);
+        padding: 0 1rem;
+
+        &:disabled {
+          color: theme-color-level(primary, -10);
+        }
+      }
+
+      h4 {
+        font-size: 1.6rem;
+        margin: 0;
+
+        @include media-breakpoint-up(sm) {
+          font-size: 1.4rem;
+        }
+      }
     }
 
     .game {
+      color: $black;
       line-height: 1rem;
       padding: 0.25rem 0;
 
@@ -31,18 +93,7 @@ section#schedule {
       .place {
         font-size: 0.8rem;
         padding: 0.5rem 0;
-
-        .street {
-          display: block;
-        }
       }
     }
   }
-}
-
-p#no-schedule {
-  border-top: 1px solid theme-color(dark);
-  border-bottom: 1px solid theme-color(dark);
-  padding: 1rem 0;
-  text-align: center;
 }

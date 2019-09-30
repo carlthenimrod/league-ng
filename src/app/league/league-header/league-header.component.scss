@@ -8,10 +8,12 @@
   display: block;
   position: fixed;
   top: 3rem;
+  width: 100%;
 
   @include media-breakpoint-up(sm) {
     position: static;
     top: auto;
+    width: auto;
   }
 }
 
@@ -29,6 +31,20 @@ header {
     flex-direction: column;
     min-height: 10rem;
     padding: 0 1rem;
+  }
+
+  &::after {
+    @include gradient-x(transparent, rgba(0, 0, 0, 0.35), 97%, 100%);
+    content: '';
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    @include media-breakpoint-up(sm) {
+      display: none;
+    }
   }
 
   > p {

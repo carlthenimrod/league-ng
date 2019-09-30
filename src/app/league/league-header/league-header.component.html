@@ -21,19 +21,19 @@
     </a>
 
     <a
-      [ngClass]="{ 'active': selected === 'scores' }"
-      (click)="onClick('scores')"
-      title="Scores"
-    >
-      Scores
-    </a>
-
-    <a
       [ngClass]="{ 'active': selected === 'standings' }"
       (click)="onClick('standings')"
       title="Standings"
     >
       Standings
+    </a>
+
+    <a
+      [ngClass]="{ 'active': selected === 'teams' }"
+      (click)="onClick('teams')"
+      title="Teams"
+    >
+      Teams
     </a>
   </nav>
 </header>

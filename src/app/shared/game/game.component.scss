@@ -12,11 +12,8 @@
     max-width: 30rem;
     padding: 0.5rem;
 
-    h1 {
-      color: theme-color(primary);
-      font-size: 1.2rem;
+    p.no-start {
       margin: 0;
-      padding: 0.5rem 0;
     }
   }
 
@@ -36,7 +33,7 @@
         order: 1;
       }
 
-      #info {
+      .status {
         order: 2;
       }
 
@@ -95,7 +92,7 @@
       }
     }
 
-    #info {
+    .status {
       align-self: flex-start;
       font-weight: 700;
       padding: 0 1rem;
@@ -105,10 +102,18 @@
   footer {
     max-width: 30rem;
     padding: 0.5rem;
+
+    section.place a {
+      margin-left: 0.5rem;
+    }
+
+    p.no-location {
+      margin: 0;
+    }
   }
 }
 
-:host(.sm) {
+:host(.thumb) {
   article {
     padding: 0.5rem;
     height: 5rem;
@@ -139,6 +144,72 @@
     article {
       background-color: $white;
       box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.4);
+    }
+  }
+}
+
+:host(.list) {
+  align-items: center;
+  display: flex;
+  max-width: 25rem;
+  padding: 0.5rem 0;
+
+  header {
+    font-size: 0.8rem;
+    padding: 0;
+    text-align: center;
+    width: 3rem;
+  }
+
+  article {
+    background-color: transparent;
+    flex: 1;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0;
+
+    .team {
+      padding: 0 0.25rem;
+      width: auto;
+
+      figure {
+        margin-right: 0.25rem;
+        height: 1.5rem;
+        width: 1.5rem;
+
+        i { font-size: 0.6rem; }
+      }
+
+      .info {
+        .name { font-size: 1rem; }
+      }
+    }
+
+    .status {
+      align-self: inherit;
+      font-size: 1rem;
+      padding: 0;
+      text-align: center;
+      width: 3rem;
+    }
+  }
+
+  footer {
+    display: flex;
+    margin-left: auto;
+    padding: 0 0.5rem 0 0;
+
+    section.score {
+      font-size: 1rem;
+      padding: 0 0.125rem;
+
+      span {
+        padding: 0 0.125rem;
+      }
+    }
+
+    a.place {
+      cursor: pointer;
     }
   }
 }

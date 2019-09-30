@@ -4,45 +4,83 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
-section#schedule {
-  article {
-    padding: 1rem 0;
+:host {
+  background-color: $white;
+  display: block;
+  padding: 1rem 0;
 
-    h2 {
-      font-size: 1.4rem;
-      padding: 0 0 1rem 0;
+  @include media-breakpoint-up(sm) {
+    padding: 2rem;
+  }
+}
+
+section#standings {
+  color: theme-color(primary);
+
+  h3 {
+    margin-bottom: 0.5rem;
+    padding: 0 1rem;
+  }
+
+  table {
+    display: block;
+    overflow-x: scroll;
+    margin: 1rem 0.5rem 0 0.5rem;
+    max-width: 50rem;
+
+    @include media-breakpoint-up(sm) {
+      margin: 1rem 0;
     }
 
-    .game {
-      line-height: 1rem;
-      padding: 0.25rem 0;
+    thead,
+    tbody {
+      display: block;
+      width: 100%;
+    }
 
-      .teams {
-        display: inline-block;
+    tr {
+      display: flex;
+      width: 100%;
+
+      th, td {
+        flex: 0 0 auto;
+        text-align: center;
+        width: 2.5rem;
+
+        &:nth-child(1) {
+          width: 3.5rem;
+        }
+
+        &:nth-child(2) {
+          flex: 1 0 auto;
+          min-width: 11rem;
+          padding-left: 0.5rem;
+          text-align: left;
+        }
       }
 
-      .date {
-        display: inline-block;
-        font-size: 0.8rem;
-        line-height: 1.4rem;
-        padding: 0 0 0 1rem;
+      th {
+        background-color: theme-color(primary);
+        color: $white;
+        padding: 0.25rem 0;
       }
 
-      .place {
-        font-size: 0.8rem;
+      td {
+        color: $black;
         padding: 0.5rem 0;
+      }
 
-        .street {
-          display: block;
+      &:nth-child(odd) {
+        td {
+          background-color: theme-color-level(light, -0.5);
+        }
+      }
+
+      &:nth-child(even) {
+        td {
+          background-color: theme-color-level(light, 0.5);
         }
       }
     }
   }
-}
-
-p#no-schedule {
-  border-top: 1px solid theme-color(dark);
-  border-bottom: 1px solid theme-color(dark);
-  padding: 1rem 0;
-  text-align: center;
 }
