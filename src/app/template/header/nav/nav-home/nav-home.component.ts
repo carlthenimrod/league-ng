@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { AuthService } from '@app/auth/auth.service';
-import { takeUntil } from 'rxjs/operators';
+import { NavService } from '../nav.service';
 import { ViewportService } from '@app/services/viewport.service';
 
 @Component({
@@ -11,13 +12,13 @@ import { ViewportService } from '@app/services/viewport.service';
   styleUrls: ['./nav-home.component.scss']
 })
 export class NavHomeComponent implements OnInit, OnDestroy {
-  @Output() linkClick = new EventEmitter<boolean>();
   isMobile: boolean;
   loggedIn: boolean;
   unsubscribe$ = new Subject<void>();
 
   constructor(
     private auth: AuthService,
+    private navService: NavService,
     private viewport: ViewportService
   ) { }
 
@@ -33,8 +34,8 @@ export class NavHomeComponent implements OnInit, OnDestroy {
       });
   }
 
-  onClick() {
-    this.linkClick.emit(true);
+  onClick(url?: string[]) {
+    this.navService.navigate(url);
   }
 
   ngOnDestroy() {

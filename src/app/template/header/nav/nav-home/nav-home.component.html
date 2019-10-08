@@ -1,6 +1,5 @@
 <nav id="home">
   <a
-    routerLink="/"
     title="Home"
     (click)="onClick()"
   >
@@ -8,7 +7,6 @@
   </a>
 
   <a
-    routerLink="/"
     title="Link #1"
     (click)="onClick()"
   >
@@ -16,7 +14,6 @@
   </a>
 
   <a
-    routerLink="/"
     title="Link #2"
     (click)="onClick()"
   >
@@ -24,7 +21,6 @@
   </a>
 
   <a
-    routerLink="/"
     title="Link #3"
     (click)="onClick()"
   >
@@ -33,18 +29,15 @@
 
   <a
     *ngIf="!loggedIn"
-    routerLink="/login"
     title="Login"
-    (click)="onClick()"
+    (click)="onClick(['login'])"
   >
     <span>Login</span>
   </a>
 
   <a
     *ngIf="!loggedIn && isMobile"
-    routerLink="/register"
     title="Register"
-    (click)="onClick()"
   >
     <span>Sign Up!</span>
   </a>

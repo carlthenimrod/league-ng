@@ -52,7 +52,7 @@ a#leagues {
   text-transform: uppercase;
   transition: color 50ms ease-in;
 
-  &:hover {
+  &.open {
     background-color: theme-color-level(primary, 6);
     color: $white;
   }
@@ -72,7 +72,7 @@ a#leagues {
     z-index: 1;
   }
 
-  &:hover ul {
+  &.open ul {
     display: block;
   }
 

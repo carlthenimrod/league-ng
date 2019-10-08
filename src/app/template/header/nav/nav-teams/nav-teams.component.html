@@ -4,7 +4,14 @@
   <ng-container *ngTemplateOutlet="teamList"></ng-container>
 </nav>
 
-<a *ngIf="!isMobile" id="teams">
+<a
+  *ngIf="!isMobile"
+  id="teams"
+  (mouseenter)="showMenu = true"
+  (mouseleave)="showMenu = false"
+  (click)="showMenu = false"
+  [ngClass]="{ 'open': showMenu }"
+>
   <span>My Teams</span>
   <i class="fas fa-tshirt"></i>
 
@@ -15,9 +22,8 @@
   <ul *ngIf="teams.length > 0; else noTeams">
     <li *ngFor="let team of teams">
       <a
-        [routerLink]="['team', team._id]"
         title="{{ team.name }}"
-        (click)="onClick()"
+        (click)="onClick(['team', team._id])"
       >
         <span>{{ team.name }}</span>
       </a>

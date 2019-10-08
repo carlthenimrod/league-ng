@@ -1,7 +1,8 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+import { NavService } from '../nav.service';
 import { League } from '@app/models/league';
 import { ViewportService } from '@app/services/viewport.service';
 
@@ -12,11 +13,12 @@ import { ViewportService } from '@app/services/viewport.service';
 })
 export class NavLeaguesComponent implements OnInit, OnDestroy {
   @Input() leagues: League[];
-  @Output() linkClick = new EventEmitter<boolean>();
   isMobile: boolean;
+  showMenu: boolean;
   unsubscribe$ = new Subject<void>();
 
   constructor(
+    private navService: NavService,
     private viewport: ViewportService
   ) { }
 
@@ -28,8 +30,8 @@ export class NavLeaguesComponent implements OnInit, OnDestroy {
       });
   }
 
-  onClick() {
-    this.linkClick.emit(true);
+  onClick(url?: string[]) {
+    this.navService.navigate(url);
   }
 
   ngOnDestroy() {

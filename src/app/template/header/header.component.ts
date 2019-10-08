@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewContainerRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { Subscription, Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { AuthService } from '@app/auth/auth.service';
 import { Auth } from '@app/models/auth';

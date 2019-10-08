@@ -4,7 +4,14 @@
   <ng-container *ngTemplateOutlet="adminLinks"></ng-container>
 </nav>
 
-<a *ngIf="!isMobile" id="admin">
+<a
+  *ngIf="!isMobile"
+  id="admin"
+  (mouseenter)="showMenu = true"
+  (mouseleave)="showMenu = false"
+  (click)="showMenu = false"
+  [ngClass]="{ 'open': showMenu }"
+>
   <span>Admin</span>
   <i class="fas fa-key"></i>
 
@@ -15,9 +22,8 @@
   <ul>
     <li>
       <a
-        routerLink="/admin"
         title="Notifications"
-        (click)="onClick()"
+        (click)="onClick(['admin'])"
       >
         <span>Notifications</span>
       </a>
@@ -25,9 +31,8 @@
 
     <li>
       <a
-        routerLink="/admin/leagues"
         title="Leagues"
-        (click)="onClick()"
+        (click)="onClick(['admin', 'leagues'])"
       >
         <span>Leagues</span>
       </a>
@@ -35,9 +40,8 @@
 
     <li>
       <a
-        routerLink="/admin/teams"
         title="Teams"
-        (click)="onClick()"
+        (click)="onClick(['admin', 'teams'])"
       >
         <span>Teams</span>
       </a>
@@ -45,9 +49,8 @@
 
     <li>
       <a
-        routerLink="/admin/users"
         title="Users"
-        (click)="onClick()"
+        (click)="onClick(['admin', 'users'])"
       >
         <span>Users</span>
       </a>
@@ -55,9 +58,8 @@
 
     <li>
       <a
-        routerLink="/admin/places"
         title="Places"
-        (click)="onClick()"
+        (click)="onClick(['admin', 'places'])"
       >
         <span>Places</span>
       </a>

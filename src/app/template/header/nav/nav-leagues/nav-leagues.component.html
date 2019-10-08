@@ -4,7 +4,14 @@
   <ng-container *ngTemplateOutlet="leagueList"></ng-container>
 </nav>
 
-<a *ngIf="!isMobile" id="leagues">
+<a
+  *ngIf="!isMobile"
+  id="leagues"
+  (mouseenter)="showMenu = true"
+  (mouseleave)="showMenu = false"
+  (click)="showMenu = false"
+  [ngClass]="{ 'open': showMenu }"
+>
   <span>My Leagues</span>
   <i class="fa fa-sticky-note"></i>
 
@@ -15,9 +22,8 @@
   <ul *ngIf="leagues.length > 0; else noLeagues">
     <li *ngFor="let league of leagues">
       <a
-        [routerLink]="['league', league._id]"
         title="{{ league.name }}"
-        (click)="onClick()"
+        (click)="onClick(['league', league._id])"
       >
         <span>{{ league.name }}</span>
       </a>

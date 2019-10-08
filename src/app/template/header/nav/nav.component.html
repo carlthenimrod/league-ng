@@ -33,35 +33,30 @@
   <ng-container *ngIf="auth" [ngSwitch]="selected">
     <app-nav-home
       *ngSwitchCase="'home'"
-      (linkClick)="onLinkClick()"
     ></app-nav-home>
 
     <app-nav-user
       *ngSwitchCase="'user'"
       [auth]="auth"
-      (linkClick)="onLinkClick()"
     ></app-nav-user>
 
     <app-nav-leagues
       *ngSwitchCase="'leagues'"
       [leagues]="auth.leagues"
-      (linkClick)="onLinkClick()"
     ></app-nav-leagues>
 
     <app-nav-teams
       *ngSwitchCase="'teams'"
       [teams]="auth.teams"
-      (linkClick)="onLinkClick()"
     ></app-nav-teams>
 
     <app-nav-admin
       *ngSwitchCase="'admin'"
-      (linkClick)="onLinkClick()"
     ></app-nav-admin>
   </ng-container>
 
   <ng-container *ngIf="!auth">
-    <app-nav-home  (linkClick)="onLinkClick()"></app-nav-home>
+    <app-nav-home></app-nav-home>
   </ng-container>
 </aside>
 

@@ -1,8 +1,9 @@
-import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-
-import { ViewportService } from '@app/services/viewport.service';
 import { takeUntil } from 'rxjs/operators';
+
+import { NavService } from '../nav.service';
+import { ViewportService } from '@app/services/viewport.service';
 
 @Component({
   selector: 'app-nav-admin',
@@ -10,11 +11,12 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./nav-admin.component.scss']
 })
 export class NavAdminComponent implements OnInit, OnDestroy {
-  @Output() linkClick = new EventEmitter<boolean>();
   isMobile: boolean;
+  showMenu: boolean;
   unsubscribe$ = new Subject<void>();
 
   constructor(
+    private navService: NavService,
     private viewport: ViewportService
   ) { }
 
@@ -26,8 +28,8 @@ export class NavAdminComponent implements OnInit, OnDestroy {
       });
   }
 
-  onClick() {
-    this.linkClick.emit(true);
+  onClick(url?: string[]) {
+    this.navService.navigate(url);
   }
 
   ngOnDestroy() {

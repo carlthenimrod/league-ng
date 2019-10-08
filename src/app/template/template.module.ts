@@ -15,6 +15,7 @@ import { NavLeaguesComponent } from './header/nav/nav-leagues/nav-leagues.compon
 import { NavTeamsComponent } from './header/nav/nav-teams/nav-teams.component';
 import { NavAdminComponent } from './header/nav/nav-admin/nav-admin.component';
 import { NavUserComponent } from './header/nav/nav-user/nav-user.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NavUserComponent } from './header/nav/nav-user/nav-user.component';
     NavLeaguesComponent,
     NavTeamsComponent,
     NavAdminComponent,
-    NavUserComponent
+    NavUserComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,7 @@ import { NavUserComponent } from './header/nav/nav-user/nav-user.component';
     TemplateComponent
   ],
   entryComponents: [
+    LoadingComponent,
     NavComponent,
     UserNotificationsComponent
   ]

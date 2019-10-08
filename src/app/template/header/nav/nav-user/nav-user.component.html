@@ -8,7 +8,14 @@
   <ng-container *ngTemplateOutlet="userLinks"></ng-container>
 </nav>
 
-<a *ngIf="!isMobile" id="user">
+<a
+  *ngIf="!isMobile"
+  id="user"
+  (mouseenter)="showMenu = true"
+  (mouseleave)="showMenu = false"
+  (click)="showMenu = false"
+  [ngClass]="{ 'open': showMenu }"
+>
   <ng-container *ngTemplateOutlet="profileImg"></ng-container>
 
   <span>Hi, {{ auth.fullName }}!</span>
@@ -26,13 +33,13 @@
 <ng-template #userLinks>
   <ul>
     <li>
-      <a routerLink="/user" title="My Profile" (click)="onClick()">
+      <a title="My Profile" (click)="onClick(['user'])">
         <span>My Profile</span>
       </a>
     </li>
 
     <li>
-      <a routerLink="/logout" title="Logout" (click)="onClick()">
+      <a title="Logout" (click)="onClick(['logout'])">
         <span>Logout</span>
         <i class="fas fa-sign-out-alt"></i>
       </a>

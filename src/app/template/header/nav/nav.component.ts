@@ -12,7 +12,6 @@ import { ViewportService } from '@app/services/viewport.service';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit, OnDestroy {
-  @Output() linkClicked = new EventEmitter<boolean>();
   @HostBinding('class.open') navOpen: boolean;
   auth: Auth;
   isMobile: boolean;
@@ -75,10 +74,6 @@ export class NavComponent implements OnInit, OnDestroy {
       default:
         this.selected = 'home';
     }
-  }
-
-  onLinkClick() {
-    this.linkClicked.emit(true);
   }
 
   ngOnDestroy() {
