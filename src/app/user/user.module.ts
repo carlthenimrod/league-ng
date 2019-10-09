@@ -11,7 +11,6 @@ import { UserScheduleComponent } from './user-schedule/user-schedule.component';
 import { UserFormComponent } from './user-dashboard/user-form/user-form.component';
 import { UserDetailsComponent } from './user-dashboard/user-details/user-details.component';
 import { UserModalPasswordComponent } from './user-dashboard/user-details/user-modal-password/user-modal-password.component';
-import { UserResolverService } from './user-resolver.service';
 
 @NgModule({
   imports: [
@@ -31,7 +30,6 @@ import { UserResolverService } from './user-resolver.service';
   ],
   entryComponents: [
     UserModalPasswordComponent
-  ],
-  providers: [UserResolverService]
+  ]
 })
 export class UserModule { }

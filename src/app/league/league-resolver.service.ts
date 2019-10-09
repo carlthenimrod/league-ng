@@ -1,6 +1,6 @@
 import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
-import { take, mergeMap } from 'rxjs/operators';
+import { take, mergeMap, tap } from 'rxjs/operators';
 
 import { LeagueService } from '@app/services/league.service';
 import { League } from '@app/models/league';
@@ -14,24 +14,26 @@ export class LeagueResolver implements Resolve<League> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<League> {
-    const id = route.paramMap.get('id');
+    const leagueId = route.paramMap.get('id');
 
     return this.authService.loggedIn$().pipe(
       take(1),
-      mergeMap(loggedIn => {
-        if (!loggedIn) { this.router.navigateByUrl('/logout'); }
-
-        const auth = this.authService.getAuth();
-        for (let i = 0; i < auth.leagues.length; i++) {
-          const league = auth.leagues[i];
-
-          if (league._id !== id) { continue; }
-          return this.leagueService.get(id);
-        }
-
-        this.router.navigateByUrl('/logout');
-        return EMPTY;
-      })
+      tap(loggedIn => !loggedIn && this.router.navigateByUrl('/logout')),
+      mergeMap(loggedIn => loggedIn && this.inLeague(leagueId)
+        ? this.leagueService.get(leagueId)
+        : EMPTY
+      )
     );
+  }
+
+  inLeague(leagueId: string): boolean {
+    const auth = this.authService.getAuth();
+    for (let i = 0; i < auth.leagues.length; i++) {
+      const league = auth.leagues[i];
+
+      if (league._id !== leagueId) { continue; }
+      return true;
+    }
+    return false;
   }
 }

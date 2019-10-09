@@ -7,7 +7,6 @@ import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 import { AuthService } from '@app/auth/auth.service';
 
-@Injectable()
 export class TeamResolverService implements Resolve<Team> {
   constructor(
     private authService: AuthService,
