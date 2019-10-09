@@ -13,17 +13,18 @@ export class LeagueResolver implements Resolve<League> {
     private leagueService: LeagueService
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<League> {
+  resolve(route: ActivatedRouteSnapshot): Observable<League> | Observable<never> {
     const leagueId = route.paramMap.get('id');
 
-    return this.authService.loggedIn$().pipe(
-      take(1),
-      tap(loggedIn => !loggedIn && this.router.navigateByUrl('/logout')),
-      mergeMap(loggedIn => loggedIn && this.inLeague(leagueId)
-        ? this.leagueService.get(leagueId)
-        : EMPTY
-      )
-    );
+    return this.authService.loggedIn$()
+      .pipe(
+        take(1),
+        tap(loggedIn => !loggedIn && this.router.navigateByUrl('/logout')),
+        mergeMap(loggedIn => loggedIn && this.inLeague(leagueId)
+          ? this.leagueService.get(leagueId)
+          : EMPTY
+        )
+      );
   }
 
   inLeague(leagueId: string): boolean {
