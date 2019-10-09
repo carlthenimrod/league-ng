@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
-import { Observable, Subject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import _ from 'lodash';
 
@@ -17,7 +17,7 @@ export class UserService {
   api: string = environment.api;
 
   user: User;
-  userSubject: Subject<User> = new Subject<User>();
+  userSubject: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   constructor(
     private authService: AuthService,
@@ -29,12 +29,15 @@ export class UserService {
     return this.http.get(url);
   }
 
-  get(id: String): void {
+  get(id: String): Observable<User> {
     const url = this.api + `users/${id}`;
-    this.http.get(url).subscribe((user: User) => {
-      this.user = user;
-      this.userSubject.next(_.cloneDeep(this.user));
-    });
+    return this.http.get<User>(url)
+      .pipe(
+        tap(user => {
+          this.user = user;
+          this.userSubject.next(_.cloneDeep(this.user));
+        })
+      );
   }
 
   user$(): Observable<User> {

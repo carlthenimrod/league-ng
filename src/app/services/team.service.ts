@@ -35,7 +35,7 @@ export class TeamService {
 
   get(id: String): Observable<Team> {
     const url = this.api + `teams/${id}`;
-    return this.http.get(url).pipe(
+    return this.http.get<TeamResponse>(url).pipe(
       map((teamResponse: TeamResponse) => {
         return this.formatResponse(teamResponse);
       }),

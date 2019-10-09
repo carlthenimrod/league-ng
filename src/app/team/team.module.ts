@@ -19,6 +19,7 @@ import { TeamGameListComponent } from './team-dashboard/team-schedule/team-game-
 import { TeamInviteComponent } from './team-invite/team-invite.component';
 import { TeamRosterComponent } from './team-dashboard/team-roster/team-roster.component';
 import { TeamInviteService } from './team-invite/team-invite.service';
+import { TeamResolverService } from './team-resolver.service';
 
 @NgModule({
   imports: [
@@ -44,9 +45,9 @@ import { TeamInviteService } from './team-invite/team-invite.service';
     TeamRosterComponent
   ],
   entryComponents: [
-    TeamInviteComponent, 
+    TeamInviteComponent,
     UserCardComponent
   ],
-  providers: [TeamInviteService]
+  providers: [TeamInviteService, TeamResolverService]
 })
 export class TeamModule { }

@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
-import { take, mergeMap } from 'rxjs/operators';
+import { take, mergeMap, tap } from 'rxjs/operators';
 
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 import { AuthService } from '@app/auth/auth.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TeamResolverService implements Resolve<Team> {
   constructor(
     private authService: AuthService,
@@ -17,29 +15,31 @@ export class TeamResolverService implements Resolve<Team> {
     private teamService: TeamService
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
-  : Observable<Team> {
-    this.authService.loggedIn$()
-      .pipe(take(1))
-      .subscribe(loggedIn => {
-        if (!loggedIn) { this.router.navigateByUrl('/login'); }
-      });
+  resolve(route: ActivatedRouteSnapshot): Observable<Team> | Observable<never> {
+    return this.authService.loggedIn$()
+      .pipe(
+        take(1),
+        tap(loggedIn => !loggedIn && this.router.navigateByUrl('/login')),
+        mergeMap(loggedIn => loggedIn
+          ? this.getTeam$(route.paramMap.get('id'))
+          : EMPTY
+        )
+      );
+  }
 
-    const teamId = route.paramMap.get('id');
-    const userId = this.authService.getAuth()._id;
+  getTeam$(teamId: string): Observable<Team> | Observable<never> {
+    return this.teamService.get(teamId)
+      .pipe(
+        mergeMap(team => {
+          const roles = this.teamService.getUserRoles(this.authService.getAuth()._id);
 
-    return this.teamService.get(teamId).pipe(
-      take(1),
-      mergeMap((team: Team) => {
-        const roles = this.teamService.getUserRoles(userId);
-
-        if (roles.length > 0) {
-          return of(team);
-        } else {
-          this.router.navigateByUrl('/user');
-          return EMPTY;
-        }
-      })
+          if (roles.length > 0) {
+            return of(team);
+          } else {
+            this.router.navigateByUrl('/user');
+            return EMPTY;
+          }
+        })
     );
   }
 }
