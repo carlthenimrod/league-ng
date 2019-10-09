@@ -34,7 +34,7 @@ header {
   }
 
   &::after {
-    @include gradient-x(transparent, rgba(0, 0, 0, 0.35));
+    @include gradient-x(transparent, rgba(theme-color-level(primary, 8), 0.4));
     content: '';
     height: 100%;
     position: absolute;
