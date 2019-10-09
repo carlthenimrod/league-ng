@@ -98,6 +98,14 @@ export class AuthService {
     this.http.request('delete', url, { body: {client, refresh_token}}).subscribe();
   }
 
+  setLoggedIn(authResponse: AuthResponse) {
+    const auth = this.formatResponse(authResponse);
+    this.setLocalStorage(auth);
+    this.loggedIn = true;
+    this.loggedInSubject.next(this.loggedIn);
+    this.socket.connect(auth);
+  }
+
   loggedIn$() {
     return this.loggedInSubject.asObservable();
   }

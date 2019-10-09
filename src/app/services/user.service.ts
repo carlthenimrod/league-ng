@@ -5,9 +5,9 @@ import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import _ from 'lodash';
 
-import { SocketService } from './socket.service';
+import { AuthService } from '@app/auth/auth.service';
+import { AuthResponse } from '@app/models/auth';
 import { User } from '@app/models/user';
-import { Auth } from '@app/models/auth';
 import { ProfileImg } from '@app/models/profile-img';
 
 @Injectable({
@@ -20,8 +20,8 @@ export class UserService {
   userSubject: Subject<User> = new Subject<User>();
 
   constructor(
-    private http: HttpClient,
-    private socket: SocketService
+    private authService: AuthService,
+    private http: HttpClient
   ) {}
 
   all(): Observable<any> {
@@ -37,7 +37,7 @@ export class UserService {
     });
   }
 
-  userListener(): Observable<User> {
+  user$(): Observable<User> {
     return this.userSubject.asObservable();
   }
 
@@ -73,16 +73,12 @@ export class UserService {
 
   createPassword(userId: string, code: string, password: string) {
     const url = this.api + `users/${userId}/password`;
-    return this.http.post(url, {password, code}).pipe(
-      tap((auth: Auth) => {
-        localStorage.setItem('_id', auth._id);
-        localStorage.setItem('email', auth.email);
-        localStorage.setItem('access_token', auth.access_token);
-        localStorage.setItem('refresh_token', auth.refresh_token);
-        localStorage.setItem('client', auth.client);
-        this.socket.connect(auth);
-      })
-    );
+    return this.http.post(url, {password, code})
+      .pipe(
+        tap((authResponse: AuthResponse) =>
+          this.authService.setLoggedIn(authResponse)
+        )
+      );
   }
 
   updatePassword(old, password) {

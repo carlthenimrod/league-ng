@@ -49,13 +49,11 @@ export class EmailConfirmComponent implements OnInit {
 
   onSubmit() {
     if (this.passwordForm.invalid) { return; }
-
     const {password, confirm} = this.passwordForm.value;
 
-    if (password === confirm) {
-      this.userService.createPassword(this.userId, this.code, password).subscribe(() => {
-        this.router.navigateByUrl('user');
-      });
-    }
+    if (password !== confirm) { return; }
+    this.userService
+      .createPassword(this.userId, this.code, password)
+      .subscribe(() => this.router.navigateByUrl('user'));
   }
 }

@@ -29,7 +29,7 @@ export class UserComponent implements OnInit {
         const auth: Auth = this.authService.getAuth();
 
         this.userService.get(auth._id);
-        this.userService.userListener().subscribe((user: User) => this.user = user);
+        this.userService.user$().subscribe((user: User) => this.user = user);
       });
   }
 }
