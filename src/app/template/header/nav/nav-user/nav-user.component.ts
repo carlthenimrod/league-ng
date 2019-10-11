@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { Me } from '@app/models/auth';
 import { NavService } from '../nav.service';
+import { SocketService } from '@app/services/socket.service';
 import { ViewportService } from '@app/services/viewport.service';
 
 @Component({
@@ -15,10 +16,12 @@ export class NavUserComponent implements OnInit, OnDestroy {
   @Input() me: Me;
   isMobile: boolean;
   showMenu: boolean;
+  connected$: Observable<boolean>;
   unsubscribe$ = new Subject<void>();
 
   constructor(
     private navService: NavService,
+    private socket: SocketService,
     private viewport: ViewportService
   ) { }
 
@@ -28,6 +31,8 @@ export class NavUserComponent implements OnInit, OnDestroy {
       .subscribe(type => {
         this.isMobile = (type === 'mobile') ? true : false;
       });
+
+    this.connected$ = this.socket.connected$;
   }
 
   onClick(url?: string[]) {

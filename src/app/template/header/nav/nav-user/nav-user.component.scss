@@ -26,11 +26,24 @@ nav#user {
 
     figure {
       background-color: theme-color-level(primary, 6);
+      position: relative;
       height: 3rem;
       width: 3rem;
 
       i {
         font-size: 1.4rem;
+      }
+
+      span {
+        background-color: theme-color(success);
+        border: 2px solid $white;
+        border-radius: 100%;
+        height: 0.75rem;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0.75rem;
       }
     }
 
@@ -76,11 +89,24 @@ a#user {
 
   figure {
     background-color: theme-color-level(primary, -1);
+    position: relative;
     height: 2rem;
     width: 2rem;
 
     i {
       font-size: 1rem;
+    }
+
+    span {
+      background-color: theme-color(success);
+      border: 1px solid $white;
+      border-radius: 100%;
+      height: 0.5rem;
+      margin: 0;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0.5rem;
     }
   }
 

@@ -12,7 +12,7 @@
   <ng-container #desktopNav></ng-container>
 
   <button
-    *ngIf="loggedIn"
+    *ngIf="me"
     id="notifications"
     (click)="onClickToggleNotifications()"
   >

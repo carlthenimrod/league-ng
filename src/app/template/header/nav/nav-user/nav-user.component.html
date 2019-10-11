@@ -27,6 +27,10 @@
   <figure>
     <i *ngIf="!me.img" class="fas fa-user"></i>
     <img *ngIf="me.img" [src]="me.img">
+    <span
+      *ngIf="connected$ | async as online"
+      [ngClass]="{ 'online': online }"
+    ></span>
   </figure>
 </ng-template>
 
