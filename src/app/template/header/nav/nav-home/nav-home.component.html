@@ -28,7 +28,7 @@
   </a>
 
   <a
-    *ngIf="!loggedIn"
+    *ngIf="!me"
     title="Login"
     (click)="onClick(['login'])"
   >
@@ -36,14 +36,14 @@
   </a>
 
   <a
-    *ngIf="!loggedIn && isMobile"
+    *ngIf="!me && isMobile"
     title="Register"
   >
     <span>Sign Up!</span>
   </a>
 
   <button
-    *ngIf="!loggedIn && !isMobile"
+    *ngIf="!me && !isMobile"
     mat-flat-button
     color="accent"
     routerLink="/register"

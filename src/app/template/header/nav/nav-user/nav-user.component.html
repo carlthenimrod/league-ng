@@ -2,7 +2,7 @@
   <header>
     <ng-container *ngTemplateOutlet="profileImg"></ng-container>
 
-    <h1>Hi, {{ auth.fullName }}!</h1>
+    <h1>Hi, {{ me.fullName }}!</h1>
   </header>
 
   <ng-container *ngTemplateOutlet="userLinks"></ng-container>
@@ -18,15 +18,15 @@
 >
   <ng-container *ngTemplateOutlet="profileImg"></ng-container>
 
-  <span>Hi, {{ auth.fullName }}!</span>
+  <span>Hi, {{ me.fullName }}!</span>
 
   <ng-container *ngTemplateOutlet="userLinks"></ng-container>
 </a>
 
 <ng-template #profileImg>
   <figure>
-    <i *ngIf="!auth.img" class="fas fa-user"></i>
-    <img *ngIf="auth.img" [src]="auth.img">
+    <i *ngIf="!me.img" class="fas fa-user"></i>
+    <img *ngIf="me.img" [src]="me.img">
   </figure>
 </ng-template>
 

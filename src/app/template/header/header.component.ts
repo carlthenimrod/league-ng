@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewContainerRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { AuthService } from '@app/auth/auth.service';
-import { Auth } from '@app/models/auth';
+import { Me } from '@app/models/auth';
 import { UserNotificationsService } from '@app/services/user-notifications.service';
 import { NavService } from './nav/nav.service';
 import { ViewportService } from '@app/services/viewport.service';
 import { unreadNotificationsTrigger } from './animations';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -20,30 +20,25 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('desktopNav', { read: ViewContainerRef, static: false }) desktopNav: ViewContainerRef;
   isMobile: boolean;
   $unread: Observable<boolean>;
-  $loggedIn: Observable<boolean>;
-  loggedIn: boolean;
+  me: Me;
   unsubscribe$ = new Subject<void>();
 
   constructor(
-    private authService: AuthService,
+    private auth: AuthService,
     private navService: NavService,
     private userNotifications: UserNotificationsService,
     private viewport: ViewportService
   ) { }
 
   ngOnInit() {
-    this.authService.loggedIn$()
+    this.auth.me$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(loggedIn => {
-        if (loggedIn) {
-          const auth: Auth = this.authService.getAuth();
+      .subscribe(me => {
+        this.me = me;
+        if (!me) { return; }
 
-          this.userNotifications.get(auth._id);
-
-          this.$unread = this.userNotifications.$unread();
-        }
-
-        this.loggedIn = loggedIn;
+        this.userNotifications.get(me._id);
+        this.$unread = this.userNotifications.$unread();
       });
 
     this.viewport.type$()

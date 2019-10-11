@@ -17,7 +17,7 @@ export class TeamSocketService implements OnDestroy {
   typingSubject: Subject<SocketData> = new Subject();
 
   constructor(private socketService: SocketService) {
-    this.connected = this.socketService.connected;
+    this.connected = this.socketService.connectedSubject;
 
     this.team$ = fromEvent(this.socketService.socket, 'team');
 

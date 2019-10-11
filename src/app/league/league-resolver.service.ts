@@ -5,10 +5,11 @@ import { take, mergeMap, tap } from 'rxjs/operators';
 import { LeagueService } from '@app/services/league.service';
 import { League } from '@app/models/league';
 import { AuthService } from '@app/auth/auth.service';
+import { Me } from '@app/models/auth';
 
 export class LeagueResolver implements Resolve<League> {
   constructor(
-    private authService: AuthService,
+    private auth: AuthService,
     private router: Router,
     private leagueService: LeagueService
   ) {}
@@ -16,21 +17,20 @@ export class LeagueResolver implements Resolve<League> {
   resolve(route: ActivatedRouteSnapshot): Observable<League> | Observable<never> {
     const leagueId = route.paramMap.get('id');
 
-    return this.authService.loggedIn$()
+    return this.auth.me$
       .pipe(
         take(1),
-        tap(loggedIn => !loggedIn && this.router.navigateByUrl('/logout')),
-        mergeMap(loggedIn => loggedIn && this.inLeague(leagueId)
+        tap(me => !me && this.router.navigateByUrl('/logout')),
+        mergeMap(me => me && this.inLeague(me, leagueId)
           ? this.leagueService.get(leagueId)
           : EMPTY
         )
       );
   }
 
-  inLeague(leagueId: string): boolean {
-    const auth = this.authService.getAuth();
-    for (let i = 0; i < auth.leagues.length; i++) {
-      const league = auth.leagues[i];
+  inLeague(me: Me, leagueId: string): boolean {
+    for (let i = 0; i < me.leagues.length; i++) {
+      const league = me.leagues[i];
 
       if (league._id !== leagueId) { continue; }
       return true;

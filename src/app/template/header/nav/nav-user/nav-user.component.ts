@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Auth } from '@app/models/auth';
+import { Me } from '@app/models/auth';
 import { NavService } from '../nav.service';
 import { ViewportService } from '@app/services/viewport.service';
 
@@ -12,7 +12,7 @@ import { ViewportService } from '@app/services/viewport.service';
   styleUrls: ['./nav-user.component.scss']
 })
 export class NavUserComponent implements OnInit, OnDestroy {
-  @Input() auth: Auth;
+  @Input() me: Me;
   isMobile: boolean;
   showMenu: boolean;
   unsubscribe$ = new Subject<void>();

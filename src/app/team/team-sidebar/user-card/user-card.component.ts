@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, HostListener, Output, EventEmitter, HostBinding, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil, take } from 'rxjs/operators';
 
 import { AuthService } from '@app/auth/auth.service';
 import { User } from '@app/models/user';
@@ -19,7 +20,7 @@ export class UserCardComponent implements OnInit, OnDestroy {
   messageForm = this.fb.group({
     message: ['']
   });
-  viewportSub: Subscription;
+  unsubscribe$ = new Subject<void>();
   @Input() user: User;
   @Output() close: EventEmitter<boolean> = new EventEmitter();
   @HostBinding('@lightbox') viewportState: string;
@@ -47,12 +48,17 @@ export class UserCardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const auth = this.auth.getAuth();
-    if (auth._id === this.user._id) { this.self = true; }
+    this.auth.me$
+      .pipe(take(1))
+      .subscribe(me => {
+        this.self = (me && me._id === this.user._id) ? true : false;
+      });
 
-    this.viewportSub = this.viewport.type$().subscribe(type => {
-      this.viewportState = type;
-    });
+    this.viewport.type$()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(type => {
+        this.viewportState = type;
+      });
   }
 
   onUserCardClick($event: MouseEvent) {
@@ -60,6 +66,7 @@ export class UserCardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.viewportSub.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

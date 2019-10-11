@@ -10,18 +10,18 @@ import { UserService } from '@app/services/user.service';
 @Injectable()
 export class UserResolverService implements Resolve<User> {
   constructor(
-    private authService: AuthService,
+    private auth: AuthService,
     private router: Router,
     private userService: UserService
   ) {}
 
   resolve(): Observable<User> | Observable<never> {
-    return this.authService.loggedIn$()
+    return this.auth.me$
       .pipe(
         take(1),
-        tap(loggedIn => !loggedIn && this.router.navigateByUrl('/login')),
-        mergeMap(loggedIn => loggedIn
-          ? this.userService.get(this.authService.getAuth()._id)
+        tap(me => !me && this.router.navigateByUrl('/login')),
+        mergeMap(me => me
+          ? this.userService.get(me._id)
           : EMPTY
         )
       );

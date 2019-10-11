@@ -27,15 +27,12 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.authService.loggedIn$()
+    this.authService.me$
       .pipe(take(1))
-      .subscribe(loggedIn => {
-        if (loggedIn) {
-          this.router.navigateByUrl('user');
-        } else {
-          this.loggedIn = false;
-        }
-      });
+      .subscribe(me => me
+        ? this.router.navigateByUrl('user')
+        : this.loggedIn = false
+      );
   }
 
   onSubmit() {

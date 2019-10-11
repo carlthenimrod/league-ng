@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { AuthService } from '@app/auth/auth.service';
+import { Me } from '@app/models/auth';
 import { NavService } from '../nav.service';
 import { ViewportService } from '@app/services/viewport.service';
 
@@ -13,7 +14,7 @@ import { ViewportService } from '@app/services/viewport.service';
 })
 export class NavHomeComponent implements OnInit, OnDestroy {
   isMobile: boolean;
-  loggedIn: boolean;
+  me: Me;
   unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -23,9 +24,9 @@ export class NavHomeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.auth.loggedIn$()
+    this.auth.me$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(loggedIn => this.loggedIn = loggedIn);
+      .subscribe(me => this.me = me);
 
     this.viewport.type$()
       .pipe(takeUntil(this.unsubscribe$))

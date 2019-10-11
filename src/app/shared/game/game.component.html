@@ -22,13 +22,13 @@
   </ng-template>
 </header>
 
-<article [ngClass]="{ 'away-top': loggedIn && isAway }">
+<article [ngClass]="{ 'away-top': me && isAway }">
   <ng-container
     *ngTemplateOutlet="team; context: { $implicit: game.home, homeOrAway: 'home' }"
   ></ng-container>
 
   <div class="status" *ngIf="type !== 'thumb'">
-    <span class="versus">{{ (loggedIn && isAway) ? '@' : 'vs' }}</span>
+    <span class="versus">{{ (me && isAway) ? '@' : 'vs' }}</span>
 
     <span class="final" *ngIf="haveScore(game)">
       Final

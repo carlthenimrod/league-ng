@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 import { AuthService } from '@app/auth/auth.service';
-import { AuthResponse } from '@app/models/auth';
+import { Auth } from '@app/models/auth';
 import { User } from '@app/models/user';
 import { ProfileImg } from '@app/models/profile-img';
 
@@ -78,8 +78,8 @@ export class UserService {
     const url = this.api + `users/${userId}/password`;
     return this.http.post(url, {password, code})
       .pipe(
-        tap((authResponse: AuthResponse) =>
-          this.authService.setLoggedIn(authResponse)
+        tap((auth: Auth) =>
+          this.authService.setLoggedIn(auth)
         )
       );
   }

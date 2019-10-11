@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 import { League, Division, ScheduleOptions, Group } from '@app/models/league';
 import { Team } from '@app/models/team';

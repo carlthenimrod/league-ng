@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, mergeMap, map } from 'rxjs/operators';
 
 import { League, Group } from '@app/models/league';
 import { LeagueService } from '@app/services/league.service';
@@ -19,7 +19,7 @@ export class LeagueScheduleComponent implements OnInit {
   teamIds: string[] = [];
 
   constructor(
-    private authService: AuthService,
+    private auth: AuthService,
     private leagueService: LeagueService,
     private schedule: LeagueScheduleService
   ) { }
@@ -30,15 +30,18 @@ export class LeagueScheduleComponent implements OnInit {
         tap(league => {
           this.selectedGroupIndex = this.schedule.pickGroup(league);
           this.selectedGroup = league.schedule[this.selectedGroupIndex];
-
-          if (this.selectedGroup) {
-            const auth = this.authService.getAuth();
-            if (auth && auth.teams.length > 0) {
-              this.teamIds = auth.teams.map(team => team._id);
-              league.schedule.forEach(group => this.schedule.orderGames(group, this.teamIds));
-            }
-          }
-        })
+        }),
+        mergeMap(league => this.auth.me$
+          .pipe(
+            map(me => {
+              if (this.selectedGroup && me && me.teams.length > 0) {
+                this.teamIds = me.teams.map(team => team._id);
+                league.schedule.forEach(group => this.schedule.orderGames(group, this.teamIds));
+              }
+              return league;
+            })
+          )
+        )
       );
   }
 }

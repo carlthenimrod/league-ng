@@ -1,8 +1,8 @@
-import { Component, OnInit, HostBinding, OnDestroy, EventEmitter, Output, HostListener } from '@angular/core';
+import { Component, OnInit, HostBinding, OnDestroy, HostListener } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Auth } from '@app/models/auth';
+import { Me } from '@app/models/auth';
 import { AuthService } from '@app/auth/auth.service';
 import { ViewportService } from '@app/services/viewport.service';
 
@@ -13,7 +13,7 @@ import { ViewportService } from '@app/services/viewport.service';
 })
 export class NavComponent implements OnInit, OnDestroy {
   @HostBinding('class.open') navOpen: boolean;
-  auth: Auth;
+  me: Me;
   isMobile: boolean;
   selected = 'home';
   path: string[] = [];
@@ -26,16 +26,16 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private authService: AuthService,
+    private auth: AuthService,
     private viewport: ViewportService
   ) { }
 
   ngOnInit() {
-    this.authService.loggedIn$()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(loggedIn => {
-        this.auth = (loggedIn) ? this.authService.getAuth() : null;
-      });
+    this.auth.me$
+      .pipe(
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe(me => this.me = me);
 
     this.path$
       .pipe(takeUntil(this.unsubscribe$))

@@ -1,5 +1,5 @@
 <aside *ngIf="isMobile" [ngClass]="{ 'open': navOpen }">
-  <nav id="toggle" *ngIf="auth">
+  <nav id="toggle" *ngIf="me">
     <button [ngClass]="{ 'active': selected === 'home' }" (click)="selected = 'home'">
       <i class="fas fa-home"></i>
       <span>Home</span>
@@ -21,7 +21,7 @@
     </button>
 
     <button
-      *ngIf="auth.status && auth.status.admin"
+      *ngIf="me.status && me.status.admin"
       [ngClass]="{ 'active': selected === 'admin' }"
       (click)="selected = 'admin'"
     >
@@ -30,24 +30,24 @@
     </button>
   </nav>
 
-  <ng-container *ngIf="auth" [ngSwitch]="selected">
+  <ng-container *ngIf="me" [ngSwitch]="selected">
     <app-nav-home
       *ngSwitchCase="'home'"
     ></app-nav-home>
 
     <app-nav-user
       *ngSwitchCase="'user'"
-      [auth]="auth"
+      [me]="me"
     ></app-nav-user>
 
     <app-nav-leagues
       *ngSwitchCase="'leagues'"
-      [leagues]="auth.leagues"
+      [leagues]="me.leagues"
     ></app-nav-leagues>
 
     <app-nav-teams
       *ngSwitchCase="'teams'"
-      [teams]="auth.teams"
+      [teams]="me.teams"
     ></app-nav-teams>
 
     <app-nav-admin
@@ -55,7 +55,7 @@
     ></app-nav-admin>
   </ng-container>
 
-  <ng-container *ngIf="!auth">
+  <ng-container *ngIf="!me">
     <app-nav-home></app-nav-home>
   </ng-container>
 </aside>
@@ -71,22 +71,22 @@
     </nav>
   </div>
 
-  <div id="bar-bot" *ngIf="auth">
+  <div id="bar-bot" *ngIf="me">
     <nav id="user">
       <app-nav-user
-        [auth]="auth"
+        [me]="me"
       ></app-nav-user>
 
       <app-nav-leagues
-        [leagues]="auth.leagues"
+        [leagues]="me.leagues"
       ></app-nav-leagues>
 
       <app-nav-teams
-        [teams]="auth.teams"
+        [teams]="me.teams"
       ></app-nav-teams>
 
       <app-nav-admin
-        *ngIf="auth.status && auth.status.admin"
+        *ngIf="me.status && me.status.admin"
       ></app-nav-admin>
     </nav>
   </div>

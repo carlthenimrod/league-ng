@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Subject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import _ from 'lodash';
+import * as _ from 'lodash';
 import * as moment from 'moment';
 
 import { Place, Permit, Slot, PlaceLocation } from '@app/models/place';

@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, OnDestroy, ViewChild, ElementRef, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Subscription, fromEvent } from 'rxjs';
+import { fromEvent, Subject } from 'rxjs';
+import { tap, debounceTime, takeUntil } from 'rxjs/operators';
 
 import { Message } from '@app/models/team';
 import { TeamSocketService } from '@app/services/team-socket.service';
 import { TeamFeedService } from '@app/services/team-feed.service';
 import { SocketData } from '@app/models/socket';
-import { tap, debounceTime } from 'rxjs/operators';
 import { AuthService } from '@app/auth/auth.service';
 import { User } from '@app/models/user';
 
@@ -22,12 +22,11 @@ export class TeamFeedComponent implements OnInit, OnDestroy, AfterViewChecked, A
   userId: string;
   typing = false;
   usersTyping: string;
-  feedSub: Subscription;
-  typingSub: Subscription;
   messageForm = this.fb.group({
     body: ['', Validators.required]
   });
   messageCount;
+  unsubscribe$ = new Subject<void>();
 
   constructor(
     private auth: AuthService,
@@ -37,30 +36,36 @@ export class TeamFeedComponent implements OnInit, OnDestroy, AfterViewChecked, A
   ) { }
 
   ngOnInit() {
-    this.userId = this.auth.getAuth()._id;
+    this.auth.me$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(me => this.userId = me._id);
 
-    this.feedSub = this.teamSocket.feed$().subscribe((data: SocketData) => {
-      switch (data.action) {
-        case 'new': {
-          this.feed.push(data.message);
-          break;
+    this.teamSocket.feed$()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((data: SocketData) => {
+        switch (data.action) {
+          case 'new': {
+            this.feed.push(data.message);
+            break;
+          }
+          case 'edit': {
+            const index = this.feed.findIndex(m => m._id === data.message._id);
+            this.feed[index] = data.message;
+            break;
+          }
+          case 'remove': {
+            const index = this.feed.findIndex(m => m._id === data.message._id);
+            this.feed.splice(index, 1);
+            break;
+          }
         }
-        case 'edit': {
-          const index = this.feed.findIndex(m => m._id === data.message._id);
-          this.feed[index] = data.message;
-          break;
-        }
-        case 'remove': {
-          const index = this.feed.findIndex(m => m._id === data.message._id);
-          this.feed.splice(index, 1);
-          break;
-        }
-      }
-    });
+      });
 
-    this.typingSub = this.teamSocket.typing$().subscribe((data: SocketData) => {
-      this.formatTypingMessage(data.users);
-    });
+    this.teamSocket.typing$()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((data: SocketData) => {
+        this.formatTypingMessage(data.users);
+      });
   }
 
   ngAfterViewInit() {
@@ -149,8 +154,8 @@ export class TeamFeedComponent implements OnInit, OnDestroy, AfterViewChecked, A
       this.teamFeed.isTyping(this.typing);
     }
 
-    this.teamFeed
-      .send(message)
+    this.teamFeed.send(message)
+      .pipe(takeUntil(this.unsubscribe$))
       .subscribe((newMessage: Message) => {
         this.feed.push(newMessage);
         this.scrollDown();
@@ -158,7 +163,7 @@ export class TeamFeedComponent implements OnInit, OnDestroy, AfterViewChecked, A
   }
 
   ngOnDestroy() {
-    this.feedSub.unsubscribe();
-    this.typingSub.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

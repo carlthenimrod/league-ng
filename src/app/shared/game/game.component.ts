@@ -4,7 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { Game } from '@app/models/game';
 import { AuthService } from '@app/auth/auth.service';
-import { Auth } from '@app/models/auth';
+import { Me } from '@app/models/auth';
 
 @Component({
   selector: 'app-game',
@@ -14,24 +14,22 @@ import { Auth } from '@app/models/auth';
 export class GameComponent implements OnInit, OnChanges, OnDestroy {
   @Input() game: Game;
   @Input() type: string;
-  auth: Auth;
-  loggedIn: boolean;
+  me: Me;
   isHome: boolean;
   isAway: boolean;
   unsubscribe$ = new Subject<void>();
 
   constructor(
-    private authService: AuthService,
+    private auth: AuthService,
     private el: ElementRef,
     private renderer: Renderer2
   ) { }
 
   ngOnInit() {
-    this.authService.loggedIn$()
+    this.auth.me$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(loggedIn => {
-        this.loggedIn = loggedIn;
-        this.auth = this.authService.getAuth();
+      .subscribe(me => {
+        this.me = me;
         this.checkAwayOrHome();
       });
 
@@ -49,8 +47,8 @@ export class GameComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   checkAwayOrHome() {
-    if (this.loggedIn) {
-      const teamIds = this.auth.teams.map(team => team._id);
+    if (this.me) {
+      const teamIds = this.me.teams.map(team => team._id);
       this.isHome = (teamIds.includes(this.game.home._id)) ? true : false;
       this.isAway = (teamIds.includes(this.game.away._id)) ? true : false;
     } else {

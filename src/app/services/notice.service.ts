@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Subject, timer, Observable, forkJoin } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { environment } from '@env/environment';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 import { NoticeList, NoticeResponse, Notice } from '@app/models/notice';
 

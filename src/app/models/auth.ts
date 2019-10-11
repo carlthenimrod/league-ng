@@ -2,7 +2,7 @@ import { League } from './league';
 import { Team } from './team';
 import { UserStatus } from './user';
 
-export interface AuthResponse {
+export interface Auth {
   _id: string;
   email: string;
   name: { first: string; last: string; };
@@ -15,6 +15,6 @@ export interface AuthResponse {
   client: string;
 }
 
-export interface Auth extends AuthResponse {
+export interface Me extends Auth {
   leagues: League[];
 }

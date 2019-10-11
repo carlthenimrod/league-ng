@@ -14,7 +14,7 @@ export class UserSocketService implements OnDestroy {
   messageSubject: Subject<SocketData> = new Subject();
 
   constructor(private socketService: SocketService) {
-    this.connected = this.socketService.connected;
+    this.connected = this.socketService.connectedSubject;
 
     this.user$ = fromEvent(this.socketService.socket, 'user');
 
