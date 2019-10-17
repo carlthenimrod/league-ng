@@ -14,33 +14,30 @@ import { Game } from '@app/models/game';
   providedIn: 'root'
 })
 export class LeagueService {
-  api: string = environment.api;
-
+  api = environment.api;
   league: League;
-  leagueSubject: BehaviorSubject<League> = new BehaviorSubject<League>(null);
+  leagueSubject = new BehaviorSubject<League>(null);
+  league$ = this.leagueSubject.asObservable();
 
   constructor(
     private http: HttpClient,
     private noticeService: NoticeService
   ) { }
 
-  all(): Observable<any> {
-    const url = this.api + 'leagues';
-    return this.http.get(url);
-  }
+  get$(): Observable<League[]>;
+  get$(id: string): Observable<League>;
+  get$(id?: string): Observable<League|League[]> {
+    const url = `${this.api}leagues` + `${id ? `/${id}` : ``}`;
 
-  get(id: String): Observable<League> {
-    const url = this.api + `leagues/${id}`;
-    return this.http.get(url).pipe(
-      tap((league: League) => {
-        this.league = league;
-        this.leagueSubject.next(_.cloneDeep(this.league));
-      })
-    );
-  }
-
-  league$(): Observable<League> {
-    return this.leagueSubject.asObservable();
+    return id
+      ? this.http.get<League>(url)
+        .pipe<League>(
+          tap(league => {
+            this.league = league;
+            this.leagueSubject.next(_.cloneDeep(this.league));
+          })
+        )
+      : this.http.get<League[]>(url);
   }
 
   create(league: League): Observable<any> {

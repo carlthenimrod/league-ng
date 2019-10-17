@@ -36,7 +36,7 @@ export class TeamComponent implements OnInit, OnDestroy {
       });
     });
 
-    this.sidebarSub = this.teamSidebar.$sidebarOpen().subscribe(status => {
+    this.sidebarSub = this.teamSidebar.isOpen$.subscribe(status => {
       this.sidebarOpen = status;
     });
   }

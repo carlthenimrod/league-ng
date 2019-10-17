@@ -5,21 +5,18 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class TeamSidebarService {
-  sidebarOpen: boolean;
-  sidebarOpenSubject: BehaviorSubject<boolean>;
+  isOpen: boolean;
+  isOpenSubject = new BehaviorSubject<boolean>(null);
+  isOpen$ = this.isOpenSubject.asObservable();
+
 
   constructor() {
-    this.sidebarOpen = (window.innerWidth >= 1200) ? true : false;
-
-    this.sidebarOpenSubject = new BehaviorSubject(this.sidebarOpen);
+    this.isOpen = window.innerWidth >= 1200 ? true : false;
+    this.isOpenSubject.next(this.isOpen);
   }
 
   toggleSidebar() {
-    this.sidebarOpen = !this.sidebarOpen;
-    this.sidebarOpenSubject.next(this.sidebarOpen);
-  }
-
-  $sidebarOpen() {
-    return this.sidebarOpenSubject.asObservable();
+    this.isOpen = !this.isOpen;
+    this.isOpenSubject.next(this.isOpen);
   }
 }

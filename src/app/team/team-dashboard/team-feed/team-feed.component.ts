@@ -6,7 +6,7 @@ import { tap, debounceTime, takeUntil } from 'rxjs/operators';
 import { Message } from '@app/models/team';
 import { TeamSocketService } from '@app/services/team-socket.service';
 import { TeamFeedService } from '@app/services/team-feed.service';
-import { SocketData } from '@app/models/socket';
+import { UserSocketData } from '@app/models/socket';
 import { AuthService } from '@app/auth/auth.service';
 import { User } from '@app/models/user';
 
@@ -42,7 +42,7 @@ export class TeamFeedComponent implements OnInit, OnDestroy, AfterViewChecked, A
 
     this.teamSocket.feed$()
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((data: SocketData) => {
+      .subscribe((data: UserSocketData) => {
         switch (data.action) {
           case 'new': {
             this.feed.push(data.message);
@@ -63,7 +63,7 @@ export class TeamFeedComponent implements OnInit, OnDestroy, AfterViewChecked, A
 
     this.teamSocket.typing$()
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((data: SocketData) => {
+      .subscribe((data: UserSocketData) => {
         this.formatTypingMessage(data.users);
       });
   }

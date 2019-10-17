@@ -22,7 +22,7 @@ export class LeagueResolver implements Resolve<League> {
         take(1),
         tap(me => !me && this.router.navigateByUrl('/logout')),
         mergeMap(me => me && this.inLeague(me, leagueId)
-          ? this.leagueService.get(leagueId)
+          ? this.leagueService.get$(leagueId)
           : EMPTY
         )
       );

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { LeagueService } from '@app/services/league.service';
 import { League } from '@app/models/league';
@@ -9,13 +10,11 @@ import { League } from '@app/models/league';
   styleUrls: ['./admin-leagues.component.scss']
 })
 export class AdminLeaguesComponent implements OnInit {
-  leagues: League[];
+  leagues$: Observable<League[]>;
 
   constructor(private leagueService: LeagueService) { }
 
   ngOnInit() {
-    this.leagueService.all().subscribe((leagues: League[]) => {
-      this.leagues = leagues;
-    });
+    this.leagues$ = this.leagueService.get$();
   }
 }

@@ -6,11 +6,15 @@
 
 header {
   align-items: center;
+  border-bottom: 3px solid theme-color(primary);
   display: flex;
   justify-content: space-between;
-  padding: 2rem 0;
+  margin: 0 0.5rem;
+  padding: 0.5rem 0;
 
-  h1 {
+  h2 {
+    color: theme-color(dark);
+    font-size: 1.8rem;
     text-transform: uppercase;
     margin: 0;
   }
@@ -22,10 +26,26 @@ header {
   }
 }
 
-p.no-leagues {
-  border-top: 1px solid $border-color;
-  border-bottom: 1px solid $border-color;
-  margin:  0;
+section#leagues {
   padding: 1rem 0;
-  text-align: center;
+
+  article {
+    border-bottom: 1px solid theme-color-level(dark, -6);
+    color: theme-color(primary);
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 1rem;
+
+    &:first-child {
+      border-top: 1px solid theme-color-level(dark, -6);
+    }
+  }
+
+  p.no-leagues {
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+    margin:  0;
+    padding: 1rem 0;
+    text-align: center;
+  }
 }

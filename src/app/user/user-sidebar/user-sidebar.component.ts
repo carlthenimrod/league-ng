@@ -16,6 +16,6 @@ export class UserSidebarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userService.user$().subscribe((user: User) => this.user = user);
+    this.userService.user$.subscribe(user => this.user = user);
   }
 }

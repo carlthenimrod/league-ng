@@ -14,7 +14,7 @@
     background-color: theme-color-level(primary, 2);
     color: $white;
     display: flex;
-    height: 3.5rem;
+    height: 3rem;
     position: relative;
 
     @include media-breakpoint-up(sm) {

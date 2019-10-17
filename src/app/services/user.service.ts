@@ -15,33 +15,29 @@ import { ProfileImg } from '@app/models/profile-img';
 })
 export class UserService {
   api: string = environment.api;
-
   user: User;
   userSubject: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  user$ = this.userSubject.asObservable();
 
   constructor(
     private authService: AuthService,
     private http: HttpClient
   ) {}
 
-  all(): Observable<any> {
-    const url = this.api + 'users';
-    return this.http.get(url);
-  }
+  get(): Observable<User[]>;
+  get(id: string): Observable<User>;
+  get(id?: string) {
+    const url = `${this.api}users/${id ? `/${id}` : ``}`;
 
-  get(id: String): Observable<User> {
-    const url = this.api + `users/${id}`;
-    return this.http.get<User>(url)
-      .pipe(
-        tap(user => {
-          this.user = user;
-          this.userSubject.next(_.cloneDeep(this.user));
-        })
-      );
-  }
-
-  user$(): Observable<User> {
-    return this.userSubject.asObservable();
+    return id
+      ? this.http.get<User>(url)
+        .pipe(
+          tap(user => {
+            this.user = user;
+            this.userSubject.next(_.cloneDeep(this.user));
+          })
+        )
+      : this.http.get<User[]>(url);
   }
 
   create(user: User): Observable<any> {

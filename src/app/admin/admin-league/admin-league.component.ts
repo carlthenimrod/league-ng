@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { League } from '@app/models/league';
 import { LeagueService } from '@app/services/league.service';
@@ -11,11 +11,10 @@ import { LeagueService } from '@app/services/league.service';
   templateUrl: './admin-league.component.html',
   styleUrls: ['./admin-league.component.scss']
 })
-export class AdminLeagueComponent implements OnInit, OnDestroy {
-  league: League;
+export class AdminLeagueComponent implements OnInit {
+  league$: Observable<League>;
   editingLeague = false;
   tab = 'overview';
-  unsubscribe$ = new Subject<void>();
 
   constructor(
     private route: ActivatedRoute,
@@ -23,16 +22,10 @@ export class AdminLeagueComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.route.paramMap
+    this.league$ = this.route.paramMap
       .pipe(
-        switchMap((params: ParamMap) => this.leagueService.get(params.get('id'))),
-        takeUntil(this.unsubscribe$)
-      )
-      .subscribe(league => this.league = league);
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+        switchMap(params => this.leagueService.get$(params.get('id'))),
+        switchMap(() => this.leagueService.league$)
+      );
   }
 }

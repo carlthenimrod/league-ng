@@ -44,7 +44,7 @@ export class NavComponent implements OnInit, OnDestroy {
         this.updateNav();
       });
 
-    this.viewport.type$()
+    this.viewport.type$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(type => {
         this.isMobile = (type === 'mobile') ? true : false;

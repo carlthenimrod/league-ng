@@ -17,7 +17,6 @@ import { LeagueStandingsService } from './league-standings.service';
 })
 export class TeamService {
   api: string = environment.api;
-
   team: Team;
   teamSubject: Subject<Team> = new Subject<Team>();
 
@@ -28,22 +27,21 @@ export class TeamService {
     private teamSchedule: TeamScheduleService
   ) { }
 
-  all(): Observable<any> {
-    const url = this.api + 'teams';
-    return this.http.get(url);
-  }
+  get(): Observable<Team[]>;
+  get(id: string): Observable<Team>;
+  get(id?: string): Observable<Team|Team[]> {
+    const url = `${this.api}teams/${id ? `/${id}` : ``}`;
 
-  get(id: String): Observable<Team> {
-    const url = this.api + `teams/${id}`;
-    return this.http.get<TeamResponse>(url).pipe(
-      map((teamResponse: TeamResponse) => {
-        return this.formatResponse(teamResponse);
-      }),
-      tap((team: Team) => {
-        this.team = team;
-        this.teamSubject.next(_.cloneDeep(this.team));
-      })
-    );
+    return id
+      ? this.http.get<TeamResponse>(url)
+        .pipe<Team, Team>(
+          map(response => this.formatResponse(response)),
+          tap(team => {
+            this.team = team;
+            this.teamSubject.next(_.cloneDeep(this.team));
+          })
+        )
+      : this.http.get<Team[]>(url);
   }
 
   teamListener(): Observable<Team> {
@@ -140,7 +138,7 @@ export class TeamService {
     return user.roles;
   }
 
-  formatResponse(teamResponse: TeamResponse) {
+  formatResponse(teamResponse: TeamResponse): Team {
     const team: Team = {
       name: teamResponse.name,
       status: teamResponse.status,

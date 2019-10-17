@@ -1,37 +1,31 @@
-<header>
-  <h1>Leagues</h1>
+<ng-container *ngIf="leagues$ | async as leagues">
+  <header>
+    <h2>Leagues</h2>
 
-  <button
-    mat-flat-button
-    color="primary"
-    routerLink="/admin/leagues/new"
-  >
-    <i class="fas fa-plus"></i>
-    <span>New</span>
-  </button>
-</header>
+    <button
+      mat-flat-button
+      color="accent"
+      routerLink="/admin/leagues/new"
+    >
+      <i class="fas fa-plus"></i>
+      <span>New</span>
+    </button>
+  </header>
 
-<section *ngIf="leagues" id="leagues">
-  <table class="table table-hover" *ngIf="leagues.length > 0">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr
+  <section id="leagues">
+    <ng-container *ngIf="leagues.length > 0; else noLeagues">
+      <article
         *ngFor="let league of leagues"
         [routerLink]="[league._id]"
       >
-        <td>
-          {{ league.name }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        {{ league.name }}
+      </article>
+    </ng-container>
 
-  <p *ngIf="leagues.length === 0" class="no-leagues">
-    No leagues. Maybe create one? <i class="far fa-smile"></i>
-  </p>
-</section>
+    <ng-template>
+      <p #noLeagues class="no-leagues">
+        No leagues. Maybe create one? <i class="far fa-smile"></i>
+      </p>
+    </ng-template>
+  </section>
+</ng-container>

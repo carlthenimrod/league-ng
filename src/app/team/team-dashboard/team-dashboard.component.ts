@@ -48,13 +48,13 @@ export class TeamDashboardComponent implements OnInit, OnDestroy {
       this.team = data.team;
     });
 
-    this.viewportSub = this.viewport.type$().subscribe(type => {
+    this.viewportSub = this.viewport.type$.subscribe(type => {
       this.viewportType = type;
 
       this.updateSidebarState();
     });
 
-    this.sidebarSub = this.teamSidebar.$sidebarOpen().subscribe(status => {
+    this.sidebarSub = this.teamSidebar.isOpen$.subscribe(status => {
       this.sidebarOpen = status;
 
       this.updateSidebarState();

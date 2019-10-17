@@ -17,7 +17,7 @@ export class UserDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userService.user$().subscribe(user => this.user = user);
+    this.userService.user$.subscribe(user => this.user = user);
   }
 
   onEdit() {

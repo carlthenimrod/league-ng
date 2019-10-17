@@ -17,7 +17,7 @@ export class AdminUsersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.all().subscribe((users: User[]) => {
+    this.userService.get().subscribe(users => {
       this.users = users;
       this.userList = users;
     });

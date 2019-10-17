@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, OnDestroy, ViewChildren, ViewContainerRef, QueryList, HostBinding } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, combineLatest } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import { SocketData } from '@app/models/socket';
+import { UserSocketData } from '@app/models/socket';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 import { TeamSidebarService } from '@app/services/team-sidebar.service';
@@ -9,7 +10,6 @@ import { TeamSocketService } from '@app/services/team-socket.service';
 import { UserCardService } from './user-card.service';
 import { ViewportService } from '@app/services/viewport.service';
 import { sidebarSlideTrigger } from './animations';
-
 
 @Component({
   selector: 'app-team-sidebar',
@@ -23,57 +23,53 @@ export class TeamSidebarComponent implements OnInit, OnDestroy {
   @ViewChildren('card', { read: ViewContainerRef }) cards: QueryList<ViewContainerRef>;
   @HostBinding('class.sidebar-open') sidebarOpen: boolean;
   @HostBinding('@sidebarSlide') sidebarState: string;
-  rosterSub: Subscription;
-  sidebarSub: Subscription;
-  viewportSub: Subscription;
   viewportType: string;
+  unsubscribe$ = new Subject<void>();
 
   constructor(
     private teamService: TeamService,
-    private teamSidebar: TeamSidebarService,
+    private sidebar: TeamSidebarService,
     private teamSocket: TeamSocketService,
     private userCard: UserCardService,
     private viewport: ViewportService
   ) {}
 
   ngOnInit() {
-    this.rosterSub = this.teamSocket.roster$().subscribe((data: SocketData) => {
-      switch (data.action) {
-        case 'update':
-          this.teamService.updateUser(data.users);
-          break;
-      }
-    });
+    this.teamSocket.roster$()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((data: UserSocketData) => {
+        switch (data.action) {
+          case 'update':
+            this.teamService.updateUser(data.users);
+            break;
+        }
+      });
 
-    this.viewportSub = this.viewport.type$().subscribe(type => {
-      this.viewportType = type;
-
-      this.updateSidebarState();
-    });
-
-    this.sidebarSub = this.teamSidebar.$sidebarOpen().subscribe(status => {
-      this.sidebarOpen = status;
-
-      this.updateSidebarState();
-    });
+    combineLatest([
+      this.viewport.type$,
+      this.sidebar.isOpen$
+    ])
+    .pipe(takeUntil(this.unsubscribe$))
+    .subscribe(this.updateSidebarState.bind(this));
   }
 
-  updateSidebarState() {
-    if (this.sidebarOpen) {
-      this.sidebarState = (this.viewportType === 'mobile') ? 'mobileOpen' : 'desktopOpen';
+  updateSidebarState([type, open]: [string, boolean]) {
+    this.sidebarOpen = open;
+
+    if (open) {
+      this.sidebarState = (type === 'mobile') ? 'mobileOpen' : 'desktopOpen';
     } else {
-      this.sidebarState = (this.viewportType === 'mobile') ? 'mobileClose' : 'desktopClose';
+      this.sidebarState = (type === 'mobile') ? 'mobileClose' : 'desktopClose';
     }
   }
 
   ngOnDestroy() {
-    this.rosterSub.unsubscribe();
-    this.sidebarSub.unsubscribe();
-    this.viewportSub.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onClickSidebarToggle() {
-    this.teamSidebar.toggleSidebar();
+    this.sidebar.toggleSidebar();
   }
 
   onClick(e, user, i) {

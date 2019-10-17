@@ -54,7 +54,7 @@ export class UserCardComponent implements OnInit, OnDestroy {
         this.self = (me && me._id === this.user._id) ? true : false;
       });
 
-    this.viewport.type$()
+    this.viewport.type$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(type => {
         this.viewportState = type;

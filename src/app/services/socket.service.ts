@@ -6,6 +6,7 @@ import { environment } from '@env/environment';
 
 import { AuthService } from '@app/auth/auth.service';
 import { Auth, Me } from '@app/models/auth';
+import { LeagueSocketService } from './league-socket.service';
 
 
 @Injectable({
@@ -19,7 +20,10 @@ export class SocketService implements OnDestroy {
   me: Me;
   unsubscribe$ = new Subject<void>();
 
-  constructor(private auth: AuthService) {
+  constructor(
+    private auth: AuthService,
+    private leagueSocket: LeagueSocketService
+  ) {
     this.socket = io(this.api, { autoConnect: false });
 
     this.auth.me$
@@ -36,6 +40,8 @@ export class SocketService implements OnDestroy {
     this.onConnect(fromEvent(this.socket, 'connect'));
     this.onDisconnect(fromEvent(this.socket, 'disconnect'));
     this.onAuthorized(fromEvent(this.socket, 'authorized'));
+
+    this.leagueSocket.handle(fromEvent(this.socket, 'league'));
   }
 
   private onConnect(connect$: Observable<void>) {

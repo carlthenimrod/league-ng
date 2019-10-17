@@ -34,7 +34,7 @@ export class UserNotificationsService implements OnDestroy {
     private resolver: ComponentFactoryResolver,
     private viewport: ViewportService
   ) {
-    this.viewportSub = this.viewport.type$().subscribe(type => {
+    this.viewportSub = this.viewport.type$.subscribe(type => {
       this.viewportType = type;
 
       if (this.componentRef) { this.removeNotifications(); }

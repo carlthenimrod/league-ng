@@ -12,8 +12,8 @@ import { LeagueService } from '@app/services/league.service';
 })
 export class AdminLeagueFormComponent implements OnInit {
   @Input() league: League;
-  @Output('saveClick') saveClick: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output('cancelClick') cancelClick: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() saveClick = new EventEmitter<boolean>();
+  @Output() cancelClick = new EventEmitter<boolean>();
   leagueForm: FormGroup;
 
   constructor(

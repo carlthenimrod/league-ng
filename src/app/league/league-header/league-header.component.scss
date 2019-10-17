@@ -27,7 +27,7 @@ header {
 
   @include media-breakpoint-up(sm) {
     align-items: stretch;
-    background-color: theme-color-level(light, -2);
+    background-color: theme-color-level(light, 1);
     flex-direction: column;
     min-height: 10rem;
     padding: 0 1rem;

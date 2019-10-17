@@ -26,7 +26,7 @@ export class NavUserComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.viewport.type$()
+    this.viewport.type$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(type => {
         this.isMobile = (type === 'mobile') ? true : false;

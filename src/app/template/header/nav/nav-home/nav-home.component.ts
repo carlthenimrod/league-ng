@@ -28,7 +28,7 @@ export class NavHomeComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(me => this.me = me);
 
-    this.viewport.type$()
+    this.viewport.type$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(type =>  {
         this.isMobile = (type === 'mobile') ? true : false;

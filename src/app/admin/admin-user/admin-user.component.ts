@@ -27,7 +27,7 @@ export class AdminUserComponent implements OnInit, OnDestroy {
     this.userSubscription = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         this.userService.get(params.get('id'));
-        return this.userService.user$();
+        return this.userService.user$;
       })
     )
     .subscribe((user: User) => {

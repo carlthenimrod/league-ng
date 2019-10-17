@@ -26,7 +26,7 @@ export class LeagueHomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.league$ = this.leagueService.league$()
+    this.league$ = this.leagueService.league$
       .pipe(
         tap(league => {
           this.selectedGroup = league.schedule[this.schedule.pickGroup(league)];

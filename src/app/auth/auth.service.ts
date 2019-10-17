@@ -5,6 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import * as _ from 'lodash';
 
+import { LocalStorageService } from '@app/services/local-storage.service';
 import { Auth, Me } from '@app/models/auth';
 import { League } from '@app/models/league';
 import { Team } from '@app/models/team';
@@ -13,47 +14,36 @@ import { Team } from '@app/models/team';
   providedIn: 'root'
 })
 export class AuthService {
-  api: string = environment.api;
+  api = environment.api;
   me: Me;
   meSubject = new BehaviorSubject<Me>(null);
   me$ = this.meSubject.asObservable();
 
-  constructor(private http: HttpClient) {
-    if (localStorage.getItem('access_token')) {
-      this.me = this.getLocalStorage();
-      this.meSubject.next(_.cloneDeep(this.me));
-    }
+  constructor(
+    private http: HttpClient,
+    private localStorage: LocalStorageService
+  ) {
+    this.getMe();
   }
 
   getAccessToken(): string {
     return localStorage.getItem('access_token');
   }
 
-  getLocalStorage(): Me {
-    const me: Me = {
-      _id: localStorage.getItem('_id'),
-      email: localStorage.getItem('email'),
-      name: JSON.parse(localStorage.getItem('name')),
-      fullName: localStorage.getItem('fullName'),
-      status: JSON.parse(localStorage.getItem('status')),
-      teams: JSON.parse(localStorage.getItem('teams')),
-      leagues: JSON.parse(localStorage.getItem('leagues')),
-      access_token: localStorage.getItem('access_token'),
-      refresh_token: localStorage.getItem('refresh_token'),
-      client: localStorage.getItem('client')
-    };
-
-    const img = localStorage.getItem('img');
-    if (img) { me.img = img; }
-
-    return me;
-  }
-
   setMe(auth: Auth): void {
     const me = this.formatResponse(auth);
-    this.setLocalStorage(me);
+    this.localStorage.set(me);
     this.me = me;
     this.meSubject.next(_.cloneDeep(me));
+  }
+
+  getMe(): void {
+    try {
+      this.me = this.localStorage.get();
+      this.meSubject.next(_.cloneDeep(this.me));
+    } catch {
+      this.logout();
+    }
   }
 
   refresh(): Observable<any> {
@@ -71,7 +61,7 @@ export class AuthService {
       })
       .pipe(
         map(response => this.formatResponse(response)),
-        tap(auth => this.setLocalStorage(auth))
+        tap(me => this.localStorage.set(me))
       );
   }
 
@@ -82,7 +72,7 @@ export class AuthService {
       .pipe(
         map(response => this.formatResponse(response)),
         tap(me => {
-          this.setLocalStorage(me);
+          this.localStorage.set(me);
           this.me = me;
           this.meSubject.next(_.cloneDeep(this.me));
         })
@@ -103,7 +93,7 @@ export class AuthService {
 
   setLoggedIn(auth: Auth) {
     const me = this.formatResponse(auth);
-    this.setLocalStorage(me);
+    this.localStorage.set(me);
     this.me = me;
     this.meSubject.next(me);
   }
@@ -147,24 +137,5 @@ export class AuthService {
     });
 
     return leagues;
-  }
-
-  setLocalStorage(me: Me) {
-    localStorage.setItem('_id', me._id);
-    localStorage.setItem('email', me.email);
-    localStorage.setItem('name', JSON.stringify(me.name));
-    localStorage.setItem('fullName', me.fullName);
-    localStorage.setItem('status', JSON.stringify(me.status));
-    localStorage.setItem('teams', JSON.stringify(me.teams));
-    localStorage.setItem('leagues', JSON.stringify(me.leagues));
-    localStorage.setItem('access_token', me.access_token);
-    localStorage.setItem('refresh_token', me.refresh_token);
-    localStorage.setItem('client', me.client);
-
-    if (me.img) {
-      localStorage.setItem('img', me.img);
-    } else {
-      localStorage.removeItem('img');
-    }
   }
 }
