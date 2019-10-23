@@ -42,7 +42,7 @@ export class TeamDashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.teamService.teamListener().subscribe((team: Team) => this.team = team);
+    this.teamService.team$.subscribe((team: Team) => this.team = team);
 
     this.route.data.subscribe((data: {team: Team}) => {
       this.team = data.team;

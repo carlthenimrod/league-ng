@@ -2,8 +2,8 @@ import { Component, OnInit, Input, OnDestroy, OnChanges, ElementRef, Renderer2 }
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Game } from '@app/models/game';
 import { AuthService } from '@app/auth/auth.service';
+import { Game } from '@app/models/game';
 import { Me } from '@app/models/auth';
 
 @Component({

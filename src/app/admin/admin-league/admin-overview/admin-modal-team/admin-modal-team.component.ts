@@ -12,7 +12,6 @@ import { TeamService } from '@app/services/team.service';
   styleUrls: ['./admin-modal-team.component.scss']
 })
 export class AdminModalTeamComponent implements OnInit {
-
   league: League;
   team: Team;
   autocompleteOptions: Team[];
@@ -30,7 +29,7 @@ export class AdminModalTeamComponent implements OnInit {
   ngOnInit() {
     this.league = this.data.league;
 
-    this.teamService.get().subscribe((teams: Team[]) => {
+    this.teamService.get$().subscribe((teams: Team[]) => {
       this.autocompleteOptions = teams.filter((t: Team) => {
         const result = this.league.teams.find((l: Team) => l._id === t._id);
         if (!result) { return t; }

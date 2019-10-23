@@ -10,42 +10,27 @@
   <app-admin-league-details
     *ngIf="!editingLeague"
     [league]="league"
-    (editClick)="editingLeague = !editingLeague"
+    (edit)="editingLeague = !editingLeague"
   >
   </app-admin-league-details>
 
-  <section id="tabs">
-    <nav>
-      <button
-        (click)="tab = 'overview'"
-        [ngClass]="{'active': tab === 'overview'}"
-      >
-        <i class="fas fa-layer-group mr-2"></i>
+  <app-admin-league-nav
+    (select)="onSelect($event)"
+    [selected]="selected"
+  >
+  </app-admin-league-nav>
 
-        <span>Overview</span>
-      </button>
+  <ng-container [ngSwitch]="selected">
+    <app-admin-overview
+      *ngSwitchCase="'overview'"
+      [league]="league"
+    >
+    </app-admin-overview>
 
-      <button
-        (click)="tab = 'schedule'"
-        [ngClass]="{'active': tab === 'schedule'}"
-      >
-        <i class="far fa-calendar mr-2"></i>
-        <span>Schedule</span>
-      </button>
-    </nav>
-
-    <ng-container [ngSwitch]="tab">
-      <app-admin-overview
-        *ngSwitchCase="'overview'"
-        [league]="league"
-      >
-      </app-admin-overview>
-
-      <app-admin-league-schedule
-        *ngSwitchCase="'schedule'"
-        [league]="league"
-      >
-      </app-admin-league-schedule>
-    </ng-container>
-  </section>
+    <app-admin-league-schedule
+      *ngSwitchCase="'schedule'"
+      [league]="league"
+    >
+    </app-admin-league-schedule>
+  </ng-container>
 </ng-container>

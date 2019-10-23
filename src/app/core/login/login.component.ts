@@ -21,13 +21,13 @@ export class LoginComponent implements OnInit {
   messageTimeout;
 
   constructor(
-    private authService: AuthService,
+    private auth: AuthService,
     private fb: FormBuilder,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.authService.me$
+    this.auth.me$
       .pipe(take(1))
       .subscribe(me => me
         ? this.router.navigateByUrl('user')
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
 
     const {email, password} = this.loginForm.value;
 
-    this.authService.login(email, password).subscribe(() => {
+    this.auth.login(email, password).subscribe(() => {
       this.router.navigateByUrl('user');
     }, (e: Error) => {
       this.error = true;

@@ -6,11 +6,10 @@
 
 header {
   align-items: center;
-  border-bottom: 3px solid theme-color(primary);
   display: flex;
   justify-content: space-between;
   margin: 0 0.5rem;
-  padding: 0.5rem 0;
+  padding: 1rem 0;
 
   h2 {
     color: theme-color(dark);
@@ -27,7 +26,7 @@ header {
 }
 
 section#leagues {
-  padding: 1rem 0;
+  padding: 0 0 1rem 0;
 
   article {
     border-bottom: 1px solid theme-color-level(dark, -6);

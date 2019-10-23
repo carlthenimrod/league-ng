@@ -22,8 +22,8 @@ export class TeamFeedService implements OnDestroy {
     private teamService: TeamService,
     private teamSocket: TeamSocketService
   ) {
-    this.teamSub = this.teamService
-      .teamListener().subscribe((team: Team) => this.team = team);
+    this.teamSub = this.teamService.team$
+      .subscribe(team => this.team = team);
   }
 
   send(message: Message) {

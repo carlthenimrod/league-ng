@@ -3,9 +3,9 @@ import { Observable } from 'rxjs';
 import { tap, mergeMap, map } from 'rxjs/operators';
 
 import { AuthService } from '@app/auth/auth.service';
-import { LeagueService } from '@app/services/league.service';
-import { LeagueScheduleService } from '@app/services/league-schedule.service';
 import { League, Group } from '@app/models/league';
+import { LeagueScheduleService } from '@app/services/league-schedule.service';
+import { LeagueService } from '@app/services/league.service';
 import { Game } from '@app/models/game';
 
 @Component({
@@ -20,7 +20,7 @@ export class LeagueHomeComponent implements OnInit {
   teamIds: string[] = [];
 
   constructor(
-    private authService: AuthService,
+    private auth: AuthService,
     private leagueService: LeagueService,
     private schedule: LeagueScheduleService
   ) { }
@@ -31,7 +31,7 @@ export class LeagueHomeComponent implements OnInit {
         tap(league => {
           this.selectedGroup = league.schedule[this.schedule.pickGroup(league)];
         }),
-        mergeMap(league => this.authService.me$
+        mergeMap(league => this.auth.me$
           .pipe(
             map(me => {
               if (this.selectedGroup) {

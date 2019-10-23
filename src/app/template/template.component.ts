@@ -35,7 +35,7 @@ export class TemplateComponent implements OnInit, AfterViewInit, OnDestroy {
         this.ref.detectChanges();
       });
 
-    this.loadingService.loading$()
+    this.loadingService.loading$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(loading => this.loading = loading);
   }

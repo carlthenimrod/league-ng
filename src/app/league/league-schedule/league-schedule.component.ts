@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap, mergeMap, map } from 'rxjs/operators';
 
+import { AuthService } from '@app/auth/auth.service';
 import { League, Group } from '@app/models/league';
 import { LeagueService } from '@app/services/league.service';
 import { LeagueScheduleService } from '@app/services/league-schedule.service';
-import { AuthService } from '@app/auth/auth.service';
 
 @Component({
   selector: 'app-league-schedule',

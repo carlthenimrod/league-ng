@@ -2,9 +2,9 @@ import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
 import { take, mergeMap, tap } from 'rxjs/operators';
 
-import { LeagueService } from '@app/services/league.service';
-import { League } from '@app/models/league';
 import { AuthService } from '@app/auth/auth.service';
+import { League } from '@app/models/league';
+import { LeagueService } from '@app/services/league.service';
 import { Me } from '@app/models/auth';
 
 export class LeagueResolver implements Resolve<League> {

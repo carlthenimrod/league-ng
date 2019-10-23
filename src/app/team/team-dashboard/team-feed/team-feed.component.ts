@@ -3,11 +3,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { fromEvent, Subject } from 'rxjs';
 import { tap, debounceTime, takeUntil } from 'rxjs/operators';
 
+import { AuthService } from '@app/auth/auth.service';
 import { Message } from '@app/models/team';
 import { TeamSocketService } from '@app/services/team-socket.service';
 import { TeamFeedService } from '@app/services/team-feed.service';
 import { UserSocketData } from '@app/models/socket';
-import { AuthService } from '@app/auth/auth.service';
 import { User } from '@app/models/user';
 
 @Component({
@@ -33,7 +33,7 @@ export class TeamFeedComponent implements OnInit, OnDestroy, AfterViewChecked, A
     private fb: FormBuilder,
     private teamFeed: TeamFeedService,
     private teamSocket: TeamSocketService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.auth.me$

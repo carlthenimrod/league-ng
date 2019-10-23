@@ -1,42 +1,39 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
-import { Subject, Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 
-import { Place, Permit, Slot, PlaceLocation } from '@app/models/place';
+import { Place, Permit, Slot } from '@app/models/place';
 import { Game } from '@app/models/game';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlaceService {
-  api: string = environment.api;
-
+  api = environment.api;
   place: Place;
-  placeSubject: Subject<Place> = new Subject();
+  placeSubject = new BehaviorSubject<Place>(null);
+  place$ = this.placeSubject.asObservable();
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) { }
 
-  all() {
-    const url = this.api + 'places';
-    return this.http.get(url);
-  }
+  get$(): Observable<Place[]>;
+  get$(id: string): Observable<Place>;
+  get$(id?: string): Observable<Place> | Observable<Place[]> {
+    const url = this.api + `places${ id ? `/${id}` : ``}`;
 
-  get(id: string) {
-    const url = this.api + `places/${id}`;
-    this.http.get(url).subscribe((place: Place) => {
-      this.place = place;
-      this.placeSubject.next(_.cloneDeep(place));
-    });
-  }
-
-  placeListener(): Observable<Place> {
-    return this.placeSubject.asObservable();
+    return id
+    ? this.http.get<Place>(url)
+        .pipe<Place>(
+          tap(place => {
+            this.place = place;
+            this.placeSubject.next(_.cloneDeep(this.place));
+          })
+        )
+    : this.http.get<Place[]>(url);
   }
 
   create(place: Place) {

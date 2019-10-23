@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subject, combineLatest } from 'rxjs';
 
 import { Team } from '@app/models/team';
-import { TeamService } from '@app/services/team.service';
 import { TeamSidebarService } from '@app/services/team-sidebar.service';
 import { TeamSocketService } from '@app/services/team-socket.service';
+import { takeUntil, map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-team-component',
@@ -15,35 +15,32 @@ import { TeamSocketService } from '@app/services/team-socket.service';
 export class TeamComponent implements OnInit, OnDestroy {
   sidebarOpen: boolean;
   sidebarState: string;
-  sidebarSub: Subscription;
   team: Team;
+  unsubscribe$ = new Subject<void>();
 
   constructor(
     private route: ActivatedRoute,
-    private teamService: TeamService,
     private teamSidebar: TeamSidebarService,
     private teamSocket: TeamSocketService
   ) { }
 
   ngOnInit() {
-    this.teamService.teamListener().subscribe((team: Team) => this.team = team);
+    this.route.data.subscribe(({ team }: { team: Team }) => {
+      this.team = team;
 
-    this.route.data.subscribe((data: {team: Team}) => {
-      this.team = data.team;
-
-      this.teamSocket.connected$().subscribe(connected => {
-        if (connected) { this.teamSocket.join(this.team._id); }
-      });
+      this.teamSocket.connected$()
+        .subscribe(connected => connected && this.teamSocket.join(this.team._id));
     });
 
-    this.sidebarSub = this.teamSidebar.isOpen$.subscribe(status => {
-      this.sidebarOpen = status;
-    });
+    this.teamSidebar.isOpen$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(status => this.sidebarOpen = status);
   }
 
   ngOnDestroy() {
-    this.teamSocket.leave(this.team._id);
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
 
-    this.sidebarSub.unsubscribe();
+    this.teamSocket.leave(this.team._id);
   }
 }

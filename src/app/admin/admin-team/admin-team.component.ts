@@ -27,8 +27,8 @@ export class AdminTeamComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.teamSubscription = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-        this.teamService.get(params.get('id')).subscribe();
-        return this.teamService.teamListener();
+        this.teamService.get$(params.get('id')).subscribe();
+        return this.teamService.team$;
       })
     )
     .subscribe((team: Team) => {

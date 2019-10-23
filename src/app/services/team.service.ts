@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
-import { Observable, Subject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import * as _ from 'lodash';
 
@@ -18,7 +18,8 @@ import { LeagueStandingsService } from './league-standings.service';
 export class TeamService {
   api: string = environment.api;
   team: Team;
-  teamSubject: Subject<Team> = new Subject<Team>();
+  teamSubject = new BehaviorSubject<Team>(null);
+  team$ = this.teamSubject.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -27,9 +28,9 @@ export class TeamService {
     private teamSchedule: TeamScheduleService
   ) { }
 
-  get(): Observable<Team[]>;
-  get(id: string): Observable<Team>;
-  get(id?: string): Observable<Team|Team[]> {
+  get$(): Observable<Team[]>;
+  get$(id: string): Observable<Team>;
+  get$(id?: string): Observable<Team|Team[]> {
     const url = `${this.api}teams/${id ? `/${id}` : ``}`;
 
     return id
@@ -42,10 +43,6 @@ export class TeamService {
           })
         )
       : this.http.get<Team[]>(url);
-  }
-
-  teamListener(): Observable<Team> {
-    return this.teamSubject.asObservable();
   }
 
   create(team: Team): Observable<any> {

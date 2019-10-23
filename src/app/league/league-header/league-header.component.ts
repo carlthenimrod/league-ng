@@ -13,9 +13,4 @@ export class LeagueHeaderComponent {
   @Output() navClick = new EventEmitter<string>();
 
   constructor() { }
-
-  onClick(clicked: string) {
-    if (this.selected === clicked) { return; }
-    this.navClick.emit(clicked);
-  }
 }

@@ -73,42 +73,4 @@ header {
       padding: 0;
     }
   }
-
-  nav {
-    display: flex;
-    height: 3rem;
-    margin-right: 0.5rem;
-
-    @include media-breakpoint-up(sm) {
-      background-color: $white;
-      margin: 0;
-      padding: 0 1rem;
-      width: 100%;
-    }
-
-    a {
-      cursor: pointer;
-      display: block;
-      height: 100%;
-      line-height: 3rem;
-      padding: 0 0.5rem;
-      text-align: center;
-      transition: color 50ms ease-in;
-
-      @include media-breakpoint-up(sm) {
-        color: theme-color(primary);
-        margin-right: 2rem;
-      }
-
-      &.active {
-        border-bottom: 4px solid $white;
-        color: theme-color-level(primary, -10);
-
-        @include media-breakpoint-up(sm) {
-          border-bottom: 4px solid theme-color(primary);
-          color: theme-color(primary);
-        }
-      }
-    }
-  }
 }

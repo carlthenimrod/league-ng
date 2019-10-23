@@ -17,7 +17,7 @@ export class AdminTeamsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.teamService.get().subscribe(teams => {
+    this.teamService.get$().subscribe(teams => {
       this.teams = teams;
       this.teamList = teams;
     });

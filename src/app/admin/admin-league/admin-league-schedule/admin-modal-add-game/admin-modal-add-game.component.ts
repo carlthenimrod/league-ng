@@ -44,7 +44,7 @@ export class AdminModalAddGameComponent implements OnInit {
     this.league = this.data.league;
 
     // get all places
-    this.placeService.all().subscribe((places: Place[]) => {
+    this.placeService.get$().subscribe(places => {
       this.places = places;
 
       // check if existing game was also provided

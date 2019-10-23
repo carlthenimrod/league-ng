@@ -8,8 +8,8 @@ import { takeUntil } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LoadingService implements OnDestroy {
-  firstLoad: boolean;
   loadingSubject = new BehaviorSubject<boolean>(null);
+  loading$ = this.loadingSubject.asObservable();
   unsubscribe$ = new Subject<void>();
 
   constructor(private router: Router) {
@@ -27,10 +27,6 @@ export class LoadingService implements OnDestroy {
             break;
         }
       });
-  }
-
-  loading$() {
-    return this.loadingSubject.asObservable();
   }
 
   ngOnDestroy() {

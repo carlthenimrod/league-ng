@@ -1,0 +1,59 @@
+@import 'variables';
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+:host {
+  display: flex;
+  height: 3rem;
+  margin-right: 0.5rem;
+  position: relative;
+
+  @include media-breakpoint-up(sm) {
+    background-color: $white;
+    margin: 0;
+    padding: 0 1rem;
+    width: 100%;
+  }
+}
+
+button {
+  background: none;
+  border: none;
+  color: $white;
+  cursor: pointer;
+  display: block;
+  height: 100%;
+  line-height: 3rem;
+  padding: 0 0.5rem;
+  text-align: center;
+  transition: color 100ms ease-in;
+
+  @include media-breakpoint-up(sm) {
+    color: theme-color(primary);
+    margin-right: 2rem;
+  }
+
+  &.selected {
+    color: theme-color-level(primary, -10);
+
+    @include media-breakpoint-up(sm) {
+      color: theme-color(primary);
+    }
+  }
+}
+
+hr {
+  background-color: $white;
+  height: 4px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 0;
+  transition: all 200ms ease-in-out;
+
+  @include media-breakpoint-up(sm) {
+    background-color: theme-color(primary);
+  }
+}

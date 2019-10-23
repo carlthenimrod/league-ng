@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators';
 import * as _ from 'lodash';
 
 import { AuthService } from '@app/auth/auth.service';
-import { Auth } from '@app/models/auth';
+import { AuthResponse } from '@app/models/auth';
 import { User } from '@app/models/user';
 import { ProfileImg } from '@app/models/profile-img';
 
@@ -20,7 +20,7 @@ export class UserService {
   user$ = this.userSubject.asObservable();
 
   constructor(
-    private authService: AuthService,
+    private auth: AuthService,
     private http: HttpClient
   ) {}
 
@@ -72,11 +72,9 @@ export class UserService {
 
   createPassword(userId: string, code: string, password: string) {
     const url = this.api + `users/${userId}/password`;
-    return this.http.post(url, {password, code})
+    return this.http.post<AuthResponse>(url, { password, code })
       .pipe(
-        tap((auth: Auth) =>
-          this.authService.setLoggedIn(auth)
-        )
+        tap(response => this.auth.me.set$(response))
       );
   }
 

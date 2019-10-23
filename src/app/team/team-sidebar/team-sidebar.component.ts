@@ -23,7 +23,6 @@ export class TeamSidebarComponent implements OnInit, OnDestroy {
   @ViewChildren('card', { read: ViewContainerRef }) cards: QueryList<ViewContainerRef>;
   @HostBinding('class.sidebar-open') sidebarOpen: boolean;
   @HostBinding('@sidebarSlide') sidebarState: string;
-  viewportType: string;
   unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -45,22 +44,16 @@ export class TeamSidebarComponent implements OnInit, OnDestroy {
         }
       });
 
-    combineLatest([
-      this.viewport.type$,
-      this.sidebar.isOpen$
-    ])
-    .pipe(takeUntil(this.unsubscribe$))
-    .subscribe(this.updateSidebarState.bind(this));
+    combineLatest([this.viewport.type$, this.sidebar.isOpen$])
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(this.updateSidebarState.bind(this));
   }
 
   updateSidebarState([type, open]: [string, boolean]) {
     this.sidebarOpen = open;
-
-    if (open) {
-      this.sidebarState = (type === 'mobile') ? 'mobileOpen' : 'desktopOpen';
-    } else {
-      this.sidebarState = (type === 'mobile') ? 'mobileClose' : 'desktopClose';
-    }
+    this.sidebarState = open
+      ? type === 'mobile' ? 'mobileOpen' : 'desktopOpen'
+      : type === 'mobile' ? 'mobileClose' : 'desktopClose';
   }
 
   ngOnDestroy() {

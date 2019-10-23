@@ -4,9 +4,10 @@ import { tap, takeUntil } from 'rxjs/operators';
 import * as io from 'socket.io-client';
 import { environment } from '@env/environment';
 
+import { AuthResponse, Me } from '@app/models/auth';
 import { AuthService } from '@app/auth/auth.service';
-import { Auth, Me } from '@app/models/auth';
-import { LeagueSocketService } from './league-socket.service';
+import { SocketLeagueService } from './socket-league.service';
+import { SocketTeamService } from './socket-team.service';
 
 
 @Injectable({
@@ -22,7 +23,8 @@ export class SocketService implements OnDestroy {
 
   constructor(
     private auth: AuthService,
-    private leagueSocket: LeagueSocketService
+    private socketLeague: SocketLeagueService,
+    private socketTeam: SocketTeamService
   ) {
     this.socket = io(this.api, { autoConnect: false });
 
@@ -41,7 +43,8 @@ export class SocketService implements OnDestroy {
     this.onDisconnect(fromEvent(this.socket, 'disconnect'));
     this.onAuthorized(fromEvent(this.socket, 'authorized'));
 
-    this.leagueSocket.handle(fromEvent(this.socket, 'league'));
+    this.socketLeague.handle(fromEvent(this.socket, 'league'));
+    this.socketTeam.handle(fromEvent(this.socket, 'team'));
   }
 
   private onConnect(connect$: Observable<void>) {
@@ -64,14 +67,14 @@ export class SocketService implements OnDestroy {
       });
   }
 
-  private onAuthorized(authorized$: Observable<Auth>) {
+  private onAuthorized(authorized$: Observable<AuthResponse>) {
     authorized$
       .pipe(
         tap(() => console.log('connected')),
         tap(() => this.connectedSubject.next(true)),
         takeUntil(this.unsubscribe$)
       )
-      .subscribe(auth => this.auth.setMe(auth));
+      .subscribe(response => this.auth.me.set$(response));
   }
 
   connect() {

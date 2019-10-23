@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { Place } from '@app/models/place';
@@ -11,9 +11,8 @@ import { PlaceService } from '@app/services/place.service';
   templateUrl: './admin-place.component.html',
   styleUrls: ['./admin-place.component.scss']
 })
-export class AdminPlaceComponent implements OnInit, OnDestroy {
-  place: Place;
-  placeSubscription: Subscription;
+export class AdminPlaceComponent implements OnInit {
+  place$: Observable<Place>;
   editingPlace = false;
 
   constructor(
@@ -22,16 +21,9 @@ export class AdminPlaceComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.placeSubscription = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => {
-        this.placeService.get(params.get('id'));
-        return this.placeService.placeListener();
-      })
-    )
-    .subscribe((place: Place) => this.place = place);
-  }
-
-  ngOnDestroy() {
-    this.placeSubscription.unsubscribe();
+    this.place$ = this.route.paramMap.pipe(
+      switchMap(params => this.placeService.get$(params.get('id'))),
+      switchMap(() => this.placeService.place$)
+    );
   }
 }

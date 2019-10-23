@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 
-import { Auth } from '@app/models/auth';
 import { League, Group } from '@app/models/league';
 import { Game } from '@app/models/game';
 

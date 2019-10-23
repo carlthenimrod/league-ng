@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Place } from '@app/models/place';
 import { PlaceService } from '@app/services/place.service';
@@ -9,15 +10,11 @@ import { PlaceService } from '@app/services/place.service';
   styleUrls: ['./admin-places.component.scss']
 })
 export class AdminPlacesComponent implements OnInit {
-  places: Place[];
+  places$: Observable<Place[]>;
 
-  constructor(
-    private placeService: PlaceService
-  ) { }
+  constructor(private placeService: PlaceService) { }
 
   ngOnInit() {
-    this.placeService.all().subscribe((places: Place[]) => {
-      this.places = places;
-    });
+    this.places$ = this.placeService.get$();
   }
 }

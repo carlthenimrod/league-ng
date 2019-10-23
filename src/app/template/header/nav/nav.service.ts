@@ -47,7 +47,7 @@ export class NavService implements OnDestroy {
         }
       });
 
-    this.loadingService.loading$()
+    this.loadingService.loading$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(loading => this.loading = loading);
   }

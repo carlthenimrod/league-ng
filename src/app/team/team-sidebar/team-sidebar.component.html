@@ -11,12 +11,12 @@
         (click)="onClick($event, user, i)"
       >
         <div class="img">
-          <div class="status"></div>
-
           <figure>
             <img *ngIf="user.img" [src]="user.img" [alt]="user.fullName">
             <i *ngIf="!user.img" class="placeholder fas fa-user"></i>
           </figure>
+
+          <div class="status"></div>
         </div>
 
         <span>{{ user.fullName }}</span>
@@ -26,7 +26,7 @@
   </ng-container>
 </aside>
 
-<button 
+<button
   id="toggle"
   [ngClass]="{ 'roster-open': sidebarOpen }"
   (click)="onClickSidebarToggle()"

@@ -20,6 +20,7 @@ import { ProfileImgComponent } from './profile-img/profile-img.component';
 import { FormatLocationsPipe } from './format-locations.pipe';
 import { GameComponent } from './game/game.component';
 import { GmapLinkPipe } from './gmap-link.pipe';
+import { TabSelectorComponent } from './tab-selector/tab-selector.component';
 
 @NgModule({
   imports: [
@@ -44,14 +45,16 @@ import { GmapLinkPipe } from './gmap-link.pipe';
     ProfileImgComponent,
     FormatLocationsPipe,
     GmapLinkPipe,
-    GameComponent
+    GameComponent,
+    TabSelectorComponent
   ],
   declarations: [
     NoticeComponent,
     ProfileImgComponent,
     FormatLocationsPipe,
     GameComponent,
-    GmapLinkPipe
+    GmapLinkPipe,
+    TabSelectorComponent
   ]
 })
 export class SharedModule { }

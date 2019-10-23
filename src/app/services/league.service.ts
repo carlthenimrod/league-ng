@@ -14,9 +14,9 @@ import { Game } from '@app/models/game';
   providedIn: 'root'
 })
 export class LeagueService {
-  api = environment.api;
-  league: League;
-  leagueSubject = new BehaviorSubject<League>(null);
+  private api = environment.api;
+  private league: League;
+  private leagueSubject = new BehaviorSubject<League>(null);
   league$ = this.leagueSubject.asObservable();
 
   constructor(

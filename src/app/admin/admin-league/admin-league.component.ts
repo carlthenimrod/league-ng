@@ -14,7 +14,7 @@ import { LeagueService } from '@app/services/league.service';
 export class AdminLeagueComponent implements OnInit {
   league$: Observable<League>;
   editingLeague = false;
-  tab = 'overview';
+  selected = 'overview';
 
   constructor(
     private route: ActivatedRoute,
@@ -27,5 +27,9 @@ export class AdminLeagueComponent implements OnInit {
         switchMap(params => this.leagueService.get$(params.get('id'))),
         switchMap(() => this.leagueService.league$)
       );
+  }
+
+  onSelect(selected: string) {
+    this.selected = selected;
   }
 }

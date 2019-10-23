@@ -1,53 +1,17 @@
-<section id="league-details">
-  <header>
-    <h1>{{ league.name }}</h1>
+<header>
+  <h1>{{ league.name }}</h1>
 
-    <div id="actions-desktop">
-      <button
-        mat-flat-button
-        color="primary"
-        (click)="onEditClick()"
-      >
-        <i class="fas fa-edit"></i>
-
-        <span>Edit</span>
-      </button>
-
-      <button
-        mat-flat-button
-        color="warn"
-        (click)="onDeleteClick()"
-      >
-        <i class="fas fa-trash-alt"></i>
-
-        <span>Delete</span>
-      </button>
-    </div>
-  </header>
-
-  <section id="description" *ngIf="league.description">
-    <p>{{ league.description }}</p>
-  </section>
-
-  <div id="actions-mobile">
-    <button
-      mat-flat-button
-      color="primary"
-      (click)="onEditClick()"
-    >
-      <i class="fas fa-edit"></i>
-
-      <span>Edit</span>
+  <div id="actions">
+    <button (click)="onClickEdit()" id="edit">
+      <i class="fas fa-pen"></i>
     </button>
 
-    <button
-      mat-flat-button
-      color="warn"
-      (click)="onDeleteClick()"
-    >
+    <button (click)="onDeleteClick()" id="delete">
       <i class="fas fa-trash-alt"></i>
-
-      <span>Delete</span>
     </button>
   </div>
+</header>
+
+<section id="description" *ngIf="league.description">
+  <p>{{ league.description }}</p>
 </section>

@@ -11,15 +11,15 @@ import { LeagueService } from '@app/services/league.service';
 })
 export class AdminLeagueDetailsComponent {
   @Input() league: League;
-  @Output() editClick = new EventEmitter<boolean>();
+  @Output() edit = new EventEmitter<boolean>();
 
   constructor(
     public leagueService: LeagueService,
     public router: Router
   ) { }
 
-  onEditClick() {
-    this.editClick.emit(true);
+  onClickEdit() {
+    this.edit.emit(true);
   }
 
   onDeleteClick() {

@@ -1,0 +1,17 @@
+<ng-container *ngIf="!tabListContent.length">
+  <button
+      *ngFor="let tabItem of tabs; let i = index"
+      [ngClass]="{ 'selected': selectedIndex === i }"
+      title="{{ tabItem | titlecase }}"
+      (click)="select.emit(tabItem)"
+      #tab
+    >
+    {{ tabItem | titlecase }}
+  </button>
+</ng-container>
+
+<ng-content></ng-content>
+
+<ng-container *ngIf="!selectorContent">
+  <hr #selector>
+</ng-container>

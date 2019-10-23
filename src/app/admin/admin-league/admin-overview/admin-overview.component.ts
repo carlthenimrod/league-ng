@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 
 import { AdminModalDivisionComponent } from './admin-modal-division/admin-modal-division.component';
@@ -16,9 +15,7 @@ import { paragraphEnterTrigger } from './animations';
   animations: [paragraphEnterTrigger]
 })
 export class AdminOverviewComponent implements OnInit {
-
   @Input() league: League;
-  leagueSubscription: Subscription;
 
   constructor(
     public dialog: MatDialog,

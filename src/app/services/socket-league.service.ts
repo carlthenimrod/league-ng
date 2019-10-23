@@ -2,25 +2,25 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { AuthService } from '@app/auth/auth.service';
 import { LocalStorageService } from './local-storage.service';
-import { LeagueSocketData } from '@app/models/socket';
+import { SocketLeagueData } from '@app/models/socket';
 import { League } from '@app/models/league';
+import { MeService } from './me.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LeagueSocketService implements OnDestroy {
+export class SocketLeagueService implements OnDestroy {
   socket: SocketIOClient.Socket;
   unsubscribe$ = new Subject<void>();
 
   constructor(
-    private auth: AuthService,
+    private meService: MeService,
     private localStorage: LocalStorageService
   ) {}
 
-  handle(league$: Observable<LeagueSocketData>) {
-    league$
+  handle(socketLeague$: Observable<SocketLeagueData>) {
+    socketLeague$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(({ league, action }) => {
         switch (action) {
@@ -51,7 +51,7 @@ export class LeagueSocketService implements OnDestroy {
           }
         }
 
-        this.auth.getMe();
+        this.meService.get$();
       });
   }
 

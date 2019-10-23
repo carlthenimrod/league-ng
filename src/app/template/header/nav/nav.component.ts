@@ -2,8 +2,8 @@ import { Component, OnInit, HostBinding, OnDestroy, HostListener } from '@angula
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Me } from '@app/models/auth';
 import { AuthService } from '@app/auth/auth.service';
+import { Me } from '@app/models/auth';
 import { ViewportService } from '@app/services/viewport.service';
 
 @Component({
