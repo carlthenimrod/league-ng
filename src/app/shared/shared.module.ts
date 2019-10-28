@@ -21,6 +21,7 @@ import { FormatLocationsPipe } from './format-locations.pipe';
 import { GameComponent } from './game/game.component';
 import { GmapLinkPipe } from './gmap-link.pipe';
 import { TabSelectorComponent } from './tab-selector/tab-selector.component';
+import { DialogModule } from './dialog/dialog.module';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { TabSelectorComponent } from './tab-selector/tab-selector.component';
     MatButtonModule,
     MatNativeDateModule,
     MatProgressSpinnerModule,
-    MatSliderModule
+    MatSliderModule,
+    DialogModule
   ],
   exports: [
     MatAutocompleteModule,
@@ -46,7 +48,8 @@ import { TabSelectorComponent } from './tab-selector/tab-selector.component';
     FormatLocationsPipe,
     GmapLinkPipe,
     GameComponent,
-    TabSelectorComponent
+    TabSelectorComponent,
+    DialogModule
   ],
   declarations: [
     NoticeComponent,

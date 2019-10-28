@@ -13,7 +13,6 @@ import { NoticeService } from '@app/services/notice.service';
   styleUrls: ['./admin-team.component.scss']
 })
 export class AdminTeamComponent implements OnInit, OnDestroy {
-
   team: Team;
   teamSubscription: Subscription;
   editingTeam = false;

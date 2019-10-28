@@ -1,0 +1,23 @@
+<ng-container *ngIf="league$ | async as league">
+  <app-admin-league-header [league]="league"></app-admin-league-header>
+
+  <app-tab-selector
+    [tabs]="['overview', 'schedule']"
+    (select)="selected = $event"
+  >
+  </app-tab-selector>
+
+  <ng-container [ngSwitch]="selected">
+    <app-admin-overview
+      *ngSwitchCase="'overview'"
+      [league]="league"
+    >
+    </app-admin-overview>
+
+    <app-admin-league-schedule
+      *ngSwitchCase="'schedule'"
+      [league]="league"
+    >
+    </app-admin-league-schedule>
+  </ng-container>
+</ng-container>

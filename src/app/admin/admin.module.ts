@@ -5,36 +5,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { AdminLeaguesComponent } from './admin-leagues/admin-leagues.component';
-import { AdminLeagueComponent } from './admin-league/admin-league.component';
-import { AdminLeagueFormComponent } from './admin-league/admin-league-form/admin-league-form.component';
-import { AdminLeagueDetailsComponent } from './admin-league/admin-league-details/admin-league-details.component';
-import { AdminOverviewComponent } from './admin-league/admin-overview/admin-overview.component';
-import { AdminModalDivisionComponent } from './admin-league/admin-overview/admin-modal-division/admin-modal-division.component';
-import { AdminModalTeamComponent } from './admin-league/admin-overview/admin-modal-team/admin-modal-team.component';
-import { AdminDivisionsComponent } from './admin-league/admin-overview/admin-divisions/admin-divisions.component';
-import { AdminTeamsComponent } from './admin-teams/admin-teams.component';
+import { AdminDashboardComponent } from './admin-leagues/admin-dashboard/admin-dashboard.component';
 import { AdminUtilityComponent } from './admin-utility/admin-utility.component';
 import { AdminPaginationComponent } from './admin-utility/admin-pagination/admin-pagination.component';
 import { AdminSearchComponent } from './admin-utility/admin-search/admin-search.component';
-import { AdminTeamComponent } from './admin-team/admin-team.component';
-import { AdminTeamDetailsComponent } from './admin-team/admin-team-details/admin-team-details.component';
-import { AdminTeamFormComponent } from './admin-team/admin-team-form/admin-team-form.component';
-import { AdminTeamListComponent } from './admin-league/admin-overview/admin-team-list/admin-team-list.component';
-import { AdminDroppableComponent } from './admin-droppable/admin-droppable.component';
-import { AdminDraggableDirective } from './admin-droppable/admin-draggable.directive';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
-import { AdminRosterComponent } from './admin-team/admin-roster/admin-roster.component';
-import { AdminModalUserComponent } from './admin-team/admin-roster/admin-modal-user/admin-modal-user.component';
 import { AdminUserDetailsComponent } from './admin-user/admin-user-details/admin-user-details.component';
 import { AdminUserFormComponent } from './admin-user/admin-user-form/admin-user-form.component';
-import { AdminLeagueScheduleComponent } from './admin-league/admin-league-schedule/admin-league-schedule.component';
-import { AdminModalAutoGenerateComponent } from './admin-league/admin-league-schedule/admin-modal-auto-generate/admin-modal-auto-generate.component';
-import { AdminModalAddGameComponent } from './admin-league/admin-league-schedule/admin-modal-add-game/admin-modal-add-game.component';
-import { AdminGameGroupComponent } from './admin-league/admin-league-schedule/admin-game-group/admin-game-group.component';
-import { AdminModalEditGroupComponent } from './admin-league/admin-league-schedule/admin-game-group/admin-modal-edit-group/admin-modal-edit-group.component';
 import { AdminPlacesComponent } from './admin-places/admin-places.component';
 import { AdminPlaceComponent } from './admin-place/admin-place.component';
 import { AdminPlaceFormComponent } from './admin-place/admin-place-form/admin-place-form.component';
@@ -44,7 +22,6 @@ import { AdminModalPermitComponent } from './admin-place/admin-permits/admin-mod
 import { AdminTimeAdderComponent } from './admin-place/admin-permits/admin-modal-permit/admin-time-adder/admin-time-adder.component';
 import { AdminPermitComponent } from './admin-place/admin-permits/admin-permit/admin-permit.component';
 import { AdminModalTimeComponent } from './admin-place/admin-permits/admin-permit/admin-modal-time/admin-modal-time.component';
-import { AdminLeagueNavComponent } from './admin-league/admin-league-nav/admin-league-nav.component';
 
 @NgModule({
   imports: [
@@ -57,35 +34,13 @@ import { AdminLeagueNavComponent } from './admin-league/admin-league-nav/admin-l
   declarations: [
     AdminComponent,
     AdminDashboardComponent,
-    AdminLeaguesComponent,
-    AdminLeagueComponent,
-    AdminLeagueFormComponent,
-    AdminLeagueDetailsComponent,
-    AdminOverviewComponent,
-    AdminModalDivisionComponent,
-    AdminModalTeamComponent,
-    AdminDivisionsComponent,
-    AdminTeamsComponent,
     AdminUtilityComponent,
     AdminPaginationComponent,
     AdminSearchComponent,
-    AdminTeamComponent,
-    AdminTeamDetailsComponent,
-    AdminTeamFormComponent,
-    AdminTeamListComponent,
-    AdminDroppableComponent,
-    AdminDraggableDirective,
     AdminUsersComponent,
     AdminUserComponent,
-    AdminRosterComponent,
-    AdminModalUserComponent,
     AdminUserDetailsComponent,
     AdminUserFormComponent,
-    AdminLeagueScheduleComponent,
-    AdminModalAutoGenerateComponent,
-    AdminModalAddGameComponent,
-    AdminGameGroupComponent,
-    AdminModalEditGroupComponent,
     AdminPlacesComponent,
     AdminPlaceComponent,
     AdminPlaceFormComponent,
@@ -94,16 +49,9 @@ import { AdminLeagueNavComponent } from './admin-league/admin-league-nav/admin-l
     AdminModalPermitComponent,
     AdminTimeAdderComponent,
     AdminPermitComponent,
-    AdminModalTimeComponent,
-    AdminLeagueNavComponent
+    AdminModalTimeComponent
   ],
   entryComponents: [
-    AdminModalDivisionComponent,
-    AdminModalTeamComponent,
-    AdminModalUserComponent,
-    AdminModalAutoGenerateComponent,
-    AdminModalAddGameComponent,
-    AdminModalEditGroupComponent,
     AdminModalPermitComponent,
     AdminModalTimeComponent
   ]
