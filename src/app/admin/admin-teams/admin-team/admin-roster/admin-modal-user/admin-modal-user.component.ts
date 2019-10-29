@@ -53,7 +53,7 @@ export class AdminModalUserComponent implements OnInit {
       }));
 
       // get all users for auto-complete
-      this.userService.get().subscribe(users =>
+      this.userService.get$().subscribe(users =>
         this.autocompleteOptions = this.filterUsers(users)
       );
     }

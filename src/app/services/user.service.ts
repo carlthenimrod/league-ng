@@ -24,9 +24,9 @@ export class UserService {
     private http: HttpClient
   ) {}
 
-  get(): Observable<User[]>;
-  get(id: string): Observable<User>;
-  get(id?: string) {
+  get$(): Observable<User[]>;
+  get$(id: string): Observable<User>;
+  get$(id?: string) {
     const url = `${this.api}users/${id ? `/${id}` : ``}`;
 
     return id

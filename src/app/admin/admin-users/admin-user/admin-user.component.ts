@@ -25,13 +25,12 @@ export class AdminUserComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userSubscription = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => {
-        this.userService.get(params.get('id'));
-        return this.userService.user$;
-      })
+      switchMap(params => this.userService.get$(params.get('id'))),
+      switchMap(() => this.userService.user$)
     )
     .subscribe((user: User) => {
       this.user = user;
+      console.log(user);
 
       // if new, update status, push notices
       if (this.user.status.new) {

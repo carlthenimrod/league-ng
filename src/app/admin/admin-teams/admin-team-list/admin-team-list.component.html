@@ -1,39 +1,36 @@
-<header>
+<ng-container *ngIf="teams$ | async as teams"><header>
   <h1>Teams</h1>
 
-  <button
-    mat-flat-button
-    color="primary"
-    routerLink="/admin/teams/new"
-  >
-    <i class="fas fa-plus"></i>
-    <span>New</span>
-  </button>
-</header>
-
-<table *ngIf="teams && teamList.length > 0" class="table table-hover border">
-  <thead>
-    <tr>
-      <th scope="col">Team Name</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr
-      *ngFor="let team of teamList"
-      [routerLink]="[team._id]"
+    <button
+      mat-flat-button
+      color="primary"
+      routerLink="/admin/teams/new"
     >
-      <td>
-        {{ team.name }}
-      </td>
-    </tr>
-  </tbody>
-</table>
+      <i class="fas fa-plus"></i>
+      <span>New</span>
+    </button>
+  </header>
 
-<p *ngIf="teamList.length === 0 && teams.length > 0" class="no-teams">
-  No teams found. <i class="far fa-frown"></i>
-</p>
+  <table *ngIf="teams.length > 0" class="table table-hover border">
+    <thead>
+      <tr>
+        <th scope="col">Team Name</th>
+      </tr>
+    </thead>
 
-<p *ngIf="teams.length === 0" class="no-teams">
-  No teams. Maybe add some? <i class="far fa-smile"></i>
-</p>
+    <tbody>
+      <tr
+        *ngFor="let team of teams"
+        [routerLink]="[team._id]"
+      >
+        <td>
+          {{ team.name }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="teams.length === 0" class="no-teams">
+    No teams. Maybe add some? <i class="far fa-smile"></i>
+  </p>
+</ng-container>

@@ -21,7 +21,7 @@ export class UserResolverService implements Resolve<User> {
         take(1),
         tap(me => !me && this.router.navigateByUrl('/login')),
         mergeMap(me => me
-          ? this.userService.get(me._id)
+          ? this.userService.get$(me._id)
           : EMPTY
         )
       );

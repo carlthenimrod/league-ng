@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
@@ -9,21 +10,11 @@ import { TeamService } from '@app/services/team.service';
   styleUrls: ['./admin-team-list.component.scss']
 })
 export class AdminTeamListComponent implements OnInit {
-  teams: Team[];
-  teamList: Team[];
+  teams$: Observable<Team[]>;
 
-  constructor(
-    public teamService: TeamService
-  ) { }
+  constructor(private teamService: TeamService) { }
 
   ngOnInit() {
-    this.teamService.get$().subscribe(teams => {
-      this.teams = teams;
-      this.teamList = teams;
-    });
-  }
-
-  onResults(teams: Team[]) {
-    this.teamList = teams;
+    this.teams$ = this.teamService.get$();
   }
 }

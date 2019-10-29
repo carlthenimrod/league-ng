@@ -1,29 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-
-import { User } from '@app/models/user';
-import { UserService } from '@app/services/user.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-admin-users',
-  templateUrl: './admin-users.component.html',
-  styleUrls: ['./admin-users.component.scss']
+  template: '<router-outlet></router-outlet>'
 })
-export class AdminUsersComponent implements OnInit {
-  users: User[];
-  userList: User[];
-
-  constructor(
-    private userService: UserService
-  ) { }
-
-  ngOnInit() {
-    this.userService.get().subscribe(users => {
-      this.users = users;
-      this.userList = users;
-    });
-  }
-
-  onResults(users: User[]) {
-    this.userList = users;
-  }
-}
+export class AdminUsersComponent { }
