@@ -1,20 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-
-import { Place } from '@app/models/place';
-import { PlaceService } from '@app/services/place.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-admin-places',
-  templateUrl: './admin-places.component.html',
-  styleUrls: ['./admin-places.component.scss']
+  template: '<router-outlet></router-outlet>'
 })
-export class AdminPlacesComponent implements OnInit {
-  places$: Observable<Place[]>;
-
-  constructor(private placeService: PlaceService) { }
-
-  ngOnInit() {
-    this.places$ = this.placeService.get$();
-  }
-}
+export class AdminPlacesComponent { }
