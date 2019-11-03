@@ -3,12 +3,12 @@ import { Component, ViewChild, Type, AfterViewInit, ComponentFactoryResolver, Ho
 import { lightboxTrigger } from './animations';
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss'],
+  selector: 'app-modal',
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.scss'],
   animations: [lightboxTrigger]
 })
-export class DialogComponent implements AfterViewInit {
+export class ModalComponent implements AfterViewInit {
   @Output() close = new EventEmitter<boolean>();
   @ViewChild('vc', { static: false, read: ViewContainerRef }) vc;
   @HostBinding('@lightbox') lightbox;

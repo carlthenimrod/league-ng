@@ -1,11 +1,11 @@
 import { Injectable, ComponentFactoryResolver, ComponentRef, Injector, ApplicationRef, EmbeddedViewRef, Inject, Type } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
-import { DialogComponent } from './dialog.component';
+import { ModalComponent } from './modal.component';
 
 @Injectable()
-export class DialogService {
-  dialogRef: ComponentRef<DialogComponent>;
+export class ModalService {
+  modalRef: ComponentRef<ModalComponent>;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -14,19 +14,19 @@ export class DialogService {
   ) { }
 
   open(componentType: Type<any>, injector: Injector) {
-    this.dialogRef = this.create(injector);
-    this.dialogRef.instance.componentType = componentType;
+    this.modalRef = this.create(injector);
+    this.modalRef.instance.componentType = componentType;
   }
 
   close() {
     this.destroy();
   }
 
-  private create(injector: Injector): ComponentRef<DialogComponent> {
-    const factory = this.resolver.resolveComponentFactory(DialogComponent);
+  private create(injector: Injector): ComponentRef<ModalComponent> {
+    const factory = this.resolver.resolveComponentFactory(ModalComponent);
 
     const componentRef = factory.create(injector);
-    const componentView = (componentRef.hostView as EmbeddedViewRef<DialogComponent>).rootNodes[0];
+    const componentView = (componentRef.hostView as EmbeddedViewRef<ModalComponent>).rootNodes[0];
 
     this.document.body.appendChild(componentView);
     this.appRef.attachView(componentRef.hostView);
@@ -38,7 +38,7 @@ export class DialogService {
   }
 
   private destroy() {
-    this.appRef.detachView(this.dialogRef.hostView);
-    this.dialogRef.destroy();
+    this.appRef.detachView(this.modalRef.hostView);
+    this.modalRef.destroy();
   }
 }

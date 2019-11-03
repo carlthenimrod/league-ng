@@ -7,7 +7,6 @@ import { Address } from '@app/models/address';
 })
 export class StringifyAddressPipe implements PipeTransform {
   transform(address: Address, partsString?: string): string {
-
     let string = '';
 
     if (partsString) {

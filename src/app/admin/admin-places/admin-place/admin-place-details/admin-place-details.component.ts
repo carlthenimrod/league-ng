@@ -1,6 +1,6 @@
 import { Component, Input, Injector } from '@angular/core';
 
-import { DialogService } from '@app/shared/dialog/dialog.service';
+import { ModalService } from '@app/shared/modal/modal.service';
 import { Place } from '@app/models/place';
 import { AdminModalPlaceLabelComponent } from './admin-modal-place-label/admin-modal-place-label.component';
 
@@ -13,14 +13,17 @@ export class AdminPlaceDetailsComponent {
   @Input() place: Place;
 
   constructor(
-    private dialog: DialogService,
-    private injector: Injector
+    private injector: Injector,
+    private modal: ModalService
   ) { }
 
-  onClickOpenDialog(type: string) {
+  onClickOpenModal(type: string) {
     switch (type) {
       case 'label':
-        this.dialog.open(AdminModalPlaceLabelComponent, this.injector);
+        this.modal.open(AdminModalPlaceLabelComponent, this.injector);
+        break;
+      case 'address':
+        this.modal.open(AdminModalPlaceLabelComponent, this.injector);
         break;
     }
   }

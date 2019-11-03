@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { DialogService } from '@app/shared/dialog/dialog.service';
+import { ModalService } from '@app/shared/modal/modal.service';
 import { PlaceService } from '@app/services/place.service';
 import { Place } from '@app/models/place';
 
@@ -15,7 +15,7 @@ export class AdminModalPlaceLabelComponent implements OnInit {
   place$: Observable<Place>;
 
   constructor(
-    private dialogService: DialogService,
+    private modalService: ModalService,
     private placeService: PlaceService
   ) { }
 
@@ -27,6 +27,6 @@ export class AdminModalPlaceLabelComponent implements OnInit {
     if (!f.valid) { return; }
 
     this.placeService.put$(f.value)
-      .subscribe(() => this.dialogService.close());
+      .subscribe(() => this.modalService.close());
   }
 }

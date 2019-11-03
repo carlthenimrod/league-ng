@@ -21,7 +21,7 @@ import { FormatLocationsPipe } from './format-locations.pipe';
 import { GameComponent } from './game/game.component';
 import { GmapLinkPipe } from './gmap-link.pipe';
 import { TabSelectorComponent } from './tab-selector/tab-selector.component';
-import { DialogModule } from './dialog/dialog.module';
+import { ModalModule } from './modal/modal.module';
 import { StringifyAddressPipe } from './stringify-address.pipe';
 
 @NgModule({
@@ -31,7 +31,7 @@ import { StringifyAddressPipe } from './stringify-address.pipe';
     MatNativeDateModule,
     MatProgressSpinnerModule,
     MatSliderModule,
-    DialogModule
+    ModalModule
   ],
   exports: [
     MatAutocompleteModule,
@@ -50,7 +50,7 @@ import { StringifyAddressPipe } from './stringify-address.pipe';
     GmapLinkPipe,
     GameComponent,
     TabSelectorComponent,
-    DialogModule,
+    ModalModule,
     StringifyAddressPipe
   ],
   declarations: [
