@@ -22,6 +22,7 @@ import { GameComponent } from './game/game.component';
 import { GmapLinkPipe } from './gmap-link.pipe';
 import { TabSelectorComponent } from './tab-selector/tab-selector.component';
 import { DialogModule } from './dialog/dialog.module';
+import { StringifyAddressPipe } from './stringify-address.pipe';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import { DialogModule } from './dialog/dialog.module';
     GmapLinkPipe,
     GameComponent,
     TabSelectorComponent,
-    DialogModule
+    DialogModule,
+    StringifyAddressPipe
   ],
   declarations: [
     NoticeComponent,
@@ -57,7 +59,8 @@ import { DialogModule } from './dialog/dialog.module';
     FormatLocationsPipe,
     GameComponent,
     GmapLinkPipe,
-    TabSelectorComponent
+    TabSelectorComponent,
+    StringifyAddressPipe
   ]
 })
 export class SharedModule { }
