@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '@app/shared/shared.module';
 import { AdminLeaguesRoutingModule } from './admin-leagues-routing.module';
@@ -14,6 +15,11 @@ import { AdminTeamListComponent } from './admin-league/admin-overview/admin-team
 import { AdminGameGroupComponent } from './admin-league/admin-league-schedule/admin-game-group/admin-game-group.component';
 import { AdminDraggableDirective } from './admin-droppable/admin-draggable.directive';
 import { AdminDroppableComponent } from './admin-droppable/admin-droppable.component';
+import { AdminModalTeamComponent } from './admin-league/admin-overview/admin-modal-team/admin-modal-team.component';
+import { AdminModalDivisionComponent } from './admin-league/admin-overview/admin-modal-division/admin-modal-division.component';
+import { AdminModalAutoGenerateComponent } from './admin-league/admin-league-schedule/admin-modal-auto-generate/admin-modal-auto-generate.component';
+import { AdminModalAddGameComponent } from './admin-league/admin-league-schedule/admin-modal-add-game/admin-modal-add-game.component';
+import { AdminModalEditGroupComponent } from './admin-league/admin-league-schedule/admin-game-group/admin-modal-edit-group/admin-modal-edit-group.component';
 
 @NgModule({
   declarations: [
@@ -27,12 +33,25 @@ import { AdminDroppableComponent } from './admin-droppable/admin-droppable.compo
     AdminGameGroupComponent,
     AdminDraggableDirective,
     AdminDroppableComponent,
-    AdminLeagueListComponent
+    AdminLeagueListComponent,
+    AdminModalTeamComponent,
+    AdminModalDivisionComponent,
+    AdminModalAutoGenerateComponent,
+    AdminModalAddGameComponent,
+    AdminModalEditGroupComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     SharedModule,
     AdminLeaguesRoutingModule
+  ],
+  entryComponents: [
+    AdminModalTeamComponent,
+    AdminModalDivisionComponent,
+    AdminModalAutoGenerateComponent,
+    AdminModalAddGameComponent,
+    AdminModalEditGroupComponent
   ]
 })
 export class AdminLeaguesModule { }

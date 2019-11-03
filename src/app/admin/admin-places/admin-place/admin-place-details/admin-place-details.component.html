@@ -1,49 +1,27 @@
-<section id="place-details">
+<section id="label">
   <header>
-    <h1>{{ place.name }}</h1>
+    <h3>Place Label</h3>
 
-    <div id="actions-desktop">
-      <button
-        mat-flat-button
-        color="primary"
-        (click)="onEditClick()"
-      >
+    <div>
+      <button (click)="onClickOpenDialog('label')">
         <i class="fas fa-edit"></i>
-
-        <span>Edit</span>
-      </button>
-
-      <button
-        mat-flat-button
-        color="warn"
-        (click)="onDeleteClick()"
-      >
-        <i class="fas fa-trash-alt"></i>
-
-        <span>Delete</span>
       </button>
     </div>
   </header>
 
-  <div id="actions-mobile">
-    <button
-      mat-flat-button
-      color="primary"
-      (click)="onEditClick()"
-    >
-      <i class="fas fa-edit"></i>
-
-      <span>Edit</span>
-    </button>
-
-    <button
-      mat-flat-button
-      color="warn"
-      (click)="onDeleteClick()"
-    >
-      <i class="fas fa-trash-alt"></i>
-
-      <span>Delete</span>
-    </button>
+  <div>
+    {{ place.name }}
   </div>
+</section>
+
+<section id="address">
+  <header>
+    <h3>Address</h3>
+  </header>
+</section>
+
+<section id="locations">
+  <header>
+    <h3>Locations</h3>
+  </header>
 </section>

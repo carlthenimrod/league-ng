@@ -1,18 +1,17 @@
 <ng-container *ngIf="place$ | async as place">
-  <app-admin-place-form
-    *ngIf="editingPlace"
-    [place]="place"
-    (saveClick)="editingPlace = !editingPlace"
-    (cancelClick)="editingPlace = !editingPlace"
-  >
-  </app-admin-place-form>
+  <app-admin-place-header [place]="place"></app-admin-place-header>
 
-  <app-admin-place-details
-    *ngIf="!editingPlace"
-    [place]="place"
-    (editClick)="editingPlace = !editingPlace"
+  <app-tab-selector
+    [tabs]="['details', 'permits']"
+    (select)="selected = $event"
   >
-  </app-admin-place-details>
+  </app-tab-selector>
 
-  <app-admin-permits [permits]="place.permits"></app-admin-permits>
+  <ng-container [ngSwitch]="selected">
+    <app-admin-place-details
+      *ngSwitchCase="'details'"
+      [place]="place"
+    >
+    </app-admin-place-details>
+  </ng-container>
 </ng-container>

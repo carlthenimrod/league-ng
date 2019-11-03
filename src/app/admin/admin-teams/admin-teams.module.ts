@@ -10,6 +10,7 @@ import { AdminTeamComponent } from './admin-team/admin-team.component';
 import { AdminTeamFormComponent } from './admin-team/admin-team-form/admin-team-form.component';
 import { AdminRosterComponent } from './admin-team/admin-roster/admin-roster.component';
 import { AdminTeamDetailsComponent } from './admin-team/admin-team-details/admin-team-details.component';
+import { AdminModalUserComponent } from './admin-team/admin-roster/admin-modal-user/admin-modal-user.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +19,17 @@ import { AdminTeamDetailsComponent } from './admin-team/admin-team-details/admin
     AdminTeamListComponent,
     AdminTeamDetailsComponent,
     AdminTeamFormComponent,
-    AdminRosterComponent
+    AdminRosterComponent,
+    AdminModalUserComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
     AdminTeamsRoutingModule
+  ],
+  entryComponents: [
+    AdminModalUserComponent
   ]
 })
 export class AdminTeamsModule { }

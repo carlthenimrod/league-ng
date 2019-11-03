@@ -10,12 +10,11 @@ export class DialogService {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private appRef: ApplicationRef,
-    private injector: Injector,
     private resolver: ComponentFactoryResolver
   ) { }
 
-  open(componentType: Type<any>) {
-    this.dialogRef = this.create();
+  open(componentType: Type<any>, injector: Injector) {
+    this.dialogRef = this.create(injector);
     this.dialogRef.instance.componentType = componentType;
   }
 
@@ -23,14 +22,17 @@ export class DialogService {
     this.destroy();
   }
 
-  private create(): ComponentRef<DialogComponent> {
+  private create(injector: Injector): ComponentRef<DialogComponent> {
     const factory = this.resolver.resolveComponentFactory(DialogComponent);
 
-    const componentRef = factory.create(this.injector);
+    const componentRef = factory.create(injector);
     const componentView = (componentRef.hostView as EmbeddedViewRef<DialogComponent>).rootNodes[0];
 
     this.document.body.appendChild(componentView);
     this.appRef.attachView(componentRef.hostView);
+
+    componentRef.instance.close
+      .subscribe(this.close.bind(this));
 
     return componentRef;
   }

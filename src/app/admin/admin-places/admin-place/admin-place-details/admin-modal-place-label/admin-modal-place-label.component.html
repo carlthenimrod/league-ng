@@ -1,0 +1,19 @@
+<ng-container *ngIf="place$ | async as place">
+  <h1>Update Label</h1>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <input
+      type="text"
+      [ngModel]="place.name"
+      name="name"
+      placeholder="Enter a Label"
+      required
+    >
+
+    <div id="actions">
+      <button [disabled]="!f.valid" id="save">Save</button>
+
+      <button id="close" appDialogClose>Cancel</button>
+    </div>
+  </form>
+</ng-container>

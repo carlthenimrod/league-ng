@@ -1,0 +1,74 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  background-color: theme-color-level(primary, 4);
+  display: block;
+
+  @include media-breakpoint-up(sm) {
+    background-color: theme-color-level(primary, -12);
+  }
+}
+
+header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+
+  @include media-breakpoint-up(sm) {
+    padding: 0.5rem 1rem;
+  }
+
+  h1 {
+    font-size: $h2-font-size;
+    color: $white;
+    margin: 0 0 0 0.5rem;
+
+    @include media-breakpoint-up(sm) {
+      color: theme-color(primary);
+      margin: 0;
+    }
+  }
+
+  #actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+
+    button {
+      background-color: theme-color-level(info);
+      border: none;
+      border-radius: 100%;
+      color: $white;
+      display: flex;
+      height: 2.5rem;
+      margin-left: 0.5rem;
+      padding: 0.5rem;
+      width: 2.5rem;
+
+      @include media-breakpoint-up(sm) {
+        border-radius: 5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        width: auto;
+      }
+
+      span {
+        display: none;
+
+        @include media-breakpoint-up(sm) {
+          display: inline;
+          font-size: 0.8rem;
+          margin-right: 0.5rem;
+          text-transform: uppercase;
+        }
+      }
+
+      i { margin: auto; }
+    }
+  }
+}

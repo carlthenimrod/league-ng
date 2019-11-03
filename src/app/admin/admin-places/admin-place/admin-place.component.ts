@@ -9,11 +9,12 @@ import { PlaceService } from '@app/services/place.service';
 @Component({
   selector: 'app-admin-place',
   templateUrl: './admin-place.component.html',
-  styleUrls: ['./admin-place.component.scss']
+  styleUrls: ['./admin-place.component.scss'],
+  providers: [PlaceService]
 })
 export class AdminPlaceComponent implements OnInit {
   place$: Observable<Place>;
-  editingPlace = false;
+  selected = 'details';
 
   constructor(
     private placeService: PlaceService,

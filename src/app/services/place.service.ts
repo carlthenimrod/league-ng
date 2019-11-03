@@ -36,6 +36,18 @@ export class PlaceService {
     : this.http.get<Place[]>(url);
   }
 
+  put$(values: { [key: string]: any }): Observable<Place> {
+    const url = `${this.api}places/${this.place._id}`;
+
+    return this.http.put<Place>(url, { ...this.place, ...values })
+      .pipe(
+        tap(place => {
+          this.place = place;
+          this.placeSubject.next(_.cloneDeep(this.place));
+        })
+      );
+  }
+
   create(place: Place) {
     const url = this.api + 'places';
     return this.http.post(url, place);

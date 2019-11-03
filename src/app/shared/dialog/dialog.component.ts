@@ -1,26 +1,39 @@
-import { Component, OnInit, ViewContainerRef, ViewChild, Type, AfterViewInit, ComponentFactoryResolver, Injector } from '@angular/core';
+import { Component, ViewChild, Type, AfterViewInit, ComponentFactoryResolver, HostBinding, Output, EventEmitter, HostListener, Injector, ChangeDetectorRef, ViewContainerRef } from '@angular/core';
+
+import { lightboxTrigger } from './animations';
 
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss']
+  styleUrls: ['./dialog.component.scss'],
+  animations: [lightboxTrigger]
 })
-export class DialogComponent implements OnInit, AfterViewInit {
-  @ViewChild('vc', { static: false, read: ViewContainerRef }) vc: ViewContainerRef;
+export class DialogComponent implements AfterViewInit {
+  @Output() close = new EventEmitter<boolean>();
+  @ViewChild('vc', { static: false, read: ViewContainerRef }) vc;
+  @HostBinding('@lightbox') lightbox;
   componentType: Type<any>;
 
+  @HostListener('document:keydown.escape') onKeydownHandler() {
+    this.close.emit(true);
+  }
+
   constructor(
+    private cd: ChangeDetectorRef,
     private injector: Injector,
     private resolver: ComponentFactoryResolver
   ) { }
 
-  ngOnInit() {
-  }
-
   ngAfterViewInit() {
     const factory = this.resolver.resolveComponentFactory(this.componentType);
+    const componentRef = factory.create(this.injector);
 
     this.vc.clear();
-    this.vc.createComponent(factory);
+    this.vc.insert(componentRef.hostView);
+    this.cd.detectChanges();
+  }
+
+  onClickClose() {
+    this.close.emit(true);
   }
 }

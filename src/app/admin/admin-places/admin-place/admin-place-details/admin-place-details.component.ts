@@ -1,41 +1,27 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, Injector } from '@angular/core';
 
+import { DialogService } from '@app/shared/dialog/dialog.service';
 import { Place } from '@app/models/place';
-import { PlaceService } from '@app/services/place.service';
+import { AdminModalPlaceLabelComponent } from './admin-modal-place-label/admin-modal-place-label.component';
 
 @Component({
   selector: 'app-admin-place-details',
   templateUrl: './admin-place-details.component.html',
   styleUrls: ['./admin-place-details.component.scss']
 })
-export class AdminPlaceDetailsComponent implements OnInit {
+export class AdminPlaceDetailsComponent {
   @Input() place: Place;
-  @Output('editClick') editClick: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
-    private placeService: PlaceService,
-    private router: Router
+    private dialog: DialogService,
+    private injector: Injector
   ) { }
 
-  ngOnInit() {
-  }
-
-  onEditClick() {
-    this.editClick.emit(true);
-  }
-
-  onDeleteClick() {
-    const name = prompt('Warning: Cannot be undone! Enter place name to confirm:');
-
-    if (!name) { return; }
-
-    if (this.place.name === name.trim()) {
-      this.placeService.delete(this.place._id).subscribe(() => {
-        this.router.navigate(['/', 'admin', 'places']);
-      });
-    } else {
-      alert('Error: Place name entered doesn\'t match.');
+  onClickOpenDialog(type: string) {
+    switch (type) {
+      case 'label':
+        this.dialog.open(AdminModalPlaceLabelComponent, this.injector);
+        break;
     }
   }
 }

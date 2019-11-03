@@ -1,9 +1,49 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
 :host {
-  background-color: #000;
-  opacity: 0.5;
+  background-color: theme-color-level(primary, 1);
+  margin-top: 3rem;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+
+  @include media-breakpoint-up(sm) {
+    background-color: rgba($black, 0.8);
+    margin-top: 0;
+    padding-top: 5rem;
+  }
+}
+
+article {
+  position: relative;
+
+  @include media-breakpoint-up(sm) {
+    background-color: $white;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 1px rgba($black, 0.4);
+    margin: 0 auto;
+    max-width: 35rem;
+    padding: 5px;
+  }
+
+  button {
+    background: none;
+    border: none;
+    color: $white;
+    font-size: 1.2rem;
+    position: absolute;
+    top: 1rem;
+    right: 0.5rem;
+
+    @include media-breakpoint-up(sm) {
+      color: theme-color(primary);
+      right: 1rem;
+    }
+  }
 }

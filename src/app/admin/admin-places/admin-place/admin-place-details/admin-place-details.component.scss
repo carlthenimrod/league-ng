@@ -4,80 +4,41 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
-#place-details {
-  margin: 0 0 2rem 0;
-  padding-left: 0.5rem;
-  padding-top: 1rem;
-  padding-right: 0.5rem;
+:host {
+  display: block;
+  padding: 1rem 0;
+}
+
+section {
+  margin: 0 0.5rem 1rem 0.5rem;
 
   header {
     align-items: center;
+    border-bottom: 2px solid theme-color(primary);
     display: flex;
-    justify-content: space-between;
+    padding: 0.25rem 0;
 
-    h1 {
-      color: $text-muted;
-      font-size: $h2-font-size;
+    h3 {
+      color: theme-color(primary);
+      font-size: 1rem;
       margin: 0;
+      text-transform: uppercase;
     }
 
-    #actions-desktop {
-      display: none;
-    }
-  }
+    div {
+      margin-left: auto;
 
-  section#description {
-    padding: 1rem 0 0 0;
-
-    p {
-      margin: 0;
-    }
-  }
-
-  #actions-mobile {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 0;
-
-    button {
-      width: 50%;
-
-      i {
-        margin-right: 0.5rem;
-      }
-
-      &:first-child {
-        margin: 0 0.125rem 0 0;
-      }
-
-      &:last-child {
-        margin: 0 0 0 0.125rem;
+      button {
+        background: none;
+        border: none;
+        color: theme-color(info);
+        cursor: pointer;
       }
     }
   }
-}
 
-@include media-breakpoint-up(sm) {
-  #place-details {
-    background-color: theme-color(light);
-    padding: 1.5rem;
-
-    header {
-      #actions-desktop {
-        display: block;
-
-        button {
-          margin: 0 0 0 0.25rem;
-
-          i {
-            margin-right: 0.5rem;
-          }
-        }
-      }
-    }
-
-    #actions-mobile {
-      display: none;
-    }
+  > div {
+    font-size: 1.25rem;
+    padding: 0.5rem 0;
   }
 }
