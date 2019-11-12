@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 
-import { Place, Permit, Slot } from '@app/models/place';
+import { Place, Permit, Slot, Location } from '@app/models/place';
 import { Game } from '@app/models/game';
 
 @Injectable({
@@ -34,6 +34,18 @@ export class PlaceService {
           })
         )
     : this.http.get<Place[]>(url);
+  }
+
+  post$(place: Place): Observable<Place> {
+    const url = `${this.api}places`;
+
+    return this.http.post<Place>(url, place)
+      .pipe(
+        tap(newPlace => {
+          this.place = newPlace;
+          this.placeSubject.next(_.cloneDeep(newPlace));
+        })
+      );
   }
 
   put$(values: { [key: string]: any }): Observable<Place> {

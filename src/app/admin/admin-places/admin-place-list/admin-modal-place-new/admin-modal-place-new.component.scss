@@ -1,0 +1,13 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+button#add-location {
+  background: none;
+  border: none;
+  color: theme-color(info);
+
+  i { margin-right: 0.5rem; }
+}

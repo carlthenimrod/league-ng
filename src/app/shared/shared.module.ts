@@ -23,6 +23,8 @@ import { GmapLinkPipe } from './gmap-link.pipe';
 import { TabSelectorComponent } from './tab-selector/tab-selector.component';
 import { ModalModule } from './modal/modal.module';
 import { StringifyAddressPipe } from './stringify-address.pipe';
+import { MustMatchValidatorDirective } from './validators/must-match.directive';
+import { HasAddressPipe } from './has-address.pipe';
 
 @NgModule({
   imports: [
@@ -51,7 +53,9 @@ import { StringifyAddressPipe } from './stringify-address.pipe';
     GameComponent,
     TabSelectorComponent,
     ModalModule,
-    StringifyAddressPipe
+    StringifyAddressPipe,
+    HasAddressPipe,
+    MustMatchValidatorDirective
   ],
   declarations: [
     NoticeComponent,
@@ -60,7 +64,9 @@ import { StringifyAddressPipe } from './stringify-address.pipe';
     GameComponent,
     GmapLinkPipe,
     TabSelectorComponent,
-    StringifyAddressPipe
+    StringifyAddressPipe,
+    HasAddressPipe,
+    MustMatchValidatorDirective
   ]
 })
 export class SharedModule { }

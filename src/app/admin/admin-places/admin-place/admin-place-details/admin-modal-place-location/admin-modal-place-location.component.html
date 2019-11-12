@@ -1,0 +1,41 @@
+<ng-container *ngIf="place$ | async as place">
+  <app-modal-header>
+    <h1 *ngIf="!delete">{{ !edit ? 'Add' : 'Update' }} Location</h1>
+    <h1 *ngIf="delete">Remove:<span>"{{ location.name }}"</span></h1>
+  </app-modal-header>
+
+  <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f, place.locations)">
+    <app-modal-form-field>
+      <input
+        *ngIf="!delete"
+        type="text"
+        name="name"
+        placeholder="Enter Name"
+        [(ngModel)]="location.name"
+        required
+      >
+
+      <input
+        *ngIf="delete"
+        type="text"
+        name="name"
+        placeholder="Confirm Name"
+        ngModel
+        [appMustMatch]="location.name"
+        required
+      >
+    </app-modal-form-field>
+
+    <app-modal-actions>
+      <button *ngIf="!delete" id="save" [disabled]="!f.valid">
+        {{ !edit ? 'Add' : 'Save' }}
+      </button>
+
+      <button *ngIf="delete" id="delete" [disabled]="!f.valid">
+        Remove
+      </button>
+
+      <button id="cancel" appModalClose>Cancel</button>
+    </app-modal-actions>
+  </form>
+</ng-container>

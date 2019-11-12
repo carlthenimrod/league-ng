@@ -3,18 +3,19 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { SharedModule } from '@app/shared/shared.module';
+import { AdminSharedModule } from '../admin-shared/admin-shared.module';
 import { AdminPlacesRoutingModule } from './admin-places-routing.module';
 import { AdminPlacesComponent } from './admin-places.component';
 import { AdminPlaceListComponent } from './admin-place-list/admin-place-list.component';
 import { AdminPlaceComponent } from './admin-place/admin-place.component';
 import { AdminPlaceDetailsComponent } from './admin-place/admin-place-details/admin-place-details.component';
-import { AdminPlaceFormComponent } from './admin-place/admin-place-form/admin-place-form.component';
-import { AdminPermitsComponent } from './admin-place/admin-permits/admin-permits.component';
-import { AdminPermitComponent } from './admin-place/admin-permits/admin-permit/admin-permit.component';
-import { AdminModalTimeComponent } from './admin-place/admin-permits/admin-permit/admin-modal-time/admin-modal-time.component';
-import { AdminModalPermitComponent } from './admin-place/admin-permits/admin-modal-permit/admin-modal-permit.component';
 import { AdminPlaceHeaderComponent } from './admin-place/admin-place-header/admin-place-header.component';
 import { AdminModalPlaceLabelComponent } from './admin-place/admin-place-details/admin-modal-place-label/admin-modal-place-label.component';
+import { AdminModalPlaceAddressComponent } from './admin-place/admin-place-details/admin-modal-place-address/admin-modal-place-address.component';
+import { AdminModalPlaceLocationComponent } from './admin-place/admin-place-details/admin-modal-place-location/admin-modal-place-location.component';
+import { AdminModalPlaceNewComponent } from './admin-place-list/admin-modal-place-new/admin-modal-place-new.component';
+import { AdminPlacePermitsComponent } from './admin-place/admin-place-permits/admin-place-permits.component';
+import { AdminModalPlacePermitComponent } from './admin-place/admin-place-permits/admin-modal-place-permit/admin-modal-place-permit.component';
 
 @NgModule({
   declarations: [
@@ -22,25 +23,28 @@ import { AdminModalPlaceLabelComponent } from './admin-place/admin-place-details
     AdminPlaceListComponent,
     AdminPlaceComponent,
     AdminPlaceDetailsComponent,
-    AdminPlaceFormComponent,
-    AdminPermitsComponent,
-    AdminPermitComponent,
-    AdminModalPermitComponent,
-    AdminModalTimeComponent,
     AdminPlaceHeaderComponent,
-    AdminModalPlaceLabelComponent
+    AdminPlacePermitsComponent,
+    AdminModalPlaceLabelComponent,
+    AdminModalPlaceAddressComponent,
+    AdminModalPlaceLocationComponent,
+    AdminModalPlaceNewComponent,
+    AdminModalPlacePermitComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    AdminSharedModule,
     AdminPlacesRoutingModule
   ],
   entryComponents: [
-    AdminModalPermitComponent,
-    AdminModalTimeComponent,
-    AdminModalPlaceLabelComponent
+    AdminModalPlaceLabelComponent,
+    AdminModalPlaceAddressComponent,
+    AdminModalPlaceLocationComponent,
+    AdminModalPlaceNewComponent,
+    AdminModalPlacePermitComponent
   ]
 })
 export class AdminPlacesModule { }

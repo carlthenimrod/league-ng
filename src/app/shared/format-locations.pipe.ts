@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { PlaceLocation } from '@app/models/place';
+import { Location } from '@app/models/place';
 
 @Pipe({
   name: 'formatLocations'
 })
 export class FormatLocationsPipe implements PipeTransform {
 
-  transform(locations: PlaceLocation[]): string {
+  transform(locations: Location[]): string {
     let string = '';
 
     string += '(';
@@ -19,5 +19,4 @@ export class FormatLocationsPipe implements PipeTransform {
 
     return string;
   }
-
 }

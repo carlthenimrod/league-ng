@@ -1,18 +1,18 @@
-<ng-container *ngIf="places$ | async as places">
+<app-admin-items *ngIf="places$ | async as places">
   <header>
     <h2>Places</h2>
 
     <button
       mat-flat-button
       color="accent"
-      routerLink="/admin/places/new"
+      (click)="onClickOpenModal()"
     >
       <i class="fas fa-plus"></i>
       <span>New</span>
     </button>
   </header>
 
-  <section id="places">
+  <section id="places" class="items">
     <ng-container *ngIf="places.length > 0; else noPlaces">
       <article
         *ngFor="let place of places"
@@ -22,10 +22,10 @@
       </article>
     </ng-container>
 
-    <ng-template>
-      <p #noPlaces class="no-places">
+    <ng-template #noPlaces>
+      <p class="no-items">
         No places. Maybe create one? <i class="far fa-smile"></i>
       </p>
     </ng-template>
   </section>
-</ng-container>
+</app-admin-items>

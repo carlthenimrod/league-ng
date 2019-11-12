@@ -1,0 +1,60 @@
+<app-modal-header>
+  <h1>Add Permit</h1>
+</app-modal-header>
+
+<form [formGroup]="permitForm" (ngSubmit)="permitForm.valid && onSubmit()">
+  <h2>Single Date or Multi</h2>
+
+  <app-modal-toggler>
+    <app-modal-toggle label="Single">
+      <input
+        type="radio"
+        value="single"
+        formControlName="toggle"
+        #toggle
+      >
+    </app-modal-toggle>
+
+    <app-modal-toggle label="Multi">
+      <input
+        type="radio"
+        value="multi"
+        formControlName="toggle"
+        #toggle
+      >
+    </app-modal-toggle>
+  </app-modal-toggler>
+
+  <ng-container formGroupName="date">
+    <app-modal-form-field>
+      <input
+        type="date"
+        formControlName="start"
+        placeholder="Start Date"
+      >
+    </app-modal-form-field>
+  </ng-container>
+
+  <ng-container formGroupName="time">
+    <app-modal-form-field>
+      <input
+        type="time"
+        formControlName="start"
+        placeholder="Start Time"
+      >
+    </app-modal-form-field>
+
+    <app-modal-form-field>
+      <input
+        type="time"
+        formControlName="end"
+        placeholder="End Time"
+      >
+    </app-modal-form-field>
+  </ng-container>
+
+  <app-modal-actions>
+    <button id="save">Save</button>
+    <button id="cancel" appModalClose>Cancel</button>
+  </app-modal-actions>
+</form>

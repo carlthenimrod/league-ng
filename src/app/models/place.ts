@@ -1,5 +1,4 @@
 import { Address } from './address';
-import { Game } from './game';
 
 export interface Slot {
   start: string;
@@ -13,7 +12,7 @@ export interface Slot {
   __v?: string;
 }
 
-export interface PlaceLocation {
+export interface Location {
   name: string;
   disabled?: boolean;
   _id?: string;
@@ -30,7 +29,7 @@ export interface Permit {
 export interface Place {
   name: string;
   address?: Address;
-  locations?: PlaceLocation[];
+  locations?: Location[];
   permits?: Permit[];
   disabled?: boolean;
   _id?: string;

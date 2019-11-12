@@ -7,11 +7,17 @@
   >
   </app-tab-selector>
 
-  <ng-container [ngSwitch]="selected">
+  <section [ngSwitch]="selected">
     <app-admin-place-details
       *ngSwitchCase="'details'"
       [place]="place"
     >
     </app-admin-place-details>
-  </ng-container>
+
+    <app-admin-place-permits
+      *ngSwitchCase="'permits'"
+      [place]="place"
+    >
+    </app-admin-place-permits>
+  </section>
 </ng-container>

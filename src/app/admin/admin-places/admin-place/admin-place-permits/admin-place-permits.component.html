@@ -1,0 +1,18 @@
+<app-admin-item>
+  <header>
+    <h3>Permits</h3>
+
+    <div>
+      <button (click)="onClickOpenModal()" class="add">
+        <i class="fas fa-plus-square"></i>
+      </button>
+    </div>
+  </header>
+
+  <div *ngIf="place.permits.length > 0; else noPermits">
+  </div>
+
+  <ng-template #noPermits>
+    <div>No Permits</div>
+  </ng-template>
+</app-admin-item>

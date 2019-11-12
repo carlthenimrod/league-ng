@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { League, Group } from '@app/models/league';
 import { Game } from '@app/models/game';
-import { Place, PlaceLocation } from '@app/models/place';
+import { Place, Location } from '@app/models/place';
 import { PlaceService } from '@app/services/place.service';
 
 @Component({
@@ -30,7 +30,7 @@ export class AdminModalAddGameComponent implements OnInit {
   });
   places: Place[];
   showPlaces = false;
-  locations: PlaceLocation[];
+  locations: Location[];
   showLocations = false;
 
   constructor(
@@ -238,7 +238,7 @@ export class AdminModalAddGameComponent implements OnInit {
         // update locations
         if (this.gameForm.value.locations) {
           const locations = this.gameForm.value.locations;
-          this.game.place.locations = place.locations.reduce((acc: PlaceLocation[], l: PlaceLocation) => {
+          this.game.place.locations = place.locations.reduce((acc: Location[], l: Location) => {
             if (locations.includes(l._id)) { acc.push(l); }
             return acc;
           }, []);

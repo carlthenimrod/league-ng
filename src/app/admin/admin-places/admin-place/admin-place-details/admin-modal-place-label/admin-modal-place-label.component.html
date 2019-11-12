@@ -1,19 +1,23 @@
 <ng-container *ngIf="place$ | async as place">
-  <h1>Update Label</h1>
+  <app-modal-header>
+    <h1>Update Label</h1>
+  </app-modal-header>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-    <input
-      type="text"
-      [ngModel]="place.name"
-      name="name"
-      placeholder="Enter a Label"
-      required
-    >
+  <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f)">
+    <app-modal-form-field>
+      <input
+        type="text"
+        [ngModel]="place.name"
+        name="name"
+        placeholder="Enter a Label"
+        required
+      >
+    </app-modal-form-field>
 
-    <div id="actions">
-      <button [disabled]="!f.valid" id="save">Save</button>
+    <app-modal-actions>
+      <button id="save" [disabled]="!f.valid">Save</button>
 
-      <button id="close" appDialogClose>Cancel</button>
-    </div>
+      <button id="cancel" appDialogClose>Cancel</button>
+    </app-modal-actions>
   </form>
 </ng-container>

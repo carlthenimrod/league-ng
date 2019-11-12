@@ -3,19 +3,18 @@ import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { ModalService } from '@app/shared/modal/modal.service';
-import { PlaceService } from '@app/services/place.service';
 import { Place } from '@app/models/place';
+import { PlaceService } from '@app/services/place.service';
 
 @Component({
   selector: 'app-admin-modal-place-label',
-  templateUrl: './admin-modal-place-label.component.html',
-  styleUrls: ['./admin-modal-place-label.component.scss']
+  templateUrl: './admin-modal-place-label.component.html'
 })
 export class AdminModalPlaceLabelComponent implements OnInit {
   place$: Observable<Place>;
 
   constructor(
-    private modalService: ModalService,
+    private modal: ModalService,
     private placeService: PlaceService
   ) { }
 
@@ -24,9 +23,7 @@ export class AdminModalPlaceLabelComponent implements OnInit {
   }
 
   onSubmit(f: NgForm) {
-    if (!f.valid) { return; }
-
     this.placeService.put$(f.value)
-      .subscribe(() => this.modalService.close());
+      .subscribe(() => this.modal.close());
   }
 }

@@ -1,0 +1,56 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+app-modal-form-field {
+  display: block;
+  margin: 0.5rem auto;
+  position: relative;
+  text-align: center;
+
+  input {
+    background-color: theme-color-level(primary, 6);
+    border: 2px solid theme-color-level(primary, -2);
+    border-radius: 3px;
+    color: $white;
+    font-size: 1.2rem;
+    max-width: 15rem;
+    padding: 0.25rem 0.5rem;
+    transition: border 50ms ease-in-out;
+    width: 100%;
+
+    @include media-breakpoint-up(sm) {
+      background-color: theme-color-level(primary, -8);
+      border: 2px solid theme-color-level(primary, -6);
+      color: theme-color-level(primary, 6);
+    }
+
+    &:focus {
+      border: 2px solid theme-color-level(primary, -2);
+    }
+
+    &.ng-invalid.ng-touched {
+      border: 2px solid theme-color(danger);
+    }
+
+    &::placeholder {
+      color: $gray-500;
+
+      @include media-breakpoint-up(sm) {
+        color: theme-color-level(primary, -2);
+      }
+    }
+  }
+
+  button {
+    background: none;
+    border: none;
+    color: theme-color(info);
+    padding: 0 1rem;
+    position: absolute;
+    top: 0.5rem;
+    right: -3rem;
+  }
+}

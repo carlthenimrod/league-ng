@@ -1,9 +1,9 @@
-<section id="label">
+<app-admin-item>
   <header>
     <h3>Place Label</h3>
 
     <div>
-      <button (click)="onClickOpenModal('label')">
+      <button (click)="onClickOpenModal($event, 'label')">
         <i class="fas fa-edit"></i>
       </button>
     </div>
@@ -12,26 +12,59 @@
   <div>
     {{ place.name }}
   </div>
-</section>
+</app-admin-item>
 
-<section id="address">
+<app-admin-item>
   <header>
     <h3>Address</h3>
 
     <div>
-      <button (click)="onClickOpenModal('address')">
+      <button (click)="onClickOpenModal($event, 'address')">
         <i class="fas fa-edit"></i>
       </button>
     </div>
   </header>
 
-  <div>
+  <div *ngIf="place.address | hasAddress; else noAddress">
     {{ place.address | stringifyAddress }}
   </div>
-</section>
 
-<section id="locations">
+  <ng-template #noAddress>
+    <div>No Address</div>
+  </ng-template>
+</app-admin-item>
+
+<app-admin-item>
   <header>
     <h3>Locations</h3>
+
+    <div>
+      <button (click)="onClickOpenModal($event, 'addLocation')" class="add">
+        <i class="fas fa-plus-square"></i>
+      </button>
+    </div>
   </header>
-</section>
+
+  <div *ngIf="place.locations.length > 0; else noLocations">
+    <a
+      *ngFor="let location of place.locations"
+      (click)="onClickOpenModal($event, 'editLocation', location._id)"
+      [title]="location.name"
+    >
+      <span>
+        {{ location.name }}
+      </span>
+
+      <button
+        class="action"
+        (click)="onClickOpenModal($event, 'deleteLocation', location._id)"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+    </a>
+  </div>
+
+  <ng-template #noLocations>
+    <div>No Locations</div>
+  </ng-template>
+</app-admin-item>
