@@ -32,6 +32,11 @@ app-modal {
     margin: 0;
     padding: 0.5rem 0;
     text-align: center;
+
+    &.warning {
+      color: theme-color(danger);
+      font-weight: 700;
+    }
   }
 
   article {

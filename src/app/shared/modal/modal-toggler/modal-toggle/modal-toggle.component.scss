@@ -13,6 +13,10 @@ label {
   color: theme-color-level(primary, -8);
   cursor: pointer;
   margin: 0 1rem 0 0;
+
+  @include media-breakpoint-up(sm) {
+    color: theme-color(primary);
+  }
 }
 
 div {
@@ -25,16 +29,22 @@ div {
   overflow: visible;
   width: 1.25rem;
 
+  @include media-breakpoint-up(sm) {
+    border: 2px solid theme-color(primary);
+  }
+
   span {
     border-radius: 100%;
     display: block;
     margin: auto;
-    transition: all 200ms ease-in-out;
+    transform: scale(0);
+    transition: transform 100ms ease-in-out;
 
     &.toggled {
-      background-color: theme-color-level(primary, -8);
+      background-color: $white;
       height: 50%;
       width: 50%;
+      transform: scale(1);
     }
   }
 }

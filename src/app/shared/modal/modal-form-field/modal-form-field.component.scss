@@ -44,7 +44,7 @@ app-modal-form-field {
     }
   }
 
-  button {
+  > button {
     background: none;
     border: none;
     color: theme-color(info);

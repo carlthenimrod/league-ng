@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '@app/shared/shared.module';
-import { CalendarModule } from '@app/calendar/calendar.module';
 import { TeamRoutingModule } from './team-routing.module';
 import { TeamComponent } from './team.component';
 import { TeamDashboardComponent } from './team-dashboard/team-dashboard.component';
@@ -25,7 +24,6 @@ import { TeamInviteService } from './team-invite/team-invite.service';
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
-    CalendarModule,
     TeamRoutingModule
   ],
   declarations: [

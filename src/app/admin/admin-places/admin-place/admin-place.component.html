@@ -1,23 +1,41 @@
 <ng-container *ngIf="place$ | async as place">
-  <app-admin-place-header [place]="place"></app-admin-place-header>
+  <app-admin-item-header>
+    <header>
+      <h1>{{ place.name }}</h1>
 
-  <app-tab-selector
-    [tabs]="['details', 'permits']"
-    (select)="selected = $event"
-  >
-  </app-tab-selector>
+      <div id="actions">
+        <button (click)="settings = !settings">
+          <span>Settings</span>
 
-  <section [ngSwitch]="selected">
-    <app-admin-place-details
-      *ngSwitchCase="'details'"
-      [place]="place"
+          <i class="fas fa-cog"></i>
+        </button>
+      </div>
+    </header>
+  </app-admin-item-header>
+
+  <app-admin-item-settings *ngIf="settings">
+    <button (click)="onClickOpenModal()">Delete Place</button>
+  </app-admin-item-settings>
+
+  <ng-container>
+    <app-tab-selector
+      [tabs]="['details', 'permits']"
+      (select)="selected = $event"
     >
-    </app-admin-place-details>
+    </app-tab-selector>
 
-    <app-admin-place-permits
-      *ngSwitchCase="'permits'"
-      [place]="place"
-    >
-    </app-admin-place-permits>
-  </section>
+    <section [ngSwitch]="selected">
+      <app-admin-place-details
+        *ngSwitchCase="'details'"
+        [place]="place"
+      >
+      </app-admin-place-details>
+
+      <app-admin-place-permits
+        *ngSwitchCase="'permits'"
+        [place]="place"
+      >
+      </app-admin-place-permits>
+    </section>
+  </ng-container>
 </ng-container>

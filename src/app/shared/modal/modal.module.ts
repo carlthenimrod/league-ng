@@ -14,6 +14,8 @@ import { ModalStepPrevDirective } from './modal-stepper/modal-step/modal-step-pr
 import { ModalStepNextDirective } from './modal-stepper/modal-step/modal-step-next.directive';
 import { ModalTogglerComponent } from './modal-toggler/modal-toggler.component';
 import { ModalToggleComponent } from './modal-toggler/modal-toggle/modal-toggle.component';
+import { ModalDatePickerComponent } from './modal-date-picker/modal-date-picker.component';
+import { ModalDatePickerDirective } from './modal-date-picker/modal-date-picker.directive';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ModalToggleComponent } from './modal-toggler/modal-toggle/modal-toggle.
     ModalStepPrevDirective,
     ModalStepNextDirective,
     ModalTogglerComponent,
-    ModalToggleComponent
+    ModalToggleComponent,
+    ModalDatePickerComponent,
+    ModalDatePickerDirective
   ],
   imports: [
     CommonModule
@@ -44,7 +48,9 @@ import { ModalToggleComponent } from './modal-toggler/modal-toggle/modal-toggle.
     ModalStepPrevDirective,
     ModalStepNextDirective,
     ModalTogglerComponent,
-    ModalToggleComponent
+    ModalToggleComponent,
+    ModalDatePickerComponent,
+    ModalDatePickerDirective
   ],
   providers: [ModalService],
   entryComponents: [ModalComponent]

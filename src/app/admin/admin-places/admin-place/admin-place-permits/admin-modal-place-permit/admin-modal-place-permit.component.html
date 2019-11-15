@@ -3,10 +3,8 @@
 </app-modal-header>
 
 <form [formGroup]="permitForm" (ngSubmit)="permitForm.valid && onSubmit()">
-  <h2>Single Date or Multi</h2>
-
   <app-modal-toggler>
-    <app-modal-toggle label="Single">
+    <app-modal-toggle label="Single Date">
       <input
         type="radio"
         value="single"
@@ -15,7 +13,7 @@
       >
     </app-modal-toggle>
 
-    <app-modal-toggle label="Multi">
+    <app-modal-toggle label="Date Range">
       <input
         type="radio"
         value="multi"
@@ -28,10 +26,11 @@
   <ng-container formGroupName="date">
     <app-modal-form-field>
       <input
-        type="date"
         formControlName="start"
         placeholder="Start Date"
+        [appModalDatePicker]="startDate"
       >
+      <app-modal-date-picker #startDate></app-modal-date-picker>
     </app-modal-form-field>
   </ng-container>
 

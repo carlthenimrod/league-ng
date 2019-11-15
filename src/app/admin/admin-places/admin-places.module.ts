@@ -9,12 +9,12 @@ import { AdminPlacesComponent } from './admin-places.component';
 import { AdminPlaceListComponent } from './admin-place-list/admin-place-list.component';
 import { AdminPlaceComponent } from './admin-place/admin-place.component';
 import { AdminPlaceDetailsComponent } from './admin-place/admin-place-details/admin-place-details.component';
-import { AdminPlaceHeaderComponent } from './admin-place/admin-place-header/admin-place-header.component';
+import { AdminPlacePermitsComponent } from './admin-place/admin-place-permits/admin-place-permits.component';
+import { AdminModalPlaceDeleteComponent } from './admin-place/admin-modal-place-delete/admin-modal-place-delete.component';
 import { AdminModalPlaceLabelComponent } from './admin-place/admin-place-details/admin-modal-place-label/admin-modal-place-label.component';
 import { AdminModalPlaceAddressComponent } from './admin-place/admin-place-details/admin-modal-place-address/admin-modal-place-address.component';
 import { AdminModalPlaceLocationComponent } from './admin-place/admin-place-details/admin-modal-place-location/admin-modal-place-location.component';
 import { AdminModalPlaceNewComponent } from './admin-place-list/admin-modal-place-new/admin-modal-place-new.component';
-import { AdminPlacePermitsComponent } from './admin-place/admin-place-permits/admin-place-permits.component';
 import { AdminModalPlacePermitComponent } from './admin-place/admin-place-permits/admin-modal-place-permit/admin-modal-place-permit.component';
 
 @NgModule({
@@ -23,8 +23,8 @@ import { AdminModalPlacePermitComponent } from './admin-place/admin-place-permit
     AdminPlaceListComponent,
     AdminPlaceComponent,
     AdminPlaceDetailsComponent,
-    AdminPlaceHeaderComponent,
     AdminPlacePermitsComponent,
+    AdminModalPlaceDeleteComponent,
     AdminModalPlaceLabelComponent,
     AdminModalPlaceAddressComponent,
     AdminModalPlaceLocationComponent,
@@ -40,6 +40,7 @@ import { AdminModalPlacePermitComponent } from './admin-place/admin-place-permit
     AdminPlacesRoutingModule
   ],
   entryComponents: [
+    AdminModalPlaceDeleteComponent,
     AdminModalPlaceLabelComponent,
     AdminModalPlaceAddressComponent,
     AdminModalPlaceLocationComponent,

@@ -60,24 +60,15 @@ export class PlaceService {
       );
   }
 
-  create(place: Place) {
-    const url = this.api + 'places';
-    return this.http.post(url, place);
-  }
-
-  update(place: Place) {
-    const url = this.api + `places/${place._id}`;
-    return this.http.put(url, place).pipe(
-      tap((updatedPlace: Place) => {
-        this.place = updatedPlace;
-        this.placeSubject.next(_.cloneDeep(updatedPlace));
-      })
-    );
-  }
-
-  delete(id: string) {
-    const url = this.api + `places/${id}`;
-    return this.http.delete(url);
+  delete$() {
+    const url = `${this.api}places/${this.place._id}`;
+    return this.http.delete<void>(url)
+      .pipe(
+        tap(() => {
+          this.place = null;
+          this.placeSubject.next(null);
+        })
+      );
   }
 
   addPermit(permit: Permit) {

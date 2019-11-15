@@ -1,0 +1,37 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+app-admin-item-settings {
+  background-color: theme-color-level(primary, 4);
+  display: block;
+  padding: 1rem 0;
+
+  @include media-breakpoint-up(sm) {
+    background-color: theme-color-level(primary, -12);
+  }
+
+  button {
+    background-color: theme-color-level(danger, 8);
+    border: 3px solid theme-color(danger);
+    border-radius: 5px;
+    display: block;
+    color: $white;
+    font-weight: 700;
+    margin: 0 auto;
+    max-width: 12rem;
+    padding: 0.5rem 0;
+    text-transform: uppercase;
+    width: 100%;
+
+    &:hover {
+      background-color: theme-color-level(danger, 6);
+    }
+
+    &:active {
+      color: theme-color-level(danger, -10);
+    }
+  }
+}

@@ -1,0 +1,26 @@
+<ng-container *ngIf="place$ | async as place">
+  <app-modal-header>
+    <h1>Delete {{ place.name }}</h1>
+  </app-modal-header>
+
+  <form #f="ngForm" (ngSubmit)="f.valid && onSubmit()">
+    <h2>Enter name to confirm</h2>
+
+    <p class="warning">WARNING: This cannot be undone!</p>
+
+    <app-modal-form-field>
+      <input
+        name="name"
+        ngModel
+        placeholder="Enter Place Name"
+        [appMustMatch]="place.name"
+      >
+    </app-modal-form-field>
+  </form>
+
+  <app-modal-actions>
+    <button id="delete" [disabled]="!f.valid">Delete</button>
+
+    <button id="cancel" appModalClose>Cancel</button>
+  </app-modal-actions>
+</ng-container>
