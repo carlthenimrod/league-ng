@@ -10,9 +10,9 @@ export class GmapLinkPipe implements PipeTransform {
   transform(place: Place): string {
     let url = 'https://www.google.com/maps/search/?api=1&query=';
 
-    if (place.name) {
-      const name = place.name.toLowerCase().split(' ').join('+');
-      url += name;
+    if (place.label) {
+      const label = place.label.toLowerCase().split(' ').join('+');
+      url += label;
     }
 
     if (place.address.street) {

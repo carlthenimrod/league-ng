@@ -1,18 +1,18 @@
-<ng-container *ngIf="leagues$ | async as leagues">
+<app-admin-items *ngIf="leagues$ | async as leagues">
   <header>
     <h2>Leagues</h2>
 
     <button
       mat-flat-button
       color="accent"
-      routerLink="/admin/leagues/new"
+      (click)="onClickOpenModal()"
     >
       <i class="fas fa-plus"></i>
       <span>New</span>
     </button>
   </header>
 
-  <section id="leagues">
+  <section id="leagues" class="items">
     <ng-container *ngIf="leagues.length > 0; else noLeagues">
       <article
         *ngFor="let league of leagues"
@@ -28,4 +28,4 @@
       </p>
     </ng-template>
   </section>
-</ng-container>
+</app-admin-items>

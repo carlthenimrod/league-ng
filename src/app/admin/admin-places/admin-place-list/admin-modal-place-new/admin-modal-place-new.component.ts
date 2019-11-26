@@ -13,7 +13,7 @@ import { ModalService } from '@app/shared/modal/modal.service';
 })
 export class AdminModalPlaceNewComponent {
   placeForm = this.fb.group({
-    name: ['', Validators.required],
+    label: ['', Validators.required],
     address: this.fb.group({
       street: [''],
       city: [''],

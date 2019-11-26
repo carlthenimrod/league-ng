@@ -40,9 +40,39 @@ export class LeagueService {
       : this.http.get<League[]>(url);
   }
 
-  create(league: League): Observable<any> {
-    const url = this.api + 'leagues';
-    return this.http.post(url, league);
+  post$(league: League): Observable<League> {
+    const url = `${this.api}leagues`;
+
+    return this.http.post<League>(url, league)
+      .pipe(
+        tap(newLeague => {
+          this.league = newLeague;
+          this.leagueSubject.next(_.cloneDeep(newLeague));
+        })
+      );
+  }
+
+  put$(values: { [key: string]: any }): Observable<League> {
+    const url = `${this.api}leagues/${this.league._id}`;
+
+    return this.http.put<League>(url, { ...this.league, ...values })
+      .pipe(
+        tap(league => {
+          this.league = league;
+          this.leagueSubject.next(_.cloneDeep(this.league));
+        })
+      );
+  }
+
+  delete$() {
+    const url = `${this.api}leagues/${this.league._id}`;
+    return this.http.delete<void>(url)
+      .pipe(
+        tap(() => {
+          this.league = null;
+          this.leagueSubject.next(null);
+        })
+      );
   }
 
   update(league: League): Observable<any> {

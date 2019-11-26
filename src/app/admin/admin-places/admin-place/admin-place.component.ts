@@ -11,7 +11,6 @@ import { AdminModalPlaceDeleteComponent } from './admin-modal-place-delete/admin
 @Component({
   selector: 'app-admin-place',
   templateUrl: './admin-place.component.html',
-  styleUrls: ['./admin-place.component.scss'],
   providers: [PlaceService]
 })
 export class AdminPlaceComponent implements OnInit {

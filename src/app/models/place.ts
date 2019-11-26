@@ -27,7 +27,7 @@ export interface Permit {
 }
 
 export interface Place {
-  name: string;
+  label: string;
   address?: Address;
   locations?: Location[];
   permits?: Permit[];

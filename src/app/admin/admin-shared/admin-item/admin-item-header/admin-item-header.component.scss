@@ -9,7 +9,7 @@ app-admin-item-header {
   display: block;
 
   @include media-breakpoint-up(sm) {
-    background-color: theme-color-level(primary, -12);
+    background-color: transparent;
   }
 
   header {

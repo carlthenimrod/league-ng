@@ -1,4 +1,4 @@
-<app-admin-item>
+<app-admin-item-section>
   <header>
     <h3>Place Label</h3>
 
@@ -10,11 +10,11 @@
   </header>
 
   <div>
-    {{ place.name }}
+    {{ place.label }}
   </div>
-</app-admin-item>
+</app-admin-item-section>
 
-<app-admin-item>
+<app-admin-item-section>
   <header>
     <h3>Address</h3>
 
@@ -32,9 +32,9 @@
   <ng-template #noAddress>
     <div>No Address</div>
   </ng-template>
-</app-admin-item>
+</app-admin-item-section>
 
-<app-admin-item>
+<app-admin-item-section>
   <header>
     <h3>Locations</h3>
 
@@ -67,4 +67,4 @@
   <ng-template #noLocations>
     <div>No Locations</div>
   </ng-template>
-</app-admin-item>
+</app-admin-item-section>

@@ -231,7 +231,7 @@ export class AdminModalAddGameComponent implements OnInit {
 
         this.game.place = {
           _id: place._id,
-          name: place.name,
+          label: place.label,
           address: place.address
         };
 

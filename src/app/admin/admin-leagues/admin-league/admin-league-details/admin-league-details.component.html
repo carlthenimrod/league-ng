@@ -1,13 +1,35 @@
-<header>
-  <h1>{{ league.name }}</h1>
+<app-admin-item-section>
+  <header>
+    <h3>League Name</h3>
 
-  <div id="actions">
-    <button (click)="onClickEdit()">
-      <i class="fas fa-cog"></i>
-    </button>
+    <div>
+      <button (click)="onClickOpenModal('name', league._id)">
+        <i class="fas fa-edit"></i>
+      </button>
+    </div>
+  </header>
+
+  <div>
+    {{ league.name }}
   </div>
-</header>
+</app-admin-item-section>
 
-<section id="description" *ngIf="league.description">
-  <p>{{ league.description }}</p>
-</section>
+<app-admin-item-section>
+  <header>
+    <h3>Description</h3>
+
+    <div>
+      <button (click)="onClickOpenModal('description', league._id)">
+        <i class="fas fa-edit"></i>
+      </button>
+    </div>
+  </header>
+
+  <div *ngIf="league.description; else noDescription">
+    {{ league.description }}
+  </div>
+
+  <ng-template #noDescription>
+    <div>No Description</div>
+  </ng-template>
+</app-admin-item-section>

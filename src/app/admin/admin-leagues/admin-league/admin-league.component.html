@@ -1,13 +1,35 @@
-<ng-container *ngIf="league$ | async as league">
-  <app-admin-league-header [league]="league"></app-admin-league-header>
+<app-admin-item *ngIf="league$ | async as league">
+  <app-admin-item-header>
+    <header>
+      <h1>{{ league.name }}</h1>
+
+      <div id="actions">
+        <button (click)="settings = !settings">
+          <span>Settings</span>
+
+          <i class="fas fa-cog"></i>
+        </button>
+      </div>
+    </header>
+  </app-admin-item-header>
+
+  <app-admin-item-settings *ngIf="settings">
+    <button (click)="onClickOpenModal()">Delete League</button>
+  </app-admin-item-settings>
 
   <app-tab-selector
-    [tabs]="['overview', 'schedule']"
+    [tabs]="['details', 'overview', 'schedule']"
     (select)="selected = $event"
   >
   </app-tab-selector>
 
-  <ng-container [ngSwitch]="selected">
+  <section [ngSwitch]="selected">
+    <app-admin-league-details
+      *ngSwitchCase="'details'"
+      [league]="league"
+    >
+    </app-admin-league-details>
+
     <app-admin-overview
       *ngSwitchCase="'overview'"
       [league]="league"
@@ -19,5 +41,5 @@
       [league]="league"
     >
     </app-admin-league-schedule>
-  </ng-container>
-</ng-container>
+  </section>
+</app-admin-item>

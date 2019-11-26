@@ -7,23 +7,23 @@
     [formGroup]="placeForm"
     (ngSubmit)="placeForm.valid && onSubmit(placeForm.value)"
   >
-    <app-modal-step [stepControl]="placeForm.get('name')">
+    <app-modal-step [stepControl]="placeForm.get('label')">
       <h2>Choose a Label</h2>
 
       <p>Label is required to identify your place.</p>
 
       <app-modal-form-field>
         <input
-          name="name"
+          name="label"
           placeholder="Enter Label"
-          formControlName="name"
+          formControlName="label"
         >
       </app-modal-form-field>
 
       <app-modal-actions>
         <button
           id="next"
-          [disabled]="!placeForm.get('name').valid"
+          [disabled]="!placeForm.get('label').valid"
           appModalStepNext
         >
           Next

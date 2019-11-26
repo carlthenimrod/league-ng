@@ -9,14 +9,14 @@ app-modal-form-field {
   margin: 0.5rem auto;
   position: relative;
   text-align: center;
+  width: 100%;
 
-  input {
+  input, textarea {
     background-color: theme-color-level(primary, 6);
     border: 2px solid theme-color-level(primary, -2);
     border-radius: 3px;
     color: $white;
     font-size: 1.2rem;
-    max-width: 15rem;
     padding: 0.25rem 0.5rem;
     transition: border 50ms ease-in-out;
     width: 100%;
@@ -42,6 +42,15 @@ app-modal-form-field {
         color: theme-color-level(primary, -2);
       }
     }
+  }
+
+  input {
+    max-width: 15rem;
+  }
+
+  textarea {
+    min-height: 8rem;
+    max-width: 20rem;
   }
 
   > button {

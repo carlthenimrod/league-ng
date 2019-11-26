@@ -1,38 +1,33 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, Injector } from '@angular/core';
 
 import { League } from '@app/models/league';
-import { LeagueService } from '@app/services/league.service';
+import { ModalService } from '@app/shared/modal/modal.service';
+import { AdminModalLeagueNameComponent } from './admin-modal-league-name/admin-modal-league-name.component';
+import { AdminModalLeagueDescriptionComponent } from './admin-modal-league-description/admin-modal-league-description.component';
 
 @Component({
   selector: 'app-admin-league-details',
-  templateUrl: './admin-league-details.component.html',
-  styleUrls: ['./admin-league-details.component.scss']
+  templateUrl: './admin-league-details.component.html'
 })
 export class AdminLeagueDetailsComponent {
   @Input() league: League;
-  @Output() edit = new EventEmitter<boolean>();
 
   constructor(
-    public leagueService: LeagueService,
-    public router: Router
+    private injector: Injector,
+    private modal: ModalService
   ) { }
 
-  onClickEdit() {
-    this.edit.emit(true);
-  }
-
-  onDeleteClick() {
-    const name = prompt('Warning: Cannot be undone! Enter league name to confirm:');
-
-    if (!name) { return; }
-
-    if (this.league.name === name.trim()) {
-      this.leagueService.delete(this.league._id).subscribe(() => {
-        this.router.navigate(['/', 'admin', 'leagues']);
-      });
-    } else {
-      alert('Error: League name entered doesn\'t match.');
+  onClickOpenModal(type: string, _id?: string) {
+    switch (type) {
+      case 'name':
+        this.modal.open(AdminModalLeagueNameComponent, {
+          injector: this.injector
+        });
+        break;
+      case 'description':
+        this.modal.open(AdminModalLeagueDescriptionComponent, {
+          injector: this.injector
+        });
     }
   }
 }

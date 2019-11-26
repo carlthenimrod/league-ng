@@ -1,10 +1,10 @@
 <ng-container *ngIf="place$ | async as place">
   <app-modal-header>
-    <h1>Delete {{ place.name }}</h1>
+    <h1>Delete {{ place.label }}</h1>
   </app-modal-header>
 
   <form #f="ngForm" (ngSubmit)="f.valid && onSubmit()">
-    <h2>Enter name to confirm</h2>
+    <h2>Enter label to confirm</h2>
 
     <p class="warning">WARNING: This cannot be undone!</p>
 
@@ -12,8 +12,8 @@
       <input
         name="name"
         ngModel
-        placeholder="Enter Place Name"
-        [appMustMatch]="place.name"
+        placeholder="Enter Place Label"
+        [appMustMatch]="place.label"
       >
     </app-modal-form-field>
   </form>
