@@ -1,0 +1,25 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+section {
+  h3 {
+    border-bottom: 1px solid theme-color-level(dark, -6);
+    font-size: 1.4rem;
+    padding: 1rem;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  &.group {
+    article {
+      padding-left: 2rem;
+    }
+  }
+
+  article:first-child {
+    border-top: none;
+  }
+}

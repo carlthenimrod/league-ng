@@ -8,6 +8,7 @@ import { AdminLeaguesRoutingModule } from './admin-leagues-routing.module';
 import { AdminLeaguesComponent } from './admin-leagues.component';
 import { AdminLeagueListComponent } from './admin-league-list/admin-league-list.component';
 import { AdminLeagueComponent } from './admin-league/admin-league.component';
+import { AdminLeagueGroupsComponent } from './admin-league-list/admin-league-groups/admin-league-groups.component';
 import { AdminLeagueDetailsComponent } from './admin-league/admin-league-details/admin-league-details.component';
 import { AdminOverviewComponent } from './admin-league/admin-overview/admin-overview.component';
 import { AdminLeagueScheduleComponent } from './admin-league/admin-league-schedule/admin-league-schedule.component';
@@ -30,6 +31,7 @@ import { AdminModalLeagueDescriptionComponent } from './admin-league/admin-leagu
   declarations: [
     AdminLeaguesComponent,
     AdminLeagueComponent,
+    AdminLeagueGroupsComponent,
     AdminLeagueDetailsComponent,
     AdminOverviewComponent,
     AdminLeagueScheduleComponent,

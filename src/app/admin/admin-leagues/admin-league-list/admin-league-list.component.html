@@ -14,16 +14,25 @@
 
   <section id="leagues" class="items">
     <ng-container *ngIf="leagues.length > 0; else noLeagues">
-      <article
-        *ngFor="let league of leagues"
-        [routerLink]="[league._id]"
-      >
-        {{ league.name }}
-      </article>
+      <ng-container *ngIf="groups.length > 0; else noGroups">
+        <app-admin-league-groups
+          [groups]="groups"
+          [ungrouped]='ungrouped'>
+        </app-admin-league-groups>
+      </ng-container>
+
+      <ng-template #noGroups>
+        <article
+          *ngFor="let league of leagues"
+          [routerLink]="[league._id]"
+        >
+          {{ league.name }}
+        </article>
+      </ng-template>
     </ng-container>
 
-    <ng-template>
-      <p #noLeagues class="no-leagues">
+    <ng-template #noLeagues>
+      <p class="no-leagues">
         No leagues. Maybe create one? <i class="far fa-smile"></i>
       </p>
     </ng-template>

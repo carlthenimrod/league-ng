@@ -1,0 +1,19 @@
+<section *ngFor="let group of groups" class="group">
+  <h3>{{ group.label }}</h3>
+
+  <article
+    *ngFor="let league of group.leagues"
+    [routerLink]="[league._id]"
+  >
+    {{ league.name }}
+  </article>
+</section>
+
+<section *ngIf="ungrouped.length > 0">
+  <article
+    *ngFor="let league of ungrouped"
+    [routerLink]="[league._id]"
+  >
+    {{ league.name }}
+  </article>
+</section>

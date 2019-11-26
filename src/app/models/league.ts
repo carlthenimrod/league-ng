@@ -37,3 +37,8 @@ export interface ScheduleOptions {
   end?: string;
   days?: string[];
 }
+
+export interface LeagueGroup {
+  label: string;
+  leagues: League[];
+}

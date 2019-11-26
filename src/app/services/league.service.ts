@@ -5,7 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import * as _ from 'lodash';
 
-import { League, Division, ScheduleOptions, Group } from '@app/models/league';
+import { League, Division, ScheduleOptions, Group, LeagueGroup } from '@app/models/league';
 import { Team } from '@app/models/team';
 import { NoticeService } from './notice.service';
 import { Game } from '@app/models/game';
@@ -73,6 +73,34 @@ export class LeagueService {
           this.leagueSubject.next(null);
         })
       );
+  }
+
+  group(leagues: League[]): { groups: LeagueGroup[], ungrouped: League[] } {
+    const groups = [];
+    const ungrouped = [];
+
+    leagues.forEach(league => {
+      const index = league.name.indexOf(':');
+      if (index === -1) { return ungrouped.push(league); }
+
+      const label = league.name.substr(0, index).trim();
+      const name = league.name.substr(index + 1).trim();
+      league.name = name;
+
+      const match = groups.find(group => group.label === label);
+
+      if (match) {
+        match.leagues.push(league);
+      } else {
+        groups.push({
+          label,
+          leagues: [league]
+        });
+      }
+    });
+
+
+    return { groups, ungrouped };
   }
 
   update(league: League): Observable<any> {
