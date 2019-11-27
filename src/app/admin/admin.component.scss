@@ -5,10 +5,9 @@
 @import '~bootstrap/scss/_mixins';
 
 :host {
-  background-color: $white;
   display: block;
-  margin: 0 auto;
-  max-width: 900px;
+  @include make-container(0);
+  @include make-container-max-widths();
 
   @include media-breakpoint-up(sm) {
     padding: 0;

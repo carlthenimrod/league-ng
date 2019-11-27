@@ -5,9 +5,9 @@
 @import '~bootstrap/scss/_mixins';
 
 :host {
+  display: block;
   @include make-container(0);
   @include make-container-max-widths();
-  display: block;
   overflow: hidden;
 }
 
@@ -34,7 +34,7 @@ section#team-main {
         @include make-col(3);
       }
     }
-  
+
     app-team-dashboard {
       @include make-col(12);
 
