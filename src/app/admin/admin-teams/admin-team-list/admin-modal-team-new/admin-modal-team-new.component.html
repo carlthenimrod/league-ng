@@ -1,0 +1,20 @@
+<app-modal-header>
+  <h1>New Team</h1>
+</app-modal-header>
+
+<form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f.value)">
+  <app-modal-form-field>
+    <input
+      name="name"
+      ngModel
+      placeholder="Enter Name"
+      required
+    >
+  </app-modal-form-field>
+
+  <app-modal-actions>
+    <button id="save" [disabled]="!f.valid">Create</button>
+
+    <button id="cancel" appModalClose>Cancel</button>
+  </app-modal-actions>
+</form>

@@ -45,6 +45,24 @@ export class TeamService {
       : this.http.get<Team[]>(url);
   }
 
+  post$(team: Team): Observable<Team> {
+    const url = `${this.api}teams`;
+
+    return this.http.post<Team>(url, team);
+  }
+
+  put$(team: Partial<Team>): Observable<Team> {
+    const url = `${this.api}teams/${this.team._id}`;
+
+    return this.http.put<Team>(url, team)
+      .pipe(
+        tap(updatedTeam => {
+          this.team = updatedTeam;
+          this.teamSubject.next(_.cloneDeep(this.team));
+        })
+      );
+  }
+
   create(team: Team): Observable<any> {
     const url = this.api + 'teams';
     return this.http.post(url, team);

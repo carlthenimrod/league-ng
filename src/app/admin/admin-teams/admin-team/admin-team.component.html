@@ -1,20 +1,39 @@
-<app-admin-team-form
-  *ngIf="team && editingTeam"
-  [team]="team"
-  (saveClick)="editingTeam = !editingTeam"
-  (cancelClick)="editingTeam = !editingTeam"
->
-</app-admin-team-form>
+<app-admin-item *ngIf="team$ | async as team">
+  <app-admin-item-header>
+    <header>
+      <h1>{{ team.name }}</h1>
 
-<app-admin-team-details
-  *ngIf="team && !editingTeam"
-  [team]="team"
-  (editClick)="editingTeam = !editingTeam"
->
-</app-admin-team-details>
+      <div id="actions">
+        <button (click)="settings = !settings">
+          <span>Settings</span>
 
-<app-admin-roster
-  *ngIf="team"
-  [team]="team"
->
-</app-admin-roster>
+          <i class="fas fa-cog"></i>
+        </button>
+      </div>
+    </header>
+  </app-admin-item-header>
+
+  <app-admin-item-settings *ngIf="settings">
+    <button (click)="onClickOpenModal()">Delete Team</button>
+  </app-admin-item-settings>
+
+  <app-tab-selector
+    [tabs]="['details', 'roster']"
+    (select)="selected = $event"
+  >
+  </app-tab-selector>
+
+  <section [ngSwitch]="selected">
+    <app-admin-team-details
+      *ngSwitchCase="'details'"
+      [team]="team"
+    >
+    </app-admin-team-details>
+
+    <app-admin-roster
+      *ngSwitchCase="'roster'"
+      [team]="team"
+    >
+    </app-admin-roster>
+  </section>
+</app-admin-item>

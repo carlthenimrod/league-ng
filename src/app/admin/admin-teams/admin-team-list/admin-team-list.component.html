@@ -1,36 +1,31 @@
-<ng-container *ngIf="teams$ | async as teams"><header>
-  <h1>Teams</h1>
+<app-admin-items *ngIf="teams$ | async as teams">
+  <header>
+    <h2>Teams</h2>
 
     <button
       mat-flat-button
-      color="primary"
-      routerLink="/admin/teams/new"
+      color="accent"
+      (click)="onClickOpenModal()"
     >
       <i class="fas fa-plus"></i>
       <span>New</span>
     </button>
   </header>
 
-  <table *ngIf="teams.length > 0" class="table table-hover border">
-    <thead>
-      <tr>
-        <th scope="col">Team Name</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr
+  <section id="teams" class="items">
+    <ng-container *ngIf="teams.length > 0; else noTeams">
+      <article
         *ngFor="let team of teams"
         [routerLink]="[team._id]"
       >
-        <td>
-          {{ team.name }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        {{ team.name }}
+      </article>
+    </ng-container>
 
-  <p *ngIf="teams.length === 0" class="no-teams">
-    No teams. Maybe add some? <i class="far fa-smile"></i>
-  </p>
-</ng-container>
+    <ng-template #noTeams>
+      <p class="no-items">
+        No teams. Maybe create one? <i class="far fa-smile"></i>
+      </p>
+    </ng-template>
+  </section>
+</app-admin-items>

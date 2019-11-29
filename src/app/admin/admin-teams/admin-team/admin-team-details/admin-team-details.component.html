@@ -1,45 +1,15 @@
-<section id="team-details">
+<app-admin-item-section>
   <header>
-    <h1>{{ team.name }}</h1>
+    <h3>Team Name</h3>
 
-    <div id="actions-desktop">
-      <button
-        mat-flat-button
-        color="primary"
-        (click)="onEditClick()"
-      >
+    <div>
+      <button (click)="onClickOpenModal()">
         <i class="fas fa-edit"></i>
-        <span>Edit</span>
-      </button>
-
-      <button
-        mat-flat-button
-        color="warn"
-        (click)="onDeleteClick()"
-      >
-        <i class="fas fa-trash-alt"></i>
-        <span>Delete</span>
       </button>
     </div>
   </header>
 
-  <div id="actions-mobile">
-    <button
-      mat-flat-button
-      color="primary"
-      (click)="onEditClick()"
-    >
-      <i class="fas fa-edit"></i>
-      <span>Edit</span>
-    </button>
-
-    <button
-      mat-flat-button
-      color="warn"
-      (click)="onDeleteClick()"
-    >
-      <i class="fas fa-trash-alt"></i>
-      <span>Delete</span>
-    </button>
+  <div>
+    {{ team.name }}
   </div>
-</section>
+</app-admin-item-section>

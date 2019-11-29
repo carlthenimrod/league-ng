@@ -1,0 +1,22 @@
+<ng-container *ngIf="team$ | async as team">
+  <app-modal-header>
+    <h1>Update Name</h1>
+  </app-modal-header>
+
+  <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f.value)">
+    <app-modal-form-field>
+        <input
+          name="name"
+          [ngModel]="team.name"
+          placeholder="Enter Name"
+          required
+        >
+      </app-modal-form-field>
+
+      <app-modal-actions>
+        <button id="save" [disabled]="!f.valid">Save</button>
+
+        <button id="cancel" appModalClose>Cancel</button>
+      </app-modal-actions>
+  </form>
+</ng-container>

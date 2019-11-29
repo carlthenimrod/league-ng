@@ -4,14 +4,13 @@ import { Observable } from 'rxjs';
 import { ModalService } from '@app/shared/modal/modal.service';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
-import { AdminModalTeamNewComponent } from './admin-modal-team-new/admin-modal-team-new.component';
 
 @Component({
-  selector: 'app-admin-team-list',
-  templateUrl: './admin-team-list.component.html'
+  selector: 'app-admin-modal-team-name',
+  templateUrl: './admin-modal-team-name.component.html'
 })
-export class AdminTeamListComponent implements OnInit {
-  teams$: Observable<Team[]>;
+export class AdminModalTeamNameComponent implements OnInit {
+  team$: Observable<Team>;
 
   constructor(
     private modal: ModalService,
@@ -19,10 +18,11 @@ export class AdminTeamListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.teams$ = this.teamService.get$();
+    this.team$ = this.teamService.team$;
   }
 
-  onClickOpenModal() {
-    this.modal.open(AdminModalTeamNewComponent);
+  onSubmit(team: Partial<Team>) {
+    this.teamService.put$(team)
+      .subscribe(() => this.modal.close());
   }
 }
