@@ -43,8 +43,8 @@
 <footer *ngIf="type !== 'thumb'">
   <ng-container *ngIf="game.place && game.place._id; else noPlace">
     <section *ngIf="type !== 'list'" class="place">
-      <div *ngIf="game.place.name">
-        <span>{{ game.place.name }}</span>
+      <div *ngIf="game.place.label">
+        <span>{{ game.place.label }}</span>
         <ng-container
           *ngIf="game.place.locations && game.place.locations.length > 0"
         >

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -6,6 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import { ModalService } from '@app/shared/modal/modal.service';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
+import { AdminModalTeamDeleteComponent } from './admin-modal-team-delete/admin-modal-team-delete.component';
 
 @Component({
   selector: 'app-admin-team',
@@ -18,6 +19,7 @@ export class AdminTeamComponent implements OnInit {
   team$: Observable<Team>;
 
   constructor(
+    private injector: Injector,
     private modal: ModalService,
     private route: ActivatedRoute,
     private teamService: TeamService
@@ -32,8 +34,8 @@ export class AdminTeamComponent implements OnInit {
   }
 
   onClickOpenModal() {
-    // this.modal.open(AdminModalLeagueDeleteComponent, {
-    //   injector: this.injector
-    // });
+    this.modal.open(AdminModalTeamDeleteComponent, {
+      injector: this.injector
+    });
   }
 }

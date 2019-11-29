@@ -11,6 +11,7 @@ import { AdminTeamComponent } from './admin-team/admin-team.component';
 import { AdminRosterComponent } from './admin-team/admin-roster/admin-roster.component';
 import { AdminTeamDetailsComponent } from './admin-team/admin-team-details/admin-team-details.component';
 import { AdminModalUserComponent } from './admin-team/admin-roster/admin-modal-user/admin-modal-user.component';
+import { AdminModalTeamDeleteComponent } from './admin-team/admin-modal-team-delete/admin-modal-team-delete.component';
 import { AdminModalTeamNewComponent } from './admin-team-list/admin-modal-team-new/admin-modal-team-new.component';
 import { AdminModalTeamNameComponent } from './admin-team/admin-team-details/admin-modal-team-name/admin-modal-team-name.component';
 
@@ -22,6 +23,7 @@ import { AdminModalTeamNameComponent } from './admin-team/admin-team-details/adm
     AdminTeamDetailsComponent,
     AdminRosterComponent,
     AdminModalUserComponent,
+    AdminModalTeamDeleteComponent,
     AdminModalTeamNewComponent,
     AdminModalTeamNameComponent
   ],
@@ -35,6 +37,7 @@ import { AdminModalTeamNameComponent } from './admin-team/admin-team-details/adm
   ],
   entryComponents: [
     AdminModalUserComponent,
+    AdminModalTeamDeleteComponent,
     AdminModalTeamNewComponent,
     AdminModalTeamNameComponent
   ]

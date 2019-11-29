@@ -63,6 +63,18 @@ export class TeamService {
       );
   }
 
+  delete$(): Observable<void> {
+    const url = `${this.api}teams/${this.team._id}`;
+
+    return this.http.delete<void>(url)
+      .pipe(
+        tap(() => {
+          this.team = null;
+          this.teamSubject.next(null);
+        })
+      );
+  }
+
   create(team: Team): Observable<any> {
     const url = this.api + 'teams';
     return this.http.post(url, team);
