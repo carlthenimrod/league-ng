@@ -37,10 +37,23 @@ app-admin-item-section {
     }
   }
 
-  > div {
+  > section {
     font-size: 1.25rem;
     padding: 0.5rem 0;
     white-space: pre-line;
+
+    div {
+      align-items: center;
+      display: flex;
+
+      span {
+        display: inline-block;
+        font-size: 0.8rem;
+        margin: 0 0.5rem 0 0;
+        text-align: right;
+        width: 4.5rem;
+      }
+    }
 
     a {
       align-items: center;

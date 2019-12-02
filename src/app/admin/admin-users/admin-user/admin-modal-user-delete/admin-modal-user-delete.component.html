@@ -16,11 +16,11 @@
         [appMustMatch]="user.fullName"
       >
     </app-modal-form-field>
+
+    <app-modal-actions>
+      <button id="delete" [disabled]="!f.valid">Delete</button>
+
+      <button id="cancel" appModalClose>Cancel</button>
+    </app-modal-actions>
   </form>
-
-  <app-modal-actions>
-    <button id="delete" [disabled]="!f.valid">Delete</button>
-
-    <button id="cancel" appModalClose>Cancel</button>
-  </app-modal-actions>
 </ng-container>

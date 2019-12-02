@@ -18,7 +18,7 @@
   </app-admin-item-settings>
 
   <app-tab-selector
-    [tabs]="['details']"
+    [tabs]="['details', 'additional']"
     (select)="selected = $event"
   >
   </app-tab-selector>
@@ -29,5 +29,11 @@
       [user]="user"
     >
     </app-admin-user-details>
+
+    <app-admin-user-additional
+      *ngSwitchCase="'additional'"
+      [user]="user"
+    >
+    </app-admin-user-additional>
   </section>
 </app-admin-item>

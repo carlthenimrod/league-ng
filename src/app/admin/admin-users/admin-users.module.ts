@@ -9,12 +9,14 @@ import { AdminUsersComponent } from './admin-users.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { AdminUserListComponent } from './admin-user-list/admin-user-list.component';
 import { AdminUserDetailsComponent } from './admin-user/admin-user-details/admin-user-details.component';
-import { AdminUserFormComponent } from './admin-user/admin-user-form/admin-user-form.component';
+import { AdminUserAdditionalComponent } from './admin-user/admin-user-additional/admin-user-additional.component';
 import { AdminModalUserNewComponent } from './admin-user-list/admin-modal-user-new/admin-modal-user-new.component';
 import { AdminModalUserDeleteComponent } from './admin-user/admin-modal-user-delete/admin-modal-user-delete.component';
 import { AdminModalUserNameComponent } from './admin-user/admin-user-details/admin-modal-user-name/admin-modal-user-name.component';
 import { AdminModalUserAddressComponent } from './admin-user/admin-user-details/admin-modal-user-address/admin-modal-user-address.component';
 import { AdminModalUserPhoneComponent } from './admin-user/admin-user-details/admin-modal-user-phone/admin-modal-user-phone.component';
+import { AdminModalUserCommentsComponent } from './admin-user/admin-user-additional/admin-modal-user-comments/admin-modal-user-comments.component';
+import { AdminModalUserEmergencyComponent } from './admin-user/admin-user-additional/admin-modal-user-emergency/admin-modal-user-emergency.component';
 
 @NgModule({
   declarations: [
@@ -22,12 +24,14 @@ import { AdminModalUserPhoneComponent } from './admin-user/admin-user-details/ad
     AdminUserComponent,
     AdminUserListComponent,
     AdminUserDetailsComponent,
-    AdminUserFormComponent,
+    AdminUserAdditionalComponent,
     AdminModalUserNewComponent,
     AdminModalUserDeleteComponent,
     AdminModalUserNameComponent,
     AdminModalUserAddressComponent,
-    AdminModalUserPhoneComponent
+    AdminModalUserPhoneComponent,
+    AdminModalUserEmergencyComponent,
+    AdminModalUserCommentsComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +46,9 @@ import { AdminModalUserPhoneComponent } from './admin-user/admin-user-details/ad
     AdminModalUserDeleteComponent,
     AdminModalUserNameComponent,
     AdminModalUserAddressComponent,
-    AdminModalUserPhoneComponent
+    AdminModalUserPhoneComponent,
+    AdminModalUserEmergencyComponent,
+    AdminModalUserCommentsComponent
   ]
 })
 export class AdminUsersModule { }

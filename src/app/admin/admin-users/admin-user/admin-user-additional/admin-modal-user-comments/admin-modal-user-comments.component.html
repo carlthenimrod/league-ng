@@ -1,0 +1,21 @@
+<ng-container *ngIf="user$ | async as user">
+  <app-modal-header>
+    <h1>Update Comments</h1>
+  </app-modal-header>
+
+  <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f.value)">
+    <app-modal-form-field>
+      <textarea
+        name="comments"
+        [ngModel]="user.comments"
+        placeholder="Enter Comments"
+      ></textarea>
+    </app-modal-form-field>
+
+    <app-modal-actions>
+      <button id="save" [disabled]="!f.valid">Save</button>
+
+      <button id="cancel" appModalClose>Cancel</button>
+    </app-modal-actions>
+  </form>
+</ng-container>

@@ -8,7 +8,6 @@ import { AdminModalUserPhoneComponent } from './admin-modal-user-phone/admin-mod
 
 @Component({
   selector: 'app-admin-user-details',
-  styleUrls: ['./admin-user-details.component.scss'],
   templateUrl: './admin-user-details.component.html'
 })
 export class AdminUserDetailsComponent {

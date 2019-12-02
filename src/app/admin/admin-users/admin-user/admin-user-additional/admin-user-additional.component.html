@@ -1,0 +1,52 @@
+<app-admin-item-section>
+  <header>
+    <h3>Emergency Contact</h3>
+
+    <div>
+      <button (click)="onClickOpenModal('emergency')">
+        <i class="fas fa-edit"></i>
+      </button>
+    </div>
+  </header>
+
+  <section *ngIf="user.emergency; else noEmergency">
+    <div *ngIf="user.emergency.fullName">
+      <span>Name:</span>
+      {{ user.emergency.fullName }}
+    </div>
+
+    <div *ngIf="user.emergency.phone">
+      <span>Phone:</span>
+      {{ user.emergency.phone }}
+    </div>
+
+    <div *ngIf="user.emergency.secondary">
+      <span>Secondary:</span>
+      {{ user.emergency.secondary }}
+    </div>
+  </section>
+
+  <ng-template #noEmergency>
+    <section>No Emergency Contact</section>
+  </ng-template>
+</app-admin-item-section>
+
+<app-admin-item-section>
+  <header>
+    <h3>Additional Comments</h3>
+
+    <div>
+      <button (click)="onClickOpenModal('comments')">
+        <i class="fas fa-edit"></i>
+      </button>
+    </div>
+  </header>
+
+  <section *ngIf="user.comments; else noComments">
+    {{ user.comments }}
+  </section>
+
+  <ng-template #noComments>
+    <section>No Comments</section>
+  </ng-template>
+</app-admin-item-section>

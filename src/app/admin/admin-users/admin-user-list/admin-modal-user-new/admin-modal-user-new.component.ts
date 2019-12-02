@@ -9,7 +9,6 @@ import { emailUnique } from '@app/validators/email-unique.validator';
 
 @Component({
   selector: 'app-admin-modal-user-new',
-  styleUrls: ['./admin-modal-user-new.component.scss'],
   templateUrl: './admin-modal-user-new.component.html'
 })
 export class AdminModalUserNewComponent {

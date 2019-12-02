@@ -1,0 +1,51 @@
+<ng-container *ngIf="user$ | async as user">
+  <app-modal-header>
+    <h1>Update <br>Emergency Contact</h1>
+  </app-modal-header>
+
+  <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f.value)">
+    <ng-container ngModelGroup="emergency">
+      <div class="name" ngModelGroup="name">
+        <app-modal-form-field>
+          <input
+            name="first"
+            [ngModel]="user.emergency && user.emergency.name.first"
+            placeholder="First Name"
+          >
+        </app-modal-form-field>
+
+        <app-modal-form-field>
+          <input
+            name="last"
+            [ngModel]="user.emergency && user.emergency.name.last"
+            placeholder="Last Name"
+          >
+        </app-modal-form-field>
+      </div>
+
+      <app-modal-form-field>
+        <input
+          type="tel"
+          name="phone"
+          [ngModel]="user.emergency && user.emergency.phone"
+          placeholder="Phone Number"
+        >
+      </app-modal-form-field>
+
+      <app-modal-form-field>
+        <input
+          type="tel"
+          name="secondary"
+          [ngModel]="user.emergency && user.emergency.secondary"
+          placeholder="Secondary Number"
+        >
+      </app-modal-form-field>
+    </ng-container>
+
+    <app-modal-actions>
+      <button id="save">Save</button>
+
+      <button id="cancel" appModalClose>Cancel</button>
+    </app-modal-actions>
+  </form>
+</ng-container>
