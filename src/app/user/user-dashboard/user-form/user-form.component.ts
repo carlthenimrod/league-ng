@@ -57,7 +57,7 @@ export class UserFormComponent implements OnInit {
       ...this.userForm.value
     };
 
-    this.userService.update(user).subscribe(() => {
+    this.userService.put$(user).subscribe(() => {
       this.save.emit(true);
     });
   }

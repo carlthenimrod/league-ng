@@ -9,9 +9,9 @@
     </div>
   </header>
 
-  <div>
+  <app-admin-item-content>
     {{ league.name }}
-  </div>
+  </app-admin-item-content>
 </app-admin-item-section>
 
 <app-admin-item-section>
@@ -25,11 +25,13 @@
     </div>
   </header>
 
-  <div *ngIf="league.description; else noDescription">
-    {{ league.description }}
-  </div>
+  <app-admin-item-content>
+    <ng-container *ngIf="league.description; else noDescription">
+      {{ league.description }}
+    </ng-container>
 
-  <ng-template #noDescription>
-    <div>No Description</div>
-  </ng-template>
+    <ng-template #noDescription>
+      No Description
+    </ng-template>
+  </app-admin-item-content>
 </app-admin-item-section>

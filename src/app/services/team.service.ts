@@ -75,29 +75,6 @@ export class TeamService {
       );
   }
 
-  create(team: Team): Observable<any> {
-    const url = this.api + 'teams';
-    return this.http.post(url, team);
-  }
-
-  update(team: Team): Observable<any> {
-    const url = this.api + `teams/${team._id}`;
-    return this.http.put(url, team).pipe(
-      map((teamResponse: TeamResponse) => {
-        return this.formatResponse(teamResponse);
-      }),
-      tap((updatedTeam: Team) => {
-        this.team = updatedTeam;
-        this.teamSubject.next(_.cloneDeep(this.team));
-      })
-    );
-  }
-
-  delete(id: string): Observable<any> {
-    const url = this.api + `teams/${id}`;
-    return this.http.delete(url);
-  }
-
   addUser(user: User, roles: string[]) {
     const url = this.api + `teams/${this.team._id}/users`;
     const data = {

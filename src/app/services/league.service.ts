@@ -103,21 +103,6 @@ export class LeagueService {
     return { groups, ungrouped };
   }
 
-  update(league: League): Observable<any> {
-    const url = this.api + `leagues/${league._id}`;
-    return this.http.put(url, league).pipe(
-      tap((updatedLeague: League) => {
-        this.league = updatedLeague;
-        this.leagueSubject.next(_.cloneDeep(this.league));
-      })
-    );
-  }
-
-  delete(id: string): Observable<any> {
-    const url = this.api + `leagues/${id}`;
-    return this.http.delete(url);
-  }
-
   addDivision(division: Division) {
     const url = this.api + `leagues/${this.league._id}/divisions`;
 

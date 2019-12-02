@@ -9,10 +9,13 @@
     </div>
   </header>
 
-  <div *ngIf="place.permits.length > 0; else noPermits">
-  </div>
+  <app-admin-item-content>
+    <ng-container *ngIf="place.permits.length > 0; else noPermits">
 
-  <ng-template #noPermits>
-    <div>No Permits</div>
-  </ng-template>
+    </ng-container>
+
+    <ng-template #noPermits>
+      No Permits
+    </ng-template>
+  </app-admin-item-content>
 </app-admin-item-section>

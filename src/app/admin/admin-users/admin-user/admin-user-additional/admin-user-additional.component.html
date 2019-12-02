@@ -9,26 +9,28 @@
     </div>
   </header>
 
-  <section *ngIf="user.emergency; else noEmergency">
-    <div *ngIf="user.emergency.fullName">
-      <span>Name:</span>
-      {{ user.emergency.fullName }}
-    </div>
+  <app-admin-item-content>
+    <ng-container *ngIf="user.emergency; else noEmergency">
+      <div *ngIf="user.emergency.fullName">
+        <span>Name:</span>
+        {{ user.emergency.fullName }}
+      </div>
 
-    <div *ngIf="user.emergency.phone">
-      <span>Phone:</span>
-      {{ user.emergency.phone }}
-    </div>
+      <div *ngIf="user.emergency.phone">
+        <span>Phone:</span>
+        {{ user.emergency.phone }}
+      </div>
 
-    <div *ngIf="user.emergency.secondary">
-      <span>Secondary:</span>
-      {{ user.emergency.secondary }}
-    </div>
-  </section>
+      <div *ngIf="user.emergency.secondary">
+        <span>Secondary:</span>
+        {{ user.emergency.secondary }}
+      </div>
+    </ng-container>
 
-  <ng-template #noEmergency>
-    <section>No Emergency Contact</section>
-  </ng-template>
+    <ng-template #noEmergency>
+      No Emergency Contact
+    </ng-template>
+  </app-admin-item-content>
 </app-admin-item-section>
 
 <app-admin-item-section>
@@ -42,11 +44,13 @@
     </div>
   </header>
 
-  <section *ngIf="user.comments; else noComments">
-    {{ user.comments }}
-  </section>
+  <app-admin-item-content>
+    <ng-container *ngIf="user.comments; else noComments">
+      {{ user.comments }}
+    </ng-container>
 
-  <ng-template #noComments>
-    <section>No Comments</section>
-  </ng-template>
+    <ng-template #noComments>
+      No Comments
+    </ng-template>
+  </app-admin-item-content>
 </app-admin-item-section>

@@ -8,12 +8,12 @@ import { TeamService } from '@app/services/team.service';
 import { usersEnterTrigger, userEnterTrigger } from './animations';
 
 @Component({
-  selector: 'app-admin-roster',
-  templateUrl: './admin-roster.component.html',
-  styleUrls: ['./admin-roster.component.scss'],
+  selector: 'app-admin-team-roster',
+  templateUrl: './admin-team-roster.component.html',
+  styleUrls: ['./admin-team-roster.component.scss'],
   animations: [usersEnterTrigger, userEnterTrigger]
 })
-export class AdminRosterComponent {
+export class AdminTeamRosterComponent {
   @Input() team: Team;
 
   constructor(

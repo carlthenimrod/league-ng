@@ -9,9 +9,9 @@
     </div>
   </header>
 
-  <section>
+  <app-admin-item-content>
     {{ user.fullName }}
-  </section>
+  </app-admin-item-content>
 </app-admin-item-section>
 
 <app-admin-item-section>
@@ -19,9 +19,9 @@
     <h3>Email Address</h3>
   </header>
 
-  <section>
+  <app-admin-item-content>
     {{ user.email }}
-  </section>
+  </app-admin-item-content>
 </app-admin-item-section>
 
 <app-admin-item-section>
@@ -35,13 +35,15 @@
     </div>
   </header>
 
-  <section *ngIf="user.address | hasAddress; else noAddress">
-    {{ user.address | stringifyAddress }}
-  </section>
+  <app-admin-item-content>
+    <ng-container *ngIf="user.address | hasAddress; else noAddress">
+      {{ user.address | stringifyAddress }}
+    </ng-container>
 
-  <ng-template #noAddress>
-    <section>No Address</section>
-  </ng-template>
+    <ng-template #noAddress>
+      No Address
+    </ng-template>
+  </app-admin-item-content>
 </app-admin-item-section>
 
 <app-admin-item-section>
@@ -55,19 +57,21 @@
     </div>
   </header>
 
-  <section *ngIf="user.phone || user.secondary; else noPhone">
-    <div *ngIf="user.phone">
-      <span>Primary:</span>
-      {{ user.phone }}
-    </div>
+  <app-admin-item-content>
+    <ng-container *ngIf="user.phone || user.secondary; else noPhone">
+      <div *ngIf="user.phone">
+        <span>Primary:</span>
+        {{ user.phone }}
+      </div>
 
-    <div *ngIf="user.secondary">
-      <span>Secondary:</span>
-      {{ user.secondary }}
-    </div>
-  </section>
+      <div *ngIf="user.secondary">
+        <span>Secondary:</span>
+        {{ user.secondary }}
+      </div>
+    </ng-container>
 
-  <ng-template #noPhone>
-    <section>No Phone Numbers</section>
-  </ng-template>
+    <ng-template #noPhone>
+      No Phone Numbers
+    </ng-template>
+  </app-admin-item-content>
 </app-admin-item-section>

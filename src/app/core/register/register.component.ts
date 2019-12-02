@@ -148,7 +148,7 @@ export class RegisterComponent implements OnInit {
         comments: form.miscForm.comments
       };
 
-      this.userService.create(user).subscribe(() => {
+      this.userService.post$(user).subscribe(() => {
         this.state = 'complete';
       });
     }

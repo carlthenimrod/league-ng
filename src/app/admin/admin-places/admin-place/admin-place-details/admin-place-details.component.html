@@ -9,9 +9,9 @@
     </div>
   </header>
 
-  <div>
+  <app-admin-item-content>
     {{ place.label }}
-  </div>
+  </app-admin-item-content>
 </app-admin-item-section>
 
 <app-admin-item-section>
@@ -25,13 +25,15 @@
     </div>
   </header>
 
-  <div *ngIf="place.address | hasAddress; else noAddress">
-    {{ place.address | stringifyAddress }}
-  </div>
+  <app-admin-item-content>
+    <ng-container *ngIf="place.address | hasAddress; else noAddress">
+      {{ place.address | stringifyAddress }}
+    </ng-container>
 
-  <ng-template #noAddress>
-    <div>No Address</div>
-  </ng-template>
+    <ng-template #noAddress>
+      No Address
+    </ng-template>
+  </app-admin-item-content>
 </app-admin-item-section>
 
 <app-admin-item-section>
@@ -45,26 +47,28 @@
     </div>
   </header>
 
-  <div *ngIf="place.locations.length > 0; else noLocations">
-    <a
-      *ngFor="let location of place.locations"
-      (click)="onClickOpenModal($event, 'editLocation', location._id)"
-      [title]="location.name"
-    >
-      <span>
-        {{ location.name }}
-      </span>
-
-      <button
-        class="action"
-        (click)="onClickOpenModal($event, 'deleteLocation', location._id)"
+  <app-admin-item-content>
+    <ng-container *ngIf="place.locations.length > 0; else noLocations">
+      <a
+        *ngFor="let location of place.locations"
+        (click)="onClickOpenModal($event, 'editLocation', location._id)"
+        [title]="location.name"
       >
-        <i class="fas fa-times"></i>
-      </button>
-    </a>
-  </div>
+        <span>
+          {{ location.name }}
+        </span>
 
-  <ng-template #noLocations>
-    <div>No Locations</div>
-  </ng-template>
+        <button
+          class="action"
+          (click)="onClickOpenModal($event, 'deleteLocation', location._id)"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </a>
+    </ng-container>
+
+    <ng-template #noLocations>
+      No Locations
+    </ng-template>
+  </app-admin-item-content>
 </app-admin-item-section>
