@@ -1,14 +1,33 @@
-<app-admin-user-form
-  *ngIf="user && editingUser"
-  [user]="user"
-  (saveClick)="editingUser = !editingUser"
-  (cancelClick)="editingUser = !editingUser"
->
-</app-admin-user-form>
+<app-admin-item *ngIf="user$ | async as user">
+  <app-admin-item-header>
+    <header>
+      <h1>{{ user.fullName }}</h1>
 
-<app-admin-user-details
-  *ngIf="user && !editingUser"
-  [user]="user"
-  (editClick)="editingUser = !editingUser"
->
-</app-admin-user-details>
+      <div id="actions">
+        <button (click)="settings = !settings">
+          <span>Settings</span>
+
+          <i class="fas fa-cog"></i>
+        </button>
+      </div>
+    </header>
+  </app-admin-item-header>
+
+  <app-admin-item-settings *ngIf="settings">
+    <button (click)="onClickOpenModal()">Delete User</button>
+  </app-admin-item-settings>
+
+  <app-tab-selector
+    [tabs]="['details']"
+    (select)="selected = $event"
+  >
+  </app-tab-selector>
+
+  <section [ngSwitch]="selected">
+    <app-admin-user-details
+      *ngSwitchCase="'details'"
+      [user]="user"
+    >
+    </app-admin-user-details>
+  </section>
+</app-admin-item>

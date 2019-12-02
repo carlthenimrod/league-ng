@@ -3,123 +3,125 @@
     <h1>New Place</h1>
   </app-modal-stepper-header>
 
-  <form
-    [formGroup]="placeForm"
-    (ngSubmit)="placeForm.valid && onSubmit(placeForm.value)"
-  >
-    <app-modal-step [stepControl]="placeForm.get('label')">
-      <h2>Choose a Label</h2>
+  <app-modal-stepper-content>
+    <form
+      [formGroup]="placeForm"
+      (ngSubmit)="placeForm.valid && onSubmit(placeForm.value)"
+    >
+      <app-modal-step [stepControl]="placeForm.get('label')">
+        <h2>Choose a Label</h2>
 
-      <p>Label is required to identify your place.</p>
+        <p>Label is required to identify your place.</p>
 
-      <app-modal-form-field>
-        <input
-          name="label"
-          placeholder="Enter Label"
-          formControlName="label"
-        >
-      </app-modal-form-field>
-
-      <app-modal-actions>
-        <button
-          id="next"
-          [disabled]="!placeForm.get('label').valid"
-          appModalStepNext
-        >
-          Next
-        </button>
-
-        <button id="cancel" appModalClose>
-          Cancel
-        </button>
-      </app-modal-actions>
-    </app-modal-step>
-
-    <app-modal-step formGroupName="address" [stepControl]="placeForm.get('address')">
-      <h2>Enter Address</h2>
-
-      <app-modal-form-field>
-        <input
-          type="text"
-          name="street"
-          placeholder="Street"
-          formControlName="street"
-        >
-      </app-modal-form-field>
-
-      <app-modal-form-field>
-        <input
-          type="text"
-          name="city"
-          placeholder="City"
-          formControlName="city"
-        >
-      </app-modal-form-field>
-
-      <app-modal-form-field>
-        <input
-          type="text"
-          name="state"
-          placeholder="State"
-          formControlName="state"
-        >
-      </app-modal-form-field>
-
-      <app-modal-form-field>
-        <input
-          type="text"
-          name="postal"
-          placeholder="Zip"
-          formControlName="postal"
-        >
-      </app-modal-form-field>
-
-      <app-modal-actions>
-        <button id="next" [disabled]="!placeForm.get('address').valid" appModalStepNext>Next</button>
-
-        <button id="previous" appModalStepPrev>Back</button>
-      </app-modal-actions>
-    </app-modal-step>
-
-    <app-modal-step formArrayName="locations">
-      <h2>Add Locations</h2>
-
-      <p>(e.g. Field 1 or Court 2)</p>
-
-      <ng-container *ngFor="let location of locationsArray.controls; let i = index">
-        <app-modal-form-field [formGroupName]="i">
+        <app-modal-form-field>
           <input
-            name="name"
-            placeholder="Enter Location"
-            formControlName="name"
+            name="label"
+            placeholder="Enter Label"
+            formControlName="label"
           >
-
-          <button *ngIf="i !== 0" (click)="removeLocation(i)">
-            <i class="fas fa-times-circle"></i>
-          </button>
         </app-modal-form-field>
-      </ng-container>
 
-      <button
-        type="button"
-        *ngIf="locationsArray.length < 4"
-        (click)="addLocation()"
-        id="add-location"
-      >
-        <i class="fas fa-plus"></i>
-        <span>Add Location</span>
-      </button>
+        <app-modal-actions>
+          <button
+            id="next"
+            [disabled]="!placeForm.get('label').valid"
+            appModalStepNext
+          >
+            Next
+          </button>
 
-      <app-modal-actions>
+          <button id="cancel" appModalClose>
+            Cancel
+          </button>
+        </app-modal-actions>
+      </app-modal-step>
+
+      <app-modal-step formGroupName="address" [stepControl]="placeForm.get('address')">
+        <h2>Enter Address</h2>
+
+        <app-modal-form-field>
+          <input
+            type="text"
+            name="street"
+            placeholder="Street"
+            formControlName="street"
+          >
+        </app-modal-form-field>
+
+        <app-modal-form-field>
+          <input
+            type="text"
+            name="city"
+            placeholder="City"
+            formControlName="city"
+          >
+        </app-modal-form-field>
+
+        <app-modal-form-field>
+          <input
+            type="text"
+            name="state"
+            placeholder="State"
+            formControlName="state"
+          >
+        </app-modal-form-field>
+
+        <app-modal-form-field>
+          <input
+            type="text"
+            name="postal"
+            placeholder="Zip"
+            formControlName="postal"
+          >
+        </app-modal-form-field>
+
+        <app-modal-actions>
+          <button id="next" [disabled]="!placeForm.get('address').valid" appModalStepNext>Next</button>
+
+          <button id="previous" appModalStepPrev>Back</button>
+        </app-modal-actions>
+      </app-modal-step>
+
+      <app-modal-step formArrayName="locations">
+        <h2>Add Locations</h2>
+
+        <p>(e.g. Field 1 or Court 2)</p>
+
+        <ng-container *ngFor="let location of locationsArray.controls; index as i; first as isFirst">
+          <app-modal-form-field [formGroupName]="i">
+            <input
+              name="name"
+              placeholder="Enter Location"
+              formControlName="name"
+            >
+
+            <button *ngIf="!isFirst" (click)="removeLocation(i)">
+              <i class="fas fa-times-circle"></i>
+            </button>
+          </app-modal-form-field>
+        </ng-container>
+
         <button
-          id="save"
-          [disabled]="!placeForm.valid"
+          type="button"
+          *ngIf="locationsArray.length < 4"
+          (click)="addLocation()"
+          id="add-location"
         >
-          Create
+          <i class="fas fa-plus"></i>
+          <span>Add Location</span>
         </button>
 
-        <button id="previous" appModalStepPrev>Back</button>
-      </app-modal-actions>
-    </app-modal-step>
-  </form>
+        <app-modal-actions>
+          <button
+            id="save"
+            [disabled]="!placeForm.valid"
+          >
+            Create
+          </button>
+
+          <button id="previous" appModalStepPrev>Back</button>
+        </app-modal-actions>
+      </app-modal-step>
+    </form>
+  </app-modal-stepper-content>
 </app-modal-stepper>

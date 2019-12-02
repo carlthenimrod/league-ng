@@ -60,6 +60,27 @@ app-modal-form-field {
     padding: 0 1rem;
     position: absolute;
     top: 0.5rem;
-    right: -3rem;
+  }
+
+  .message {
+    height: 1.5rem;
+    margin: 0 auto;
+    max-width: 15rem;
+    padding: 0.25rem 0 0 0.25rem;
+    text-align: left;
+
+    .pending, .error {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      text-align: left;
+    }
+
+    .pending {
+      color: $white;
+    }
+
+    .error {
+      color: theme-color(danger);
+    }
   }
 }

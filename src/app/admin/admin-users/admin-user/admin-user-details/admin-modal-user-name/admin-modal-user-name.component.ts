@@ -4,14 +4,13 @@ import { Observable } from 'rxjs';
 import { ModalService } from '@app/shared/modal/modal.service';
 import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
-import { AdminModalUserNewComponent } from './admin-modal-user-new/admin-modal-user-new.component';
 
 @Component({
-  selector: 'app-admin-user-list',
-  templateUrl: './admin-user-list.component.html'
+  selector: 'app-admin-modal-user-name',
+  templateUrl: './admin-modal-user-name.component.html'
 })
-export class AdminUserListComponent implements OnInit {
-  users$: Observable<User[]>;
+export class AdminModalUserNameComponent implements OnInit {
+  user$: Observable<User>;
 
   constructor(
     private modal: ModalService,
@@ -19,10 +18,11 @@ export class AdminUserListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.users$ = this.userService.get$();
+    this.user$ = this.userService.user$;
   }
 
-  onClickOpenModal() {
-    this.modal.open(AdminModalUserNewComponent);
+  onSubmit(user: Partial<User>) {
+    this.userService.put$(user)
+      .subscribe(() => this.modal.close());
   }
 }

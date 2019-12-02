@@ -10,8 +10,7 @@ import { AdminModalTeamDeleteComponent } from './admin-modal-team-delete/admin-m
 
 @Component({
   selector: 'app-admin-team',
-  templateUrl: './admin-team.component.html',
-  styleUrls: ['./admin-team.component.scss']
+  templateUrl: './admin-team.component.html'
 })
 export class AdminTeamComponent implements OnInit {
   selected = 'details';

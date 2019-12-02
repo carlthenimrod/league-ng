@@ -1,0 +1,9 @@
+app-modal-stepper-content {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+
+  > form {
+    flex-direction: row !important;
+  }
+}

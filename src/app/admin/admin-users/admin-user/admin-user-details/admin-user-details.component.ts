@@ -1,41 +1,41 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, Injector } from '@angular/core';
 
+import { ModalService } from '@app/shared/modal/modal.service';
 import { User } from '@app/models/user';
-import { UserService } from '@app/services/user.service';
+import { AdminModalUserNameComponent } from './admin-modal-user-name/admin-modal-user-name.component';
+import { AdminModalUserAddressComponent } from './admin-modal-user-address/admin-modal-user-address.component';
+import { AdminModalUserPhoneComponent } from './admin-modal-user-phone/admin-modal-user-phone.component';
 
 @Component({
   selector: 'app-admin-user-details',
-  templateUrl: './admin-user-details.component.html',
-  styleUrls: ['./admin-user-details.component.scss']
+  styleUrls: ['./admin-user-details.component.scss'],
+  templateUrl: './admin-user-details.component.html'
 })
-export class AdminUserDetailsComponent implements OnInit {
+export class AdminUserDetailsComponent {
   @Input() user: User;
-  @Output('editClick') editClick: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
-    public userService: UserService,
-    public router: Router
+    private injector: Injector,
+    private modal: ModalService
   ) { }
 
-  ngOnInit() {
-  }
-
-  onEditClick() {
-    this.editClick.emit(true);
-  }
-
-  onDeleteClick() {
-    const name = prompt('Warning: Cannot be undone! Enter user\'s name to confirm:');
-
-    if (!name) { return; }
-
-    if (this.user.fullName === name.trim()) {
-      this.userService.delete(this.user._id).subscribe(() => {
-        this.router.navigate(['/', 'admin', 'users']);
-      });
-    } else {
-      alert('Error: User name entered doesn\'t match.');
+  onClickOpenModal(type: string) {
+    switch (type) {
+      case 'name':
+        this.modal.open(AdminModalUserNameComponent, {
+          injector: this.injector
+        });
+        break;
+      case 'address':
+        this.modal.open(AdminModalUserAddressComponent, {
+          injector: this.injector
+        });
+        break;
+      case 'phone':
+        this.modal.open(AdminModalUserPhoneComponent, {
+          injector: this.injector
+        });
+        break;
     }
   }
 }

@@ -9,6 +9,7 @@ import { ModalFormFieldComponent } from './modal-form-field/modal-form-field.com
 import { ModalActionsComponent } from './modal-actions/modal-actions.component';
 import { ModalStepperComponent } from './modal-stepper/modal-stepper.component';
 import { ModalStepperHeaderComponent } from './modal-stepper/modal-stepper-header/modal-stepper-header.component';
+import { ModalStepperContentComponent } from './modal-stepper/modal-stepper-content/modal-stepper-content.component';
 import { ModalStepComponent } from './modal-stepper/modal-step/modal-step.component';
 import { ModalStepPrevDirective } from './modal-stepper/modal-step/modal-step-prev.directive';
 import { ModalStepNextDirective } from './modal-stepper/modal-step/modal-step-next.directive';
@@ -26,6 +27,7 @@ import { ModalDatePickerDirective } from './modal-date-picker/modal-date-picker.
     ModalActionsComponent,
     ModalStepperComponent,
     ModalStepperHeaderComponent,
+    ModalStepperContentComponent,
     ModalStepComponent,
     ModalStepPrevDirective,
     ModalStepNextDirective,
@@ -44,6 +46,7 @@ import { ModalDatePickerDirective } from './modal-date-picker/modal-date-picker.
     ModalActionsComponent,
     ModalStepperComponent,
     ModalStepperHeaderComponent,
+    ModalStepperContentComponent,
     ModalStepComponent,
     ModalStepPrevDirective,
     ModalStepNextDirective,

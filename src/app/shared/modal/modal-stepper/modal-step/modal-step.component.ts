@@ -18,11 +18,6 @@ export class ModalStepComponent implements AfterContentInit {
   @ContentChild(ModalStepPrevDirective, { static: false }) stepPrev: ModalStepPrevDirective;
   @ContentChild(ModalStepNextDirective, { static: false }) stepNext: ModalStepNextDirective;
   @HostBinding('@stepChange') state;
-  @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(e: KeyboardEvent) {
-    e.stopPropagation();
-
-    console.log('test');
-  }
 
   constructor(public el: ElementRef) { }
 

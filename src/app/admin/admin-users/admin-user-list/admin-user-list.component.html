@@ -1,37 +1,31 @@
-<ng-container *ngIf="users$ | async as users">
+<app-admin-items *ngIf="users$ | async as users">
   <header>
-    <h1>Users</h1>
+    <h2>Users</h2>
 
     <button
       mat-flat-button
-      color="primary"
-      routerLink="/admin/users/new"
+      color="accent"
+      (click)="onClickOpenModal()"
     >
       <i class="fas fa-plus"></i>
       <span>New</span>
     </button>
   </header>
 
-  <table *ngIf="users.length > 0" class="table table-hover border">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr
+  <section id="users" class="items">
+    <ng-container *ngIf="users.length > 0; else noUsers">
+      <article
         *ngFor="let user of users"
         [routerLink]="[user._id]"
       >
-        <td>
-          {{ user.fullName }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        {{ user.fullName }}
+      </article>
+    </ng-container>
 
-  <p *ngIf="users.length === 0" class="no-users">
-    No users. Maybe add some? <i class="far fa-smile ml-1"></i>
-  </p>
-</ng-container>
+    <ng-template #noUsers>
+      <p class="no-items">
+        No users. Maybe create one? <i class="far fa-smile"></i>
+      </p>
+    </ng-template>
+  </section>
+</app-admin-items>

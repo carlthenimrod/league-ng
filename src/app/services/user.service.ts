@@ -40,6 +40,39 @@ export class UserService {
       : this.http.get<User[]>(url);
   }
 
+  post$(user: User): Observable<User> {
+    const url = `${this.api}users`;
+    return this.http.post<User>(url, user)
+      .pipe(
+        tap(newUser => {
+          this.user = newUser;
+          this.userSubject.next(_.cloneDeep(this.user));
+        })
+      );
+  }
+
+  put$(user: Partial<User>): Observable<User> {
+    const url = `${this.api}users/${this.user._id}`;
+    return this.http.put<User>(url, { ...this.user, ...user })
+      .pipe(
+        tap(updatedUser => {
+          this.user = updatedUser;
+          this.userSubject.next(_.cloneDeep(this.user));
+        })
+      );
+  }
+
+  delete$(): Observable<void> {
+    const url = `${this.api}users/${this.user._id}`;
+    return this.http.delete<void>(url)
+      .pipe(
+        tap(() => {
+          this.user = null;
+          this.userSubject.next(null);
+        })
+      );
+  }
+
   create(user: User): Observable<any> {
     const url = this.api + 'users';
     return this.http.post(url, user);

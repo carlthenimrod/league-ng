@@ -1,48 +1,39 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, Injector } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+import { ModalService } from '@app/shared/modal/modal.service';
 import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
-import { NoticeService } from '@app/services/notice.service';
+import { AdminModalUserDeleteComponent } from './admin-modal-user-delete/admin-modal-user-delete.component';
 
 @Component({
   selector: 'app-admin-user',
-  templateUrl: './admin-user.component.html',
-  styleUrls: ['./admin-user.component.scss']
+  templateUrl: './admin-user.component.html'
 })
-export class AdminUserComponent implements OnInit, OnDestroy {
-  user: User;
-  userSubscription: Subscription;
-  editingUser = false;
+export class AdminUserComponent implements OnInit {
+  selected = 'details';
+  settings = false;
+  user$: Observable<User>;
 
   constructor(
-    private noticeService: NoticeService,
+    private injector: Injector,
+    private modal: ModalService,
     private route: ActivatedRoute,
     private userService: UserService
   ) { }
 
   ngOnInit() {
-    this.userSubscription = this.route.paramMap.pipe(
+    this.user$ = this.route.paramMap.pipe(
       switchMap(params => this.userService.get$(params.get('id'))),
       switchMap(() => this.userService.user$)
-    )
-    .subscribe((user: User) => {
-      this.user = user;
-      console.log(user);
-
-      // if new, update status, push notices
-      if (this.user.status.new) {
-        this.user.status.new = false;
-        this.userService.update(this.user).subscribe(() => {
-          this.noticeService.push();
-        });
-      }
-    });
+    );
   }
 
-  ngOnDestroy() {
-    this.userSubscription.unsubscribe();
+  onClickOpenModal() {
+    this.modal.open(AdminModalUserDeleteComponent, {
+      injector: this.injector
+    });
   }
 }

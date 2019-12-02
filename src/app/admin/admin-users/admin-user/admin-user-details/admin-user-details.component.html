@@ -1,49 +1,71 @@
-<section id="user-details">
+<app-admin-item-section>
   <header>
-    <h1>{{ user.fullName }}</h1>
+    <h3>User Name</h3>
 
-    <div id="actions-desktop">
-      <button
-        mat-flat-button
-        color="primary"
-        (click)="onEditClick()"
-      >
+    <div>
+      <button (click)="onClickOpenModal('name')">
         <i class="fas fa-edit"></i>
-
-        <span>Edit</span>
-      </button>
-
-      <button
-        mat-flat-button
-        color="warn"
-        (click)="onDeleteClick()"
-      >
-        <i class="fas fa-trash-alt"></i>
-
-        <span>Delete</span>
       </button>
     </div>
   </header>
 
-  <div id="actions-mobile">
-    <button
-      mat-flat-button
-      color="primary"
-      (click)="onEditClick()"
-    >
-      <i class="fas fa-edit"></i>
-
-      <span>Edit</span>
-    </button>
-
-    <button
-      mat-flat-button
-      color="warn"
-      (click)="onDeleteClick()"
-    >
-      <i class="fas fa-trash-alt"></i>
-
-      <span>Delete</span>
-    </button>
+  <div>
+    {{ user.fullName }}
   </div>
-</section>
+</app-admin-item-section>
+
+<app-admin-item-section>
+  <header>
+    <h3>Email Address</h3>
+  </header>
+
+  <div>
+    {{ user.email }}
+  </div>
+</app-admin-item-section>
+
+<app-admin-item-section>
+  <header>
+    <h3>Address</h3>
+
+    <div>
+      <button (click)="onClickOpenModal('address')">
+        <i class="fas fa-edit"></i>
+      </button>
+    </div>
+  </header>
+
+  <div *ngIf="user.address | hasAddress; else noAddress">
+    {{ user.address | stringifyAddress }}
+  </div>
+
+  <ng-template #noAddress>
+    <div>No Address</div>
+  </ng-template>
+</app-admin-item-section>
+
+<app-admin-item-section>
+  <header>
+    <h3>Phone</h3>
+
+    <div>
+      <button (click)="onClickOpenModal('phone')">
+        <i class="fas fa-edit"></i>
+      </button>
+    </div>
+  </header>
+
+  <div *ngIf="user.phone || user.secondary; else noPhone" id="phone">
+    <div *ngIf="user.phone">
+      <span>Primary:</span>{{ user.phone }}
+    </div>
+
+    <div *ngIf="user.secondary">
+      <span>Secondary:</span>{{ user.secondary }}
+    </div>
+  </div>
+
+  <ng-template #noPhone>
+    <div>No Phone Numbers</div>
+  </ng-template>
+</app-admin-item-section>

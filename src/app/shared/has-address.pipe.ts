@@ -7,7 +7,7 @@ import { Address } from '@app/models/address';
 })
 export class HasAddressPipe implements PipeTransform {
   transform(address: Address): boolean {
-    return (address.street || address.city || address.state || address.postal)
+    return (address && (address.street || address.city || address.state || address.postal))
      ? true
      : false;
   }

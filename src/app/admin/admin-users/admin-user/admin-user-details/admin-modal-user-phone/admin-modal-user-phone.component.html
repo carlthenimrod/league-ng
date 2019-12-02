@@ -1,0 +1,31 @@
+<ng-container *ngIf="user$ | async as user">
+  <app-modal-header>
+    <h1>Update Phone</h1>
+  </app-modal-header>
+
+  <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f.value)">
+    <app-modal-form-field>
+      <input
+        type="tel"
+        name="phone"
+        [ngModel]="user.phone"
+        placeholder="Phone Number"
+      >
+    </app-modal-form-field>
+
+    <app-modal-form-field>
+      <input
+        type="tel"
+        name="secondary"
+        [ngModel]="user.secondary"
+        placeholder="Secondary Phone"
+      >
+    </app-modal-form-field>
+
+    <app-modal-actions>
+      <button id="save" [disabled]="!f.valid">Save</button>
+
+      <button id="cancel" appModalClose>Cancel</button>
+    </app-modal-actions>
+  </form>
+</ng-container>
