@@ -1,11 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Injector } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
+import { ModalService } from '@app/shared/modal/modal.service';
 import { AdminModalUserComponent } from './admin-modal-user/admin-modal-user.component';
 import { User } from '@app/models/user';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 import { usersEnterTrigger, userEnterTrigger } from './animations';
+import { AdminModalAddUserComponent } from './admin-modal-add-user/admin-modal-add-user.component';
 
 @Component({
   selector: 'app-admin-team-roster',
@@ -18,6 +20,8 @@ export class AdminTeamRosterComponent {
 
   constructor(
     private dialog: MatDialog,
+    private injector: Injector,
+    private modal: ModalService,
     private teamService: TeamService
   ) { }
 
@@ -58,6 +62,16 @@ export class AdminTeamRosterComponent {
 
       this.teamService.editUser(userId, roles);
     });
+  }
+
+  onClickOpenModal(type: string) {
+    switch (type) {
+      case 'add':
+        this.modal.open(AdminModalAddUserComponent, {
+          injector: this.injector
+        });
+        break;
+    }
   }
 
   trackById(index: number, user: User) {

@@ -6,6 +6,8 @@ import { ModalCloseDirective } from './modal-close.directive';
 import { ModalService } from './modal.service';
 import { ModalHeaderComponent } from './modal-header/modal-header.component';
 import { ModalFormFieldComponent } from './modal-form-field/modal-form-field.component';
+import { ModalSelectComponent } from './modal-form-field/modal-select/modal-select.component';
+import { ModalOptionComponent } from './modal-form-field/modal-select/modal-option/modal-option.component';
 import { ModalActionsComponent } from './modal-actions/modal-actions.component';
 import { ModalStepperComponent } from './modal-stepper/modal-stepper.component';
 import { ModalStepperHeaderComponent } from './modal-stepper/modal-stepper-header/modal-stepper-header.component';
@@ -24,6 +26,8 @@ import { ModalDatePickerDirective } from './modal-date-picker/modal-date-picker.
     ModalCloseDirective,
     ModalHeaderComponent,
     ModalFormFieldComponent,
+    ModalSelectComponent,
+    ModalOptionComponent,
     ModalActionsComponent,
     ModalStepperComponent,
     ModalStepperHeaderComponent,
@@ -43,6 +47,8 @@ import { ModalDatePickerDirective } from './modal-date-picker/modal-date-picker.
     ModalCloseDirective,
     ModalHeaderComponent,
     ModalFormFieldComponent,
+    ModalSelectComponent,
+    ModalOptionComponent,
     ModalActionsComponent,
     ModalStepperComponent,
     ModalStepperHeaderComponent,
