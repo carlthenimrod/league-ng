@@ -19,6 +19,8 @@ import { ModalTogglerComponent } from './modal-toggler/modal-toggler.component';
 import { ModalToggleComponent } from './modal-toggler/modal-toggle/modal-toggle.component';
 import { ModalDatePickerComponent } from './modal-date-picker/modal-date-picker.component';
 import { ModalDatePickerDirective } from './modal-date-picker/modal-date-picker.directive';
+import { ModalAutoCompleteComponent } from './modal-autocomplete/modal-autocomplete.component';
+import { ModalInputDirective } from './modal-input.directive';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { ModalDatePickerDirective } from './modal-date-picker/modal-date-picker.
     ModalCloseDirective,
     ModalHeaderComponent,
     ModalFormFieldComponent,
+    ModalInputDirective,
     ModalSelectComponent,
     ModalOptionComponent,
     ModalActionsComponent,
@@ -38,7 +41,8 @@ import { ModalDatePickerDirective } from './modal-date-picker/modal-date-picker.
     ModalTogglerComponent,
     ModalToggleComponent,
     ModalDatePickerComponent,
-    ModalDatePickerDirective
+    ModalDatePickerDirective,
+    ModalAutoCompleteComponent
   ],
   imports: [
     CommonModule
@@ -47,6 +51,7 @@ import { ModalDatePickerDirective } from './modal-date-picker/modal-date-picker.
     ModalCloseDirective,
     ModalHeaderComponent,
     ModalFormFieldComponent,
+    ModalInputDirective,
     ModalSelectComponent,
     ModalOptionComponent,
     ModalActionsComponent,
@@ -59,7 +64,8 @@ import { ModalDatePickerDirective } from './modal-date-picker/modal-date-picker.
     ModalTogglerComponent,
     ModalToggleComponent,
     ModalDatePickerComponent,
-    ModalDatePickerDirective
+    ModalDatePickerDirective,
+    ModalAutoCompleteComponent
   ],
   providers: [ModalService],
   entryComponents: [ModalComponent]

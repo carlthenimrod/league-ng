@@ -1,4 +1,4 @@
-import { Component, ContentChildren, QueryList, AfterContentInit, HostListener, Input, Attribute, forwardRef } from '@angular/core';
+import { Component, ContentChildren, QueryList, AfterContentInit, HostListener, Input, Attribute, forwardRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ModalOptionComponent } from './modal-option/modal-option.component';
@@ -7,6 +7,7 @@ import { ModalOptionComponent } from './modal-option/modal-option.component';
   selector: 'app-modal-select',
   styleUrls: ['./modal-select.component.scss'],
   templateUrl: './modal-select.component.html',
+  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -23,7 +24,7 @@ export class ModalSelectComponent implements AfterContentInit, ControlValueAcces
   onChange: (value) => void;
   onTouched: () => void;
   _selectedMulti: string[] = [];
-  _selected: string;
+  _selected = '';
   get selected() {
     return !this.multi ? this._selected : this._selectedMulti;
   }
@@ -32,9 +33,10 @@ export class ModalSelectComponent implements AfterContentInit, ControlValueAcces
       this._selected = value as string;
     } else if (value instanceof Array) {
       this._selectedMulti = value as string[];
+    } else {
+      this._selectedMulti = [];
     }
-
-    this.onChange(this.selected);
+    if (this.onChange) { this.onChange(value); }
   }
 
   constructor(@Attribute('multiple') multiple) {
@@ -44,7 +46,10 @@ export class ModalSelectComponent implements AfterContentInit, ControlValueAcces
   }
 
   writeValue(value) {
-    if (value === null) { return; }
+    if (value === null) {
+      this.selected = '';
+      this.options.forEach(option => option.selected = false);
+    }
 
     this.selected = value;
   }
@@ -84,12 +89,14 @@ export class ModalSelectComponent implements AfterContentInit, ControlValueAcces
       (this.selected as string) = option.value;
       this.open = false;
     } else {
-      const index = ((this.selected as string[]) as string[]).findIndex(v => v === option.value);
+      const selected = this.selected as string[];
+      const index = selected.findIndex(v => v === option.value);
       if (index === -1) {
-        (this.selected as string[]).push(option.value);
+        this.selected = [...selected, option.value];
         option.selected = true;
       } else {
-        (this.selected as string[]).splice(index, 1);
+        selected.splice(index, 1);
+        this.selected = [...selected];
         option.selected = false;
       }
     }
@@ -97,15 +104,18 @@ export class ModalSelectComponent implements AfterContentInit, ControlValueAcces
 
   onClickRemove(e: MouseEvent, value: string) {
     e.stopPropagation();
+    this.onTouched();
 
     if (this.open) {
       this.open = false;
       return;
     }
 
-    const index = (this.selected as string[]).findIndex(v => v === value);
+    const selected = this.selected as string[];
+    const index = selected.findIndex(v => v === value);
     if (index !== -1) {
-      (this.selected as string[]).splice(index, 1);
+      selected.splice(index, 1);
+      this.selected = [...selected];
 
       this.options.forEach(option => {
         if (option.value === value) { option.selected = false; }

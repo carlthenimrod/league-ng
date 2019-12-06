@@ -3,11 +3,64 @@
     <h1>Add User</h1>
   </app-modal-header>
 
-  <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f.value)">
+  <form
+    [formGroup]="userForm"
+    autocomplete="off"
+    (ngSubmit)="userForm.valid && onSubmit(userForm.value)"
+  >
+    <app-modal-form-field>
+      <input
+        formControlName="email"
+        placeholder="Enter Email"
+        appModalInput
+        autocomplete="disabled"
+        [modalAutocomplete]="auto"
+      >
+
+      <app-modal-autocomplete #auto (autocompleteSelect)="onSelect($event)">
+        <app-modal-option
+          *ngFor="let option of options"
+          [value]="option"
+        >
+          <div class="email">{{ option.email }}</div>
+          <div class="name">{{ option.fullName }}</div>
+        </app-modal-option>
+      </app-modal-autocomplete>
+
+      <a *ngIf="selectedUser" id="clear" (click)="onClickClearSelected()">
+        <i class="fas fa-times"></i>
+      </a>
+
+      <div class="message">
+        <span *ngIf="userForm.get('email').pending" class="pending">
+          Checking Email...
+        </span>
+
+        <span *ngIf="userForm.get('email').hasError('notUnique')" class="error">
+          Email is already in use!
+        </span>
+      </div>
+    </app-modal-form-field>
+
+    <div class="name" formGroupName="name">
+      <app-modal-form-field>
+        <input
+          formControlName="first"
+          placeholder="First Name"
+        >
+      </app-modal-form-field>
+
+      <app-modal-form-field>
+        <input
+          formControlName="last"
+          placeholder="Last Name"
+        >
+      </app-modal-form-field>
+    </div>
+
     <app-modal-form-field>
       <app-modal-select
-        name="roles"
-        ngModel
+        formControlName="roles"
         placeholder="Select Roles"
         multiple
       >
@@ -18,7 +71,7 @@
     </app-modal-form-field>
 
     <app-modal-actions>
-      <button id="save" [disabled]="!f.valid">Add User</button>
+      <button id="save" [disabled]="!userForm.valid">Add User</button>
 
       <button id="cancel" appModalClose>Cancel</button>
     </app-modal-actions>

@@ -4,7 +4,7 @@
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 
-:host {
+app-modal-select {
   align-items: center;
   background-color: theme-color-level(primary, 6);
   border: 2px solid theme-color-level(primary, -2);
@@ -27,8 +27,12 @@
     color: theme-color-level(primary, 6);
   }
 
+  &.ng-invalid.ng-touched {
+    border: 2px solid theme-color(danger);
+  }
+
   .placeholder {
-    color: theme-color-level(primary, -6);
+    color: $gray-500;
     margin-bottom: 0.25rem;
   }
 
@@ -43,10 +47,19 @@
     border-radius: 5px;
     box-shadow: 0 0 3px 1px rgba($color: #000, $alpha: 0.6);
     max-width: 15rem;
+    padding: 1rem 0;
     position: absolute;
     top: 2.5rem;
     left: 0;
     width: 100%;
+
+    app-modal-option {
+      padding: 0 1rem 1rem 1rem;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+    }
   }
 
   .selected {
