@@ -8,55 +8,35 @@
       </button>
     </div>
   </header>
-</app-admin-item-section>
 
-<section id="roster">
-  <header>
-    <h2>Roster</h2>
+  <app-admin-item-content>
+    <ng-container *ngIf="team.users && team.users.length > 0; else noUsers">
+      <ng-container *ngFor="let group of team.roster">
+        <section *ngIf="group.users.length > 0" class="group">
+          <h3>{{ group.role | titlecase }} List</h3>
 
-    <button
-      mat-flat-button
-      color="primary"
-      (click)="onClickAddUser()"
-    >
-      <i class="fas fa-plus"></i>
-      <span>Add User</span>
-    </button>
-  </header>
-
-  <p *ngIf="team.users.length === 0" class="no-users">
-    No users. Maybe add some? <i class="far fa-smile"></i>
-  </p>
-
-  <ng-container
-    *ngFor="let group of team.roster"
-  >
-    <section
-      *ngIf="group.users.length > 0"
-      class="users"
-      @usersEnter
-    >
-      <h3>{{ group.role | titlecase }} List</h3>
-
-      <div
-        *ngFor="let user of group.users; trackBy: trackById"
-        class="user"
-        @userEnter
-      >
-        <div class="label">
-          <a [routerLink]="['/admin/users/', user._id]">{{ user.fullName }}</a>
-        </div>
-
-        <div class="actions">
-          <button
-            mat-icon-button
-            color="primary"
-            (click)="onClickEditRoles(user._id)"
+          <div
+            *ngFor="let user of group.users"
+            class="user"
           >
-            <i class="fas fa-user-cog"></i>
-          </button>
-        </div>
-      </div>
-    </section>
-  </ng-container>
-</section>
+            <div class="label">
+              <a [routerLink]="['/admin/users/', user._id]">{{ user.fullName }}</a>
+            </div>
+
+            <div class="actions">
+              <button
+                (click)="onClickOpenModal('roles', user._id)"
+              >
+                <i class="fas fa-user-cog"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #noUsers>
+      No users. Maybe add some? <i class="far fa-smile"></i>
+    </ng-template>
+  </app-admin-item-content>
+</app-admin-item-section>

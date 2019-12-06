@@ -37,7 +37,7 @@ export class AdminModalPlaceNewComponent {
   ) { }
 
   addLocation() {
-    if (this.locationsArray.length >= 4) { return; }
+    if (this.locationsArray.length >= 3) { return; }
 
     this.locationsArray.push(this.fb.group({
       name: ['']

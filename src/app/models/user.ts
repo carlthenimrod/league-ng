@@ -25,7 +25,7 @@ export interface User {
     secondary?: string;
   };
   comments?: string;
-  roles?: [string];
+  roles?: string[];
   _id?: string;
   __v?: number;
 }

@@ -6,7 +6,7 @@ import { map, tap } from 'rxjs/operators';
 import * as _ from 'lodash';
 
 import { League, Group } from '@app/models/league';
-import { Team, TeamResponse, RoleGroup } from '@app/models/team';
+import { Team, TeamResponse, TeamRosterResponse, TeamRoster } from '@app/models/team';
 import { User } from '@app/models/user';
 import { NoticeService } from './notice.service';
 import { TeamScheduleService } from './team-schedule.service';
@@ -31,12 +31,12 @@ export class TeamService {
   get$(): Observable<Team[]>;
   get$(id: string): Observable<Team>;
   get$(id?: string): Observable<Team|Team[]> {
-    const url = `${this.api}teams/${id ? `/${id}` : ``}`;
+    const url = `${this.api}teams${id ? `/${id}` : ``}`;
 
     return id
       ? this.http.get<TeamResponse>(url)
         .pipe<Team, Team>(
-          map(response => this.formatResponse(response)),
+          map(this.mapResponse.bind(this)),
           tap(team => {
             this.team = team;
             this.teamSubject.next(_.cloneDeep(this.team));
@@ -75,26 +75,28 @@ export class TeamService {
       );
   }
 
-  addUser(user: User, roles: string[]) {
-    const url = this.api + `teams/${this.team._id}/users`;
-    const data = {
-      userId: user._id,
-      name: user.name,
-      roles
-    };
+  userPost$(user: User): Observable<Team> {
+    const url = `${this.api}teams/${this.team._id}/users`;
+    return this.http.post<TeamResponse>(url, user)
+      .pipe<Team, Team>(
+        map(this.mapResponse.bind(this)),
+        tap(updatedTeam => {
+          this.team = updatedTeam;
+          this.teamSubject.next(_.cloneDeep(this.team));
+        })
+      );
+  }
 
-    this.http.post(url, data).pipe(
-      map((teamResponse: TeamResponse) => {
-        return this.formatResponse(teamResponse);
-      })
-    )
-    .subscribe((team: Team) => {
-      this.team = team;
-      this.teamSubject.next(_.cloneDeep(this.team));
-
-      // push notices if new user
-      if (!user._id) { this.noticeService.push(); }
-    });
+  userPut$(user: Partial<User>): Observable<Team> {
+    const url = `${this.api}teams/${this.team._id}/users/${user._id}`;
+    return this.http.put<TeamResponse>(url, user)
+      .pipe<Team, Team>(
+        map(this.mapResponse.bind(this)),
+        tap(updatedTeam => {
+          this.team = updatedTeam;
+          this.teamSubject.next(_.cloneDeep(this.team));
+        })
+      );
   }
 
   editUser(userId: string, roles: string[]) {
@@ -102,7 +104,7 @@ export class TeamService {
 
     this.http.put(url, {roles}).pipe(
       map((teamResponse: TeamResponse) => {
-        return this.formatResponse(teamResponse);
+        return this.mapResponse(teamResponse);
       })
     )
     .subscribe((team: Team) => {
@@ -116,7 +118,7 @@ export class TeamService {
 
     this.http.delete(url).pipe(
       map((teamResponse: TeamResponse) => {
-        return this.formatResponse(teamResponse);
+        return this.mapResponse(teamResponse);
       })
     )
     .subscribe((team: Team) => {
@@ -142,58 +144,32 @@ export class TeamService {
     return user.roles;
   }
 
-  formatResponse(teamResponse: TeamResponse): Team {
-    const team: Team = {
-      name: teamResponse.name,
-      status: teamResponse.status,
-      pending: teamResponse.pending,
-      feed: teamResponse.feed,
-      leagues: teamResponse.leagues,
-      users: [],
-      roster: [],
-      schedule: this.teamSchedule.generateSchedule(teamResponse.leagues),
-      _id: teamResponse._id,
-      __v: teamResponse.__v
+  mapResponse(response: TeamResponse): Team {
+    return {
+      ...response,
+      roster: this.mapRoster(response.roster),
+      users: response.roster.map(u => {
+        return { ...u.user, roles: u.roles };
+      })
     };
-
-    team.leagues.forEach(league => this.leagueStandings.generateStandings(league));
-
-    this.formatRoster(teamResponse, team);
-
-    return team;
   }
 
-  formatRoster(teamResponse: TeamResponse, team: Team) {
-    const managers: User[] = [];
-    const coaches: User[] = [];
-    const players: User[] = [];
+  mapRoster(roster: TeamRosterResponse[]): TeamRoster[] {
+    const players = [];
+    const coaches = [];
+    const managers = [];
 
-    for (let i = 0; i < teamResponse.roster.length; i++) {
-      const user = teamResponse.roster[i];
+    roster.forEach(r => {
+      if (r.roles.includes('manager')) { managers.push(r.user); }
+      if (r.roles.includes('coach')) { coaches.push(r.user); }
+      if (r.roles.includes('player')) { players.push(r.user); }
+    });
 
-      team.users.push(user);
-
-      if (user.roles.includes('manager')) {
-        managers.push(user);
-        continue;
-      }
-
-      if (user.roles.includes('coach')) {
-        coaches.push(user);
-        continue;
-      }
-
-      if (user.roles.includes('player')) {
-        players.push(user);
-        continue;
-      }
-    }
-
-    team.roster.push({ role: 'manager', users: [...managers] });
-    team.roster.push({ role: 'coach', users: [...coaches] });
-    team.roster.push({ role: 'player', users: [...players] });
-
-    this.orderRoster(team.roster);
+    return [
+      { role: 'manager', users: managers },
+      { role: 'coach', users: coaches },
+      { role: 'player', users: players }
+    ];
   }
 
   updateUser(users: User[]) {
@@ -214,7 +190,7 @@ export class TeamService {
     this.teamSubject.next(_.cloneDeep(this.team));
   }
 
-  orderRoster(roster: RoleGroup[]) {
+  orderRoster(roster: TeamRoster[]) {
     roster.forEach(group => {
       group.users.sort(this.sortByFullName);
       group.users.sort(this.sortByOnlineStatus);

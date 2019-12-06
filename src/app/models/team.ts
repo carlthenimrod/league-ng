@@ -2,11 +2,6 @@ import { League } from './league';
 import { User } from './user';
 import { Game } from './game';
 
-export interface RoleGroup {
-  role: string;
-  users: User[];
-}
-
 export interface Status {
   new?: boolean;
   verified?: boolean;
@@ -23,10 +18,20 @@ export interface Message {
   __v?: string;
 }
 
+export interface TeamRosterResponse {
+  user: User;
+  roles: string[];
+}
+
+export interface TeamRoster {
+  role: string;
+  users: User[];
+}
+
 export interface Team {
   name: string;
   img?: string;
-  roster?: RoleGroup[];
+  roster?: TeamRoster[];
   status?: Status;
   pending?: User[];
   feed?: Message[];
@@ -49,7 +54,7 @@ export interface TeamResponse {
   name: string;
   img: string;
   leagues: League[];
-  roster?: User[];
+  roster?: TeamRosterResponse[];
   status?: Status;
   pending?: User[];
   feed?: Message[];

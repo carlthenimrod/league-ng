@@ -7,6 +7,7 @@
 app-modal {
   background-color: theme-color-level(primary, 4);
   margin-top: 3rem;
+  overflow-y: scroll;
   position: fixed;
   top: 0;
   left: 0;
@@ -78,11 +79,13 @@ app-modal {
         flex: 1;
         flex-direction: column;
         height: 100%;
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: scroll;
         padding: 1rem 0;
 
         > .name {
           display: flex;
+          flex: 0 0 auto;
           padding: 0 0.5rem;
 
           @include media-breakpoint-up(sm) {

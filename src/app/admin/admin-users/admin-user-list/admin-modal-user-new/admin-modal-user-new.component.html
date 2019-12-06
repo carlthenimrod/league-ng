@@ -6,10 +6,6 @@
   <app-modal-stepper-content>
     <app-modal-step [stepControl]="userForm">
       <form [formGroup]="userForm">
-        <h2>User Info</h2>
-
-        <p>Enter Name</p>
-
         <div class="name" formGroupName="name">
           <app-modal-form-field>
             <input
@@ -25,8 +21,6 @@
             >
           </app-modal-form-field>
         </div>
-
-        <p>Enter Contact Info</p>
 
         <app-modal-form-field>
           <input
@@ -74,8 +68,6 @@
       <form [formGroup]="addressForm">
         <h2>User Address</h2>
 
-        <p>Enter the user's address</p>
-
         <app-modal-form-field>
           <input
             formControlName="street"
@@ -116,9 +108,7 @@
       <form [formGroup]="emergencyForm" (ngSubmit)="onSubmit()">
         <h2>Emergency Contact</h2>
 
-        <p>Enter emergency contact information</p>
-
-        <section id="name" formGroupName="name">
+        <div class="name" formGroupName="name">
           <app-modal-form-field>
             <input
               formControlName="first"
@@ -132,7 +122,7 @@
               placeholder="Last Name"
             >
           </app-modal-form-field>
-        </section>
+        </div>
 
         <app-modal-form-field>
           <input

@@ -20,7 +20,7 @@ export class NavComponent implements OnInit, OnDestroy {
   path$: Observable<string[]>;
   unsubscribe$ = new Subject<void>();
 
-  @HostListener('touchmove', ['$event']) touchMove(e: TouchEvent) {
+  @HostListener('touchmove', ['$event']) touchMove(e: Event) {
     e.preventDefault();
     e.stopPropagation();
   }

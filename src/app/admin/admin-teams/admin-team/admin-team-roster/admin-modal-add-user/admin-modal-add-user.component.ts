@@ -1,18 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable, Subject, combineLatest } from 'rxjs';
+import { takeUntil, map, switchMap } from 'rxjs/operators';
 
+import { ModalService } from '@app/shared/modal/modal.service';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
-import { takeUntil, map } from 'rxjs/operators';
 import { emailUnique } from '@app/validators/email-unique.validator';
 
 @Component({
   selector: 'app-admin-modal-add-user',
   styleUrls: ['./admin-modal-add-user.component.scss'],
-  templateUrl: './admin-modal-add-user.component.html'
+  templateUrl: './admin-modal-add-user.component.html',
+  providers: [UserService]
 })
 export class AdminModalAddUserComponent implements OnInit, OnDestroy {
   userForm = this.fb.group({
@@ -31,6 +33,7 @@ export class AdminModalAddUserComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
+    private modal: ModalService,
     private teamService: TeamService,
     private userService: UserService
   ) { }
@@ -58,6 +61,8 @@ export class AdminModalAddUserComponent implements OnInit, OnDestroy {
     const search = value.toLowerCase();
 
     return users.filter(user => {
+      if (!user.email || !user.fullName) { return; }
+
       const email = user.email.toLowerCase();
       const name = user.fullName.toLowerCase();
 
@@ -95,9 +100,17 @@ export class AdminModalAddUserComponent implements OnInit, OnDestroy {
     this.userForm.get('name.last').enable();
   }
 
-  onSubmit(v) {
-    console.log('submitted!');
-    console.log(v);
+  onSubmit(user: User) {
+    const obs = !this.selectedUser
+      ? this.userService.post$(user)
+          .pipe(
+            switchMap(createdUser =>
+              this.teamService.userPost$({ ...createdUser, roles: user.roles })
+            )
+          )
+      : this.teamService.userPost$({ ...user, _id: this.selectedUser._id});
+
+    obs.subscribe(() => this.modal.close());
   }
 
   ngOnDestroy() {
