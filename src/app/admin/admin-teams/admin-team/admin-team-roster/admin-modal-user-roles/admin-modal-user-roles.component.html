@@ -1,27 +1,25 @@
-<ng-container *ngIf="team$ | async as team">
-  <app-modal-header>
-      <h1>Update Roles</h1>
-    </app-modal-header>
+<app-modal-header>
+  <h1>Update Roles</h1>
+</app-modal-header>
 
-    <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f.value)">
-      <app-modal-form-field>
-        <app-modal-select
-          name="roles"
-          [ngModel]="user.roles"
-          placeholder="Select Roles"
-          required
-          multiple
-        >
-          <app-modal-option value="player">Player</app-modal-option>
-          <app-modal-option value="coach">Coach</app-modal-option>
-          <app-modal-option value="manager">Manager</app-modal-option>
-        </app-modal-select>
-      </app-modal-form-field>
+<form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f.value)">
+  <app-modal-form-field>
+    <app-modal-select
+      name="roles"
+      [ngModel]="user.roles"
+      placeholder="Select Roles"
+      required
+      multiple
+    >
+      <app-modal-option value="player">Player</app-modal-option>
+      <app-modal-option value="coach">Coach</app-modal-option>
+      <app-modal-option value="manager">Manager</app-modal-option>
+    </app-modal-select>
+  </app-modal-form-field>
 
-      <app-modal-actions>
-        <button id="save" [disabled]="!f.valid">Save</button>
+  <app-modal-actions>
+    <button id="save" [disabled]="!f.valid">Save</button>
 
-        <button id="cancel" appModalClose>Cancel</button>
-      </app-modal-actions>
-    </form>
-</ng-container>
+    <button id="cancel" appModalClose>Cancel</button>
+  </app-modal-actions>
+</form>

@@ -1,15 +1,18 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { MODAL_DATA } from '@app/shared/modal/modal';
 import { ModalService } from '@app/shared/modal/modal.service';
+import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 import { User } from '@app/models/user';
 
 @Component({
-  selector: 'app-admin-modal-user-roles',
-  templateUrl: './admin-modal-user-roles.component.html'
+  selector: 'app-admin-modal-user-remove',
+  templateUrl: './admin-modal-user-remove.component.html'
 })
-export class AdminModalUserRolesComponent implements OnInit {
+export class AdminModalUserRemoveComponent implements OnInit {
   user: User;
 
   constructor(
@@ -22,9 +25,8 @@ export class AdminModalUserRolesComponent implements OnInit {
     this.user = this.data.user;
   }
 
-  onSubmit(user: Pick<User, 'roles'>) {
-    this.teamService.userPut$({ ...user, _id: this.user._id })
+  onSubmit() {
+    this.teamService.userDelete$(this.user)
       .subscribe(() => this.modal.close());
   }
 }
-

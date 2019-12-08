@@ -13,8 +13,9 @@ import { AdminTeamDetailsComponent } from './admin-team/admin-team-details/admin
 import { AdminModalTeamDeleteComponent } from './admin-team/admin-modal-team-delete/admin-modal-team-delete.component';
 import { AdminModalTeamNewComponent } from './admin-team-list/admin-modal-team-new/admin-modal-team-new.component';
 import { AdminModalTeamNameComponent } from './admin-team/admin-team-details/admin-modal-team-name/admin-modal-team-name.component';
-import { AdminModalAddUserComponent } from './admin-team/admin-team-roster/admin-modal-add-user/admin-modal-add-user.component';
+import { AdminModalUserAddComponent } from './admin-team/admin-team-roster/admin-modal-user-add/admin-modal-user-add.component';
 import { AdminModalUserRolesComponent } from './admin-team/admin-team-roster/admin-modal-user-roles/admin-modal-user-roles.component';
+import { AdminModalUserRemoveComponent } from './admin-team/admin-team-roster/admin-modal-user-remove/admin-modal-user-remove.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AdminModalUserRolesComponent } from './admin-team/admin-team-roster/adm
     AdminModalTeamDeleteComponent,
     AdminModalTeamNewComponent,
     AdminModalTeamNameComponent,
-    AdminModalAddUserComponent,
+    AdminModalUserAddComponent,
+    AdminModalUserRemoveComponent,
     AdminModalUserRolesComponent
   ],
   imports: [
@@ -41,7 +43,8 @@ import { AdminModalUserRolesComponent } from './admin-team/admin-team-roster/adm
     AdminModalTeamDeleteComponent,
     AdminModalTeamNewComponent,
     AdminModalTeamNameComponent,
-    AdminModalAddUserComponent,
+    AdminModalUserAddComponent,
+    AdminModalUserRemoveComponent,
     AdminModalUserRolesComponent
   ]
 })

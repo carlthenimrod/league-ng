@@ -11,12 +11,12 @@ import { UserService } from '@app/services/user.service';
 import { emailUnique } from '@app/validators/email-unique.validator';
 
 @Component({
-  selector: 'app-admin-modal-add-user',
-  styleUrls: ['./admin-modal-add-user.component.scss'],
-  templateUrl: './admin-modal-add-user.component.html',
+  selector: 'app-admin-modal-user-add',
+  styleUrls: ['./admin-modal-user-add.component.scss'],
+  templateUrl: './admin-modal-user-add.component.html',
   providers: [UserService]
 })
-export class AdminModalAddUserComponent implements OnInit, OnDestroy {
+export class AdminModalUserAddComponent implements OnInit, OnDestroy {
   userForm = this.fb.group({
     email: ['', [Validators.required, Validators.email], emailUnique(this.userService)],
     name: this.fb.group({

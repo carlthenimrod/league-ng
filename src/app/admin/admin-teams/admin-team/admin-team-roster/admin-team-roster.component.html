@@ -25,9 +25,15 @@
 
             <div class="actions">
               <button
-                (click)="onClickOpenModal('roles', user._id)"
+                (click)="onClickOpenModal('roles', user)"
               >
                 <i class="fas fa-user-cog"></i>
+              </button>
+
+              <button
+                (click)="onClickOpenModal('remove', user)"
+              >
+                <i class="fas fa-times-circle"></i>
               </button>
             </div>
           </div>

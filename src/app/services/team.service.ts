@@ -99,6 +99,18 @@ export class TeamService {
       );
   }
 
+  userDelete$(user: Partial<User>): Observable<Team> {
+    const url = `${this.api}teams/${this.team._id}/users/${user._id}`;
+    return this.http.delete<TeamResponse>(url)
+      .pipe<Team, Team>(
+        map(this.mapResponse.bind(this)),
+        tap(updatedTeam => {
+          this.team = updatedTeam;
+          this.teamSubject.next(_.cloneDeep(this.team));
+        })
+      );
+  }
+
   editUser(userId: string, roles: string[]) {
     const url = this.api + `teams/${this.team._id}/users/${userId}`;
 
@@ -160,9 +172,9 @@ export class TeamService {
     const managers = [];
 
     roster.forEach(r => {
-      if (r.roles.includes('manager')) { managers.push(r.user); }
-      if (r.roles.includes('coach')) { coaches.push(r.user); }
-      if (r.roles.includes('player')) { players.push(r.user); }
+      if (r.roles.includes('manager')) { managers.push({ ...r.user, roles: r.roles }); }
+      if (r.roles.includes('coach')) { coaches.push({ ...r.user, roles: r.roles }); }
+      if (r.roles.includes('player')) { players.push({ ...r.user, roles: r.roles }); }
     });
 
     return [
