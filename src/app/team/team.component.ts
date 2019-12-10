@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject, combineLatest } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { Team } from '@app/models/team';
 import { TeamSidebarService } from '@app/services/team-sidebar.service';
 import { TeamSocketService } from '@app/services/team-socket.service';
-import { takeUntil, map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-team-component',

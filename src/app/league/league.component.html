@@ -1,8 +1,14 @@
-<app-league-header
-  [league]="league"
-  [selected]="selected"
-  (navClick)="onNavClick($event)"
-></app-league-header>
+<app-nav-slide>
+  <h2>{{ league.name }}</h2>
+
+  <p *ngIf="league.description">{{ league.description }}</p>
+
+  <app-tab-selector
+    [tabs]="['home', 'schedule', 'standings', 'teams']"
+    (select)="selected = $event"
+  >
+  </app-tab-selector>
+</app-nav-slide>
 
 <section id="league">
   <ng-container [ngSwitch]="selected">

@@ -25,6 +25,7 @@ import { ModalModule } from './modal/modal.module';
 import { StringifyAddressPipe } from './stringify-address.pipe';
 import { MustMatchValidatorDirective } from './validators/must-match.directive';
 import { HasAddressPipe } from './has-address.pipe';
+import { NavSlideComponent } from './nav-slide/nav-slide.component';
 
 @NgModule({
   imports: [
@@ -51,6 +52,7 @@ import { HasAddressPipe } from './has-address.pipe';
     FormatLocationsPipe,
     GmapLinkPipe,
     GameComponent,
+    NavSlideComponent,
     TabSelectorComponent,
     ModalModule,
     StringifyAddressPipe,
@@ -63,6 +65,7 @@ import { HasAddressPipe } from './has-address.pipe';
     FormatLocationsPipe,
     GameComponent,
     GmapLinkPipe,
+    NavSlideComponent,
     TabSelectorComponent,
     StringifyAddressPipe,
     HasAddressPipe,

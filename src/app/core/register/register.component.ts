@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { User } from '@app/models/user';
@@ -26,7 +26,7 @@ import { TemplateService } from '@app/services/template.service';
     completeTrigger
   ]
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   state = 'type';
   type: string;
 
@@ -60,9 +60,6 @@ export class RegisterComponent implements OnInit {
     private templateService: TemplateService,
     private userService: UserService
   ) { }
-
-  ngOnInit() {
-  }
 
   onTypeSelect(type: string) {
     if (type === 'team') {

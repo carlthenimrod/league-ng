@@ -1,10 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 import { MODAL_DATA } from '@app/shared/modal/modal';
 import { ModalService } from '@app/shared/modal/modal.service';
-import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 import { User } from '@app/models/user';
 

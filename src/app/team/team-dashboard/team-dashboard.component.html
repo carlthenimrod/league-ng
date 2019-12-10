@@ -1,119 +1,30 @@
-<header>
-  <!-- <app-profile-img
-    [img]="team.img"
-    (save)="onSaveImg($event)"
+<app-nav-slide>
+  <h2>{{ team.name }}</h2>
+
+  <app-tab-selector
+    [tabs]="['home', 'feed', 'schedule', 'roster']"
+    (select)="selected = $event"
   >
-  </app-profile-img> -->
+  </app-tab-selector>
+</app-nav-slide>
 
-  <h1>{{ team.name }}</h1>
+<section id="team">
+  <ng-container [ngSwitch]="selected">
+    <app-team-feed
+      *ngSwitchCase="'feed'"
+      [feed]="team.feed"
+    ></app-team-feed>
 
-  <button id="team-mobile-toggle" (click)="onClickMobileToggle($event)">
-    <ng-container [ngSwitch]="tab">
-      <i *ngSwitchCase="'feed'" class="fas fa-rss"></i>
-      <i *ngSwitchCase="'schedule'" class="far fa-calendar-alt"></i>
-      <i *ngSwitchCase="'roster'" class="fas fa-users"></i>
-      <i *ngSwitchCase="'settings'" class="fas fa-cog"></i>
-    </ng-container>
-
-    <span>{{ tab }}</span>
-
-    <i *ngIf="!mobileNav" class="fas fa-caret-down"></i>
-    <i *ngIf="mobileNav" class="fas fa-caret-up"></i>
-  </button>
-
-  <nav id="team-mobile" [ngStyle]="{ 'display': mobileNav ? 'block' : 'none' }">
-    <a 
-      *ngIf="tab !== 'feed'" 
-      (click)="tab = 'feed'"
+    <app-team-schedule
+      *ngSwitchCase="'schedule'"
+      [team]="team"
     >
-      <i class="fas fa-rss"></i>
-      <span>Feed</span>
-    </a>
+    </app-team-schedule>
 
-    <a 
-      *ngIf="tab !== 'schedule'" 
-      (click)="tab = 'schedule'"
+    <app-team-roster
+      *ngSwitchCase="'roster'"
+      [team]="team"
     >
-      <i class="far fa-calendar-alt"></i>
-      <span>Schedule</span>
-    </a>
-
-    <a 
-      *ngIf="tab !== 'roster'" 
-      (click)="tab = 'roster'"
-    >
-      <i class="fas fa-users"></i>
-      <span>Roster</span>
-    </a>
-
-    <a 
-      *ngIf="tab !== 'settings'" 
-      (click)="tab = 'settings'"
-    >
-      <i class="fas fa-cog"></i>
-      <span>Settings</span>
-    </a>
-  </nav>
-
-  <button 
-    id="toggle"
-    (click)="onClickSidebarToggle($event)"
-  >
-    <i class="fas fa-comments"></i>
-  </button>
-
-  <section id="tabs">
-    <nav>
-      <button
-        (click)="tab = 'feed'"
-        [ngClass]="{'active': tab === 'feed'}"
-      >
-        <span>Feed</span>
-        <i class="fas fa-rss ml-2"></i>
-      </button>
-
-      <button
-        (click)="tab = 'schedule'"
-        [ngClass]="{'active': tab === 'schedule'}"
-      >
-        <span>Schedule</span>
-        <i class="far fa-calendar-alt ml-2"></i>
-      </button>
-
-      <button
-        (click)="tab = 'roster'"
-        [ngClass]="{'active': tab === 'roster'}"
-      >
-        <span>Roster</span>
-        <i class="fas fa-users ml-2"></i>
-      </button>
-
-      <button
-        (click)="tab = 'settings'"
-        [ngClass]="{'active': tab === 'settings'}"
-      >
-        <span>Settings</span>
-        <i class="fas fa-cog ml-2"></i>
-      </button>
-    </nav>
-  </section>
-</header>
-
-<ng-container [ngSwitch]="tab">
-  <app-team-feed
-    *ngSwitchCase="'feed'"
-    [feed]="team.feed"
-  ></app-team-feed>
-
-  <app-team-schedule
-    *ngSwitchCase="'schedule'"
-    [team]="team"
-  >
-  </app-team-schedule>
-
-  <app-team-roster
-    *ngSwitchCase="'roster'"
-    [team]="team"
-  >
-  </app-team-roster>
-</ng-container>
+    </app-team-roster>
+  </ng-container>
+</section>

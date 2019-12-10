@@ -190,3 +190,13 @@
     }
   }
 }
+
+section#team {
+  display: flex;
+  height: 100%;
+  padding-top: 3rem;
+
+  @include media-breakpoint-up(sm) {
+    padding-top: 0;
+  }
+}
