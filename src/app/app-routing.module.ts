@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent },
   { path: 'confirm/:id', component: EmailConfirmComponent },
   { path: 'recover', component: PasswordRecoveryComponent },
+  { path: 'sign-up', loadChildren: () => import('./sign-up/sign-up.module').then(m => m.SignUpModule) },
   { path: 'league', loadChildren: () => import('./league/league.module').then(m => m.LeagueModule) },
   { path: 'team', loadChildren: () => import('./team/team.module').then(m => m.TeamModule) },
   { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },

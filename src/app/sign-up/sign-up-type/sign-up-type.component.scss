@@ -1,0 +1,118 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  display: none;
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  @include media-breakpoint-up(sm) {
+    flex-direction: row;
+  }
+
+  button {
+    @include gradient-x(
+      theme-color-level(primary, -11),
+      theme-color-level(primary, -11.5)
+    );
+    align-items: center;
+    border: 2px solid theme-color(primary);
+    border-radius: 50rem;
+    color: theme-color(primary);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    max-width: 25rem;
+    padding: 2rem;
+    transition: all 100ms ease-in-out;
+    transition-property: color, border-color;
+    width: 100%;
+
+    @include media-breakpoint-up(sm) {
+      border-radius: 0.5rem;
+      flex-wrap: wrap;
+      margin: 0 1rem;
+      padding: 3rem 0;
+    }
+
+    &:hover {
+      @include gradient-x(
+        theme-color-level(primary, -10.5),
+        theme-color-level(primary, -10)
+      );
+      border-color: lighten(theme-color(primary), 5%);
+      color: lighten(theme-color(primary), 5%);
+    }
+
+    &:first-child {
+      margin-bottom: 2rem;
+
+      @include media-breakpoint-up(sm) {
+        margin-bottom: 0;
+      }
+
+      i {
+        margin-left: 1rem;
+
+        @include media-breakpoint-up(sm) {
+          margin-left: 0;
+        }
+      }
+    }
+
+    &:last-child {
+      span {
+        order: 2;
+
+        @include media-breakpoint-up(sm) {
+          order: 0;
+        }
+      }
+
+      i {
+        margin-right: 1rem;
+        order: 1;
+
+        @include media-breakpoint-up(sm) {
+          margin-right: 0;
+          order: 0;
+        }
+      }
+    }
+
+    span {
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-transform: uppercase;
+
+      @include media-breakpoint-up(sm) {
+        display: block;
+        font-size: 1.4rem;
+        margin-bottom: 1.5rem;
+        width: 100%;
+      }
+    }
+
+    i {
+      font-size: 2rem;
+      text-align: center;
+
+      @include media-breakpoint-up(sm) {
+        font-size: 3rem;
+      }
+    }
+  }
+}

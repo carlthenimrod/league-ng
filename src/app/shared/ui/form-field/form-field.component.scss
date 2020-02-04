@@ -1,0 +1,111 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+$error_color: darken(theme-color(danger), 10%);
+
+ui-form-field {
+  border-bottom: 1px solid darken(theme-color(primary), 20%);
+  display: flex;
+  margin: 1rem 0;
+  padding: 0.25rem;
+  position: relative;
+  transition: border-color 100ms ease-in-out;
+
+  &.ng-touched.ng-invalid {
+    border-color: $error_color;
+
+    .placeholder {
+      color: $error_color;
+    }
+
+    .underline {
+      background-color: $error_color;
+    }
+  }
+
+  .placeholder {
+    color: lighten(theme-color(primary), 20%);
+    position: absolute;
+    transform: scale(0.85) translate(0, -20px);
+    transform-origin: 0 0;
+    transition: all 100ms ease-in-out;
+
+    &.empty {
+      background-color: transparent;
+      transform: scale(1) translate(0, 0);
+    }
+
+    span.required {
+      color: $error_color;
+      margin-left: 0.25rem;
+    }
+  }
+
+  ui-error {
+    color: $error_color;
+    display: block;
+    font-weight: 700;
+    position: absolute;
+    right: 0;
+    transform: scale(0.85) translate(0, -20px);
+    transform-origin: 100% 0;
+    transition: all 100ms ease-in-out;
+  }
+
+  ui-hint {
+    color: lighten(theme-color(primary), 20%);
+    display: block;
+    position: absolute;
+    right: 0;
+    transform: scale(0.85) translate(0, -20px);
+    transform-origin: 100% 0;
+    transition: all 100ms ease-in-out;
+  }
+
+  input, textarea {
+    background: none;
+    border: none;
+    width: 100%;
+
+    &::placeholder {
+      color: transparent;
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active  {
+      box-shadow: 0 0 0 30px #fff inset !important;
+    }
+
+    @keyframes autofill-start {  from {}  to {}}
+    @keyframes autofill-cancel {  from {}  to {}}
+    &:-webkit-autofill {
+        animation-name: autofill-start;
+    }
+
+    &:not(:-webkit-autofill) {
+        animation-name: autofill-cancel;
+    }
+  }
+
+  .underline {
+    background-color: theme-color(primary);
+    height: 2px;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    transition: width 200ms ease-in-out;
+    width: 0%;
+  }
+
+  &.focused {
+    .underline {
+      display: block;
+      width: 100%;
+    }
+  }
+}

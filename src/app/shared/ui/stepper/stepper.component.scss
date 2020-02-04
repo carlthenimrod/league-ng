@@ -1,0 +1,11 @@
+ui-stepper {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  width: 100%;
+
+  form {
+    display: flex;
+    width: 100%;
+  }
+}

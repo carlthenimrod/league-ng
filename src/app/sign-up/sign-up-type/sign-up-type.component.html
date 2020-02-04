@@ -1,0 +1,15 @@
+<h2>How do you want to sign up?</h2>
+
+<section>
+  <button (click)="select.emit('user')" uiStepNext>
+    <span>I am a Free Agent</span>
+
+    <i class="fas fa-user"></i>
+  </button>
+
+  <button (click)="select.emit('team')" uiStepNext>
+    <span>I have a Team</span>
+
+    <i class="fas fa-users"></i>
+  </button>
+</section>

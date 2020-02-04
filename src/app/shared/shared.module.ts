@@ -21,11 +21,13 @@ import { FormatLocationsPipe } from './format-locations.pipe';
 import { GameComponent } from './game/game.component';
 import { GmapLinkPipe } from './gmap-link.pipe';
 import { TabSelectorComponent } from './tab-selector/tab-selector.component';
+import { ScheduleModule } from './schedule/schedule.module';
 import { ModalModule } from './modal/modal.module';
 import { StringifyAddressPipe } from './stringify-address.pipe';
 import { MustMatchValidatorDirective } from './validators/must-match.directive';
 import { HasAddressPipe } from './has-address.pipe';
 import { NavSlideComponent } from './nav-slide/nav-slide.component';
+import { UIModule } from './ui/ui.module';
 
 @NgModule({
   imports: [
@@ -34,7 +36,9 @@ import { NavSlideComponent } from './nav-slide/nav-slide.component';
     MatNativeDateModule,
     MatProgressSpinnerModule,
     MatSliderModule,
-    ModalModule
+    ScheduleModule,
+    ModalModule,
+    UIModule
   ],
   exports: [
     MatAutocompleteModule,
@@ -54,10 +58,12 @@ import { NavSlideComponent } from './nav-slide/nav-slide.component';
     GameComponent,
     NavSlideComponent,
     TabSelectorComponent,
+    ScheduleModule,
     ModalModule,
     StringifyAddressPipe,
     HasAddressPipe,
-    MustMatchValidatorDirective
+    MustMatchValidatorDirective,
+    UIModule
   ],
   declarations: [
     NoticeComponent,

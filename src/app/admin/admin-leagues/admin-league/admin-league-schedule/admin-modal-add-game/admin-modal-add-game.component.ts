@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { League, Group } from '@app/models/league';
+import { League, GameGroup } from '@app/models/league';
 import { Game } from '@app/models/game';
 import { Place, Location } from '@app/models/place';
 import { PlaceService } from '@app/services/place.service';
@@ -140,7 +140,7 @@ export class AdminModalAddGameComponent implements OnInit {
     });
   }
 
-  displayFn(group: Group): string | undefined {
+  displayFn(group: GameGroup): string | undefined {
     return group ? group.label : undefined;
   }
 

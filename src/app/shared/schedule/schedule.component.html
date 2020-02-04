@@ -1,0 +1,9 @@
+<p *ngIf="schedule.length === 0">No Games Scheduled.</p>
+
+<ng-container *ngIf="schedule && schedule.length > 0; else noGames">
+  <app-schedule-group></app-schedule-group>
+</ng-container>
+
+<ng-template #noGames>
+  <p>No Games Scheduled.</p>
+</ng-template>

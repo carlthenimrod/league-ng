@@ -1,0 +1,23 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0.5rem 0.25rem 0;
+
+  span {
+    color: theme-color(primary);
+  }
+
+  button {
+    background: none;
+    border: none;
+    color: theme-color(primary);
+  }
+}

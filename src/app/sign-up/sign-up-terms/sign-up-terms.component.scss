@@ -1,0 +1,29 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+section#terms {
+  background-color: lighten(theme-color(primary), 50%);
+  border: 3px solid theme-color(primary);
+  border-radius: 0.5rem;
+  height: 15rem;
+  margin-bottom: 1rem;
+  overflow-y: scroll;
+  padding: 0.5rem 1rem;
+
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+
+  &::-webkit-scrollbar:vertical {
+    width: 11px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid lighten(theme-color(primary), 50%);
+    background-color: rgba(darken(theme-color(primary), 20%), 0.8);
+  }
+}

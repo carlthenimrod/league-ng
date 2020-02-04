@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
-import { League, ScheduleOptions, Group } from '@app/models/league';
+import { League, ScheduleOptions, GameGroup } from '@app/models/league';
 import { LeagueService } from '@app/services/league.service';
 import { AdminModalAutoGenerateComponent } from './admin-modal-auto-generate/admin-modal-auto-generate.component';
 import { Game } from '@app/models/game';
@@ -53,7 +53,7 @@ export class AdminLeagueScheduleComponent implements OnInit {
 
     const dialogRef = this.dialog.open(AdminModalAddGameComponent, config);
 
-    dialogRef.afterClosed().subscribe((data: {game: Game, group: Group|string}) => {
+    dialogRef.afterClosed().subscribe((data: {game: Game, group: GameGroup|string}) => {
       if (!data) { return; }
 
       if (typeof data.group === 'object') {
@@ -72,7 +72,7 @@ export class AdminLeagueScheduleComponent implements OnInit {
     }
   }
 
-  trackById(index: number, group: Group) {
+  trackById(index: number, group: GameGroup) {
     return group._id;
   }
 }

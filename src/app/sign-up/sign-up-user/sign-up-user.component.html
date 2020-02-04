@@ -1,0 +1,131 @@
+<ng-container [formGroup]="userForm">
+  <ngl-sign-up-header>
+    <h2>Enter your user information</h2>
+
+    <p><span>*</span> required field</p>
+  </ngl-sign-up-header>
+
+  <ngl-sign-up-section>
+    <header>
+      <h3>User Details</h3>
+    </header>
+
+    <div id="name" formGroupName="name">
+      <ui-form-field>
+        <input
+          formControlName="first"
+          placeholder="First Name"
+          uiInput
+          required
+        >
+      </ui-form-field>
+
+      <ui-form-field>
+        <input
+          formControlName="last"
+          placeholder="Last Name"
+          uiInput
+          required
+        >
+      </ui-form-field>
+    </div>
+
+    <ui-form-field>
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="Email Address"
+        uiInput
+        required
+      >
+
+      <ui-hint *ngIf="email.pending">
+        Checking email...
+      </ui-hint>
+
+      <ui-error *ngIf="email.errors && email.errors.notUnique">
+        Email already exists!
+      </ui-error>
+    </ui-form-field>
+
+    <ui-form-field>
+      <input
+        type="tel"
+        formControlName="phone"
+        placeholder="Phone Number"
+        uiInput
+        required
+      >
+    </ui-form-field>
+
+    <ui-form-field>
+      <input
+        type="tel"
+        formControlName="secondary"
+        placeholder="Secondary Phone"
+        uiInput
+      >
+    </ui-form-field>
+  </ngl-sign-up-section>
+
+  <ngl-sign-up-section>
+    <header>
+      <h3>User Address</h3>
+    </header>
+
+    <div id="address" formGroupName="address">
+      <ui-form-field>
+        <input
+          formControlName="street"
+          placeholder="Street Address"
+          uiInput
+          required
+        >
+      </ui-form-field>
+
+      <ui-form-field>
+        <input
+          formControlName="city"
+          placeholder="City"
+          uiInput
+          required
+        >
+      </ui-form-field>
+
+      <ui-form-field>
+        <input
+          formControlName="state"
+          placeholder="State"
+          uiInput
+          required
+        >
+      </ui-form-field>
+
+      <ui-form-field>
+        <input
+          formControlName="postal"
+          placeholder="Postal Code"
+          uiInput
+          required
+        >
+      </ui-form-field>
+    </div>
+  </ngl-sign-up-section>
+
+  <ngl-sign-up-actions>
+    <button class="prev" uiStepPrev>
+      <i class="fas fa-angle-left"></i>
+      <span>Back</span>
+    </button>
+
+    <button
+      class="next"
+      (click)="userComplete.emit()"
+      [disabled]="!userForm.valid"
+      uiStepNext
+    >
+      <span>Next</span>
+      <i class="fas fa-angle-right"></i>
+    </button>
+  </ngl-sign-up-actions>
+</ng-container>

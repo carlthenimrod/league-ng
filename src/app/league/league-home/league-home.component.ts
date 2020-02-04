@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { tap, mergeMap, map } from 'rxjs/operators';
 
 import { AuthService } from '@app/auth/auth.service';
-import { League, Group } from '@app/models/league';
+import { League, GameGroup } from '@app/models/league';
 import { LeagueScheduleService } from '@app/services/league-schedule.service';
 import { LeagueService } from '@app/services/league.service';
 import { Game } from '@app/models/game';
@@ -15,7 +15,7 @@ import { Game } from '@app/models/game';
 })
 export class LeagueHomeComponent implements OnInit {
   league$: Observable<League>;
-  selectedGroup: Group;
+  selectedGroup: GameGroup;
   selectedGame: Game;
   teamIds: string[] = [];
 

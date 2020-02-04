@@ -118,8 +118,8 @@ export class UserService {
     );
   }
 
-  search(email: string) {
+  search(email: string): Observable<User> {
     const url = this.api + `users/search`;
-    return this.http.post(url, { email });
+    return this.http.post<User>(url, { email });
   }
 }

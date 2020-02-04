@@ -7,7 +7,7 @@ import { NavService } from './header/nav/nav.service';
 import { TemplateService } from '@app/services/template.service';
 
 @Component({
-  selector: 'app-template',
+  selector: 'ngl-template',
   templateUrl: './template.component.html',
   styleUrls: ['./template.component.scss']
 })

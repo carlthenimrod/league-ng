@@ -10,15 +10,18 @@
   </app-tab-selector>
 </app-nav-slide>
 
-<section id="league">
-  <ng-container [ngSwitch]="selected">
-    <app-league-home *ngSwitchCase="'home'"></app-league-home>
+<section id="league" [ngSwitch]="selected">
+  <app-league-home *ngSwitchCase="'home'"></app-league-home>
 
-    <app-league-schedule *ngSwitchCase="'schedule'"></app-league-schedule>
+  <app-schedule
+    *ngSwitchCase="'schedule'"
+    [schedule]="league.schedule"
+  ></app-schedule>
 
-    <app-league-standings
-      *ngSwitchCase="'standings'"
-      [league]="league"
-    ></app-league-standings>
-  </ng-container>
+  <!-- <app-league-schedule *ngSwitchCase="'schedule'"></app-league-schedule> -->
+
+  <app-league-standings
+    *ngSwitchCase="'standings'"
+    [league]="league"
+  ></app-league-standings>
 </section>

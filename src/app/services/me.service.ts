@@ -18,7 +18,9 @@ export class MeService {
     return new Observable(observer => {
       try {
         const me = this.localStorage.get();
-        this.subject.next(me);
+        me._id
+          ? this.subject.next(me)
+          : this.subject.next(null);
 
         observer.next(me);
         observer.complete();

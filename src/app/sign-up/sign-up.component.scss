@@ -1,0 +1,45 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  display: block;
+  margin: 0 auto;
+  max-width: 40rem;
+
+  @include media-breakpoint-up(sm) {
+    padding: 0;
+  }
+}
+
+header {
+  padding: 0 0.5rem;
+
+  h1 {
+    border-bottom: 3px solid theme-color(primary);
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin: 1rem 0;
+    padding: 0 0 0.5rem 0;
+
+    @include media-breakpoint-up(sm) {
+      margin: 2rem 0;
+    }
+  }
+}
+
+ui-step {
+  padding: 0 0.5rem;
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      background-color: theme-color(primary);
+      padding: 0.5rem 1rem;
+    }
+  }
+}

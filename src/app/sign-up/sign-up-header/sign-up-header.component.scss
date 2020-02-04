@@ -1,0 +1,25 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+ngl-sign-up-header {
+  display: block;
+  padding-bottom: 1rem;
+
+  h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+    font-style: italic;
+    margin-bottom: 0;
+
+    span {
+      color: darken(theme-color(danger), 10%);
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { League, Group, Division } from '@app/models/league';
+import { League, GameGroup, Division } from '@app/models/league';
 import { Team } from '@app/models/team';
 
 @Injectable({
@@ -68,7 +68,7 @@ export class LeagueStandingsService {
 
     // loop thru games, update stats
     for (let i = 0; i < league.schedule.length; i++) {
-      const group: Group = league.schedule[i];
+      const group: GameGroup = league.schedule[i];
 
       for (let x = 0; x < group.games.length; x++) {
         const game = group.games[x];

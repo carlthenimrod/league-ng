@@ -1,0 +1,41 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+ui-modal-actions {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  padding: 0.5rem 0 2rem 0;
+
+  button {
+    background-color: theme-color(info);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 700;
+    margin: 0 auto 1rem auto;
+    max-width: 18rem;
+    padding: 0.5rem;
+    text-transform: uppercase;
+    width: 100%;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &#save {
+      background-color: theme-color(success);
+    }
+
+    &#cancel {
+      background-color: theme-color(danger);
+    }
+
+    &:disabled {
+      background-color: #aaa !important;
+    }
+  }
+}

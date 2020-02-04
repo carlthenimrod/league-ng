@@ -5,7 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import * as _ from 'lodash';
 
-import { League, Division, ScheduleOptions, Group, LeagueGroup } from '@app/models/league';
+import { League, Division, ScheduleOptions, GameGroup, LeagueGroup } from '@app/models/league';
 import { Team } from '@app/models/team';
 import { NoticeService } from './notice.service';
 import { Game } from '@app/models/game';
@@ -206,7 +206,7 @@ export class LeagueService {
   generateSchedule(options: ScheduleOptions) {
     const url = this.api + `leagues/${this.league._id}/schedule`;
 
-    this.http.post(url, {...options}).subscribe((groups: Group[]) => {
+    this.http.post(url, {...options}).subscribe((groups: GameGroup[]) => {
       this.league.schedule = groups;
       this.leagueSubject.next(_.cloneDeep(this.league));
     });
@@ -224,22 +224,22 @@ export class LeagueService {
   addGroup(label: string, game?: Game) {
     const url = this.api + `leagues/${this.league._id}/schedule/add`;
 
-    this.http.post(url, {label}).subscribe((group: Group) => {
+    this.http.post(url, {label}).subscribe((group: GameGroup) => {
       this.addGame(group._id, game);
     });
   }
 
-  updateGroup(group: Group) {
+  updateGroup(group: GameGroup) {
     const url = this.api + `leagues/${this.league._id}/schedule/${group._id}`;
 
-    this.http.put(url, _.pick(group, ['label'])).subscribe((updatedGroup: Group) => {
+    this.http.put(url, _.pick(group, ['label'])).subscribe((updatedGroup: GameGroup) => {
       const index = this.league.schedule.findIndex((g => g._id === updatedGroup._id));
       this.league.schedule[index].label = updatedGroup.label;
       this.leagueSubject.next(_.cloneDeep(this.league));
     });
   }
 
-  removeGroup(group: Group) {
+  removeGroup(group: GameGroup) {
     const url = this.api + `leagues/${this.league._id}/schedule/${group._id}`;
 
     this.http.delete(url).subscribe(() => {
@@ -252,7 +252,7 @@ export class LeagueService {
   addGame(groupId: string, game: Game) {
     const url = this.api + `leagues/${this.league._id}/schedule/${groupId}/games`;
 
-    this.http.post(url, game).subscribe((groups: Group[]) => {
+    this.http.post(url, game).subscribe((groups: GameGroup[]) => {
       this.league.schedule = groups;
       this.leagueSubject.next(_.cloneDeep(this.league));
     });
@@ -261,7 +261,7 @@ export class LeagueService {
   updateGame(groupId: string, game: Game) {
     const url = this.api + `leagues/${this.league._id}/schedule/${groupId}/games/${game._id}`;
 
-    this.http.put(url, game).subscribe((groups: Group[]) => {
+    this.http.put(url, game).subscribe((groups: GameGroup[]) => {
       this.league.schedule = groups;
       this.leagueSubject.next(_.cloneDeep(this.league));
     });

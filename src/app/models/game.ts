@@ -1,4 +1,4 @@
-import { League, Group } from './league';
+import { League, GameGroup } from './league';
 import { Place } from './place';
 
 export interface Game {
@@ -16,7 +16,7 @@ export interface Game {
   time?: boolean;
   place?: Place;
   league?: League;
-  group?: Group;
+  group?: GameGroup;
   _id?: string;
   __v?: number;
 }

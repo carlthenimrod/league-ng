@@ -1,0 +1,75 @@
+<ui-modal-header>
+  Add User
+</ui-modal-header>
+
+<form [formGroup]="addUserForm" (ngSubmit)="addUserForm.valid && onSubmit()" autocomplete="off">
+  <section id="search">
+    <ngl-sign-up-search>
+      <input
+        uiInput
+        type="email"
+        formControlName="email"
+        placeholder="Enter Email"
+        autocomplete="none"
+      >
+
+      <ui-hint *ngIf="!searching && !email.errors && user">
+        {{
+          user._id
+            ? 'Email exists! User Found!'
+            : 'Email doesn\'t exist! Invite New User!'
+        }}
+      </ui-hint>
+
+      <ui-error *ngIf="email.touched && email.invalid && email.hasError('email')">
+        Invalid Email!
+      </ui-error>
+    </ngl-sign-up-search>
+  </section>
+
+  <section id="user" *ngIf="user">
+    <div class="name" formGroupName="name">
+      <ui-modal-form-field>
+        <input
+          uiInput
+          type="text"
+          formControlName="first"
+          placeholder="First Name"
+          autocomplete="off"
+        >
+      </ui-modal-form-field>
+
+      <ui-modal-form-field>
+        <input
+          uiInput
+          type="text"
+          formControlName="last"
+          placeholder="Last Name"
+          autocomplete="off"
+        >
+      </ui-modal-form-field>
+    </div>
+
+    <ui-modal-form-field>
+      <ui-select
+        formControlName="roles"
+        placeholder="Select Roles"
+        multiple
+      >
+        <ui-option value="player">Player</ui-option>
+        <ui-option value="coach">Coach</ui-option>
+        <ui-option value="manager">Manager</ui-option>
+      </ui-select>
+    </ui-modal-form-field>
+  </section>
+
+  <ui-modal-actions *ngIf="user">
+    <button id="save" [disabled]="!addUserForm.valid">
+      <span>Add</span>
+    </button>
+
+    <button id="cancel" uiModalClose>
+      <span>Cancel</span>
+    </button>
+  </ui-modal-actions>
+</form>

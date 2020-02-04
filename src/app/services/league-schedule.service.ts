@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 
-import { League, Group } from '@app/models/league';
+import { League, GameGroup } from '@app/models/league';
 import { Game } from '@app/models/game';
 
 @Injectable({
@@ -49,7 +49,7 @@ export class LeagueScheduleService {
     return selectedGame;
   }
 
-  orderGames(group: Group, teamIds: string[]) {
+  orderGames(group: GameGroup, teamIds: string[]) {
     group.games = [...group.games];
     group.games.sort((a, b) => {
       const inA = teamIds.some(id => {

@@ -48,15 +48,15 @@ export class TeamDashboardComponent implements OnInit, OnDestroy {
 
     combineLatest([ this.viewport.type$, this.teamSidebar.isOpen$ ])
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(([ type, isOpen ]) => {
+      .subscribe(([ type, isOpen ]) =>
         this.sidebarState = isOpen
           ? type === 'mobile'
             ? 'mobileOpen'
             : 'desktopOpen'
           : type === 'mobile'
             ? 'mobileClose'
-            : 'desktopClose';
-      });
+            : 'desktopClose'
+      );
   }
 
   onClickSidebarToggle($event: Event) {

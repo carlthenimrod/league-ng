@@ -1,0 +1,17 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+section#roster {
+  div {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.5rem 0.5rem 0;
+
+    button {
+      color: theme-color(primary);
+    }
+  }
+}

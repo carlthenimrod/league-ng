@@ -1,0 +1,104 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+ui-select {
+  align-items: center;
+  background-color: darken(theme-color(primary), 30%);
+  border: 2px solid lighten(theme-color(primary), 20%);
+  border-radius: 3px;
+  color: $white;
+  display: flex;
+  font-size: 1.2rem;
+  margin: 0 auto;
+  min-height: 2.5rem;
+  max-width: 15rem;
+  padding: 0.25rem 0.5rem 0 0.5rem;
+  position: relative;
+  text-align: left;
+  transition: border 50ms ease-in-out;
+  width: 100%;
+
+  @include media-breakpoint-up(sm) {
+    background-color: theme-color-level(primary, -8);
+    border: 2px solid theme-color-level(primary, -6);
+    color: theme-color-level(primary, 6);
+  }
+
+  &.ng-invalid.ng-touched {
+    border: 2px solid theme-color(danger);
+  }
+
+  .placeholder {
+    color: lighten(theme-color(primary), 20%);
+    margin-bottom: 0.25rem;
+  }
+
+  > i {
+    color: lighten(theme-color(primary), 20%);
+    margin-bottom: 0.25rem;
+    margin-left: auto;
+  }
+
+  .options {
+    background-color: theme-color-level(primary, 8);
+    border-radius: 5px;
+    box-shadow: 0 0 3px 1px rgba($color: #000, $alpha: 0.6);
+    max-width: 15rem;
+    padding: 1rem 0;
+    position: absolute;
+    top: 2.5rem;
+    left: 0;
+    width: 100%;
+
+    ui-option {
+      padding: 0 1rem 1rem 1rem;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  .selected {
+    display: flex;
+    flex-wrap: wrap;
+
+    .selected-value {
+      margin-bottom: 0.25rem;
+      text-transform: capitalize;
+    }
+
+    .selected-item {
+      @include gradient-y(
+        theme-color-level(primary, -4),
+        theme-color-level(primary, -6)
+      );
+      align-items: center;
+      border-radius: 2rem;
+      box-shadow: 0 0 3px 1px rgba($color: #000, $alpha: 0.4);
+      color: theme-color-level(primary, 4);
+      display: flex;
+      font-size: 0.8rem;
+      justify-content: space-between;
+      margin: 0 0.25rem 0.25rem 0;
+      padding: 0.25rem 0.5rem;
+      text-transform: uppercase;
+
+      span {
+        font-weight: 700;
+      }
+
+      i {
+        font-size: 0.6rem;
+        padding-left: 0.5rem;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

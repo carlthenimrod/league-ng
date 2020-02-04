@@ -1,0 +1,60 @@
+<ng-container [formGroup]="teamForm">
+  <ngl-sign-up-header>
+    <h2>Enter your team information</h2>
+
+    <p><span>*</span> required field</p>
+  </ngl-sign-up-header>
+
+  <ngl-sign-up-section>
+    <header>
+      <h3>Team Info</h3>
+    </header>
+
+    <ui-form-field>
+      <input
+        formControlName="name"
+        placeholder="Team Name"
+        uiInput
+        required
+      >
+    </ui-form-field>
+  </ngl-sign-up-section>
+
+  <ngl-sign-up-section>
+    <header>
+      <h3>Team Roster</h3>
+
+      <button (click)="onClickAddUser()" type="button">
+        <i class="fas fa-user-plus"></i>
+      </button>
+    </header>
+
+    <section id="roster" formArrayName="roster">
+      <div *ngFor="let user of roster.controls; let i = index">
+        <span>
+          {{ user.get('email' ).value }}
+        </span>
+
+        <button *ngIf="i !== 0" type="button" (click)="removeUser(i)">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </section>
+  </ngl-sign-up-section>
+
+  <ngl-sign-up-actions>
+    <button class="prev" uiStepPrev>
+      <i class="fas fa-angle-left"></i>
+      <span>Back</span>
+    </button>
+
+    <button
+      class="next"
+      [disabled]="!teamForm.valid"
+      uiStepNext
+    >
+      <span>Next</span>
+      <i class="fas fa-angle-right"></i>
+    </button>
+  </ngl-sign-up-actions>
+</ng-container>

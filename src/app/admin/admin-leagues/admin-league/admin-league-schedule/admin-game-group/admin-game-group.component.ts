@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { LeagueService } from '@app/services/league.service';
-import { League, Group } from '@app/models/league';
+import { League, GameGroup } from '@app/models/league';
 import { Game } from '@app/models/game';
 import { AdminModalEditGroupComponent } from './admin-modal-edit-group/admin-modal-edit-group.component';
 import { AdminModalAddGameComponent } from '../admin-modal-add-game/admin-modal-add-game.component';
@@ -16,7 +16,7 @@ import { gameListEnterTrigger, gameToggleTrigger } from './animations';
 })
 export class AdminGameGroupComponent implements OnInit {
   @Input() league: League;
-  @Input() group: Group;
+  @Input() group: GameGroup;
   show = false;
 
   constructor(
@@ -57,13 +57,13 @@ export class AdminGameGroupComponent implements OnInit {
 
     const dialogRef = this.dialog.open(AdminModalEditGroupComponent, config);
 
-    dialogRef.afterClosed().subscribe((group: Group) => {
+    dialogRef.afterClosed().subscribe((group: GameGroup) => {
       if (!group) { return; }
       this.leagueService.updateGroup(group);
     });
   }
 
-  onClickDeleteGroup($event: MouseEvent, group: Group) {
+  onClickDeleteGroup($event: MouseEvent, group: GameGroup) {
     $event.stopPropagation();
 
     const msg = `Remove ${group.label}?\nWarning: This will also remove all games associated with ${group.label}`;

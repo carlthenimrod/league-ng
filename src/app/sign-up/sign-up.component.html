@@ -1,0 +1,38 @@
+<header>
+  <h1>
+    {{
+      !complete
+      ? 'Sign Up'
+      : 'Thank You!'
+    }}
+  </h1>
+</header>
+
+<ui-stepper *ngIf="!complete">
+  <form [formGroup]="signUpForm" (ngSubmit)="!submitted && signUpForm.valid && onSubmit()">
+    <ui-step>
+      <ngl-sign-up-type (select)="onSelect($event)"></ngl-sign-up-type>
+    </ui-step>
+
+    <ui-step [stepControl]="signUpForm.get('user')">
+      <ngl-sign-up-user
+        [userForm]="signUpForm.get('user')"
+        (userComplete)="type.value === 'team' && addSelf()"
+      ></ngl-sign-up-user>
+    </ui-step>
+
+    <ui-step [stepControl]="signUpForm.get('misc')">
+      <ngl-sign-up-misc [miscForm]="signUpForm.get('misc')"></ngl-sign-up-misc>
+    </ui-step>
+
+    <ui-step *ngIf="type.value === 'team'" [stepControl]="signUpForm.get('team')">
+      <ngl-sign-up-team [teamForm]="signUpForm.get('team')"></ngl-sign-up-team>
+    </ui-step>
+
+    <ui-step [stepControl]="signUpForm">
+      <ngl-sign-up-terms></ngl-sign-up-terms>
+    </ui-step>
+  </form>
+</ui-stepper>
+
+<ngl-sign-up-complete *ngIf="complete"></ngl-sign-up-complete>

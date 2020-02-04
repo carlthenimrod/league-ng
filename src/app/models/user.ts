@@ -8,8 +8,13 @@ export interface UserStatus {
   online?: boolean;
 }
 
+export interface Name {
+  first: string;
+  last: string;
+}
+
 export interface User {
-  name: { first: string; last: string; };
+  name: Name;
   fullName?: string;
   email?: string;
   status?: UserStatus;
@@ -19,7 +24,7 @@ export interface User {
   phone?: string;
   secondary?: string;
   emergency?: {
-    name: { first: string; last: string; };
+    name: Name;
     fullName?: string;
     phone: string;
     secondary?: string;
@@ -31,7 +36,7 @@ export interface User {
 }
 
 export interface Player extends User {
-  name: { first: string; last: string; };
+  name: Name;
   fullName?: string;
   email?: string;
   _id?: string;
@@ -39,7 +44,7 @@ export interface Player extends User {
 }
 
 export interface Coach extends User {
-  name: { first: string; last: string; };
+  name: Name;
   fullName?: string;
   email?: string;
   _id?: string;

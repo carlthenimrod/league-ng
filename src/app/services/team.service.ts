@@ -5,7 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import * as _ from 'lodash';
 
-import { League, Group } from '@app/models/league';
+import { League, GameGroup } from '@app/models/league';
 import { Team, TeamResponse, TeamRosterResponse, TeamRoster } from '@app/models/team';
 import { User } from '@app/models/user';
 import { NoticeService } from './notice.service';
@@ -249,7 +249,7 @@ export class TeamService {
 
     // loop thru games, update stats
     for (let i = 0; i < league.schedule.length; i++) {
-      const group: Group = league.schedule[i];
+      const group: GameGroup = league.schedule[i];
 
       for (let x = 0; x < group.games.length; x++) {
         const game = group.games[x];

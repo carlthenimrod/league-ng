@@ -1,0 +1,64 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+ngl-sign-up-search {
+  padding: 0.5rem 0;
+
+  #search-box {
+    background-color: darken(theme-color(primary), 30%);
+    border-radius: 25px;
+    border: 2px solid lighten(theme-color(primary), 20%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    transition: all 100ms ease-in-out;
+    transition-property: color, border-color;
+
+    input {
+      background: none;
+      border: none;
+      color: $white;
+      flex: 1;
+
+      &::placeholder {
+        color: lighten(theme-color(primary), 20%);
+      }
+    }
+
+    button {
+      background: none;
+      border: none;
+      color: lighten(theme-color(primary), 20%);
+      padding: 0 0.5rem 0 1rem;
+    }
+  }
+
+  &.focused {
+    #search-box {
+      border-color: lighten(theme-color(primary), 30%);
+
+      button {
+        color: lighten(theme-color(primary), 30%);
+      }
+    }
+  }
+
+  #search-message {
+    height: 2.5rem;
+    padding: 0.5rem 0;
+    text-align: center;
+
+    ui-hint {
+      color: lighten(theme-color(primary), 40%);
+      font-size: 0.8rem;
+    }
+
+    ui-error {
+      color: darken(theme-color(danger), 10%);
+      font-size: 0.8rem;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+ui-modal {
+  background-color: darken(theme-color(primary), 20%);
+  margin-top: 3rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  .ui-modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 0 0.5rem;
+
+      .name {
+        display: flex;
+
+        ui-modal-form-field {
+          padding: 0 0.25rem;
+
+          &:first-child { width: 40%; }
+          &:last-child { width: 60%; }
+        }
+      }
+    }
+  }
+}

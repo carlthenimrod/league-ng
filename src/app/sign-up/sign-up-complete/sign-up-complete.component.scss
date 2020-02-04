@@ -1,0 +1,27 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  display: block;
+  padding: 0 0.5rem;
+
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+  }
+
+  section {
+    padding: 1rem 0;
+
+    p {
+      text-align: center;
+
+      em {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

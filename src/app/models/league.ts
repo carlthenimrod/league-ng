@@ -9,7 +9,7 @@ export interface Division {
   __v?: number;
 }
 
-export interface Group {
+export interface GameGroup {
   _id: string;
   label: string;
   start?: string;
@@ -21,7 +21,7 @@ export interface League {
   img?: string;
   divisions?: Division[];
   teams?: Team[];
-  schedule?: Group[];
+  schedule?: GameGroup[];
   description?: string;
   start?: string;
   end?: string;
