@@ -10,7 +10,7 @@ import { emailUnique } from '@app/validators/email-unique.validator';
 
 @Component({
   selector: 'ngl-sign-up',
-  styleUrls: ['/sign-up.component.scss'],
+  styleUrls: ['./sign-up.component.scss'],
   templateUrl: './sign-up.component.html'
 })
 export class SignUpComponent {

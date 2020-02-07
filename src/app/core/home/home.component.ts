@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.router.navigate(['register']);
+    this.router.navigate(['sign-up']);
   }
 
 }

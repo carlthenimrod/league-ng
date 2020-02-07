@@ -16,7 +16,7 @@ import { lightboxTrigger } from './animations';
 })
 export class ModalComponent implements AfterViewInit {
   @Output() close = new EventEmitter<boolean>();
-  @ViewChild('vc', { static: false, read: ViewContainerRef }) vc: ViewContainerRef;
+  @ViewChild('vc', { read: ViewContainerRef }) vc: ViewContainerRef;
   @HostBinding('@lightbox') lightbox;
   componentType: Type<any>;
 
