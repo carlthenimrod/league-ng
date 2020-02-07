@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, AbstractControl, FormGroup, FormArray } from '@angular/forms';
 import { iif, forkJoin, Observable, of } from 'rxjs';
-import { concatMap, defaultIfEmpty, map, tap } from 'rxjs/operators';
+import { concatMap, map } from 'rxjs/operators';
 
-import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
@@ -147,7 +146,6 @@ export class SignUpComponent {
       this.userService.post$(user)
         .pipe(
           concatMap(this._createRoster.bind(this)),
-          tap(roster => console.log(roster)),
           concatMap(roster => this.teamService.post$({
             name: this.signUpForm.get('team.name').value,
             roster: roster,
