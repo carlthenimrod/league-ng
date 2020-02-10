@@ -1,0 +1,43 @@
+<button
+  type="button"
+  class="filter"
+  (click)="toggleFilter('admin')"
+  [ngClass]="{ 'selected': selected.includes('admin') }"
+>
+  <i id="admin"></i>
+
+  <span>Admin</span>
+</button>
+
+<button
+  type="button"
+  class="filter"
+  (click)="toggleFilter('league')"
+  [ngClass]="{ 'selected': selected.includes('league') }"
+>
+  <i id="league"></i>
+
+  <span>League</span>
+</button>
+
+<button
+  type="button"
+  class="filter"
+  (click)="toggleFilter('team')"
+  [ngClass]="{ 'selected': selected.includes('team') }"
+>
+  <i id="team"></i>
+
+  <span>Team</span>
+</button>
+
+<button
+  type="button"
+  class="filter"
+  (click)="toggleFilter('user')"
+  [ngClass]="{ 'selected': selected.includes('user') }"
+>
+  <i id="user" [ngClass]="{ 'selected': selected.includes('user') }"></i>
+
+  <span>User</span>
+</button>

@@ -16,6 +16,7 @@ import { NavTeamsComponent } from './header/nav/nav-teams/nav-teams.component';
 import { NavAdminComponent } from './header/nav/nav-admin/nav-admin.component';
 import { NavUserComponent } from './header/nav/nav-user/nav-user.component';
 import { LoadingComponent } from './loading/loading.component';
+import { NotificationModule } from './header/notification/notification.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { LoadingComponent } from './loading/loading.component';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    NotificationModule
   ],
   exports: [
     TemplateComponent

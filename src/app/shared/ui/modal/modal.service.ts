@@ -1,14 +1,17 @@
 import { Injectable, Type, ComponentFactoryResolver, ComponentRef, Injector, ApplicationRef, EmbeddedViewRef, Inject, OnDestroy } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Subject } from 'rxjs';
 
 import { UIModalComponent } from './modal.component';
-import { DOCUMENT } from '@angular/common';
 
 @Injectable()
 export class UIModalService implements OnDestroy {
   private _modalRef: ComponentRef<UIModalComponent>;
+
+  protected _componentTypeWrapper: Type<UIModalComponent> = UIModalComponent;
+
   private _closedSubject = new Subject<any>();
-  closed = this._closedSubject.asObservable();
+  closed$ = this._closedSubject.asObservable();
 
   constructor(
     private appRef: ApplicationRef,
@@ -17,7 +20,7 @@ export class UIModalService implements OnDestroy {
     private resolver: ComponentFactoryResolver
   ) {}
 
-  open(componentType: Type<any>) {
+  open(componentType?: Type<any>) {
     if (this._modalRef) { return; }
 
     this._create(componentType);
@@ -34,8 +37,12 @@ export class UIModalService implements OnDestroy {
     this._destroy();
   }
 
-  private _create(componentType: Type<any>) {
-    const factory = this.resolver.resolveComponentFactory(UIModalComponent);
+  toggle(componentType?: Type<any>) {
+    !this._modalRef ? this.open(componentType) : this.close();
+  }
+
+  private _create(componentType?: Type<any>) {
+    const factory = this.resolver.resolveComponentFactory(this._componentTypeWrapper);
 
     this._modalRef = factory.create(this.injector);
     this._modalRef.instance.componentType = componentType;

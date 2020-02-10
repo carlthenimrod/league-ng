@@ -24,7 +24,7 @@ export class SignUpTeamComponent {
   onClickAddUser() {
     this.modal.open(SignUpModalComponent);
 
-    this.modal.closed
+    this.modal.closed$
       .pipe(take(1))
       .subscribe((result: FormGroup) =>
         result && this.roster.push(result)

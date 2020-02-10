@@ -16,6 +16,8 @@ import { SocketTeamService } from './socket-team.service';
 export class SocketService implements OnDestroy {
   api: string = environment.api;
   socket: SocketIOClient.Socket;
+  socketSubject = new BehaviorSubject<SocketIOClient.Socket>(null);
+  socket$ = this.socketSubject.asObservable();
   connectedSubject = new BehaviorSubject<boolean>(false);
   connected$ = this.connectedSubject.asObservable();
   me: Me;
@@ -27,6 +29,7 @@ export class SocketService implements OnDestroy {
     private socketTeam: SocketTeamService
   ) {
     this.socket = io(this.api, { autoConnect: false });
+    this.socketSubject.next(this.socket);
 
     this.auth.me$
       .pipe(takeUntil(this.unsubscribe$))

@@ -1,0 +1,18 @@
+<header>
+  <span class="date">{{ notification.date }}</span>
+
+  <div>
+    <ng-container [ngSwitch]="notification.type">
+      <i *ngSwitchCase="'admin'" class="fas fa-key admin"></i>
+      <i *ngSwitchCase="'league'" class="fa fa-sticky-note league"></i>
+      <i *ngSwitchCase="'team'" class="fas fa-tshirt team"></i>
+      <i *ngSwitchCase="'user'" class="fas fa-user user"></i>
+    </ng-container>
+
+    <h1>{{ notification.type }}</h1>
+  </div>
+</header>
+
+<section class="message">
+  {{ notification.message }}
+</section>

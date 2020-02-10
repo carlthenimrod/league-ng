@@ -2,7 +2,7 @@ import {
   Component, Input, Type, Output, EventEmitter, HostBinding,
   ViewChild, AfterViewInit, ViewContainerRef,
   ComponentFactoryResolver, ChangeDetectorRef,
-  ViewEncapsulation, Injector, EmbeddedViewRef, Renderer2
+  ViewEncapsulation, Injector, EmbeddedViewRef, Renderer2, Optional
 } from '@angular/core';
 
 import { lightboxTrigger } from './animations';
@@ -21,13 +21,15 @@ export class UIModalComponent implements AfterViewInit {
   @HostBinding('@lightbox') lightbox;
 
   constructor(
-    private injector: Injector,
-    private ref: ChangeDetectorRef,
-    private renderer: Renderer2,
-    private resolver: ComponentFactoryResolver
+    @Optional() private injector?: Injector,
+    @Optional() private ref?: ChangeDetectorRef,
+    @Optional() private renderer?: Renderer2,
+    @Optional() private resolver?: ComponentFactoryResolver
   ) { }
 
   ngAfterViewInit() {
+    if (!this.componentType) { return; }
+
     const factory = this.resolver.resolveComponentFactory(this.componentType);
     const componentRef = factory.create(this.injector);
 

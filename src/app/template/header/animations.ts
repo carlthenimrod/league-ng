@@ -10,7 +10,7 @@ export const unreadNotificationsTrigger = trigger('unreadNotifications', [
       transform: 'scale(1)'
     }))
   ]),
-  transition(':leave', 
+  transition(':leave',
     animate('100ms ease-in', style({
       transform: 'scale(0)'
     }))

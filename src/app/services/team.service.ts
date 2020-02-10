@@ -8,7 +8,6 @@ import * as _ from 'lodash';
 import { League, GameGroup } from '@app/models/league';
 import { Team, TeamResponse, TeamRosterResponse, TeamRoster } from '@app/models/team';
 import { User } from '@app/models/user';
-import { NoticeService } from './notice.service';
 import { TeamScheduleService } from './team-schedule.service';
 import { LeagueStandingsService } from './league-standings.service';
 
@@ -24,7 +23,6 @@ export class TeamService {
   constructor(
     private http: HttpClient,
     private leagueStandings: LeagueStandingsService,
-    private noticeService: NoticeService,
     private teamSchedule: TeamScheduleService
   ) { }
 

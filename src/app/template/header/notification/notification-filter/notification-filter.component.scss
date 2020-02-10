@@ -1,0 +1,66 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  @include gradient-y(
+    rgba(darken(theme-color(primary), 40%), 0.5),
+    transparent, 50%, 100%
+  );
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+
+  button.filter {
+    align-items: center;
+    background: none;
+    border: none;
+    display: flex;
+    padding: 0 0.75rem;
+
+    i {
+      background-color: transparent;
+      border: 3px solid transparent;
+      border-radius: 100%;
+      display: block;
+      height: 0.75rem;
+      transition: all 100ms ease-out;
+      width: 0.75rem;
+
+      &#admin {
+        border-color: $color-admin;
+      }
+
+      &#league {
+        border-color: $color-league;
+      }
+
+      &#team {
+        border-color: $color-team;
+      }
+
+      &#user {
+        border-color: $color-user;
+      }
+    }
+
+    span {
+      color: #aaa;
+      font-size: 0.8rem;
+      margin-left: 0.5rem;
+    }
+
+    &.selected {
+      i#admin { background-color: $color-admin; }
+      i#league { background-color: $color-league; }
+      i#team { background-color: $color-team; }
+      i#user { background-color: $color-user; }
+
+      span {
+        color: #fff;
+      }
+    }
+  }
+}

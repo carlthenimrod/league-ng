@@ -1,0 +1,16 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  background-color: rgba(darken(theme-color(primary), 30%), 0.95);
+  display: block;
+  height: 100%;
+  margin-top: 3rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}

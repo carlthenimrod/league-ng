@@ -1,0 +1,54 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+:host {
+  background-color: lighten(theme-color(primary), 40%);
+  border-radius: 5px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.85);
+  display: block;
+  margin: 1.5rem 0;
+  padding: 1rem;
+
+  header {
+    position: relative;
+
+    span.date {
+      color: lighten(theme-color(primary), 10%);
+      font-size: 0.8rem;
+      font-style: italic;
+      position: absolute;
+      top: -8px;
+      right: 0;
+    }
+
+    div {
+      align-items: center;
+      display: flex;
+
+      i {
+        color: lighten(theme-color(primary), 10%);
+        font-size: 0.8rem;
+        margin-right: 0.5rem;
+
+        &.admin { color: $color-admin; }
+        &.league { color: $color-league; }
+        &.team { color: $color-team; }
+        &.user { color: $color-user; }
+      }
+
+      h1 {
+        color: lighten(theme-color(primary), 10%);
+        font-size: 0.8rem;
+        margin: 0;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  section.message {
+    padding: 1rem 0;
+  }
+}
