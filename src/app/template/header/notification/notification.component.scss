@@ -6,7 +6,8 @@
 
 :host {
   background-color: rgba(darken(theme-color(primary), 30%), 0.95);
-  display: block;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   margin-top: 3rem;
   position: fixed;

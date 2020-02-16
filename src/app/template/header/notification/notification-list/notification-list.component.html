@@ -1,5 +1,5 @@
 <ng-container *ngIf="notifications$ | async as notifications">
-  <section class="notification-list" *ngIf="notifications.length > 0; else noNotifications" [@enterList]="notifications.length">
+  <section id="notification-list" *ngIf="notifications.length > 0; else noNotifications" [@enterList]="notifications.length">
     <ngl-notification-item
       *ngFor="let notification of notifications; trackBy: _trackBy"
       [notification]="notification"

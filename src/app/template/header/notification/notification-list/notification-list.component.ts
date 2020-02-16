@@ -10,9 +10,14 @@ import { NotificationService } from '../notification.service';
   styles: [`
     :host {
       display: block;
-      height: 100%;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    section#notification-list {
+      height: calc(100% - 3rem);
       overflow-y: scroll;
-      padding: 0 1rem 1rem 1rem;
+      padding: 0 1rem;
     }
 
     p#no-notifications {

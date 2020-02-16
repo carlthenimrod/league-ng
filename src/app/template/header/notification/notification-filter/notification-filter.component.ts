@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'ngl-notification-filter',
-  styleUrls: ['/notification-filter.component.scss'],
+  styleUrls: ['./notification-filter.component.scss'],
   templateUrl: './notification-filter.component.html'
 })
 export class NotificationFilterComponent {

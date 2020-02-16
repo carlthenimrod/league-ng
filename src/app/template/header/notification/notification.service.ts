@@ -2,29 +2,37 @@ import { Injectable, ApplicationRef, Inject, Injector, ComponentFactoryResolver,
 import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Subject, BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { environment } from '@env/environment';
 
 import { UIModalService } from '@app/shared/ui/modal/modal.service';
+import { AuthService } from '@app/auth/auth.service';
+import { Me } from '@app/models/auth';
 import { Notification, NotificationResponse } from '@app/models/notification';
 import { NotificationComponent } from './notification.component';
-import { LocalStorageService } from '@app/services/local-storage.service';
+import { SocketService } from '@app/services/socket.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService extends UIModalService implements OnDestroy {
+  private _api: string = environment.api;
+  private _me: Me;
   protected _componentTypeWrapper: Type<NotificationComponent> = NotificationComponent;
 
   private _notifications: Notification[];
   private _notificationsSubject: Subject<Notification[]> = new BehaviorSubject(null);
   notifications$ = this._notificationsSubject.asObservable();
 
+  private _unreadSubject = new BehaviorSubject<boolean>(false);
+  unread$ = this._unreadSubject.asObservable();
+
   constructor(
+    private auth: AuthService,
     private http: HttpClient,
-    private localStorage: LocalStorageService,
+    private socket: SocketService,
     appRef: ApplicationRef,
     @Inject(DOCUMENT) document: Document,
     injector: Injector,
@@ -32,7 +40,33 @@ export class NotificationService extends UIModalService implements OnDestroy {
   ) {
     super(appRef, document, injector, resolver);
 
-    this.refresh();
+    this.auth.me$
+      .subscribe(me => {
+        this._me = me;
+
+        this._me
+          ? this.refresh()
+          : this._notificationsSubject.next(null);
+      });
+
+    this.socket.notification$
+      .pipe(
+        tap(() => this._unreadSubject.next(true)),
+        map<NotificationResponse, Notification>(this._transform.bind(this))
+      )
+      .subscribe(n => {
+        this._notifications.unshift(n);
+        this._notificationsSubject.next(_.cloneDeep(this._notifications));
+      });
+  }
+
+  open() {
+    super.open();
+
+    this._read$().subscribe(notifications => {
+      this._notifications = notifications;
+      this._notificationsSubject.next(_.cloneDeep(this._notifications));
+    });
   }
 
   refresh() {
@@ -51,30 +85,42 @@ export class NotificationService extends UIModalService implements OnDestroy {
     }
   }
 
-  private _get$(): Observable<Notification[]> {
-    const api = environment.api;
-    const id = this.localStorage.get('_id');
+  private _read$(): Observable<Notification[]> {
+    return this.http.post<NotificationResponse[]>(`${this._api}users/${this._me._id}/notifications/read`, {})
+      .pipe(
+        tap(() => this._unreadSubject.next(false)),
+        map(this._map.bind(this))
+      );
+  }
 
-    return this.http.get<NotificationResponse[]>(`${api}users/${id}/notifications`)
-      .pipe<Notification[]>(
+  private _get$(): Observable<Notification[]> {
+    return this.http.get<NotificationResponse[]>(`${this._api}users/${this._me._id}/notifications`)
+      .pipe(
+        tap(response => response.forEach(r => {
+          if (!r.status.read) { this._unreadSubject.next(true); }
+        })),
         map(this._map.bind(this))
       );
   }
 
   private _map(response: NotificationResponse[]): Notification[] {
-    return response.reverse().map(r => {
-      const { type, status, _id } = r;
-      const updated = r.createdAt === r.updatedAt;
+    return response
+      .reverse()
+      .map(this._transform.bind(this));
+  }
 
-      return {
-        type,
-        status,
-        updated,
-        _id,
-        message: this._formatMessage(r),
-        date: !updated ? moment(r.createdAt).fromNow() : moment(r.updatedAt).fromNow()
-      };
-    });
+  private _transform(r: NotificationResponse): Notification {
+    const { type, status, _id } = r;
+    const updated = r.createdAt === r.updatedAt;
+
+    return {
+      type,
+      status,
+      updated,
+      _id,
+      message: this._formatMessage(r),
+      date: !updated ? moment(r.createdAt).fromNow() : moment(r.updatedAt).fromNow()
+    };
   }
 
   private _formatMessage(r: NotificationResponse): string {

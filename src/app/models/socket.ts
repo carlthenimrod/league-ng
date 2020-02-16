@@ -2,8 +2,15 @@ import { User } from './user';
 import { Message, Team } from './team';
 import { League } from './league';
 
+import { NotificationResponse } from './notification';
+
 export interface SocketData {
   action: string;
+}
+
+export interface SocketNotification extends SocketData {
+  type: string;
+  notification: NotificationResponse;
 }
 
 export interface SocketLeagueData extends SocketData {

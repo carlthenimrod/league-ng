@@ -29,7 +29,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     private auth: AuthService,
     private navService: NavService,
     private notifications: NotificationService,
-    private userNotifications: UserNotificationsService,
     private viewport: ViewportService
   ) { }
 
@@ -40,8 +39,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
         this.me = me;
         if (!me) { return; }
 
-        this.userNotifications.get(me._id);
-        this.$unread = this.userNotifications.$unread();
+        this.$unread = this.notifications.unread$;
       });
 
     this.viewport.type$
@@ -49,8 +47,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(type => {
         this.isMobile = (type === 'mobile') ? true : false;
       });
-
-    this.$unread = this.userNotifications.$unread();
   }
 
   ngAfterViewInit() {

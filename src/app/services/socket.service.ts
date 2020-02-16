@@ -1,14 +1,15 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, fromEvent, Subject } from 'rxjs';
-import { tap, takeUntil } from 'rxjs/operators';
+import { tap, takeUntil, map } from 'rxjs/operators';
 import * as io from 'socket.io-client';
 import { environment } from '@env/environment';
 
 import { AuthResponse, Me } from '@app/models/auth';
 import { AuthService } from '@app/auth/auth.service';
+import { NotificationResponse } from '@app/models/notification';
 import { SocketLeagueService } from './socket-league.service';
 import { SocketTeamService } from './socket-team.service';
-
+import { SocketNotification } from '@app/models/socket';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,9 @@ export class SocketService implements OnDestroy {
   socket$ = this.socketSubject.asObservable();
   connectedSubject = new BehaviorSubject<boolean>(false);
   connected$ = this.connectedSubject.asObservable();
+
+  notification$: Observable<NotificationResponse>;
+
   me: Me;
   unsubscribe$ = new Subject<void>();
 
@@ -48,6 +52,9 @@ export class SocketService implements OnDestroy {
 
     this.socketLeague.handle(fromEvent(this.socket, 'league'));
     this.socketTeam.handle(fromEvent(this.socket, 'team'));
+
+    this.notification$ = fromEvent<SocketNotification>(this.socket, 'notification')
+      .pipe(map(d => d.notification));
   }
 
   private onConnect(connect$: Observable<void>) {
