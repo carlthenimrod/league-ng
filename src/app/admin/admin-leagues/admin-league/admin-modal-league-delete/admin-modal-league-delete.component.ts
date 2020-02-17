@@ -7,7 +7,7 @@ import { LeagueService } from '@app/services/league.service';
 import { UIModalService } from '@app/shared/ui/modal/modal.service';
 
 @Component({
-  selector: 'app-admin-modal-league-delete',
+  selector: 'admin-modal-league-delete',
   templateUrl: './admin-modal-league-delete.component.html'
 })
 export class AdminModalLeagueDeleteComponent implements OnInit {

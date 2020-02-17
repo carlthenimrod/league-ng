@@ -24,7 +24,7 @@
 
 <ng-template #divisionRow let-divisions="divisions" let-depth="depth" let-parent="parent">
     <ng-container *ngFor="let division of divisions; let i = index; trackBy: trackById">
-        <app-admin-droppable
+        <admin-droppable
           appAdminDraggable
           class="border-bottom"
           (dragging)="onDrag($event, division)"
@@ -59,11 +59,11 @@
               </button>
             </div>
           </div>
-        </app-admin-droppable>
+        </admin-droppable>
 
         <ng-container *ngIf="division.teams.length > 0">
             <div class="teams">
-              <app-admin-droppable
+              <admin-droppable
                 *ngFor="let team of division.teams; let i = index"
                 appAdminDraggable
                 (dragging)="onDrag($event, team)"
@@ -97,7 +97,7 @@
                     </button>
                   </div>
                 </div>
-              </app-admin-droppable>
+              </admin-droppable>
             </div>
         </ng-container>
 

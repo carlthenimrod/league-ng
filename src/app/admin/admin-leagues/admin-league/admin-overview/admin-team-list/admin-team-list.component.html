@@ -4,7 +4,7 @@
   class="bg-white rounded"
   @teamsEnter
 >
-  <app-admin-droppable
+  <admin-droppable
     *ngFor="let team of teams let i = index; trackBy: trackById"
     appAdminDraggable
     (dragging)="onDrag($event, team)"
@@ -38,5 +38,5 @@
         </button>
       </div>
     </div>
-  </app-admin-droppable>
+  </admin-droppable>
 </section>

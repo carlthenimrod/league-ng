@@ -4,7 +4,7 @@ import { Division } from '@app/models/league';
 import { Team } from '@app/models/team';
 
 @Component({
-  selector: 'app-admin-droppable',
+  selector: 'admin-droppable',
   templateUrl: './admin-droppable.component.html',
   styleUrls: ['./admin-droppable.component.scss']
 })

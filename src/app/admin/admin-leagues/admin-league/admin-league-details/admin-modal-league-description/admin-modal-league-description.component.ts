@@ -6,7 +6,7 @@ import { LeagueService } from '@app/services/league.service';
 import { UIModalService } from '@app/shared/ui/modal/modal.service';
 
 @Component({
-  selector: 'app-admin-modal-league-description',
+  selector: 'admin-modal-league-description',
   templateUrl: './admin-modal-league-description.component.html'
 })
 export class AdminModalLeagueDescriptionComponent implements OnInit {

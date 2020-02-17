@@ -2,7 +2,7 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
 
 export const teamsEnterTrigger = trigger('teamsEnter', [
   transition(':enter', [
-    query('app-admin-droppable', [
+    query('admin-droppable', [
       style({
         height: 0,
         opacity: 0

@@ -6,7 +6,7 @@ import { LeagueService } from '@app/services/league.service';
 import { UIModalService } from '@app/shared/ui/modal/modal.service';
 
 @Component({
-  selector: 'app-admin-modal-league-name',
+  selector: 'admin-modal-league-name',
   templateUrl: './admin-modal-league-name.component.html'
 })
 export class AdminModalLeagueNameComponent implements OnInit {

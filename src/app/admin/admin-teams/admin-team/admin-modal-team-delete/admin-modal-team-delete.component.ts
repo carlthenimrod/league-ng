@@ -7,7 +7,7 @@ import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 
 @Component({
-  selector: 'app-admin-modal-team-delete',
+  selector: 'admin-modal-team-delete',
   templateUrl: './admin-modal-team-delete.component.html'
 })
 export class AdminModalTeamDeleteComponent implements OnInit {
