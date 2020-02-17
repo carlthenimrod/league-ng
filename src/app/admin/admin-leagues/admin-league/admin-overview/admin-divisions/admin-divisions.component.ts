@@ -12,7 +12,7 @@ import {
   import { AdminModalDivisionComponent } from '../admin-modal-division/admin-modal-division.component';
 
 @Component({
-  selector: 'app-admin-divisions',
+  selector: 'admin-divisions',
   templateUrl: './admin-divisions.component.html',
   styleUrls: ['./admin-divisions.component.scss'],
   animations: [

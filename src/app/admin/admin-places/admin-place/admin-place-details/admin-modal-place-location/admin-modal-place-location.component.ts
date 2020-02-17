@@ -9,7 +9,7 @@ import { Place, Location } from '@app/models/place';
 import { PlaceService } from '@app/services/place.service';
 
 @Component({
-  selector: 'app-admin-modal-location',
+  selector: 'admin-modal-location',
   templateUrl: './admin-modal-place-location.component.html'
 })
 export class AdminModalPlaceLocationComponent implements OnInit {

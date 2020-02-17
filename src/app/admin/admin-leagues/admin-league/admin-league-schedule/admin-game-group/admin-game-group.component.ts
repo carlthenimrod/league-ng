@@ -9,7 +9,7 @@ import { AdminModalAddGameComponent } from '../admin-modal-add-game/admin-modal-
 import { gameListEnterTrigger, gameToggleTrigger } from './animations';
 
 @Component({
-  selector: 'app-admin-game-group',
+  selector: 'admin-game-group',
   templateUrl: './admin-game-group.component.html',
   styleUrls: ['./admin-game-group.component.scss'],
   animations: [gameListEnterTrigger, gameToggleTrigger]

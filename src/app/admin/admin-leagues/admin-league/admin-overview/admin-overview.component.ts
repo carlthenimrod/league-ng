@@ -9,7 +9,7 @@ import { Team } from '@app/models/team';
 import { paragraphEnterTrigger } from './animations';
 
 @Component({
-  selector: 'app-admin-overview',
+  selector: 'admin-overview',
   templateUrl: './admin-overview.component.html',
   styleUrls: ['./admin-overview.component.scss'],
   animations: [paragraphEnterTrigger]

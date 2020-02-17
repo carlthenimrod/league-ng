@@ -6,7 +6,7 @@ import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 
 @Component({
-  selector: 'app-admin-modal-team-new',
+  selector: 'admin-modal-team-new',
   templateUrl: './admin-modal-team-new.component.html'
 })
 export class AdminModalTeamNewComponent {

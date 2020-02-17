@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-admin-modal-place-permit',
+  selector: 'admin-modal-place-permit',
   styleUrls: ['./admin-modal-place-permit.component.scss'],
   templateUrl: './admin-modal-place-permit.component.html'
 })

@@ -10,6 +10,10 @@ ui-modal-actions {
   margin-top: auto;
   padding: 0.5rem 0 2rem 0;
 
+  @include media-breakpoint-up(sm) {
+    margin-top: 2rem;
+  }
+
   button {
     background-color: theme-color(info);
     border: none;

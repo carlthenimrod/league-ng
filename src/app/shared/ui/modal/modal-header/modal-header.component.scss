@@ -5,6 +5,8 @@
 @import '~bootstrap/scss/_mixins';
 
 ui-modal-header {
+  position: relative;
+
   header {
     padding: 1rem 0;
 
@@ -17,6 +19,10 @@ ui-modal-header {
       position: absolute;
       top: 1rem;
       right: 0.5rem;
+
+      @include media-breakpoint-up(sm) {
+        top: 0.5rem;
+      }
     }
 
     h1 {

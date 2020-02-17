@@ -8,7 +8,7 @@ import { AdminModalUserRemoveComponent } from './admin-modal-user-remove/admin-m
 import { AdminModalUserRolesComponent } from './admin-modal-user-roles/admin-modal-user-roles.component';
 
 @Component({
-  selector: 'app-admin-team-roster',
+  selector: 'admin-team-roster',
   templateUrl: './admin-team-roster.component.html',
   styleUrls: ['./admin-team-roster.component.scss']
 })

@@ -6,7 +6,7 @@ import { AdminModalUserEmergencyComponent } from './admin-modal-user-emergency/a
 import { AdminModalUserCommentsComponent } from './admin-modal-user-comments/admin-modal-user-comments.component';
 
 @Component({
-  selector: 'app-admin-user-additional',
+  selector: 'admin-user-additional',
   templateUrl: './admin-user-additional.component.html'
 })
 export class AdminUserAdditionalComponent {

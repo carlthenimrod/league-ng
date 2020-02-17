@@ -4,11 +4,11 @@ import { tap } from 'rxjs/operators';
 
 import { League, LeagueGroup } from '@app/models/league';
 import { LeagueService } from '@app/services/league.service';
-import { ModalService } from '@app/shared/modal/modal.service';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { AdminModalLeagueNewComponent } from './admin-modal-league-new/admin-modal-league-new.component';
 
 @Component({
-  selector: 'app-admin-league-list',
+  selector: 'admin-league-list',
   templateUrl: './admin-league-list.component.html'
 })
 export class AdminLeagueListComponent implements OnInit {
@@ -18,7 +18,7 @@ export class AdminLeagueListComponent implements OnInit {
 
   constructor(
     private leagueService: LeagueService,
-    private modal: ModalService
+    private modal: UIModalService
   ) { }
 
   ngOnInit() {

@@ -3,7 +3,7 @@ import { FormBuilder, AbstractControl, FormControl, FormGroup, Validators } from
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-admin-modal-auto-generate',
+  selector: 'admin-modal-auto-generate',
   templateUrl: './admin-modal-auto-generate.component.html',
   styleUrls: ['./admin-modal-auto-generate.component.scss']
 })

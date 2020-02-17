@@ -9,7 +9,7 @@ import { PlaceService } from '@app/services/place.service';
 import { AdminModalPlaceDeleteComponent } from './admin-modal-place-delete/admin-modal-place-delete.component';
 
 @Component({
-  selector: 'app-admin-place',
+  selector: 'admin-place',
   templateUrl: './admin-place.component.html',
   providers: [PlaceService]
 })

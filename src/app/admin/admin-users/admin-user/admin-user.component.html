@@ -1,5 +1,5 @@
-<app-admin-item *ngIf="user$ | async as user">
-  <app-admin-item-header>
+<admin-item *ngIf="user$ | async as user">
+  <admin-item-header>
     <header>
       <h1>{{ user.fullName }}</h1>
 
@@ -11,11 +11,11 @@
         </button>
       </div>
     </header>
-  </app-admin-item-header>
+  </admin-item-header>
 
-  <app-admin-item-settings *ngIf="settings">
+  <admin-item-settings *ngIf="settings">
     <button (click)="onClickOpenModal()">Delete User</button>
-  </app-admin-item-settings>
+  </admin-item-settings>
 
   <app-tab-selector
     [tabs]="['details', 'additional']"
@@ -24,16 +24,16 @@
   </app-tab-selector>
 
   <section [ngSwitch]="selected">
-    <app-admin-user-details
+    <admin-user-details
       *ngSwitchCase="'details'"
       [user]="user"
     >
-    </app-admin-user-details>
+    </admin-user-details>
 
-    <app-admin-user-additional
+    <admin-user-additional
       *ngSwitchCase="'additional'"
       [user]="user"
     >
-    </app-admin-user-additional>
+    </admin-user-additional>
   </section>
-</app-admin-item>
+</admin-item>

@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'app-admin-item-settings',
+  selector: 'admin-item-settings',
   styleUrls: ['./admin-item-settings.component.scss'],
   template: '<ng-content></ng-content>',
   encapsulation: ViewEncapsulation.None

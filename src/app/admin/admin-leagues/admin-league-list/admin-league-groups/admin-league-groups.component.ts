@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { LeagueGroup, League } from '@app/models/league';
 
 @Component({
-  selector: 'app-admin-league-groups',
+  selector: 'admin-league-groups',
   styleUrls: ['./admin-league-groups.component.scss'],
   templateUrl: './admin-league-groups.component.html'
 })

@@ -7,7 +7,7 @@ import { Place } from '@app/models/place';
 import { PlaceService } from '@app/services/place.service';
 
 @Component({
-  selector: 'app-admin-modal-place-address',
+  selector: 'admin-modal-place-address',
   templateUrl: './admin-modal-place-address.component.html'
 })
 export class AdminModalPlaceAddressComponent implements OnInit {

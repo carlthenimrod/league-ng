@@ -1,5 +1,5 @@
-<app-admin-item *ngIf="place$ | async as place">
-  <app-admin-item-header>
+<admin-item *ngIf="place$ | async as place">
+  <admin-item-header>
     <header>
       <h1>{{ place.label }}</h1>
 
@@ -11,11 +11,11 @@
         </button>
       </div>
     </header>
-  </app-admin-item-header>
+  </admin-item-header>
 
-  <app-admin-item-settings *ngIf="settings">
+  <admin-item-settings *ngIf="settings">
     <button (click)="onClickOpenModal()">Delete Place</button>
-  </app-admin-item-settings>
+  </admin-item-settings>
 
   <app-tab-selector
     [tabs]="['details', 'permits']"
@@ -24,16 +24,16 @@
   </app-tab-selector>
 
   <section [ngSwitch]="selected">
-    <app-admin-place-details
+    <admin-place-details
       *ngSwitchCase="'details'"
       [place]="place"
     >
-    </app-admin-place-details>
+    </admin-place-details>
 
-    <app-admin-place-permits
+    <admin-place-permits
       *ngSwitchCase="'permits'"
       [place]="place"
     >
-    </app-admin-place-permits>
+    </admin-place-permits>
   </section>
-</app-admin-item>
+</admin-item>

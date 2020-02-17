@@ -9,7 +9,7 @@ import { UserService } from '@app/services/user.service';
 import { AdminModalUserDeleteComponent } from './admin-modal-user-delete/admin-modal-user-delete.component';
 
 @Component({
-  selector: 'app-admin-user',
+  selector: 'admin-user',
   templateUrl: './admin-user.component.html'
 })
 export class AdminUserComponent implements OnInit {

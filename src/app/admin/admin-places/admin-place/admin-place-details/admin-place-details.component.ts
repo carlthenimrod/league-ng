@@ -7,7 +7,7 @@ import { AdminModalPlaceAddressComponent } from './admin-modal-place-address/adm
 import { AdminModalPlaceLocationComponent } from './admin-modal-place-location/admin-modal-place-location.component';
 
 @Component({
-  selector: 'app-admin-place-details',
+  selector: 'admin-place-details',
   templateUrl: './admin-place-details.component.html'
 })
 export class AdminPlaceDetailsComponent {

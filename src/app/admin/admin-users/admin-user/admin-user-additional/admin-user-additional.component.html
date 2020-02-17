@@ -1,4 +1,4 @@
-<app-admin-item-section>
+<admin-item-section>
   <header>
     <h3>Emergency Contact</h3>
 
@@ -9,7 +9,7 @@
     </div>
   </header>
 
-  <app-admin-item-content>
+  <admin-item-content>
     <ng-container *ngIf="user.emergency; else noEmergency">
       <div *ngIf="user.emergency.fullName">
         <span>Name:</span>
@@ -30,10 +30,10 @@
     <ng-template #noEmergency>
       No Emergency Contact
     </ng-template>
-  </app-admin-item-content>
-</app-admin-item-section>
+  </admin-item-content>
+</admin-item-section>
 
-<app-admin-item-section>
+<admin-item-section>
   <header>
     <h3>Additional Comments</h3>
 
@@ -44,7 +44,7 @@
     </div>
   </header>
 
-  <app-admin-item-content>
+  <admin-item-content>
     <ng-container *ngIf="user.comments; else noComments">
       {{ user.comments }}
     </ng-container>
@@ -52,5 +52,5 @@
     <ng-template #noComments>
       No Comments
     </ng-template>
-  </app-admin-item-content>
-</app-admin-item-section>
+  </admin-item-content>
+</admin-item-section>

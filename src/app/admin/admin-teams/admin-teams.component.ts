@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { TeamService } from '@app/services/team.service';
 
 @Component({
-  selector: 'app-admin-teams',
+  selector: 'admin-teams',
   template: '<router-outlet></router-outlet>',
   providers: [TeamService]
 })

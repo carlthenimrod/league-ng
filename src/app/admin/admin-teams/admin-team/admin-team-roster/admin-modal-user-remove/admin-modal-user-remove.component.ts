@@ -6,7 +6,7 @@ import { TeamService } from '@app/services/team.service';
 import { User } from '@app/models/user';
 
 @Component({
-  selector: 'app-admin-modal-user-remove',
+  selector: 'admin-modal-user-remove',
   templateUrl: './admin-modal-user-remove.component.html'
 })
 export class AdminModalUserRemoveComponent implements OnInit {

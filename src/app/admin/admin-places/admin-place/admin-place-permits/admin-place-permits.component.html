@@ -1,4 +1,4 @@
-<app-admin-item-section>
+<admin-item-section>
   <header>
     <h3>Permits</h3>
 
@@ -9,7 +9,7 @@
     </div>
   </header>
 
-  <app-admin-item-content>
+  <admin-item-content>
     <ng-container *ngIf="place.permits.length > 0; else noPermits">
 
     </ng-container>
@@ -17,5 +17,5 @@
     <ng-template #noPermits>
       No Permits
     </ng-template>
-  </app-admin-item-content>
-</app-admin-item-section>
+  </admin-item-content>
+</admin-item-section>

@@ -1,4 +1,4 @@
-<app-admin-item-section>
+<admin-item-section>
   <header>
     <h3>Place Label</h3>
 
@@ -9,12 +9,12 @@
     </div>
   </header>
 
-  <app-admin-item-content>
+  <admin-item-content>
     {{ place.label }}
-  </app-admin-item-content>
-</app-admin-item-section>
+  </admin-item-content>
+</admin-item-section>
 
-<app-admin-item-section>
+<admin-item-section>
   <header>
     <h3>Address</h3>
 
@@ -25,7 +25,7 @@
     </div>
   </header>
 
-  <app-admin-item-content>
+  <admin-item-content>
     <ng-container *ngIf="place.address | hasAddress; else noAddress">
       {{ place.address | stringifyAddress }}
     </ng-container>
@@ -33,10 +33,10 @@
     <ng-template #noAddress>
       No Address
     </ng-template>
-  </app-admin-item-content>
-</app-admin-item-section>
+  </admin-item-content>
+</admin-item-section>
 
-<app-admin-item-section>
+<admin-item-section>
   <header>
     <h3>Locations</h3>
 
@@ -47,7 +47,7 @@
     </div>
   </header>
 
-  <app-admin-item-content>
+  <admin-item-content>
     <ng-container *ngIf="place.locations.length > 0; else noLocations">
       <a
         *ngFor="let location of place.locations"
@@ -70,5 +70,5 @@
     <ng-template #noLocations>
       No Locations
     </ng-template>
-  </app-admin-item-content>
-</app-admin-item-section>
+  </admin-item-content>
+</admin-item-section>

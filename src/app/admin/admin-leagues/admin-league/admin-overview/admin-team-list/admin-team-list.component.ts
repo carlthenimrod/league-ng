@@ -5,7 +5,7 @@ import { Team } from '@app/models/team';
 import { teamsEnterTrigger, teamEnterTrigger } from './animations';
 
 @Component({
-  selector: 'app-admin-team-list',
+  selector: 'admin-team-list',
   templateUrl: './admin-team-list.component.html',
   styleUrls: ['./admin-team-list.component.scss'],
   animations: [teamsEnterTrigger, teamEnterTrigger]

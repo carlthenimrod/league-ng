@@ -7,7 +7,7 @@ import { TeamService } from '@app/services/team.service';
 import { AdminModalTeamNewComponent } from './admin-modal-team-new/admin-modal-team-new.component';
 
 @Component({
-  selector: 'app-admin-team-list',
+  selector: 'admin-team-list',
   templateUrl: './admin-team-list.component.html'
 })
 export class AdminTeamListComponent implements OnInit {

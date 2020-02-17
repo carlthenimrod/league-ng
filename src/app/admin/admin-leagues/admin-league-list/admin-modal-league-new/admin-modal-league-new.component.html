@@ -1,20 +1,20 @@
-<app-modal-header>
+<ui-modal-header>
   <h1>New League</h1>
-</app-modal-header>
+</ui-modal-header>
 
 <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f.value)">
-  <app-modal-form-field>
+  <ui-modal-form-field>
     <input
       name="name"
       placeholder="League Name"
       ngModel
       required
     >
-  </app-modal-form-field>
+  </ui-modal-form-field>
 
-  <app-modal-actions>
+  <ui-modal-actions>
     <button id="save">Create</button>
 
-    <button id="cancel" appModalClose>Cancel</button>
-  </app-modal-actions>
+    <button id="cancel" uiModalClose>Cancel</button>
+  </ui-modal-actions>
 </form>

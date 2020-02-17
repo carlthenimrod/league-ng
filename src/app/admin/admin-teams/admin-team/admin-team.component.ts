@@ -9,7 +9,7 @@ import { TeamService } from '@app/services/team.service';
 import { AdminModalTeamDeleteComponent } from './admin-modal-team-delete/admin-modal-team-delete.component';
 
 @Component({
-  selector: 'app-admin-team',
+  selector: 'admin-team',
   templateUrl: './admin-team.component.html'
 })
 export class AdminTeamComponent implements OnInit {

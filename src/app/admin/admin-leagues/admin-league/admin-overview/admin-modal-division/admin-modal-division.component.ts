@@ -6,7 +6,7 @@ import { League, Division } from '@app/models/league';
 import { LeagueService } from '@app/services/league.service';
 
 @Component({
-  selector: 'app-admin-modal-division',
+  selector: 'admin-modal-division',
   templateUrl: './admin-modal-division.component.html',
   styleUrls: ['./admin-modal-division.component.scss']
 })

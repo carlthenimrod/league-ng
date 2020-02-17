@@ -7,7 +7,7 @@ import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
 
 @Component({
-  selector: 'app-admin-modal-user-delete',
+  selector: 'admin-modal-user-delete',
   templateUrl: 'admin-modal-user-delete.component.html'
 })
 export class AdminModalUserDeleteComponent implements OnInit {

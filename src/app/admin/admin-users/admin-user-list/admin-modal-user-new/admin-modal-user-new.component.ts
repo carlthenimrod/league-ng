@@ -8,7 +8,7 @@ import { UserService } from '@app/services/user.service';
 import { emailUnique } from '@app/validators/email-unique.validator';
 
 @Component({
-  selector: 'app-admin-modal-user-new',
+  selector: 'admin-modal-user-new',
   templateUrl: './admin-modal-user-new.component.html'
 })
 export class AdminModalUserNewComponent {

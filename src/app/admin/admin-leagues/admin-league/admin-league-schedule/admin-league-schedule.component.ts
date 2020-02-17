@@ -9,7 +9,7 @@ import { AdminModalAddGameComponent } from './admin-modal-add-game/admin-modal-a
 import { groupsEnterTrigger } from './animations';
 
 @Component({
-  selector: 'app-admin-league-schedule',
+  selector: 'admin-league-schedule',
   templateUrl: './admin-league-schedule.component.html',
   styleUrls: ['./admin-league-schedule.component.scss'],
   animations: [groupsEnterTrigger]

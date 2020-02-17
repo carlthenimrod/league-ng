@@ -25,18 +25,18 @@
     </div>
   </header>
 
-  <app-admin-divisions
+  <admin-divisions
     *ngIf="league.divisions && league.divisions.length > 0; else teamList"
     [league]="league"
   >
-  </app-admin-divisions>
+  </admin-divisions>
 
   <ng-template #teamList>
-    <app-admin-team-list
+    <admin-team-list
       *ngIf="league.teams && league.teams.length > 0; else p"
       [teams]="league.teams"
     >
-    </app-admin-team-list>
+    </admin-team-list>
   </ng-template>
 
   <ng-template #p>

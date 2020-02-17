@@ -6,7 +6,7 @@ import { AdminModalLeagueNameComponent } from './admin-modal-league-name/admin-m
 import { AdminModalLeagueDescriptionComponent } from './admin-modal-league-description/admin-modal-league-description.component';
 
 @Component({
-  selector: 'app-admin-league-details',
+  selector: 'admin-league-details',
   templateUrl: './admin-league-details.component.html'
 })
 export class AdminLeagueDetailsComponent {

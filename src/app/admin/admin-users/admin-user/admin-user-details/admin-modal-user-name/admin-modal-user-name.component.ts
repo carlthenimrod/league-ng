@@ -6,7 +6,7 @@ import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
 
 @Component({
-  selector: 'app-admin-modal-user-name',
+  selector: 'admin-modal-user-name',
   templateUrl: './admin-modal-user-name.component.html'
 })
 export class AdminModalUserNameComponent implements OnInit {

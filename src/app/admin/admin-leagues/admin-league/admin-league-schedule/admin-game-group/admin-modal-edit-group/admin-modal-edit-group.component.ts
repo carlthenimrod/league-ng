@@ -5,7 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GameGroup } from '@app/models/league';
 
 @Component({
-  selector: 'app-admin-modal-edit-group',
+  selector: 'admin-modal-edit-group',
   templateUrl: './admin-modal-edit-group.component.html',
   styleUrls: ['./admin-modal-edit-group.component.scss']
 })

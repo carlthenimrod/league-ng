@@ -7,7 +7,7 @@ import { AdminModalUserAddressComponent } from './admin-modal-user-address/admin
 import { AdminModalUserPhoneComponent } from './admin-modal-user-phone/admin-modal-user-phone.component';
 
 @Component({
-  selector: 'app-admin-user-details',
+  selector: 'admin-user-details',
   templateUrl: './admin-user-details.component.html'
 })
 export class AdminUserDetailsComponent {

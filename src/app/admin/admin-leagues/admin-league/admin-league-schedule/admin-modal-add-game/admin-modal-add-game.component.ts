@@ -8,7 +8,7 @@ import { Place, Location } from '@app/models/place';
 import { PlaceService } from '@app/services/place.service';
 
 @Component({
-  selector: 'app-admin-modal-add-game',
+  selector: 'admin-modal-add-game',
   templateUrl: './admin-modal-add-game.component.html',
   styleUrls: ['./admin-modal-add-game.component.scss']
 })

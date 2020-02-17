@@ -5,7 +5,7 @@ import { Place } from '@app/models/place';
 import { AdminModalPlacePermitComponent } from './admin-modal-place-permit/admin-modal-place-permit.component';
 
 @Component({
-  selector: 'app-admin-place-permits',
+  selector: 'admin-place-permits',
   templateUrl: './admin-place-permits.component.html',
   styleUrls: ['./admin-place-permits.component.scss']
 })

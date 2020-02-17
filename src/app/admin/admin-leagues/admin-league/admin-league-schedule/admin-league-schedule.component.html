@@ -65,12 +65,12 @@
     *ngIf="league.schedule.length > 0"
     [@groupsEnter]="league.schedule.length"
   >
-    <app-admin-game-group
+    <admin-game-group
       *ngFor="let group of league.schedule; trackBy: trackById"
       [league]="league"
       [group]="group"
     >
-    </app-admin-game-group>
+    </admin-game-group>
   </section>
 
   <section id="no-groups" *ngIf="!league.schedule || league.schedule.length === 0">

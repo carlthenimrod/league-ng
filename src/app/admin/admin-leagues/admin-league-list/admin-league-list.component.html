@@ -1,4 +1,4 @@
-<app-admin-items *ngIf="leagues$ | async as leagues">
+<admin-items *ngIf="leagues$ | async as leagues">
   <header>
     <h2>Leagues</h2>
 
@@ -15,10 +15,10 @@
   <section id="leagues" class="items">
     <ng-container *ngIf="leagues.length > 0; else noLeagues">
       <ng-container *ngIf="groups.length > 0; else noGroups">
-        <app-admin-league-groups
+        <admin-league-groups
           [groups]="groups"
           [ungrouped]='ungrouped'>
-        </app-admin-league-groups>
+        </admin-league-groups>
       </ng-container>
 
       <ng-template #noGroups>
@@ -37,4 +37,4 @@
       </p>
     </ng-template>
   </section>
-</app-admin-items>
+</admin-items>

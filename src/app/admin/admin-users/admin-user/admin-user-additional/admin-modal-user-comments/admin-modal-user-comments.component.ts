@@ -6,7 +6,7 @@ import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
 
 @Component({
-  selector: 'app-admin-modal-user-comments',
+  selector: 'admin-modal-user-comments',
   templateUrl: './admin-modal-user-comments.component.html'
 })
 export class AdminModalUserCommentsComponent implements OnInit {

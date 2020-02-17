@@ -6,7 +6,7 @@ import { TeamService } from '@app/services/team.service';
 import { User } from '@app/models/user';
 
 @Component({
-  selector: 'app-admin-modal-user-roles',
+  selector: 'admin-modal-user-roles',
   templateUrl: './admin-modal-user-roles.component.html'
 })
 export class AdminModalUserRolesComponent implements OnInit {

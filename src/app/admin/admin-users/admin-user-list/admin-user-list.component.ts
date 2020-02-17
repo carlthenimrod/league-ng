@@ -7,7 +7,7 @@ import { UserService } from '@app/services/user.service';
 import { AdminModalUserNewComponent } from './admin-modal-user-new/admin-modal-user-new.component';
 
 @Component({
-  selector: 'app-admin-user-list',
+  selector: 'admin-user-list',
   templateUrl: './admin-user-list.component.html'
 })
 export class AdminUserListComponent implements OnInit {

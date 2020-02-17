@@ -7,7 +7,7 @@ import { PlaceService } from '@app/services/place.service';
 import { ModalService } from '@app/shared/modal/modal.service';
 
 @Component({
-  selector: 'app-admin-modal-place-new',
+  selector: 'admin-modal-place-new',
   templateUrl: './admin-modal-place-new.component.html',
   styleUrls: ['./admin-modal-place-new.component.scss']
 })

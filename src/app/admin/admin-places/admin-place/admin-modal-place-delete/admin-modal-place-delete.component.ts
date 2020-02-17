@@ -7,7 +7,7 @@ import { PlaceService } from '@app/services/place.service';
 import { Place } from '@app/models/place';
 
 @Component({
-  selector: 'app-admin-modal-place-delete',
+  selector: 'admin-modal-place-delete',
   templateUrl: './admin-modal-place-delete.component.html'
 })
 export class AdminModalPlaceDeleteComponent implements OnInit {

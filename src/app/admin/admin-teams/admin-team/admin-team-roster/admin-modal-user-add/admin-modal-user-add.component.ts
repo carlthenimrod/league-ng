@@ -11,7 +11,7 @@ import { UserService } from '@app/services/user.service';
 import { emailUnique } from '@app/validators/email-unique.validator';
 
 @Component({
-  selector: 'app-admin-modal-user-add',
+  selector: 'admin-modal-user-add',
   styleUrls: ['./admin-modal-user-add.component.scss'],
   templateUrl: './admin-modal-user-add.component.html',
   providers: [UserService]

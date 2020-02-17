@@ -9,7 +9,7 @@ import { ModalService } from '@app/shared/modal/modal.service';
 import { AdminModalLeagueDeleteComponent } from './admin-modal-league-delete/admin-modal-league-delete.component';
 
 @Component({
-  selector: 'app-admin-league',
+  selector: 'admin-league',
   templateUrl: './admin-league.component.html',
   providers: [LeagueService]
 })
