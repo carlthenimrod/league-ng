@@ -4,11 +4,9 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AuthService } from '@app/auth/auth.service';
 import { Me } from '@app/models/auth';
-import { UserNotificationsService } from '@app/services/user-notifications.service';
 import { NavService } from './nav/nav.service';
 import { ViewportService } from '@app/services/viewport.service';
 import { NotificationService } from './notification/notification.service';
-import { NotificationListComponent } from './notification/notification-list/notification-list.component';
 import { unreadNotificationsTrigger } from './animations';
 
 @Component({

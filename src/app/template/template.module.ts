@@ -8,7 +8,6 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { TemplateComponent } from './template.component';
 import { NavComponent } from './header/nav/nav.component';
-import { UserNotificationsComponent } from './header/user-notifications/user-notifications.component';
 import { SearchComponent } from './header/nav/search/search.component';
 import { NavHomeComponent } from './header/nav/nav-home/nav-home.component';
 import { NavLeaguesComponent } from './header/nav/nav-leagues/nav-leagues.component';
@@ -24,7 +23,6 @@ import { NotificationModule } from './header/notification/notification.module';
     FooterComponent,
     TemplateComponent,
     NavComponent,
-    UserNotificationsComponent,
     SearchComponent,
     NavHomeComponent,
     NavLeaguesComponent,
@@ -45,8 +43,7 @@ import { NotificationModule } from './header/notification/notification.module';
   ],
   entryComponents: [
     LoadingComponent,
-    NavComponent,
-    UserNotificationsComponent
+    NavComponent
   ]
 })
 export class TemplateModule { }
