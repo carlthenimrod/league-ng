@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ModalService } from '@app/shared/modal/modal.service';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 
@@ -11,7 +11,7 @@ import { TeamService } from '@app/services/team.service';
 })
 export class AdminModalTeamNewComponent {
   constructor(
-    private modal: ModalService,
+    private modal: UIModalService,
     private router: Router,
     private teamService: TeamService
   ) { }

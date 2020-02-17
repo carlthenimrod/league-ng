@@ -22,7 +22,6 @@ import { GameComponent } from './game/game.component';
 import { GmapLinkPipe } from './gmap-link.pipe';
 import { TabSelectorComponent } from './tab-selector/tab-selector.component';
 import { ScheduleModule } from './schedule/schedule.module';
-import { ModalModule } from './modal/modal.module';
 import { StringifyAddressPipe } from './stringify-address.pipe';
 import { MustMatchValidatorDirective } from './validators/must-match.directive';
 import { HasAddressPipe } from './has-address.pipe';
@@ -37,7 +36,6 @@ import { UIModule } from './ui/ui.module';
     MatProgressSpinnerModule,
     MatSliderModule,
     ScheduleModule,
-    ModalModule,
     UIModule
   ],
   exports: [
@@ -59,7 +57,6 @@ import { UIModule } from './ui/ui.module';
     NavSlideComponent,
     TabSelectorComponent,
     ScheduleModule,
-    ModalModule,
     StringifyAddressPipe,
     HasAddressPipe,
     MustMatchValidatorDirective,
