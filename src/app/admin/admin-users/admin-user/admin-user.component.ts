@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { ModalService } from '@app/shared/modal/modal.service';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
 import { AdminModalUserDeleteComponent } from './admin-modal-user-delete/admin-modal-user-delete.component';
@@ -19,7 +19,7 @@ export class AdminUserComponent implements OnInit {
 
   constructor(
     private injector: Injector,
-    private modal: ModalService,
+    private modal: UIModalService,
     private route: ActivatedRoute,
     private userService: UserService
   ) { }

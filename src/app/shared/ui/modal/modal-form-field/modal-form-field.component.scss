@@ -11,7 +11,7 @@ ui-modal-form-field {
   text-align: center;
   width: 100%;
 
-  input {
+  input, textarea {
     background-color: darken(theme-color(primary), 30%);
     border: 2px solid lighten(theme-color(primary), 20%);
     border-radius: 3px;
@@ -26,6 +26,11 @@ ui-modal-form-field {
     &::placeholder {
       color: lighten(theme-color(primary), 20%);
     }
+  }
+
+  textarea {
+    max-width: 20rem;
+    min-height: 8rem;
   }
 
   &.focused {

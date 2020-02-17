@@ -1,6 +1,6 @@
 import { Component, Input, Injector } from '@angular/core';
 
-import { ModalService } from '@app/shared/modal/modal.service';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { User } from '@app/models/user';
 import { AdminModalUserEmergencyComponent } from './admin-modal-user-emergency/admin-modal-user-emergency.component';
 import { AdminModalUserCommentsComponent } from './admin-modal-user-comments/admin-modal-user-comments.component';
@@ -14,7 +14,7 @@ export class AdminUserAdditionalComponent {
 
   constructor(
     private injector: Injector,
-    private modal: ModalService
+    private modal: UIModalService
   ) { }
 
   onClickOpenModal(value: string) {

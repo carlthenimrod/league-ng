@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { ModalService } from '@app/shared/modal/modal.service';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { Place } from '@app/models/place';
 import { PlaceService } from '@app/services/place.service';
 import { AdminModalPlaceNewComponent } from './admin-modal-place-new/admin-modal-place-new.component';
@@ -14,7 +14,7 @@ export class AdminPlaceListComponent implements OnInit {
   places$: Observable<Place[]>;
 
   constructor(
-    private modal: ModalService,
+    private modal: UIModalService,
     private placeService: PlaceService
   ) { }
 

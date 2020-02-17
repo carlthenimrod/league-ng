@@ -1,21 +1,21 @@
 <ng-container *ngIf="league$ | async as league">
-  <app-modal-header>
+  <ui-modal-header>
     <h1>Update Description</h1>
-  </app-modal-header>
+  </ui-modal-header>
 
   <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f.value)">
-    <app-modal-form-field>
+    <ui-modal-form-field>
       <textarea
         name="description"
         [ngModel]="league.description"
         placeholder="Enter Description..."
       ></textarea>
-    </app-modal-form-field>
+    </ui-modal-form-field>
 
-    <app-modal-actions>
+    <ui-modal-actions>
       <button id="save" [disabled]="!f.valid">Save</button>
 
       <button id="cancel" appModalClose>Cancel</button>
-    </app-modal-actions>
+    </ui-modal-actions>
   </form>
 </ng-container>

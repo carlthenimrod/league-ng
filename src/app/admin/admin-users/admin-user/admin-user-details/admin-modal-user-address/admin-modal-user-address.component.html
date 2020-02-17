@@ -1,51 +1,51 @@
 <ng-container *ngIf="user$ | async as user">
-  <app-modal-header>
+  <ui-modal-header>
     <h1>Update Address</h1>
-  </app-modal-header>
+  </ui-modal-header>
 
   <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f.value)">
     <ng-container ngModelGroup="address">
-      <app-modal-form-field>
+      <ui-modal-form-field>
         <input
           type="text"
           [ngModel]="user.address && user.address.street"
           name="street"
           placeholder="Enter Address"
         >
-      </app-modal-form-field>
+      </ui-modal-form-field>
 
-      <app-modal-form-field>
+      <ui-modal-form-field>
         <input
           type="text"
           [ngModel]="user.address && user.address.city"
           name="city"
           placeholder="City"
         >
-      </app-modal-form-field>
+      </ui-modal-form-field>
 
-      <app-modal-form-field>
+      <ui-modal-form-field>
         <input
           type="text"
           [ngModel]="user.address && user.address.state"
           name="state"
           placeholder="State"
         >
-      </app-modal-form-field>
+      </ui-modal-form-field>
 
-      <app-modal-form-field>
+      <ui-modal-form-field>
         <input
           type="text"
           [ngModel]="user.address && user.address.postal"
           name="postal"
           placeholder="Zip"
         >
-      </app-modal-form-field>
+      </ui-modal-form-field>
 
-      <app-modal-actions>
+      <ui-modal-actions>
         <button id="save" [disabled]="!f.valid">Save</button>
 
-        <button id="cancel" appDialogClose>Cancel</button>
-      </app-modal-actions>
+        <button id="cancel" uiModalClose>Cancel</button>
+      </ui-modal-actions>
     </ng-container>
   </form>
 </ng-container>

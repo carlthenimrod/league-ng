@@ -1,24 +1,24 @@
-<app-modal-header>
+<ui-modal-header>
   <h1>Remove {{ user.fullName }}</h1>
-</app-modal-header>
+</ui-modal-header>
 
 <form #f="ngForm" (ngSubmit)="f.valid && onSubmit()">
   <h2>Enter Name to confirm:</h2>
 
   <p>Warning: Cannot be undone!</p>
 
-  <app-modal-form-field>
+  <ui-modal-form-field>
     <input
       name="name"
       ngModel
       placeholder="Confirm Name"
       [appMustMatch]="user.fullName"
     >
-  </app-modal-form-field>
+  </ui-modal-form-field>
 
-  <app-modal-actions>
+  <ui-modal-actions>
     <button id="save" [disabled]="!f.valid">Confirm</button>
 
-    <button id="cancel" appModalClose>Cancel</button>
-  </app-modal-actions>
+    <button id="cancel" uiModalClose>Cancel</button>
+  </ui-modal-actions>
 </form>

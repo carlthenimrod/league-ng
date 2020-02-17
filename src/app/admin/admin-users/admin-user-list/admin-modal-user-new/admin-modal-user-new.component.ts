@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { ModalService } from '@app/shared/modal/modal.service';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
 import { emailUnique } from '@app/validators/email-unique.validator';
@@ -40,7 +40,7 @@ export class AdminModalUserNewComponent {
 
   constructor(
     private fb: FormBuilder,
-    private modal: ModalService,
+    private modal: UIModalService,
     private router: Router,
     private userService: UserService
   ) { }

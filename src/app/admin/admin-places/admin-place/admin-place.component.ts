@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { ModalService } from '@app/shared/modal/modal.service';
 import { Place } from '@app/models/place';
 import { PlaceService } from '@app/services/place.service';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { AdminModalPlaceDeleteComponent } from './admin-modal-place-delete/admin-modal-place-delete.component';
 
 @Component({
@@ -20,7 +20,7 @@ export class AdminPlaceComponent implements OnInit {
 
   constructor(
     private injector: Injector,
-    private modal: ModalService,
+    private modal: UIModalService,
     private placeService: PlaceService,
     private route: ActivatedRoute
   ) { }

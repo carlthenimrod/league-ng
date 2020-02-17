@@ -1,8 +1,8 @@
 import { Component, Input, Injector } from '@angular/core';
 
-import { ModalService } from '@app/shared/modal/modal.service';
 import { Team } from '@app/models/team';
 import { User } from '@app/models/user';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { AdminModalUserAddComponent } from './admin-modal-user-add/admin-modal-user-add.component';
 import { AdminModalUserRemoveComponent } from './admin-modal-user-remove/admin-modal-user-remove.component';
 import { AdminModalUserRolesComponent } from './admin-modal-user-roles/admin-modal-user-roles.component';
@@ -17,7 +17,7 @@ export class AdminTeamRosterComponent {
 
   constructor(
     private injector: Injector,
-    private modal: ModalService
+    private modal: UIModalService
   ) { }
 
   onClickOpenModal(type: string, user?: User) {

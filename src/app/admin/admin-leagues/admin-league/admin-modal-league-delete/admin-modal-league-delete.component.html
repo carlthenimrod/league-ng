@@ -1,26 +1,26 @@
 <ng-container *ngIf="league$ | async as league">
-  <app-modal-header>
+  <ui-modal-header>
     <h1>Delete {{ league.name }}</h1>
-  </app-modal-header>
+  </ui-modal-header>
 
   <form #f="ngForm" (ngSubmit)="f.valid && onSubmit()">
     <h2>Enter name to confirm</h2>
 
     <p class="warning">WARNING: This cannot be undone!</p>
 
-    <app-modal-form-field>
+    <ui-modal-form-field>
       <input
         name="name"
         placeholder="League Name"
         ngModel
         [appMustMatch]="league.name"
       >
-    </app-modal-form-field>
+    </ui-modal-form-field>
 
-    <app-modal-actions>
+    <ui-modal-actions>
       <button id="delete" [disabled]="!f.valid">Delete</button>
 
-      <button id="cancel" appModalClose>Cancel</button>
-    </app-modal-actions>
+      <button id="cancel" uiModalClose>Cancel</button>
+    </ui-modal-actions>
   </form>
 </ng-container>

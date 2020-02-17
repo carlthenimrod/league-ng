@@ -1,6 +1,6 @@
 import { Component, Input, Injector } from '@angular/core';
 
-import { ModalService } from '@app/shared/modal/modal.service';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { Team } from '@app/models/team';
 import { AdminModalTeamNameComponent } from './admin-modal-team-name/admin-modal-team-name.component';
 
@@ -13,7 +13,7 @@ export class AdminTeamDetailsComponent {
 
   constructor(
     private injector: Injector,
-    private modal: ModalService
+    private modal: UIModalService
   ) { }
 
   onClickOpenModal() {

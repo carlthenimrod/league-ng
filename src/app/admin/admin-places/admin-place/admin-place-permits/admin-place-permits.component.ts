@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
-import { ModalService } from '@app/shared/modal/modal.service';
 import { Place } from '@app/models/place';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { AdminModalPlacePermitComponent } from './admin-modal-place-permit/admin-modal-place-permit.component';
 
 @Component({
@@ -12,7 +12,7 @@ import { AdminModalPlacePermitComponent } from './admin-modal-place-permit/admin
 export class AdminPlacePermitsComponent {
   @Input() place: Place;
 
-  constructor(private modal: ModalService) { }
+  constructor(private modal: UIModalService) { }
 
   onClickOpenModal() {
     this.modal.open(AdminModalPlacePermitComponent);

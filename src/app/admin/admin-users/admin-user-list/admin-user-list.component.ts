@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { ModalService } from '@app/shared/modal/modal.service';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
 import { AdminModalUserNewComponent } from './admin-modal-user-new/admin-modal-user-new.component';
@@ -14,7 +14,7 @@ export class AdminUserListComponent implements OnInit {
   users$: Observable<User[]>;
 
   constructor(
-    private modal: ModalService,
+    private modal: UIModalService,
     private userService: UserService
   ) { }
 

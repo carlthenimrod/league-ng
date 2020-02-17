@@ -1,7 +1,7 @@
 import { Component, Input, Injector } from '@angular/core';
 
-import { ModalService } from '@app/shared/modal/modal.service';
 import { Place } from '@app/models/place';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { AdminModalPlaceLabelComponent } from './admin-modal-place-label/admin-modal-place-label.component';
 import { AdminModalPlaceAddressComponent } from './admin-modal-place-address/admin-modal-place-address.component';
 import { AdminModalPlaceLocationComponent } from './admin-modal-place-location/admin-modal-place-location.component';
@@ -15,7 +15,7 @@ export class AdminPlaceDetailsComponent {
 
   constructor(
     private injector: Injector,
-    private modal: ModalService
+    private modal: UIModalService
   ) { }
 
   onClickOpenModal(e: Event, type: string, _id?: string) {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { ModalService } from '@app/shared/modal/modal.service';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { Place } from '@app/models/place';
 import { PlaceService } from '@app/services/place.service';
 
@@ -14,7 +14,7 @@ export class AdminModalPlaceAddressComponent implements OnInit {
   place$: Observable<Place>;
 
   constructor(
-    private modal: ModalService,
+    private modal: UIModalService,
     private placeService: PlaceService
   ) { }
 

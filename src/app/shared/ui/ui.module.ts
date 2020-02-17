@@ -6,8 +6,15 @@ import { UIInputDirective } from './input/input.directive';
 import { UIErrorComponent } from './form-field/error/error.component';
 import { UIHintComponent } from './form-field/hint/hint.component';
 import { UISelectComponent } from './select/select.component';
+import { UIAutoCompleteComponent } from './auto-complete/auto-complete.component';
 import { UIOptionComponent } from './select/option/option.component';
+import { UITogglerComponent } from './toggler/toggler.component';
+import { UIToggleComponent } from './toggler/toggle/toggle.component';
+import { UIDatePickerComponent } from './date-picker/date-picker.component';
+import { UIDatePickerDirective } from './date-picker/date-picker.directive';
 import { UIStepperComponent } from './stepper/stepper.component';
+import { UIStepperHeaderComponent } from './stepper/stepper-header/stepper-header.component';
+import { UIStepperContentComponent } from './stepper/stepper-content/stepper-content.component';
 import { UIStepComponent } from './stepper/step/step.component';
 import { UIStepPrevDirective } from './stepper/step-prev/step-prev.directive';
 import { UIStepNextDirective } from './stepper/step-next/step-next.directive';
@@ -30,8 +37,15 @@ import { UIModalSelectComponent } from './modal/modal-select/modal-select.compon
     UIErrorComponent,
     UIHintComponent,
     UISelectComponent,
+    UIAutoCompleteComponent,
     UIOptionComponent,
+    UITogglerComponent,
+    UIToggleComponent,
+    UIDatePickerComponent,
+    UIDatePickerDirective,
     UIStepperComponent,
+    UIStepperHeaderComponent,
+    UIStepperContentComponent,
     UIStepComponent,
     UIStepPrevDirective,
     UIStepNextDirective,
@@ -55,8 +69,15 @@ import { UIModalSelectComponent } from './modal/modal-select/modal-select.compon
     UIErrorComponent,
     UIHintComponent,
     UISelectComponent,
+    UIAutoCompleteComponent,
     UIOptionComponent,
+    UITogglerComponent,
+    UIToggleComponent,
+    UIDatePickerComponent,
+    UIDatePickerDirective,
     UIStepperComponent,
+    UIStepperHeaderComponent,
+    UIStepperContentComponent,
     UIStepComponent,
     UIStepPrevDirective,
     UIStepNextDirective,

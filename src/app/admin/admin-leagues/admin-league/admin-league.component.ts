@@ -5,7 +5,7 @@ import { switchMap } from 'rxjs/operators';
 
 import { League } from '@app/models/league';
 import { LeagueService } from '@app/services/league.service';
-import { ModalService } from '@app/shared/modal/modal.service';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { AdminModalLeagueDeleteComponent } from './admin-modal-league-delete/admin-modal-league-delete.component';
 
 @Component({
@@ -21,7 +21,7 @@ export class AdminLeagueComponent implements OnInit {
   constructor(
     private injector: Injector,
     private leagueService: LeagueService,
-    private modal: ModalService,
+    private modal: UIModalService,
     private route: ActivatedRoute
   ) { }
 

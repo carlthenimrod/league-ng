@@ -3,6 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { Subject } from 'rxjs';
 
 import { UIModalComponent } from './modal.component';
+import { ModalConfig, MODAL_DATA } from './modal';
 
 @Injectable()
 export class UIModalService implements OnDestroy {
@@ -20,10 +21,10 @@ export class UIModalService implements OnDestroy {
     private resolver: ComponentFactoryResolver
   ) {}
 
-  open(componentType?: Type<any>) {
+  open(componentType?: Type<any>, config?: ModalConfig) {
     if (this._modalRef) { return; }
 
-    this._create(componentType);
+    this._create(componentType, config);
 
     this._modalRef.instance.close
       .subscribe(this._destroy.bind(this));
@@ -41,10 +42,18 @@ export class UIModalService implements OnDestroy {
     !this._modalRef ? this.open(componentType) : this.close();
   }
 
-  private _create(componentType?: Type<any>) {
+  private _create(componentType?: Type<any>, config?: ModalConfig) {
     const factory = this.resolver.resolveComponentFactory(this._componentTypeWrapper);
 
-    this._modalRef = factory.create(this.injector);
+    const data = config && config.data ? config.data : { };
+    const parent = config && config.injector ? config.injector : this.injector;
+
+    const injector = Injector.create({
+      providers: [{ provide: MODAL_DATA, useValue: data }],
+      parent
+    });
+
+    this._modalRef = factory.create(injector);
     this._modalRef.instance.componentType = componentType;
 
     this.document.body.appendChild((this._modalRef.hostView as EmbeddedViewRef<UIModalComponent>).rootNodes[0]);

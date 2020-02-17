@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
-import { MODAL_DATA } from '@app/shared/modal/modal';
-import { ModalService } from '@app/shared/modal/modal.service';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
+import { MODAL_DATA } from '@app/shared/ui/modal/modal';
 import { TeamService } from '@app/services/team.service';
 import { User } from '@app/models/user';
 
@@ -14,7 +14,7 @@ export class AdminModalUserRolesComponent implements OnInit {
 
   constructor(
     @Inject(MODAL_DATA) private data: { user: User },
-    private modal: ModalService,
+    private modal: UIModalService,
     private teamService: TeamService
   ) { }
 

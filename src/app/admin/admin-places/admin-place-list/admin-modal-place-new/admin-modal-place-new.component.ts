@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { Place } from '@app/models/place';
 import { PlaceService } from '@app/services/place.service';
-import { ModalService } from '@app/shared/modal/modal.service';
 
 @Component({
   selector: 'admin-modal-place-new',
@@ -31,7 +31,7 @@ export class AdminModalPlaceNewComponent {
 
   constructor(
     private fb: FormBuilder,
-    private modal: ModalService,
+    private modal: UIModalService,
     private placeService: PlaceService,
     private router: Router
   ) { }

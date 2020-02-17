@@ -3,8 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { ModalService } from '@app/shared/modal/modal.service';
-import { MODAL_DATA } from '@app/shared/modal/modal';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
+import { MODAL_DATA } from '@app/shared/ui/modal/modal';
 import { Place, Location } from '@app/models/place';
 import { PlaceService } from '@app/services/place.service';
 
@@ -20,7 +20,7 @@ export class AdminModalPlaceLocationComponent implements OnInit {
 
   constructor(
     @Inject(MODAL_DATA) private data: { _id?: string, delete?: boolean },
-    private modal: ModalService,
+    private modal: UIModalService,
     private placeService: PlaceService
   ) {}
 

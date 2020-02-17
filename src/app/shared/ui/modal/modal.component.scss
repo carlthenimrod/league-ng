@@ -35,6 +35,26 @@ ui-modal {
       width: 400px;
     }
 
+    h2 {
+      color: theme-color-level(primary, -4);
+      font-size: 1.4rem;
+      margin: 0 0 0.5rem 0;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    p {
+      color: theme-color-level(primary, -6);
+      margin: 0;
+      padding: 0.5rem 0;
+      text-align: center;
+
+      &.warning {
+        color: theme-color(danger);
+        font-weight: 700;
+      }
+    }
+
     form {
       display: flex;
       flex-direction: column;

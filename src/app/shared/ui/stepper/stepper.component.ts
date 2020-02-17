@@ -1,6 +1,7 @@
-import { Component, ContentChildren, QueryList, AfterContentInit, OnDestroy, ChangeDetectorRef, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, ContentChildren, QueryList, AfterContentInit, OnDestroy, ChangeDetectorRef, ViewEncapsulation, ElementRef, ContentChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { UIStepperHeaderComponent } from './stepper-header/stepper-header.component';
 import { UIStepComponent } from './step/step.component';
 
 @Component({
@@ -10,6 +11,7 @@ import { UIStepComponent } from './step/step.component';
   encapsulation: ViewEncapsulation.None
 })
 export class UIStepperComponent implements AfterContentInit, OnDestroy {
+  @ContentChild(UIStepperHeaderComponent, { static: false }) header: UIStepperHeaderComponent;
   @ContentChildren(UIStepComponent, { descendants: true }) steps: QueryList<UIStepComponent>;
   current = 1;
   total: number;
@@ -43,8 +45,15 @@ export class UIStepperComponent implements AfterContentInit, OnDestroy {
         step.next.subscribe(() => this.incrementStep(i + 1))
       );
 
+      this._updateHeader();
       setTimeout(() => this._updateState(step, i));
     });
+  }
+
+  private _updateHeader() {
+    if (!this.header) { return; }
+    this.header.step = this.current;
+    this.header.stepTotal = this.total;
   }
 
   decrementStep(currentStep: number) {
@@ -55,6 +64,7 @@ export class UIStepperComponent implements AfterContentInit, OnDestroy {
 
     window.scrollTo(0, 0);
 
+    this._updateHeader();
     this.steps.forEach(this._updateState.bind(this));
   }
 
@@ -66,6 +76,7 @@ export class UIStepperComponent implements AfterContentInit, OnDestroy {
 
     window.scrollTo(0, 0);
 
+    this._updateHeader();
     this.steps.forEach(this._updateState.bind(this));
   }
 

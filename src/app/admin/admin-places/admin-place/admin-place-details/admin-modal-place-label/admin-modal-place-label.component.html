@@ -1,10 +1,10 @@
 <ng-container *ngIf="place$ | async as place">
-  <app-modal-header>
+  <ui-modal-header>
     <h1>Update Label</h1>
-  </app-modal-header>
+  </ui-modal-header>
 
   <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f)">
-    <app-modal-form-field>
+    <ui-modal-form-field>
       <input
         type="text"
         [ngModel]="place.label"
@@ -12,12 +12,12 @@
         placeholder="Enter a Label"
         required
       >
-    </app-modal-form-field>
+    </ui-modal-form-field>
 
-    <app-modal-actions>
+    <ui-modal-actions>
       <button id="save" [disabled]="!f.valid">Save</button>
 
-      <button id="cancel" appDialogClose>Cancel</button>
-    </app-modal-actions>
+      <button id="cancel" uiModalClose>Cancel</button>
+    </ui-modal-actions>
   </form>
 </ng-container>

@@ -21,12 +21,6 @@ ui-select {
   transition: border 50ms ease-in-out;
   width: 100%;
 
-  @include media-breakpoint-up(sm) {
-    background-color: theme-color-level(primary, -8);
-    border: 2px solid theme-color-level(primary, -6);
-    color: theme-color-level(primary, 6);
-  }
-
   &.ng-invalid.ng-touched {
     border: 2px solid theme-color(danger);
   }

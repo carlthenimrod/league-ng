@@ -1,59 +1,59 @@
-<app-modal-header>
+<ui-modal-header>
   <h1>Add Permit</h1>
-</app-modal-header>
+</ui-modal-header>
 
 <form [formGroup]="permitForm" (ngSubmit)="permitForm.valid && onSubmit()">
-  <app-modal-toggler>
-    <app-modal-toggle label="Single Date">
+  <ui-toggler>
+    <ui-toggle label="Single Date">
       <input
         type="radio"
         value="single"
         formControlName="toggle"
         #toggle
       >
-    </app-modal-toggle>
+    </ui-toggle>
 
-    <app-modal-toggle label="Date Range">
+    <ui-toggle label="Date Range">
       <input
         type="radio"
         value="multi"
         formControlName="toggle"
         #toggle
       >
-    </app-modal-toggle>
-  </app-modal-toggler>
+    </ui-toggle>
+  </ui-toggler>
 
   <ng-container formGroupName="date">
-    <app-modal-form-field>
+    <ui-modal-form-field>
       <input
         formControlName="start"
         placeholder="Start Date"
-        [appModalDatePicker]="startDate"
+        [uiDatePicker]="startDate"
       >
-      <app-modal-date-picker #startDate></app-modal-date-picker>
-    </app-modal-form-field>
+      <ui-date-picker #startDate></ui-date-picker>
+    </ui-modal-form-field>
   </ng-container>
 
   <ng-container formGroupName="time">
-    <app-modal-form-field>
+    <ui-modal-form-field>
       <input
         type="time"
         formControlName="start"
         placeholder="Start Time"
       >
-    </app-modal-form-field>
+    </ui-modal-form-field>
 
-    <app-modal-form-field>
+    <ui-modal-form-field>
       <input
         type="time"
         formControlName="end"
         placeholder="End Time"
       >
-    </app-modal-form-field>
+    </ui-modal-form-field>
   </ng-container>
 
-  <app-modal-actions>
+  <ui-modal-actions>
     <button id="save">Save</button>
-    <button id="cancel" appModalClose>Cancel</button>
-  </app-modal-actions>
+    <button id="cancel" uiModalClose>Cancel</button>
+  </ui-modal-actions>
 </form>

@@ -1,28 +1,28 @@
-<app-modal-stepper>
-  <app-modal-stepper-header>
+<ui-stepper>
+  <ui-stepper-header>
     <h1>New User</h1>
-  </app-modal-stepper-header>
+  </ui-stepper-header>
 
-  <app-modal-stepper-content>
-    <app-modal-step [stepControl]="userForm">
+  <ui-stepper-content>
+    <ui-step [stepControl]="userForm">
       <form [formGroup]="userForm">
         <div class="name" formGroupName="name">
-          <app-modal-form-field>
+          <ui-modal-form-field>
             <input
               formControlName="first"
               placeholder="First Name"
             >
-          </app-modal-form-field>
+          </ui-modal-form-field>
 
-          <app-modal-form-field>
+          <ui-modal-form-field>
             <input
               formControlName="last"
               placeholder="Last Name"
             >
-          </app-modal-form-field>
+          </ui-modal-form-field>
         </div>
 
-        <app-modal-form-field>
+        <ui-modal-form-field>
           <input
             type="email"
             formControlName="email"
@@ -38,114 +38,114 @@
               Email is already in use!
             </span>
           </div>
-        </app-modal-form-field>
+        </ui-modal-form-field>
 
-        <app-modal-form-field>
+        <ui-modal-form-field>
           <input
             type="tel"
             formControlName="phone"
             placeholder="Phone Number"
           >
-        </app-modal-form-field>
+        </ui-modal-form-field>
 
-        <app-modal-form-field>
+        <ui-modal-form-field>
           <input
             type="tel"
             formControlName="secondary"
             placeholder="Secondary Phone"
           >
-        </app-modal-form-field>
+        </ui-modal-form-field>
 
-        <app-modal-actions>
-          <button id="next" appModalStepNext>Next</button>
+        <ui-modal-actions>
+          <button id="next" uiStepNext>Next</button>
 
-          <button id="cancel" appModalClose>Cancel</button>
-        </app-modal-actions>
+          <button id="cancel" uiModalClose>Cancel</button>
+        </ui-modal-actions>
       </form>
-    </app-modal-step>
+    </ui-step>
 
-    <app-modal-step>
+    <ui-step>
       <form [formGroup]="addressForm">
         <h2>User Address</h2>
 
-        <app-modal-form-field>
+        <ui-modal-form-field>
           <input
             formControlName="street"
             placeholder="Street"
           >
-        </app-modal-form-field>
+        </ui-modal-form-field>
 
-        <app-modal-form-field>
+        <ui-modal-form-field>
           <input
             formControlName="city"
             placeholder="City"
           >
-        </app-modal-form-field>
+        </ui-modal-form-field>
 
-        <app-modal-form-field>
+        <ui-modal-form-field>
           <input
             formControlName="state"
             placeholder="State"
           >
-        </app-modal-form-field>
+        </ui-modal-form-field>
 
-        <app-modal-form-field>
+        <ui-modal-form-field>
           <input
             formControlName="postal"
             placeholder="Zip Code"
           >
-        </app-modal-form-field>
+        </ui-modal-form-field>
 
-        <app-modal-actions>
-          <button id="next" appModalStepNext>Next</button>
+        <ui-modal-actions>
+          <button id="next" uiStepNext>Next</button>
 
-          <button id="previous" appModalStepPrev>Previous</button>
-        </app-modal-actions>
+          <button id="previous" uiStepPrev>Previous</button>
+        </ui-modal-actions>
       </form>
-    </app-modal-step>
+    </ui-step>
 
-    <app-modal-step>
+    <ui-step>
       <form [formGroup]="emergencyForm" (ngSubmit)="onSubmit()">
         <h2>Emergency Contact</h2>
 
         <div class="name" formGroupName="name">
-          <app-modal-form-field>
+          <ui-modal-form-field>
             <input
               formControlName="first"
               placeholder="First Name"
             >
-          </app-modal-form-field>
+          </ui-modal-form-field>
 
-          <app-modal-form-field>
+          <ui-modal-form-field>
             <input
               formControlName="last"
               placeholder="Last Name"
             >
-          </app-modal-form-field>
+          </ui-modal-form-field>
         </div>
 
-        <app-modal-form-field>
+        <ui-modal-form-field>
           <input
             type="tel"
             formControlName="phone"
             placeholder="Phone Number"
           >
-        </app-modal-form-field>
+        </ui-modal-form-field>
 
-        <app-modal-form-field>
+        <ui-modal-form-field>
           <input
             type="tel"
             formControlName="secondary"
             placeholder="Secondary Phone"
           >
-        </app-modal-form-field>
+        </ui-modal-form-field>
 
-        <app-modal-actions>
+        <ui-modal-actions>
           <button id="save">Create</button>
 
-          <button id="previous" appModalStepPrev>Previous</button>
-        </app-modal-actions>
+          <button id="previous" uiStepPrev>Previous</button>
+        </ui-modal-actions>
       </form>
-    </app-modal-step>
-  </app-modal-stepper-content>
-</app-modal-stepper>
+    </ui-step>
+  </ui-stepper-content>
+</ui-stepper>

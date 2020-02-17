@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Observable, Subject, combineLatest } from 'rxjs';
 import { takeUntil, map, switchMap } from 'rxjs/operators';
 
-import { ModalService } from '@app/shared/modal/modal.service';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 import { User } from '@app/models/user';
@@ -33,7 +33,7 @@ export class AdminModalUserAddComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private modal: ModalService,
+    private modal: UIModalService,
     private teamService: TeamService,
     private userService: UserService
   ) { }

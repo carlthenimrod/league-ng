@@ -1,7 +1,7 @@
 import { Component, Input, Injector } from '@angular/core';
 
 import { League } from '@app/models/league';
-import { ModalService } from '@app/shared/modal/modal.service';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { AdminModalLeagueNameComponent } from './admin-modal-league-name/admin-modal-league-name.component';
 import { AdminModalLeagueDescriptionComponent } from './admin-modal-league-description/admin-modal-league-description.component';
 
@@ -14,7 +14,7 @@ export class AdminLeagueDetailsComponent {
 
   constructor(
     private injector: Injector,
-    private modal: ModalService
+    private modal: UIModalService
   ) { }
 
   onClickOpenModal(type: string, _id?: string) {

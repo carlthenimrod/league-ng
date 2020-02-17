@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { ModalService } from '@app/shared/modal/modal.service';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 import { AdminModalTeamDeleteComponent } from './admin-modal-team-delete/admin-modal-team-delete.component';
@@ -19,7 +19,7 @@ export class AdminTeamComponent implements OnInit {
 
   constructor(
     private injector: Injector,
-    private modal: ModalService,
+    private modal: UIModalService,
     private route: ActivatedRoute,
     private teamService: TeamService
   ) { }

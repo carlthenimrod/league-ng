@@ -1,0 +1,11 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+ui-toggler {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1rem 0;
+}

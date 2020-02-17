@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { ModalService } from '@app/shared/modal/modal.service';
 import { PlaceService } from '@app/services/place.service';
 import { Place } from '@app/models/place';
+import { UIModalService } from '@app/shared/ui/modal/modal.service';
 
 @Component({
   selector: 'admin-modal-place-delete',
@@ -14,7 +14,7 @@ export class AdminModalPlaceDeleteComponent implements OnInit {
   place$: Observable<Place>;
 
   constructor(
-    private modal: ModalService,
+    private modal: UIModalService,
     private placeService: PlaceService,
     private router: Router
   ) { }
