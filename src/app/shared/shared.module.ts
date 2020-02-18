@@ -15,7 +15,6 @@ import {
   MatSliderModule
 } from '@angular/material';
 
-import { NoticeComponent } from './notice/notice.component';
 import { ProfileImgComponent } from './profile-img/profile-img.component';
 import { FormatLocationsPipe } from './format-locations.pipe';
 import { GameComponent } from './game/game.component';
@@ -49,7 +48,6 @@ import { UIModule } from './ui/ui.module';
     MatDatepickerModule,
     MatProgressSpinnerModule,
     MatSliderModule,
-    NoticeComponent,
     ProfileImgComponent,
     FormatLocationsPipe,
     GmapLinkPipe,
@@ -63,7 +61,6 @@ import { UIModule } from './ui/ui.module';
     UIModule
   ],
   declarations: [
-    NoticeComponent,
     ProfileImgComponent,
     FormatLocationsPipe,
     GameComponent,
