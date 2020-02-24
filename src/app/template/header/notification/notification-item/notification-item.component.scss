@@ -5,7 +5,7 @@
 @import '~bootstrap/scss/_mixins';
 
 :host {
-  background-color: lighten(theme-color(primary), 40%);
+  background-color: lighten(theme-color(primary), 50%);
   border-radius: 5px;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.85);
   display: block;
@@ -54,5 +54,58 @@
 
   section.message {
     padding: 1rem 0;
+  }
+
+  section.actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.5rem 0 0 0;
+
+    p {
+      color: lighten(theme-color(primary), 10%);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+
+      i {
+        margin-left: 0.5rem;
+      }
+
+      &.accepted {
+        i { color: theme-color(success); }
+      }
+
+      &.declined {
+        i { color: theme-color(danger); }
+      }
+    }
+
+    button {
+      background-color: theme-color(primary);
+      border: none;
+      border-radius: 2px;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin: 0 0.25rem;
+      padding: 0.5rem 1rem;
+      text-transform: uppercase;
+
+      &.accept {
+        background-color: theme-color(success);
+      }
+
+      &.decline {
+        background-color: theme-color(danger);
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      i {
+        margin-left: 0.5rem;
+      }
+    }
   }
 }

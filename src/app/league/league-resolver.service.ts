@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
 import { take, mergeMap, tap } from 'rxjs/operators';
@@ -7,6 +8,7 @@ import { League } from '@app/models/league';
 import { LeagueService } from '@app/services/league.service';
 import { Me } from '@app/models/auth';
 
+@Injectable()
 export class LeagueResolver implements Resolve<League> {
   constructor(
     private auth: AuthService,

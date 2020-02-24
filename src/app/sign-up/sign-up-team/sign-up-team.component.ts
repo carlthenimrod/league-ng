@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup, FormArray } from '@angular/forms';
+import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { take } from 'rxjs/operators';
 
 import { UIModalService } from '@app/shared/ui/modal/modal.service';
@@ -13,9 +13,14 @@ import { SignUpModalComponent } from './sign-up-modal/sign-up-modal.component';
 export class SignUpTeamComponent {
   @Input() teamForm: FormGroup;
 
+  get name(): FormControl {
+    return this.teamForm.get('name') as FormControl;
+  }
+
   get roster(): FormArray {
     return this.teamForm.get('roster') as FormArray;
   }
+
 
   constructor(
     private modal: UIModalService

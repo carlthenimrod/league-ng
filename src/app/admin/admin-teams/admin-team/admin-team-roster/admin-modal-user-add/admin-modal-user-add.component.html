@@ -12,9 +12,9 @@
       <input
         formControlName="email"
         placeholder="Enter Email"
-        appModalInput
+        uiInput
         autocomplete="disabled"
-        [modalAutocomplete]="auto"
+        [autoComplete]="auto"
       >
 
       <ui-auto-complete #auto (autocompleteSelect)="onSelect($event)">

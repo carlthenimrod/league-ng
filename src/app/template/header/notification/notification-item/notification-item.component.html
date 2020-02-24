@@ -16,3 +16,27 @@
 <section class="message">
   {{ notification.message }}
 </section>
+
+<section class="actions" *ngIf="showActions">
+  <ng-container *ngIf="status.pending; else actionComplete">
+    <button type="button" class="decline" (click)="onClick(false)">
+      <span>Decline</span>
+      <i class="fas fa-times"></i>
+    </button>
+
+    <button type="button" class="accept" (click)="onClick(true)">
+      <span>Accept</span>
+      <i class="fas fa-check"></i>
+    </button>
+  </ng-container>
+
+  <ng-template #actionComplete>
+    <p *ngIf="status.accepted" class="accepted">
+      Invite has been accepted! <i class="fas fa-check"></i>
+    </p>
+
+    <p *ngIf="!status.accepted" class="declined">
+      Invite has been declined! <i class="fas fa-times"></i>
+    </p>
+  </ng-template>
+</section>

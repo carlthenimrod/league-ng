@@ -3,10 +3,14 @@ import { NgControl } from '@angular/forms';
 import { Subject, fromEvent } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+import { ViewportService } from '@app/services/viewport.service';
+import { UIAutoCompleteComponent } from '../auto-complete/auto-complete.component';
+
 @Directive({
   selector: '[uiInput]'
 })
 export class UIInputDirective implements OnInit, OnDestroy {
+  @Input() autoComplete: UIAutoCompleteComponent;
   @HostBinding() @Input() placeholder: string;
   autofilled = false;
   focused = false;
@@ -23,7 +27,8 @@ export class UIInputDirective implements OnInit, OnDestroy {
 
   constructor(
     public el: ElementRef,
-    public ngControl: NgControl
+    public ngControl: NgControl,
+    private viewport: ViewportService
   ) { }
 
   @HostListener('focus') focus() {
@@ -38,6 +43,26 @@ export class UIInputDirective implements OnInit, OnDestroy {
     fromEvent<AnimationEvent>(this.el.nativeElement, 'animationstart')
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(({ animationName }) => this._autofillChanged(animationName));
+
+      if (this.autoComplete) {
+        const input = this.el.nativeElement as HTMLInputElement;
+
+        fromEvent(input, 'click')
+          .pipe(takeUntil(this.unsubscribe$))
+          .subscribe((e: MouseEvent) => {
+            e.stopPropagation();
+            this.autoComplete.open = true;
+          });
+
+        fromEvent(document, 'click')
+          .pipe(takeUntil(this.unsubscribe$))
+          .subscribe(() => this.autoComplete.open = false);
+
+        this._positionAutocomplete(input);
+        this.viewport.width$
+          .pipe(takeUntil(this.unsubscribe$))
+          .subscribe(this._positionAutocomplete.bind(this, input));
+      }
   }
 
   private _focusChanged(isFocused: boolean) {
@@ -53,6 +78,12 @@ export class UIInputDirective implements OnInit, OnDestroy {
         this.autofilled = false;
         break;
     }
+  }
+
+  private _positionAutocomplete(element: HTMLElement) {
+    this.autoComplete.top   = `${element.offsetTop + element.offsetHeight}px`;
+    this.autoComplete.left  = `${element.offsetLeft}px`;
+    this.autoComplete.width = `${element.offsetWidth}px`;
   }
 
   ngOnDestroy() {

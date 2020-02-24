@@ -85,6 +85,18 @@ export class NotificationService extends UIModalService implements OnDestroy {
     }
   }
 
+  put$(notification: Notification, values: { [key: string]: any }): Observable<Notification> {
+    return this.http.put<NotificationResponse>(`${this._api}users/${this._me._id}/notifications/${notification._id}`, values)
+      .pipe(
+        map(this._transform.bind(this)),
+        tap<Notification>(savedNotification => {
+          const index = this._notifications.findIndex(n => n._id === savedNotification._id);
+          this._notifications[index] = savedNotification;
+          this._notificationsSubject.next(_.cloneDeep(this._notifications));
+        })
+      );
+  }
+
   private _read$(): Observable<Notification[]> {
     return this.http.post<NotificationResponse[]>(`${this._api}users/${this._me._id}/notifications/read`, {})
       .pipe(
@@ -110,7 +122,7 @@ export class NotificationService extends UIModalService implements OnDestroy {
   }
 
   private _transform(r: NotificationResponse): Notification {
-    const { type, status, _id } = r;
+    const { type, status, _id, team, user } = r;
     const updated = r.createdAt === r.updatedAt;
 
     return {
@@ -118,6 +130,8 @@ export class NotificationService extends UIModalService implements OnDestroy {
       status,
       updated,
       _id,
+      team,
+      user,
       message: this._formatMessage(r),
       date: !updated ? moment(r.createdAt).fromNow() : moment(r.updatedAt).fromNow()
     };
@@ -134,6 +148,12 @@ export class NotificationService extends UIModalService implements OnDestroy {
           case 'newUser':
             return `New User: ${ user.fullName ? user.fullName : user.email }`;
         }
+        break;
+      case 'team':
+          switch (action) {
+            case 'invite':
+              return `Invite sent to join: ${ team.name }`;
+          }
         break;
       default:
         return `New Notification - Type: ${ type } Action: ${ action }`;

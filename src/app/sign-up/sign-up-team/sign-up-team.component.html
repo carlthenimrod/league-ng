@@ -17,6 +17,14 @@
         uiInput
         required
       >
+
+      <ui-hint *ngIf="name.pending">
+        Checking Team Name...
+      </ui-hint>
+
+      <ui-error *ngIf="name.errors && name.errors.teamExists">
+        Team Name already exists!
+      </ui-error>
     </ui-form-field>
   </ngl-sign-up-section>
 

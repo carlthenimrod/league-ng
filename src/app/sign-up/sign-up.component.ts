@@ -7,6 +7,7 @@ import { TeamService } from '@app/services/team.service';
 import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
 import { emailUnique } from '@app/validators/email-unique.validator';
+import { TeamExistsValidator } from '@app/validators/team-exists.validator';
 
 @Component({
   selector: 'ngl-sign-up',
@@ -53,6 +54,7 @@ export class SignUpComponent {
   constructor(
     private fb: FormBuilder,
     private teamService: TeamService,
+    private teamExists: TeamExistsValidator,
     private userService: UserService
   ) { }
 
@@ -68,7 +70,7 @@ export class SignUpComponent {
 
   private _createTeamCtrl(): FormGroup {
     return this.fb.group({
-      name: ['', Validators.required],
+      name: ['', Validators.required, this.teamExists.validate.bind(this.teamExists)],
       roster: this.fb.array([])
     });
   }
@@ -95,13 +97,13 @@ export class SignUpComponent {
     }
   }
 
-  private _createRoster(newUser: User) {
+  private _createUsers(newUser: User) {
     const users: User[] = (this.signUpForm.get('team.roster') as FormArray).getRawValue();
-    const roster: Observable<{ user: string, roles: string[] }>[] = [];
+    const users$: Observable<{ user: string, roles: string[] }>[] = [];
 
     users.forEach((user, index) => {
       if (index === 0) {
-        roster.push(
+        users$.push(
           of({ user: newUser._id, roles: user.roles })
         );
 
@@ -109,14 +111,14 @@ export class SignUpComponent {
       }
 
       if (user._id) {
-        roster.push(
+        users$.push(
           of({ user: user._id, roles: user.roles })
         );
 
         return;
       }
 
-      roster.push(this.userService.post$(user)
+      users$.push(this.userService.post$(user)
         .pipe(
           map(u => {
             return {
@@ -128,7 +130,7 @@ export class SignUpComponent {
       );
     });
 
-    return forkJoin(roster);
+    return forkJoin(users$);
   }
 
   onSubmit() {
@@ -145,10 +147,11 @@ export class SignUpComponent {
       this.userService.post$(user),
       this.userService.post$(user)
         .pipe(
-          concatMap(this._createRoster.bind(this)),
-          concatMap(roster => this.teamService.post$({
+          concatMap(this._createUsers.bind(this)),
+          concatMap(users => this.teamService.post$({
             name: this.signUpForm.get('team.name').value,
-            roster: roster,
+            roster: [users.shift()],
+            pending: users,
             status: { new: true }
           }))
         )

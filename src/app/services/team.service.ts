@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import * as _ from 'lodash';
 
@@ -107,6 +107,12 @@ export class TeamService {
           this.teamSubject.next(_.cloneDeep(this.team));
         })
       );
+  }
+
+  teamExists$(name: string): Observable<void> {
+    const url = `${this.api}teams/name`;
+
+    return this.http.post<void>(url, { name });
   }
 
   editUser(userId: string, roles: string[]) {

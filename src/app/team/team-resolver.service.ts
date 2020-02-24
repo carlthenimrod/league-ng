@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 import { take, mergeMap, tap } from 'rxjs/operators';
@@ -7,6 +8,7 @@ import { Me } from '@app/models/auth';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 
+@Injectable()
 export class TeamResolverService implements Resolve<Team> {
   constructor(
     private auth: AuthService,

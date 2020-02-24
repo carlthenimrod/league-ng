@@ -8,11 +8,6 @@ export interface SocketData {
   action: string;
 }
 
-export interface SocketNotification extends SocketData {
-  type: string;
-  notification: NotificationResponse;
-}
-
 export interface SocketLeagueData extends SocketData {
   league: League;
 }

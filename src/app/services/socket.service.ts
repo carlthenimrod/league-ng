@@ -9,7 +9,6 @@ import { AuthService } from '@app/auth/auth.service';
 import { NotificationResponse } from '@app/models/notification';
 import { SocketLeagueService } from './socket-league.service';
 import { SocketTeamService } from './socket-team.service';
-import { SocketNotification } from '@app/models/socket';
 
 @Injectable({
   providedIn: 'root'
@@ -53,8 +52,7 @@ export class SocketService implements OnDestroy {
     this.socketLeague.handle(fromEvent(this.socket, 'league'));
     this.socketTeam.handle(fromEvent(this.socket, 'team'));
 
-    this.notification$ = fromEvent<SocketNotification>(this.socket, 'notification')
-      .pipe(map(d => d.notification));
+    this.notification$ = fromEvent<NotificationResponse>(this.socket, 'notification');
   }
 
   private onConnect(connect$: Observable<void>) {
