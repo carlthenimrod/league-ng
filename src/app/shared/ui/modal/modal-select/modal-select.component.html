@@ -4,19 +4,19 @@
   </div>
 
   <div *ngIf="selected" class="selected">
-    <div class="selected-value">{{ selected }}</div>
+    <div class="selected-value">{{ displayText }}</div>
   </div>
 </ng-container>
 
 <ng-template #multiSelect>
-  <div *ngIf="selected.length === 0" class="placeholder">
+  <div *ngIf="selectedOptions.length === 0" class="placeholder">
     {{ placeholder ? placeholder : 'Select' }}
   </div>
 
-  <div *ngIf="selected.length > 0" class="selected">
-    <div *ngFor="let selectedItem of selected" class="selected-item">
-      <span>{{ selectedItem }}</span>
-      <i class="fas fa-times" (click)="onClickRemove($event, selectedItem)"></i>
+  <div *ngIf="selectedOptions.length > 0" class="selected">
+    <div *ngFor="let selected of selectedOptions" class="selected-item">
+      <span>{{ selected.label }}</span>
+      <i class="fas fa-times" (click)="onClickRemove($event, selected)"></i>
     </div>
   </div>
 </ng-template>

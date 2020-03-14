@@ -6,29 +6,13 @@
 
 ui-select {
   align-items: center;
-  background-color: darken(theme-color(primary), 30%);
-  border: 2px solid lighten(theme-color(primary), 20%);
   border-radius: 3px;
-  color: $white;
   display: flex;
-  font-size: 1.2rem;
   margin: 0 auto;
-  min-height: 2.5rem;
-  max-width: 15rem;
-  padding: 0.25rem 0.5rem 0 0.5rem;
   position: relative;
   text-align: left;
   transition: border 50ms ease-in-out;
   width: 100%;
-
-  &.ng-invalid.ng-touched {
-    border: 2px solid theme-color(danger);
-  }
-
-  .placeholder {
-    color: lighten(theme-color(primary), 20%);
-    margin-bottom: 0.25rem;
-  }
 
   > i {
     color: lighten(theme-color(primary), 20%);
@@ -37,15 +21,14 @@ ui-select {
   }
 
   .options {
-    background-color: theme-color-level(primary, 8);
+    background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 3px 1px rgba($color: #000, $alpha: 0.6);
     max-width: 15rem;
     padding: 1rem 0;
-    position: absolute;
-    top: 2.5rem;
-    left: 0;
+    position: fixed;
     width: 100%;
+    z-index: 1;
 
     ui-option {
       padding: 0 1rem 1rem 1rem;
@@ -61,7 +44,6 @@ ui-select {
     flex-wrap: wrap;
 
     .selected-value {
-      margin-bottom: 0.25rem;
       text-transform: capitalize;
     }
 
@@ -73,7 +55,7 @@ ui-select {
       align-items: center;
       border-radius: 2rem;
       box-shadow: 0 0 3px 1px rgba($color: #000, $alpha: 0.4);
-      color: theme-color-level(primary, 4);
+      color: theme-color(primary);
       display: flex;
       font-size: 0.8rem;
       justify-content: space-between;

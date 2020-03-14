@@ -2,11 +2,9 @@ import { Component, Input, OnInit, OnDestroy, ViewChildren, ViewContainerRef, Qu
 import { Subject, combineLatest } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { UserSocketData } from '@app/models/socket';
 import { Team } from '@app/models/team';
 import { TeamService } from '@app/services/team.service';
 import { TeamSidebarService } from '@app/services/team-sidebar.service';
-import { TeamSocketService } from '@app/services/team-socket.service';
 import { UserCardService } from './user-card.service';
 import { ViewportService } from '@app/services/viewport.service';
 import { sidebarSlideTrigger } from './animations';
@@ -28,21 +26,20 @@ export class TeamSidebarComponent implements OnInit, OnDestroy {
   constructor(
     private teamService: TeamService,
     private sidebar: TeamSidebarService,
-    private teamSocket: TeamSocketService,
     private userCard: UserCardService,
     private viewport: ViewportService
   ) {}
 
   ngOnInit() {
-    this.teamSocket.roster$()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((data: UserSocketData) => {
-        switch (data.action) {
-          case 'update':
-            this.teamService.updateUser(data.users);
-            break;
-        }
-      });
+    // this.teamSocket.roster$()
+    //   .pipe(takeUntil(this.unsubscribe$))
+    //   .subscribe((data: UserSocketData) => {
+    //     switch (data.action) {
+    //       case 'update':
+    //         this.teamService.updateUser(data.users);
+    //         break;
+    //     }
+    //   });
 
     combineLatest([this.viewport.type$, this.sidebar.isOpen$])
       .pipe(takeUntil(this.unsubscribe$))

@@ -5,7 +5,6 @@ import { tap } from 'rxjs/operators';
 import { environment } from '@env/environment';
 
 import { TeamService } from './team.service';
-import { TeamSocketService } from './team-socket.service';
 import { Team, Message } from '@app/models/team';
 
 @Injectable({
@@ -19,8 +18,7 @@ export class TeamFeedService implements OnDestroy {
 
   constructor(
     private http: HttpClient,
-    private teamService: TeamService,
-    private teamSocket: TeamSocketService
+    private teamService: TeamService
   ) {
     this.teamSub = this.teamService.team$
       .subscribe(team => this.team = team);
@@ -29,16 +27,16 @@ export class TeamFeedService implements OnDestroy {
   send(message: Message) {
     const url = this.api + `teams/${this.team._id}/feed`;
 
-    return this.http.post(url, message)
-      .pipe(
-        tap((newMessage: Message) => {
-          this.teamSocket.feed(this.team._id, 'new', newMessage);
-        })
-      );
+    // return this.http.post(url, message)
+    //   .pipe(
+    //     tap((newMessage: Message) => {
+    //       this.teamSocket.feed(this.team._id, 'new', newMessage);
+    //     })
+    //   );
   }
 
   isTyping(typing: boolean) {
-    this.teamSocket.typing(this.team._id, typing);
+    // this.teamSocket.typing(this.team._id, typing);
   }
 
   ngOnDestroy() {

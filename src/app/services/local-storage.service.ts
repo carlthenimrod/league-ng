@@ -42,30 +42,21 @@ export class LocalStorageService {
   set(item: Me): void;
   set(item: string, value: any): void;
   set(item: string|Me, value?: any): void {
-    if (typeof item !== 'string') {
-      localStorage.setItem('_id', item._id);
-      localStorage.setItem('email', item.email);
-      localStorage.setItem('name', JSON.stringify(item.name));
-      localStorage.setItem('fullName', item.fullName);
-      localStorage.setItem('status', JSON.stringify(item.status));
-      localStorage.setItem('teams', JSON.stringify(item.teams));
-      localStorage.setItem('leagues', JSON.stringify(item.leagues));
-      localStorage.setItem('access_token', item.access_token);
-      localStorage.setItem('refresh_token', item.refresh_token);
-      localStorage.setItem('client', item.client);
+    if (typeof item === 'object') {
+      for (const [keys, values] of Object.entries(item)) {
+        localStorage.setItem(
+          keys,
+          typeof values === 'object'
+            ? JSON.stringify(values)
+            : values
+          );
+      }
 
       item.img ? localStorage.setItem('img', item.img) : localStorage.removeItem('img');
-    } else {
-      switch (item) {
-        case 'leagues':
-        case 'teams':
-        case 'status':
-        case 'fullName':
-          localStorage.setItem(item, JSON.stringify(value));
-          break;
-        default:
-          localStorage.setItem(item, value);
-      }
+    } else if (typeof item === 'string') {
+        typeof value === 'object'
+          ? localStorage.setItem(item, JSON.stringify(value))
+          : localStorage.setItem(item, value);
     }
   }
 }

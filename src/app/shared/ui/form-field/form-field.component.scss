@@ -92,6 +92,14 @@ ui-form-field {
     }
   }
 
+  input {
+    min-height: 26px;
+  }
+
+  ui-select {
+    min-height: 26px;
+  }
+
   .underline {
     background-color: theme-color(primary);
     height: 2px;

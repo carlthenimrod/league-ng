@@ -1,25 +1,6 @@
-<ng-container *ngIf="!multi; else multiSelect">
-  <div *ngIf="!selected" class="placeholder">
-    {{ placeholder ? placeholder : 'Select' }}
-  </div>
-
-  <div *ngIf="selected" class="selected">
-    <div class="selected-value">{{ selected }}</div>
-  </div>
-</ng-container>
-
-<ng-template #multiSelect>
-  <div *ngIf="selected.length === 0" class="placeholder">
-    {{ placeholder ? placeholder : 'Select' }}
-  </div>
-
-  <div *ngIf="selected.length > 0" class="selected">
-    <div *ngFor="let selectedItem of selected" class="selected-item">
-      <span>{{ selectedItem }}</span>
-      <i class="fas fa-times" (click)="onClickRemove($event, selectedItem)"></i>
-    </div>
-  </div>
-</ng-template>
+<div *ngIf="selected" class="selected">
+  <div class="selected-value">{{ displayText }}</div>
+</div>
 
 <i *ngIf="open"  class="fas fa-caret-down"></i>
 <i *ngIf="!open" class="fas fa-caret-up"></i>

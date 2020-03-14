@@ -87,7 +87,7 @@ export class UserService {
     const url = this.api + `users/${userId}/password`;
     return this.http.post<AuthResponse>(url, { password, code })
       .pipe(
-        tap(response => this.auth.me.set$(response))
+        tap(response => this.auth.set$(response))
       );
   }
 

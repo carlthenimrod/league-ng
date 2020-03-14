@@ -5,7 +5,6 @@ import { takeUntil } from 'rxjs/operators';
 
 import { Team } from '@app/models/team';
 import { TeamSidebarService } from '@app/services/team-sidebar.service';
-import { TeamSocketService } from '@app/services/team-socket.service';
 
 @Component({
   selector: 'app-team-component',
@@ -20,16 +19,15 @@ export class TeamComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private teamSidebar: TeamSidebarService,
-    private teamSocket: TeamSocketService
+    private teamSidebar: TeamSidebarService
   ) { }
 
   ngOnInit() {
     this.route.data.subscribe(({ team }: { team: Team }) => {
       this.team = team;
 
-      this.teamSocket.connected$()
-        .subscribe(connected => connected && this.teamSocket.join(this.team._id));
+      // this.teamSocket.connected$()
+      //   .subscribe(connected => connected && this.teamSocket.join(this.team._id));
     });
 
     this.teamSidebar.isOpen$
@@ -41,6 +39,6 @@ export class TeamComponent implements OnInit, OnDestroy {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
 
-    this.teamSocket.leave(this.team._id);
+    // this.teamSocket.leave(this.team._id);
   }
 }

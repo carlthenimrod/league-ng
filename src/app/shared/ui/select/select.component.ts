@@ -1,6 +1,7 @@
-import { Component, ContentChildren, QueryList, AfterContentInit, HostListener, Input, Attribute, forwardRef, ViewEncapsulation } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, ContentChildren, QueryList, AfterContentInit, HostListener, Input, Attribute, ViewEncapsulation, Self, Optional } from '@angular/core';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 
+import { ControlDirective } from '../form-field/control.directive';
 import { UIOptionComponent } from './option/option.component';
 
 @Component({
@@ -9,47 +10,72 @@ import { UIOptionComponent } from './option/option.component';
   templateUrl: './select.component.html',
   encapsulation: ViewEncapsulation.None,
   providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => UISelectComponent),
-      multi: true
-    }
+    { provide: ControlDirective, useExisting: UISelectComponent }
   ]
 })
-export class UISelectComponent implements AfterContentInit, ControlValueAccessor {
+export class UISelectComponent implements ControlDirective, AfterContentInit, ControlValueAccessor {
   @ContentChildren(UIOptionComponent) options: QueryList<UIOptionComponent>;
   @Input() placeholder: string;
   multi: boolean;
   open = false;
   onChange: (value) => void;
   onTouched: () => void;
-  _selectedMulti: string[] = [];
-  _selected = '';
+  selectedOption: UIOptionComponent;
+  selectedOptions: UIOptionComponent[] = [];
   get selected() {
-    return !this.multi ? this._selected : this._selectedMulti;
+    return !this.multi
+      ? this.selectedOption
+      : this.selectedOptions;
   }
-  set selected(value) {
-    if (!this.multi && typeof value === 'string') {
-      this._selected = value as string;
-    } else if (value instanceof Array) {
-      this._selectedMulti = value as string[];
+  set selected(selected: UIOptionComponent | UIOptionComponent[]) {
+    let value;
+    if (!this.multi) {
+      this.selectedOption = selected as UIOptionComponent;
+      value = this.selectedOption.value;
     } else {
-      this._selectedMulti = [];
+      this.selectedOptions = selected as UIOptionComponent[];
+      value = this.selectedOptions.map(o => o.value);
     }
     if (this.onChange) { this.onChange(value); }
   }
 
-  constructor(@Attribute('multiple') multiple) {
+  get displayText(): string {
+    return !this.multi
+      ? this.selectedOption.label
+      : this.selectedOptions.map(o => o.label).join(', ');
+  }
+
+  @Input()
+  get required () { return this._required; }
+  set required (value: boolean) { this._required = (value != null && `${value}` !== 'false'); }
+  private _required: boolean;
+
+  get focused() {
+    return this.open;
+  }
+
+  get empty() {
+    return !this.multi
+      ? !this.selectedOption
+      : this.selectedOptions.length === 0;
+  }
+
+  constructor(
+    @Self() @Optional() public ngControl: NgControl,
+    @Attribute('multiple') multiple
+  ) {
     this.multi = multiple !== null
       ? true
       : false;
+
+    if (this.ngControl) { this.ngControl.valueAccessor = this; }
   }
 
   writeValue(value) {
     if (!this.options) { return; }
 
     if (value === null) {
-      this.selected = '';
+      this.selected = null;
       this.options.forEach(option => option.selected = false);
     }
 
@@ -88,13 +114,13 @@ export class UISelectComponent implements AfterContentInit, ControlValueAccessor
     if (!option.value) { return; }
 
     if (!this.multi) {
-      (this.selected as string) = option.value;
+      this.selected = option;
       this.open = false;
     } else {
-      const selected = this.selected as string[];
-      const index = selected.findIndex(v => v === option.value);
+      const selected = this.selected as UIOptionComponent[];
+      const index = selected.findIndex(s => s === option);
       if (index === -1) {
-        this.selected = [...selected, option.value];
+        this.selected = [...selected, option];
         option.selected = true;
       } else {
         selected.splice(index, 1);
@@ -104,7 +130,11 @@ export class UISelectComponent implements AfterContentInit, ControlValueAccessor
     }
   }
 
-  onClickRemove(e: MouseEvent, value: string) {
+  onContainerClick() {
+    if (!this.open) { console.log('open!'); }
+  }
+
+  onClickRemove(e: MouseEvent, option: UIOptionComponent) {
     e.stopPropagation();
     this.onTouched();
 
@@ -113,14 +143,14 @@ export class UISelectComponent implements AfterContentInit, ControlValueAccessor
       return;
     }
 
-    const selected = this.selected as string[];
-    const index = selected.findIndex(v => v === value);
+    const selected = this.selected as UIOptionComponent[];
+    const index = selected.findIndex(s => s === option);
     if (index !== -1) {
       selected.splice(index, 1);
       this.selected = [...selected];
 
-      this.options.forEach(option => {
-        if (option.value === value) { option.selected = false; }
+      this.options.forEach(o => {
+        if (o === option) { option.selected = false; }
       });
     }
   }

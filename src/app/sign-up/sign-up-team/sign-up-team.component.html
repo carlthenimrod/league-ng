@@ -28,6 +28,51 @@
     </ui-form-field>
   </ngl-sign-up-section>
 
+  <ngl-sign-up-section formGroupName="notes">
+    <header>
+      <h3>Team Availability</h3>
+    </header>
+
+    <ui-form-field>
+      <ui-select formControlName="season" placeholder="Pick Preferred Season" multiple required>
+        <ui-option value="summer">Summer</ui-option>
+        <ui-option value="fall">Fall</ui-option>
+        <ui-option value="winter">Winter</ui-option>
+        <ui-option value="spring">Spring</ui-option>
+      </ui-select>
+    </ui-form-field>
+
+    <ui-form-field>
+      <ui-select formControlName="type" placeholder="Pick Preferred League" multiple required>
+        <ui-option value="men_premier">Men Premier</ui-option>
+        <ui-option value="men">Men</ui-option>
+        <ui-option value="coed_premier">Coed Premier</ui-option>
+        <ui-option value="coed">Coed</ui-option>
+        <ui-option value="women">Women</ui-option>
+        <ui-option value="youth">Youth</ui-option>
+      </ui-select>
+    </ui-form-field>
+
+    <ui-form-field>
+      <ui-select formControlName="days" placeholder="Days Available" multiple required>
+        <ui-option value="mon_tues">Mon/Tues</ui-option>
+        <ui-option value="tues_thurs">Tues/Thurs</ui-option>
+        <ui-option value="wed_thurs">Wed/Thurs</ui-option>
+        <ui-option value="fri">Fri</ui-option>
+        <ui-option value="sat">Sat</ui-option>
+        <ui-option value="sun">Sun</ui-option>
+      </ui-select>
+    </ui-form-field>
+
+    <ui-form-field>
+      <ui-select formControlName="time" placeholder="Times Available" required>
+        <ui-option value="early">Early</ui-option>
+        <ui-option value="late">Late</ui-option>
+        <ui-option value="either">Does Not Matter</ui-option>
+      </ui-select>
+    </ui-form-field>
+  </ngl-sign-up-section>
+
   <ngl-sign-up-section>
     <header>
       <h3>Team Roster</h3>

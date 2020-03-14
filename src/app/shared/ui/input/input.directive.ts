@@ -3,13 +3,15 @@ import { NgControl } from '@angular/forms';
 import { Subject, fromEvent } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+import { ControlDirective } from '../form-field/control.directive';
 import { ViewportService } from '@app/services/viewport.service';
 import { UIAutoCompleteComponent } from '../auto-complete/auto-complete.component';
 
 @Directive({
-  selector: '[uiInput]'
+  selector: '[uiInput]',
+  providers: [{ provide: ControlDirective, useExisting: UIInputDirective }]
 })
-export class UIInputDirective implements OnInit, OnDestroy {
+export class UIInputDirective implements ControlDirective, OnInit, OnDestroy {
   @Input() autoComplete: UIAutoCompleteComponent;
   @HostBinding() @Input() placeholder: string;
   autofilled = false;
@@ -22,7 +24,7 @@ export class UIInputDirective implements OnInit, OnDestroy {
   private _required: boolean;
 
   get empty () {
-    return !!(this.el.nativeElement as HTMLInputElement).value;
+    return !(this.el.nativeElement as HTMLInputElement).value;
   }
 
   constructor(
@@ -84,6 +86,10 @@ export class UIInputDirective implements OnInit, OnDestroy {
     this.autoComplete.top   = `${element.offsetTop + element.offsetHeight}px`;
     this.autoComplete.left  = `${element.offsetLeft}px`;
     this.autoComplete.width = `${element.offsetWidth}px`;
+  }
+
+  onContainerClick() {
+    if (!this.focused) { (this.el.nativeElement as HTMLElement).focus(); }
   }
 
   ngOnDestroy() {

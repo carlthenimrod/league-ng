@@ -21,7 +21,6 @@ export class SignUpTeamComponent {
     return this.teamForm.get('roster') as FormArray;
   }
 
-
   constructor(
     private modal: UIModalService
   ) { }

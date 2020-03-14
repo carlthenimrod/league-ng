@@ -6,8 +6,8 @@
 
 ui-modal-select {
   align-items: center;
-  background-color: theme-color-level(primary, 6);
-  border: 2px solid theme-color-level(primary, -2);
+  background-color: darken(theme-color(primary), 30%);
+  border: 2px solid lighten(theme-color(primary), 20%);
   border-radius: 3px;
   color: $white;
   display: flex;
@@ -21,23 +21,17 @@ ui-modal-select {
   transition: border 50ms ease-in-out;
   width: 100%;
 
-  @include media-breakpoint-up(sm) {
-    background-color: theme-color-level(primary, -8);
-    border: 2px solid theme-color-level(primary, -6);
-    color: theme-color-level(primary, 6);
-  }
-
   &.ng-invalid.ng-touched {
     border: 2px solid theme-color(danger);
   }
 
   .placeholder {
-    color: $gray-500;
+    color: lighten(theme-color(primary), 20%);
     margin-bottom: 0.25rem;
   }
 
   > i {
-    color: theme-color-level(primary, -6);
+    color: lighten(theme-color(primary), 20%);
     margin-bottom: 0.25rem;
     margin-left: auto;
   }
@@ -53,7 +47,7 @@ ui-modal-select {
     left: 0;
     width: 100%;
 
-    app-modal-option {
+    ui-option {
       padding: 0 1rem 1rem 1rem;
 
       &:last-child {

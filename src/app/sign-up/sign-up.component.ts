@@ -71,7 +71,13 @@ export class SignUpComponent {
   private _createTeamCtrl(): FormGroup {
     return this.fb.group({
       name: ['', Validators.required, this.teamExists.validate.bind(this.teamExists)],
-      roster: this.fb.array([])
+      roster: this.fb.array([]),
+      notes: this.fb.group({
+        season: ['', Validators.required],
+        type: ['', Validators.required],
+        days: ['', Validators.required],
+        time: ['', Validators.required]
+      })
     });
   }
 

@@ -1,8 +1,8 @@
 import { Component, ContentChild, HostBinding, HostListener, ViewEncapsulation } from '@angular/core';
 
-import { UIInputDirective } from '../input/input.directive';
 import { UIErrorComponent } from './error/error.component';
 import { UIHintComponent } from './hint/hint.component';
+import { ControlDirective } from './control.directive';
 
 @Component({
   selector: 'ui-form-field',
@@ -11,35 +11,33 @@ import { UIHintComponent } from './hint/hint.component';
   encapsulation: ViewEncapsulation.None
 })
 export class UIFormFieldComponent {
-  @ContentChild(UIInputDirective, { static: false }) input: UIInputDirective;
-  @ContentChild(UIErrorComponent, { static: false }) error: UIErrorComponent;
-  @ContentChild(UIHintComponent, { static: false }) hint: UIHintComponent;
+  @ContentChild(UIErrorComponent) error: UIErrorComponent;
+  @ContentChild(UIHintComponent) hint: UIHintComponent;
+  @ContentChild(ControlDirective) control: ControlDirective;
 
   @HostBinding('class.focused')
   get focused() {
-    return this.input ? this.input.focused : false;
+    return this.control ? this.control.focused : false;
   }
 
   @HostBinding('class.autofilled')
   get autofilled() {
-    return this.input ? this.input.autofilled : false;
+    return this.control ? this.control.autofilled : false;
   }
 
   @HostBinding('class.ng-invalid')
   get invalid() {
-    return this.input && this.input.ngControl
-      ? this.input.ngControl.invalid : false;
+    return this.control && this.control.ngControl
+      ? this.control.ngControl.invalid : false;
   }
 
   @HostBinding('class.ng-touched')
   get touched() {
-    return this.input && this.input.ngControl
-      ? this.input.ngControl.touched : false;
+    return this.control && this.control.ngControl
+      ? this.control.ngControl.touched : false;
   }
 
-  @HostListener('click') onClick() {
-    if (this.input && !this.input.focused) {
-      (this.input.el.nativeElement as HTMLInputElement).focus();
-    }
+  @HostListener('click', ['$event']) onClick(event: MouseEvent) {
+    if (this.control) { this.control.onContainerClick(event); }
   }
 }

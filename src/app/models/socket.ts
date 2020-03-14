@@ -17,6 +17,7 @@ export interface SocketTeamData extends SocketData {
 }
 
 export interface UserSocketData extends SocketData {
+  user: User;
   users?: [User];
   message?: Message;
 }

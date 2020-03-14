@@ -1,6 +1,7 @@
 import { Component, Input, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { skipWhile } from 'rxjs/operators';
 
 import { Notification } from '@app/models/notification';
 import { NotificationService } from '../notification.service';
@@ -50,6 +51,7 @@ export class NotificationItemComponent {
         }
       }
     )
+      .pipe(skipWhile(() => !accepted))
       .subscribe(n =>
         this.router.navigate(['/team', n.team._id])
           .then(() => this.notificationService.close())

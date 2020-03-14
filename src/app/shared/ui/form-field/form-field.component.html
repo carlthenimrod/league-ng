@@ -1,10 +1,10 @@
 <div
-  *ngIf="input && input.placeholder"
+  *ngIf="control && control.placeholder"
   class="placeholder"
-  [class.empty]="input && !input.empty && !input.autofilled"
+  [class.empty]="control && control.empty && !control.autofilled"
 >
-  <span class="label">{{ input.placeholder }}</span>
-  <span *ngIf="input.required" class="required">*</span>
+  <span class="label">{{ control.placeholder }}</span>
+  <span *ngIf="control.required" class="required">*</span>
 </div>
 
 <ng-content select="ui-error"></ng-content>
