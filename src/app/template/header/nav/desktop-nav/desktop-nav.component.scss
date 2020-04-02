@@ -1,0 +1,89 @@
+@import 'variables';
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/_mixins';
+
+$link-color: #fff;
+$link-transition: color 100ms ease-in-out;
+$hover-link-color: lighten(theme-color(primary), 40%);
+$hover-bg-color: darken(theme-color(primary), 5%);
+
+#top {
+  background-color: theme-color(primary);
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+
+  a {
+    color: $link-color;
+    font-weight: 700;
+    line-height: 3rem;
+    padding: 0 1rem;
+    transition: $link-transition;
+
+    &:hover {
+      color: $hover-link-color;
+    }
+
+    i {
+      margin-left: 0.5rem;
+    }
+
+    &#name {
+      margin-right: auto;
+    }
+  }
+}
+
+#bot {
+  background-color: darken(theme-color(primary), 10%);
+  display: flex;
+  justify-content: flex-end;
+}
+
+ngl-nav-dropdown {
+  position: relative;
+
+  ngl-nav-dropdown-label {
+    color: $link-color;
+    cursor: pointer;
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 3rem;
+    padding: 0 1rem;
+    text-transform: uppercase;
+
+    i { margin-right: 0.5rem; }
+  }
+
+  &:hover {
+    ngl-nav-dropdown-label { background-color: $hover-bg-color; }
+  }
+
+  ngl-nav-dropdown-content {
+    background-color: $hover-bg-color;
+    padding: 0.5rem 0;
+    position: absolute;
+
+    a, p {
+      color: $link-color;
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin: 0;
+      padding: 0.5rem 1rem;
+      text-transform: uppercase;
+      transition: $link-transition;
+
+      i {
+        margin-left: 0.5rem;
+      }
+    }
+
+    a:hover {
+      color: $hover-link-color;
+    }
+  }
+}

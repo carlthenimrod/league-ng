@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { loadingTrigger } from './animations';
 
 @Component({
-  selector: 'app-loading',
+  selector: 'ngl-loading',
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss'],
   animations: [loadingTrigger]

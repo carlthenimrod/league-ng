@@ -1,173 +1,96 @@
-import { Injectable, OnDestroy, ViewContainerRef, ComponentFactoryResolver, ComponentRef, Injector, ApplicationRef, Inject, EmbeddedViewRef } from '@angular/core';
+import { Injectable, ComponentFactoryResolver, Injector, ApplicationRef, ComponentRef, Inject, EmbeddedViewRef } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { DOCUMENT, Location } from '@angular/common';
-import { Router, NavigationEnd, RouterEvent } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, skipWhile, tap } from 'rxjs/operators';
 
-import { LoadingService } from '@app/template/loading/loading.service';
-import { NavComponent } from './nav.component';
+import { ScrollService } from '@app/services/scroll.service';
 import { ViewportService } from '@app/services/viewport.service';
+import { MobileNavMenuComponent } from './mobile-menu/mobile-menu.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NavService implements OnDestroy {
-  componentRef: ComponentRef<NavComponent>;
-  desktopCtn: ViewContainerRef;
-  loading: boolean;
-  navStatusSubject: BehaviorSubject<string> = new BehaviorSubject(null);
-  navStatus: string;
-  pathSubject: BehaviorSubject<string[]> = new BehaviorSubject([]);
-  unsubscribe$ = new Subject<void>();
-  viewportType: string;
+export class NavService {
+  private _mobileMenu: ComponentRef<MobileNavMenuComponent>;
 
   constructor(
-    private appRef: ApplicationRef,
-    @Inject(DOCUMENT) private document: Document,
-    private injector: Injector,
-    private loadingService: LoadingService,
-    private location: Location,
-    private resolver: ComponentFactoryResolver,
-    private router: Router,
-    private viewport: ViewportService
+    private _appRef: ApplicationRef,
+    @Inject(DOCUMENT) private _document: Document,
+    private _injector: Injector,
+    private _location: Location,
+    private _resolver: ComponentFactoryResolver,
+    private _scroll: ScrollService,
+    private _router: Router,
+    private _viewportService: ViewportService
   ) {
-    this.viewport.type$
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(type => {
-        this.viewportType = type;
-        this.updateNav();
-      });
+    this._viewportService.type$
+      .pipe(
+        filter(type => type !== 'mobile'),
+        filter(_ => !!this._mobileMenu)
+      )
+      .subscribe(this._destroy.bind(this));
 
-    this.router.events
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((event: RouterEvent) => {
-        if (event instanceof NavigationEnd) {
-          this.getPath();
-          this.closeNav();
-        }
-      });
-
-    this.loadingService.loading$
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(loading => this.loading = loading);
+    this._router.events
+      .pipe(
+        skipWhile(_ => !this._mobileMenu || !this._mobileMenu.instance.open),
+        filter(e => e instanceof NavigationEnd),
+        tap(this._setSelected.bind(this))
+      )
+      .subscribe(_ => this.close());
   }
 
-  init(desktopCtn: ViewContainerRef) {
-    this.desktopCtn = desktopCtn;
-    this.createNav();
-
-    if (this.viewportType === 'mobile') {
-      this.insertMobile();
-    } else {
-      this.insertDesktop();
-    }
+  toggle() {
+    !this._mobileMenu || !this._mobileMenu.instance.open
+      ? this.open()
+      : this.close();
   }
 
-  getPath() {
-    const path = this.location.path().split('/');
+  open() {
+    if (!this._mobileMenu) { this._create(); }
+    this._mobileMenu.instance.open = true;
+    this._scroll.lock();
+  }
+
+  close() {
+    if (!this._mobileMenu) { return; }
+    this._mobileMenu.instance.open = false;
+    this._scroll.unlock();
+    this._setSelected();
+  }
+
+  private _setSelected() {
+    const path = this._location.path().split('/');
     path.shift();
 
-    this.pathSubject.next(path);
+    this._mobileMenu.instance.selected =
+    path[0] === 'user'
+        ? 'user'
+        : path[0] === 'league'
+        ? 'leagues'
+        : path[0] === 'team'
+        ? 'teams'
+        : path[0] === 'admin'
+        ? 'admin'
+        : 'home';
   }
 
-  path$() {
-    return this.pathSubject.asObservable();
+  private _create() {
+    this._mobileMenu = this._resolver
+      .resolveComponentFactory(MobileNavMenuComponent)
+      .create(this._injector);
+    this._setSelected();
+
+    this._appRef.attachView(this._mobileMenu.hostView);
+    this._document.body.appendChild(
+      (this._mobileMenu.hostView as EmbeddedViewRef<any>)
+      .rootNodes[0]
+    );
+
+    this._mobileMenu.onDestroy(() => delete this._mobileMenu);
   }
 
-  navigate(url?: string[]) {
-    if (this.loading) { return; }
-
-    const path = url ? '/' + url.join('/') : '/';
-    const currentUrl = this.router.url;
-
-    if (path === currentUrl && this.viewportType === 'mobile') {
-      this.closeNav();
-    } else {
-      this.router.navigateByUrl(path);
-    }
-  }
-
-  toggleNav() {
-    if (this.viewportType !== 'mobile') { return; }
-
-    if (this.navStatus !== 'mobileOpen') {
-      this.openNav();
-    } else {
-      this.closeNav();
-    }
-  }
-
-  openNav() {
-    if (this.viewportType !== 'mobile') { return; }
-    this.navStatus = 'mobileOpen';
-    this.componentRef.instance.navOpen = true;
-    this.navStatusSubject.next(this.navStatus);
-  }
-
-  closeNav() {
-    if (this.viewportType !== 'mobile') { return; }
-    this.navStatus = 'mobileClose';
-    this.componentRef.instance.navOpen = false;
-    this.navStatusSubject.next(this.navStatus);
-  }
-
-  $navStatus() {
-    return this.navStatusSubject.asObservable();
-  }
-
-  createNav() {
-    const factory = this.resolver.resolveComponentFactory(NavComponent);
-
-    this.componentRef = factory.create(this.injector);
-    this.componentRef.instance.path$ = this.path$();
-  }
-
-  updateNav() {
-    if (!this.componentRef) { return; }
-
-    if (this.viewportType === 'mobile') {
-      this.removeDesktop();
-      this.createNav();
-      this.insertMobile();
-    } else {
-      this.removeMobile();
-      this.createNav();
-      this.insertDesktop();
-    }
-  }
-
-  insertMobile() {
-    this.appRef.attachView(this.componentRef.hostView);
-
-    const componentView = this.componentRef.hostView as EmbeddedViewRef<NavComponent>;
-    const domEl = componentView.rootNodes[0];
-
-    this.document.body.appendChild(domEl);
-
-    this.navStatus = 'mobileClose';
-    this.componentRef.instance.navOpen = false;
-    this.navStatusSubject.next('mobileClose');
-  }
-
-  removeMobile() {
-    this.appRef.detachView(this.componentRef.hostView);
-    this.componentRef.destroy();
-  }
-
-  insertDesktop() {
-    this.desktopCtn.insert(this.componentRef.hostView);
-
-    this.navStatus = 'desktop';
-    this.navStatusSubject.next('desktop');
-  }
-
-  removeDesktop() {
-    this.desktopCtn.clear();
-    this.componentRef.destroy();
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+  private _destroy() {
+    this._scroll.unlock();
+    this._mobileMenu.destroy();
   }
 }

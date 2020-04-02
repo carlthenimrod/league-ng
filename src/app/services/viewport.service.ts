@@ -1,11 +1,11 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, fromEvent, Subject } from 'rxjs';
-import { takeUntil, distinctUntilChanged, map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ViewportService implements OnDestroy {
+export class ViewportService {
   typeSubject = new BehaviorSubject<string>(null);
   type$ = this.typeSubject.pipe(distinctUntilChanged());
   widthSubject = new BehaviorSubject<number>(null);
@@ -16,9 +16,8 @@ export class ViewportService implements OnDestroy {
     this.update(window);
 
     fromEvent<Event>(window, 'resize')
-      .pipe<Window, Window>(
-        map(event => event.target as Window),
-        takeUntil(this.unsubscribe$)
+      .pipe<Window>(
+        map(event => event.target as Window)
       )
       .subscribe(this.update.bind(this));
   }
@@ -26,10 +25,5 @@ export class ViewportService implements OnDestroy {
   update(window: Window) {
     this.typeSubject.next(window.innerWidth >= 576 ? 'desktop' : 'mobile');
     this.widthSubject.next(window.innerWidth);
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 }

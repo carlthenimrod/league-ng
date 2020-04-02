@@ -18,10 +18,7 @@
 }
 
 header {
-  align-items: center;
   background-color: theme-color(primary);
-  color: $white;
-  display: flex;
   height: 3rem;
 
   @include media-breakpoint-up(sm) {
@@ -29,59 +26,27 @@ header {
     color: theme-color(primary);
     height: auto;
   }
+}
 
-  button#mobile-menu,
-  button#notifications {
-    background: none;
-    border: none;
-    color: $white;
-    display: block;
-    height: 100%;
-    margin: 0;
-    text-align: center;
+ngl-mobile-nav {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  width: 100%;
+
+  ngl-mobile-toggle, ngl-notification-toggle {
+    font-size: 1.8rem;
     width: 3rem;
-
-    i {
-      font-size: 1.8rem;
-    }
-  }
-
-  button#notifications {
-    margin-left: auto;
-    position: relative;
-
-    @include media-breakpoint-up(sm) {
-      display: none;
-    }
-
-    span {
-      background-color: $red;
-      border: 3px solid theme-color(primary);
-      border-radius: 100%;
-      box-sizing: content-box;
-      height: 0.55rem;
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      width: 0.55rem;
-    }
-  }
-
-  button#mobile-menu {
-    @include media-breakpoint-up(sm) {
-      display: none;
-    }
   }
 
   a {
-    color: $white;
+    color: #fff;
     flex: 1 0 auto;
 
     h1 {
       font-size: 1rem;
       font-weight: 700;
-      margin: 0 0 0 1rem;
-      padding: 0;
+      margin: 0;
       text-transform: uppercase;
     }
   }

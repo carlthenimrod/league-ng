@@ -4,6 +4,11 @@
 
 @import '~bootstrap/scss/bootstrap';
 
+body.scroll-lock {
+  height: 100vh;
+  overflow: hidden;
+}
+
 .mat-dialog-container {
   padding: 0 !important;
 

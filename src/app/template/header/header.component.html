@@ -1,25 +1,19 @@
-<header>
-  <ng-container *ngIf="isMobile">
-    <button id="mobile-menu" (click)="onClickToggleNav()">
-      <i class="fas fa-bars"></i>
-    </button>
+<header *ngIf="type$ | async as type">
+  <ngl-mobile-nav *ngIf="type === 'mobile'">
+    <ngl-mobile-toggle></ngl-mobile-toggle>
 
     <a routerLink="/">
-      <h1>ngLeague App</h1>
+      <h1>{{ title }}</h1>
     </a>
-  </ng-container>
 
-  <ng-container #desktopNav></ng-container>
+    <ngl-notification-toggle></ngl-notification-toggle>
+  </ngl-mobile-nav>
 
-  <button
-    *ngIf="me"
-    id="notifications"
-    (click)="onClickToggleNotifications()"
-  >
-    <i class="fas fa-bell"></i>
-
-    <span *ngIf="$unread | async" @unreadNotifications></span>
-
-    <ng-container #vc></ng-container>
-  </button>
+  <ngl-desktop-nav *ngIf="type === 'desktop'">
+    <ngl-logo>
+      <a routerLink="/" title="ngLeague">
+        <i class="fab fa-angular"></i>
+      </a>
+    </ngl-logo>
+  </ngl-desktop-nav>
 </header>
