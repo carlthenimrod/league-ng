@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
-import { MatDialogRef, ErrorStateMatcher } from '@angular/material';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 import { UserService } from '@app/services/user.service';
 import { confirmPassword } from '@app/validators/password-confirm.validator';
