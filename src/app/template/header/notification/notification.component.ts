@@ -13,10 +13,6 @@ import { UIModalComponent } from '@app/shared/ui/modal/modal.component';
   animations: [
     trigger('lightbox', [
       transition(':enter', [
-        style({ transform: 'translateY(-100%)' }),
-        animate('200ms ease-in',
-          style({ transform: 'translateY(0)' })
-        ),
         query('@enterList', [
           animateChild()
         ], { optional: true }),
